@@ -6,7 +6,7 @@
  * @since      2.9.0
  * @package    abovethefold
  * @subpackage abovethefold/admin
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_Admin_HTTP2
@@ -27,8 +27,8 @@ class Abovethefold_Admin_HTTP2
      */
     public function __construct(&$CTRL)
     {
-        $this->CTRL =& $CTRL;
-        $this->options =& $CTRL->options;
+        $this->CTRL = & $CTRL;
+        $this->options = & $CTRL->options;
 
         /**
          * Admin panel specific

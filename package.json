@@ -1,10 +1,10 @@
 {
     "name": "abovethefold",
-    "version": "2.9.8",
+    "version": "2.9.10",
     "description": "Above The Fold Optimization",
     "author": {
-        "name": "info@pagespeed.pro",
-        "email": "info@pagespeed.pro",
+        "name": "info@optimization.team",
+        "email": "info@optimization.team",
         "web": "pagespeed.pro"
     },
     "engines": {

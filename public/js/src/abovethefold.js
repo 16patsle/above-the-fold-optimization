@@ -5,7 +5,7 @@
  *
  * @package    abovethefold
  * @subpackage abovethefold/public
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 (function(window, Abtf, undefined) {
 

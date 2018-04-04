@@ -9,34 +9,34 @@
  * @since      1.0
  * @package    abovethefold
  * @subpackage abovethefold/includes
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_i18n {
+class Abovethefold_i18n
+{
 
-	/**
-	 * The domain specified for this plugin
-	 */
-	private $domain;
+    /**
+     * The domain specified for this plugin
+     */
+    private $domain;
 
-	/**
-	 * Load the plugin text domain for translation
-	 */
-	public function load_plugin_textdomain() {
+    /**
+     * Load the plugin text domain for translation
+     */
+    public function load_plugin_textdomain()
+    {
+        load_plugin_textdomain(
+            $this->domain,
+            false,
+            dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
+        );
+    }
 
-		load_plugin_textdomain(
-			$this->domain,
-			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-		);
-
-	}
-
-	/**
-	 * Set the domain equal to that of the specified domain
-	 */
-	public function set_domain( $domain ) {
-		$this->domain = $domain;
-	}
-
+    /**
+     * Set the domain equal to that of the specified domain
+     */
+    public function set_domain($domain)
+    {
+        $this->domain = $domain;
+    }
 }

@@ -6,7 +6,7 @@
  * @since      2.9.7
  * @package    abovethefold
  * @subpackage abovethefold/admin
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 ?>
 <script src="<?php print WPABTF_URI;?>public/js/critical-css-view.min.js"></script>

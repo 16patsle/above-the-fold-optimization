@@ -6,7 +6,7 @@
  * @since      2.8.3
  * @package    abovethefold
  * @subpackage abovethefold/admin
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_Admin_PWA

@@ -8,7 +8,7 @@
  * @since      1.0
  * @package    abovethefold
  * @subpackage abovethefold/includes
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 
@@ -110,11 +110,21 @@ class Abovethefold_Optimization
          * Optimize CSS delivery
          */
         $this->optimize_css_delivery = (isset($this->CTRL->options['cssdelivery']) && intval($this->CTRL->options['cssdelivery']) === 1) ? true : false;
+        
+        // new CSS optimization module
+        if (defined('O10N_CSS_MODULE_LOADED')) {
+            $this->optimize_css_delivery = false;
+        }
 
         /**
          * Optimize Javascript loading
          */
         $this->optimize_js_delivery = (isset($this->CTRL->options['jsdelivery']) && intval($this->CTRL->options['jsdelivery']) === 1) ? true : false;
+
+        // new JS optimization module
+        if (defined('O10N_JS_MODULE_LOADED')) {
+            $this->optimize_js_delivery = false;
+        }
 
         /**
          * HTML Search & Replace
@@ -123,7 +133,7 @@ class Abovethefold_Optimization
 
 
         // ignore critical css view controller in javascript optimization
-        if ($this->CTRL->view === 'critical-css-view') {
+        if ($this->CTRL->view === 'critical-css-view' && !defined('O10N_CSS_MODULE_LOADED')) {
             add_filter('abtf_jsfile_pre', function ($file) {
                 if (strpos($file, 'critical-css-view.min.js') !== false) {
                     return 'ignore';
@@ -136,11 +146,11 @@ class Abovethefold_Optimization
         /**
          * Extract Full CSS view
          */
-        if (in_array($this->CTRL->view, array('extract-css','abtf-buildtool-css'))) {
+        if (in_array($this->CTRL->view, array('extract-css','abtf-buildtool-css')) && !defined('O10N_CSS_MODULE_LOADED')) {
 
             // load optimization controller
             $this->CTRL->extractcss = new Abovethefold_ExtractFullCss($this->CTRL);
-        } elseif ($this->CTRL->view === 'critical-css-editor') {
+        } elseif ($this->CTRL->view === 'critical-css-editor' && !defined('O10N_CSS_MODULE_LOADED')) {
 
             /**
              * Compare Critical CSS view
@@ -172,6 +182,16 @@ class Abovethefold_Optimization
 
         // wordpress header
         $this->CTRL->loader->add_action('wp_head', $this, 'header', 1);
+    }
+
+    /**
+     * Ignore ABTF client
+     */
+    public function ignore_abtf($text, $tag)
+    {
+        if (strpos($tag, 'data-abtf') !== false) {
+            return 'ignore';
+        }
     }
 
     /**
@@ -445,7 +465,7 @@ class Abovethefold_Optimization
         /**
          * CSS Delivery Optimization
          */
-        if ($this->optimize_css_delivery) {
+        if ($this->optimize_css_delivery && !defined('O10N_CSS_MODULE_LOADED')) {
 
             /**
              * Ignore List
@@ -624,7 +644,7 @@ class Abovethefold_Optimization
         /**
          * Javascript Delivery Optimization
          */
-        if ($this->optimize_js_delivery) {
+        if ($this->optimize_js_delivery && defined('O10N_JS_MODULE_LOADED')) {
 
             /**
              * Ignore List
@@ -859,7 +879,7 @@ class Abovethefold_Optimization
         /**
          * CSS Delivery Optimization
          */
-        if ($this->optimize_css_delivery) {
+        if ($this->optimize_css_delivery && !defined('O10N_CSS_MODULE_LOADED')) {
 
             /**
              * Remove full CSS and show critical CSS only
@@ -902,7 +922,7 @@ class Abovethefold_Optimization
         /**
          * Javascript Delivery Optimization
          */
-        if ($this->optimize_js_delivery) {
+        if ($this->optimize_js_delivery && defined('O10N_JS_MODULE_LOADED')) {
 
             /**
              * Remove duplicate Javascript files
@@ -1064,7 +1084,7 @@ class Abovethefold_Optimization
         /**
          * Optimize CSS delivery
          */
-        if ($this->optimize_css_delivery) {
+        if ($this->optimize_css_delivery && !defined('O10N_CSS_MODULE_LOADED')) {
             $headCSS = ($this->CTRL->options['cssdelivery_position'] === 'header') ? true : false;
         } else {
 
@@ -1085,7 +1105,7 @@ class Abovethefold_Optimization
         print '<script '.((!defined('ABTF_NOREF') || !ABTF_NOREF) ? 'data-ref="https://goo.gl/C1gw96"' : '').' data-abtf=\''.str_replace('\'', '&#39;', json_encode($clientjs['config'])).'\'>'.$clientjs['client'].'</script>';
 
         // HTTP/2 Server Push Critical CSS
-        if ($this->http2push_criticalcss) {
+        if ($this->http2push_criticalcss && !defined('O10N_CSS_MODULE_LOADED')) {
             print '<link href="'.$this->http2push_criticalcss.'" media="all" rel="stylesheet" id="AbtfCSS" data-abtf/>';
         }
 
@@ -1095,7 +1115,7 @@ class Abovethefold_Optimization
         }
 
         // inline Critical CSS
-        if (!$this->http2push_criticalcss) {
+        if (!$this->http2push_criticalcss && !defined('O10N_CSS_MODULE_LOADED')) {
             print '<style type="text/css" id="AbtfCSS" data-abtf>' . $inlineCSS . '</style>';
         }
     }
@@ -1156,7 +1176,7 @@ class Abovethefold_Optimization
         /**
          * Javascript delivery optimization
          */
-        if ($this->optimize_js_delivery) {
+        if ($this->optimize_js_delivery && defined('O10N_JS_MODULE_LOADED')) {
 
             // jQuery ready stub
             if (isset($this->CTRL->options['jsdelivery_jquery']) && $this->CTRL->options['jsdelivery_jquery']) {
@@ -1178,7 +1198,7 @@ class Abovethefold_Optimization
         /**
          * CSS delivery optimization
          */
-        if ($this->optimize_css_delivery) {
+        if ($this->optimize_css_delivery && !defined('O10N_CSS_MODULE_LOADED')) {
             $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-css'.$jsdebug.'.min.js';
 
             /** Async CSS controller */
@@ -1206,7 +1226,7 @@ class Abovethefold_Optimization
         /**
          * Optimize Javascript delivery
          */
-        if ($this->optimize_js_delivery) {
+        if ($this->optimize_js_delivery && defined('O10N_JS_MODULE_LOADED')) {
             $jssettings[$this->client_config_ref['js']] = array($this->js_replacement_string,($this->CTRL->options['jsdelivery_position'] === 'footer') ? true : false);
             if (isset($this->CTRL->options['jsdelivery_idle']) && !empty($this->CTRL->options['jsdelivery_idle'])) {
                 $jssettings[$this->client_config_ref['js']][] = $this->CTRL->options['jsdelivery_idle'];
@@ -1216,7 +1236,7 @@ class Abovethefold_Optimization
         /**
          * Optimize CSS delivery
          */
-        if ($this->optimize_css_delivery) {
+        if ($this->optimize_css_delivery && !defined('O10N_CSS_MODULE_LOADED')) {
             $jssettings[$this->client_config_ref['css']] = $this->criticalcss_replacement_string;
 
             if (isset($this->CTRL->options['cssdelivery_renderdelay']) && intval($this->CTRL->options['cssdelivery_renderdelay']) > 0) {

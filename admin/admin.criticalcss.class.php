@@ -6,7 +6,7 @@
  * @since      2.5.4
  * @package    abovethefold
  * @subpackage abovethefold/admin
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_Admin_CriticalCSS
@@ -27,8 +27,8 @@ class Abovethefold_Admin_CriticalCSS
      */
     public function __construct(&$CTRL)
     {
-        $this->CTRL =& $CTRL;
-        $this->options =& $CTRL->options;
+        $this->CTRL = & $CTRL;
+        $this->options = & $CTRL->options;
 
         /**
          * Admin panel specific
@@ -453,9 +453,9 @@ class Abovethefold_Admin_CriticalCSS
                     case "product_cat":
                     case "product_brand":
                         $terms = get_terms($taxonomy, array(
-                            'orderby'    => 'title',
-                            'order'      => 'ASC',
-                            'number'     => $limit,
+                            'orderby' => 'title',
+                            'order' => 'ASC',
+                            'number' => $limit,
                             'hide_empty' => false,
                             'name__like' => $query
                         ));

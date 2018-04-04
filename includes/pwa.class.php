@@ -8,7 +8,7 @@
  * @since      2.8.3
  * @package    abovethefold
  * @subpackage abovethefold/includes
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 

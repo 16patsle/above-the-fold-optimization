@@ -8,7 +8,7 @@
  * @since      2.7
  * @package    abovethefold
  * @subpackage abovethefold/includes
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_Critical_CSS

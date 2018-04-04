@@ -12,6 +12,13 @@
 						</h3>
 						<div class="inside testcontent">
 
+						<div class="ok_green" style="padding:8px;padding-left:8px;border-width:1px;font-size:14px;line-height:18px;margin:0px;">
+    						<h3 style="margin:0px;padding-left:0px;">New plugin</h3>
+    						<p style="margin:0px;margin-bottom:5px;">We have published a new plugin for CSS optimization and Web Font Optimization. It is advised to use the new plugin for access to the latest technologies and long term support.</p>
+
+    						<p><a href="<?php print esc_url(add_query_arg(array('s' => 'o10n', 'tab' => 'search', 'type' => 'author'), admin_url('plugin-install.php'))); ?>" class="button button-large">Install new plugin</a></p>
+    					</div>
+
 <?php
 
     /**
@@ -23,14 +30,12 @@
         ?>
 	<h1 style="color:red;">WARNING: PLUGIN INSTALLATION NOT COMPLETE, MISSING public/js/src/loadcss_package.json</h1>
 <?php
-
     } else {
         $package = @json_decode(file_get_contents($loadcss_package), true);
         if (!is_array($package)) {
             ?>
 	<h1 style="color:red;">failed to parse public/js/src/loadcss_package.json</h1>
 <?php
-
         } else {
 
             // set version
@@ -277,7 +282,7 @@
 															<h4 class="h" style="margin-bottom:10px;margin-top:15px;">Step 1: download the font files and CSS</h4>
 
 															
-															<p style="margin-top:7px;">Visit <a href="https://google-webfonts-helper.herokuapp.com/fonts?utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=PageSpeed.pro%3A%20Above%20The%20Fold%20Optimization" target="_blank">Google Webfonts Helper</a> and search for the fonts that you want to download. Select the font configuration (weight, charset and style) and download the zip-file.</p>
+															<p style="margin-top:7px;">Visit <a href="https://google-webfonts-helper.herokuapp.com/fonts?utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">Google Webfonts Helper</a> and search for the fonts that you want to download. Select the font configuration (weight, charset and style) and download the zip-file.</p>
 
 															<h4 class="h" style="margin-bottom:10px;margin-top:10px;">Step 2: upload the fonts to your theme directory</h4>
 															<p style="margin-top:7px;">Extract the zip-file and upload the font files to <code>/fonts/</code> in your theme directory. Optionally, use the file upload to extract the zip-file in your theme directory automatically (requires PHP5).</p>

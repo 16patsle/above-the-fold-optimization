@@ -6,7 +6,7 @@
  * @since      2.3.5
  * @package    abovethefold
  * @subpackage abovethefold/admin
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 $output = '<!DOCTYPE html>
@@ -40,7 +40,7 @@ $output .= '
 | <a href="https://www.google.com/search?q=beautify+css+online" target="_blank">Beautify</a>
 | <a href="https://www.google.com/search?q=minify+css+online" target="_blank">Minify</a>
 | <a href="https://jigsaw.w3.org/css-validator/#validate_by_input+with_options" target="_blank">Validate</a>
-| <a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=PageSpeed.pro%3A%20Above%20The%20Fold%20Optimization" target="_blank">CSS<span style="color:#768c1c;font-weight:bold;margin-left:2px;">LINT</span></a>
+| <a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">CSS<span style="color:#768c1c;font-weight:bold;margin-left:2px;">LINT</span></a>
 
 </div></fieldset>
 <script src="'.WPABTF_URI.'public/js/extractfull.min.js"></script>

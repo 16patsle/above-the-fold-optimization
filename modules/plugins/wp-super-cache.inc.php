@@ -10,7 +10,7 @@
  * @since      2.5.0
  * @package    abovethefold
  * @subpackage abovethefold/modules/plugins
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_OPP_WpSuperCache extends Abovethefold_OPP

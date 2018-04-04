@@ -6,7 +6,7 @@
  * @since      2.8
  * @package    abovethefold
  * @subpackage abovethefold/admin
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_Admin_HTML
@@ -27,8 +27,8 @@ class Abovethefold_Admin_HTML
      */
     public function __construct(&$CTRL)
     {
-        $this->CTRL =& $CTRL;
-        $this->options =& $CTRL->options;
+        $this->CTRL = & $CTRL;
+        $this->options = & $CTRL->options;
 
         /**
          * Admin panel specific
@@ -135,12 +135,13 @@ class Abovethefold_Admin_HTML
         }
 
         $errors = array(
-            PREG_INTERNAL_ERROR         => 'Code 1 : There was an internal PCRE error',
-            PREG_BACKTRACK_LIMIT_ERROR  => 'Code 2 : Backtrack limit was exhausted',
-            PREG_RECURSION_LIMIT_ERROR  => 'Code 3 : Recursion limit was exhausted',
-            PREG_BAD_UTF8_ERROR         => 'Code 4 : The offset didn\'t correspond to the begin of a valid UTF-8 code point',
-            PREG_BAD_UTF8_OFFSET_ERROR  => 'Code 5 : Malformed UTF-8 data',
+            PREG_INTERNAL_ERROR => 'Code 1 : There was an internal PCRE error',
+            PREG_BACKTRACK_LIMIT_ERROR => 'Code 2 : Backtrack limit was exhausted',
+            PREG_RECURSION_LIMIT_ERROR => 'Code 3 : Recursion limit was exhausted',
+            PREG_BAD_UTF8_ERROR => 'Code 4 : The offset didn\'t correspond to the begin of a valid UTF-8 code point',
+            PREG_BAD_UTF8_OFFSET_ERROR => 'Code 5 : Malformed UTF-8 data',
         );
+
         return $errors[$error];
     }
 }

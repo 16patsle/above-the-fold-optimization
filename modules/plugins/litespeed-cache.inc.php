@@ -11,7 +11,7 @@
  * @since      2.7.7
  * @package    abovethefold
  * @subpackage abovethefold/modules/plugins
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_OPP_LitespeedCache extends Abovethefold_OPP

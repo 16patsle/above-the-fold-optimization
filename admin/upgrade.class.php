@@ -5,7 +5,7 @@
  * @since      2.7.0
  * @package    abovethefold
  * @subpackage abovethefold/admin
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_Upgrade
@@ -21,7 +21,7 @@ class Abovethefold_Upgrade
      */
     public function __construct(&$CTRL)
     {
-        $this->CTRL =& $CTRL;
+        $this->CTRL = & $CTRL;
     }
 
     /**
@@ -483,7 +483,7 @@ class Abovethefold_Upgrade
 
                                     $meta[] = '<link rel="apple-touch-icon" sizes="'.esc_attr($icon['sizes']).'" href="'.esc_attr($icon['src']).'">';
 
-                                    $meta[] =  '<link rel="icon" type="image/png" sizes="'.esc_attr($icon['sizes']).'" href="'.esc_attr($icon['src']).'">';
+                                    $meta[] = '<link rel="icon" type="image/png" sizes="'.esc_attr($icon['sizes']).'" href="'.esc_attr($icon['src']).'">';
 
                                     switch ($icon['sizes']) {
                                         case "144x144":

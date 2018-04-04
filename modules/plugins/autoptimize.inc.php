@@ -10,7 +10,7 @@
  * @since      2.5.0
  * @package    abovethefold
  * @subpackage abovethefold/modules/plugins
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
@@ -33,24 +33,24 @@ class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
             return;
         }
 
-       /**
-        * Autoptimize: skip Critical Path CSS
-        */
+        /**
+         * Autoptimize: skip Critical Path CSS
+         */
         $this->CTRL->loader->add_filter('autoptimize_filter_css_exclude', $this, 'skip_css', 10, 3);
 
-       /**
-        * Autoptimize: skip Critical Path Javascript
-        */
+        /**
+         * Autoptimize: skip Critical Path Javascript
+         */
         $this->CTRL->loader->add_filter('autoptimize_filter_js_exclude', $this, 'skip_js', 10, 3);
 
-       /**
-        * Autoptimize: process @import (Google fonts etc)
-        */
+        /**
+         * Autoptimize: process @import (Google fonts etc)
+         */
         $this->CTRL->loader->add_filter('autoptimize_css_after_minify', $this, 'process_minified_css');
 
-       /**
-        * Autoptimize: process HTML
-        */
+        /**
+         * Autoptimize: process HTML
+         */
         $this->CTRL->loader->add_filter('autoptimize_html_after_minify', $this, 'process_minified_html');
     }
 
@@ -92,6 +92,7 @@ class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
     public function skip_css($excludeCSS)
     {
         $excludeCSS .= ',data-abtf';
+
         return $excludeCSS;
     }
 
@@ -101,20 +102,21 @@ class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
     public function skip_js($excludeJS)
     {
         $excludeJS .= ',data-abtf,' . $this->CTRL->optimization->criticalcss_replacement_string;
+
         return $excludeJS;
     }
 
     /**
-    * Process minified CSS
-    */
+     * Process minified CSS
+     */
     public function process_minified_css($css)
     {
         return apply_filters('abtf_css', $css);
     }
 
     /**
-    * Process minified javascript
-    */
+     * Process minified javascript
+     */
     public function process_minified_js($js)
     {
         return apply_filters('abtf_js', $js);

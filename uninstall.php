@@ -3,7 +3,7 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @link       https://pagespeed.pro/
+ * @link       https://optimization.team/
  * @since      2.5.0
  *
  * @package    abovethefold

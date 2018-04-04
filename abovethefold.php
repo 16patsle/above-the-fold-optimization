@@ -4,22 +4,21 @@
  *
  * WordPress optimization toolkit with a focus on SEO. This plugin enables to achieve a Google PageSpeed 100 Score. Supports most optimization, minification and full page cache plugins.
  *
- * @link              https://pagespeed.pro/
+ * @link              https://optimization.team/
  * @since             1.0
  * @package           abovethefold
  *
  * @wordpress-plugin
- * Plugin Name:       Page Speed Optimization for SEO
- * Plugin URI:        https://pagespeed.pro/
+ * Plugin Name:       Page Speed Optimization
  * Description:       WordPress optimization toolkit with a focus on SEO. This plugin enables to achieve a Google PageSpeed 100 Score. Supports most optimization, minification and full page cache plugins.
- * Version:           2.9.8
- * Author:            PageSpeed.pro
- * Author URI:        https://pagespeed.pro/
+ * Version:           2.9.19
+ * Author:            Optimization.Team
+ * Author URI:        https://optimization.team/
  * Text Domain:       abovethefold
  * Domain Path:       /languages
  */
 
-define('WPABTF_VERSION', '2.9.8');
+define('WPABTF_VERSION', '2.9.19');
 define('WPABTF_URI', plugin_dir_url(__FILE__));
 define('WPABTF_PATH', plugin_dir_path(__FILE__));
 define('WPABTF_SELF', __FILE__);
@@ -29,7 +28,7 @@ define('ABTF_CACHE_DIR', trailingslashit(WP_CONTENT_DIR) . 'cache/abtf/');
 define('ABTF_CACHE_URL', trailingslashit(WP_CONTENT_URL) . 'cache/abtf/');
 
 if (! defined('WPINC')) {
-    die;
+    die; //
 }
 
 /**

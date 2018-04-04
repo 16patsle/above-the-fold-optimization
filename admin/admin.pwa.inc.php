@@ -23,6 +23,14 @@
 						</h3>
 						<div class="inside testcontent">
 
+
+						<div class="ok_green" style="padding:8px;padding-left:8px;border-width:1px;font-size:14px;line-height:18px;margin:0px;">
+    						<h3 style="margin:0px;padding-left:0px;">New plugin</h3>
+    						<p style="margin:0px;margin-bottom:5px;">We have published a new plugin for PWA Optimization. It is advised to use the new plugin for access to the latest technologies and long term support.</p>
+
+    						<p><a href="<?php print esc_url(add_query_arg(array('s' => 'o10n', 'tab' => 'search', 'type' => 'author'), admin_url('plugin-install.php'))); ?>" class="button button-large">Install new plugin</a></p>
+    					</div>
+
 						<div style="text-align:center;"><a href="https://developers.google.com/web/tools/lighthouse/" target="_blank"><img src="<?php print WPABTF_URI; ?>admin/images/google-lighthouse-pwa-validation.jpg" alt="Google Bot" width="100%" style="max-width:1141px;max-height:359px;" title="Google Lighthouse PWA Validation"></a></div>
 
 						<p>Google has been promoting <a href="https://developers.google.com/web/progressive-web-apps/" target="_blank">Progressive Web Apps</a> (PWA) as the future of the internet: a combination of the flexability and openness of the existing web with the user experience advantages of native mobile apps. In essence: a mobile app that can be indexed by Google and that can be managed by WordPress.</p>

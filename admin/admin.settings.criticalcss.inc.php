@@ -38,12 +38,12 @@
 		<a href="https://www.google.com/search?q=beautify+css+online&amp;hl=<?php print $lgcode;?>" target="_blank" class="button button-secondary button-small">Beautify</a>
 		<a href="https://www.google.com/search?q=minify+css+online&amp;hl=<?php print $lgcode;?>" target="_blank" class="button button-secondary button-small">Minify</a>
 		<a href="https://jigsaw.w3.org/css-validator/#validate_by_input+with_options" target="_blank" class="button button-secondary button-small">Validate</a>
-		<a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=PageSpeed.pro%3A%20Above%20The%20Fold%20Optimization" target="_blank" class="button button-secondary button-small">CSS<span style="color:#768c1c;font-weight:bold;margin-left:1px;">LINT</span></a>
+		<a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank" class="button button-secondary button-small">CSS<span style="color:#768c1c;font-weight:bold;margin-left:1px;">LINT</span></a>
 		</div>
 		<div class="criticalcss-editorswitch">
 			<label><input type="checkbox" name="abovethefold[csseditor]" value="1"<?php if (!isset($options['csseditor']) || intval($options['csseditor']) === 1) {
     print ' checked=""';
-} ?>> Use a CSS editor with error reporting (<a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=PageSpeed.pro%3A%20Above%20The%20Fold%20Optimization" target="_blank">CSS Lint</a> using <a href="https://codemirror.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=PageSpeed.pro%3A%20Above%20The%20Fold%20Optimization" target="_blank">CodeMirror</a>).</label>
+} ?>> Use a CSS editor with error reporting (<a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">CSS Lint</a> using <a href="https://codemirror.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">CodeMirror</a>).</label>
 		</div>
 
 		<div style="clear:both;height:1px;overflow:hidden;font-size:1px;">&nbsp;</div>
@@ -57,7 +57,7 @@
 </label>
 			<p class="description" style="margin-bottom:1em;">When enabled, the critical CSS is not inlined but instead pushed together with the HTML (<a href="https://developers.google.com/web/fundamentals/performance/http2/#server_push" target="_blank">documentation</a>). </p>
 			
-			<p class="info_yellow" id="http2pushnote" style="margin-bottom:1em;<?php echo ((isset($options['http2_push_criticalcss']) && intval($options['http2_push_criticalcss']) === 1)) ? '' : 'display:none;'; ?>"><strong>Note:</strong> When using this feature, make sure that your server supports HTTP/2 Server Push. See the <a href="<?php echo add_query_arg(array('page'=>'pagespeed-http2'), admin_url('admin.php'));?>">HTTP/2-tab</a> for more information.</p>
+			<p class="info_yellow" id="http2pushnote" style="margin-bottom:1em;<?php echo ((isset($options['http2_push_criticalcss']) && intval($options['http2_push_criticalcss']) === 1)) ? '' : 'display:none;'; ?>"><strong>Note:</strong> When using this feature, make sure that your server supports HTTP/2 Server Push. See the <a href="<?php echo add_query_arg(array('page' => 'pagespeed-http2'), admin_url('admin.php'));?>">HTTP/2-tab</a> for more information.</p>
 		</div>
 		
 		<hr />

@@ -8,7 +8,7 @@
  * @since      2.5.0
  * @package    abovethefold
  * @subpackage abovethefold/includes
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 
@@ -46,9 +46,9 @@ class Abovethefold_WebFonts
      */
     public function __construct(&$CTRL)
     {
-        $this->CTRL =& $CTRL;
+        $this->CTRL = & $CTRL;
 
-        if ($this->CTRL->disabled) {
+        if ($this->CTRL->disabled || defined('O10N_FONTS_MODULE_LOADED')) {
             return; // above the fold optimization disabled for area / page
         }
 
@@ -309,13 +309,13 @@ class Abovethefold_WebFonts
         if (isset($urlParameters['text'])) {
 
             /**
-        	 * @todo custom fonts
-        	 */
+             * @todo custom fonts
+             */
         } else {
 
             /**
-        	 * Google Font Family config
-        	 */
+             * Google Font Family config
+             */
             $familyParams = explode('|', $urlParameters['family']);
 
             foreach ($familyParams as $familyKey => $fontFamilies) {
@@ -409,13 +409,14 @@ class Abovethefold_WebFonts
          */
         if (!empty($this->googlefonts) && isset($this->CTRL->options['gwfo_googlefonts_remove']) && !empty($this->CTRL->options['gwfo_googlefonts_remove'])) {
             $removeList = $this->CTRL->options['gwfo_googlefonts_remove'];
-            $this->googlefonts =  array_filter($this->googlefonts, function ($font) use ($removeList) {
+            $this->googlefonts = array_filter($this->googlefonts, function ($font) use ($removeList) {
                 foreach ($removeList as $removeFont) {
                     if (stripos($font, $removeFont) !== false) {
                         // remove font
                         return false;
                     }
                 }
+
                 return true;
             });
         }
@@ -479,11 +480,13 @@ REGEX;
         $webfont_package = WPABTF_PATH . 'public/js/src/webfontjs_package.json';
         if (!file_exists($webfont_package)) {
             $this->CTRL->admin->set_notice('PLUGIN INSTALLATION NOT COMPLETE, MISSING public/js/src/webfontjs_package.json', 'ERROR');
+
             return false;
         } else {
             $package = @json_decode(file_get_contents($webfont_package), true);
             if (!is_array($package)) {
                 $this->CTRL->admin->set_notice('failed to parse public/js/src/webfontjs_package.json', 'ERROR');
+
                 return false;
             } else {
                 $version = update_option('abtf_webfontjs_version', $package['version']);
@@ -552,7 +555,7 @@ REGEX;
                     } else {
 
                     // load from Google CDN
-                    $jssettings[$gfwindex][$this->CTRL->optimization->client_config_ref['gwf-sub']['async_url']] = $this->cdn_url;
+                        $jssettings[$gfwindex][$this->CTRL->optimization->client_config_ref['gwf-sub']['async_url']] = $this->cdn_url;
                     }
                 }
 

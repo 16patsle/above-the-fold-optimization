@@ -8,7 +8,7 @@
  * @since      2.9.0
  * @package    abovethefold
  * @subpackage abovethefold/includes
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_HTTP2
@@ -29,7 +29,7 @@ class Abovethefold_HTTP2
      */
     public function __construct(&$CTRL)
     {
-        $this->CTRL =& $CTRL;
+        $this->CTRL = & $CTRL;
 
         if ($this->CTRL->disabled) {
             return; // above the fold optimization disabled for area / page
@@ -265,6 +265,7 @@ class Abovethefold_HTTP2
             if (!preg_match($regex, $tag, $out)) {
                 return false;
             }
+
             return $out[2];
         }
 

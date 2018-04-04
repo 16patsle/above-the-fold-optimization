@@ -8,7 +8,7 @@
  * @since      1.0
  * @package    abovethefold
  * @subpackage abovethefold/includes
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold
@@ -139,7 +139,6 @@ class Abovethefold
             }
         }
 
-
         // load dependencies
         $this->load_dependencies();
 
@@ -241,6 +240,13 @@ class Abovethefold
         }
 
         /**
+         * o10n Critical CSS Editor
+         */
+        if (isset($_GET['o10n-css']) || isset($_GET['o10n-no-css']) || isset($_GET['o10n-full-css'])) {
+            return false;
+        }
+
+        /**
          * Skip if admin
          */
         if (defined('WP_ADMIN')) {
@@ -311,6 +317,23 @@ class Abovethefold
      */
     public function template_redirect()
     {
+
+        // detect new optimization plugins
+        if (defined('O10N_CORE_VERSION') && class_exists('\O10n\Core')) {
+            $modules = O10n\Core::get('modules');
+            if (in_array('css', $modules)) {
+                define('O10N_CSS_MODULE_LOADED', true);
+            }
+            if (in_array('fonts', $modules)) {
+                define('O10N_FONTS_MODULE_LOADED', true);
+            }
+            if (in_array('js', $modules)) {
+                define('O10N_JS_MODULE_LOADED', true);
+
+                add_action('o10n_script_text_pre', array($this->optimization, 'ignore_abtf'), 1, 2);
+            }
+        }
+
         // return content security hashes
         if (isset($_GET['abtf-csp-hash'])) {
             $json = array();

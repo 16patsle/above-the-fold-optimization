@@ -13,7 +13,7 @@
  *
  * @package    abovethefold
  * @subpackage abovethefold/includes
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 if (!defined('ABSPATH')) {
     exit;
@@ -36,8 +36,8 @@ class ABTF_HTMLMinify
     /**
      * Minify HTML
      *
-     * @param  string 		$HTML 		HTML string to minify.
-     * @return string 					Minified HTML.
+     * @param  string $HTML HTML string to minify.
+     * @return string Minified HTML.
      */
     final public function minify($HTML)
     {
@@ -49,18 +49,27 @@ class ABTF_HTMLMinify
         
         // replace SCRIPTs with placeholders
         $HTML = preg_replace_callback(
-            '/(\\s*)<script(\\b[^>]*?>)([\\s\\S]*?)<\\/script>(\\s*)/i', array($this, '_removeScriptCB'), $HTML);
+            '/(\\s*)<script(\\b[^>]*?>)([\\s\\S]*?)<\\/script>(\\s*)/i',
+            array($this, '_removeScriptCB'),
+            $HTML
+        );
 
         // replace STYLEs with placeholders
         $HTML = preg_replace_callback(
-            '/\\s*<style(\\b[^>]*>)([\\s\\S]*?)<\\/style>\\s*/i', array($this, '_removeStyleCB'), $HTML);
+            '/\\s*<style(\\b[^>]*>)([\\s\\S]*?)<\\/style>\\s*/i',
+            array($this, '_removeStyleCB'),
+            $HTML
+        );
 
         // replace PREs with placeholders
         $HTML = preg_replace_callback('/\\s*<pre(\\b[^>]*?>[\\s\\S]*?<\\/pre>)\\s*/i', array($this, '_removePreCB'), $HTML);
         
         // replace TEXTAREAs with placeholders
         $HTML = preg_replace_callback(
-            '/\\s*<textarea(\\b[^>]*?>[\\s\\S]*?<\\/textarea>)\\s*/i', array($this, '_removeTextareaCB'), $HTML);
+            '/\\s*<textarea(\\b[^>]*?>[\\s\\S]*?<\\/textarea>)\\s*/i',
+            array($this, '_removeTextareaCB'),
+            $HTML
+        );
         
         // trim each line.
         // @todo take into account attribute values that span multiple lines.
@@ -75,19 +84,26 @@ class ABTF_HTMLMinify
         
         // remove ws outside of all elements
         $HTML = preg_replace(
-            '/>(\\s(?:\\s*))?([^<]+)(\\s(?:\s*))?</', '>$1$2$3<', $HTML);
+            '/>(\\s(?:\\s*))?([^<]+)(\\s(?:\s*))?</',
+            '>$1$2$3<',
+            $HTML
+        );
         
         // use newlines before 1st attribute in open tags (to limit line lengths)
         // @improved: every 500 characters
-           $HTML = preg_replace('/(.{1,500}<[a-z\\-]+)\\s+([^>]+>)/is', "$1\n$2", $HTML);
+        $HTML = preg_replace('/(.{1,500}<[a-z\\-]+)\\s+([^>]+>)/is', "$1\n$2", $HTML);
         
         // fill placeholders
         $HTML = str_replace(
-            array_keys($this->_placeholders), array_values($this->_placeholders), $HTML
+            array_keys($this->_placeholders),
+            array_values($this->_placeholders),
+            $HTML
         );
         // issue 229: multi-pass to catch scripts that didn't get replaced in textareas
         $HTML = str_replace(
-            array_keys($this->_placeholders), array_values($this->_placeholders), $HTML
+            array_keys($this->_placeholders),
+            array_values($this->_placeholders),
+            $HTML
         );
 
         return $HTML;
@@ -97,6 +113,7 @@ class ABTF_HTMLMinify
     {
         $placeholder = '%' . $this->_replacementHash . count($this->_placeholders) . '%';
         $this->_placeholders[$placeholder] = $content;
+
         return $placeholder;
     }
     public function _removePreCB($m)
@@ -122,7 +139,9 @@ class ABTF_HTMLMinify
         // minify
         $css = trim($css);
         
-        return $this->_reservePlace($this->_needsCdata($css)
+        return $this->_reservePlace(
+        
+            $this->_needsCdata($css)
             ? "{$openStyle}/*<![CDATA[*/{$css}/*]]>*/</style>"
             : "{$openStyle}{$css}</style>"
         );
@@ -146,7 +165,9 @@ class ABTF_HTMLMinify
         // minify
         $js = trim($js);
         
-        return $this->_reservePlace($this->_needsCdata($js)
+        return $this->_reservePlace(
+        
+            $this->_needsCdata($js)
             ? "{$ws1}{$openScript}/*<![CDATA[*/{$js}/*]]>*/</script>{$ws2}"
             : "{$ws1}{$openScript}{$js}</script>{$ws2}"
         );

@@ -10,7 +10,7 @@
  * @since      2.5.0
  * @package    abovethefold
  * @subpackage abovethefold/modules/plugins
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_OPP_BwpMinify extends Abovethefold_OPP
@@ -33,9 +33,9 @@ class Abovethefold_OPP_BwpMinify extends Abovethefold_OPP
             return;
         }
 
-       /**
-        * Apply resource proxy to minification tag to apply CSS and Javascript optimization to minified code
-        */
+        /**
+         * Apply resource proxy to minification tag to apply CSS and Javascript optimization to minified code
+         */
         $this->CTRL->loader->add_filter('bwp_minify_get_tag', $this, 'get_minify_tag', 10, 4);
     }
 

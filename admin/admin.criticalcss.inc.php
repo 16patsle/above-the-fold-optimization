@@ -18,6 +18,14 @@
 							<span><?php _e('Critical Path CSS', 'abovethefold'); ?></span>
 						</h3>
 						<div class="inside testcontent">
+
+							<div class="ok_green" style="padding:8px;padding-left:8px;border-width:1px;font-size:14px;line-height:18px;margin:0px;">
+	    						<h3 style="margin:0px;padding-left:0px;">New plugin</h3>
+	    						<p style="margin:0px;margin-bottom:5px;">We have published a new plugin for Critical CSS optimization. It is advised to use the new plugin for access to the latest technologies and long term support.</p>
+
+	    						<p><a href="<?php print esc_url(add_query_arg(array('s' => 'o10n', 'tab' => 'search', 'type' => 'author'), admin_url('plugin-install.php'))); ?>" class="button button-large">Install new plugin</a></p>
+	    					</div>
+
 							<p>Critical Path CSS is the minimum CSS required to render above the fold content. Please read the <a href="https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent?hl=<?php print $lgcode;?>" target="_blank">documentation by Google</a> before you continue.</p>
 							<p><a href="https://github.com/addyosmani/critical-path-css-tools" target="_blank">This article</a> by a Google engineer provides information about the available methods for creating critical path CSS. <a href="https://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/?<?php print $utmstring; ?>" target="_blank">This blog</a> (with video) by two Google engineers provides information about the essence of Critical Path CSS creation.</p>
 							

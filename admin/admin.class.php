@@ -9,7 +9,7 @@
  * @since      2.0
  * @package    abovethefold
  * @subpackage abovethefold/admin
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 
@@ -56,8 +56,8 @@ class Abovethefold_Admin
         'settings' => 'Settings',
         'build-tool' => 'Critical CSS Creator',
         'criticalcss-test' => 'Quality Test',
-        'monitor' => 'Monitor'/*,
-        'offer' => 'New Plugin'*/
+        'monitor' => 'Monitor',
+        'offer' => 'New Plugins'
     );
 
     /**
@@ -106,6 +106,9 @@ class Abovethefold_Admin
             if (!$this->google_intlcode) {
                 $this->google_intlcode = 'en-us';
             }
+
+            // Hook in the admin options page
+            $this->CTRL->loader->add_action('admin_init', $this, 'o10n_redirect', 30);
 
             // Hook in the admin options page
             $this->CTRL->loader->add_action('admin_menu', $this, 'admin_menu', 30);
@@ -199,6 +202,28 @@ class Abovethefold_Admin
     }
 
     /**
+     * Redirect to new plugin
+     */
+    public function o10n_redirect()
+    {
+        // redirect to new CSS optimization plugin
+        if (defined('O10N_CORE_VERSION') && class_exists('\O10n\Core') && isset($_GET['page']) && $_GET['page'] === 'pagespeed-css') {
+            $modules = O10n\Core::get('modules');
+            if (in_array('css', $modules)) {
+                wp_redirect(add_query_arg(array( 'page' => 'o10n-css', 'tab' => 'optimization' ), admin_url(((count($modules) === 1) ? 'themes.php' : 'admin.php'))));
+            }
+        }
+
+        // redirect to new javascript optimization plugin
+        if (defined('O10N_CORE_VERSION') && class_exists('\O10n\Core') && isset($_GET['page']) && $_GET['page'] === 'pagespeed-javascript') {
+            $modules = O10n\Core::get('modules');
+            if (in_array('js', $modules)) {
+                wp_redirect(add_query_arg(array( 'page' => 'o10n-js', 'tab' => 'optimization' ), admin_url(((count($modules) === 1) ? 'tools.php' : 'admin.php'))));
+            }
+        }
+    }
+
+    /**
      * Set body class
      */
     public function admin_body_class($classes)
@@ -222,7 +247,7 @@ class Abovethefold_Admin
      */
     public static function plugin_row_meta($links, $file)
     {
-        if ($file == plugin_basename(WPABTF_SELF)) {
+        /*if ($file == plugin_basename(WPABTF_SELF)) {
             $lgcode = strtolower(get_locale());
             $intlcode = 'en-us';
             if (strpos($lgcode, '_') !== false) {
@@ -235,12 +260,11 @@ class Abovethefold_Admin
             }
 
             $row_meta = array(
-                'pagespeed_insights' => '<a href="' . esc_url('https://developers.google.com/speed/pagespeed/insights/?hl=' . $lgcode) . '" target="_blank" title="' . esc_attr(__('View Google PageSpeed Insights Test', 'pagespeed')) . '">' . __('Google PageSpeed', 'pagespeed') . '</a>',
-                'pagespeed_scores' => '<a href="' . esc_url('https://testmysite.' . (($intlcode === 'en-us') ? 'think' : '') . 'withgoogle.com/intl/'.$intlcode.'?url='.home_url()) . '" target="_blank" title="' . esc_attr(__('View Google PageSpeed Scores Documentation', 'pagespeed')) . '">' . __('View Scores', 'pagespeed') . '</a>',
+                'new_plugins' => '<a href="' . esc_url('https://developers.google.com/speed/pagespeed/insights/?hl=' . $lgcode) . '" target="_blank" style="font-weight:bold;color:#079c2d;">' . __('New Plugins', 'pagespeed') . '</a>',
             );
 
             return array_merge($links, $row_meta);
-        }
+        }*/
 
         return (array) $links;
     }
@@ -690,7 +714,7 @@ jQuery(function() { var desc = jQuery('*[data-plugin="above-the-fold-optimizatio
             'parent' => 'abovethefold-check-google',
             'id' => 'abovethefold-check-google-more',
             'title' => __('More tests', 'abovethefold'),
-            'href' => 'https://pagespeed.pro/tests#url='.urlencode($currenturl),
+            'href' => 'https://optimization.team/tests#url='.urlencode($currenturl),
             'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
         ));
 
@@ -722,7 +746,7 @@ jQuery(function() { var desc = jQuery('*[data-plugin="above-the-fold-optimizatio
             'parent' => 'abovethefold-check-speed',
             'id' => 'abovethefold-check-speed-more',
             'title' => __('More tests', 'abovethefold'),
-            'href' => 'https://pagespeed.pro/tests#url='.urlencode($currenturl),
+            'href' => 'https://optimization.team/tests#url='.urlencode($currenturl),
             'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
         ));
 
@@ -768,7 +792,7 @@ jQuery(function() { var desc = jQuery('*[data-plugin="above-the-fold-optimizatio
             'parent' => 'abovethefold-check-technical',
             'id' => 'abovethefold-check-technical-more',
             'title' => __('More tests', 'abovethefold'),
-            'href' => 'https://pagespeed.pro/tests#url='.urlencode($currenturl),
+            'href' => 'https://optimization.team/tests#url='.urlencode($currenturl),
             'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
         ));
     }

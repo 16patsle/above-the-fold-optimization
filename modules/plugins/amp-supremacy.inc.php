@@ -10,7 +10,7 @@
  * @since      2.6.16
  * @package    abovethefold
  * @subpackage abovethefold/modules/plugins
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 
 class Abovethefold_OPP_AmpSupremacy extends Abovethefold_OPP
@@ -33,9 +33,9 @@ class Abovethefold_OPP_AmpSupremacy extends Abovethefold_OPP
             return;
         }
 
-       /**
-        * WordPress init hook
-        */
+        /**
+         * WordPress init hook
+         */
         $this->CTRL->loader->add_action('init', $this, 'init');
     }
 

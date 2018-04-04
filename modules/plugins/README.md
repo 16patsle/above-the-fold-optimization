@@ -7,7 +7,7 @@ The [Above The Fold Optimization](https://wordpress.org/plugins/above-the-fold-o
 
 To add support for an unsupported plugin, you can copy the source of an existing plugin module and place it as a custom module in `/wp-content/themes/YOUR_THEME_NAME/abovethefold/plugins/plugin-name.inc.php` and accompany it with a text file named `plugin-name.active.txt` that contains the WordPress plugin reference name (usually `plugin-name/plugin-name.php`) which is used for fast checking the active state of the plugin.
 
-Please submit new plugin modules or requests for default support for a plugin to info@pagespeed.pro.
+Please submit new plugin modules or requests for default support for a plugin to info@optimization.team.
 
 ## Maintainers
 

@@ -5,7 +5,7 @@
  *
  * @package    abovethefold
  * @subpackage abovethefold/modules/critical-css-build-tool
- * @author     PageSpeed.pro <info@pagespeed.pro>
+ * @author     Optimization.Team <info@optimization.team>
  */
 'use strict';
 
@@ -21,10 +21,10 @@ plugins.es = require('event-stream');
 var critical = require('critical');
 
 var criticalTasks = [];
-plugins.fs.readdirSync('./').forEach(function (file) {
-    if (file.indexOf('critical-') === 0 && plugins.fs.lstatSync('./'+file+'/').isDirectory()) {
+plugins.fs.readdirSync('./').forEach(function(file) {
+    if (file.indexOf('critical-') === 0 && plugins.fs.lstatSync('./' + file + '/').isDirectory()) {
 
-        var taskFile = './'+file+'/gulp-critical-task.js';
+        var taskFile = './' + file + '/gulp-critical-task.js';
         if (!plugins.fs.existsSync(taskFile)) {
             return;
         }
@@ -40,15 +40,17 @@ plugins.fs.readdirSync('./').forEach(function (file) {
 /**
  * Clean output directories
  */
-gulp.task('clean', function () {
-    return gulp.src(['critical-*/output'], { read: false })
+gulp.task('clean', function() {
+    return gulp.src(['critical-*/output'], {
+            read: false
+        })
         .pipe(plugins.clean());
 });
 
 /**
  * Print available Critical CSS tasks
  */
-gulp.task('default', function () {
+gulp.task('default', function() {
 
     console.log('\n' + plugins.util.colors.bold.yellow('Available Critical CSS Tasks:') + '\n');
 
@@ -60,6 +62,6 @@ gulp.task('default', function () {
         });
     }
 
-    console.log('\nUsage:', plugins.util.colors.bold('gulp'), plugins.util.colors.bold.magenta('critical-task-name'),'\n');
+    console.log('\nUsage:', plugins.util.colors.bold('gulp'), plugins.util.colors.bold.magenta('critical-task-name'), '\n');
 
 });
