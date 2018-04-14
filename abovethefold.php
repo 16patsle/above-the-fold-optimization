@@ -14,6 +14,7 @@
  * Version:           2.9.19
  * Author:            Optimization.Team
  * Author URI:        https://optimization.team/
+ * GitHub Plugin URI: https://github.com/optimalisatie/above-the-fold-optimization
  * Text Domain:       abovethefold
  * Domain Path:       /languages
  */
