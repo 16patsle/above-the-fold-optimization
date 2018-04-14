@@ -1,5 +1,3 @@
-<p align="center"><img src="https://github.com/optimalisatie/above-the-fold-optimization/blob/master/banner-772x250.jpg" alt="Excellent Score in Google AI Mobile Performance Test"></p>
-
 # WordPress Page Speed Optimization for SEO
 
 The Page Speed Optimization plugin is a toolkit for WordPress Optimization with a focus on SEO. The plugin enables to achieve a 100 score in the [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) test.
@@ -22,7 +20,7 @@ The following scores are for the same site. It shows that a perfect Google PageS
 
 ![Perfect Google PageSpeed 100 Score](https://github.com/o10n-x/wordpress-css-optimization/blob/master/docs/images/google-pagespeed-100.png) ![Google Lighthouse Critical Performance Score](https://github.com/o10n-x/wordpress-css-optimization/blob/master/docs/images/lighthouse-performance-15.png)
 
-We developed [new optimization plugins](https://github.com/o10n-x/) that are designed to achieve perfect Google Lighouse scores and to validate a website as [Google PWA](https://developers.google.com/web/progressive-web-apps/). The plugins are available on our Github company profile: https://github.com/o10n-x/
+We developed [new optimization plugins](https://github.com/o10n-x/) that are designed to achieve perfect Google Lighouse scores and to validate a website as [Google PWA](https://developers.google.com/web/progressive-web-apps/). The new plugins are available on our Github company profile: https://github.com/o10n-x/
 
 The new optimization plugins include [CSS](https://github.com/o10n-x/wordpress-css-optimization), [Javascript](https://github.com/o10n-x/wordpress-javascript-optimization), [HTML](https://github.com/o10n-x/wordpress-html-optimization), [Web Font](https://github.com/o10n-x/wordpress-font-optimization), [Progressive Web App (Service Worker)](https://github.com/o10n-x/wordpress-pwa-optimization), [HTTP/2](https://github.com/o10n-x/wordpress-http2-optimization) and [Security Header](https://github.com/o10n-x/wordpress-security-header-optimization) optimization. 
 
@@ -33,6 +31,8 @@ For the web to have a chance of survival in a mobile era it needs to compete wit
 For SEO it is therefor simple: websites will need to meet the standards set by the [Google Lighthouse Test](https://developers.google.com/web/tools/lighthouse/) (or Google's future new tests). A website with perfect scores will be preferred in search over low performance websites. The officially announced [Google Speed Update](https://searchengineland.com/google-speed-update-page-speed-will-become-ranking-factor-mobile-search-289904) (July 2018) shows that Google is going as far as it can to drive people to enhance the quality to ultra high levels, to meet the quality of, and hopefully beat native mobile apps.
 
 **The new WPO plugins are in beta release.**
+
+https://github.com/o10n-x/
 
 # Page Speed Optimization Description
 
