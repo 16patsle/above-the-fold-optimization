@@ -3,7 +3,7 @@
 <h1><?php _e('Page Speed Optimization', 'abovethefold') ?></h1>
 <nav class="nav-tab-wrapper" style="position:relative;">
 <div class="ref">
-        <a href="<?php print esc_url('https://optimization.team/'); ?>" target="_blank" class="logo">PageSpeed.<span class="g100">PRO</span></a>
+        <a href="<?php print esc_url('https://github.com/16patsle/'); ?>" target="_blank" class="logo">PageSpeed.<span class="g100">PRO</span></a>
 
         <div class="links">
             <a href="https://github.com/optimalisatie/above-the-fold-optimization" target="_blank">Github</a> &dash; <a href="https://github.com/optimalisatie/above-the-fold-optimization/issues" target="_blank">Report a bug</a> &dash; <a href="https://wordpress.org/support/plugin/above-the-fold-optimization/reviews/#new-post" target="_blank">Review plugin</a>

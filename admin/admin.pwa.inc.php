@@ -23,17 +23,9 @@
 						</h3>
 						<div class="inside testcontent">
 
-
-						<div class="ok_green" style="padding:8px;padding-left:8px;border-width:1px;font-size:14px;line-height:18px;margin:0px;">
-    						<h3 style="margin:0px;padding-left:0px;">New plugin</h3>
-    						<p style="margin:0px;margin-bottom:5px;">We have published a new plugin for PWA Optimization. It is advised to use the new plugin for access to the latest technologies and long term support.</p>
-
-    						<p><a href="<?php print esc_url(add_query_arg(array('s' => 'o10n', 'tab' => 'search', 'type' => 'author'), admin_url('plugin-install.php'))); ?>" class="button button-large">Install new plugin</a></p>
-    					</div>
-
 						<div style="text-align:center;"><a href="https://developers.google.com/web/tools/lighthouse/" target="_blank"><img src="<?php print WPABTF_URI; ?>admin/images/google-lighthouse-pwa-validation.jpg" alt="Google Bot" width="100%" style="max-width:1141px;max-height:359px;" title="Google Lighthouse PWA Validation"></a></div>
 
-						<p>Google has been promoting <a href="https://developers.google.com/web/progressive-web-apps/" target="_blank">Progressive Web Apps</a> (PWA) as the future of the internet: a combination of the flexability and openness of the existing web with the user experience advantages of native mobile apps. In essence: a mobile app that can be indexed by Google and that can be managed by WordPress.</p>
+						<p>Google has been promoting <a href="https://developers.google.com/web/progressive-web-apps/" target="_blank">Progressive Web Apps</a> (PWA) as the future of the internet: a combination of the flexibility and openness of the existing web with the user experience advantages of native mobile apps. In essence: a mobile app that can be indexed by Google and that can be managed by WordPress.</p>
 						<p>Google provides an extensive test called <a href="https://developers.google.com/web/tools/lighthouse/" target="_blank">Lighthouse</a> that tests for validity against the key qualities of a Progressive Web App: performance, accessibility, and more.</p>
 						<p>This tool enables to score 100 / 100 / 100 / 100 in the lighthouse test and validate a website as Progressive Web App for improved mobile user experiences and findability.</p>
 						<p>At the core of the features of a Progressive Web App is a <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank">HTML5 Service Worker</a>. It's not supported by Internet Explorer and Opera (<a href="https://jakearchibald.github.io/isserviceworkerready/" target="_blank">browser compatibility</a>).</p>
@@ -240,7 +232,7 @@ submit_button(__('Save'), 'primary large', 'is_submit', false);
 <input type="hidden" name="abovethefold[pwa_cache_assets_policy]" id="cache_assets_src" value="<?php echo esc_attr(json_encode($asset_policy)); ?>"  />
 			
         	<div style="clear:both;height:10px;"></div>
-			<div style="float:right;"><span class="ref" style="position:relative;top:-5px;">JSON editor</span> <span class="star"><a class="github-button" data-manual="1" href="https://github.com/josdejong/jsoneditor" data-icon="octicon-star" data-show-count="true" aria-label="Star josdejong/jsoneditor on GitHub">Star</a></span></div>
+			<div style="float:right;"><a href="https://github.com/josdejong/jsoneditor" class="ref" style="position:relative;top:-5px;">JSON editor</a></div>
 		</td>
 	</tr>
 		<tr valign="top">
@@ -321,7 +313,7 @@ submit_button(__('Save'), 'primary large', 'is_submit', false);
     }
 ?>
         	<div style="clear:both;height:10px;"></div>
-			<div style="float:right;"><span class="ref" style="position:relative;top:-5px;">JSON editor</span> <span class="star"><a class="github-button" data-manual="1" href="https://github.com/josdejong/jsoneditor" data-icon="octicon-star" data-show-count="true" aria-label="Star josdejong/jsoneditor on GitHub">Star</a></span></div>
+			<div style="float:right;"><a href="https://github.com/josdejong/jsoneditor" class="ref" style="position:relative;top:-5px;">JSON editor</a></div>
 			<p>There are several online tools that can help with Web App Manifest creation. <a href="https://app-manifest.firebaseapp.com/" target="_blank">https://app-manifest.firebaseapp.com/</a> is a simple one. <a href="https://encrypted.google.com/search?q=<?php print urlencode('webapp manifest creator'); ?>" target="_blank">Search Google</a> for more creators.</p>
 
 			<p style="margin-top:1em;"><label><input type="checkbox" name="abovethefold[manifest_json_update]" value="1"<?php if (!isset($options['manifest_json_update']) || intval($options['manifest_json_update']) === 1) {

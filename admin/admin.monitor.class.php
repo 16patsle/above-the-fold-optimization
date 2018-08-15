@@ -5,6 +5,7 @@
  * @package    optimization
  * @subpackage optimization/admin
  * @author     Optimization.Team <info@optimization.team>
+ * @author     Patrick Sletvold
  */
 
 class Abovethefold_Admin_Monitor

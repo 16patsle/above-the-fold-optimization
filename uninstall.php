@@ -3,7 +3,7 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @link       https://optimization.team/
+ * @link       https://github.com/16patsle/
  * @since      2.5.0
  *
  * @package    abovethefold

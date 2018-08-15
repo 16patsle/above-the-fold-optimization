@@ -1,11 +1,11 @@
-=== Page Speed Optimization ===
-Contributors: o10n, optimalisatie
+=== Above The Fold Optimization ===
+Contributors: 16patsle
 Donate link: https://github.com/16patsle/
 Tags: optimization, page speed, pwa, seo, performance, css, pagespeed, critical css, web app, javascript, minification, minify, minify css, minify stylesheet, progressive, progressive web app, optimize, speed, stylesheet, google, web font, webfont
 Requires at least: 4.0
 Requires PHP: 5.3
 Tested up to: 4.9.2
-Stable tag: 2.9.19
+Stable tag: 2.10.0
 License: MIT license
 License URI: https://opensource.org/licenses/MIT
 

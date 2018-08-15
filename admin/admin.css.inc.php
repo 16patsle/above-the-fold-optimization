@@ -12,13 +12,6 @@
 						</h3>
 						<div class="inside testcontent">
 
-						<div class="ok_green" style="padding:8px;padding-left:8px;border-width:1px;font-size:14px;line-height:18px;margin:0px;">
-    						<h3 style="margin:0px;padding-left:0px;">New plugin</h3>
-    						<p style="margin:0px;margin-bottom:5px;">We have published a new plugin for CSS optimization and Web Font Optimization. It is advised to use the new plugin for access to the latest technologies and long term support.</p>
-
-    						<p><a href="<?php print esc_url(add_query_arg(array('s' => 'o10n', 'tab' => 'search', 'type' => 'author'), admin_url('plugin-install.php'))); ?>" class="button button-large">Install new plugin</a></p>
-    					</div>
-
 <?php
 
     /**
@@ -274,7 +267,7 @@
 															<p style="margin-top:7px;">To solve the PageSpeed Score issue while also achieving the best font render performance, it is possible to download the Google fonts and load them locally (from the critical CSS). Loading Google fonts locally enables to achieve a Google PageSpeed 100 Score while also preventing a font flicker effect during navigation.</p>
 
 															<br />
-															<h1>How to place Google Fonts locally</h1>
+															<h3>How to place Google Fonts locally</h3>
 
 
 															<p>Select the option "<em>Disabled (remove all fonts)</em>" from the webfont.js Load Method menu (above) to remove dynamic and static Google fonts from the HTML and CSS.</p>

@@ -23,15 +23,7 @@
 						</h3>
 						<div class="inside testcontent">
 
-							<div class="ok_green" style="padding:8px;padding-left:8px;border-width:1px;font-size:14px;line-height:18px;margin:0px;">
-	    						<h3 style="margin:0px;padding-left:0px;">New plugin</h3>
-	    						<p style="margin:0px;margin-bottom:5px;">We have published a new plugin for Javascript optimization. It is advised to use the new plugin for access to the latest technologies and long term support.</p>
-
-	    						<p><a href="<?php print esc_url(add_query_arg(array('s' => 'o10n', 'tab' => 'search', 'type' => 'author'), admin_url('plugin-install.php'))); ?>" class="button button-large">Install new plugin</a></p>
-	    					</div>
-
 						<div class="info_seagreen" style="margin-bottom:0px;font-size:14px;"><strong>Tip:</strong> More information about javascript optimization can be found in <a href="https://www.igvita.com/?<?php print $utmstring; ?>" target="_blank">this blog</a> by Ilya Grigorik, web performance engineer at Google and author of the O'Reilly book <a href="https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/?<?php print $utmstring; ?>" target="_blank">High Performance Browser Networking</a> (<a href="https://hpbn.co/?<?php print $utmstring; ?>" target="_blank">free online</a>).</div>
-
 
 						<table class="form-table">
 							<tr valign="top">
@@ -226,7 +218,7 @@
     print 'display:none;';
 } ?>" class="lazyscriptsoptions">
 <?php print htmlentities('<div data-lazy-widget><!--
-<div id="fblikebutton_1" class="fb-like" data-href="https://optimization.team/" 
+<div id="fblikebutton_1" class="fb-like" data-href="https://github.com/16patsle/" 
 data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 <script>
 FB.XFBML.parse(document.getElementById(\'fblikebutton_1\').parentNode||null);

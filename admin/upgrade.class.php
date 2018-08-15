@@ -6,6 +6,7 @@
  * @package    abovethefold
  * @subpackage abovethefold/admin
  * @author     Optimization.Team <info@optimization.team>
+ * @author     Patrick Sletvold
  */
 
 class Abovethefold_Upgrade

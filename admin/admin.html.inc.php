@@ -12,14 +12,6 @@
 						</h3>
 						<div class="inside testcontent">
 
-
-						<div class="ok_green" style="padding:8px;padding-left:8px;border-width:1px;font-size:14px;line-height:18px;margin:0px;">
-    						<h3 style="margin:0px;padding-left:0px;">New plugin</h3>
-    						<p style="margin:0px;margin-bottom:5px;">We have published a new plugin for HTML Optimization. It is advised to use the new plugin for access to the latest technologies and long term support.</p>
-
-    						<p><a href="<?php print esc_url(add_query_arg(array('s' => 'o10n', 'tab' => 'search', 'type' => 'author'), admin_url('plugin-install.php'))); ?>" class="button button-large">Install new plugin</a></p>
-    					</div>
-
 							<table class="form-table">
 	<tr valign="top">
 		<th scope="row">Minify HTML</th>

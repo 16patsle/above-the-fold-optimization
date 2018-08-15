@@ -60,7 +60,7 @@ font-weight: bold;
         		<a href="javascript:void(0);" class="button" data-http2-insert='[{"type":"image","match":"all","meta":true},{"type":"image","match":{"pattern":"/gravatar\\.com\\//","regex":true,"exclude":true},"meta":true}]'>HTML images</a>
         		<a href="javascript:void(0);" class="button" data-http2-insert='[{"type":"custom","resources":[{"file":"https://url.to/file.jpg","type":"image"},{"file":"/path/to/font.woff2","type":"font","mime":"font/woff2"}],"meta":true}]'>Custom resource list</a>
         	</fieldset>
-			<div style="float:right;"><span class="ref" style="position:relative;top:-5px;">JSON editor</span> <span class="star"><a class="github-button" data-manual="1" href="https://github.com/josdejong/jsoneditor" data-icon="octicon-star" data-show-count="true" aria-label="Star josdejong/jsoneditor on GitHub">Star</a></span></div>
+			<div style="float:right;"><a href="https://github.com/josdejong/jsoneditor" class="ref" style="position:relative;top:-5px;">JSON editor</a></div>
 
 			<p class="info_yellow">
 			<strong>Note:</strong> When using the Progressive Web App Service Worker (PWA), the service worker automatically calculates a <strong>Cache Digest</strong> based on previously pushed resources. This feature is based on the hash calculation implementation of <a href="https://gitlab.com/sebdeckers/cache-digest-immutable/#-cache-digest-immutable" target="_blank">Cache-Digest-Immutable</a> and enables the server to only push resources that aren't already available in the client. For more information, see <a href="https://calendar.perfplanet.com/2016/cache-digests-http2-server-push/" target="_blank">this article</a> on PerfPlanet.com.

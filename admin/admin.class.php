@@ -10,6 +10,7 @@
  * @package    abovethefold
  * @subpackage abovethefold/admin
  * @author     Optimization.Team <info@optimization.team>
+ * @author     Patrick Sletvold
  */
 
 
@@ -50,14 +51,13 @@ class Abovethefold_Admin
         'css' => 'CSS',
         'javascript' => 'Javascript',
         'criticalcss' => 'Critical CSS',
-        'pwa' => 'PWA', // Google PWA Validation
+        'pwa' => 'PWA', // PWA Validation
         'http2' => 'HTTP/2',
         'proxy' => 'Proxy',
         'settings' => 'Settings',
         'build-tool' => 'Critical CSS Creator',
         'criticalcss-test' => 'Quality Test',
-        'monitor' => 'Monitor',
-        'offer' => 'New Plugins'
+        'monitor' => 'Monitor'
     );
 
     /**
@@ -108,23 +108,13 @@ class Abovethefold_Admin
             }
 
             // Hook in the admin options page
-            $this->CTRL->loader->add_action('admin_init', $this, 'o10n_redirect', 30);
-
-            // Hook in the admin options page
             $this->CTRL->loader->add_action('admin_menu', $this, 'admin_menu', 30);
 
             // Hook in the admin styles and scripts
             $this->CTRL->loader->add_action('admin_enqueue_scripts', $this, 'enqueue_scripts', 30);
 
-
             // add settings link to plugin overview
             $this->CTRL->loader->add_filter('plugin_action_links_above-the-fold-optimization/abovethefold.php', $this, 'settings_link');
-
-            // meta links on plugin index
-            $this->CTRL->loader->add_filter('plugin_row_meta', $this, 'plugin_row_meta', 10, 2);
-
-            // title on plugin index
-            $this->CTRL->loader->add_action('pre_current_active_plugins', $this, 'plugin_title', 10);
 
             // Handle admin notices
             $this->CTRL->loader->add_action('admin_notices', $this, 'show_notices');
@@ -202,28 +192,6 @@ class Abovethefold_Admin
     }
 
     /**
-     * Redirect to new plugin
-     */
-    public function o10n_redirect()
-    {
-        // redirect to new CSS optimization plugin
-        if (defined('O10N_CORE_VERSION') && class_exists('\O10n\Core') && isset($_GET['page']) && $_GET['page'] === 'pagespeed-css') {
-            $modules = O10n\Core::get('modules');
-            if (in_array('css', $modules)) {
-                wp_redirect(add_query_arg(array( 'page' => 'o10n-css', 'tab' => 'optimization' ), admin_url(((count($modules) === 1) ? 'themes.php' : 'admin.php'))));
-            }
-        }
-
-        // redirect to new javascript optimization plugin
-        if (defined('O10N_CORE_VERSION') && class_exists('\O10n\Core') && isset($_GET['page']) && $_GET['page'] === 'pagespeed-javascript') {
-            $modules = O10n\Core::get('modules');
-            if (in_array('js', $modules)) {
-                wp_redirect(add_query_arg(array( 'page' => 'o10n-js', 'tab' => 'optimization' ), admin_url(((count($modules) === 1) ? 'tools.php' : 'admin.php'))));
-            }
-        }
-    }
-
-    /**
      * Set body class
      */
     public function admin_body_class($classes)
@@ -240,43 +208,6 @@ class Abovethefold_Admin
         array_unshift($links, $settings_link);
 
         return $links;
-    }
-    
-    /**
-     * Show row meta on the plugin screen.
-     */
-    public static function plugin_row_meta($links, $file)
-    {
-        /*if ($file == plugin_basename(WPABTF_SELF)) {
-            $lgcode = strtolower(get_locale());
-            $intlcode = 'en-us';
-            if (strpos($lgcode, '_') !== false) {
-                $lgparts = explode('_', $lgcode);
-                $lgcode = $lgparts[0];
-                $intlcode = $lgparts[0] . '-' . $lgparts[1];
-            }
-            if ($lgcode === 'en') {
-                $lgcode = '';
-            }
-
-            $row_meta = array(
-                'new_plugins' => '<a href="' . esc_url('https://developers.google.com/speed/pagespeed/insights/?hl=' . $lgcode) . '" target="_blank" style="font-weight:bold;color:#079c2d;">' . __('New Plugins', 'pagespeed') . '</a>',
-            );
-
-            return array_merge($links, $row_meta);
-        }*/
-
-        return (array) $links;
-    }
-
-    /**
-     * Plugin title modification
-     */
-    public function plugin_title()
-    {
-        ?><script>
-jQuery(function() { var desc = jQuery('*[data-plugin="above-the-fold-optimization/abovethefold.php"] .column-description'); desc.html(desc.html().replace('100 Score','<span class="g100">100</span> Score')); });
-</script><?php
     }
 
     /**
@@ -467,7 +398,7 @@ jQuery(function() { var desc = jQuery('*[data-plugin="above-the-fold-optimizatio
             'id' => 'abovethefold',
             'title' => '<div class="ab-icon wp-menu-image svg" style="background-image: url(\''.$this->admin_icon().'\') !important;"></div><span class="ab-label">' . __('PageSpeed', 'pagespeed') . '</span>',
             'href' => $settings_url,
-            'meta' => array( 'title' => __('PageSpeed', 'abovethefold'), 'class' => 'ab-sub-secondary' )
+            'meta' => array( 'title' => __('ABTF Optimization', 'abovethefold'), 'class' => 'ab-sub-secondary' )
 
         ));
 
@@ -714,7 +645,7 @@ jQuery(function() { var desc = jQuery('*[data-plugin="above-the-fold-optimizatio
             'parent' => 'abovethefold-check-google',
             'id' => 'abovethefold-check-google-more',
             'title' => __('More tests', 'abovethefold'),
-            'href' => 'https://optimization.team/tests#url='.urlencode($currenturl),
+            'href' => 'https://github.com/16patsle/tests#url='.urlencode($currenturl),
             'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
         ));
 
@@ -746,7 +677,7 @@ jQuery(function() { var desc = jQuery('*[data-plugin="above-the-fold-optimizatio
             'parent' => 'abovethefold-check-speed',
             'id' => 'abovethefold-check-speed-more',
             'title' => __('More tests', 'abovethefold'),
-            'href' => 'https://optimization.team/tests#url='.urlencode($currenturl),
+            'href' => 'https://github.com/16patsle/tests#url='.urlencode($currenturl),
             'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
         ));
 
@@ -792,7 +723,7 @@ jQuery(function() { var desc = jQuery('*[data-plugin="above-the-fold-optimizatio
             'parent' => 'abovethefold-check-technical',
             'id' => 'abovethefold-check-technical-more',
             'title' => __('More tests', 'abovethefold'),
-            'href' => 'https://optimization.team/tests#url='.urlencode($currenturl),
+            'href' => 'https://github.com/16patsle/tests#url='.urlencode($currenturl),
             'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
         ));
     }

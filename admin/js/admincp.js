@@ -2,24 +2,24 @@
  * Request animation frame
  */
 if (!window.requestAnimationFrame) {
-    window.requestAnimationFrame = (function() {
+    window.requestAnimationFrame = (function () {
         return window.webkitRequestAnimationFrame ||
             window.mozRequestAnimationFrame ||
             window.oRequestAnimationFrame ||
             window.msRequestAnimationFrame ||
-            function( /* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+            function ( /* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
                 window.setTimeout(callback, 1000 / 60);
             };
     })();
 }
 
 if (!window.requestIdleCallback) {
-    window.requestIdleCallback = function(fn) {
+    window.requestIdleCallback = function (fn) {
         setTimeout(fn);
     };
 }
 
-jQuery(function($) {
+jQuery(function ($) {
 
     /**
      * Page selection menu
@@ -31,13 +31,13 @@ jQuery(function($) {
             labelField: 'name',
             searchField: ['name'],
             optgroups: window.abtf_pagesearch_optgroups,
-            onType: function(str) {
+            onType: function (str) {
                 if (/^http(s)?:\/\/[^\/]+\//.test(str)) {
                     var selectize = page_select_menu[0].selectize;
                     selectize.setTextboxValue(str.replace(/^http(s)?:\/\/[^\/]+\//, '/'));
                 }
             },
-            load: function(query, callback) {
+            load: function (query, callback) {
                 if (!query.length) return callback();
                 jQuery.ajax({
                     url: ajaxurl,
@@ -48,10 +48,10 @@ jQuery(function($) {
                         query: query,
                         maxresults: 10
                     },
-                    error: function() {
+                    error: function () {
                         callback();
                     },
-                    success: function(res) {
+                    success: function (res) {
                         callback(res);
                     }
                 });
@@ -65,7 +65,7 @@ jQuery(function($) {
     if (jQuery('#fullcsspages').length > 0 && typeof jQuery('#fullcsspages').selectize !== 'undefined') {
 
         // download button
-        jQuery('#fullcsspages_dl').on('click', function() {
+        jQuery('#fullcsspages_dl').on('click', function () {
 
             var href = jQuery('#fullcsspages').val();
 
@@ -83,7 +83,7 @@ jQuery(function($) {
         });
 
         // print button
-        jQuery('#fullcsspages_print').on('click', function() {
+        jQuery('#fullcsspages_print').on('click', function () {
 
             var href = jQuery('#fullcsspages').val();
 
@@ -108,7 +108,7 @@ jQuery(function($) {
     if (jQuery('#criticalcss-test-pages').length > 0 && typeof jQuery('#criticalcss-test-pages').selectize !== 'undefined') {
 
         // download button
-        jQuery('#splitview').on('click', function() {
+        jQuery('#splitview').on('click', function () {
 
             var href = jQuery('#criticalcss-test-pages').val();
 
@@ -126,7 +126,7 @@ jQuery(function($) {
         });
 
         // download button
-        jQuery('#editorview').on('click', function() {
+        jQuery('#editorview').on('click', function () {
 
             var href = jQuery('#criticalcss-test-pages').val();
 
@@ -144,7 +144,7 @@ jQuery(function($) {
         });
 
         // print button
-        jQuery('#fullview').on('click', function() {
+        jQuery('#fullview').on('click', function () {
 
             var href = jQuery('#criticalcss-test-pages').val();
 
@@ -165,7 +165,7 @@ jQuery(function($) {
 
 
     // text selection
-    $('.clickselect').on('click', function() {
+    $('.clickselect').on('click', function () {
         if (document.selection) {
             var range = document.body.createTextRange();
             range.moveToElementText($(this)[0]);
@@ -182,8 +182,8 @@ jQuery(function($) {
      */
 
     // example links
-    $('[data-example]').each(function(index, el) {
-        $(el).on('click', function(e) {
+    $('[data-example]').each(function (index, el) {
+        $(el).on('click', function (e) {
             var example = $('#' + $(this).data('example'));
             if (example.length > 0) {
 
@@ -202,28 +202,5 @@ jQuery(function($) {
                 $(this).data('example-html', original_html);
             }
         });
-    });
-
-    /**
-     * Github star button
-     */
-    if (jQuery('.github-button').length > 0) {
-
-        window.requestIdleCallback(function() {
-            var s = document.createElement('script');
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = 'https://buttons.github.io/buttons.js';
-            document.getElementsByTagName('head')[0].appendChild(s);
-        });
-
-    }
-
-    // instant app link
-    $('.wp-submenu a[href]').each(function(i, el) {
-        if ($(el).attr('href') === 'admin.php?page=pagespeed-instant') {
-            $(el).attr('href', 'https://test.fastestwebsite.co/');
-            $(el).attr('target', '_blank');
-        }
     });
 });
