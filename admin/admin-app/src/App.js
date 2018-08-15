@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Tabs from './Tabs';
 
 window.react_dir = document.querySelector('#react_dir').value
+window.home_url = document.querySelector('#home_url').value
+window.admin_url = document.querySelector('#admin_url').value
 
 class App extends Component {
   render() {
@@ -15,6 +18,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <Tabs></Tabs>
       </div>
     );
   }
