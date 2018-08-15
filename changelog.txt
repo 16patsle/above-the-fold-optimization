@@ -1,7 +1,79 @@
 = Changelog archive =
 
-This is an archive of older changelog entries. Most recent entries are maintained in readme.txt
+This is an archive of older changelog entries, from the original plugin. More recent entries are maintained in readme.txt
 
+= 2.9.19 = 
+* Upgrade to new HTML optimization plugin.
+
+= 2.9.18 = 
+* Upgrade to new PWA / Service Worker optimization plugin.
+
+= 2.9.16 =
+* New PWA Optimization and HTML optimization plugins availability.
+
+= 2.9.15 = 
+* Improved compatibility with new optimization plugins by excluding ABTF client.
+
+= 2.9.14 = 
+* Upgrade to new optimization plugins.
+
+= 2.9.13 = 
+* Javascript Optimization module upgrade.
+
+= 2.9.12 = 
+* Disable old CSS and Web Font optimization when new optimization modules are installed.
+
+= 2.9.11 = 
+* CSS and Web Font Optimization module upgrade.
+
+= 2.9.10 = 
+* Informative update.
+
+= 2.9.9 = 
+* Name change.
+
+= 2.9.8 = 
+* Improved: Synchronized scroll option in Critical CSS Quality Test.
+
+= 2.9.7 = 
+* Improved: Critical CSS Quality Test (Split View).
+* Added: Critical CSS Live Editor.
+
+= 2.9.6 =
+* Added: Simple Critical CSS extraction javascript widget from admin menu bar. (@alexlii)
+* Added: Full CSS extraction javascript widget from admin menu bar. (@bhagawadkrishna)
+* Added: Search a page by URL (@Emilybkk)
+
+= 2.9.5 =
+* Added: option to require preloading of assets to complete in Service Worker installation (before activation).
+* Added: Progressive Web App preload filter `abtf_pwa_preload`.
+* Added: Service Worker sends identifying HTTP header `X-PAGESPEED-SW` in requests to allow server side modification for SW.
+
+= 2.9.4 =
+* Repair of previous incomplete update.
+
+= 2.9.3 =
+* Bugfix: PHP 5.3 compatibility (@thowden)
+* Bugfix: Older webfont.js version `v1.6.26` on Google CDN. (@jimwalczak)
+* Bugfix: Global CDN URL not applied. (@supernovae)
+* Bugfix: Service Worker file not removed upon uninstallation.
+* Bugfix: Google Lighthouse fails `start_url` audit. (@sirtaptap)
+* Added: option to preload navigation requests in Service Worker on mousdown event to prevent 300ms tap delay.
+
+= 2.9.2 =
+* Added: HTTP/2 Server Push for Critical CSS.
+
+= 2.9.1 =
+* Bugfix: Service Worker JSON config from query parameter not persistent after browser restart.
+
+= 2.9.0 =
+* Added: HTTP/2 Server Push optimization.
+* Added: [Cache Digest](https://calendar.perfplanet.com/2016/cache-digests-http2-server-push/) hash computation in PWA Service Worker for HTTP/2 pushed resources.
+* Added: HTTP/2 test in admin menu.
+* Added: PageSpeed admin menu.
+* Improved: location of PWA config json file sent to Service Worker as a query parameter. ([@16patsle](https://github.com/optimalisatie/above-the-fold-optimization/issues/66))
+* Improved: plugin disabled for REST API requests.
+* Improved: Service Worker cache cleanup in idle time.
 
 = 2.8.22 =
 * Added: WordPress filters `abtf_pwa_sw_scope` and `abtf_pwa_sw_path`.

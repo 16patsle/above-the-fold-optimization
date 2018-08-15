@@ -2,39 +2,11 @@
 
 The Page Speed Optimization plugin is a toolkit for WordPress Optimization with a focus on SEO. The plugin enables to achieve a 100 score in the [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) test.
 
-The plugin is compatible with most optimization, caching and minification plugins such as Autoptimize and W3 Total Cache. The plugin offers modular compatibility and can be extended to support any optimization plugin. ([more info](https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/))
-
-**This plugin is removed from WordPress.org. Read the story [here](https://github.com/o10n-x/wordpress-css-optimization/issues/4).**
+The plugin is compatible with most optimization, caching and minification plugins such as Autoptimize and W3 Total Cache. The plugin offers modular compatibility and can be extended to support any optimization plugin. ([more info](https://github.com/16patsle/above-the-fold-optimization/tree/master/trunk/modules/plugins/))
 
 ## Installation
 
-![Github Updater](https://github.com/afragen/github-updater/raw/develop/assets/GitHub_Updater_logo_small.png)
-
-This plugin can be installed and updated using [Github Updater](https://github.com/afragen/github-updater) ([installation instructions](https://github.com/afragen/github-updater/wiki/Installation))
-
-## New! WordPress WPO Collection
-
-The Page Speed Optimization plugin (previously named *Above The Fold Optimization*) is very old and was originally designed for Google PageSpeed optimization. While a Google PageSpeed 100 score is still of value, websites with a high Google PageSpeed score may score very bad in Google's new [Lighthouse performance test](https://developers.google.com/web/tools/lighthouse/). 
-
-The following scores are for the same site. It shows that a perfect Google PageSpeed score does not correlate to a high Google Lighthouse performance score.
-
-![Perfect Google PageSpeed 100 Score](https://github.com/o10n-x/wordpress-css-optimization/blob/master/docs/images/google-pagespeed-100.png) ![Google Lighthouse Critical Performance Score](https://github.com/o10n-x/wordpress-css-optimization/blob/master/docs/images/lighthouse-performance-15.png)
-
-We developed [new optimization plugins](https://github.com/o10n-x/) that are designed to achieve perfect Google Lighouse scores and to validate a website as [Google PWA](https://developers.google.com/web/progressive-web-apps/). The new plugins are available on our Github company profile: https://github.com/o10n-x/
-
-The new optimization plugins include [CSS](https://github.com/o10n-x/wordpress-css-optimization), [Javascript](https://github.com/o10n-x/wordpress-javascript-optimization), [HTML](https://github.com/o10n-x/wordpress-html-optimization), [Web Font](https://github.com/o10n-x/wordpress-font-optimization), [Progressive Web App (Service Worker)](https://github.com/o10n-x/wordpress-pwa-optimization), [HTTP/2](https://github.com/o10n-x/wordpress-http2-optimization) and [Security Header](https://github.com/o10n-x/wordpress-security-header-optimization) optimization. 
-
-### Google PageSpeed score is outdated
-
-For the open web to have a chance of survival in a mobile era it needs to compete with and win from native mobile apps. Google is dependent on the open web for it's advertising revenue. Google therefor seeks a way to secure the open web and the main objective is to rapidly enhance the quality of the open web to meet the standards of native mobile apps.
-
-For SEO it is therefor simple: websites will need to meet the standards set by the [Google Lighthouse Test](https://developers.google.com/web/tools/lighthouse/) (or Google's future new tests). A website with perfect scores will be preferred in search over low performance websites. The officially announced [Google Speed Update](https://searchengineland.com/google-speed-update-page-speed-will-become-ranking-factor-mobile-search-289904) (July 2018) shows that Google is going as far as it can to drive people to enhance the quality to ultra high levels, to meet the quality of, and hopefully beat native mobile apps.
-
-![Google Lighthouse Perfect Performance Scores](https://github.com/o10n-x/wordpress-css-optimization/blob/master/docs/images/google-lighthouse-pwa-validation.jpg)
-
-**The new WPO plugins are in beta release.**
-
-https://github.com/o10n-x/
+This plugin is not available from the WordPress plugin repository at the moment, but can be installed and updated using [Github Updater](https://github.com/afragen/github-updater) ([installation instructions](https://github.com/afragen/github-updater/wiki/Installation))
 
 # Page Speed Optimization Description
 
@@ -122,8 +94,8 @@ The plugin contains a tool to create Critical CSS based on [Gulp.js](https://gul
 
 ## Maintainers
 
-* [@optimalisatie](https://github.com/optimalisatie)
+* [@16patsle](https://github.com/16patsle)
 
 ## License
 
-(C) [www.pagespeed.pro](https://pagespeed.pro) 2014–2018, released under the MIT license
+Copyright [www.pagespeed.pro](https://pagespeed.pro) 2014–2018, Patrick Sletvold 2018, released under the MIT license

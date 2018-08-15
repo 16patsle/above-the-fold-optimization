@@ -1,13 +1,13 @@
 === Page Speed Optimization ===
 Contributors: o10n, optimalisatie
-Donate link: https://optimization.team/
+Donate link: https://github.com/16patsle/
 Tags: optimization, page speed, pwa, seo, performance, css, pagespeed, critical css, web app, javascript, minification, minify, minify css, minify stylesheet, progressive, progressive web app, optimize, speed, stylesheet, google, web font, webfont
 Requires at least: 4.0
 Requires PHP: 5.3
 Tested up to: 4.9.2
 Stable tag: 2.9.19
-License: GPLv2 or late
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: MIT license
+License URI: https://opensource.org/licenses/MIT
 
 WordPress optimization toolkit with a focus on SEO. This plugin enables to achieve a Google PageSpeed 100 Score. Supports most optimization, minification and full page cache plugins.
 
@@ -136,78 +136,9 @@ The plugin contains a tool to create Critical CSS based on [Gulp.js](https://gul
 
 == Changelog ==
 
-= 2.9.19 = 
-* Upgrade to new HTML optimization plugin.
-
-= 2.9.18 = 
-* Upgrade to new PWA / Service Worker optimization plugin.
-
-= 2.9.16 =
-* New PWA Optimization and HTML optimization plugins availability.
-
-= 2.9.15 = 
-* Improved compatibility with new optimization plugins by excluding ABTF client.
-
-= 2.9.14 = 
-* Upgrade to new optimization plugins.
-
-= 2.9.13 = 
-* Javascript Optimization module upgrade.
-
-= 2.9.12 = 
-* Disable old CSS and Web Font optimization when new optimization modules are installed.
-
-= 2.9.11 = 
-* CSS and Web Font Optimization module upgrade.
-
-= 2.9.10 = 
-* Informative update.
-
-= 2.9.9 = 
-* Name change.
-
-= 2.9.8 = 
-* Improved: Synchronized scroll option in Critical CSS Quality Test.
-
-= 2.9.7 = 
-* Improved: Critical CSS Quality Test (Split View).
-* Added: Critical CSS Live Editor.
-
-= 2.9.6 =
-* Added: Simple Critical CSS extraction javascript widget from admin menu bar. (@alexlii)
-* Added: Full CSS extraction javascript widget from admin menu bar. (@bhagawadkrishna)
-* Added: Search a page by URL (@Emilybkk)
-
-= 2.9.5 =
-* Added: option to require preloading of assets to complete in Service Worker installation (before activation).
-* Added: Progressive Web App preload filter `abtf_pwa_preload`.
-* Added: Service Worker sends identifying HTTP header `X-PAGESPEED-SW` in requests to allow server side modification for SW.
-
-= 2.9.4 =
-* Repair of previous incomplete update.
-
-= 2.9.3 =
-* Bugfix: PHP 5.3 compatibility (@thowden)
-* Bugfix: Older webfont.js version `v1.6.26` on Google CDN. (@jimwalczak)
-* Bugfix: Global CDN URL not applied. (@supernovae)
-* Bugfix: Service Worker file not removed upon uninstallation.
-* Bugfix: Google Lighthouse fails `start_url` audit. (@sirtaptap)
-* Added: option to preload navigation requests in Service Worker on mousdown event to prevent 300ms tap delay.
-
-= 2.9.2 =
-* Added: HTTP/2 Server Push for Critical CSS.
-
-= 2.9.1 =
-* Bugfix: Service Worker JSON config from query parameter not persistent after browser restart.
-
-= 2.9.0 =
-* Added: HTTP/2 Server Push optimization.
-* Added: [Cache Digest](https://calendar.perfplanet.com/2016/cache-digests-http2-server-push/) hash computation in PWA Service Worker for HTTP/2 pushed resources.
-* Added: HTTP/2 test in admin menu.
-* Added: PageSpeed admin menu.
-* Improved: location of PWA config json file sent to Service Worker as a query parameter. ([@16patsle](https://github.com/optimalisatie/above-the-fold-optimization/issues/66))
-* Improved: plugin disabled for REST API requests.
-* Improved: Service Worker cache cleanup in idle time.
+= 2.10.0 = 
+* Remove references to the original plugin author's new plugins
+* Cleanup various files
 
 Older changes have been moved to changelog.txt.
 

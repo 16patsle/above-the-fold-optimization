@@ -4,7 +4,7 @@
  *
  * WordPress optimization toolkit with a focus on SEO. This plugin enables to achieve a Google PageSpeed 100 Score. Supports most optimization, minification and full page cache plugins.
  *
- * @link              https://optimization.team/
+ * @link              https://github.com/16patsle/
  * @since             1.0
  * @package           abovethefold
  *
@@ -12,9 +12,9 @@
  * Plugin Name:       Page Speed Optimization
  * Description:       WordPress optimization toolkit with a focus on SEO. This plugin enables to achieve a Google PageSpeed 100 Score. Supports most optimization, minification and full page cache plugins.
  * Version:           2.9.19
- * Author:            Optimization.Team
- * Author URI:        https://optimization.team/
- * GitHub Plugin URI: https://github.com/optimalisatie/above-the-fold-optimization
+ * Author:            Optimization.Team, Patrick Sletvold
+ * Author URI:        https://github.com/16patsle/
+ * GitHub Plugin URI: https://github.com/16patsle/above-the-fold-optimization
  * Text Domain:       abovethefold
  * Domain Path:       /languages
  */
