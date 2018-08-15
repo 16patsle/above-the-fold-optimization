@@ -962,9 +962,6 @@ class Abovethefold_Admin
     {
         global $pagenow, $wp_query;
 
-        // offer
-        require_once('admin.offer.inc.php');
-
         // load options
         $options = get_option('abovethefold');
         if (!is_array($options)) {

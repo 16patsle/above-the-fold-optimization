@@ -581,9 +581,6 @@ class Abovethefold_Upgrade
                 update_option('abovethefold', $options, true);
             }
 
-            // restore limited offer
-            update_user_meta(get_current_user_id(), 'abtf_show_offer', 0);
-
             /**
              * Clear full page cache
              */

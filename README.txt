@@ -139,6 +139,8 @@ The plugin contains a tool to create Critical CSS based on [Gulp.js](https://gul
 = 2.10.0 = 
 * Remove references to the original plugin author's new plugins
 * Cleanup various files
+* Remove unneeded styles
+* Remove "offer" for Google's "Full Spectrum Mobile Performance Test
 
 Older changes have been moved to changelog.txt.
 
