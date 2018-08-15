@@ -7,7 +7,9 @@
         "email": "info@optimization.team",
         "web": "pagespeed.pro"
     },
-    "contributors": ["Patrick Sletvold"],
+    "contributors": [
+        "Patrick Sletvold"
+    ],
     "engines": {
         "node": "~0.10"
     },
