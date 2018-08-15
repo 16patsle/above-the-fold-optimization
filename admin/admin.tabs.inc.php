@@ -1,6 +1,8 @@
 
 <div class="wrap">
+<input id="home_url" type="hidden" value="<?php echo get_home_url(); ?>" />
 <h1><?php _e('Page Speed Optimization', 'abovethefold') ?></h1>
+<div id="root"></div>
 <nav class="nav-tab-wrapper" style="position:relative;">
 <div class="ref">
         <div class="links">

@@ -268,6 +268,36 @@ class Abovethefold_Admin
 
         // add general admin CSS
         wp_enqueue_style('abtf_admincp', plugin_dir_url(__FILE__) . 'css/admincp.min.css', false, WPABTF_VERSION);
+
+        // add admin-app JS
+        if (!in_array($_SERVER['HTTP_HOST'], array('127.0.0.1', '::1', 'localhost'))) {
+            // PROD
+             $JSfiles = scandir(dirname(__FILE__) . '/admin-app/build/static/js/');
+             $react_js_to_load = '';
+             foreach($JSfiles as $filename) {
+                 if(strpos($filename,'.js')&&!strpos($filename,'.js.map')) {
+                     $react_js_to_load = plugin_dir_url( __FILE__ ) . 'admin-app/build/static/js/' . $filename;
+                     $react_dir = plugin_dir_url( __FILE__ ) . 'admin-app/build/';
+                 }
+             }
+        } else {
+            // DEV
+            $react_js_to_load = 'http://localhost:3000/static/js/bundle.js';
+            $react_dir = 'http://localhost:3000/';
+        }
+        //React dynamic loading
+        wp_enqueue_script('abtf_react', $react_js_to_load, '', mt_rand(10,1000), true);
+        echo '<input id="react_dir" type="hidden" value="' . $react_dir . '" />';
+
+        // add admin-app CSS
+        if (!in_array($_SERVER['HTTP_HOST'], array('127.0.0.1', '::1', 'localhost'))) {
+            $CSSfiles = scandir(dirname(__FILE__) . '/admin-app/build/static/css/');
+               foreach($CSSfiles as $filename) {
+              if(strpos($filename,'.css')&&!strpos($filename,'.css.map')) {
+                wp_enqueue_style( 'abtf_react_css', plugin_dir_url( __FILE__ ) . 'admin-app/build/static/css/' . $filename, array(), mt_rand(10,1000), 'all' );
+              }
+               }
+          }
     }
 
     /**
