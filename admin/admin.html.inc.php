@@ -1,6 +1,8 @@
 <?php
 
-?><form method="post" action="<?php echo admin_url('admin-post.php?action=abtf_html_update'); ?>" class="clearfix" enctype="multipart/form-data">
+?>
+<div id="html-root"></div>
+<form method="post" action="<?php echo admin_url('admin-post.php?action=abtf_html_update'); ?>" class="clearfix" enctype="multipart/form-data">
 	<?php wp_nonce_field('abovethefold'); ?>
 	<div class="wrap abovethefold-wrapper">
 		<div id="poststuff">
