@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
-const tabs = JSON.parse(document.querySelector('#admin_tabs').value);
-const tab = JSON.parse(document.querySelector('#current_admin_tab').value);
+const tabs = JSON.parse(document.querySelector('#adminTabs').value);
+const tab = JSON.parse(document.querySelector('#currentAdminTab').value);
 
 class Tabs extends Component {
 
     render() {
         const tabElements = [];
-        for (const tabkey in tabs) {
-            if (tabkey === 'criticalcss-test' || tabkey === 'build-tool') {
+        for (const tabKey in tabs) {
+            if (tabKey === 'criticalcss-test' || tabKey === 'build-tool') {
                 continue;
             }
 
-            const className = (tabkey == tab || (tabkey === 'criticalcss' && tab == 'criticalcss-test')) ? ' nav-tab-active' : '';
-            const url = new URL(window.admin_url)
-            url.searchParams.append('page', 'pagespeed' + ((tabkey !== 'intro') ? '-' + tabkey : ''));
-            tabElements.push(<a className={'nav-tab' + className} href={encodeURI(url)} key={tabkey}>{tabs[tabkey]}</a>);
+            const className = (tabKey == tab || (tabKey === 'criticalcss' && tab == 'criticalcss-test')) ? ' nav-tab-active' : '';
+            const url = new URL(window.adminUrl)
+            url.searchParams.append('page', 'pagespeed' + ((tabKey !== 'intro') ? '-' + tabKey : ''));
+            tabElements.push(<a className={'nav-tab' + className} href={encodeURI(url)} key={tabKey}>{tabs[tabKey]}</a>);
         }
         return tabElements;
     }

@@ -287,7 +287,7 @@ class Abovethefold_Admin
         }
         //React dynamic loading
         wp_enqueue_script('abtf_react', $react_js_to_load, '', mt_rand(10,1000), true);
-        echo '<input id="react_dir" type="hidden" value="' . $react_dir . '" />';
+        echo '<input id="reactDir" type="hidden" value="' . $react_dir . '" />';
 
         // add admin-app CSS
         if (!in_array($_SERVER['HTTP_HOST'], array('127.0.0.1', '::1', 'localhost'))) {
