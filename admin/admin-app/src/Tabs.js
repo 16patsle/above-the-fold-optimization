@@ -18,23 +18,7 @@ class Tabs extends Component {
             url.searchParams.append('page', 'pagespeed' + ((tabkey !== 'intro') ? '-' + tabkey : ''));
             tabElements.push(<a className={'nav-tab' + className} href={encodeURI(url)} key={tabkey}>{tabs[tabkey]}</a>);
         }
-        return (
-            <nav className="nav-tab-wrapper" style={{ position: 'relative' }}>
-                <div className="ref">
-                    <div className="links">
-                        <a href="https://github.com/16patsle/above-the-fold-optimization" target="_blank">Github</a> ‐ <a href="https://github.com/16patsle/above-the-fold-optimization/issues" target="_blank">Report a bug</a> {/*‐ <a href="https://wordpress.org/support/plugin/above-the-fold-optimization/reviews/#new-post" target="_blank">Review plugin</a>*/}
-                    </div>
-                </div>
-                {
-                    tabElements
-                }{/*
-
-            $class = ($tabkey == $tab || ($tabkey === 'criticalcss' && $tab == 'criticalcss-test')) ? ' nav-tab-active' : '';
-            $url = add_query_arg(array('page' => 'pagespeed' . (($tabkey !== 'intro') ? '-' . $tabkey : '')), admin_url('admin.php'));
-                echo '<a class="nav-tab'.$class.'" href="'.esc_url($url).'">'.$name.'</a>';
-        }*/}
-            </nav>
-        );
+        return tabElements;
     }
 }
 
