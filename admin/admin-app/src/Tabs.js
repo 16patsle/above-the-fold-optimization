@@ -13,7 +13,6 @@ class Tabs extends Component {
             }
 
             const className = (tabkey == tab || (tabkey === 'criticalcss' && tab == 'criticalcss-test')) ? ' nav-tab-active' : '';
-            console.log(tabkey, tabs[tabkey], className)
             const url = new URL(window.admin_url)
             url.searchParams.append('page', 'pagespeed' + ((tabkey !== 'intro') ? '-' + tabkey : ''));
             tabElements.push(<a className={'nav-tab' + className} href={encodeURI(url)} key={tabkey}>{tabs[tabkey]}</a>);

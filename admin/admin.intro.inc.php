@@ -5,6 +5,10 @@
     $thinkurl = $thinkhost . 'intl/'.$this->google_intlcode.'?url=' . urlencode(home_url());
 
 ?>
+<div id="intro-root">
+	<input id="lgcode" type="hidden" value="<?php echo $lgcode; ?>" />
+	<input id="google_intlcode" type="hidden" value="<?php echo $this->google_intlcode; ?>" />
+</div>
 <div class="wrap abovethefold-wrapper">
 	<div id="poststuff">
 		<div id="post-body" class="metabox-holder">
@@ -32,7 +36,7 @@
 						<p>Before you start using this plugin: test your website for problems and create a priority list with the issues that need to be resolved. This plugin offers access to several tests from the PageSpeed menu in the top admin bar.</p>
 
 						<p>
-							<a class="button button-small" href="https://testmysite.withgoogle.com/intl<?php print $this->google_intlcode. '?url=' . urlencode(home_url()); ?>&amp;hl=<?php print $lgcode;?>" target="_blank">Google Full Spectrum Test</a>
+							<a class="button button-small" href="https://testmysite.withgoogle.com/intl/<?php print $this->google_intlcode. '?url=' . urlencode(home_url()); ?>&amp;hl=<?php print $lgcode;?>" target="_blank">Google Full Spectrum Test</a>
 							<a class="button button-small" href="https://developers.google.com/speed/pagespeed/insights/?url=<?php print urlencode(home_url()); ?>&amp;hl=<?php print $lgcode;?>" target="_blank">Google PageSpeed Test</a>
 							<a class="button button-small" href="https://search.google.com/search-console/mobile-friendly?url=<?php print urlencode(home_url()); ?>&amp;hl=<?php print $lgcode;?>" target="_blank">Google Mobile Test</a>
 							<a class="button button-small" href="https://performance.sucuri.net/domain/<?php print urlencode(str_replace('www.', '', parse_url(home_url(), PHP_URL_HOST))); ?>" target="_blank">Securi Server Response Time</a>
