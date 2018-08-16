@@ -10,7 +10,7 @@
  * When no callback is provided, the extracted CSS is offered as a file download + printed to the browser console.
  * 
  */
-(function(window) {
+(function (window) {
 
     /**
      * Critical CSS extraction
@@ -21,11 +21,11 @@
      * Made cross browser using 
      * @link https://github.com/ovaldi/getMatchedCSSRules
      */
-    var CSSCriticalPath = function(w, d, opts) {
+    var CSSCriticalPath = function (w, d, opts) {
         var opt = opts || {};
         var css = {};
         var inlineCount = 0;
-        var pushCSS = function(r) {
+        var pushCSS = function (r) {
 
             var stylesheetFile = r.parentStyleSheet.href;
             if (!stylesheetFile) {
@@ -55,10 +55,10 @@
             }
         };
 
-        var parseTree = function() {
+        var parseTree = function () {
             // Get a list of all the elements in the view.
             var height = w.innerHeight;
-            var walker = d.createTreeWalker(d, NodeFilter.SHOW_ELEMENT, function(node) {
+            var walker = d.createTreeWalker(d, NodeFilter.SHOW_ELEMENT, function (node) {
                 return NodeFilter.FILTER_ACCEPT;
             }, true);
 
@@ -76,7 +76,7 @@
             }
         };
 
-        this.generateCSS = function() {
+        this.generateCSS = function () {
             var finalCSS = "";
 
             var printConsole = (console && console.groupCollapsed);
@@ -167,16 +167,16 @@
      * Based on CSSSteal (chrome plugin)
      * @link https://github.com/krasimir/css-steal
      */
-    var CSSSteal = function() {
+    var CSSSteal = function () {
         var elements = [document.body],
             html = null,
             styles = [],
             indent = '  ';
 
-        var getHTMLAsString = function() {
+        var getHTMLAsString = function () {
             return elements.outerHTML;
         };
-        var toArray = function(obj, ignoreFalsy) {
+        var toArray = function (obj, ignoreFalsy) {
             var arr = [],
                 i;
 
@@ -187,7 +187,7 @@
             }
             return arr;
         }
-        var getRules = function(a) {
+        var getRules = function (a) {
             var sheets = document.styleSheets,
                 result = [],
                 selectorText;
@@ -196,7 +196,7 @@
             for (var i in sheets) {
                 var rules = sheets[i].rules || sheets[i].cssRules;
                 for (var r in rules) {
-                    selectorText = rules[r].selectorText ? rules[r].selectorText.split(' ').map(function(piece) {
+                    selectorText = rules[r].selectorText ? rules[r].selectorText.split(' ').map(function (piece) {
                         return piece ? piece.split(/(:|::)/)[0] : false;
                     }).join(' ') : false;
                     try {
@@ -210,33 +210,33 @@
             }
             return result;
         }
-        var readStyles = function(els) {
-            return els.reduce(function(s, el) {
+        var readStyles = function (els) {
+            return els.reduce(function (s, el) {
                 s.push(getRules(el));
                 s = s.concat(readStyles(toArray(el.children)));
                 return s;
             }, []);
         };
-        var flattenRules = function(s) {
-            var filterBySelector = function(selector, result) {
-                return result.filter(function(item) {
+        var flattenRules = function (s) {
+            var filterBySelector = function (selector, result) {
+                return result.filter(function (item) {
                     return item.selector === selector;
                 });
             }
-            var getItem = function(selector, result) {
+            var getItem = function (selector, result) {
                 var arr = filterBySelector(selector, result);
                 return arr.length > 0 ? arr[0] : {
                     selector: selector,
                     styles: {}
                 };
             }
-            var pushItem = function(item, result) {
+            var pushItem = function (item, result) {
                 var arr = filterBySelector(item.selector, result);
                 if (arr.length === 0) result.push(item);
             }
             var all = [];
-            s.forEach(function(rules) {
-                rules.forEach(function(rule) {
+            s.forEach(function (rules) {
+                rules.forEach(function (rule) {
                     var item = getItem(rule.selectorText, all);
                     for (var i = 0; i < rule.style.length; i++) {
                         var property = rule.style[i];
@@ -251,9 +251,9 @@
         html = getHTMLAsString();
         styles = flattenRules(readStyles(elements));
 
-        return styles.reduce(function(text, item) {
+        return styles.reduce(function (text, item) {
             text += item.selector + ' {\n';
-            text += Object.keys(item.styles).reduce(function(lines, prop) {
+            text += Object.keys(item.styles).reduce(function (lines, prop) {
                 lines.push(indent + prop + ': ' + item.styles[prop] + ';');
                 return lines;
             }, []).join('\n');
@@ -267,9 +267,9 @@
      * Cross Browser getMatchedCSSRules
      * @link https://github.com/ovaldi/getMatchedCSSRules
      */
-    (function(factory, global) {
+    (function (factory, global) {
         global.getMatchedCSSRules = factory();
-    })((function(win) {
+    })((function (win) {
 
         function matchMedia(mediaRule) {
             return window.matchMedia(mediaRule.media.mediaText).matches;
@@ -331,7 +331,7 @@
             return matchedRules;
         }
 
-        return function() {
+        return function () {
             return window.getMatchedCSSRules ? window.getMatchedCSSRules : getMatchedCSSRules;
         };
     })(window), this);
@@ -351,7 +351,7 @@
 
     /*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
 
-    var saveAs = saveAs || (function(view) {
+    var saveAs = saveAs || (function (view) {
         "use strict";
         // IE <10 is explicitly unsupported
         if (typeof view === "undefined" || typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
@@ -361,19 +361,19 @@
             doc = view.document
             // only get URL when necessary in case Blob.js hasn't overridden it yet
             ,
-            get_URL = function() {
+            get_URL = function () {
                 return view.URL || view.webkitURL || view;
             },
             save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a"),
             can_use_save_link = "download" in save_link,
-            click = function(node) {
+            click = function (node) {
                 var event = new MouseEvent("click");
                 node.dispatchEvent(event);
             },
             is_safari = /constructor/i.test(view.HTMLElement) || view.safari,
             is_chrome_ios = /CriOS\/[\d]+/.test(navigator.userAgent),
-            throw_outside = function(ex) {
-                (view.setImmediate || view.setTimeout)(function() {
+            throw_outside = function (ex) {
+                (view.setImmediate || view.setTimeout)(function () {
                     throw ex;
                 }, 0);
             },
@@ -382,8 +382,8 @@
             ,
             arbitrary_revoke_timeout = 1000 * 40 // in ms
             ,
-            revoke = function(file) {
-                var revoker = function() {
+            revoke = function (file) {
+                var revoker = function () {
                     if (typeof file === "string") { // file is an object URL
                         get_URL().revokeObjectURL(file);
                     } else { // file is a File
@@ -392,7 +392,7 @@
                 };
                 setTimeout(revoker, arbitrary_revoke_timeout);
             },
-            dispatch = function(filesaver, event_types, event) {
+            dispatch = function (filesaver, event_types, event) {
                 event_types = [].concat(event_types);
                 var i = event_types.length;
                 while (i--) {
@@ -406,7 +406,7 @@
                     }
                 }
             },
-            auto_bom = function(blob) {
+            auto_bom = function (blob) {
                 // prepend BOM for UTF-8 XML and text/* types (including HTML)
                 // note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
                 if (/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
@@ -416,7 +416,7 @@
                 }
                 return blob;
             },
-            FileSaver = function(blob, name, no_auto_bom) {
+            FileSaver = function (blob, name, no_auto_bom) {
                 if (!no_auto_bom) {
                     blob = auto_bom(blob);
                 }
@@ -425,16 +425,16 @@
                     filesaver = this,
                     type = blob.type,
                     force = type === force_saveable_type,
-                    object_url, dispatch_all = function() {
+                    object_url, dispatch_all = function () {
                         dispatch(filesaver, "writestart progress write writeend".split(" "));
                     }
                     // on any filesys errors revert to saving with object URLs
                     ,
-                    fs_error = function() {
+                    fs_error = function () {
                         if ((is_chrome_ios || (force && is_safari)) && view.FileReader) {
                             // Safari doesn't allow downloading of blob urls
                             var reader = new FileReader();
-                            reader.onloadend = function() {
+                            reader.onloadend = function () {
                                 var url = is_chrome_ios ? reader.result : reader.result.replace(/^data:[^;]*;/, 'data:attachment/file;');
                                 var popup = view.open(url, '_blank');
                                 if (!popup) view.location.href = url;
@@ -467,7 +467,7 @@
 
                 if (can_use_save_link) {
                     object_url = get_URL().createObjectURL(blob);
-                    setTimeout(function() {
+                    setTimeout(function () {
                         save_link.href = object_url;
                         save_link.download = name;
                         click(save_link);
@@ -481,12 +481,12 @@
                 fs_error();
             },
             FS_proto = FileSaver.prototype,
-            saveAs = function(blob, name, no_auto_bom) {
+            saveAs = function (blob, name, no_auto_bom) {
                 return new FileSaver(blob, name || blob.name || "download", no_auto_bom);
             };
         // IE 10+ (native saveAs)
         if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
-            return function(blob, name, no_auto_bom) {
+            return function (blob, name, no_auto_bom) {
                 name = name || blob.name || "download";
 
                 if (!no_auto_bom) {
@@ -496,7 +496,7 @@
             };
         }
 
-        FS_proto.abort = function() {};
+        FS_proto.abort = function () { };
         FS_proto.readyState = FS_proto.INIT = 0;
         FS_proto.WRITING = 1;
         FS_proto.DONE = 2;
@@ -516,7 +516,7 @@
     ));
 
     // public extract Critical CSS method
-    window.extractCriticalCSS = function(callback) {
+    window.extractCriticalCSS = function (callback) {
 
         var cp = new CSSCriticalPath(window, document);
         var result = cp.generateCSS();
@@ -525,13 +525,13 @@
 
         try {
             var isFileSaverSupported = (callback) ? true : !!new Blob;
-        } catch (e) {}
+        } catch (e) { }
 
         if (!isFileSaverSupported) {
             alert('Your browser does not support javascript based file download. The critical CSS is printed in the console.')
         } else {
 
-            var criticalCSS = "/**\n * Simple Critical CSS\n *\n * @url " + document.location.href + "\n * @title " + document.title + "\n * @viewport " + window.innerWidth + "x" + window.innerHeight + "\n * @size " + humanFileSize(css.length) + "\n *\n * Extracted using the Page Speed Optimization CSS extract widget.\n * @link https://wordpress.org/plugins/above-the-fold-optimization/\n * @source https://github.com/optimalisatie/above-the-fold-optimization/blob/master/admin/js/css-extract-widget.js (.min.js)\n *\n * For professional Critical CSS generators see https://github.com/addyosmani/critical-path-css-tools\n *\n * @sources";
+            var criticalCSS = "/**\n * Simple Critical CSS\n *\n * @url " + document.location.href + "\n * @title " + document.title + "\n * @viewport " + window.innerWidth + "x" + window.innerHeight + "\n * @size " + humanFileSize(css.length) + "\n *\n * Extracted using the Above the Fold Optimization CSS extract widget.\n * @link https://wordpress.org/plugins/above-the-fold-optimization/\n * @source https://github.com/optimalisatie/above-the-fold-optimization/blob/master/admin/js/css-extract-widget.js (.min.js)\n *\n * For professional Critical CSS generators see https://github.com/addyosmani/critical-path-css-tools\n *\n * @sources";
 
             var hlines = criticalCSS.split(/\r\n|\r|\n/).length;
             hlines += files.length + 3;
@@ -560,12 +560,12 @@
     };
 
     // public extract Full CSS method
-    window.extractFullCSS = function(callback) {
+    window.extractFullCSS = function (callback) {
         var css = CSSSteal();
 
         try {
             var isFileSaverSupported = (callback) ? true : !!new Blob;
-        } catch (e) {}
+        } catch (e) { }
 
         if (console.clear) {
             console.clear();
@@ -585,7 +585,7 @@
             alert('Your browser does not support javascript based file download. The full CSS is printed in the console.')
         } else {
 
-            var fullcss = "/**\n * Full CSS\n *\n * @url " + document.location.href + "\n * @title " + document.title + "\n * @size " + humanFileSize(css.length) + "\n *\n * Extracted using the Page Speed Optimization CSS extract widget.\n * @link https://wordpress.org/plugins/above-the-fold-optimization/\n * @source https://github.com/optimalisatie/above-the-fold-optimization/blob/master/admin/js/css-extract-widget.js (.min.js)\n */\n\n" +
+            var fullcss = "/**\n * Full CSS\n *\n * @url " + document.location.href + "\n * @title " + document.title + "\n * @size " + humanFileSize(css.length) + "\n *\n * Extracted using the Above the Fold Optimization CSS extract widget.\n * @link https://wordpress.org/plugins/above-the-fold-optimization/\n * @source https://github.com/optimalisatie/above-the-fold-optimization/blob/master/admin/js/css-extract-widget.js (.min.js)\n */\n\n" +
                 css;
 
             if (callback) {

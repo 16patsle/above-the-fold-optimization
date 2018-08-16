@@ -655,7 +655,7 @@ class Abovethefold_Critical_CSS
             if ($debug) {
                 $criticalCSS .= '
 /*!
- * Page Speed Optimization ' . $this->CTRL->get_version() . '
+ * Above the Fold Optimization ' . $this->CTRL->get_version() . '
  * Full CSS View: Critical CSS is excluded from page.
  */
 ';
@@ -673,7 +673,7 @@ class Abovethefold_Critical_CSS
             if ($debug) {
                 $criticalCSS .= '
 /*!
- * Page Speed Optimization ' . $this->CTRL->get_version() . '
+ * Above the Fold Optimization ' . $this->CTRL->get_version() . '
  * This message is visible to admins and editors only.
  *
 ' . htmlentities($servedfiles, ENT_COMPAT, 'utf-8') . $matchedconditions . $debugnotice . '
@@ -689,7 +689,7 @@ class Abovethefold_Critical_CSS
              */
             $criticalCSS .= '
 /*!
- * Page Speed Optimization ' . $this->CTRL->get_version() . '
+ * Above the Fold Optimization ' . $this->CTRL->get_version() . '
  * 
  * ------------------------------------
  *    WARNING: CRITICAL CSS IS EMPTY     

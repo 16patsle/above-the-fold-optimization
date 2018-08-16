@@ -1,6 +1,6 @@
-# WordPress Page Speed Optimization for SEO
+# Above the Fold Optimization
 
-The Page Speed Optimization plugin is a toolkit for WordPress Optimization with a focus on SEO. The plugin enables to achieve a 100 score in the [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) test.
+The Above the Fold Optimization plugin is a toolkit for WordPress Optimization with a focus on SEO. The plugin enables to achieve a 100 score in the [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) test.
 
 The plugin is compatible with most optimization, caching and minification plugins such as Autoptimize and W3 Total Cache. The plugin offers modular compatibility and can be extended to support any optimization plugin. ([more info](https://github.com/16patsle/above-the-fold-optimization/tree/master/trunk/modules/plugins/))
 
@@ -8,7 +8,7 @@ The plugin is compatible with most optimization, caching and minification plugin
 
 This plugin is not available from the WordPress plugin repository at the moment, but can be installed and updated using [Github Updater](https://github.com/afragen/github-updater) ([installation instructions](https://github.com/afragen/github-updater/wiki/Installation))
 
-# Page Speed Optimization Description
+# Above the Fold Optimization Description
 
 ## Critical CSS Tools
 

@@ -7,7 +7,7 @@ class TabsView extends Component {
     render() {
         return (
             <div>
-                <h1>{__('Page Speed Optimization')}</h1>
+                <h1>{__('Above the Fold Optimization')}</h1>
                 <nav className="nav-tab-wrapper" style={{ position: 'relative' }}>
                     <div className="ref">
                         <div className="links">
