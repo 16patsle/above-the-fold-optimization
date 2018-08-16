@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
 
-const lgcode = document.querySelector('#lgcode').value;
-const google_intlcode = document.querySelector('#google_intlcode').value;
-
 const homeUrl = window.homeUrl;
 
 class HtmlView extends Component {
+	constructor(props) {
+        super(props);
+
+        this.lgcode = document.querySelector('#lgcode').value;
+        this.google_intlcode = document.querySelector('#google_intlcode').value;
+    }
 
     render() {
         // Google uses a different host for the US
-        const thinkHost = `https://testmysite.${((google_intlcode === 'en-us') ? 'think' : '')}withgoogle.com/`;
-        const thinkUrl = `${thinkHost}intl/${google_intlcode}?url=${encodeURIComponent(homeUrl)}`;
+        const thinkHost = `https://testmysite.${((this.google_intlcode === 'en-us') ? 'think' : '')}withgoogle.com/`;
+        const thinkUrl = `${thinkHost}intl/${this.google_intlcode}?url=${encodeURIComponent(homeUrl)}`;
 
         const monitorUrl = new URL(window.adminUrl)
         monitorUrl.searchParams.append('page', 'pagespeed-monitor')

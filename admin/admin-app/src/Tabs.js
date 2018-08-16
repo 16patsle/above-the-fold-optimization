@@ -14,7 +14,8 @@ class Tabs extends Component {
 
             const className = (tabKey == tab || (tabKey === 'criticalcss' && tab == 'criticalcss-test')) ? ' nav-tab-active' : '';
             const url = new URL(window.adminUrl)
-            url.searchParams.append('page', 'pagespeed' + ((tabKey !== 'intro') ? '-' + tabKey : ''));
+            url.searchParams.append('page', 'pagespeed');
+            url.hash += ((tabKey !== 'intro') ? '#/' + tabKey : '#/')
             tabElements.push(<a className={'nav-tab' + className} href={encodeURI(url)} key={tabKey}>{tabs[tabKey]}</a>);
         }
         return tabElements;
