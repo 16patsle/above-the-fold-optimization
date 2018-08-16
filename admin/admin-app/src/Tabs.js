@@ -16,7 +16,7 @@ class Tabs extends Component {
             console.log(tabkey, tabs[tabkey], className)
             const url = new URL(window.admin_url)
             url.searchParams.append('page', 'pagespeed' + ((tabkey !== 'intro') ? '-' + tabkey : ''));
-            tabElements.push(<a className={'nav-tab' + className} href={url} key={tabkey}>{tabs[tabkey]}</a>);
+            tabElements.push(<a className={'nav-tab' + className} href={encodeURI(url)} key={tabkey}>{tabs[tabkey]}</a>);
         }
         return (
             <nav className="nav-tab-wrapper" style={{ position: 'relative' }}>

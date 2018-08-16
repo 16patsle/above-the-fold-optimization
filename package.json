@@ -18,6 +18,7 @@
         "node": "~0.10"
     },
     "dependencies": {
+        "@wordpress/i18n": "^1.2.3",
         "jquery": "^3.1.1",
         "jsoneditor": "5.9.5",
         "lazyloadxt": "1.1.0",
