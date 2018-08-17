@@ -98,7 +98,7 @@ class Abovethefold_Admin_HTML
         // update settings
         $this->CTRL->admin->save_settings($options, 'HTML optimization settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed-html' ), admin_url('admin.php')));
+        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/html');
         exit;
     }
     
@@ -107,7 +107,7 @@ class Abovethefold_Admin_HTML
      */
     public function enqueue_scripts($hook)
     {
-        if (!isset($_REQUEST['page']) || $_GET['page'] !== 'pagespeed-html') {
+        if (!isset($_REQUEST['page']) || $_GET['page'] !== 'pagespeed') {
             return;
         }
 
@@ -117,7 +117,7 @@ class Abovethefold_Admin_HTML
 
         // add general admin javascript
         wp_enqueue_script('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.js', array( 'jquery' ), WPABTF_VERSION);
-        wp_enqueue_script('abtf_admincp_html', plugin_dir_url(__FILE__) . 'js/admincp-html.min.js', array( 'jquery', 'abtf_admincp_jsoneditor' ), WPABTF_VERSION);
+        //wp_enqueue_script('abtf_admincp_html', plugin_dir_url(__FILE__) . 'js/admincp-html.min.js', array( 'jquery', 'abtf_admincp_jsoneditor' ), WPABTF_VERSION);
     }
 
     /**
