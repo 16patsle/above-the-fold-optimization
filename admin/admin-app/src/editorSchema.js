@@ -1,4 +1,4 @@
-export default {
+export const htmlSchema = {
     "title": "HTML search and replace",
     "type": "array",
     "items": {

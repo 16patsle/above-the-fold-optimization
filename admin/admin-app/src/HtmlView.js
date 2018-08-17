@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
 import JsonEditor from './JsonEditor';
-import getSubmitButton from './getSubmitButton';
-import schema from './editorSchema';
+import newlineArrayString from './utils/newLineArrayString';
+import getSubmitButton from './utils/getSubmitButton';
+import { htmlSchema } from './editorSchema';
 
 const homeUrl = window.homeUrl;
 
@@ -23,21 +24,6 @@ class HtmlView extends Component {
 
 	handleSearchReplaceValueChange(value) {
 		this.setState({ searchReplaceValue: value });
-	}
-
-	/**
-     * Return string from newline array
-     */
-	newlineArrayString(array) {
-		if (!Array.isArray(array) || array.length === 0) {
-			return '';
-		}
-
-		return this.htmlEntities(array.join("\n"));
-	}
-
-	htmlEntities(str) {
-		return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 	}
 
 	render() {
@@ -83,7 +69,7 @@ class HtmlView extends Component {
 													<th scope="row">&nbsp;</th>
 													<td style={{ paddingTop: "0px" }}>
 														<h5 className="h">&nbsp;Preserve List</h5>
-														<textarea className="json-array-lines" name="abovethefold[html_comments_preserve]" defaultValue={this.newlineArrayString(this.htmlSettings.comments_preserve)}></textarea>
+														<textarea className="json-array-lines" name="abovethefold[html_comments_preserve]" defaultValue={newlineArrayString(this.htmlSettings.comments_preserve)}></textarea>
 														<p className="description">
 															Enter (parts of) HTML comments to exclude from removal. One string per line.
 														</p>
@@ -99,7 +85,7 @@ class HtmlView extends Component {
 										<p className="description">
 											This option enables to replace strings in the HTML. Enter an array of JSON objects.
 										</p>
-										<JsonEditor name="html.replace" schema={schema} value={this.state.searchReplaceValue} onValueChange={this.handleSearchReplaceValueChange}></JsonEditor>
+										<JsonEditor name="html.replace" schema={htmlSchema} value={this.state.searchReplaceValue} onValueChange={this.handleSearchReplaceValueChange}></JsonEditor>
 										<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" value={this.state.searchReplaceValue} />
 
 										<div className="info_yellow">
