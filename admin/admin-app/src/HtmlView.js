@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
 import JsonEditor from './JsonEditor';
+import SettingCheckbox from './SettingCheckbox';
 import newlineArrayString from './utils/newLineArrayString';
 import getSubmitButton from './utils/getSubmitButton';
 import { htmlSchema } from './editorSchema';
@@ -41,30 +42,8 @@ class HtmlView extends Component {
 									<div className="inside testcontent">
 										<table className="form-table">
 											<tbody>
-												<tr valign="top">
-													<th scope="row">Minify HTML</th>
-													<td>
-														<label>
-															<input type="checkbox" name="abovethefold[html_minify]" value="1" defaultChecked={this.htmlSettings.minify} />
-															Enabled
-														</label>
-														<p className="description">
-															Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.
-														</p>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">Strip HTML comments</th>
-													<td>
-														<label>
-															<input type="checkbox" name="abovethefold[html_comments]" value="1" defaultChecked={this.htmlSettings.comments} />
-															Enabled
-														</label>
-														<p className="description">
-															Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.
-														</p>
-													</td>
-												</tr>
+												<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" defaultChecked={this.htmlSettings.minify} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Strip HTML comments" name="abovethefold[html_comments]" defaultChecked={this.htmlSettings.comments} label="Enabled" description={<span>Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.</span>}></SettingCheckbox>
 												<tr valign="top">
 													<th scope="row">&nbsp;</th>
 													<td style={{ paddingTop: "0px" }}>
