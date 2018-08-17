@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import JsonEditor from './JsonEditor';
 import getSubmitButton from './getSubmitButton';
 import schema from './editorSchema';
 
@@ -9,13 +10,19 @@ class HtmlView extends Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			searchReplaceValue: document.querySelector('#html_search_replace_src_server').value
+		}
+
 		this.lgcode = document.querySelector('#lgcode').value;
 		this.google_intlcode = document.querySelector('#google_intlcode').value;
-		this.searchReplaceServerSrc = document.querySelector('#html_search_replace_src_server').value;
 		this.htmlSettings = JSON.parse(document.querySelector('#html_settings').value);
 
-		this.htmlSearchReplace = React.createRef();
-		this.htmlSearchReplaceSrc = React.createRef();
+		this.handleSearchReplaceValueChange = this.handleSearchReplaceValueChange.bind(this);
+	}
+
+	handleSearchReplaceValueChange(value) {
+		this.setState({ searchReplaceValue: value });
 	}
 
 	/**
@@ -31,101 +38,6 @@ class HtmlView extends Component {
 
 	htmlEntities(str) {
 		return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-	}
-
-	componentDidMount() {
-		/**
-     	 * Search & Replace editor
-     	 */
-		const htmlSearchReplaceSrc = this.htmlSearchReplaceSrc.current
-		if (this.htmlSearchReplace.current) {
-
-			this.htmlSearchReplace.current.innerHTML = '';
-
-			let changeTimeout;
-
-			const options = {
-				name: "html.replace",
-				mode: 'code',
-				modes: ['code', 'tree'], // allowed modes
-				onError: function (err) {
-					// Log the error
-					console.error('JSON', err.toString());
-					alert('JSON error. Please verify your input.\n\nSee console for details.');
-				},
-				onChange: function () {
-					const t = editor.getText();
-
-					// If the content is empty
-					if (t.trim() === '') {
-						if (changeTimeout) {
-							clearTimeout(changeTimeout);
-						}
-						// wait for copy paste action
-						changeTimeout = setTimeout(function () {
-							changeTimeout = false;
-							const t = editor.getText();
-							// If the editor is still empty
-							// set it to empty array
-							if (t.trim() === '') {
-								editor.set([]);
-								htmlSearchReplaceSrc.value = '[]';
-							}
-						}, 25);
-
-						return;
-					}
-
-					let json;
-
-					try {
-						json = editor.get();
-					} catch (e) {
-
-						return;
-					}
-					htmlSearchReplaceSrc.value = JSON.stringify(json);
-				},
-				onModeChange: function (newMode, oldMode) {
-					const t = editor.getText();
-					if (t.trim() === '') {
-						// If the content is empty
-						// set it to an empty arrray
-						editor.set([]);
-					}
-					// expand nodes in tree mode
-					if (newMode === 'tree') {
-						editor.expandAll();
-					}
-				},
-				search: false,
-				schema
-			};
-
-			let json = [];
-
-			// Set the editor content to the searchReplaceSrc sent from the server
-			if (htmlSearchReplaceSrc.value !== '') {
-				json = htmlSearchReplaceSrc.value;
-				if (typeof json !== 'object') {
-					try {
-						json = JSON.parse(json);
-					} catch (e) {
-						json = [];
-					}
-				}
-				if (!json || typeof json !== 'object') {
-					json = [];
-				}
-			}
-			const editor = new window.JSONEditor(this.htmlSearchReplace.current, options, json);
-
-			editor.compact(); // collapseAll();
-
-			// set editor reference
-			//this.htmlSearchReplaceSrc.dataset.jsonEditor = editor
-			window.jQuery('#html_search_replace_src').data('json-editor', editor);
-		}
 	}
 
 	render() {
@@ -187,12 +99,8 @@ class HtmlView extends Component {
 										<p className="description">
 											This option enables to replace strings in the HTML. Enter an array of JSON objects.
 										</p>
-										<div id="html_search_replace" ref={this.htmlSearchReplace}>
-											<div className="loading-json-editor">
-												{__('Loading JSON editor...')}
-											</div>
-										</div>
-										<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" ref={this.htmlSearchReplaceSrc} value={this.searchReplaceServerSrc} />
+										<JsonEditor name="html.replace" schema={schema} value={this.state.searchReplaceValue} onValueChange={this.handleSearchReplaceValueChange}></JsonEditor>
+										<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" value={this.state.searchReplaceValue} />
 
 										<div className="info_yellow">
 											<strong>Example:</strong> <code id="html_search_replace_example" className="clickselect" data-example-text="show string" title="<?php print esc_attr('Click to select', 'pagespeed'); ?>" style={{ cursor: "copy" }}>{'"search":"string to match","replace":"newstring"'}</code> (<a href="javascript:void(0);" data-example="html_search_replace_example" data-example-html={'coming soon'/*<?php print esc_attr(__('{\"search\":"|string to (match)|i","replace":"newstring $1","regex":true}', 'pagespeed')); ?>*/}>show regular expression</a>)
