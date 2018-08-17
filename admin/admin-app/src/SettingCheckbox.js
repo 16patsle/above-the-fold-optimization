@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { __ } from '@wordpress/i18n';
 
 class SettingCheckbox extends Component {
     render() {

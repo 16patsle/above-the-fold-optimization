@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
 import JsonEditor from './JsonEditor';
 import SettingCheckbox from './SettingCheckbox';
+import SettingTextarea from './SettingTextarea';
 import newlineArrayString from './utils/newLineArrayString';
 import getSubmitButton from './utils/getSubmitButton';
 import { htmlSchema } from './editorSchema';
@@ -44,16 +45,7 @@ class HtmlView extends Component {
 											<tbody>
 												<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" defaultChecked={this.htmlSettings.minify} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>
 												<SettingCheckbox header="Strip HTML comments" name="abovethefold[html_comments]" defaultChecked={this.htmlSettings.comments} label="Enabled" description={<span>Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.</span>}></SettingCheckbox>
-												<tr valign="top">
-													<th scope="row">&nbsp;</th>
-													<td style={{ paddingTop: "0px" }}>
-														<h5 className="h">&nbsp;Preserve List</h5>
-														<textarea className="json-array-lines" name="abovethefold[html_comments_preserve]" defaultValue={newlineArrayString(this.htmlSettings.comments_preserve)}></textarea>
-														<p className="description">
-															Enter (parts of) HTML comments to exclude from removal. One string per line.
-														</p>
-													</td>
-												</tr>
+												<SettingTextarea title="&nbsp;Preserve List" textareaClass="json-array-lines" name="abovethefold[html_comments_preserve]" defaultValue={newlineArrayString(this.htmlSettings.comments_preserve)} description="Enter (parts of) HTML comments to exclude from removal. One string per line."></SettingTextarea>
 												<tr valign="top">
 													<td colSpan="2" style={{ padding: "0px" }} dangerouslySetInnerHTML={{ __html: getSubmitButton(__('Save'), 'primary large', 'is_submit', false) }}></td>
 												</tr>
