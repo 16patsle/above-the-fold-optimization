@@ -25,6 +25,23 @@ class HtmlView extends Component {
 		this.htmlSettings = JSON.parse(document.querySelector('#html_settings').value);
 
 		this.handleSearchReplaceValueChange = this.handleSearchReplaceValueChange.bind(this);
+
+		this.wpHtmlSearchReplaceExample = `
+function your_html_search_and_replace( &$search, &$replace, &$search_regex, &$replace_regex ) {
+
+	# regular string replace
+	$search[] = 'string';
+	$replace[] = '';
+
+	# regex replace
+	$search_regex[] = '|regex (string)|i';
+	$replace_regex[] = '$1';
+
+	return $search; // required
+}
+
+add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
+		`.trim()
 	}
 
 	handleSearchReplaceValueChange(value) {
@@ -72,20 +89,7 @@ class HtmlView extends Component {
 										</Info>
 										<p>You can also add a search and replace configuration using the WordPress filter hook <code>abtf_html_replace</code>.</p>
 										<div id="wp_html_search_replace_example">
-											<pre style={{ padding: "10px", border: "solid 1px #efefef" }}>{`function your_html_search_and_replace( &$search, &$replace, &$search_regex, &$replace_regex ) {
-
-	# regular string replace
-	$search[] = 'string';
-	$replace[] = '';
-
-	# regex replace
-	$search_regex[] = '|regex (string)|i';
-	$replace_regex[] = '$1';
-
-	return $search; // required
-}
-
-add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );`}</pre>
+											<pre style={{ padding: "10px", border: "solid 1px #efefef" }}>{this.wpHtmlSearchReplaceExample}</pre>
 										</div>
 										<hr />
 										<span dangerouslySetInnerHTML={{ __html: getSubmitButton(__('Save'), 'primary large', 'is_submit', false) }}></span>
