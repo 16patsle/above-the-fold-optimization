@@ -107,6 +107,9 @@ class Abovethefold_Admin
                 $this->google_intlcode = 'en-us';
             }
 
+            // Redirect to correct admin page
+            $this->CTRL->loader->add_action('admin_init', $this, 'admin_redirects', 30);
+
             // Hook in the admin options page
             $this->CTRL->loader->add_action('admin_menu', $this, 'admin_menu', 30);
 
@@ -188,6 +191,26 @@ class Abovethefold_Admin
              * Load monitor management
              */
             $this->monitor = new Abovethefold_Admin_Monitor($CTRL);
+        }
+    }
+
+    /**
+     * Redirect admin pages.
+     *
+     * Redirect specific admin page to another specific admin page.
+     *
+     * @author Michael Ecklund
+     * @see https://wordpress.stackexchange.com/questions/52114/admin-page-redirect
+     *
+     * @return void
+     */
+    function admin_redirects() {
+        global $pagenow;
+
+        # Check current admin page.
+        if( $pagenow == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] == 'pagespeed-html' ){
+            wp_redirect( add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/html', 301 );
+            exit;
         }
     }
 
