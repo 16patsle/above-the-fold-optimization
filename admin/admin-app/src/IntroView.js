@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import Info from './Info';
 
 const homeUrl = window.homeUrl.value;
 const baseHomeUrl = new URL(homeUrl).host.replace('www', '')
@@ -52,13 +53,13 @@ class IntroView extends Component {
                                         <a className="button button-small" href={`http://www.intodns.com/${encodeURIComponent(baseHomeUrl)}`} target="_blank">DNS test</a>
                                     </p>
 
-                                    <div className="info_yellow" style={{ marginBottom: "10px" }}><p style={{ margin: "0px" }}><strong>Tip:</strong> If you can resolve small issues fast, start with the smaller issues, it may help to resolve the larger issues.</p></div>
+                                    <Info color="yellow" style={{ marginBottom: "10px" }}><p style={{ margin: "0px" }}><strong>Tip:</strong> If you can resolve small issues fast, start with the smaller issues, it may help to resolve the larger issues.</p></Info>
 
                                     <h3 style={{ marginTop: "0px", paddingBottom: "5px", marginBottom: "0px", borderBottom: "solid 1px #efefef" }}>Step 2 - server optimization</h3>
                                     <p>Start with the fundament of your website: the server. Make sure that the best <a href={`https://encrypted.google.com/search?hl=${this.lgcode}&q=${encodeURIComponent('gzip configuration')}`} target="_blank">gzip settings</a> and <a href={`https://encrypted.google.com/search?hl=${this.lgcode}&q=${encodeURIComponent('http cache headers configuration')}`} target="_blank">HTTP cache headers</a> are installed and if the server is slow, find ways to improve the speed of the server by optimizing WordPress plugins or by using a <a href={`https://encrypted.google.com/search?hl=${this.lgcode}&q=${encodeURIComponent('best wordpress full page cache' + new Date().getFullYear())}`} target="_blank">full page cache</a> solution. It may be required to choose a better hosting plan or to move to a different hosting provider. Hosting reliability and performance is a major aspect for achieving a good performance and stability reputation in Google. Once you lose a stable hosting reputation, it may cause a hidden penalty and you may not get your reputation back for years.</p>
                                     <p>Choose professional server configuration over WordPress plugins to achieve the best performance.</p>
                                     <p>Google <a href={`https://developers.google.com/speed/docs/insights/Server?hl=${this.lgcode}`} target="_blank">officially advises</a> a maximum server response time of 0,2 seconds (200ms). Test your global server response times <a href={`https://performance.sucuri.net/domain/${encodeURIComponent(new URL(homeUrl).host.replace('www', ''))}`} target="_blank">here</a>.</p>
-                                    <div className="info_yellow" style={{ marginBottom: "10px" }}><p style={{ margin: "0px" }}><strong>Tip:</strong> Find out what exactly you need and write a single detailed request to your hosting provider for professional installation. If the server has a speed issue, simply ask your host to achieve a maximum server speed of 0,2 seconds (200ms) as advised by Google.</p></div>
+                                    <Info color="yellow" style={{ marginBottom: "10px" }}><p style={{ margin: "0px" }}><strong>Tip:</strong> Find out what exactly you need and write a single detailed request to your hosting provider for professional installation. If the server has a speed issue, simply ask your host to achieve a maximum server speed of 0,2 seconds (200ms) as advised by Google.</p></Info>
 
                                     <h3 style={{ marginTop: "0px", paddingBottom: "5px", marginBottom: "0px", borderBottom: "solid 1px #efefef" }}>Step 3 - Google PageSpeed optimization</h3>
                                     <p>Test your website at <a href={`https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(homeUrl)}&hl=${this.lgcode}`} target="_blank">Google PageSpeed Insights</a> and start resolving the issues. Google offers detailed documentation for each issue and this plugin offers the tools to resolve most issues.</p>
