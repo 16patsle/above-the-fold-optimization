@@ -1017,15 +1017,13 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
         // Google Analytics tracking code
         $utmstring = $this->utm_string;
 
-        // print tabs
-        require_once('admin.tabs.inc.php');
-
+        // print the HTML required by the React app
+        require_once('admin.app.inc.php');
          
         // print tab content
         switch ($tab) {
             case "criticalcss":
             case "css":
-            case "html":
             case "javascript":
             case "pwa":
             case "http2":
@@ -1035,7 +1033,6 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
             case "criticalcss-test":
             case "build-tool":
             case "monitor":
-            case "intro":
                 require_once('admin.'.$tab.'.inc.php');
             break;
         }

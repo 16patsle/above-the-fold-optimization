@@ -1,5 +1,9 @@
-<div id="intro-root">
-	<input id="lgcode" type="hidden" value="<?php echo $lgcode; ?>" />
+<span>
+    <input id="homeUrl" type="hidden" value="<?php echo get_home_url(); ?>" />
+    <input id="adminUrl" type="hidden" value="<?php echo admin_url('admin.php'); ?>" />
+    <input id="adminTabs" type="hidden" value="<?php echo htmlspecialchars(json_encode($this->tabs)); ?>" />
+    <input id="currentAdminTab" type="hidden" value="<?php echo htmlspecialchars(json_encode($tab)); ?>" />
+    <input id="lgcode" type="hidden" value="<?php echo $lgcode; ?>" />
 	<input id="google_intlcode" type="hidden" value="<?php echo $this->google_intlcode; ?>" />
 	<input id="admin_url_html_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_html_update'); ?>" />
 	<div id="admin_nonce_html" type="hidden"><?php echo wp_nonce_field('abovethefold'); ?></div>
@@ -17,4 +21,6 @@
 	<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src_server" value="<?php if (isset($options['html_search_replace']) && is_array($options['html_search_replace'])) {
 		echo esc_attr(json_encode($options['html_search_replace']));
 	} ?>"  />
+</span>
+<div id="root">
 </div>
