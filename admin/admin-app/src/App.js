@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <div className="wrap">
-        <TabsView></TabsView>
+        <Route path="/" component={TabsView} />
         <Route exact path="/" component={IntroView} />
         <Route path="/html" component={HtmlView} />
       </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 const tabs = JSON.parse(document.querySelector('#adminTabs').value);
-const tab = JSON.parse(document.querySelector('#currentAdminTab').value);
 
 class Tabs extends Component {
 
@@ -12,7 +11,7 @@ class Tabs extends Component {
                 continue;
             }
 
-            const className = (tabKey == tab || (tabKey === 'criticalcss' && tab == 'criticalcss-test')) ? ' nav-tab-active' : '';
+            const className = (tabKey === this.props.selected || (tabKey === 'criticalcss' && this.props.selected === 'criticalcss-test')) ? ' nav-tab-active' : '';
             const url = new URL(window.adminUrl)
             url.searchParams.append('page', 'pagespeed');
             url.hash += ((tabKey !== 'intro') ? '#/' + tabKey : '#/')

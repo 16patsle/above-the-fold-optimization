@@ -2,7 +2,6 @@
     <input id="homeUrl" type="hidden" value="<?php echo get_home_url(); ?>" />
     <input id="adminUrl" type="hidden" value="<?php echo admin_url('admin.php'); ?>" />
     <input id="adminTabs" type="hidden" value="<?php echo htmlspecialchars(json_encode($this->tabs)); ?>" />
-    <input id="currentAdminTab" type="hidden" value="<?php echo htmlspecialchars(json_encode($tab)); ?>" />
     <input id="lgcode" type="hidden" value="<?php echo $lgcode; ?>" />
 	<input id="google_intlcode" type="hidden" value="<?php echo $this->google_intlcode; ?>" />
 	<input id="admin_url_html_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_html_update'); ?>" />
