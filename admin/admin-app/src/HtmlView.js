@@ -6,7 +6,9 @@ import SettingTextarea from './SettingTextarea';
 import Info from './Info';
 import newlineArrayString from './utils/newLineArrayString';
 import getSubmitButton from './utils/getSubmitButton';
+import escapeHtml from './utils/escapeHtml';
 import { htmlSchema } from './editorSchema';
+import SearchReplaceExample from './SearchReplaceExample';
 
 const homeUrl = window.homeUrl;
 
@@ -61,7 +63,12 @@ class HtmlView extends Component {
 										<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" value={this.state.searchReplaceValue} />
 
 										<Info color="yellow">
-											<strong>Example:</strong> <code id="html_search_replace_example" className="clickselect" data-example-text="show string" title="<?php print esc_attr('Click to select', 'pagespeed'); ?>" style={{ cursor: "copy" }}>{'"search":"string to match","replace":"newstring"'}</code> (<a href="javascript:void(0);" data-example="html_search_replace_example" data-example-html={'coming soon'/*<?php print esc_attr(__('{\"search\":"|string to (match)|i","replace":"newstring $1","regex":true}', 'pagespeed')); ?>*/}>show regular expression</a>)
+											<SearchReplaceExample title={__('Click to select')}>
+												{{
+													string: '"search":"string to match","replace":"newstring"',
+													regex: __('{"search":"|string to (match)|i","replace":"newstring $1","regex":true}')
+												}}
+											</SearchReplaceExample>
 										</Info>
 										<p>You can also add a search and replace configuration using the WordPress filter hook <code>abtf_html_replace</code>.</p>
 										<div id="wp_html_search_replace_example">
