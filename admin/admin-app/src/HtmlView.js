@@ -4,11 +4,10 @@ import JsonEditor from './JsonEditor';
 import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
 import Info from './Info';
-import newlineArrayString from './utils/newLineArrayString';
-import getSubmitButton from './utils/getSubmitButton';
-import escapeHtml from './utils/escapeHtml';
-import { htmlSchema } from './editorSchema';
 import SearchReplaceExample from './SearchReplaceExample';
+import SubmitButton from './SubmitButton';
+import newlineArrayString from './utils/newLineArrayString';
+import { htmlSchema } from './editorSchema';
 
 const homeUrl = window.homeUrl;
 
@@ -67,7 +66,11 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 												<SettingCheckbox header="Strip HTML comments" name="abovethefold[html_comments]" defaultChecked={this.htmlSettings.comments} label="Enabled" description={<span>Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.</span>}></SettingCheckbox>
 												<SettingTextarea title="&nbsp;Preserve List" textareaClass="json-array-lines" name="abovethefold[html_comments_preserve]" defaultValue={newlineArrayString(this.htmlSettings.comments_preserve)} description="Enter (parts of) HTML comments to exclude from removal. One string per line."></SettingTextarea>
 												<tr valign="top">
-													<td colSpan="2" style={{ padding: "0px" }} dangerouslySetInnerHTML={{ __html: getSubmitButton(__('Save'), 'primary large', 'is_submit', false) }}></td>
+													<td colSpan="2" style={{ padding: "0px" }}>
+														<SubmitButton type={['primary', 'large']} name="is_submit">
+															{__('Save')}
+														</SubmitButton>
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -92,7 +95,9 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 											<pre style={{ padding: "10px", border: "solid 1px #efefef" }}>{this.wpHtmlSearchReplaceExample}</pre>
 										</div>
 										<hr />
-										<span dangerouslySetInnerHTML={{ __html: getSubmitButton(__('Save'), 'primary large', 'is_submit', false) }}></span>
+										<SubmitButton type={['primary', 'large']} name="is_submit">
+											{__('Save')}
+										</SubmitButton>
 									</div>
 								</div>
 							</div>
