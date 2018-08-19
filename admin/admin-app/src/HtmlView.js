@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/light';
+import php from 'react-syntax-highlighter/languages/hljs/php';
+import vs from 'react-syntax-highlighter/styles/hljs/vs';
 import JsonEditor from './JsonEditor';
 import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
@@ -8,6 +11,8 @@ import SearchReplaceExample from './SearchReplaceExample';
 import SubmitButton from './SubmitButton';
 import newlineArrayString from './utils/newLineArrayString';
 import { htmlSchema } from './editorSchema';
+
+registerLanguage('php', php);
 
 const homeUrl = window.homeUrl;
 
@@ -92,7 +97,7 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 										</Info>
 										<p>You can also add a search and replace configuration using the WordPress filter hook <code>abtf_html_replace</code>.</p>
 										<div id="wp_html_search_replace_example">
-											<pre style={{ padding: "10px", border: "solid 1px #efefef" }}>{this.wpHtmlSearchReplaceExample}</pre>
+											<SyntaxHighlighter className="example-code" language="php" style={vs}>{this.wpHtmlSearchReplaceExample}</SyntaxHighlighter>
 										</div>
 										<hr />
 										<SubmitButton type={['primary', 'large']} name="is_submit">
