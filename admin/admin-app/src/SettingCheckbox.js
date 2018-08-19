@@ -7,7 +7,7 @@ class SettingCheckbox extends Component {
                 <th scope="row">{this.props.header}</th>
                 <td>
                     <label>
-                        <input type="checkbox" name={this.props.name} value="1" defaultChecked={this.props.defaultChecked} />
+                        <input type="checkbox" name={this.props.name} value="1" defaultChecked={this.props.defaultChecked} onChange={this.props.onChange} />
                         {this.props.label}
                     </label>
                     <p className="description">
