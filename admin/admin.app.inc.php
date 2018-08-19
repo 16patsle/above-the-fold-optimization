@@ -39,6 +39,16 @@
 		if (isset($options['cssdelivery_remove'])) {
 			$cssdelivery_remove = $options['cssdelivery_remove'];
 		}
+		$gwfo = isset($options['gwfo']) && intval($options['gwfo']) === 1;
+		$gwfo_loadmethod = '';
+		if(!isset($options['gwfo_loadmethod'])) {
+			$gwfo_loadmethod = $options['gwfo_loadmethod'];
+		}
+		$gwfo_config_valid = $options['gwfo_config_valid'];
+		$gwfo_config = '';
+		if (isset($options['gwfo_config'])) {
+			$gwfo_config = htmlentities($options['gwfo_config']);
+		}
 
 		$css_settings = 
 		'{"delivery":' . json_encode($cssdelivery) . 
@@ -47,6 +57,10 @@
 		',"position":' . json_encode($cssdelivery_position) . 
 		',"ignore":' . json_encode($cssdelivery_ignore) . 
 		',"remove":' . json_encode($cssdelivery_remove) . 
+		',"gwfo":' . json_encode($gwfo) . 
+		',"gwfoLoadMethod":' . json_encode($gwfo_loadmethod) . 
+		',"gwfoConfigValid":' . json_encode($gwfo_config_valid) . 
+		',"gwfoConfig":' . json_encode($gwfo_config) . 
 		'}'
 	?>
 	<input id="css_settings"  type="hidden" value='<?php echo $css_settings ?>'/>
@@ -74,6 +88,16 @@
     	}
 	?>
 	<input id="loadcss_version"  type="hidden" value='<?php echo '{ "version": ' . json_encode($loadcss_version) . ', "error": ' . json_encode($loadcss_version_error) . ' }' ?>'/>
+	<?php
+		/**
+         * Get version of local webfont.js
+         */
+        $webfont_version = $this->CTRL->gwfo->package_version(true);
+        if (empty($webfont_version)) {
+            $webfont_version = '(unknown)';
+        }
+	?>
+	<input id="webfont_version"  type="hidden" value='<?php echo $webfont_version ?>'/>
 </span>
 <div id="root">
 </div>
