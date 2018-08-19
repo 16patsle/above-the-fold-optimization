@@ -31,8 +31,23 @@
 		if(isset($options['cssdelivery_position'])){
 			$cssdelivery_position = $options['cssdelivery_position'];
 		}
+		$cssdelivery_ignore = '';
+		if (isset($options['cssdelivery_ignore'])) {
+			$cssdelivery_ignore = $options['cssdelivery_ignore'];
+		}
+		$cssdelivery_remove = '';
+		if (isset($options['cssdelivery_remove'])) {
+			$cssdelivery_remove = $options['cssdelivery_remove'];
+		}
 
-		$css_settings = '{"delivery":' . json_encode($cssdelivery) . ',"loadCSSEnhanced":' . json_encode($loadcss_enhanced) . ',"renderDelay":' . json_encode($cssdelivery_renderdelay) . ',"position":' . json_encode($cssdelivery_position) . '}'
+		$css_settings = 
+		'{"delivery":' . json_encode($cssdelivery) . 
+		',"loadCSSEnhanced":' . json_encode($loadcss_enhanced) . 
+		',"renderDelay":' . json_encode($cssdelivery_renderdelay) . 
+		',"position":' . json_encode($cssdelivery_position) . 
+		',"ignore":' . json_encode($cssdelivery_ignore) . 
+		',"remove":' . json_encode($cssdelivery_remove) . 
+		'}'
 	?>
 	<input id="css_settings"  type="hidden" value='<?php echo $css_settings ?>'/>
 	<?php

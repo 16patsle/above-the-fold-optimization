@@ -7,7 +7,7 @@ class SettingTextarea extends Component {
                 <th scope="row">{this.props.header || ' '}</th>
                 <td style={{ paddingTop: "0px" }}>
                     <h5 className="h">{this.props.title}</h5>
-                    <textarea className={this.props.textareaClass} name={this.props.name} defaultValue={this.props.defaultValue} onChange={this.props.onChange}></textarea>
+                    <textarea style={this.props.style} className={this.props.textareaClass} name={this.props.name} defaultValue={this.props.defaultValue} onChange={this.props.onChange}></textarea>
                     <p className="description">
                         {this.props.description}
                     </p>

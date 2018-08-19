@@ -4,6 +4,7 @@ import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
 import Info from './Info';
 import SubmitButton from './SubmitButton';
+import newlineArrayString from './utils/newLineArrayString';
 
 const homeUrl = window.homeUrl;
 
@@ -16,7 +17,7 @@ class CssView extends Component {
 		this.state = {
 			showCssOptionsDelivery: this.cssSettings.delivery,
 			showCssOptionsLoadCSSEnhanced: this.cssSettings.loadCSSEnhanced,
-			showCssOptionsRenderDelayWarn: this.cssSettings.renderDelay !== '' || this.cssSettings.renderDelay !== 0 || this.cssSettings.renderDelay.trim() === ''
+			showCssOptionsRenderDelayWarn: !(this.cssSettings.renderDelay === '' || this.cssSettings.renderDelay === 0)
 		}
 
 		this.lgcode = document.querySelector('#lgcode').value;
@@ -27,9 +28,14 @@ class CssView extends Component {
 		this.handleRenderDelayChange = this.handleRenderDelayChange.bind(this);
 	}
 
-	handleOptionToggle(option, value) {
+	handleOptionToggle(option) {
 		const optionName = 'showCssOptions' + option[0].toUpperCase() + option.slice(1)
-		this.setState({ [optionName]: value || !this.state[optionName] })
+		this.setState({ [optionName]: !this.state[optionName] })
+	}
+
+	setOption(option, value) {
+		const optionName = 'showCssOptions' + option[0].toUpperCase() + option.slice(1)
+		this.setState({ [optionName]: value })
 	}
 
 	getOption(option) {
@@ -42,9 +48,9 @@ class CssView extends Component {
 			e.target.value = '';
 		}
 		if (e.target.value !== '' && e.target.value !== '0') {
-			this.handleOptionToggle('renderDelayWarn', true);
+			this.setOption('renderDelayWarn', true);
 		} else {
-			this.handleOptionToggle('renderDelayWarn', false);
+			this.setOption('renderDelayWarn', false);
 		}
 	}
 
@@ -96,39 +102,20 @@ class CssView extends Component {
 																							</tbody>
 																						</table>
 																						<p className="description" style={{ clear: "both" }}>Optionally, enter a time in milliseconds to delay the rendering of CSS files.</p>
-
 																					</td>
 																				</tr> : null}
 																			<tr valign="top">
 																				<th scope="row">Position</th>
 																				<td>
-																					<select name="abovethefold[cssdelivery_position]">
-																						<option value="header" selected={this.cssSettings.position === 'header'}>Header</option>
-																						<option value="footer" selected={this.cssSettings.position === 'footer' || !this.cssSettings.position}>Footer</option>
+																					<select name="abovethefold[cssdelivery_position]" defaultValue={this.cssSettings.position || 'footer'}>
+																						<option value="header">Header</option>
+																						<option value="footer">Footer</option>
 																					</select>
 																					<p className="description">Select the position where the async loading of CSS will start.</p>
 																				</td>
 																			</tr>
-																			{/*
-																		<tr valign="top">
-																			<th scope="row">Ignore List</th>
-																			<td>
-																				<textarea style={{width: "100%",height:"50px",fontSize:"11px"}} name="abovethefold[cssdelivery_ignore]"><?php if (isset($options['cssdelivery_ignore'])) {
-																					echo $this->CTRL->admin->newline_array_string($options['cssdelivery_ignore']);
-} ?></textarea>
-																				<p className="description">Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML.</p>
-																			</td>
-																		</tr>
-																		<tr valign="top">
-																			<th scope="row">Remove List</th>
-																			<td>
-																				<textarea style={{width: "100%",height:"50px",fontSize:"11px"}} name="abovethefold[cssdelivery_remove]"><?php if (isset($options['cssdelivery_remove'])) {
-																					echo $this->CTRL->admin->newline_array_string($options['cssdelivery_remove']);
-} ?></textarea>
-																				<p className="description">Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline.</p>
-																			</td>
-																		</tr>
-																		*/}
+																			<SettingTextarea header="Ignore List" style={{ width: "100%", height: "50px", fontSize: "11px" }} name="abovethefold[cssdelivery_ignore]" defaultValue={newlineArrayString(this.cssSettings.ignore)} description="Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML."></SettingTextarea>
+																			<SettingTextarea header="Remove List" style={{ width: "100%", height: "50px", fontSize: "11px" }} name="abovethefold[cssdelivery_remove]" defaultValue={newlineArrayString(this.cssSettings.remove)} description="Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline."></SettingTextarea>
 																		</tbody>
 																	</table>
 																</div>
