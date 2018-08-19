@@ -5,6 +5,7 @@ import SettingTextarea from './SettingTextarea';
 import Info from './Info';
 import SubmitButton from './SubmitButton';
 import newlineArrayString from './utils/newLineArrayString';
+import SettingSelect from './SettingSelect';
 
 const homeUrl = window.homeUrl;
 
@@ -104,16 +105,7 @@ class CssView extends Component {
 																						<p className="description" style={{ clear: "both" }}>Optionally, enter a time in milliseconds to delay the rendering of CSS files.</p>
 																					</td>
 																				</tr> : null}
-																			<tr valign="top">
-																				<th scope="row">Position</th>
-																				<td>
-																					<select name="abovethefold[cssdelivery_position]" defaultValue={this.cssSettings.position || 'footer'}>
-																						<option value="header">Header</option>
-																						<option value="footer">Footer</option>
-																					</select>
-																					<p className="description">Select the position where the async loading of CSS will start.</p>
-																				</td>
-																			</tr>
+																			<SettingSelect header="Position" name="abovethefold[cssdelivery_position]" defaultValue={this.cssSettings.position || 'footer'} options={[{ value: 'header', name: 'Header' }, { value: 'footer', name: 'Footer' }]} description="Select the position where the async loading of CSS will start."></SettingSelect>
 																			<SettingTextarea header="Ignore List" style={{ width: "100%", height: "50px", fontSize: "11px" }} name="abovethefold[cssdelivery_ignore]" defaultValue={newlineArrayString(this.cssSettings.ignore)} description="Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML."></SettingTextarea>
 																			<SettingTextarea header="Remove List" style={{ width: "100%", height: "50px", fontSize: "11px" }} name="abovethefold[cssdelivery_remove]" defaultValue={newlineArrayString(this.cssSettings.remove)} description="Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline."></SettingTextarea>
 																		</tbody>
