@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import './JsonEditor.css';
 
 class JsonEditor extends Component {
     constructor(props) {

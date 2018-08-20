@@ -113,7 +113,6 @@ class Abovethefold_Admin_HTML
 
         // add global admin CSS
         wp_enqueue_style('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.css', false, WPABTF_VERSION);
-        wp_enqueue_style('abtf_admincp_html', plugin_dir_url(__FILE__) . 'css/admincp-jsoneditor.min.css', false, WPABTF_VERSION);
 
         // add general admin javascript
         wp_enqueue_script('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.js', array( 'jquery' ), WPABTF_VERSION);
