@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import './CssView.css';
 import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
 import Info from './Info';
@@ -200,28 +201,28 @@ class CssView extends Component {
 																			{this.getOption('gwfoLoadMethod') ?
 																				<SettingTextarea title="&nbsp;Remove List" style={{ width: "100%", height: this.cssSettings.gwfoGoogleFonts > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_remove]" defaultValue={newlineArrayString(this.cssSettings.googleFontsRemove)} description={<span>Enter (parts of) Google Web Font definitions to remove, e.g. <code>Open Sans</code>. This feature is useful when loading fonts locally. One font per line.</span>}></SettingTextarea>
 																				: null}
-																			<tr valign="top">
+																			<tr valign="top" className="local-font-loading">
 																				<th scope="row">Local Font Loading</th>
 																				<td>
 																					<p>Google Fonts are served from <code>fonts.googleapis.com</code> that is causing a render-blocking warning in the Google PageSpeed test. The Google fonts stylesheet cannot be cached by the <a href={proxyUrl}>external resource proxy</a> because it serves different content based on the client.</p>
-																					<p style={{ marginTop: "7px" }}>To solve the PageSpeed Score issue while also achieving the best font render performance, it is possible to download the Google fonts and load them locally (from the critical CSS). Loading Google fonts locally enables to achieve a Google PageSpeed 100 Score while also preventing a font flicker effect during navigation.</p>
+																					<p>To solve the PageSpeed Score issue while also achieving the best font render performance, it is possible to download the Google fonts and load them locally (from the critical CSS). Loading Google fonts locally enables to achieve a Google PageSpeed 100 Score while also preventing a font flicker effect during navigation.</p>
 
 																					<br />
 																					<h3>How to place Google Fonts locally</h3>
 
 																					<p>Select the option "<em>Disabled (remove all fonts)</em>" from the webfont.js Load Method menu (above) to remove dynamic and static Google fonts from the HTML and CSS.</p>
 
-																					<h4 className="h" style={{ marginBottom: "10px", marginTop: "15px" }}>Step 1: download the font files and CSS</h4>
+																					<h4 className="h">Step 1: download the font files and CSS</h4>
 
-																					<p style={{ marginTop: "7px" }}>Visit <a href="https://google-webfonts-helper.herokuapp.com/fonts?utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">Google Webfonts Helper</a> and search for the fonts that you want to download. Select the font configuration (weight, charset and style) and download the zip-file.</p>
+																					<p>Visit <a href="https://google-webfonts-helper.herokuapp.com/fonts?utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">Google Webfonts Helper</a> and search for the fonts that you want to download. Select the font configuration (weight, charset and style) and download the zip-file.</p>
 
-																					<h4 className="h" style={{ marginBottom: "10px", marginTop: "10px" }}>Step 2: upload the fonts to your theme directory</h4>
-																					<p style={{ marginTop: "7px" }}>Extract the zip-file and upload the font files to <code>/fonts/</code> in your theme directory. Optionally, use the file upload to extract the zip-file in your theme directory automatically (requires PHP5).</p>
-																					<p style={{ marginTop: "7px" }}><input type="file" name="googlefontzip" /></p>
+																					<h4 className="h">Step 2: upload the fonts to your theme directory</h4>
+																					<p>Extract the zip-file and upload the font files to <code>/fonts/</code> in your theme directory. Optionally, use the file upload to extract the zip-file in your theme directory automatically (requires PHP5).</p>
+																					<p><input type="file" name="googlefontzip" /></p>
 																					<p><button type="submit" name="uploadgooglefontzip" className="button button-primary button-green">Upload &amp; Extract</button></p>
 
-																					<h4 className="h" style={{ marginBottom: "10px", marginTop: "10px" }}>Step 3: create a Conditional Critical Path CSS entry for Google Fonts</h4>
-																					<p style={{ marginTop: "7px" }}>Create a Conditional Critical Path CSS entry without conditions and select the <code>@appendToAny</code> option.</p>
+																					<h4 className="h">Step 3: create a Conditional Critical Path CSS entry for Google Fonts</h4>
+																					<p>Create a Conditional Critical Path CSS entry without conditions and select the <code>@appendToAny</code> option.</p>
 																					<p>Enter the Google Font CSS into the CSS input field.</p>
 																					<p>Change the paths of the fonts to the location of the fonts in your theme directory, e.g. <code>{this.fontThemePath}</code> and <a href={`https://www.google.com/search?q=minify+css+online&amp;hl=${this.lgcode}`} target="_blank" className="button button-secondary button-small">minify</a> the CSS.</p>
 																				</td>
