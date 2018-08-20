@@ -117,7 +117,6 @@ class Abovethefold_Admin_HTML
 
         // add general admin javascript
         wp_enqueue_script('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.js', array( 'jquery' ), WPABTF_VERSION);
-        //wp_enqueue_script('abtf_admincp_html', plugin_dir_url(__FILE__) . 'js/admincp-html.min.js', array( 'jquery', 'abtf_admincp_jsoneditor' ), WPABTF_VERSION);
     }
 
     /**
