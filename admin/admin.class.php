@@ -208,9 +208,14 @@ class Abovethefold_Admin
         global $pagenow;
 
         # Check current admin page.
-        if( $pagenow == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] == 'pagespeed-html' ){
-            wp_redirect( add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/html', 301 );
-            exit;
+        if( $pagenow == 'admin.php' && isset( $_GET['page'] ) ){
+            switch ($_GET['page']) {
+                case 'pagespeed-html':
+                case 'pagespeed-css':
+                wp_redirect( add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/' . str_replace('pagespeed-', '', $_GET['page']), 301 );
+                exit;
+                break;
+            }
         }
     }
 
@@ -1046,7 +1051,6 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
         // print tab content
         switch ($tab) {
             case "criticalcss":
-            case "css":
             case "javascript":
             case "pwa":
             case "http2":
