@@ -27,6 +27,8 @@ class CssView extends Component {
 		this.google_intlcode = document.querySelector('#google_intlcode').value;
 		this.loadCSSVersion = JSON.parse(document.querySelector('#loadcss_version').value);
 		this.webfontVersion = document.querySelector('#webfont_version').value;
+		this.cdnVersion = document.querySelector('#cdn_version').value;
+		this.fontThemePath = document.querySelector('#font_theme_path').value
 
 		this.handleOptionToggle = this.handleOptionToggle.bind(this);
 		this.handleRenderDelayChange = this.handleRenderDelayChange.bind(this);
@@ -59,6 +61,9 @@ class CssView extends Component {
 	}
 
 	render() {
+		const proxyUrl = new URL(window.adminUrl)
+		proxyUrl.searchParams.append('page', 'pagespeed-proxy')
+
 		return (
 			<form method="post" action={document.querySelector('#admin_url_css_update').value} className="clearfix" encType="multipart/form-data">
 				<div dangerouslySetInnerHTML={{ __html: document.querySelector('#admin_nonce_css').innerHTML }}></div>
@@ -151,7 +156,7 @@ class CssView extends Component {
 																					name: 'Async'
 																				}, {
 																					value: 'async_cdn',
-																					name: 'Async from Google CDN (v{/*<?php print $this->CTRL->gwfo->cdn_version; ?>*/})'
+																					name: `Async from Google CDN (v${this.cdnVersion})`
 																				}, {
 																					value: 'wordpress',
 																					name: 'WordPress include'
@@ -159,7 +164,7 @@ class CssView extends Component {
 																					value: 'disabled',
 																					name: 'Disabled (remove all fonts)'
 																				}]
-																			} description={<span>Select the method to load <a href="https://developers.google.com/speed/libraries/?hl=<?php print $lgcode;?>#web-font-loader" target="_blank">webfont.js</a> (v{this.webfontVersion})).</span>}></SettingSelect>
+																			} description={<span>Select the method to load <a href={`https://developers.google.com/speed/libraries/?hl=${this.lgcode}#web-font-loader`} target="_blank">webfont.js</a> (v{this.webfontVersion})).</span>}></SettingSelect>
 																			{this.getOption('gwfoLoadMethod') ?
 																				<SettingSelect header="Load Position" name="abovethefold[gwfo_loadposition]" options={
 																					[{
@@ -184,25 +189,21 @@ class CssView extends Component {
 																				<SettingTextarea header="WebFontConfig" style={{ width: "100%", height: "100px", fontSize: "11px", borderColor: !this.cssSettings.gwfoConfigValid ? "red" : "notacolor" }} name="abovethefold[gwfo_config]" placeholder="WebFontConfig = { classes: false, typekit: { id: 'xxxxxx' }, loading: function() {}, google: { families: ['Droid Sans', 'Droid Serif'] } };" defaultValue={this.cssSettings.gwfoConfig} description={<span>Enter the <code>WebFontConfig</code> variable for Google Web Font Loader. Leave blank for the default configuration. (<a href="https://github.com/typekit/webfontloader#configuration" target="_blank">more information</a>)</span>} onChange={() => { return false }/*onchange="if (jQuery(this).val() ==='') { jQuery('#sha256_warning').hide(); } else {jQuery('#sha256_warning').show();} "*/}></SettingTextarea>
 																				: null}
 																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingTextarea header="Google Web Fonts" style={{ width: "100%", height: "50px"/*<?php if (count($options['gwfo_googlefonts']) > 3) {print '100px';} else {print '50px';} ?>;*/, fontSize: "11px" }} name="abovethefold[gwfo_googlefonts]" placeholder="Droid Sans" defaultValue={1/*<?php if (isset($options['gwfo_googlefonts'])) {echo $this->CTRL->admin->newline_array_string($options['gwfo_googlefonts']);} ?>*/} description={<span>Enter the <a href="https://developers.google.com/fonts/docs/getting_started?hl=<?php print $lgcode;?>&csw=1" target="_blank">Google Font API</a> definitions of <a href="https://fonts.google.com/?hl=<?php print $lgcode;?>" target="_blank">Google Web Fonts</a> to load. One font per line. (<a href="https://github.com/typekit/webfontloader#google" target="_blank">documentation</a>)</span>}></SettingTextarea>
+																				<SettingTextarea header="Google Web Fonts" style={{ width: "100%", height: this.cssSettings.gwfoGoogleFonts > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts]" placeholder="Droid Sans" defaultValue={newlineArrayString(this.cssSettings.googleFonts)} description={<span>Enter the <a href={`https://developers.google.com/fonts/docs/getting_started?hl=${this.lgcode}&csw=1`} target="_blank">Google Font API</a> definitions of <a href={`https://fonts.google.com/?hl=${this.lgcode}`} target="_blank">Google Web Fonts</a> to load. One font per line. (<a href="https://github.com/typekit/webfontloader#google" target="_blank">documentation</a>)</span>}></SettingTextarea>
 																				: null}
 																			{this.getOption('gwfoLoadMethod') ?
 																				<SettingCheckbox name="abovethefold[gwfo_googlefonts_auto]" label="Auto-detect enabled" description="When enabled, fonts are automatically extracted from the HTML, CSS and existing WebFontConfig."></SettingCheckbox>
 																				: null}
 																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingTextarea title="&nbsp;Ignore List" style={{ width: "100%", height: "50px"/*<?php if (count($options['gwfo_googlefonts']) > 3) {print '100px';} else {print '50px';} ?>;*/, fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_ignore]" defaultValue={1/*<?php if (isset($options['gwfo_googlefonts_ignore'])) {
-                                                                echo $this->CTRL->admin->newline_array_string($options['gwfo_googlefonts_ignore']);
-                                                            } ?>*/} description={<span>Enter (parts of) Google Web Font definitions to ignore, e.g. <code>Open Sans</code>. The fonts in this list will not be optimized or auto-detected.</span>}></SettingTextarea>
+																				<SettingTextarea title="&nbsp;Ignore List" style={{ width: "100%", height: this.cssSettings.gwfoGoogleFonts > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_ignore]" defaultValue={newlineArrayString(this.cssSettings.googleFontsIgnore)} description={<span>Enter (parts of) Google Web Font definitions to ignore, e.g. <code>Open Sans</code>. The fonts in this list will not be optimized or auto-detected.</span>}></SettingTextarea>
 																				: null}
 																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingTextarea title="&nbsp;Remove List" style={{ width: "100%", height: "50px"/*<?php if (count($options['gwfo_googlefonts']) > 3) {print '100px';} else {print '50px';} ?>;*/, fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_remove]" defaultValue={1/*<?php if (isset($options['gwfo_googlefonts_remove'])) {
-                                                                echo $this->CTRL->admin->newline_array_string($options['gwfo_googlefonts_remove']);
-                                                            } ?>*/} description={<span>Enter (parts of) Google Web Font definitions to remove, e.g. <code>Open Sans</code>. This feature is useful when loading fonts locally. One font per line.</span>}></SettingTextarea>
+																				<SettingTextarea title="&nbsp;Remove List" style={{ width: "100%", height: this.cssSettings.gwfoGoogleFonts > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_remove]" defaultValue={newlineArrayString(this.cssSettings.googleFontsRemove)} description={<span>Enter (parts of) Google Web Font definitions to remove, e.g. <code>Open Sans</code>. This feature is useful when loading fonts locally. One font per line.</span>}></SettingTextarea>
 																				: null}
 																			<tr valign="top">
 																				<th scope="row">Local Font Loading</th>
 																				<td>
-																					<p>Google Fonts are served from <code>fonts.googleapis.com</code> that is causing a render-blocking warning in the Google PageSpeed test. The Google fonts stylesheet cannot be cached by the <a href="<?php echo add_query_arg(array( 'page' => 'pagespeed-proxy' ), admin_url('admin.php')); ?>">external resource proxy</a> because it serves different content based on the client.</p>
+																					<p>Google Fonts are served from <code>fonts.googleapis.com</code> that is causing a render-blocking warning in the Google PageSpeed test. The Google fonts stylesheet cannot be cached by the <a href={proxyUrl}>external resource proxy</a> because it serves different content based on the client.</p>
 																					<p style={{ marginTop: "7px" }}>To solve the PageSpeed Score issue while also achieving the best font render performance, it is possible to download the Google fonts and load them locally (from the critical CSS). Loading Google fonts locally enables to achieve a Google PageSpeed 100 Score while also preventing a font flicker effect during navigation.</p>
 
 																					<br />
@@ -222,7 +223,7 @@ class CssView extends Component {
 																					<h4 className="h" style={{ marginBottom: "10px", marginTop: "10px" }}>Step 3: create a Conditional Critical Path CSS entry for Google Fonts</h4>
 																					<p style={{ marginTop: "7px" }}>Create a Conditional Critical Path CSS entry without conditions and select the <code>@appendToAny</code> option.</p>
 																					<p>Enter the Google Font CSS into the CSS input field.</p>
-																					<p>Change the paths of the fonts to the location of the fonts in your theme directory, e.g. <code>{/*<?php print htmlentities(str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/'), ENT_COMPAT, 'utf-8'); ?>*/}</code> and <a href="https://www.google.com/search?q=minify+css+online&amp;hl=<?php print $lgcode;?>" target="_blank" className="button button-secondary button-small">minify</a> the CSS.</p>
+																					<p>Change the paths of the fonts to the location of the fonts in your theme directory, e.g. <code>{this.fontThemePath}</code> and <a href={`https://www.google.com/search?q=minify+css+online&amp;hl=${this.lgcode}`} target="_blank" className="button button-secondary button-small">minify</a> the CSS.</p>
 																				</td>
 																			</tr>
 																		</tbody>
@@ -234,6 +235,10 @@ class CssView extends Component {
 													</tr> : null}
 											</tbody>
 										</table>
+										<hr />
+										<SubmitButton type={['primary', 'large']} name="is_submit">
+											{__('Save')}
+										</SubmitButton>
 									</div>
 								</div>
 							</div>

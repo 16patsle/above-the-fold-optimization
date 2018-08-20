@@ -49,6 +49,18 @@
 		if (isset($options['gwfo_config'])) {
 			$gwfo_config = htmlentities($options['gwfo_config']);
 		}
+		$gwfo_googlefonts = '';
+		if (isset($options['gwfo_googlefonts'])) {
+			$gwfo_googlefonts = $options['gwfo_googlefonts'];
+		}
+		$gwfo_googlefonts_ignore = '';
+		if (isset($options['gwfo_googlefonts_ignore'])) {
+			$gwfo_googlefonts_ignore = $options['gwfo_googlefonts_ignore'];
+		}
+		$gwfo_googlefonts_remove = '';
+		if (isset($options['gwfo_googlefonts_remove'])) {
+			$gwfo_googlefonts_remove = $options['gwfo_googlefonts_remove'];
+		}
 
 		$css_settings = 
 		'{"delivery":' . json_encode($cssdelivery) . 
@@ -61,6 +73,9 @@
 		',"gwfoLoadMethod":' . json_encode($gwfo_loadmethod) . 
 		',"gwfoConfigValid":' . json_encode($gwfo_config_valid) . 
 		',"gwfoConfig":' . json_encode($gwfo_config) . 
+		',"googleFonts":' . json_encode($gwfo_googlefonts) . 
+		',"googleFontsIgnore":' . json_encode($gwfo_googlefonts_ignore) . 
+		',"googleFontsRemove":' . json_encode($gwfo_googlefonts_remove) . 
 		'}'
 	?>
 	<input id="css_settings"  type="hidden" value='<?php echo $css_settings ?>'/>
@@ -98,6 +113,8 @@
         }
 	?>
 	<input id="webfont_version"  type="hidden" value='<?php echo $webfont_version ?>'/>
+	<input id="cdn_version"  type="hidden" value='<?php echo $this->CTRL->gwfo->cdn_version ?>'/>
+	<input id="font_theme_path"  type="hidden" value='<?php print htmlentities(str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/'), ENT_COMPAT, 'utf-8'); ?>'/>
 </span>
 <div id="root">
 </div>
