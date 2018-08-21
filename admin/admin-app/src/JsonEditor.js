@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import JSONEditor from 'jsoneditor';
+import 'jsoneditor/dist/jsoneditor.css';
 import './JsonEditor.css';
+import JsonEditorIconFix from './JsonEditorIconFix';
 
 class JsonEditor extends Component {
     constructor(props) {
@@ -28,7 +31,9 @@ class JsonEditor extends Component {
                 onChange: this.onChange.bind(this),
                 onModeChange: this.onModeChange.bind(this),
                 search: false,
-                schema: this.props.schema
+                schema: this.props.schema,
+                navigationBar: false,
+                statusBar: false,
             };
 
             let json = [];
@@ -47,7 +52,7 @@ class JsonEditor extends Component {
                     json = [];
                 }
             }
-            this.editor = new window.JSONEditor(this.editorRef.current, options, json);
+            this.editor = new JSONEditor(this.editorRef.current, options, json);
 
             this.editor.compact(); // collapseAll();
 
@@ -112,11 +117,14 @@ class JsonEditor extends Component {
 
     render() {
         return (
-            <div ref={this.editorRef}>
-                <div className="loading-json-editor">
-                    {__('Loading JSON editor...')}
+            <span>
+                <JsonEditorIconFix />
+                <div ref={this.editorRef}>
+                    <div className="loading-json-editor">
+                        {__('Loading JSON editor...')}
+                    </div>
                 </div>
-            </div>
+            </span>
         );
     }
 }

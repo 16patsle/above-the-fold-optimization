@@ -40,8 +40,6 @@ class Abovethefold_Admin_HTML
              * Handle form submissions
              */
             $this->CTRL->loader->add_action('admin_post_abtf_html_update', $this, 'update_settings');
-
-            $this->CTRL->loader->add_action('admin_enqueue_scripts', $this, 'enqueue_scripts', 30);
         }
     }
 
@@ -100,22 +98,6 @@ class Abovethefold_Admin_HTML
 
         wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/html');
         exit;
-    }
-    
-    /**
-     * Enqueue scripts and styles
-     */
-    public function enqueue_scripts($hook)
-    {
-        if (!isset($_REQUEST['page']) || $_GET['page'] !== 'pagespeed') {
-            return;
-        }
-
-        // add global admin CSS
-        wp_enqueue_style('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.css', false, WPABTF_VERSION);
-
-        // add general admin javascript
-        wp_enqueue_script('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.js', array( 'jquery' ), WPABTF_VERSION);
     }
 
     /**
