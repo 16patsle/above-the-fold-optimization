@@ -3,7 +3,6 @@ import { __ } from '@wordpress/i18n';
 import './CssView.css';
 import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
-import Info from './Info';
 import SubmitButton from './SubmitButton';
 import newlineArrayString from './utils/newLineArrayString';
 import SettingSelect from './SettingSelect';
@@ -133,7 +132,6 @@ class CssView extends Component {
 														</td>
 													</tr> : null}
 												<SettingCheckbox header="Optimize Web Fonts" name="abovethefold[gwfo]" defaultChecked={this.cssSettings.gwfo} onChange={this.handleOptionToggle.bind(this, 'gwfo')} label="Enabled" description={<span>When enabled, web fonts are optimized using <a href="https://github.com/typekit/webfontloader" target="_blank">Google Web Font Loader</a>.</span>}></SettingCheckbox>
-												{/*Coming soon*/}
 												{this.getOption('gwfo') ?
 													<tr valign="top" className="gwfooptions">
 														<td colSpan="2" style={{ paddingTop: "0px" }}>
