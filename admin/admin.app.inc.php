@@ -41,7 +41,7 @@
 		}
 		$gwfo = isset($options['gwfo']) && intval($options['gwfo']) === 1;
 		$gwfo_loadmethod = '';
-		if(!isset($options['gwfo_loadmethod'])) {
+		if(isset($options['gwfo_loadmethod'])) {
 			$gwfo_loadmethod = $options['gwfo_loadmethod'];
 		}
 		$gwfo_config_valid = $options['gwfo_config_valid'];
