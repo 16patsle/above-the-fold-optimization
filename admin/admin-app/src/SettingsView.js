@@ -12,20 +12,8 @@ class SettingsView extends Component {
 
 		this.settingsSettings = JSON.parse(document.querySelector('#settings_settings').value);
 
-		this.state = {
-			showCssOptionsDelivery: 1//this.cssSettings.delivery
-		}
-		/*this.lgcode = document.querySelector('#lgcode').value;
-		this.google_intlcode = document.querySelector('#google_intlcode').value;
-		this.loadCSSVersion = JSON.parse(document.querySelector('#loadcss_version').value);
-		this.webfontVersion = document.querySelector('#webfont_version').value;
-		this.cdnVersion = document.querySelector('#cdn_version').value;
-        this.fontThemePath = document.querySelector('#font_theme_path').value*/
-        this.clientHashes = JSON.parse(document.querySelector('#client_hashes').value);
-
-		//this.handleOptionToggle = this.handleOptionToggle.bind(this);
-		//this.handleRenderDelayChange = this.handleRenderDelayChange.bind(this);
-    }
+		this.clientHashes = JSON.parse(document.querySelector('#client_hashes').value);
+	}
     
     render() {
         return (
