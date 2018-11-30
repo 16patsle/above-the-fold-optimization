@@ -7,6 +7,7 @@ import TabsView from './TabsView';
 import IntroView from './IntroView';
 import HtmlView from './HtmlView';
 import CssView from './CssView';
+import SettingsView from './SettingsView';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
         <Route exact path="/" component={IntroView} />
         <Route path="/html" component={HtmlView} />
         <Route path="/css" component={CssView} />
+        <Route path="/settings" component={SettingsView} />
       </div>
     );
   }

@@ -115,6 +115,36 @@
 	<input id="webfont_version"  type="hidden" value='<?php echo $webfont_version ?>'/>
 	<input id="cdn_version"  type="hidden" value='<?php echo $this->CTRL->gwfo->cdn_version ?>'/>
 	<input id="font_theme_path"  type="hidden" value='<?php print htmlentities(str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/'), ENT_COMPAT, 'utf-8'); ?>'/>
+	<!-- Settings -->
+	<input id="admin_url_settings_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_settings_update'); ?>" />
+	<div id="admin_nonce_settings" type="hidden"><?php echo wp_nonce_field('abovethefold'); ?></div>
+	<?php
+		$settings_adminbar = !isset($options['adminbar']) || intval($options['adminbar']) === 1;
+		$settings_clear_pagecache = !isset($options['clear_pagecache']) || intval($options['clear_pagecache']) === 1;
+		$settings_debug = isset($options['debug']) && intval($options['debug']) === 1;
+
+		$settings_settings = 
+		'{"adminbar":' . json_encode($settings_adminbar) . 
+		',"clearPagecache":' . json_encode($settings_clear_pagecache) .  
+		',"debug":' . json_encode($settings_debug) .
+		'}'
+	?>
+	<input id="settings_settings"  type="hidden" value='<?php echo $settings_settings ?>'/>
+	<?php
+		$client_hashes = false;
+
+		$site_url = wp_nonce_url(trailingslashit(site_url()), 'csp_hash_json', 'abtf-csp-hash');
+	
+		try {
+			$json = file_get_contents($site_url);
+		} catch (Exception $err) {
+			$json = false;
+		}
+		if ($json) {
+			$client_hashes = $json;
+		}
+	?>
+	<input id="client_hashes"  type="hidden" value='<?php echo $client_hashes ?>'/>
 </span>
 <div id="root">
 </div>
