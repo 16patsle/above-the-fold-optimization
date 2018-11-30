@@ -272,9 +272,6 @@ class Abovethefold_Admin
     public function enqueue_scripts($hook)
     {
 
-        // add global admin CSS
-        wp_enqueue_style('abtf_admincp_global', plugin_dir_url(__FILE__) . 'css/admincp-global.min.css', false, WPABTF_VERSION);
-
         if (!isset($_REQUEST['page']) || strpos($_GET['page'], 'pagespeed') !== 0) {
             return;
         }
