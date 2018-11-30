@@ -13,6 +13,7 @@ class SettingCheckbox extends Component {
                     <p className="description">
                         {this.props.description}
                     </p>
+                    {this.props.children}
                 </td>
             </tr>
         );
