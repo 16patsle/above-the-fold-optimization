@@ -17,7 +17,7 @@ class SettingsView extends Component {
     render() {
         return (
             <form method="post" action={document.querySelector('#admin_url_settings_update').value} className="clearfix">
-	            <div dangerouslySetInnerHTML={{ __html: document.querySelector('#admin_nonce_css').innerHTML }}></div>
+	            <div dangerouslySetInnerHTML={{ __html: document.querySelector('#admin_nonce_settings').innerHTML }}></div>
 	            <div className="wrap abovethefold-wrapper">
 		            <div id="poststuff">
 			            <div id="post-body" className="metabox-holder">
