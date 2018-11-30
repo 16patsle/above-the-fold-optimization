@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
-import './CssView.css';
 import SettingCheckbox from './SettingCheckbox';
 import SubmitButton from './SubmitButton';
 
