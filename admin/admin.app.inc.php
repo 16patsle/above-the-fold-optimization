@@ -115,6 +115,75 @@
 	<input id="webfont_version"  type="hidden" value='<?php echo $webfont_version ?>'/>
 	<input id="cdn_version"  type="hidden" value='<?php echo $this->CTRL->gwfo->cdn_version ?>'/>
 	<input id="font_theme_path"  type="hidden" value='<?php print htmlentities(str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/'), ENT_COMPAT, 'utf-8'); ?>'/>
+	<!-- Javascript -->
+	<input id="admin_url_javascript_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_javascript_update'); ?>" />
+	<div id="admin_nonce_javascript" type="hidden"><?php echo wp_nonce_field('abovethefold'); ?></div>
+	<?php
+	$jsProxy = (isset($options['js_proxy']) && intval($options['js_proxy']) === 1);
+
+    if (isset($options['jsdelivery_idle']) && !empty($options['jsdelivery_idle'])) {
+        foreach ($options['jsdelivery_idle'] as $n => $cnf) {
+            $options['jsdelivery_idle'][$n] = $cnf[0];
+            if (isset($cnf[1])) {
+                $options['jsdelivery_idle'][$n] .= ':' . $cnf[1];
+            }
+        }
+	}
+
+	$jsdelivery = isset($options['jsdelivery']) && intval($options['jsdelivery']) === 1;
+
+	$jsdelivery_scriptloader = '';
+	if(isset($options['jsdelivery_scriptloader'])) {
+		$jsdelivery_scriptloader = $options['jsdelivery_scriptloader'];
+	}
+	$jsdelivery_position = '';
+	if(isset($options['jsdelivery_position'])){
+		$jsdelivery_position = $options['jsdelivery_position'];
+	}
+	$jsdelivery_ignore = '';
+	if (isset($options['jsdelivery_ignore'])) {
+		$jsdelivery_ignore = $options['jsdelivery_ignore'];
+	}
+	$jsdelivery_remove = '';
+	if (isset($options['jsdelivery_remove'])) {
+		$jsdelivery_remove = $options['jsdelivery_remove'];
+	}
+	$jsdelivery_async_all = !isset($options['jsdelivery_async_all']) || intval($options['jsdelivery_async_all']) === 1;
+	$jsdelivery_async = '';
+	if (isset($options['jsdelivery_async'])){
+		$jsdelivery_async = $options['jsdelivery_async'];
+	}
+	$jsdelivery_async_disabled = '';
+	if (isset($options['jsdelivery_async_disabled'])){
+		$jsdelivery_async_disabled = $options['jsdelivery_async_disabled'];
+	}
+	$jsdelivery_idle = '';
+	if (isset($options['jsdelivery_idle'])) {
+		$jsdelivery_idle = $options['jsdelivery_idle'];
+	}
+	$jsdelivery_deps = isset($options['jsdelivery_deps']) && intval($options['jsdelivery_deps']) === 1;
+	$jsdelivery_jquery = !isset($options['jsdelivery_jquery']) || intval($options['jsdelivery_jquery']) === 1;
+	$js_lazyscripts_enabled = isset($options['lazyscripts_enabled']) && intval($options['lazyscripts_enabled']) === 1;
+
+	$javascript_settings = 
+		'{"proxy":' . json_encode($jsProxy) . 
+		',"delivery":' . json_encode($jsdelivery) .  
+		',"scriptLoader":' . json_encode($jsdelivery_scriptloader) .
+		',"position":' . json_encode($jsdelivery_position) . 
+		',"ignore":' . json_encode($jsdelivery_ignore) . 
+		',"remove":' . json_encode($jsdelivery_remove) . 
+		',"forceAsync":' . json_encode($jsdelivery_async_all) . 
+		',"async":' . json_encode($jsdelivery_async) . 
+		',"asyncDisabled":' . json_encode($jsdelivery_async_disabled) . 
+		',"idleDelivery":' . json_encode($jsdelivery_idle) . 
+		',"abideDeps":' . json_encode($jsdelivery_deps) . 
+		',"jqueryStub":' . json_encode($jsdelivery_jquery) . 
+		',"lazyScripts":' . json_encode($js_lazyscripts_enabled) . 
+		'}'
+
+	?>
+	<input id="javascript_settings" type="hidden" value='<?php echo $javascript_settings ?>'/>
+	<input id="lazyload_plugins_url" type="hidden" value="<?php print admin_url('plugin-install.php?s=Lazy+Load+XT&tab=search&type=term'); ?>">
 	<!-- Settings -->
 	<input id="admin_url_settings_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_settings_update'); ?>" />
 	<div id="admin_nonce_settings" type="hidden"><?php echo wp_nonce_field('abovethefold'); ?></div>

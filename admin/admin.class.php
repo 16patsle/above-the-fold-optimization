@@ -212,6 +212,7 @@ class Abovethefold_Admin
             switch ($_GET['page']) {
                 case 'pagespeed-html':
                 case 'pagespeed-css':
+                case 'pagespeed-javascript':
                 case 'pagespeed-settings':
                 wp_redirect( add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/' . str_replace('pagespeed-', '', $_GET['page']), 301 );
                 exit;
