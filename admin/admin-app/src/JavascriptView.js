@@ -60,8 +60,7 @@ class JavascriptView extends Component {
 						    <table className="form-table">
                                 <tbody>
                                     <SettingCheckbox header="Optimize Javascript Loading" name="abovethefold[jsdelivery]" label="Enabled" defaultChecked={this.javascriptSettings.delivery} onChange={this.handleOptionToggle.bind(this, 'delivery')} description={<span>When enabled, Javascript files are loaded asynchronously using an enhanced version of <a href="https://github.com/walmartlabs/little-loader" target="_blank">little-loader</a> from Walmart Labs (<a href="https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=Above%20The%20Fold%20Optimization" target="_blank">reference</a>).</span>}></SettingCheckbox>
-                                    {this.getOption('delivery') ?
-							            <tr valign="top" className="jsdeliveryoptions">
+							            <tr valign="top" className="jsdeliveryoptions" style={!this.getOption('delivery') ? {display:'none'} : {}}>
 							            	<td colSpan="2" style={{"paddingTop":"0px"}}>
 							            		<div className="abtf-inner-table">
 							            			<h3 className="h"><span>Javascript Load Optimization</span></h3>
@@ -138,7 +137,6 @@ class JavascriptView extends Component {
 									            </div>
 								            </td>
 							            </tr>
-                                     : null}
                                 <SettingCheckbox header="Lazy Load Scripts" name="abovethefold[lazyscripts_enabled]" label="Enabled" defaultChecked={this.javascriptSettings.lazyScripts} onChange={this.handleOptionToggle.bind(this, 'lazyScripts')} description={<span>When enabled, the widget module from <a href="https://github.com/ressio/lazy-load-xt#widgets" target="_blank">jQuery Lazy Load XT</a> is loaded to enable lazy loading of inline scripts such as Facebook like and Twitter follow buttons.</span>}>
                             {this.getOption('lazyScripts') ?
                                 <span>
