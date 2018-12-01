@@ -4,6 +4,7 @@
     <input id="adminTabs" type="hidden" value="<?php echo htmlspecialchars(json_encode($this->tabs)); ?>" />
     <input id="lgcode" type="hidden" value="<?php echo $lgcode; ?>" />
 	<input id="google_intlcode" type="hidden" value="<?php echo $this->google_intlcode; ?>" />
+	<input id="utmstring" type="hidden" value="<?php echo $utmstring; ?>" />
 	<!-- HTML -->
 	<input id="admin_url_html_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_html_update'); ?>" />
 	<div id="admin_nonce_html" type="hidden"><?php echo wp_nonce_field('abovethefold'); ?></div>

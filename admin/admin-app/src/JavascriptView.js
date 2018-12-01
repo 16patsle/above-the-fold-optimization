@@ -20,7 +20,9 @@ class JavascriptView extends Component {
             showJavascriptOptionsDelivery: this.javascriptSettings.delivery,
             showJavascriptOptionsLazyScripts: this.javascriptSettings.lazyScripts,
             showJavascriptOptionsForceAsync: this.javascriptSettings.forceAsync,
-		}
+        }
+        
+        this.utmstring = document.querySelector('#utmstring').value
         
         this.handleOptionToggle = this.handleOptionToggle.bind(this);
     }
@@ -56,10 +58,10 @@ class JavascriptView extends Component {
 							<span>{__('Javascript Optimization')}</span>
 						</h3>
 						<div className="inside testcontent">
-						    <Info color="seagreen" style={{"marginBottom":"0px","fontSize":"14px"}}><strong>Tip:</strong> More information about javascript optimization can be found in <a href="https://www.igvita.com/?{/*php print $utmstring; */}" target="_blank">this blog</a> by Ilya Grigorik, web performance engineer at Google and author of the O'Reilly book <a href="https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/?{/*php print $utmstring; */}" target="_blank">High Performance Browser Networking</a> (<a href="https://hpbn.co/?{/*php print $utmstring; */}" target="_blank">free online</a>).</Info>
+						    <Info color="seagreen" style={{"marginBottom":"0px","fontSize":"14px"}}><strong>Tip:</strong> More information about javascript optimization can be found in <a href={'https://www.igvita.com/?' + this.utmstring} target="_blank">this blog</a> by Ilya Grigorik, web performance engineer at Google and author of the O'Reilly book <a href={'https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/?' + this.utmstring} target="_blank">High Performance Browser Networking</a> (<a href={'https://hpbn.co/?' + this.utmstring} target="_blank">free online</a>).</Info>
 						    <table className="form-table">
                                 <tbody>
-                                    <SettingCheckbox header="Optimize Javascript Loading" name="abovethefold[jsdelivery]" label="Enabled" defaultChecked={this.javascriptSettings.delivery} onChange={this.handleOptionToggle.bind(this, 'delivery')} description={<span>When enabled, Javascript files are loaded asynchronously using an enhanced version of <a href="https://github.com/walmartlabs/little-loader" target="_blank">little-loader</a> from Walmart Labs (<a href="https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=Above%20The%20Fold%20Optimization" target="_blank">reference</a>).</span>}></SettingCheckbox>
+                                    <SettingCheckbox header="Optimize Javascript Loading" name="abovethefold[jsdelivery]" label="Enabled" defaultChecked={this.javascriptSettings.delivery} onChange={this.handleOptionToggle.bind(this, 'delivery')} description={<span>When enabled, Javascript files are loaded asynchronously using an enhanced version of <a href="https://github.com/walmartlabs/little-loader" target="_blank">little-loader</a> from Walmart Labs (<a href={'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' + this.utmstring} target="_blank">reference</a>).</span>}></SettingCheckbox>
 							            <tr valign="top" className="jsdeliveryoptions" style={!this.getOption('delivery') ? {display:'none'} : {}}>
 							            	<td colSpan="2" style={{"paddingTop":"0px"}}>
 							            		<div className="abtf-inner-table">
@@ -71,7 +73,7 @@ class JavascriptView extends Component {
                                                                 <SettingRadio header="Script Loader" name="abovethefold[jsdelivery_scriptloader]" defaultChecked={this.javascriptSettings.scriptLoader} radios={
                                                                     [{
                                                                         value: 'little-loader',
-                                                                        label:  <span><a href="https://github.com/walmartlabs/little-loader" target="_blank">little-loader</a> from Walmart Labs (<a href="https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=Above%20The%20Fold%20Optimization" target="_blank">reference</a>)</span>,
+                                                                        label:  <span><a href="https://github.com/walmartlabs/little-loader" target="_blank">little-loader</a> from Walmart Labs (<a href={'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' + this.utmstring} target="_blank">reference</a>)</span>,
                                                                         description: <span style={{"marginBottom":"5px"}}>A stable async script loader that works in old browsers.</span>
                                                                     },
                                                                     {
@@ -79,7 +81,7 @@ class JavascriptView extends Component {
                                                                         label: ' little-loader + HTML5 Web Worker and Fetch API based script loader with localStorage cache',
                                                                         description: <span>
                                                                                         {!this.javascriptSettings.proxy ? <span className="description" style={{color:"red"}}>This script loader requires the <a href={proxyUrl}>Javascript proxy</a> to be enabled to bypass <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">CORS</a>.</span>: null }
-							            					    		                <span className="description">A state of the art script loader for optimal mobile speed, inspired by <a href="https://addyosmani.com/basket.js/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=Above%20The%20Fold%20Optimization" target="_blank">basket.js</a> (by a Google engineer), a script loading concept in use by Google. With fallback to little-loader for old browsers.</span>
+							            					    		                <span className="description">A state of the art script loader for optimal mobile speed, inspired by <a href={'https://addyosmani.com/basket.js/#' + this.utmstring} target="_blank">basket.js</a> (by a Google engineer), a script loading concept in use by Google. With fallback to little-loader for old browsers.</span>
                                                                                     </span>
                                                                     }]
                                                                 }>
