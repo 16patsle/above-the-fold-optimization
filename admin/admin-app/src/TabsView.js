@@ -14,7 +14,7 @@ class TabsView extends Component {
                             <a href="https://github.com/16patsle/above-the-fold-optimization" target="_blank">Github</a> ‐ <a href="https://github.com/16patsle/above-the-fold-optimization/issues" target="_blank">Report a bug</a> {/*‐ <a href="https://wordpress.org/support/plugin/above-the-fold-optimization/reviews/#new-post" target="_blank">Review plugin</a>*/}
                         </div>
                     </div>
-                    <Tabs selected={this.props.location.pathname.slice(1)}></Tabs>
+                    <Tabs selected={this.props.location.pathname.slice(1) || 'intro'}></Tabs>
                 </nav>
             </div>
         );
