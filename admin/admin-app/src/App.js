@@ -10,6 +10,7 @@ import CssView from './CssView';
 import JavascriptView from './JavascriptView';
 import ProxyView from './ProxyView';
 import SettingsView from './SettingsView';
+import MonitorView from './MonitorView';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
         <Route path="/javascript" component={JavascriptView} />
         <Route path="/proxy" component={ProxyView} />
         <Route path="/settings" component={SettingsView} />
+        <Route path="/monitor" component={MonitorView} />
       </div>
     );
   }

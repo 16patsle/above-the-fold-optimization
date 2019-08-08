@@ -286,6 +286,42 @@
 		}
 	?>
 	<input id="client_hashes"  type="hidden" value='<?php echo $client_hashes ?>'/>
+	<!-- Monitor -->
+	<input id="ssl_installed" type="hidden" value='<?php (strtolower($home_url['scheme']) === 'http') ? false : true; ?>'/>
+	<input id="admin_url_monitor_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_monitor_update'); ?>" />
+	<div id="admin_nonce_monitor" hidden><?php echo wp_nonce_field('abovethefold'); ?></div>
+	<?php
+		$uptimerobot_install_link = false;
+		$uptimerobot_overview = false;
+		
+		if (is_plugin_inactive('uptime-robot-monitor/uptime-robot-nh.php')) {
+			$uptimerobot_status = 'not installed';
+
+			$uptimerobot_action = 'install-plugin';
+        	$uptimerobot_slug = 'uptime-robot-monitor';
+        	$uptimerobot_install_link = wp_nonce_url(
+        	    add_query_arg(
+        	        array(
+        	            'action' => $uptimerobot_action,
+						'plugin' => $uptimerobot_slug
+					),
+        	        admin_url('update.php')
+        	    ),
+            	$uptimerobot_action.'_'.$uptimerobot_slug
+        	);
+		} elseif (is_plugin_active('uptime-robot-monitor/uptime-robot-nh.php')) {
+        	if (!function_exists('urpro_data') || urpro_data("apikey", "no") === "") {
+        	    $uptimerobot_status = 'not configured';
+        	} else {
+				$uptimerobot_status = 'active';
+        	    $uptimerobot_overview = do_shortcode('[uptime-robot days="1-7-14-180"]') .
+        	    do_shortcode('[uptime-robot-response]');
+        	}
+    	}
+	?>
+	<input id="uptimerobot_status" type="hidden" value="<?php echo $uptimerobot_status; ?>" />
+	<input id="uptimerobot_install_link" type="hidden" value="<?php echo $uptimerobot_install_link; ?>" />
+	<input id="uptimerobot_overview" type="hidden" value="<?php echo $uptimerobot_overview; ?>" />
 </span>
 <div id="root">
 </div>

@@ -37,6 +37,8 @@ class Abovethefold_Admin_Monitor
             /**
              * Handle form submissions
              */
+            $this->CTRL->loader->add_action('admin_post_abtf_monitor_update', $this, 'update_settings');
+            // Legacy version
             $this->CTRL->loader->add_action('admin_post_abovethefold-monitor-update', $this, 'update_settings');
         }
     }
