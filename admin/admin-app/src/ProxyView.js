@@ -37,7 +37,9 @@ class ProxyView extends Component {
 		this.google_intlcode = document.querySelector('#google_intlcode').value;
 
 		this.handleOptionToggle = this.handleOptionToggle.bind(this);
+	}
 
+	componentDidMount() {
 		this.updateCacheStats()
 	}
 
