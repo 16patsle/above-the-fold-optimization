@@ -58,7 +58,7 @@ class Abovethefold_Admin_Settings
 
             $this->CTRL->admin->clear_pagecache();
 
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed-settings' ), admin_url('admin.php')));
+            wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/settings');
             exit;
         }
 
@@ -83,7 +83,7 @@ class Abovethefold_Admin_Settings
         // update settings
         $this->CTRL->admin->save_settings($options, 'Settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed-settings' ), admin_url('admin.php')));
+        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/settings');
         exit;
     }
 }
