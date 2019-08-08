@@ -69,7 +69,7 @@ class ProxyView extends Component {
 
 		return (
 			<form method="post" action={document.querySelector('#admin_url_proxy_update').value} className="clearfix">
-			  	<div dangerouslySetInnerHTML={{ __html: document.querySelector('#admin_nonce_proxy').innerHTML }}></div>
+			  	<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
 			    <div className="wrap abovethefold-wrapper">
 			    	<div id="poststuff">
 			      		<div id="post-body" className="metabox-holder">

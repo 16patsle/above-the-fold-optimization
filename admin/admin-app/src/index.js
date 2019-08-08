@@ -8,6 +8,7 @@ import App from './App';
 window.reactDir = document.querySelector('#reactDir').value
 window.homeUrl = document.querySelector('#homeUrl').value
 window.adminUrl = document.querySelector('#adminUrl').value
+window.abtfAdminNonce = document.querySelector('#abtf_admin_nonce').innerHTML
 
 ReactDOM.render((
     <HashRouter>

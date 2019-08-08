@@ -55,7 +55,7 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 	render() {
 		return (
 			<form method="post" action={document.querySelector('#admin_url_html_update').value} className="clearfix" encType="multipart/form-data">
-				<div dangerouslySetInnerHTML={{ __html: document.querySelector('#admin_nonce_html').innerHTML }}></div>
+				<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
 				<div className="wrap abovethefold-wrapper">
 					<div id="poststuff">
 						<div id="post-body" className="metabox-holder">
