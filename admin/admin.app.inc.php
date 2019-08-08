@@ -5,6 +5,7 @@
     <input id="lgcode" type="hidden" value="<?php echo $lgcode; ?>" />
 	<input id="google_intlcode" type="hidden" value="<?php echo $this->google_intlcode; ?>" />
 	<input id="utmstring" type="hidden" value="<?php echo $utmstring; ?>" />
+	<input id="wpabtf_uri" type="hidden" value="<?php print WPABTF_URI; ?>" />
 	<!-- HTML -->
 	<input id="admin_url_html_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_html_update'); ?>" />
 	<div id="admin_nonce_html" type="hidden"><?php echo wp_nonce_field('abovethefold'); ?></div>
@@ -185,6 +186,76 @@
 	?>
 	<input id="javascript_settings" type="hidden" value='<?php echo $javascript_settings ?>'/>
 	<input id="lazyload_plugins_url" type="hidden" value="<?php print admin_url('plugin-install.php?s=Lazy+Load+XT&tab=search&type=term'); ?>">
+	<!-- Proxy -->
+	<input id="admin_url_proxy_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_proxy_update'); ?>" />
+	<div id="admin_nonce_proxy" type="hidden"><?php echo wp_nonce_field('abovethefold'); ?></div>
+	<?php
+		// Javascript Proxy Enabled?
+    	$jsProxy = (isset($options['js_proxy']) && intval($options['js_proxy']) === 1);
+
+		$jsProxyInclude = '';
+			if (isset($options['js_proxy_include'])) {
+			$jsProxyInclude = $options['js_proxy_include'];
+		}
+		$jsProxyExclude = '';
+			if (isset($options['js_proxy_exclude'])) {
+			$jsProxyExclude = $options['js_proxy_exclude'];
+		}
+		// js preload list
+		$jsProxyPreload = '';
+    	if (isset($options['js_proxy_preload']) && !empty($options['js_proxy_preload'])) {
+        	$jsProxyPreload = array();
+        	foreach ($options['js_proxy_preload'] as $url) {
+        	    $jsProxyPreload[] = (is_string($url)) ? $url : json_encode($url);
+        	}
+        	$jsProxyPreload = $this->CTRL->admin->newline_array_string($jsProxyPreload);
+    	}
+
+		// CSS Proxy Enabled?
+    	$cssProxy = (isset($options['css_proxy']) && intval($options['css_proxy']) === 1);
+
+		$cssProxyInclude = '';
+			if (isset($options['css_proxy_include'])) {
+			$cssProxyInclude = $options['css_proxy_include'];
+		}
+		$cssProxyExclude = '';
+			if (isset($options['css_proxy_exclude'])) {
+			$cssProxyExclude = $options['css_proxy_exclude'];
+		}
+		// css preload list
+		$cssProxyPreload = '';
+    	if (isset($options['css_proxy_preload']) && !empty($options['css_proxy_preload'])) {
+        	$cssProxyPreload = array();
+        	foreach ($options['css_proxy_preload'] as $url) {
+        	    $cssProxyPreload[] = (is_string($url)) ? $url : json_encode($url);
+        	}
+        	$cssProxyPreload = $this->CTRL->admin->newline_array_string($cssProxyPreload);
+		}
+		
+		$proxy_cdn = '';
+		if (isset($options['proxy_cdn'])) {
+			$proxy_cdn =  htmlentities($options['proxy_cdn'], ENT_COMPAT, 'utf-8');
+		}
+		$proxy_url = '';
+		if (isset($options['proxy_url'])) {
+			$proxy_url = htmlentities($options['proxy_url'], ENT_COMPAT, 'utf-8');
+		}
+
+		$proxy_settings = 
+		'{"jsProxy":' . json_encode($jsProxy) . 
+		',"jsProxyInclude":' . json_encode($jsProxyInclude) . 
+		',"jsProxyExclude":' . json_encode($jsProxyExclude) . 
+		',"jsProxyPreload":' . json_encode($jsProxyPreload) . 
+		',"cssProxy":' . json_encode($cssProxy) . 
+		',"cssProxyInclude":' . json_encode($cssProxyInclude) . 
+		',"cssProxyExclude":' . json_encode($cssProxyExclude) . 
+		',"cssProxyPreload":' . json_encode($cssProxyPreload) . 
+		',"proxyCDN":' . json_encode($proxy_cdn) . 
+		',"proxyURL":' . json_encode($proxy_url) . 
+		'}'
+
+	?>
+	<input id="proxy_settings" type="hidden" value='<?php echo $proxy_settings ?>'/>
 	<!-- Settings -->
 	<input id="admin_url_settings_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_settings_update'); ?>" />
 	<div id="admin_nonce_settings" type="hidden"><?php echo wp_nonce_field('abovethefold'); ?></div>

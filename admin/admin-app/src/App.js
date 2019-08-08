@@ -7,7 +7,8 @@ import TabsView from './TabsView';
 import IntroView from './IntroView';
 import HtmlView from './HtmlView';
 import CssView from './CssView';
-import JavascriptView from './JavascriptView'
+import JavascriptView from './JavascriptView';
+import ProxyView from './ProxyView';
 import SettingsView from './SettingsView';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         <Route path="/html" component={HtmlView} />
         <Route path="/css" component={CssView} />
         <Route path="/javascript" component={JavascriptView} />
+        <Route path="/proxy" component={ProxyView} />
         <Route path="/settings" component={SettingsView} />
       </div>
     );
