@@ -262,7 +262,7 @@
 
 		$settings_settings = 
 		'{"adminbar":' . json_encode($settings_adminbar) . 
-		',"clearPagecache":' . json_encode($settings_clear_pagecache) .  
+		',"clearPageCache":' . json_encode($settings_clear_pagecache) .  
 		',"debug":' . json_encode($settings_debug) .
 		'}'
 	?>

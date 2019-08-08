@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import { getOption } from './utils/optionUtils';
+import { linkOptionState } from './utils/linkState';
 import SettingCheckbox from './SettingCheckbox';
 import SubmitButton from './SubmitButton';
 
@@ -9,9 +11,14 @@ class SettingsView extends Component {
     constructor(props) {
 		super(props);
 
-		this.settingsSettings = JSON.parse(document.querySelector('#settings_settings').value);
+		this.state = {
+			options: JSON.parse(document.querySelector('#settings_settings').value),
+		}
 
 		this.clientHashes = JSON.parse(document.querySelector('#client_hashes').value);
+
+		this.getOption = getOption.bind(this);
+		this.linkOptionState = linkOptionState.bind(this);
 	}
     
     render() {
@@ -29,9 +36,9 @@ class SettingsView extends Component {
 						            <div className="inside testcontent">
 						                <table className="form-table">
                                             <tbody>
-                                                <SettingCheckbox header="Admin Bar" name="abovethefold[adminbar]" label="Enabled" defaultChecked={this.settingsSettings.adminbar} description={<span>Show a <code>PageSpeed</code> menu in the top admin bar with links to website speed and security tests such as Google PageSpeed Insights.</span>}></SettingCheckbox>
-                                                <SettingCheckbox header="Clear Page Caches" name="abovethefold[clear_pagecache]" label="Enabled" defaultChecked={this.settingsSettings.clearPagecache} description={<span>If enabled, the page related caches of <a href="https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/" target="_blank">supported plugins</a> is cleared when updating the above the fold settings.</span>}></SettingCheckbox>
-                                                <SettingCheckbox header="Debug Mode" name="abovethefold[debug]" label="Enabled" defaultChecked={this.settingsSettings.debug} description={<span>Show debug info in the browser console for logged in admin-users.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Admin Bar" name="abovethefold[adminbar]" label="Enabled" link={this.linkOptionState('adminbar')} description={<span>Show a <code>PageSpeed</code> menu in the top admin bar with links to website speed and security tests such as Google PageSpeed Insights.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Clear Page Caches" name="abovethefold[clear_pagecache]" label="Enabled" link={this.linkOptionState('clearPageCache')} description={<span>If enabled, the page related caches of <a href="https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/" target="_blank">supported plugins</a> is cleared when updating the above the fold settings.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Debug Mode" name="abovethefold[debug]" label="Enabled" link={this.linkOptionState('debug')} description={<span>Show debug info in the browser console for logged in admin-users.</span>}></SettingCheckbox>
                                             </tbody>
 						                </table>
 						                <hr />
