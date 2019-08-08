@@ -63,9 +63,6 @@ class ProxyView extends Component {
 	}
 
 	render() {
-		const updateCacheStatsUrl = new URL(window.adminUrl)
-		updateCacheStatsUrl.searchParams.append('page', 'pagespeed-proxy')
-		updateCacheStatsUrl.searchParams.append('update_cache_stats', 1)
 		const emptyCacheUrl = new URL(window.adminUrl)
 		emptyCacheUrl.searchParams.append('page', 'pagespeed-proxy')
 		emptyCacheUrl.searchParams.append('empty_cache', 1)
