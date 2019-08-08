@@ -1051,11 +1051,8 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
         // print tab content
         switch ($tab) {
             case "criticalcss":
-            case "javascript":
             case "pwa":
             case "http2":
-            case "proxy":
-            case "settings":
             case "extract":
             case "criticalcss-test":
             case "build-tool":
