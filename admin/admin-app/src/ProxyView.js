@@ -44,18 +44,15 @@ class ProxyView extends Component {
 	}
 
 	handleOptionToggle(option) {
-		const optionName = 'showCssOptions' + option[0].toUpperCase() + option.slice(1)
-		this.setState({ [optionName]: !this.state[optionName] })
+		this.setState({ [option]: !this.state[option] })
 	}
 
 	setOption(option, value) {
-		const optionName = 'showCssOptions' + option[0].toUpperCase() + option.slice(1)
-		this.setState({ [optionName]: value })
+		this.setState({ [option]: value })
 	}
 
 	getOption(option) {
-		const optionName = 'showCssOptions' + option[0].toUpperCase() + option.slice(1)
-		return this.state[optionName];
+		return this.state[option];
 	}
 
 	async updateCacheStats() {
