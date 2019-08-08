@@ -10,7 +10,7 @@ class SettingRadio extends Component {
                         return (
                             <span key={radio.value}>
                                 <label>
-                                    <input type="radio" name={this.props.name} value={radio.value} defaultChecked={this.props.defaultChecked === radio.value} />
+                                    <input type="radio" name={this.props.name} value={radio.value} checked={this.props.link.value === radio.value} onChange={e => this.props.link.set(e.target.value)} />
                                     {radio.label}
                                 </label>
                                 <p className="description">

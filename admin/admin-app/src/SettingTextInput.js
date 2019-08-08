@@ -6,7 +6,7 @@ class SettingTextInput extends Component {
             <tr valign="top">
                 <th scope="row">{this.props.header || ' '}</th>
                 <td>
-                    <input type={this.props.type || 'text'} style={this.props.style} className={this.props.textareaClass} name={this.props.name} defaultValue={this.props.defaultValue} onChange={this.props.onChange} placeholder={this.props.placeholder} disabled={this.props.disabled} />
+                    <input type={this.props.type || 'text'} style={this.props.style} className={this.props.textareaClass} name={this.props.name} value={this.props.link.value} onChange={e => this.props.link.set(e.target.value)} placeholder={this.props.placeholder} disabled={this.props.disabled} />
                     <p className="description">
                         {this.props.description}
                     </p>
