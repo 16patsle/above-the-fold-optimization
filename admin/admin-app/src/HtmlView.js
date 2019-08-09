@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import { getOption } from './utils/optionUtils';
+import { linkState, linkOptionState } from './utils/linkState';
+import newlineArrayString from './utils/newLineArrayString';
 import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/light';
 import php from 'react-syntax-highlighter/languages/hljs/php';
 import vs from 'react-syntax-highlighter/styles/hljs/vs';
 import JsonEditor from './JsonEditor';
+import { htmlSchema } from './editorSchema';
+import Info from './Info';
 import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
-import Info from './Info';
 import SearchReplaceExample from './SearchReplaceExample';
 import SubmitButton from './SubmitButton';
-import newlineArrayString from './utils/newLineArrayString';
-import { htmlSchema } from './editorSchema';
 
 registerLanguage('php', php);
 
@@ -21,14 +23,18 @@ class HtmlView extends Component {
 		super(props);
 
 		this.state = {
-			searchReplaceValue: document.querySelector('#html_search_replace_src_server').value
+			options: JSON.parse(document.querySelector('#html_settings').value),
+			searchReplaceValue: JSON.parse(document.querySelector('#html_search_replace_src_server').value)
 		}
+
+		this.state.options.commentsPreserve = newlineArrayString(this.state.options.commentsPreserve);
 
 		this.lgcode = document.querySelector('#lgcode').value;
 		this.google_intlcode = document.querySelector('#google_intlcode').value;
-		this.htmlSettings = JSON.parse(document.querySelector('#html_settings').value);
 
-		this.handleSearchReplaceValueChange = this.handleSearchReplaceValueChange.bind(this);
+		this.getOption = getOption.bind(this);
+		this.linkState = linkState.bind(this);
+		this.linkOptionState = linkOptionState.bind(this);
 
 		this.wpHtmlSearchReplaceExample = `
 function your_html_search_and_replace( &$search, &$replace, &$search_regex, &$replace_regex ) {
@@ -48,10 +54,6 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 		`.trim()
 	}
 
-	handleSearchReplaceValueChange(value) {
-		this.setState({ searchReplaceValue: value });
-	}
-
 	render() {
 		return (
 			<form method="post" action={document.querySelector('#admin_url_html_update').value} className="clearfix" encType="multipart/form-data">
@@ -67,9 +69,9 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 									<div className="inside testcontent">
 										<table className="form-table">
 											<tbody>
-												<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" defaultChecked={this.htmlSettings.minify} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>
-												<SettingCheckbox header="Strip HTML comments" name="abovethefold[html_comments]" defaultChecked={this.htmlSettings.comments} label="Enabled" description={<span>Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.</span>}></SettingCheckbox>
-												<SettingTextarea title="&nbsp;Preserve List" textareaClass="json-array-lines" name="abovethefold[html_comments_preserve]" defaultValue={newlineArrayString(this.htmlSettings.comments_preserve)} description="Enter (parts of) HTML comments to exclude from removal. One string per line."></SettingTextarea>
+												<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" link={this.linkOptionState('minify')} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Strip HTML comments" name="abovethefold[html_comments]" link={this.linkOptionState('comments')} label="Enabled" description={<span>Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.</span>}></SettingCheckbox>
+												<SettingTextarea title="&nbsp;Preserve List" textareaClass="json-array-lines" name="abovethefold[html_comments_preserve]" link={this.linkOptionState('commentsPreserve')} description="Enter (parts of) HTML comments to exclude from removal. One string per line." disabled={!this.getOption('comments')}></SettingTextarea>
 												<tr valign="top">
 													<td colSpan="2" style={{ padding: "0px" }}>
 														<SubmitButton type={['primary', 'large']} name="is_submit">
@@ -84,7 +86,7 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 										<p className="description">
 											This option enables to replace strings in the HTML. Enter an array of JSON objects.
 										</p>
-										<JsonEditor name="html.replace" schema={htmlSchema} value={this.state.searchReplaceValue} onValueChange={this.handleSearchReplaceValueChange}></JsonEditor>
+										<JsonEditor name="html.replace" schema={htmlSchema} link={this.linkState('searchReplaceValue')}></JsonEditor>
 										<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" value={this.state.searchReplaceValue} />
 
 										<Info color="yellow">
