@@ -18,7 +18,6 @@ class JsonEditor extends Component {
 		/**
      	 * JSON editor
      	 */
-        //const htmlSearchReplaceSrc = this.htmlSearchReplaceSrc.current
         if (this.editorRef.current) {
 
             this.editorRef.current.innerHTML = '';
@@ -56,9 +55,8 @@ class JsonEditor extends Component {
 
             this.editor.compact(); // collapseAll();
 
-            // set editor reference
-            //this.htmlSearchReplaceSrc.dataset.jsonEditor =this.editor
-            //window.jQuery('#html_search_replace_src').data('json-editor',this.editor);
+            // When in code mode (using ace editor), save on blur
+            this.editor.aceEditor.on('blur', this.saveJSON.bind(this));
         }
     }
 
@@ -77,29 +75,25 @@ class JsonEditor extends Component {
                 clearTimeout(this.changeTimeout);
             }
             // wait for copy paste action
-            this.changeTimeout = setTimeout(function () {
+            this.changeTimeout = setTimeout(()=>{
                 this.changeTimeout = false;
                 const t = this.editor.getText();
                 // If the editor is still empty
                 // set it to empty array
                 if (t.trim() === '') {
                     this.editor.set([]);
-                    this.props.onValueChange('[]');
+                    this.saveJSON([]);
                 }
             }, 25);
 
             return;
         }
 
-        let json;
-
-        try {
-            json = this.editor.get();
-        } catch (e) {
-
-            return;
+        // Only save if not in code mode.
+        // Code mode is saved on blur event to not move the cursor.
+        if(this.editor.getMode() !== 'code') {
+            this.saveJSON()
         }
-        this.props.onValueChange(JSON.stringify(json));
     }
 
     onModeChange(newMode, oldMode) {
@@ -115,7 +109,23 @@ class JsonEditor extends Component {
         }
     }
 
+    saveJSON() {
+        let json;
+
+        try {
+            json = this.editor.get();
+        } catch (e) {
+
+            return;
+        }
+        this.props.link.set(json);
+    }
+
     render() {
+        if(this.editor){
+            this.editor.update(this.props.link.value);
+        }
+
         return (
             <span>
                 <JsonEditorIconFix />
