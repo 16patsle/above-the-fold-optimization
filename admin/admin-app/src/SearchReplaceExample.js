@@ -40,9 +40,9 @@ class SearchReplaceExample extends Component {
                 <code className="clickselect" title={this.props.title} style={{ cursor: "copy" }}>
                     {this.state.exampleHtml}
                 </code>
-                (<a href="javascript:void(0);" onClick={this.handleClick}>
+                (<button type="button" className="button-link" onClick={this.handleClick}>
                     {this.state.showLinkContent}
-                </a>)
+                </button>)
             </span>
         );
     }

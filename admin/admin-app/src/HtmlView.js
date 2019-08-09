@@ -16,8 +16,6 @@ import SubmitButton from './SubmitButton';
 
 registerLanguage('php', php);
 
-const homeUrl = window.homeUrl;
-
 class HtmlView extends Component {
 	constructor(props) {
 		super(props);
@@ -69,7 +67,7 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 									<div className="inside testcontent">
 										<table className="form-table">
 											<tbody>
-												<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" link={this.linkOptionState('minify')} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" link={this.linkOptionState('minify')} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank" rel="noopener noreferrer">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>
 												<SettingCheckbox header="Strip HTML comments" name="abovethefold[html_comments]" link={this.linkOptionState('comments')} label="Enabled" description={<span>Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.</span>}></SettingCheckbox>
 												<SettingTextarea title="&nbsp;Preserve List" textareaClass="json-array-lines" name="abovethefold[html_comments_preserve]" link={this.linkOptionState('commentsPreserve')} description="Enter (parts of) HTML comments to exclude from removal. One string per line." disabled={!this.getOption('comments')}></SettingTextarea>
 												<tr valign="top">

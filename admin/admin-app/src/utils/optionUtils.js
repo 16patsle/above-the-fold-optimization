@@ -9,7 +9,7 @@ export function getOption(a, b) {
     let option = a
 
     // If both prefix and option is supplied, assign them properly.
-    if (typeof b == 'string'){
+    if (typeof b === 'string'){
         prefix = a;
         option = b;
     }
@@ -33,7 +33,7 @@ export function setOption(a, b, c) {
     let value = b
 
     // If both prefix and option is supplied, assign them properly.
-    if (typeof b == 'string' && c !== undefined) {
+    if (typeof b === 'string' && c !== undefined) {
         prefix = a;
         option = b;
         value = c
@@ -58,7 +58,7 @@ export function toggleOption(a, b) {
     let option = a
 
     // If both prefix and option is supplied, assign them properly.
-    if (typeof b == 'string') {
+    if (typeof b === 'string') {
         prefix = a;
         option = b;
     }

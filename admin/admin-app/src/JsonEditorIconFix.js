@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const iconsUrl = window.homeUrl.value + '/wp-content/plugins/above-the-fold-optimization/admin/js/jsoneditor/img/jsoneditor-icons.svg'
+const iconsUrl = window.homeUrl + '/wp-content/plugins/above-the-fold-optimization/admin/js/jsoneditor/img/jsoneditor-icons.svg'
 
 class JsonEditorIconFix extends Component {
     render() {

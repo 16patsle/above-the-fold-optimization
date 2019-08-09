@@ -5,8 +5,6 @@ import { linkOptionState } from './utils/linkState';
 import SettingCheckbox from './SettingCheckbox';
 import SubmitButton from './SubmitButton';
 
-const homeUrl = window.homeUrl;
-
 class SettingsView extends Component {
     constructor(props) {
 		super(props);
@@ -37,7 +35,7 @@ class SettingsView extends Component {
 						                <table className="form-table">
                                             <tbody>
 												<SettingCheckbox header="Admin Bar" name="abovethefold[adminbar]" label="Enabled" link={this.linkOptionState('adminbar')} description={<span>Show a <code>PageSpeed</code> menu in the top admin bar with links to website speed and security tests such as Google PageSpeed Insights.</span>}></SettingCheckbox>
-												<SettingCheckbox header="Clear Page Caches" name="abovethefold[clear_pagecache]" label="Enabled" link={this.linkOptionState('clearPageCache')} description={<span>If enabled, the page related caches of <a href="https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/" target="_blank">supported plugins</a> is cleared when updating the above the fold settings.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Clear Page Caches" name="abovethefold[clear_pagecache]" label="Enabled" link={this.linkOptionState('clearPageCache')} description={<span>If enabled, the page related caches of <a href="https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/" target="_blank" rel="noopener noreferrer">supported plugins</a> is cleared when updating the above the fold settings.</span>}></SettingCheckbox>
 												<SettingCheckbox header="Debug Mode" name="abovethefold[debug]" label="Enabled" link={this.linkOptionState('debug')} description={<span>Show debug info in the browser console for logged in admin-users.</span>}></SettingCheckbox>
                                             </tbody>
 						                </table>
@@ -52,7 +50,7 @@ class SettingsView extends Component {
 						                <br />
 						                <br />
 						                <h1>Content Security Policy</h1>
-						                <p>Based on your current configuration, the Above The Fold Optimization inline client javascript can be white listed using the following hashes. (<a href="https://content-security-policy.com/faq/" target="_blank">documentation</a>)</p>
+						                <p>Based on your current configuration, the Above The Fold Optimization inline client javascript can be white listed using the following hashes. (<a href="https://content-security-policy.com/faq/" target="_blank" rel="noopener noreferrer">documentation</a>)</p>
                                         <p className="warning_red">
                                             <strong>Important:</strong> when you change the configuration of the plugin the hashes may change.
                                         </p>

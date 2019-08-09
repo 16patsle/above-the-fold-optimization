@@ -5,11 +5,8 @@ import { linkOptionState } from './utils/linkState';
 import newlineArrayString from './utils/newLineArrayString';
 import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
-import SettingSelect from './SettingSelect';
 import SettingTextInput from './SettingTextInput';
 import SubmitButton from './SubmitButton';
-
-const homeUrl = window.homeUrl;
 
 class ProxyView extends Component {
 	constructor(props) {
@@ -70,7 +67,7 @@ class ProxyView extends Component {
 											<img src={document.querySelector('#wpabtf_uri').value + 'admin/images/browsercache-error.png'} alt="Google Bot" width={225} title="Leverage browser caching" />
 										</div>
 			              				<p>The external resource proxy loads external resources such as scripts and stylesheets via a caching proxy.</p>
-										<p>This feature enables to pass the <a href={`https://developers.google.com/speed/docs/insights/LeverageBrowserCaching?hl=${this.lgcode}`} target="_blank">Leverage browser caching</a> rule from Google PageSpeed Insights.</p>
+										<p>This feature enables to pass the <a href={`https://developers.google.com/speed/docs/insights/LeverageBrowserCaching?hl=${this.lgcode}`} target="_blank" rel="noopener noreferrer">Leverage browser caching</a> rule from Google PageSpeed Insights.</p>
 			              				<table className="form-table">
 			                				<tbody>
 												<SettingCheckbox header="Proxy Scripts" name="abovethefold[js_proxy]" link={this.linkOptionState('jsProxy')} label="Enabled" description="Capture external scripts and load the scripts through a caching proxy."></SettingCheckbox>
