@@ -9,6 +9,7 @@ import vs from 'react-syntax-highlighter/styles/hljs/vs';
 import JsonEditor from './JsonEditor';
 import { htmlSchema } from './editorSchema';
 import Info from './Info';
+import PageContent from './PageContent';
 import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
 import SearchReplaceExample from './SearchReplaceExample';
@@ -56,59 +57,46 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 		return (
 			<form method="post" action={document.querySelector('#admin_url_html_update').value} className="clearfix" encType="multipart/form-data">
 				<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
-				<div className="wrap abovethefold-wrapper">
-					<div id="poststuff">
-						<div id="post-body" className="metabox-holder">
-							<div id="post-body-content">
-								<div className="postbox">
-									<h3 className="hndle">
-										<span>{__('HTML Optimization')}</span>
-									</h3>
-									<div className="inside testcontent">
-										<table className="form-table">
-											<tbody>
-												<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" link={this.linkOptionState('minify')} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank" rel="noopener noreferrer">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>
-												<SettingCheckbox header="Strip HTML comments" name="abovethefold[html_comments]" link={this.linkOptionState('comments')} label="Enabled" description={<span>Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.</span>}></SettingCheckbox>
-												<SettingTextarea title="&nbsp;Preserve List" textareaClass="json-array-lines" name="abovethefold[html_comments_preserve]" link={this.linkOptionState('commentsPreserve')} description="Enter (parts of) HTML comments to exclude from removal. One string per line." disabled={!this.getOption('comments')}></SettingTextarea>
-												<tr valign="top">
-													<td colSpan="2" style={{ padding: "0px" }}>
-														<SubmitButton type={['primary', 'large']} name="is_submit">
-															{__('Save')}
-														</SubmitButton>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+				<PageContent header={__('HTML Optimization')}>
+					<table className="form-table">
+						<tbody>
+							<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" link={this.linkOptionState('minify')} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank" rel="noopener noreferrer">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>
+							<SettingCheckbox header="Strip HTML comments" name="abovethefold[html_comments]" link={this.linkOptionState('comments')} label="Enabled" description={<span>Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>.</span>}></SettingCheckbox>
+							<SettingTextarea title="&nbsp;Preserve List" textareaClass="json-array-lines" name="abovethefold[html_comments_preserve]" link={this.linkOptionState('commentsPreserve')} description="Enter (parts of) HTML comments to exclude from removal. One string per line." disabled={!this.getOption('comments')}></SettingTextarea>
+							<tr valign="top">
+								<td colSpan="2" style={{ padding: "0px" }}>
+									<SubmitButton type={['primary', 'large']} name="is_submit">
+										{__('Save')}
+									</SubmitButton>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
-										<h3 style={{ marginBottom: "0px", paddingLeft: "0px", paddingBottom: "0px" }}>Search & Replace<a name="searchreplace">&nbsp;</a></h3>
-										<p className="description">
-											This option enables to replace strings in the HTML. Enter an array of JSON objects.
+					<h3 style={{ marginBottom: "0px", paddingLeft: "0px", paddingBottom: "0px" }}>Search & Replace<a name="searchreplace">&nbsp;</a></h3>
+					<p className="description">
+						This option enables to replace strings in the HTML. Enter an array of JSON objects.
 										</p>
-										<JsonEditor name="html.replace" schema={htmlSchema} link={this.linkState('searchReplaceValue')}></JsonEditor>
-										<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" value={this.state.searchReplaceValue} />
+					<JsonEditor name="html.replace" schema={htmlSchema} link={this.linkState('searchReplaceValue')}></JsonEditor>
+					<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" value={this.state.searchReplaceValue} />
 
-										<Info color="yellow">
-											<SearchReplaceExample title={__('Click to select')}>
-												{{
-													string: '"search":"string to match","replace":"newstring"',
-													regex: __('{"search":"|string to (match)|i","replace":"newstring $1","regex":true}')
-												}}
-											</SearchReplaceExample>
-										</Info>
-										<p>You can also add a search and replace configuration using the WordPress filter hook <code>abtf_html_replace</code>.</p>
-										<div id="wp_html_search_replace_example">
-											<SyntaxHighlighter className="example-code" language="php" style={vs}>{this.wpHtmlSearchReplaceExample}</SyntaxHighlighter>
-										</div>
-										<hr />
-										<SubmitButton type={['primary', 'large']} name="is_submit">
-											{__('Save')}
-										</SubmitButton>
-									</div>
-								</div>
-							</div>
-						</div>
+					<Info color="yellow">
+						<SearchReplaceExample title={__('Click to select')}>
+							{{
+								string: '"search":"string to match","replace":"newstring"',
+								regex: __('{"search":"|string to (match)|i","replace":"newstring $1","regex":true}')
+							}}
+						</SearchReplaceExample>
+					</Info>
+					<p>You can also add a search and replace configuration using the WordPress filter hook <code>abtf_html_replace</code>.</p>
+					<div id="wp_html_search_replace_example">
+						<SyntaxHighlighter className="example-code" language="php" style={vs}>{this.wpHtmlSearchReplaceExample}</SyntaxHighlighter>
 					</div>
-				</div>
+					<hr />
+					<SubmitButton type={['primary', 'large']} name="is_submit">
+						{__('Save')}
+					</SubmitButton>
+				</PageContent>
 			</form>
 		);
 	}
