@@ -20,7 +20,6 @@ class CssView extends Component {
 			options: JSON.parse(document.querySelector('#css_settings').value),
 		}
 
-		this.state.options.position = this.state.options.position;
 		this.state.options.ignore = newlineArrayString(this.state.options.ignore);
 		this.state.options.remove = newlineArrayString(this.state.options.remove);
 		this.state.options.googleFonts = newlineArrayString(this.state.options.googleFonts);
