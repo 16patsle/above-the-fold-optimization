@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
-import { getOption } from './utils/optionUtils';
-import { linkOptionState } from './utils/linkState';
-import newlineArrayString from './utils/newLineArrayString';
-import PageContent from './PageContent';
-import SettingCheckbox from './SettingCheckbox';
-import SettingTextarea from './SettingTextarea';
-import SettingTextInput from './SettingTextInput';
-import SubmitButton from './SubmitButton';
+import { getOption } from '../utils/optionUtils';
+import { linkOptionState } from '../utils/linkState';
+import newlineArrayString from '../utils/newLineArrayString';
+import PageContent from '../components/PageContent';
+import SettingCheckbox from '../components/SettingCheckbox';
+import SettingTextarea from '../components/SettingTextarea';
+import SettingTextInput from '../components/SettingTextInput';
+import SubmitButton from '../components/SubmitButton';
 
 class ProxyView extends Component {
 	constructor(props) {

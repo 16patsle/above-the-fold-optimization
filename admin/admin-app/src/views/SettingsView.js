@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
-import { getOption } from './utils/optionUtils';
-import { linkOptionState } from './utils/linkState';
-import PageContent from './PageContent';
-import SettingCheckbox from './SettingCheckbox';
-import SubmitButton from './SubmitButton';
+import { getOption } from '../utils/optionUtils';
+import { linkOptionState } from '../utils/linkState';
+import PageContent from '../components/PageContent';
+import SettingCheckbox from '../components/SettingCheckbox';
+import SubmitButton from '../components/SubmitButton';
 
 class SettingsView extends Component {
     constructor(props) {

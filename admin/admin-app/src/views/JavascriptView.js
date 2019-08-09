@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
-import { getOption } from './utils/optionUtils';
-import { linkOptionState } from './utils/linkState';
-import newlineArrayString from './utils/newLineArrayString';
-import Info from './Info';
-import PageContent from './PageContent';
-import SettingCheckbox from './SettingCheckbox';
-import SettingSelect from './SettingSelect';
-import SettingTextarea from './SettingTextarea';
-import SettingRadio from './SettingRadio';
-import SubmitButton from './SubmitButton';
+import { getOption } from '../utils/optionUtils';
+import { linkOptionState } from '../utils/linkState';
+import newlineArrayString from '../utils/newLineArrayString';
+import Info from '../components/Info';
+import PageContent from '../components/PageContent';
+import SettingCheckbox from '../components/SettingCheckbox';
+import SettingSelect from '../components/SettingSelect';
+import SettingTextarea from '../components/SettingTextarea';
+import SettingRadio from '../components/SettingRadio';
+import SubmitButton from '../components/SubmitButton';
 
 class JavascriptView extends Component {
     constructor(props) {

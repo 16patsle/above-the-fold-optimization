@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 import './App-global.css';
-import TabsView from './TabsView';
-import IntroView from './IntroView';
-import HtmlView from './HtmlView';
-import CssView from './CssView';
-import JavascriptView from './JavascriptView';
-import ProxyView from './ProxyView';
-import SettingsView from './SettingsView';
-import MonitorView from './MonitorView';
+import TabsView from './views/TabsView';
+import IntroView from './views/IntroView';
+import HtmlView from './views/HtmlView';
+import CssView from './views/CssView';
+import JavascriptView from './views/JavascriptView';
+import ProxyView from './views/ProxyView';
+import SettingsView from './views/SettingsView';
+import MonitorView from './views/MonitorView';
 
 class App extends Component {
   render() {

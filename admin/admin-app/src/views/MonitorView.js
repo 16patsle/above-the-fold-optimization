@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
-import Info from './Info';
-import PageContent from './PageContent';
+import Info from '../components/Info';
+import PageContent from '../components/PageContent';
 
 class MonitorView extends Component {
 	constructor(props) {

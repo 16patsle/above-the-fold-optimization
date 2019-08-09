@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
-import { getOption } from './utils/optionUtils';
-import { linkOptionState } from './utils/linkState';
-import newlineArrayString from './utils/newLineArrayString';
-import PageContent from './PageContent';
-import SettingCheckbox from './SettingCheckbox';
-import SettingTextarea from './SettingTextarea';
-import SubmitButton from './SubmitButton';
-import SettingSelect from './SettingSelect';
-import SettingNumberInput from './SettingNumberInput';
+import { getOption } from '../utils/optionUtils';
+import { linkOptionState } from '../utils/linkState';
+import newlineArrayString from '../utils/newLineArrayString';
+import PageContent from '../components/PageContent';
+import SettingCheckbox from '../components/SettingCheckbox';
+import SettingTextarea from '../components/SettingTextarea';
+import SubmitButton from '../components/SubmitButton';
+import SettingSelect from '../components/SettingSelect';
+import SettingNumberInput from '../components/SettingNumberInput';
 import './CssView.css';
 
 class CssView extends Component {

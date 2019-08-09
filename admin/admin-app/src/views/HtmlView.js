@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
-import { getOption } from './utils/optionUtils';
-import { linkState, linkOptionState } from './utils/linkState';
-import newlineArrayString from './utils/newLineArrayString';
+import { getOption } from '../utils/optionUtils';
+import { linkState, linkOptionState } from '../utils/linkState';
+import newlineArrayString from '../utils/newLineArrayString';
 import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/light';
 import php from 'react-syntax-highlighter/languages/hljs/php';
 import vs from 'react-syntax-highlighter/styles/hljs/vs';
-import JsonEditor from './JsonEditor';
-import { htmlSchema } from './editorSchema';
-import Info from './Info';
-import PageContent from './PageContent';
-import SettingCheckbox from './SettingCheckbox';
-import SettingTextarea from './SettingTextarea';
-import SearchReplaceExample from './SearchReplaceExample';
-import SubmitButton from './SubmitButton';
+import JsonEditor from '../components/JsonEditor';
+import { htmlSchema } from '../components/editorSchema';
+import Info from '../components/Info';
+import PageContent from '../components/PageContent';
+import SettingCheckbox from '../components/SettingCheckbox';
+import SettingTextarea from '../components/SettingTextarea';
+import SearchReplaceExample from '../components/SearchReplaceExample';
+import SubmitButton from '../components/SubmitButton';
 
 registerLanguage('php', php);
 
