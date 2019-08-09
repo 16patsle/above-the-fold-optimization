@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import { getOption } from './utils/optionUtils';
+import { linkOptionState } from './utils/linkState';
+import newlineArrayString from './utils/newLineArrayString';
 import './CssView.css';
 import SettingCheckbox from './SettingCheckbox';
 import SettingTextarea from './SettingTextarea';
 import SubmitButton from './SubmitButton';
-import newlineArrayString from './utils/newLineArrayString';
 import SettingSelect from './SettingSelect';
+import SettingNumberInput from './SettingNumberInput';
 
 const homeUrl = window.homeUrl;
 
@@ -13,15 +16,16 @@ class CssView extends Component {
 	constructor(props) {
 		super(props);
 
-		this.cssSettings = JSON.parse(document.querySelector('#css_settings').value);
-
 		this.state = {
-			showCssOptionsDelivery: this.cssSettings.delivery,
-			showCssOptionsLoadCSSEnhanced: this.cssSettings.loadCSSEnhanced,
-			showCssOptionsRenderDelayWarn: !(this.cssSettings.renderDelay === '' || this.cssSettings.renderDelay === 0),
-			showCssOptionsGwfo: this.cssSettings.gwfo,
-			showCssOptionsGwfoLoadMethod: this.cssSettings.gwfoLoadMethod !== 'disabled',
+			options: JSON.parse(document.querySelector('#css_settings').value),
 		}
+
+		this.state.options.position = this.state.options.position;
+		this.state.options.ignore = newlineArrayString(this.state.options.ignore);
+		this.state.options.remove = newlineArrayString(this.state.options.remove);
+		this.state.options.googleFonts = newlineArrayString(this.state.options.googleFonts);
+		this.state.options.googleFontsIgnore = newlineArrayString(this.state.options.googleFontsIgnore);
+		this.state.options.googleFontsRemove = newlineArrayString(this.state.options.googleFontsRemove);
 
 		this.lgcode = document.querySelector('#lgcode').value;
 		this.google_intlcode = document.querySelector('#google_intlcode').value;
@@ -30,34 +34,8 @@ class CssView extends Component {
 		this.cdnVersion = document.querySelector('#cdn_version').value;
 		this.fontThemePath = document.querySelector('#font_theme_path').value
 
-		this.handleOptionToggle = this.handleOptionToggle.bind(this);
-		this.handleRenderDelayChange = this.handleRenderDelayChange.bind(this);
-	}
-
-	handleOptionToggle(option) {
-		const optionName = 'showCssOptions' + option[0].toUpperCase() + option.slice(1)
-		this.setState({ [optionName]: !this.state[optionName] })
-	}
-
-	setOption(option, value) {
-		const optionName = 'showCssOptions' + option[0].toUpperCase() + option.slice(1)
-		this.setState({ [optionName]: value })
-	}
-
-	getOption(option) {
-		const optionName = 'showCssOptions' + option[0].toUpperCase() + option.slice(1)
-		return this.state[optionName];
-	}
-
-	handleRenderDelayChange(e) {
-		if (e.target.value === '0') {
-			e.target.value = '';
-		}
-		if (e.target.value !== '' && e.target.value !== '0') {
-			this.setOption('renderDelayWarn', true);
-		} else {
-			this.setOption('renderDelayWarn', false);
-		}
+		this.getOption = getOption.bind(this);
+		this.linkOptionState = linkOptionState.bind(this);
 	}
 
 	render() {
@@ -80,7 +58,7 @@ class CssView extends Component {
 										{this.loadCSSVersion.error === 'failed_parse' ? <h1 style={{ color: "red" }}>failed to parse public/js/src/loadcss_package.json</h1> : null}
 										<table className="form-table">
 											<tbody>
-												<SettingCheckbox header="Optimize CSS Delivery" name="abovethefold[cssdelivery]" defaultChecked={this.cssSettings.delivery} onChange={this.handleOptionToggle.bind(this, 'delivery')} label="Enabled" description={<span>When enabled, CSS files are loaded asynchronously via <a href="https://github.com/filamentgroup/loadCSS" target="_blank">loadCSS</a> (v{this.loadCSSVersion.version}).  <a href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${this.lgcode}`} target="_blank">Click here</a> for the recommendations by Google.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Optimize CSS Delivery" name="abovethefold[cssdelivery]" link={this.linkOptionState('delivery')} label="Enabled" description={<span>When enabled, CSS files are loaded asynchronously via <a href="https://github.com/filamentgroup/loadCSS" target="_blank">loadCSS</a> (v{this.loadCSSVersion.version}).  <a href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${this.lgcode}`} target="_blank">Click here</a> for the recommendations by Google.</span>}></SettingCheckbox>
 												{this.getOption('delivery') ?
 													<tr valign="top" className="cssdeliveryoptions">
 														<td colSpan="2" style={{ paddingTop: "0px" }}>
@@ -89,31 +67,20 @@ class CssView extends Component {
 																<div className="inside">
 																	<table className="form-table">
 																		<tbody>
-																			<SettingCheckbox header="Enhanced loadCSS" name="abovethefold[loadcss_enhanced]" defaultChecked={this.cssSettings.loadCSSEnhanced} onChange={this.handleOptionToggle.bind(this, 'loadCSSEnhanced')} label="Enabled" description={<span>When enabled, a customized version of loadCSS is used to make use of the <code>requestAnimationFrame</code> API following the <a href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${this.lgcode}`} target="_blank">recommendations by Google</a>.</span>}></SettingCheckbox>
+																			<SettingCheckbox header="Enhanced loadCSS" name="abovethefold[loadcss_enhanced]" link={this.linkOptionState('loadCSSEnhanced')} label="Enabled" description={<span>When enabled, a customized version of loadCSS is used to make use of the <code>requestAnimationFrame</code> API following the <a href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${this.lgcode}`} target="_blank">recommendations by Google</a>.</span>}></SettingCheckbox>
 																			{this.getOption('loadCSSEnhanced') ?
-																				<tr valign="top" className="enhancedloadcssoptions">
-																					<th scope="row">CSS render delay</th>
-																					<td>
-																						<table cellPadding="0" cellSpacing="0" border="0">
-																							<tbody>
-																								<tr>
-																									<td valign="top" style={{ padding: "0px", verticalAlign: "top" }}>
-																										<input type="number" min="0" max="3000" step="1" name="abovethefold[cssdelivery_renderdelay]" size="10" defaultValue={this.cssSettings.renderDelay} onKeyUp={this.handleRenderDelayChange} onChange={this.handleRenderDelayChange} placeholder="0 ms" />
-																									</td>
-																									<td valign="top" style={{ padding: "0px", verticalAlign: "top", paddingLeft: "10px", fontSize: "11px" }}>
-																										{this.getOption('renderDelayWarn') ?
-																											<div id="warnrenderdelay" style={{ padding: "0px", margin: "0px" }}>
-																												<span style={{ color: "red", fontWeight: "bold" }}>Warning:</span>
-																												A higher Google PageSpeed score may sometimes be achieved using this option but it may not be beneficial to the page rendering experience of your users. Often it is best to seek an alternative solution.
-																										</div> : null}
-																									</td>
-																								</tr>
-																							</tbody>
-																						</table>
-																						<p className="description" style={{ clear: "both" }}>Optionally, enter a time in milliseconds to delay the rendering of CSS files.</p>
-																					</td>
-																				</tr> : null}
-																			<SettingSelect header="Position" name="abovethefold[cssdelivery_position]" defaultValue={this.cssSettings.position || 'footer'} options={
+																				<SettingNumberInput header="CSS render delay" min="0" max="3000" step="1" name="abovethefold[cssdelivery_renderdelay]" className="enchanceloadcssoptions" link={this.linkOptionState('renderDelay')} placeholder="0 ms">
+																					<p>
+																						<span style={this.getOption('renderDelay') === '' || this.getOption('renderDelay') === 0 ? {display:'none'}:null}>
+																							<span style={{ color: "red", fontWeight: "bold" }}>Warning: </span>
+																							A higher Google PageSpeed score may sometimes be achieved using this option but it may not be beneficial to the page rendering experience of your users. Often it is best to seek an alternative solution.
+																						</span>
+																					</p>
+																					<p className="description">
+																						Optionally, enter a time in milliseconds to delay the rendering of CSS files.
+																					</p>
+																				</SettingNumberInput> : null}
+																			<SettingSelect header="Position" name="abovethefold[cssdelivery_position]" link={this.linkOptionState('position')} options={
 																				[{
 																					value: 'header',
 																					name: 'Header'
@@ -123,15 +90,15 @@ class CssView extends Component {
 																					name: 'Footer'
 																				}]
 																			} description="Select the position where the async loading of CSS will start."></SettingSelect>
-																			<SettingTextarea header="Ignore List" style={{ width: "100%", height: "50px", fontSize: "11px" }} name="abovethefold[cssdelivery_ignore]" defaultValue={newlineArrayString(this.cssSettings.ignore)} description="Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML."></SettingTextarea>
-																			<SettingTextarea header="Remove List" style={{ width: "100%", height: "50px", fontSize: "11px" }} name="abovethefold[cssdelivery_remove]" defaultValue={newlineArrayString(this.cssSettings.remove)} description="Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline."></SettingTextarea>
+																			<SettingTextarea header="Ignore List" style={{ width: "100%", height: "50px", fontSize: "11px" }} name="abovethefold[cssdelivery_ignore]" link={this.linkOptionState('ignore')} description="Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML."></SettingTextarea>
+																			<SettingTextarea header="Remove List" style={{ width: "100%", height: "50px", fontSize: "11px" }} name="abovethefold[cssdelivery_remove]" link={this.linkOptionState('remove')} description="Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline."></SettingTextarea>
 																		</tbody>
 																	</table>
 																</div>
 															</div>
 														</td>
 													</tr> : null}
-												<SettingCheckbox header="Optimize Web Fonts" name="abovethefold[gwfo]" defaultChecked={this.cssSettings.gwfo} onChange={this.handleOptionToggle.bind(this, 'gwfo')} label="Enabled" description={<span>When enabled, web fonts are optimized using <a href="https://github.com/typekit/webfontloader" target="_blank">Google Web Font Loader</a>.</span>}></SettingCheckbox>
+												<SettingCheckbox header="Optimize Web Fonts" name="abovethefold[gwfo]" link={this.linkOptionState('gwfo')} label="Enabled" description={<span>When enabled, web fonts are optimized using <a href="https://github.com/typekit/webfontloader" target="_blank">Google Web Font Loader</a>.</span>}></SettingCheckbox>
 												{this.getOption('gwfo') ?
 													<tr valign="top" className="gwfooptions">
 														<td colSpan="2" style={{ paddingTop: "0px" }}>
@@ -140,13 +107,7 @@ class CssView extends Component {
 																<div className="inside">
 																	<table className="form-table">
 																		<tbody>
-																			<SettingSelect header="webfont.js Load Method" name="abovethefold[gwfo_loadmethod]" defaultValue={this.cssSettings.gwfoLoadMethod} onChange={e => {
-																				if (e.target.value !== 'disabled') {
-																					this.setOption('gwfoLoadMethod', true)
-																				} else {
-																					this.setOption('gwfoLoadMethod', false)
-																				}
-																			}} options={
+																			<SettingSelect header="webfont.js Load Method" name="abovethefold[gwfo_loadmethod]" link={this.linkOptionState('gwfoLoadMethod')} options={
 																				[{
 																					value: 'inline',
 																					name: 'Inline'
@@ -164,8 +125,8 @@ class CssView extends Component {
 																					name: 'Disabled (remove all fonts)'
 																				}]
 																			} description={<span>Select the method to load <a href={`https://developers.google.com/speed/libraries/?hl=${this.lgcode}#web-font-loader`} target="_blank">webfont.js</a> (v{this.webfontVersion})).</span>}></SettingSelect>
-																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingSelect header="Load Position" name="abovethefold[gwfo_loadposition]" options={
+																			{this.getOption('gwfoLoadMethod') !== 'disabled' ?
+																				<SettingSelect header="Load Position" name="abovethefold[gwfo_loadposition]" link={this.linkOptionState('gwfoLoadPosition')} options={
 																					[{
 																						value: 'header',
 																						name: 'Header'
@@ -176,7 +137,7 @@ class CssView extends Component {
 																					}]
 																				} description="Select the position where the loading of web fonts will start."></SettingSelect>
 																				: null}
-																			{!this.cssSettings.gwfoConfigValid ?
+																			{!this.getOption('gwfoConfigValid') ?
 																				<tr>
 																					<th></th>
 																					<td>
@@ -184,21 +145,15 @@ class CssView extends Component {
 																					</td>
 																				</tr>
 																				: null}
-																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingTextarea header="WebFontConfig" style={{ width: "100%", height: "100px", fontSize: "11px", borderColor: !this.cssSettings.gwfoConfigValid ? "red" : "notacolor" }} name="abovethefold[gwfo_config]" placeholder="WebFontConfig = { classes: false, typekit: { id: 'xxxxxx' }, loading: function() {}, google: { families: ['Droid Sans', 'Droid Serif'] } };" defaultValue={this.cssSettings.gwfoConfig} description={<span>Enter the <code>WebFontConfig</code> variable for Google Web Font Loader. Leave blank for the default configuration. (<a href="https://github.com/typekit/webfontloader#configuration" target="_blank">more information</a>)</span>} onChange={() => { return false }/*onchange="if (jQuery(this).val() ==='') { jQuery('#sha256_warning').hide(); } else {jQuery('#sha256_warning').show();} "*/}></SettingTextarea>
-																				: null}
-																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingTextarea header="Google Web Fonts" style={{ width: "100%", height: this.cssSettings.gwfoGoogleFonts > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts]" placeholder="Droid Sans" defaultValue={newlineArrayString(this.cssSettings.googleFonts)} description={<span>Enter the <a href={`https://developers.google.com/fonts/docs/getting_started?hl=${this.lgcode}&csw=1`} target="_blank">Google Font API</a> definitions of <a href={`https://fonts.google.com/?hl=${this.lgcode}`} target="_blank">Google Web Fonts</a> to load. One font per line. (<a href="https://github.com/typekit/webfontloader#google" target="_blank">documentation</a>)</span>}></SettingTextarea>
-																				: null}
-																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingCheckbox name="abovethefold[gwfo_googlefonts_auto]" label="Auto-detect enabled" description="When enabled, fonts are automatically extracted from the HTML, CSS and existing WebFontConfig."></SettingCheckbox>
-																				: null}
-																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingTextarea title="&nbsp;Ignore List" style={{ width: "100%", height: this.cssSettings.gwfoGoogleFonts > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_ignore]" defaultValue={newlineArrayString(this.cssSettings.googleFontsIgnore)} description={<span>Enter (parts of) Google Web Font definitions to ignore, e.g. <code>Open Sans</code>. The fonts in this list will not be optimized or auto-detected.</span>}></SettingTextarea>
-																				: null}
-																			{this.getOption('gwfoLoadMethod') ?
-																				<SettingTextarea title="&nbsp;Remove List" style={{ width: "100%", height: this.cssSettings.gwfoGoogleFonts > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_remove]" defaultValue={newlineArrayString(this.cssSettings.googleFontsRemove)} description={<span>Enter (parts of) Google Web Font definitions to remove, e.g. <code>Open Sans</code>. This feature is useful when loading fonts locally. One font per line.</span>}></SettingTextarea>
-																				: null}
+																			{this.getOption('gwfoLoadMethod') !== 'disabled' ?
+																			<React.Fragment>
+																				<SettingTextarea header="WebFontConfig" style={{ width: "100%", height: "100px", fontSize: "11px", borderColor: !this.getOption('gwfoConfigValid') ? "red" : "notacolor" }} name="abovethefold[gwfo_config]" placeholder="WebFontConfig = { classes: false, typekit: { id: 'xxxxxx' }, loading: function() {}, google: { families: ['Droid Sans', 'Droid Serif'] } };" link={this.linkOptionState('gwfoConfig')} description={<span>Enter the <code>WebFontConfig</code> variable for Google Web Font Loader. Leave blank for the default configuration. (<a href="https://github.com/typekit/webfontloader#configuration" target="_blank">more information</a>)</span>} onChange={() => { return false }/*onchange="if (jQuery(this).val() ==='') { jQuery('#sha256_warning').hide(); } else {jQuery('#sha256_warning').show();} "*/}></SettingTextarea>
+																				<SettingTextarea header="Google Web Fonts" style={{ width: "100%", height: this.getOption('googleFonts') > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts]" placeholder="Droid Sans" link={this.linkOptionState('googleFonts')} description={<span>Enter the <a href={`https://developers.google.com/fonts/docs/getting_started?hl=${this.lgcode}&csw=1`} target="_blank">Google Font API</a> definitions of <a href={`https://fonts.google.com/?hl=${this.lgcode}`} target="_blank">Google Web Fonts</a> to load. One font per line. (<a href="https://github.com/typekit/webfontloader#google" target="_blank">documentation</a>)</span>}></SettingTextarea>
+																				<SettingCheckbox name="abovethefold[gwfo_googlefonts_auto]" label="Auto-detect enabled" link={this.linkOptionState('googleFontsAuto')} description="When enabled, fonts are automatically extracted from the HTML, CSS and existing WebFontConfig."></SettingCheckbox>
+																				<SettingTextarea title="&nbsp;Ignore List" style={{ width: "100%", height: this.getOption('googleFonts') > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_ignore]" link={this.linkOptionState('googleFontsIgnore')} description={<span>Enter (parts of) Google Web Font definitions to ignore, e.g. <code>Open Sans</code>. The fonts in this list will not be optimized or auto-detected.</span>}></SettingTextarea>
+																				<SettingTextarea title="&nbsp;Remove List" style={{ width: "100%", height: this.getOption('googleFonts') > 3 ? "100px" : "50px", fontSize: "11px" }} name="abovethefold[gwfo_googlefonts_remove]" link={this.linkOptionState('googleFontsRemove')} description={<span>Enter (parts of) Google Web Font definitions to remove, e.g. <code>Open Sans</code>. This feature is useful when loading fonts locally. One font per line.</span>}></SettingTextarea>
+																			</React.Fragment>
+																			: null}
 																			<tr valign="top" className="local-font-loading">
 																				<th scope="row">Local Font Loading</th>
 																				<td>

@@ -28,7 +28,7 @@
 		$cssdelivery = isset($options['cssdelivery']) && intval($options['cssdelivery']) === 1;
 		$loadcss_enhanced = isset($options['loadcss_enhanced']) && intval($options['loadcss_enhanced']) === 1;
 		$cssdelivery_renderdelay = (empty($options['cssdelivery_renderdelay']) || $options['cssdelivery_renderdelay'] === 0) ? '' : htmlentities($options['cssdelivery_renderdelay'], ENT_COMPAT, 'utf-8');
-		$cssdelivery_position = '';
+		$cssdelivery_position = 'footer';
 		if(isset($options['cssdelivery_position'])){
 			$cssdelivery_position = $options['cssdelivery_position'];
 		}
@@ -41,9 +41,13 @@
 			$cssdelivery_remove = $options['cssdelivery_remove'];
 		}
 		$gwfo = isset($options['gwfo']) && intval($options['gwfo']) === 1;
-		$gwfo_loadmethod = '';
-		if(isset($options['gwfo_loadmethod'])) {
+		$gwfo_loadmethod = 'inline';
+		if(isset($options['gwfo_loadmethod']) && $options['gwfo_loadmethod'] !== '') {
 			$gwfo_loadmethod = $options['gwfo_loadmethod'];
+		}
+		$gwfo_loadposition = 'header';
+		if(isset($options['gwfo_loadposition']) && $options['gwfo_loadposition'] !== '') {
+			$gwfo_loadposition = $options['gwfo_loadposition'];
 		}
 		$gwfo_config_valid = $options['gwfo_config_valid'];
 		$gwfo_config = '';
@@ -54,6 +58,7 @@
 		if (isset($options['gwfo_googlefonts'])) {
 			$gwfo_googlefonts = $options['gwfo_googlefonts'];
 		}
+		$gwfo_googlefonts_auto = isset($options['gwfo_googlefonts_auto']) && intval($options['gwfo_googlefonts_auto']) === 1;
 		$gwfo_googlefonts_ignore = '';
 		if (isset($options['gwfo_googlefonts_ignore'])) {
 			$gwfo_googlefonts_ignore = $options['gwfo_googlefonts_ignore'];
@@ -72,9 +77,11 @@
 		',"remove":' . json_encode($cssdelivery_remove) . 
 		',"gwfo":' . json_encode($gwfo) . 
 		',"gwfoLoadMethod":' . json_encode($gwfo_loadmethod) . 
+		',"gwfoLoadPosition":' . json_encode($gwfo_loadposition) . 
 		',"gwfoConfigValid":' . json_encode($gwfo_config_valid) . 
 		',"gwfoConfig":' . json_encode($gwfo_config) . 
 		',"googleFonts":' . json_encode($gwfo_googlefonts) . 
+		',"googleFontsAuto":' . json_encode($gwfo_googlefonts_auto) . 
 		',"googleFontsIgnore":' . json_encode($gwfo_googlefonts_ignore) . 
 		',"googleFontsRemove":' . json_encode($gwfo_googlefonts_remove) . 
 		'}'
