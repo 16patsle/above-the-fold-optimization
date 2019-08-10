@@ -16,16 +16,18 @@
 		if(isset($options['html_comments_preserve'])) {
 			$html_comments_preserve = $options['html_comments_preserve'];
 		}
+		$html_search_replace = null;
+		if (isset($options['html_search_replace']) && is_array($options['html_search_replace'])) {
+    		$html_search_replace = $options['html_search_replace'];
+		}
 		$html_settings = 
 		'{"minify":' . json_encode($html_minify) . 
 		',"comments":' . json_encode($html_comments) . 
 		',"commentsPreserve":' . json_encode($html_comments_preserve) . 
+		',"searchReplace":' . json_encode($html_search_replace) . 
 		'}'
 	?>
 	<input id="html_settings" type="hidden" value='<?php echo $html_settings ?>'/>
-	<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src_server" value="<?php if (isset($options['html_search_replace']) && is_array($options['html_search_replace'])) {
-		echo esc_attr(json_encode($options['html_search_replace']));
-	} ?>"  />
 	<!-- CSS -->
 	<input id="admin_url_css_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_css_update'); ?>" />
 	<?php

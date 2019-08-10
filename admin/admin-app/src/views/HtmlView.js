@@ -23,7 +23,6 @@ class HtmlView extends Component {
 
 		this.state = {
 			options: JSON.parse(document.querySelector('#html_settings').value),
-			searchReplaceValue: JSON.parse(document.querySelector('#html_search_replace_src_server').value)
 		}
 
 		this.state.options.commentsPreserve = newlineArrayString(this.state.options.commentsPreserve);
@@ -77,8 +76,8 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 					<p className="description">
 						This option enables to replace strings in the HTML. Enter an array of JSON objects.
 										</p>
-					<JsonEditor name="html.replace" schema={htmlSchema} link={this.linkState('searchReplaceValue')}></JsonEditor>
-					<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" value={this.state.searchReplaceValue} />
+					<JsonEditor name="html.replace" schema={htmlSchema} link={this.linkOptionState('searchReplace')}></JsonEditor>
+					<input type="hidden" name="abovethefold[html_search_replace]" id="html_search_replace_src" value={this.getOption('searchReplace')} />
 
 					<Info color="yellow">
 						<SearchReplaceExample title={__('Click to select')}>
