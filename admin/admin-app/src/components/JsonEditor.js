@@ -60,6 +60,10 @@ class JsonEditor extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.editor.destroy();
+    }
+
     onError(err) {
         // Log the error
         console.error('JSON', err.toString());
