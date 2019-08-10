@@ -3,11 +3,11 @@
  * @param {Array} - The array of strings
  * */
 function newlineArrayString(array) {
-    if (!Array.isArray(array) || array.length === 0) {
-        return '';
-    }
+  if (!Array.isArray(array) || array.length === 0) {
+    return '';
+  }
 
-    return array.join("\n");
+  return array.join('\n');
 }
 
 export default newlineArrayString;

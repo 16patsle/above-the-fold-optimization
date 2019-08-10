@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-const iconsUrl = window.homeUrl + '/wp-content/plugins/above-the-fold-optimization/admin/js/jsoneditor/img/jsoneditor-icons.svg'
+const iconsUrl =
+  window.homeUrl +
+  '/wp-content/plugins/above-the-fold-optimization/admin/js/jsoneditor/img/jsoneditor-icons.svg';
 
 class JsonEditorIconFix extends Component {
-    render() {
-        return (
-            <style>
-                {`
+  render() {
+    return (
+      <style>
+        {`
                 div.jsoneditor-tree button {
                     background: transparent url("${iconsUrl}");
                 }
@@ -43,9 +45,9 @@ class JsonEditorIconFix extends Component {
                     background: url("${iconsUrl}") -168px -48px;
                 }'
 `}
-            </style>
-        );
-    }
+      </style>
+    );
+  }
 }
 
 export default JsonEditorIconFix;

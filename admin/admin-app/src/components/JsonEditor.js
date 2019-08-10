@@ -6,141 +6,140 @@ import './JsonEditor.css';
 import JsonEditorIconFix from './JsonEditorIconFix';
 
 class JsonEditor extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.editorRef = React.createRef();
-        this.editor = null
-        this.changeTimeout = null;
-    }
+    this.editorRef = React.createRef();
+    this.editor = null;
+    this.changeTimeout = null;
+  }
 
-    componentDidMount() {
-		/**
-     	 * JSON editor
-     	 */
-        if (this.editorRef.current) {
+  componentDidMount() {
+    /**
+     * JSON editor
+     */
+    if (this.editorRef.current) {
+      this.editorRef.current.innerHTML = '';
 
-            this.editorRef.current.innerHTML = '';
+      const options = {
+        name: this.props.name,
+        mode: 'code',
+        modes: ['code', 'tree'], // allowed modes
+        onError: this.onError.bind(this),
+        onChange: this.onChange.bind(this),
+        onModeChange: this.onModeChange.bind(this),
+        search: false,
+        schema: this.props.schema,
+        navigationBar: false,
+        statusBar: false
+      };
 
-            const options = {
-                name: this.props.name,
-                mode: 'code',
-                modes: ['code', 'tree'], // allowed modes
-                onError: this.onError.bind(this),
-                onChange: this.onChange.bind(this),
-                onModeChange: this.onModeChange.bind(this),
-                search: false,
-                schema: this.props.schema,
-                navigationBar: false,
-                statusBar: false,
-            };
+      let json = [];
 
-            let json = [];
-
-            // Set the editor content to the searchReplaceSrc sent from the server
-            if (this.props.value !== '') {
-                json = this.props.value;
-                if (typeof json !== 'object') {
-                    try {
-                        json = JSON.parse(json);
-                    } catch (e) {
-                        json = [];
-                    }
-                }
-                if (!json || typeof json !== 'object') {
-                    json = [];
-                }
-            }
-            this.editor = new JSONEditor(this.editorRef.current, options, json);
-
-            this.editor.compact(); // collapseAll();
-
-            // When in code mode (using ace editor), save on blur
-            this.editor.aceEditor.on('blur', this.saveJSON.bind(this));
+      // Set the editor content to the searchReplaceSrc sent from the server
+      if (this.props.value !== '') {
+        json = this.props.value;
+        if (typeof json !== 'object') {
+          try {
+            json = JSON.parse(json);
+          } catch (e) {
+            json = [];
+          }
         }
-    }
+        if (!json || typeof json !== 'object') {
+          json = [];
+        }
+      }
+      this.editor = new JSONEditor(this.editorRef.current, options, json);
 
-    componentWillUnmount() {
-        this.editor.destroy();
-    }
+      this.editor.compact(); // collapseAll();
 
-    onError(err) {
-        // Log the error
-        console.error('JSON', err.toString());
-        alert('JSON error. Please verify your input.\n\nSee console for details.');
+      // When in code mode (using ace editor), save on blur
+      this.editor.aceEditor.on('blur', this.saveJSON.bind(this));
     }
+  }
 
-    onChange() {
+  componentWillUnmount() {
+    this.editor.destroy();
+  }
+
+  onError(err) {
+    // Log the error
+    console.error('JSON', err.toString());
+    alert('JSON error. Please verify your input.\n\nSee console for details.');
+  }
+
+  onChange() {
+    const t = this.editor.getText();
+
+    // If the content is empty
+    if (t.trim() === '') {
+      if (this.changeTimeout) {
+        clearTimeout(this.changeTimeout);
+      }
+      // wait for copy paste action
+      this.changeTimeout = setTimeout(() => {
+        this.changeTimeout = false;
         const t = this.editor.getText();
-
-        // If the content is empty
+        // If the editor is still empty
+        // set it to empty array
         if (t.trim() === '') {
-            if (this.changeTimeout) {
-                clearTimeout(this.changeTimeout);
-            }
-            // wait for copy paste action
-            this.changeTimeout = setTimeout(()=>{
-                this.changeTimeout = false;
-                const t = this.editor.getText();
-                // If the editor is still empty
-                // set it to empty array
-                if (t.trim() === '') {
-                    this.editor.set([]);
-                    this.saveJSON([]);
-                }
-            }, 25);
-
-            return;
+          this.editor.set([]);
+          //this.editor.aceEditor.moveCursorToPosition({row:1, column:2});
+          this.saveJSON([]);
         }
+      }, 25);
 
-        // Only save if not in code mode.
-        // Code mode is saved on blur event to not move the cursor.
-        if(this.editor.getMode() !== 'code') {
-            this.saveJSON()
-        }
+      return;
     }
 
-    onModeChange(newMode, oldMode) {
-        const t = this.editor.getText();
-        if (t.trim() === '') {
-            // If the content is empty
-            // set it to an empty arrray
-            this.editor.set([]);
-        }
-        // expand nodes in tree mode
-        if (newMode === 'tree') {
-            this.editor.expandAll();
-        }
+    // Only save if not in code mode.
+    // Code mode is saved on blur event to not move the cursor.
+    if (this.editor.getMode() !== 'code') {
+      this.saveJSON();
+    }
+  }
+
+  onModeChange(newMode, oldMode) {
+    const t = this.editor.getText();
+    if (t.trim() === '') {
+      // If the content is empty
+      // set it to an empty arrray
+      this.editor.set([]);
+    }
+    // expand nodes in tree mode
+    if (newMode === 'tree') {
+      this.editor.expandAll();
+    }
+  }
+
+  saveJSON() {
+    let json;
+
+    try {
+      json = this.editor.get();
+    } catch (e) {
+      return;
+    }
+    this.props.link.set(json);
+  }
+
+  render() {
+    if (this.editor) {
+      this.editor.update(this.props.link.value);
     }
 
-    saveJSON() {
-        let json;
-
-        try {
-            json = this.editor.get();
-        } catch (e) {
-
-            return;
-        }
-        this.props.link.set(json);
-    }
-
-    render() {
-        if(this.editor){
-            this.editor.update(this.props.link.value);
-        }
-
-        return (
-            <span>
-                <JsonEditorIconFix />
-                <div ref={this.editorRef}>
-                    <div className="loading-json-editor">
-                        {__('Loading JSON editor...')}
-                    </div>
-                </div>
-            </span>
-        );
-    }
+    return (
+      <span>
+        <JsonEditorIconFix />
+        <div ref={this.editorRef}>
+          <div className="loading-json-editor">
+            {__('Loading JSON editor...')}
+          </div>
+        </div>
+      </span>
+    );
+  }
 }
 
 export default JsonEditor;
