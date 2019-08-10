@@ -213,6 +213,7 @@ class Abovethefold_Admin
                 case 'pagespeed-html':
                 case 'pagespeed-css':
                 case 'pagespeed-javascript':
+                case 'pagespeed-http2':
                 case 'pagespeed-proxy':
                 case 'pagespeed-settings':
                 case 'pagespeed-monitor':
@@ -1053,7 +1054,6 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
         switch ($tab) {
             case "criticalcss":
             case "pwa":
-            case "http2":
             case "extract":
             case "criticalcss-test":
             case "build-tool":

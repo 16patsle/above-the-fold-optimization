@@ -40,9 +40,6 @@ class Abovethefold_Admin_HTTP2
              * Handle form submissions
              */
             $this->CTRL->loader->add_action('admin_post_abtf_http2_update', $this, 'update_settings');
-
-            // add scripts/styles
-            $this->CTRL->loader->add_action('admin_enqueue_scripts', $this, 'enqueue_scripts', 30);
         }
     }
 
@@ -85,25 +82,7 @@ class Abovethefold_Admin_HTTP2
         // update settings
         $this->CTRL->admin->save_settings($options, 'HTTP/2 Optimization settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed-http2' ), admin_url('admin.php')));
+        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/http2');
         exit;
-    }
-
-    /**
-     * Enqueue scripts and styles
-     */
-    public function enqueue_scripts($hook)
-    {
-        if (!isset($_REQUEST['page']) || $_GET['page'] !== 'pagespeed-http2') {
-            return;
-        }
-
-        // add global admin CSS
-        wp_enqueue_style('abtf_admincp_jsoneditor_editor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.css', false, WPABTF_VERSION);
-        wp_enqueue_style('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'css/admincp-jsoneditor.min.css', false, WPABTF_VERSION);
-
-        // add general admin javascript
-        wp_enqueue_script('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.js', array( 'jquery' ), WPABTF_VERSION);
-        wp_enqueue_script('abtf_admincp_http2', plugin_dir_url(__FILE__) . 'js/admincp-http2.min.js', array( 'jquery', 'abtf_admincp_jsoneditor' ), WPABTF_VERSION);
     }
 }

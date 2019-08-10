@@ -198,6 +198,24 @@
 	?>
 	<input id="javascript_settings" type="hidden" value='<?php echo $javascript_settings ?>'/>
 	<input id="lazyload_plugins_url" type="hidden" value="<?php print admin_url('plugin-install.php?s=Lazy+Load+XT&tab=search&type=term'); ?>">
+	<!-- HTTP/2 -->
+	<?php
+		$http2_push = isset($options['http2_push']) && intval($options['http2_push'])=== 1;
+
+		// asset cache policy
+    	$http2_push_config = (isset($options['http2_push_config']) && is_array($options['http2_push_config'])) ? $options['http2_push_config'] : array();
+    	if (!is_array($http2_push_config) || empty($http2_push_config)) {
+    	    $http2_push_config = '[]';
+    	} else {
+    	    $http2_push_config = json_encode($http2_push_config);
+		}
+
+		$http2_settings = 
+		'{"push":' . json_encode($http2_push) . 
+		',"pushConfig":' . $http2_push_config . 
+		'}'
+	?>
+	<input id="http2_settings" type="hidden" value='<?php echo $http2_settings ?>'/>
 	<!-- Proxy -->
 	<input id="admin_url_proxy_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_proxy_update'); ?>" />
 	<?php
