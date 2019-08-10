@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
@@ -44,6 +45,9 @@ class CssView extends Component {
 			<form method="post" action={document.querySelector('#admin_url_css_update').value} className="clearfix" encType="multipart/form-data">
 				<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
 				<PageContent header={__('CSS Optimization')}>
+					<Helmet>
+						<title>CSS Optimization {window.siteTitle}</title>
+					</Helmet>
 					{this.loadCSSVersion.error === 'not_found' ? <h1 style={{ color: "red" }}>WARNING: PLUGIN INSTALLATION NOT COMPLETE, MISSING public/js/src/loadcss_package.json</h1> : null}
 					{this.loadCSSVersion.error === 'failed_parse' ? <h1 style={{ color: "red" }}>failed to parse public/js/src/loadcss_package.json</h1> : null}
 					<table className="form-table">

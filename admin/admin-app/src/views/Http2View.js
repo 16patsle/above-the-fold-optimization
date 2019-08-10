@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import { __ } from '@wordpress/i18n';
 import { getOption, setOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
@@ -60,6 +61,9 @@ class Http2View extends Component {
 			<form method="post" action={window.adminUrl + '?action=abtf_http2_update'} className="clearfix">
 			  	<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
 				<PageContent header={__('HTTP/2 Optimization')}>
+					<Helmet>
+						<title>HTTP/2 Optimization {window.siteTitle}</title>
+					</Helmet>
 					<p>
 						<a href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${this.lgcode}`} target="_blank" rel="noopener noreferrer">HTTP/2</a> is a new version of the internet protocol originally developed by Google (SPDY). This plugin enables to make use of some it's optimization potential.
 						</p>

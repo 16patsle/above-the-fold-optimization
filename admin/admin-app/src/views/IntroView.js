@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import { __ } from '@wordpress/i18n';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
@@ -24,6 +25,9 @@ class IntroView extends Component {
 
         return (
             <PageContent header={__('Introduction')}>
+                <Helmet>
+                    <title>Google PageSpeed Optimization {window.siteTitle}</title>
+                </Helmet>
                 <p>Take a moment to explore the abilities of this plugin. This plugin is not a simple <code>on/off</code> plugin so do not expect a result by simply activating the plugin.</p>
                 <p>This plugin is intended as a toolkit to achieve <u>the best</u> website performance and it is focussed on Google, including the ability to achieve a Google PageSpeed 100 score.</p>
                 <p>Every website is different and has different requirements to achieve the best performance. This plugin offers many configuration options{/* and goes a step further than many premium optimization plugins*/}.</p>

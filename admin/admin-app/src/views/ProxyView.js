@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
@@ -56,6 +57,9 @@ class ProxyView extends Component {
 			<form method="post" action={document.querySelector('#admin_url_proxy_update').value} className="clearfix">
 			  	<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
 				<PageContent header={__('External Resource Proxy')}>
+					<Helmet>
+						<title>External Resource Proxy {window.siteTitle}</title>
+					</Helmet>
 					<div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
 						<img src={document.querySelector('#wpabtf_uri').value + 'admin/images/browsercache-error.png'} alt="Google Bot" width={225} title="Leverage browser caching" />
 					</div>

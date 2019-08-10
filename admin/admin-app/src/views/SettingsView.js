@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
@@ -25,6 +26,9 @@ class SettingsView extends Component {
             <form method="post" action={document.querySelector('#admin_url_settings_update').value} className="clearfix">
 				<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
 				<PageContent header={__('Settings')}>
+					<Helmet>
+						<title>Above the Fold Optimization Settings {window.siteTitle}</title>
+					</Helmet>
 					<table className="form-table">
 						<tbody>
 							<SettingCheckbox header="Admin Bar" name="abovethefold[adminbar]" label="Enabled" link={this.linkOptionState('adminbar')} description={<span>Show a <code>PageSpeed</code> menu in the top admin bar with links to website speed and security tests such as Google PageSpeed Insights.</span>}></SettingCheckbox>

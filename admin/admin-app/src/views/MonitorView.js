@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import { __ } from '@wordpress/i18n';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
@@ -21,6 +22,9 @@ class MonitorView extends Component {
 			<form method="post" action={document.querySelector('#admin_url_monitor_update').value} className="clearfix">
 				<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
 				<PageContent header={__('Website Monitor')}>
+					<Helmet>
+						<title>Website Monitor {window.siteTitle}</title>
+					</Helmet>
 					<div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
 						<a href={`https://www.google.nl/webmasters/?hl=${this.lgcode}`} target="_blank" rel="noopener noreferrer">
 							<img src={document.querySelector('#wpabtf_uri').value + 'admin/images/googlebot.png'} alt="Google Bot" title="Google Webmasters Monitor" />

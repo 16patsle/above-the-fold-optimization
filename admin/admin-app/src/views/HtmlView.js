@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkState, linkOptionState } from '../utils/linkState';
@@ -57,6 +58,9 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
 			<form method="post" action={document.querySelector('#admin_url_html_update').value} className="clearfix" encType="multipart/form-data">
 				<div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
 				<PageContent header={__('HTML Optimization')}>
+					<Helmet>
+						<title>HTML Optimization {window.siteTitle}</title>
+					</Helmet>
 					<table className="form-table">
 						<tbody>
 							<SettingCheckbox header="Minify HTML" name="abovethefold[html_minify]" link={this.linkOptionState('minify')} label="Enabled" description={<span>Compress HTML using an enhanced version of <a href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" target="_blank" rel="noopener noreferrer">HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.</span>}></SettingCheckbox>

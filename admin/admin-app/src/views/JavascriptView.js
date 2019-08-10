@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
@@ -39,6 +40,9 @@ class JavascriptView extends Component {
 <form method="post" action={document.querySelector('#admin_url_javascript_update').value} className="clearfix">
     <div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
     <PageContent header={__('Javascript Optimization')}>
+                    <Helmet>
+                        <title>Javascript Optimization {window.siteTitle}</title>
+                    </Helmet>
         <Info color="seagreen" style={{ "marginBottom": "0px", "fontSize": "14px" }}><strong>Tip:</strong> More information about javascript optimization can be found in <a href={'https://www.igvita.com/?' + this.utmstring} target="_blank" rel="noopener noreferrer">this blog</a> by Ilya Grigorik, web performance engineer at Google and author of the O'Reilly book <a href={'https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/?' + this.utmstring} target="_blank" rel="noopener noreferrer">High Performance Browser Networking</a> (<a href={'https://hpbn.co/?' + this.utmstring} target="_blank" rel="noopener noreferrer">free online</a>).</Info>
         <table className="form-table">
             <tbody>
