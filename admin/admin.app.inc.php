@@ -27,7 +27,7 @@
 		',"searchReplace":' . json_encode($html_search_replace) . 
 		'}'
 	?>
-	<input id="html_settings" type="hidden" value='<?php echo $html_settings ?>'/>
+	<input id="html_settings" type="hidden" value="<?php echo htmlspecialchars($html_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
 	<!-- CSS -->
 	<input id="admin_url_css_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_css_update'); ?>" />
 	<?php
@@ -92,7 +92,7 @@
 		',"googleFontsRemove":' . json_encode($gwfo_googlefonts_remove) . 
 		'}'
 	?>
-	<input id="css_settings"  type="hidden" value='<?php echo $css_settings ?>'/>
+	<input id="css_settings"  type="hidden" value="<?php echo htmlspecialchars($css_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
 	<script>console.log(<?php echo json_encode($options) ?>)</script>
 	<?php
 		/**
@@ -196,7 +196,7 @@
 		'}'
 
 	?>
-	<input id="javascript_settings" type="hidden" value='<?php echo $javascript_settings ?>'/>
+	<input id="javascript_settings" type="hidden" value="<?php echo htmlspecialchars($javascript_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
 	<input id="lazyload_plugins_url" type="hidden" value="<?php print admin_url('plugin-install.php?s=Lazy+Load+XT&tab=search&type=term'); ?>">
 	<!-- HTTP/2 -->
 	<?php
@@ -284,7 +284,7 @@
 		'}'
 
 	?>
-	<input id="proxy_settings" type="hidden" value='<?php echo $proxy_settings ?>'/>
+	<input id="proxy_settings" type="hidden" value="<?php echo htmlspecialchars($proxy_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
 	<!-- Settings -->
 	<input id="admin_url_settings_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_settings_update'); ?>" />
 	<?php
@@ -298,7 +298,7 @@
 		',"debug":' . json_encode($settings_debug) .
 		'}'
 	?>
-	<input id="settings_settings"  type="hidden" value='<?php echo $settings_settings ?>'/>
+	<input id="settings_settings"  type="hidden" value="<?php echo htmlspecialchars($settings_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
 	<?php
 		$client_hashes = false;
 

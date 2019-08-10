@@ -1,5 +1,3 @@
-import htmlEntities from './htmlEntities';
-
 /**
  * Return string with array values separated with newline
  * @param {Array} - The array of strings
@@ -9,7 +7,7 @@ function newlineArrayString(array) {
         return '';
     }
 
-    return htmlEntities(array.join("\n"));
+    return array.join("\n");
 }
 
 export default newlineArrayString;
