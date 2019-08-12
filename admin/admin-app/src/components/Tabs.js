@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import getValueOf from '../utils/getValueOf';
+import { adminUrl } from '../utils/globalVars';
 
-const tabs = JSON.parse(document.querySelector('#adminTabs').value);
+const tabs = JSON.parse(getValueOf('#adminTabs', 'object'));
 
 class Tabs extends Component {
   render() {
@@ -15,7 +17,7 @@ class Tabs extends Component {
         (tabKey === 'criticalcss' && this.props.selected === 'criticalcss-test')
           ? ' nav-tab-active'
           : '';
-      const url = new URL(window.adminUrl);
+      const url = new URL(adminUrl);
       url.searchParams.append('page', 'pagespeed');
       url.hash += tabKey !== 'intro' ? '#/' + tabKey : '#/';
       tabElements.push(

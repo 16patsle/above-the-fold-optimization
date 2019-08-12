@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
+import getValueOf from '../utils/getValueOf';
+import { siteTitle, abtfAdminNonce } from '../utils/globalVars';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
@@ -12,12 +14,10 @@ class SettingsView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(document.querySelector('#settings_settings').value)
+      options: JSON.parse(getValueOf('#settings_settings', 'object'))
     };
 
-    this.clientHashes = JSON.parse(
-      document.querySelector('#client_hashes').value
-    );
+    this.clientHashes = JSON.parse(getValueOf('#client_hashes', 'object'));
 
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
@@ -27,15 +27,13 @@ class SettingsView extends Component {
     return (
       <form
         method="post"
-        action={document.querySelector('#admin_url_settings_update').value}
+        action={getValueOf('#admin_url_settings_update')}
         className="clearfix"
       >
-        <div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
+        <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
         <PageContent header={__('Settings')}>
           <Helmet>
-            <title>
-              Above the Fold Optimization Settings {window.siteTitle}
-            </title>
+            <title>Above the Fold Optimization Settings {siteTitle}</title>
           </Helmet>
           <table className="form-table">
             <tbody>

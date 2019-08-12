@@ -3,6 +3,14 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption, setOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
+import getValueOf from '../utils/getValueOf';
+import {
+  adminUrl,
+  homeUrl,
+  siteTitle,
+  abtfAdminNonce,
+  ajaxUrl
+} from '../utils/globalVars';
 import JsonEditor from '../components/JsonEditor';
 import { http2Schema } from '../components/editorSchema';
 import Info from '../components/Info';
@@ -16,7 +24,7 @@ class Http2View extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(document.querySelector('#http2_settings').value)
+      options: JSON.parse(getValueOf('#http2_settings', 'object'))
     };
 
     this.http2Insert = {
@@ -56,8 +64,8 @@ class Http2View extends Component {
       ]
     };
 
-    this.lgcode = document.querySelector('#lgcode').value;
-    this.google_intlcode = document.querySelector('#google_intlcode').value;
+    this.lgcode = getValueOf('#lgcode');
+    this.google_intlcode = getValueOf('#google_intlcode');
 
     this.getOption = getOption.bind(this);
     this.setOption = setOption.bind(this);
@@ -89,13 +97,13 @@ class Http2View extends Component {
     return (
       <form
         method="post"
-        action={window.adminUrl + '?action=abtf_http2_update'}
+        action={adminUrl + '?action=abtf_http2_update'}
         className="clearfix"
       >
-        <div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
+        <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
         <PageContent header={__('HTTP/2 Optimization')}>
           <Helmet>
-            <title>HTTP/2 Optimization {window.siteTitle}</title>
+            <title>HTTP/2 Optimization {siteTitle}</title>
           </Helmet>
           <p>
             <a
@@ -111,7 +119,7 @@ class Http2View extends Component {
           </p>
           <a
             href={`https://tools.keycdn.com/http2-test?url=${encodeURIComponent(
-              window.homeUrl
+              homeUrl
             )}`}
             target="_blank"
             className="button"
@@ -222,9 +230,9 @@ class Http2View extends Component {
                   <br />
                   <br />
                   <img
-                    src={`${
-                      document.querySelector('#wpabtf_uri').value
-                    }admin/images/Cache_Digest_-_Warm_Cache.png`}
+                    src={`${getValueOf(
+                      '#wpabtf_uri'
+                    )}admin/images/Cache_Digest_-_Warm_Cache.png`}
                     alt="Cache-Digest"
                     style={{ width: '100%', maxWidth: 600 }}
                     title="Cache-Digest"

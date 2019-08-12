@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
-import { linkState, linkOptionState } from '../utils/linkState';
+import { linkOptionState } from '../utils/linkState';
+import getValueOf from '../utils/getValueOf';
+import { siteTitle, abtfAdminNonce } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import SyntaxHighlighter, {
   registerLanguage
@@ -25,18 +27,17 @@ class HtmlView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(document.querySelector('#html_settings').value)
+      options: JSON.parse(getValueOf('#html_settings', 'object'))
     };
 
     this.state.options.commentsPreserve = newlineArrayString(
       this.state.options.commentsPreserve
     );
 
-    this.lgcode = document.querySelector('#lgcode').value;
-    this.google_intlcode = document.querySelector('#google_intlcode').value;
+    this.lgcode = getValueOf('#lgcode');
+    this.google_intlcode = getValueOf('#google_intlcode');
 
     this.getOption = getOption.bind(this);
-    this.linkState = linkState.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
 
     this.wpHtmlSearchReplaceExample = `
@@ -61,14 +62,14 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
     return (
       <form
         method="post"
-        action={document.querySelector('#admin_url_html_update').value}
+        action={getValueOf('#admin_url_html_update')}
         className="clearfix"
         encType="multipart/form-data"
       >
-        <div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
+        <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
         <PageContent header={__('HTML Optimization')}>
           <Helmet>
-            <title>HTML Optimization {window.siteTitle}</title>
+            <title>HTML Optimization {siteTitle}</title>
           </Helmet>
           <table className="form-table">
             <tbody>

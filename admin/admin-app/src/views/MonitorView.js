@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import getValueOf from '../utils/getValueOf';
+import { homeUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
 
@@ -8,33 +10,26 @@ class MonitorView extends Component {
   constructor(props) {
     super(props);
 
-    this.lgcode = document.querySelector('#lgcode').value;
-    this.utmstring = document.querySelector('#utmstring').value;
-    this.google_intlcode = document.querySelector('#google_intlcode').value;
-    this.sllInstalled =
-      document.querySelector('#ssl_installed').value === 'true';
-    this.uptimerobotStatus = document.querySelector(
-      '#uptimerobot_status'
-    ).value;
-    this.uptimerobotInstallLink = document.querySelector(
-      '#uptimerobot_install_link'
-    ).value;
-    this.uptimerobotOverview = document.querySelector(
-      '#uptimerobot_overview'
-    ).value;
+    this.lgcode = getValueOf('#lgcode');
+    this.utmstring = getValueOf('#utmstring');
+    this.google_intlcode = getValueOf('#google_intlcode');
+    this.sllInstalled = getValueOf('#ssl_installed') === 'true';
+    this.uptimerobotStatus = getValueOf('#uptimerobot_status');
+    this.uptimerobotInstallLink = getValueOf('#uptimerobot_install_link');
+    this.uptimerobotOverview = getValueOf('#uptimerobot_overview');
   }
 
   render() {
     return (
       <form
         method="post"
-        action={document.querySelector('#admin_url_monitor_update').value}
+        action={getValueOf('#admin_url_monitor_update')}
         className="clearfix"
       >
-        <div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
+        <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
         <PageContent header={__('Website Monitor')}>
           <Helmet>
-            <title>Website Monitor {window.siteTitle}</title>
+            <title>Website Monitor {siteTitle}</title>
           </Helmet>
           <div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
             <a
@@ -43,10 +38,7 @@ class MonitorView extends Component {
               rel="noopener noreferrer"
             >
               <img
-                src={
-                  document.querySelector('#wpabtf_uri').value +
-                  'admin/images/googlebot.png'
-                }
+                src={getValueOf('#wpabtf_uri') + 'admin/images/googlebot.png'}
                 alt="Google Bot"
                 title="Google Webmasters Monitor"
               />
@@ -66,7 +58,7 @@ class MonitorView extends Component {
             problem occurs, preventing damage to your reputation in Google. The
             most important aspects to monitor besides basic uptime are the{' '}
             <a
-              href={`https://testmysite.thinkwithgoogle.com/?url=${window.homeUrl}&hl=${this.lgcode}`}
+              href={`https://testmysite.thinkwithgoogle.com/?url=${homeUrl}&hl=${this.lgcode}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -77,7 +69,7 @@ class MonitorView extends Component {
               href={`https://www.google.com/transparencyreport/safebrowsing/diagnostic/index.html?hl=${
                 this.lgcode
               }#url=${encodeURIComponent(
-                new URL(window.homeUrl).host.replace('www', '')
+                new URL(homeUrl).host.replace('www', '')
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -125,10 +117,7 @@ class MonitorView extends Component {
               rel="noopener noreferrer"
             >
               <img
-                src={
-                  document.querySelector('#wpabtf_uri').value +
-                  'admin/images/uptimerobot.png'
-                }
+                src={getValueOf('#wpabtf_uri') + 'admin/images/uptimerobot.png'}
                 alt="UptimeRobot.com"
                 title="UptimeRobot.com - Free website monitor"
               />
@@ -169,8 +158,7 @@ class MonitorView extends Component {
             >
               <img
                 src={
-                  document.querySelector('#wpabtf_uri').value +
-                  'admin/images/google-security.png'
+                  getValueOf('#wpabtf_uri') + 'admin/images/google-security.png'
                 }
                 alt="Google Security Blog"
                 title="Google Security Blog"

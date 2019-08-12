@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
+import getValueOf from '../utils/getValueOf';
+import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
@@ -17,7 +19,7 @@ class JavascriptView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(document.querySelector('#javascript_settings').value)
+      options: JSON.parse(getValueOf('#javascript_settings', 'object'))
     };
 
     this.state.options.ignore = newlineArrayString(this.state.options.ignore);
@@ -30,26 +32,26 @@ class JavascriptView extends Component {
       this.state.options.idleDelivery
     );
 
-    this.utmstring = document.querySelector('#utmstring').value;
+    this.utmstring = getValueOf('#utmstring');
 
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
   }
 
   render() {
-    const proxyUrl = new URL(window.adminUrl);
+    const proxyUrl = new URL(adminUrl);
     proxyUrl.searchParams.append('page', 'pagespeed-proxy');
 
     return (
       <form
         method="post"
-        action={document.querySelector('#admin_url_javascript_update').value}
+        action={getValueOf('#admin_url_javascript_update')}
         className="clearfix"
       >
-        <div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
+        <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
         <PageContent header={__('Javascript Optimization')}>
           <Helmet>
-            <title>Javascript Optimization {window.siteTitle}</title>
+            <title>Javascript Optimization {siteTitle}</title>
           </Helmet>
           <Info
             color="seagreen"
@@ -482,11 +484,7 @@ class JavascriptView extends Component {
                   <span>
                     <p className="description lazyscriptsoptions">
                       This option is compatible with{' '}
-                      <a
-                        href={
-                          document.querySelector('#lazyload_plugins_url').value
-                        }
-                      >
+                      <a href={getValueOf('#lazyload_plugins_url')}>
                         WordPress lazy load plugins
                       </a>{' '}
                       that use Lazy Load XT. Those plugins are{' '}

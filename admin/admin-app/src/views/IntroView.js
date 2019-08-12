@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import getValueOf from '../utils/getValueOf';
+import { homeUrl, adminUrl, siteTitle } from '../utils/globalVars';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
 
-const homeUrl = window.homeUrl.value;
 const baseHomeUrl = new URL(homeUrl).host.replace('www', '');
 
 class IntroView extends Component {
   constructor(props) {
     super(props);
 
-    this.lgcode = document.querySelector('#lgcode').value;
-    this.google_intlcode = document.querySelector('#google_intlcode').value;
+    this.lgcode = getValueOf('#lgcode');
+    this.google_intlcode = getValueOf('#google_intlcode');
   }
 
   render() {
@@ -24,13 +25,13 @@ class IntroView extends Component {
       this.google_intlcode
     }?url=${encodeURIComponent(homeUrl)}`;
 
-    const monitorUrl = new URL(window.adminUrl);
+    const monitorUrl = new URL(adminUrl);
     monitorUrl.searchParams.append('page', 'pagespeed-monitor');
 
     return (
       <PageContent header={__('Introduction')}>
         <Helmet>
-          <title>Google PageSpeed Optimization {window.siteTitle}</title>
+          <title>Google PageSpeed Optimization {siteTitle}</title>
         </Helmet>
         <p>
           Take a moment to explore the abilities of this plugin. This plugin is

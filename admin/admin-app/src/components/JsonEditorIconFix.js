@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { homeUrl } from '../utils/globalVars';
 
 const iconsUrl =
-  window.homeUrl +
+  homeUrl +
   '/wp-content/plugins/above-the-fold-optimization/admin/js/jsoneditor/img/jsoneditor-icons.svg';
 
 class JsonEditorIconFix extends Component {

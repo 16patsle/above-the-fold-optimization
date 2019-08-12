@@ -3,6 +3,13 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
+import getValueOf from '../utils/getValueOf';
+import {
+  adminUrl,
+  siteTitle,
+  abtfAdminNonce,
+  ajaxUrl
+} from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
@@ -15,7 +22,7 @@ class ProxyView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(document.querySelector('#proxy_settings').value),
+      options: JSON.parse(getValueOf('#proxy_settings', 'object')),
       cacheStats: {
         files: '',
         size: '',
@@ -42,8 +49,8 @@ class ProxyView extends Component {
       this.state.options.cssProxyPreload
     );
 
-    this.lgcode = document.querySelector('#lgcode').value;
-    this.google_intlcode = document.querySelector('#google_intlcode').value;
+    this.lgcode = getValueOf('#lgcode');
+    this.google_intlcode = getValueOf('#google_intlcode');
 
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
@@ -56,32 +63,32 @@ class ProxyView extends Component {
   async updateCacheStats() {
     this.setState({ cacheStatsLoading: true });
     const cacheStats = await (await fetch(
-      window.ajaxurl + '?action=abtf_cache_stats'
+      ajaxUrl + '?action=abtf_cache_stats'
     )).json();
 
     this.setState({ cacheStats, cacheStatsLoading: false });
   }
 
   render() {
-    const emptyCacheUrl = new URL(window.adminUrl);
+    const emptyCacheUrl = new URL(adminUrl);
     emptyCacheUrl.searchParams.append('page', 'pagespeed-proxy');
     emptyCacheUrl.searchParams.append('empty_cache', 1);
 
     return (
       <form
         method="post"
-        action={document.querySelector('#admin_url_proxy_update').value}
+        action={getValueOf('#admin_url_proxy_update')}
         className="clearfix"
       >
-        <div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
+        <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
         <PageContent header={__('External Resource Proxy')}>
           <Helmet>
-            <title>External Resource Proxy {window.siteTitle}</title>
+            <title>External Resource Proxy {siteTitle}</title>
           </Helmet>
           <div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
             <img
               src={
-                document.querySelector('#wpabtf_uri').value +
+                getValueOf('#wpabtf_uri') +
                 'admin/images/browsercache-error.png'
               }
               alt="Google Bot"

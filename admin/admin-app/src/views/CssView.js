@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
+import getValueOf from '../utils/getValueOf';
+import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
@@ -17,7 +19,7 @@ class CssView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(document.querySelector('#css_settings').value)
+      options: JSON.parse(getValueOf('#css_settings', 'object'))
     };
 
     this.state.options.ignore = newlineArrayString(this.state.options.ignore);
@@ -32,34 +34,32 @@ class CssView extends Component {
       this.state.options.googleFontsRemove
     );
 
-    this.lgcode = document.querySelector('#lgcode').value;
-    this.google_intlcode = document.querySelector('#google_intlcode').value;
-    this.loadCSSVersion = JSON.parse(
-      document.querySelector('#loadcss_version').value
-    );
-    this.webfontVersion = document.querySelector('#webfont_version').value;
-    this.cdnVersion = document.querySelector('#cdn_version').value;
-    this.fontThemePath = document.querySelector('#font_theme_path').value;
+    this.lgcode = getValueOf('#lgcode');
+    this.google_intlcode = getValueOf('#google_intlcode');
+    this.loadCSSVersion = JSON.parse(getValueOf('#loadcss_version', 'object'));
+    this.webfontVersion = getValueOf('#webfont_version');
+    this.cdnVersion = getValueOf('#cdn_version');
+    this.fontThemePath = getValueOf('#font_theme_path');
 
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
   }
 
   render() {
-    const proxyUrl = new URL(window.adminUrl);
+    const proxyUrl = new URL(adminUrl);
     proxyUrl.searchParams.append('page', 'pagespeed-proxy');
 
     return (
       <form
         method="post"
-        action={document.querySelector('#admin_url_css_update').value}
+        action={getValueOf('#admin_url_css_update')}
         className="clearfix"
         encType="multipart/form-data"
       >
-        <div dangerouslySetInnerHTML={{ __html: window.abtfAdminNonce }}></div>
+        <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
         <PageContent header={__('CSS Optimization')}>
           <Helmet>
-            <title>CSS Optimization {window.siteTitle}</title>
+            <title>CSS Optimization {siteTitle}</title>
           </Helmet>
           {this.loadCSSVersion.error === 'not_found' ? (
             <h1 style={{ color: 'red' }}>
