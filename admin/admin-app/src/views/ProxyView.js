@@ -293,8 +293,7 @@ class ProxyView extends Component {
               ) : null}
               <tr valign="top">
                 <th scope="row">&nbsp;</th>
-                <td style={{ paddingTop: 0 }}>
-                  <a id="jsoncnf">&nbsp;</a>
+                <td style={{ paddingTop: 0 }} id="jsoncnf">
                   <fieldset
                     style={{
                       border: 'solid 1px #efefef',
@@ -400,7 +399,7 @@ class ProxyView extends Component {
           <br />
           <br />
           <h3 style={{ margin: 0, padding: 0 }} id="stats">
-            Cache Stats<a name="stats">&nbsp;</a>
+            Cache Stats
           </h3>
           <table
             style={

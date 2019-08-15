@@ -556,6 +556,7 @@ class CssView extends Component {
                                   <a
                                     href={`https://www.google.com/search?q=minify+css+online&amp;hl=${this.lgcode}`}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className="button button-secondary button-small"
                                   >
                                     minify

@@ -129,8 +129,9 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
               paddingLeft: '0px',
               paddingBottom: '0px'
             }}
+            id="searchreplace"
           >
-            Search & Replace<a name="searchreplace">&nbsp;</a>
+            Search & Replace
           </h3>
           <p className="description">
             This option enables to replace strings in the HTML. Enter an array

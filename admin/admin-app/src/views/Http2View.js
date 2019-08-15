@@ -8,8 +8,7 @@ import {
   adminUrl,
   homeUrl,
   siteTitle,
-  abtfAdminNonce,
-  ajaxUrl
+  abtfAdminNonce
 } from '../utils/globalVars';
 import JsonEditor from '../components/JsonEditor';
 import { http2Schema } from '../components/editorSchema';
@@ -122,6 +121,7 @@ class Http2View extends Component {
               homeUrl
             )}`}
             target="_blank"
+            rel="noopener noreferrer"
             className="button"
           >
             Test your website for HTTP/2 support
