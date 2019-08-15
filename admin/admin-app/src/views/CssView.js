@@ -4,7 +4,12 @@ import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
 import getValueOf from '../utils/getValueOf';
-import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import {
+  adminUrl,
+  siteTitle,
+  abtfAdminNonce,
+  lgCode
+} from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
@@ -34,8 +39,6 @@ class CssView extends Component {
       this.state.options.googleFontsRemove
     );
 
-    this.lgcode = getValueOf('#lgcode');
-    this.google_intlcode = getValueOf('#google_intlcode');
     this.loadCSSVersion = JSON.parse(getValueOf('#loadcss_version', 'object'));
     this.webfontVersion = getValueOf('#webfont_version');
     this.cdnVersion = getValueOf('#cdn_version');
@@ -91,7 +94,7 @@ class CssView extends Component {
                     </a>{' '}
                     (v{this.loadCSSVersion.version}).{' '}
                     <a
-                      href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${this.lgcode}`}
+                      href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${lgCode}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -123,7 +126,7 @@ class CssView extends Component {
                                   <code>requestAnimationFrame</code> API
                                   following the{' '}
                                   <a
-                                    href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${this.lgcode}`}
+                                    href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${lgCode}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
@@ -278,7 +281,7 @@ class CssView extends Component {
                                 <span>
                                   Select the method to load{' '}
                                   <a
-                                    href={`https://developers.google.com/speed/libraries/?hl=${this.lgcode}#web-font-loader`}
+                                    href={`https://developers.google.com/speed/libraries/?hl=${lgCode}#web-font-loader`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
@@ -376,7 +379,7 @@ class CssView extends Component {
                                     <span>
                                       Enter the{' '}
                                       <a
-                                        href={`https://developers.google.com/fonts/docs/getting_started?hl=${this.lgcode}&csw=1`}
+                                        href={`https://developers.google.com/fonts/docs/getting_started?hl=${lgCode}&csw=1`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                       >
@@ -384,7 +387,7 @@ class CssView extends Component {
                                       </a>{' '}
                                       definitions of{' '}
                                       <a
-                                        href={`https://fonts.google.com/?hl=${this.lgcode}`}
+                                        href={`https://fonts.google.com/?hl=${lgCode}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                       >
@@ -554,7 +557,7 @@ class CssView extends Component {
                                   of the fonts in your theme directory, e.g.{' '}
                                   <code>{this.fontThemePath}</code> and{' '}
                                   <a
-                                    href={`https://www.google.com/search?q=minify+css+online&amp;hl=${this.lgcode}`}
+                                    href={`https://www.google.com/search?q=minify+css+online&amp;hl=${lgCode}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="button button-secondary button-small"

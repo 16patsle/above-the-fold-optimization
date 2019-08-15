@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
-import getValueOf from '../utils/getValueOf';
-import { homeUrl, adminUrl, siteTitle } from '../utils/globalVars';
+import {
+  homeUrl,
+  adminUrl,
+  siteTitle,
+  lgCode,
+  googleIntlCode
+} from '../utils/globalVars';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
 
 const baseHomeUrl = new URL(homeUrl).host.replace('www', '');
 
 class IntroView extends Component {
-  constructor(props) {
-    super(props);
-
-    this.lgcode = getValueOf('#lgcode');
-    this.google_intlcode = getValueOf('#google_intlcode');
-  }
-
   render() {
     // Google uses a different host for the US
     const thinkHost = `https://testmysite.${
-      this.google_intlcode === 'en-us' ? 'think' : ''
+      googleIntlCode === 'en-us' ? 'think' : ''
     }withgoogle.com/`;
-    const thinkUrl = `${thinkHost}intl/${
-      this.google_intlcode
-    }?url=${encodeURIComponent(homeUrl)}`;
+    const thinkUrl = `${thinkHost}intl/${googleIntlCode}?url=${encodeURIComponent(
+      homeUrl
+    )}`;
 
     const monitorUrl = new URL(adminUrl);
     monitorUrl.searchParams.append('page', 'pagespeed-monitor');
@@ -52,9 +50,7 @@ class IntroView extends Component {
           <strong>This plugin is not intended for easy usage.</strong> Please
           seek expert help if you do not understand how to use this plugin.{' '}
           <a
-            href={`https://encrypted.google.com/search?hl=${
-              this.lgcode
-            }&q=${encodeURIComponent(
+            href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
               'wordpress pagespeed optimization service'
             )}`}
             target="_blank"
@@ -102,7 +98,7 @@ class IntroView extends Component {
         <p>
           <a
             className="button button-small"
-            href={`${thinkUrl}&hl=${this.lgcode}`}
+            href={`${thinkUrl}&hl=${lgCode}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -112,7 +108,7 @@ class IntroView extends Component {
             className="button button-small"
             href={`https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
               homeUrl
-            )}&hl=${this.lgcode}`}
+            )}&hl=${lgCode}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -122,7 +118,7 @@ class IntroView extends Component {
             className="button button-small"
             href={`https://search.google.com/search-console/mobile-friendly?url=${encodeURIComponent(
               homeUrl
-            )}&hl=${this.lgcode}`}
+            )}&hl=${lgCode}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -207,9 +203,9 @@ class IntroView extends Component {
           Start with the fundament of your website: the server. Make sure that
           the best{' '}
           <a
-            href={`https://encrypted.google.com/search?hl=${
-              this.lgcode
-            }&q=${encodeURIComponent('gzip configuration')}`}
+            href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+              'gzip configuration'
+            )}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -217,9 +213,9 @@ class IntroView extends Component {
           </a>{' '}
           and{' '}
           <a
-            href={`https://encrypted.google.com/search?hl=${
-              this.lgcode
-            }&q=${encodeURIComponent('http cache headers configuration')}`}
+            href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+              'http cache headers configuration'
+            )}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -228,9 +224,7 @@ class IntroView extends Component {
           are installed and if the server is slow, find ways to improve the
           speed of the server by optimizing WordPress plugins or by using a{' '}
           <a
-            href={`https://encrypted.google.com/search?hl=${
-              this.lgcode
-            }&q=${encodeURIComponent(
+            href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
               'best wordpress full page cache' + new Date().getFullYear()
             )}`}
             target="_blank"
@@ -252,7 +246,7 @@ class IntroView extends Component {
         <p>
           Google{' '}
           <a
-            href={`https://developers.google.com/speed/docs/insights/Server?hl=${this.lgcode}`}
+            href={`https://developers.google.com/speed/docs/insights/Server?hl=${lgCode}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -296,7 +290,7 @@ class IntroView extends Component {
           <a
             href={`https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
               homeUrl
-            )}&hl=${this.lgcode}`}
+            )}&hl=${lgCode}`}
             target="_blank"
             rel="noopener noreferrer"
           >

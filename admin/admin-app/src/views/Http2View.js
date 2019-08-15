@@ -8,7 +8,8 @@ import {
   adminUrl,
   homeUrl,
   siteTitle,
-  abtfAdminNonce
+  abtfAdminNonce,
+  lgCode
 } from '../utils/globalVars';
 import JsonEditor from '../components/JsonEditor';
 import { http2Schema } from '../components/editorSchema';
@@ -63,9 +64,6 @@ class Http2View extends Component {
       ]
     };
 
-    this.lgcode = getValueOf('#lgcode');
-    this.google_intlcode = getValueOf('#google_intlcode');
-
     this.getOption = getOption.bind(this);
     this.setOption = setOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
@@ -106,7 +104,7 @@ class Http2View extends Component {
           </Helmet>
           <p>
             <a
-              href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${this.lgcode}`}
+              href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${lgCode}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -138,7 +136,7 @@ class Http2View extends Component {
                     When enabled, resources such as scripts, stylesheets and
                     images can be pushed to visitors together with the HTML (
                     <a
-                      href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${this.lgcode}#server_push`}
+                      href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${lgCode}#server_push`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

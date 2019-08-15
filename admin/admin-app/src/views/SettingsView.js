@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
 import getValueOf from '../utils/getValueOf';
-import { siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';

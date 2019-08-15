@@ -8,7 +8,9 @@ import {
   adminUrl,
   siteTitle,
   abtfAdminNonce,
-  ajaxUrl
+  ajaxUrl,
+  lgCode,
+  wpAbtfUri
 } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import PageContent from '../components/PageContent';
@@ -49,9 +51,6 @@ class ProxyView extends Component {
       this.state.options.cssProxyPreload
     );
 
-    this.lgcode = getValueOf('#lgcode');
-    this.google_intlcode = getValueOf('#google_intlcode');
-
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
   }
@@ -87,10 +86,7 @@ class ProxyView extends Component {
           </Helmet>
           <div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
             <img
-              src={
-                getValueOf('#wpabtf_uri') +
-                'admin/images/browsercache-error.png'
-              }
+              src={wpAbtfUri + 'admin/images/browsercache-error.png'}
               alt="Google Bot"
               width={225}
               title="Leverage browser caching"
@@ -103,7 +99,7 @@ class ProxyView extends Component {
           <p>
             This feature enables to pass the{' '}
             <a
-              href={`https://developers.google.com/speed/docs/insights/LeverageBrowserCaching?hl=${this.lgcode}`}
+              href={`https://developers.google.com/speed/docs/insights/LeverageBrowserCaching?hl=${lgCode}`}
               target="_blank"
               rel="noopener noreferrer"
             >

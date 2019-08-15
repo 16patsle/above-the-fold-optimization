@@ -4,7 +4,12 @@ import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
 import getValueOf from '../utils/getValueOf';
-import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import {
+  adminUrl,
+  siteTitle,
+  abtfAdminNonce,
+  utmString
+} from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
@@ -32,8 +37,6 @@ class JavascriptView extends Component {
       this.state.options.idleDelivery
     );
 
-    this.utmstring = getValueOf('#utmstring');
-
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
   }
@@ -60,7 +63,7 @@ class JavascriptView extends Component {
             <strong>Tip:</strong> More information about javascript optimization
             can be found in{' '}
             <a
-              href={'https://www.igvita.com/?' + this.utmstring}
+              href={'https://www.igvita.com/?' + utmString}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -71,7 +74,7 @@ class JavascriptView extends Component {
             <a
               href={
                 'https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/?' +
-                this.utmstring
+                utmString
               }
               target="_blank"
               rel="noopener noreferrer"
@@ -80,7 +83,7 @@ class JavascriptView extends Component {
             </a>{' '}
             (
             <a
-              href={'https://hpbn.co/?' + this.utmstring}
+              href={'https://hpbn.co/?' + utmString}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -110,7 +113,7 @@ class JavascriptView extends Component {
                     <a
                       href={
                         'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' +
-                        this.utmstring
+                        utmString
                       }
                       target="_blank"
                       rel="noopener noreferrer"
@@ -167,7 +170,7 @@ class JavascriptView extends Component {
                                     <a
                                       href={
                                         'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' +
-                                        this.utmstring
+                                        utmString
                                       }
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -214,7 +217,7 @@ class JavascriptView extends Component {
                                       <a
                                         href={
                                           'https://addyosmani.com/basket.js/#' +
-                                          this.utmstring
+                                          utmString
                                         }
                                         target="_blank"
                                         rel="noopener noreferrer"

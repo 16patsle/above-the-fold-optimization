@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
 import getValueOf from '../utils/getValueOf';
-import { siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import SyntaxHighlighter, {
   registerLanguage
@@ -33,9 +33,6 @@ class HtmlView extends Component {
     this.state.options.commentsPreserve = newlineArrayString(
       this.state.options.commentsPreserve
     );
-
-    this.lgcode = getValueOf('#lgcode');
-    this.google_intlcode = getValueOf('#google_intlcode');
 
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);

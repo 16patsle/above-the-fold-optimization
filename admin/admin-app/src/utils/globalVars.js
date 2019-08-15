@@ -10,3 +10,7 @@ export const abtfAdminNonce = document.querySelector('#abtf_admin_nonce')
 export const siteTitle =
   '‹' + document.title.split('‹')[1] || '‹ WordPress Site — WordPress';
 export const ajaxUrl = window.ajaxurl || '/wp-admin/admin-ajax.php';
+export const lgCode = getValueOf('#lgcode');
+export const utmString = getValueOf('#utmstring');
+export const googleIntlCode = getValueOf('#google_intlcode');
+export const wpAbtfUri = getValueOf('#wpabtf_uri');

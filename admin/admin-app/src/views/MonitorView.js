@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import getValueOf from '../utils/getValueOf';
-import { homeUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import {
+  homeUrl,
+  adminUrl,
+  siteTitle,
+  abtfAdminNonce,
+  lgCode,
+  utmString,
+  wpAbtfUri
+} from '../utils/globalVars';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
 
@@ -10,9 +18,6 @@ class MonitorView extends Component {
   constructor(props) {
     super(props);
 
-    this.lgcode = getValueOf('#lgcode');
-    this.utmstring = getValueOf('#utmstring');
-    this.google_intlcode = getValueOf('#google_intlcode');
     this.sllInstalled = new URL(homeUrl).protocol === 'https:';
     this.uptimerobotStatus = getValueOf('#uptimerobot_status');
     this.uptimerobotInstallLink = getValueOf('#uptimerobot_install_link');
@@ -33,12 +38,12 @@ class MonitorView extends Component {
           </Helmet>
           <div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
             <a
-              href={`https://www.google.nl/webmasters/?hl=${this.lgcode}`}
+              href={`https://www.google.nl/webmasters/?hl=${lgCode}`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src={getValueOf('#wpabtf_uri') + 'admin/images/googlebot.png'}
+                src={wpAbtfUri + 'admin/images/googlebot.png'}
                 alt="Google Bot"
                 title="Google Webmasters Monitor"
               />
@@ -58,7 +63,7 @@ class MonitorView extends Component {
             problem occurs, preventing damage to your reputation in Google. The
             most important aspects to monitor besides basic uptime are the{' '}
             <a
-              href={`https://testmysite.thinkwithgoogle.com/?url=${homeUrl}&hl=${this.lgcode}`}
+              href={`https://testmysite.thinkwithgoogle.com/?url=${homeUrl}&hl=${lgCode}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -66,9 +71,7 @@ class MonitorView extends Component {
             </a>
             ,{' '}
             <a
-              href={`https://www.google.com/transparencyreport/safebrowsing/diagnostic/index.html?hl=${
-                this.lgcode
-              }#url=${encodeURIComponent(
+              href={`https://www.google.com/transparencyreport/safebrowsing/diagnostic/index.html?hl=${lgCode}#url=${encodeURIComponent(
                 new URL(homeUrl).host.replace('www', '')
               )}`}
               target="_blank"
@@ -82,9 +85,7 @@ class MonitorView extends Component {
           <p>
             There are many free and paid monitoring services.{' '}
             <a
-              href={`https://encrypted.google.com/search?hl=${
-                this.lgcode
-              }&q=${encodeURIComponent(
+              href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
                 'best website monitor ' + new Date().getFullYear()
               )}`}
               target="_blank"
@@ -98,7 +99,7 @@ class MonitorView extends Component {
             <strong>
               You should always register your website for{' '}
               <a
-                href={`https://www.google.com/webmasters/?hl=${this.lgcode}`}
+                href={`https://www.google.com/webmasters/?hl=${lgCode}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -112,12 +113,12 @@ class MonitorView extends Component {
           </Info>
           <div style={{ float: 'right' }}>
             <a
-              href={`https://uptimerobot.com/?${this.utmstring}`}
+              href={`https://uptimerobot.com/?${utmString}`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src={getValueOf('#wpabtf_uri') + 'admin/images/uptimerobot.png'}
+                src={wpAbtfUri + 'admin/images/uptimerobot.png'}
                 alt="UptimeRobot.com"
                 title="UptimeRobot.com - Free website monitor"
               />
@@ -152,14 +153,12 @@ class MonitorView extends Component {
           ) : null}
           <div style={{ float: 'right' }}>
             <a
-              href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${this.utmstring}`}
+              href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${utmString}`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src={
-                  getValueOf('#wpabtf_uri') + 'admin/images/google-security.png'
-                }
+                src={wpAbtfUri + 'admin/images/google-security.png'}
                 alt="Google Security Blog"
                 title="Google Security Blog"
               />
@@ -178,7 +177,7 @@ class MonitorView extends Component {
             Chrome browser will start showing an insecure warning for non SSL
             websites (
             <a
-              href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${this.utmstring}`}
+              href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${utmString}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -189,7 +188,7 @@ class MonitorView extends Component {
           <p>
             Register your website for free at{' '}
             <a
-              href={`https://certificatemonitor.org/?${this.utmstring}`}
+              href={`https://certificatemonitor.org/?${utmString}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -198,9 +197,7 @@ class MonitorView extends Component {
             to receive a notification when a SSL certificate is about the
             expire.{' '}
             <a
-              href={`https://encrypted.google.com/search?hl=${
-                this.lgcode
-              }&q=${encodeURIComponent(
+              href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
                 'ssl certificate monitor ' + new Date().getFullYear()
               )}`}
               target="_blank"
@@ -220,7 +217,7 @@ class MonitorView extends Component {
           <p>
             One of the many solutions is{' '}
             <a
-              href={`https://www.browserstack.com/automate?${this.utmstring}`}
+              href={`https://www.browserstack.com/automate?${utmString}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -228,9 +225,9 @@ class MonitorView extends Component {
             </a>
             .{' '}
             <a
-              href={`https://encrypted.google.com/search?hl=${
-                this.lgcode
-              }&q=${encodeURIComponent('selenium website monitor')}`}
+              href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                'selenium website monitor'
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
             >
