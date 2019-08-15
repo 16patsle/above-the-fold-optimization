@@ -8,7 +8,6 @@
 	<input id="wpabtf_uri" type="hidden" value="<?php print WPABTF_URI; ?>" />
 	<div id="abtf_admin_nonce" hidden><?php echo wp_nonce_field('abovethefold'); ?></div>
 	<!-- HTML -->
-	<input id="admin_url_html_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_html_update'); ?>" />
 	<?php
 		$html_minify = isset($options['html_minify']) && intval($options['html_minify']) === 1;
 		$html_comments = isset($options['html_comments']) && intval($options['html_comments']) === 1;
@@ -29,7 +28,6 @@
 	?>
 	<input id="html_settings" type="hidden" value="<?php echo htmlspecialchars($html_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
 	<!-- CSS -->
-	<input id="admin_url_css_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_css_update'); ?>" />
 	<?php
 		$cssdelivery = isset($options['cssdelivery']) && intval($options['cssdelivery']) === 1;
 		$loadcss_enhanced = isset($options['loadcss_enhanced']) && intval($options['loadcss_enhanced']) === 1;
@@ -131,7 +129,6 @@
 	<input id="cdn_version"  type="hidden" value='<?php echo $this->CTRL->gwfo->cdn_version ?>'/>
 	<input id="font_theme_path"  type="hidden" value='<?php print htmlentities(str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/'), ENT_COMPAT, 'utf-8'); ?>'/>
 	<!-- Javascript -->
-	<input id="admin_url_javascript_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_javascript_update'); ?>" />
 	<?php
 	$jsProxy = (isset($options['js_proxy']) && intval($options['js_proxy']) === 1);
 
@@ -217,7 +214,6 @@
 	?>
 	<input id="http2_settings" type="hidden" value='<?php echo $http2_settings ?>'/>
 	<!-- Proxy -->
-	<input id="admin_url_proxy_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_proxy_update'); ?>" />
 	<?php
 		// Javascript Proxy Enabled?
     	$jsProxy = (isset($options['js_proxy']) && intval($options['js_proxy']) === 1);
@@ -286,7 +282,6 @@
 	?>
 	<input id="proxy_settings" type="hidden" value="<?php echo htmlspecialchars($proxy_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
 	<!-- Settings -->
-	<input id="admin_url_settings_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_settings_update'); ?>" />
 	<?php
 		$settings_adminbar = !isset($options['adminbar']) || intval($options['adminbar']) === 1;
 		$settings_clear_pagecache = !isset($options['clear_pagecache']) || intval($options['clear_pagecache']) === 1;
@@ -316,7 +311,6 @@
 	<input id="client_hashes" type="hidden" value='<?php echo $client_hashes ?>'/>
 	<!-- Monitor -->
 	<input id="ssl_installed" type="hidden" value='<?php (strtolower($home_url['scheme']) === 'http') ? false : true; ?>'/>
-	<input id="admin_url_monitor_update" type="hidden" value="<?php echo admin_url('admin-post.php?action=abtf_monitor_update'); ?>" />
 	<?php
 		$uptimerobot_install_link = false;
 		$uptimerobot_overview = false;

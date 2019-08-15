@@ -77,7 +77,7 @@ class ProxyView extends Component {
     return (
       <form
         method="post"
-        action={getValueOf('#admin_url_proxy_update')}
+        action={adminUrl + '?action=abtf_proxy_update'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>

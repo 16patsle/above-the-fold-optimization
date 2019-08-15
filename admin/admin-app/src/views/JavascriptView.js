@@ -45,7 +45,7 @@ class JavascriptView extends Component {
     return (
       <form
         method="post"
-        action={getValueOf('#admin_url_javascript_update')}
+        action={adminUrl + '?action=abtf_javascript_update'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>

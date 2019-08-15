@@ -23,7 +23,7 @@ class MonitorView extends Component {
     return (
       <form
         method="post"
-        action={getValueOf('#admin_url_monitor_update')}
+        action={adminUrl + '?action=abtf_monitor_update'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>

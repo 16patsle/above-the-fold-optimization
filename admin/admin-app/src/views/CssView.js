@@ -52,7 +52,7 @@ class CssView extends Component {
     return (
       <form
         method="post"
-        action={getValueOf('#admin_url_css_update')}
+        action={adminUrl + '?action=abtf_css_update'}
         className="clearfix"
         encType="multipart/form-data"
       >
