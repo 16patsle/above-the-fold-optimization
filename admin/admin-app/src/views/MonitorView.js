@@ -13,7 +13,7 @@ class MonitorView extends Component {
     this.lgcode = getValueOf('#lgcode');
     this.utmstring = getValueOf('#utmstring');
     this.google_intlcode = getValueOf('#google_intlcode');
-    this.sllInstalled = getValueOf('#ssl_installed') === 'true';
+    this.sllInstalled = new URL(homeUrl).protocol === 'https:';
     this.uptimerobotStatus = getValueOf('#uptimerobot_status');
     this.uptimerobotInstallLink = getValueOf('#uptimerobot_install_link');
     this.uptimerobotOverview = getValueOf('#uptimerobot_overview');

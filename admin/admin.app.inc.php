@@ -310,7 +310,6 @@
 	?>
 	<input id="client_hashes" type="hidden" value='<?php echo $client_hashes ?>'/>
 	<!-- Monitor -->
-	<input id="ssl_installed" type="hidden" value='<?php (strtolower($home_url['scheme']) === 'http') ? false : true; ?>'/>
 	<?php
 		$uptimerobot_install_link = false;
 		$uptimerobot_overview = false;
