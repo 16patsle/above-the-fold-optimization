@@ -1,12 +1,17 @@
 <span>
-    <input id="homeUrl" type="hidden" value="<?php echo get_home_url(); ?>" />
-    <input id="adminUrl" type="hidden" value="<?php echo admin_url('admin.php'); ?>" />
-    <input id="adminTabs" type="hidden" value="<?php echo htmlspecialchars(json_encode($this->tabs)); ?>" />
-    <input id="lgcode" type="hidden" value="<?php echo $lgcode; ?>" />
-	<input id="google_intlcode" type="hidden" value="<?php echo $this->google_intlcode; ?>" />
-	<input id="utmstring" type="hidden" value="<?php echo $utmstring; ?>" />
-	<input id="wpabtf_uri" type="hidden" value="<?php print WPABTF_URI; ?>" />
-	<div id="abtf_admin_nonce" hidden><?php echo wp_nonce_field('abovethefold'); ?></div>
+    <?php
+		$admin_values = array(
+			'homeUrl' => get_home_url(),
+			'adminUrl' => admin_url('admin.php'),
+			'adminTabs' => $this->tabs,
+			'abtfAdminNonce' => wp_nonce_field('abovethefold'),
+			'lgCode' => $lgcode,
+			'utmString' => $utmstring,
+			'googleIntlCode' => $this->google_intlcode,
+			'wpAbtfUri' => WPABTF_URI
+		);
+	?>
+	<input id="admin_values" type="hidden" value="<?php echo htmlspecialchars(json_encode($admin_values)) ?>"/>
 	<!-- HTML -->
 	<?php
 		$html_minify = isset($options['html_minify']) && intval($options['html_minify']) === 1;
