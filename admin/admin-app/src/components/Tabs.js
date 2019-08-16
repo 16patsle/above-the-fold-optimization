@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import getValueOf from '../utils/getValueOf';
-import { adminUrl } from '../utils/globalVars';
-
-const tabs = JSON.parse(getValueOf('#adminTabs', 'object'));
+import { adminUrl, adminTabs } from '../utils/globalVars';
 
 class Tabs extends Component {
   render() {
     const tabElements = [];
-    for (const tabKey in tabs) {
+    for (const tabKey in adminTabs) {
       if (tabKey === 'criticalcss-test' || tabKey === 'build-tool') {
         continue;
       }
@@ -22,7 +19,7 @@ class Tabs extends Component {
       url.hash += tabKey !== 'intro' ? '#/' + tabKey : '#/';
       tabElements.push(
         <a className={'nav-tab' + className} href={encodeURI(url)} key={tabKey}>
-          {tabs[tabKey]}
+          {adminTabs[tabKey]}
         </a>
       );
     }

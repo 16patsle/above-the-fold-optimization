@@ -4,6 +4,7 @@ export const reactDir = getValueOf('#reactDir');
 export const homeUrl = getValueOf('#homeUrl') || 'http://localhost';
 export const adminUrl =
   getValueOf('#adminUrl') || 'http://localhost/wp-admin/admin.php';
+export const adminTabs = JSON.parse(getValueOf('#adminTabs', 'object'));
 export const abtfAdminNonce = document.querySelector('#abtf_admin_nonce')
   ? document.querySelector('#abtf_admin_nonce').innerHTML
   : '';
