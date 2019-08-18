@@ -5,11 +5,9 @@ import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
 import { adminUrl, siteTitle, abtfAdminNonce, htmlSettings } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
-import SyntaxHighlighter, {
-  registerLanguage
-} from 'react-syntax-highlighter/light';
-import php from 'react-syntax-highlighter/languages/hljs/php';
-import vs from 'react-syntax-highlighter/styles/hljs/vs';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import php from 'react-syntax-highlighter/dist/esm/languages/hljs/php';
+import vs from 'react-syntax-highlighter/dist/esm/styles/hljs/vs';
 import JsonEditor from '../components/JsonEditor';
 import { htmlSchema } from '../components/editorSchema';
 import Info from '../components/Info';
@@ -19,7 +17,7 @@ import SettingTextarea from '../components/SettingTextarea';
 import SearchReplaceExample from '../components/SearchReplaceExample';
 import SubmitButton from '../components/SubmitButton';
 
-registerLanguage('php', php);
+SyntaxHighlighter.registerLanguage('php', php);
 
 class HtmlView extends Component {
   constructor(props) {
