@@ -261,7 +261,9 @@ class CssView extends Component {
                                 },
                                 {
                                   value: 'async_cdn',
-                                  name: `Async from Google CDN (v${this.getOption('cdnVersion')})`
+                                  name: `Async from Google CDN (v${this.getOption(
+                                    'cdnVersion'
+                                  )})`
                                 },
                                 {
                                   value: 'wordpress',
@@ -550,7 +552,8 @@ class CssView extends Component {
                                 <p>
                                   Change the paths of the fonts to the location
                                   of the fonts in your theme directory, e.g.{' '}
-                                  <code>{this.getOption('fontThemePath')}</code> and{' '}
+                                  <code>{this.getOption('fontThemePath')}</code>{' '}
+                                  and{' '}
                                   <a
                                     href={`https://www.google.com/search?q=minify+css+online&amp;hl=${lgCode}`}
                                     target="_blank"

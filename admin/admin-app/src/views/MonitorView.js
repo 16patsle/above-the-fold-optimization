@@ -137,7 +137,10 @@ class MonitorView extends Component {
                 display an UptimeRobot.com overview.
               </p>
               <p>
-                <a href={this.getOption('uptimerobotInstallLink')} className="button">
+                <a
+                  href={this.getOption('uptimerobotInstallLink')}
+                  className="button"
+                >
                   Install plugin
                 </a>
               </p>
@@ -152,7 +155,9 @@ class MonitorView extends Component {
           {this.getOption('uptimerobotStatus') === 'active' ? (
             <div
               className="uptime"
-              dangerouslySetInnerHTML={{ __html: this.getOption('uptimerobotOverview') }}
+              dangerouslySetInnerHTML={{
+                __html: this.getOption('uptimerobotOverview')
+              }}
             ></div>
           ) : null}
           <div style={{ float: 'right' }}>

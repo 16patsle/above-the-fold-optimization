@@ -3,7 +3,12 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
-import { adminUrl, siteTitle, abtfAdminNonce, htmlSettings } from '../utils/globalVars';
+import {
+  adminUrl,
+  siteTitle,
+  abtfAdminNonce,
+  htmlSettings
+} from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import php from 'react-syntax-highlighter/dist/esm/languages/hljs/php';

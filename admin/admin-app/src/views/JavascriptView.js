@@ -510,7 +510,9 @@ class JavascriptView extends Component {
                       that use Lazy Load XT. Those plugins are{' '}
                       <u>not required</u> for this feature.
                     </p>
-                    <div style={{ float: 'left', width: '100%', overflow: 'auto' }}>
+                    <div
+                      style={{ float: 'left', width: '100%', overflow: 'auto' }}
+                    >
                       <SyntaxHighlighter
                         className="example-code lazyscriptsoptions"
                         language="xml"

@@ -3,7 +3,12 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
-import { adminUrl, siteTitle, abtfAdminNonce, settingsSettings } from '../utils/globalVars';
+import {
+  adminUrl,
+  siteTitle,
+  abtfAdminNonce,
+  settingsSettings
+} from '../utils/globalVars';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
@@ -126,29 +131,31 @@ class SettingsView extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(this.getOption('clientHashes')).map(algorithm => {
-                    return (
-                      <tr key={algorithm[0]}>
-                        <td
-                          style={{
-                            fontWeight: 'bold',
-                            textAlign: 'right',
-                            paddingRight: '5px'
-                          }}
-                        >
-                          {algorithm[0].toUpperCase()}
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            value={algorithm[0] + '-' + algorithm[1].public}
-                            style={{ width: '100%' }}
-                            readOnly
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {Object.entries(this.getOption('clientHashes')).map(
+                    algorithm => {
+                      return (
+                        <tr key={algorithm[0]}>
+                          <td
+                            style={{
+                              fontWeight: 'bold',
+                              textAlign: 'right',
+                              paddingRight: '5px'
+                            }}
+                          >
+                            {algorithm[0].toUpperCase()}
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              value={algorithm[0] + '-' + algorithm[1].public}
+                              style={{ width: '100%' }}
+                              readOnly
+                            />
+                          </td>
+                        </tr>
+                      );
+                    }
+                  )}
                 </tbody>
               </table>
               <strong>Debug mode client (admin users only)</strong>
@@ -162,29 +169,31 @@ class SettingsView extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(this.getOption('clientHashes')).map(algorithm => {
-                    return (
-                      <tr key={algorithm[0]}>
-                        <td
-                          style={{
-                            fontWeight: 'bold',
-                            textAlign: 'right',
-                            paddingRight: '5px'
-                          }}
-                        >
-                          {algorithm[0].toUpperCase()}
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            value={algorithm[0] + '-' + algorithm[1].debug}
-                            style={{ width: '100%' }}
-                            readOnly
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {Object.entries(this.getOption('clientHashes')).map(
+                    algorithm => {
+                      return (
+                        <tr key={algorithm[0]}>
+                          <td
+                            style={{
+                              fontWeight: 'bold',
+                              textAlign: 'right',
+                              paddingRight: '5px'
+                            }}
+                          >
+                            {algorithm[0].toUpperCase()}
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              value={algorithm[0] + '-' + algorithm[1].debug}
+                              style={{ width: '100%' }}
+                              readOnly
+                            />
+                          </td>
+                        </tr>
+                      );
+                    }
+                  )}
                 </tbody>
               </table>
             </span>
