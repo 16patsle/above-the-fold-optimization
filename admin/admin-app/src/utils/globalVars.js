@@ -6,7 +6,7 @@ export const reactDir = getValueOf('#reactDir');
 export const homeUrl = adminValues.homeUrl || 'http://localhost';
 export const adminUrl =
   adminValues.adminUrl || 'http://localhost/wp-admin/admin.php';
-export const adminTabs = adminValues.adminTabs;
+export const adminTabs = adminValues.adminTabs || {};
 export const abtfAdminNonce = adminValues.abtfAdminNonce || '';
 export const siteTitle =
   '‹' + document.title.split('‹')[1] || '‹ WordPress Site — WordPress';
@@ -15,3 +15,11 @@ export const lgCode = adminValues.lgCode;
 export const utmString = adminValues.utmString;
 export const googleIntlCode = adminValues.googleIntlCode;
 export const wpAbtfUri = adminValues.wpAbtfUri;
+
+export const htmlSettings = adminValues.htmlSettings || {};
+export const cssSettings = adminValues.cssSettings || {};
+export const javascriptSettings = adminValues.javascriptSettings || {};
+export const http2Settings = adminValues.http2Settings || {};
+export const proxySettings = adminValues.proxySettings || {};
+export const settingsSettings = adminValues.settingsSettings || {};
+export const monitorSettings = adminValues.monitorSettings || {};

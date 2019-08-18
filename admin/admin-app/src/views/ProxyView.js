@@ -3,14 +3,14 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
-import getValueOf from '../utils/getValueOf';
 import {
   adminUrl,
   siteTitle,
   abtfAdminNonce,
   ajaxUrl,
   lgCode,
-  wpAbtfUri
+  wpAbtfUri,
+  proxySettings
 } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import PageContent from '../components/PageContent';
@@ -24,7 +24,7 @@ class ProxyView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(getValueOf('#proxy_settings', 'object')),
+      options: proxySettings,
       cacheStats: {
         files: '',
         size: '',

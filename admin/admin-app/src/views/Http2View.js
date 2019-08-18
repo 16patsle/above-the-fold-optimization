@@ -3,13 +3,14 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption, setOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
-import getValueOf from '../utils/getValueOf';
 import {
   adminUrl,
   homeUrl,
   siteTitle,
   abtfAdminNonce,
-  lgCode
+  lgCode,
+  wpAbtfUri,
+  http2Settings
 } from '../utils/globalVars';
 import JsonEditor from '../components/JsonEditor';
 import { http2Schema } from '../components/editorSchema';
@@ -24,7 +25,7 @@ class Http2View extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(getValueOf('#http2_settings', 'object'))
+      options: http2Settings
     };
 
     this.http2Insert = {
@@ -228,9 +229,7 @@ class Http2View extends Component {
                   <br />
                   <br />
                   <img
-                    src={`${getValueOf(
-                      '#wpabtf_uri'
-                    )}admin/images/Cache_Digest_-_Warm_Cache.png`}
+                    src={`${wpAbtfUri}admin/images/Cache_Digest_-_Warm_Cache.png`}
                     alt="Cache-Digest"
                     style={{ width: '100%', maxWidth: 600 }}
                     title="Cache-Digest"

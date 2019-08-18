@@ -3,12 +3,12 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
-import getValueOf from '../utils/getValueOf';
 import {
   adminUrl,
   siteTitle,
   abtfAdminNonce,
-  utmString
+  utmString,
+  javascriptSettings
 } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import Info from '../components/Info';
@@ -24,7 +24,7 @@ class JavascriptView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(getValueOf('#javascript_settings', 'object'))
+      options: javascriptSettings
     };
 
     this.state.options.ignore = newlineArrayString(this.state.options.ignore);
@@ -487,7 +487,7 @@ class JavascriptView extends Component {
                   <span>
                     <p className="description lazyscriptsoptions">
                       This option is compatible with{' '}
-                      <a href={getValueOf('#lazyload_plugins_url')}>
+                      <a href={this.getOption('lazyloadPluginsUrl')}>
                         WordPress lazy load plugins
                       </a>{' '}
                       that use Lazy Load XT. Those plugins are{' '}

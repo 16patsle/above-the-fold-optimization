@@ -3,12 +3,12 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
-import getValueOf from '../utils/getValueOf';
 import {
   adminUrl,
   siteTitle,
   abtfAdminNonce,
-  lgCode
+  lgCode,
+  cssSettings
 } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import PageContent from '../components/PageContent';
@@ -24,7 +24,7 @@ class CssView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(getValueOf('#css_settings', 'object'))
+      options: cssSettings
     };
 
     this.state.options.ignore = newlineArrayString(this.state.options.ignore);
@@ -38,11 +38,6 @@ class CssView extends Component {
     this.state.options.googleFontsRemove = newlineArrayString(
       this.state.options.googleFontsRemove
     );
-
-    this.loadCSSVersion = JSON.parse(getValueOf('#loadcss_version', 'object'));
-    this.webfontVersion = getValueOf('#webfont_version');
-    this.cdnVersion = getValueOf('#cdn_version');
-    this.fontThemePath = getValueOf('#font_theme_path');
 
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
@@ -64,13 +59,13 @@ class CssView extends Component {
           <Helmet>
             <title>CSS Optimization {siteTitle}</title>
           </Helmet>
-          {this.loadCSSVersion.error === 'not_found' ? (
+          {this.getOption('loadCSSVersion').error === 'not_found' ? (
             <h1 style={{ color: 'red' }}>
               WARNING: PLUGIN INSTALLATION NOT COMPLETE, MISSING
               public/js/src/loadcss_package.json
             </h1>
           ) : null}
-          {this.loadCSSVersion.error === 'failed_parse' ? (
+          {this.getOption('loadCSSVersion').error === 'failed_parse' ? (
             <h1 style={{ color: 'red' }}>
               failed to parse public/js/src/loadcss_package.json
             </h1>
@@ -92,7 +87,7 @@ class CssView extends Component {
                     >
                       loadCSS
                     </a>{' '}
-                    (v{this.loadCSSVersion.version}).{' '}
+                    (v{this.getOption('loadCSSVersion').version}).{' '}
                     <a
                       href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${lgCode}`}
                       target="_blank"
@@ -266,7 +261,7 @@ class CssView extends Component {
                                 },
                                 {
                                   value: 'async_cdn',
-                                  name: `Async from Google CDN (v${this.cdnVersion})`
+                                  name: `Async from Google CDN (v${this.getOption('cdnVersion')})`
                                 },
                                 {
                                   value: 'wordpress',
@@ -287,7 +282,7 @@ class CssView extends Component {
                                   >
                                     webfont.js
                                   </a>{' '}
-                                  (v{this.webfontVersion})).
+                                  (v{this.getOption('webfontVersion')})).
                                 </span>
                               }
                             ></SettingSelect>
@@ -555,7 +550,7 @@ class CssView extends Component {
                                 <p>
                                   Change the paths of the fonts to the location
                                   of the fonts in your theme directory, e.g.{' '}
-                                  <code>{this.fontThemePath}</code> and{' '}
+                                  <code>{this.getOption('fontThemePath')}</code> and{' '}
                                   <a
                                     href={`https://www.google.com/search?q=minify+css+online&amp;hl=${lgCode}`}
                                     target="_blank"

@@ -1,5 +1,6 @@
 <span>
     <?php
+		// Admin values
 		$admin_values = array(
 			'homeUrl' => get_home_url(),
 			'adminUrl' => admin_url('admin.php'),
@@ -10,10 +11,8 @@
 			'googleIntlCode' => $this->google_intlcode,
 			'wpAbtfUri' => WPABTF_URI
 		);
-	?>
-	<input id="admin_values" type="hidden" value="<?php echo htmlspecialchars(json_encode($admin_values)) ?>"/>
-	<!-- HTML -->
-	<?php
+
+		// HTML
 		$html_minify = isset($options['html_minify']) && intval($options['html_minify']) === 1;
 		$html_comments = isset($options['html_comments']) && intval($options['html_comments']) === 1;
 		$html_comments_preserve = '';
@@ -24,16 +23,16 @@
 		if (isset($options['html_search_replace']) && is_array($options['html_search_replace'])) {
     		$html_search_replace = $options['html_search_replace'];
 		}
-		$html_settings = 
-		'{"minify":' . json_encode($html_minify) . 
-		',"comments":' . json_encode($html_comments) . 
-		',"commentsPreserve":' . json_encode($html_comments_preserve) . 
-		',"searchReplace":' . json_encode($html_search_replace) . 
-		'}'
-	?>
-	<input id="html_settings" type="hidden" value="<?php echo htmlspecialchars($html_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
-	<!-- CSS -->
-	<?php
+		$html_settings = array(
+			'minify' => $html_minify,
+			'comments' => $html_comments,
+			'commentsPreserve' => $html_comments_preserve,
+			'searchReplace' => $html_search_replace
+		);
+
+		$admin_values['htmlSettings'] = $html_settings;
+
+		// CSS
 		$cssdelivery = isset($options['cssdelivery']) && intval($options['cssdelivery']) === 1;
 		$loadcss_enhanced = isset($options['loadcss_enhanced']) && intval($options['loadcss_enhanced']) === 1;
 		$cssdelivery_renderdelay = (empty($options['cssdelivery_renderdelay']) || $options['cssdelivery_renderdelay'] === 0) ? '' : htmlentities($options['cssdelivery_renderdelay'], ENT_COMPAT, 'utf-8');
@@ -77,27 +76,6 @@
 			$gwfo_googlefonts_remove = $options['gwfo_googlefonts_remove'];
 		}
 
-		$css_settings = 
-		'{"delivery":' . json_encode($cssdelivery) . 
-		',"loadCSSEnhanced":' . json_encode($loadcss_enhanced) . 
-		',"renderDelay":' . json_encode($cssdelivery_renderdelay) . 
-		',"position":' . json_encode($cssdelivery_position) . 
-		',"ignore":' . json_encode($cssdelivery_ignore) . 
-		',"remove":' . json_encode($cssdelivery_remove) . 
-		',"gwfo":' . json_encode($gwfo) . 
-		',"gwfoLoadMethod":' . json_encode($gwfo_loadmethod) . 
-		',"gwfoLoadPosition":' . json_encode($gwfo_loadposition) . 
-		',"gwfoConfigValid":' . json_encode($gwfo_config_valid) . 
-		',"gwfoConfig":' . json_encode($gwfo_config) . 
-		',"googleFonts":' . json_encode($gwfo_googlefonts) . 
-		',"googleFontsAuto":' . json_encode($gwfo_googlefonts_auto) . 
-		',"googleFontsIgnore":' . json_encode($gwfo_googlefonts_ignore) . 
-		',"googleFontsRemove":' . json_encode($gwfo_googlefonts_remove) . 
-		'}'
-	?>
-	<input id="css_settings"  type="hidden" value="<?php echo htmlspecialchars($css_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
-	<script>console.log(<?php echo json_encode($options) ?>)</script>
-	<?php
 		/**
     	 * Get version of local loadCSS
     	 */
@@ -118,108 +96,128 @@
 
     	if (empty($loadcss_version)) {
     	    $loadcss_version = '(unknown)';
-    	}
-	?>
-	<input id="loadcss_version"  type="hidden" value='<?php echo '{ "version": ' . json_encode($loadcss_version) . ', "error": ' . json_encode($loadcss_version_error) . ' }' ?>'/>
-	<?php
+		}
+
 		/**
          * Get version of local webfont.js
          */
         $webfont_version = $this->CTRL->gwfo->package_version(true);
         if (empty($webfont_version)) {
             $webfont_version = '(unknown)';
-        }
-	?>
-	<input id="webfont_version"  type="hidden" value='<?php echo $webfont_version ?>'/>
-	<input id="cdn_version"  type="hidden" value='<?php echo $this->CTRL->gwfo->cdn_version ?>'/>
-	<input id="font_theme_path"  type="hidden" value='<?php print htmlentities(str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/'), ENT_COMPAT, 'utf-8'); ?>'/>
-	<!-- Javascript -->
-	<?php
-	$jsProxy = (isset($options['js_proxy']) && intval($options['js_proxy']) === 1);
+		}
 
-    if (isset($options['jsdelivery_idle']) && !empty($options['jsdelivery_idle'])) {
-        foreach ($options['jsdelivery_idle'] as $n => $cnf) {
-            $options['jsdelivery_idle'][$n] = $cnf[0];
-            if (isset($cnf[1])) {
-                $options['jsdelivery_idle'][$n] .= ':' . $cnf[1];
-            }
-        }
-	}
+		$css_settings = array(
+			'delivery' => $cssdelivery,
+			'loadCSSEnhanced' => $loadcss_enhanced,
+			'renderDelay' => $cssdelivery_renderdelay,
+			'position' => $cssdelivery_position,
+			'ignore' => $cssdelivery_ignore,
+			'remove' => $cssdelivery_remove,
+			'gwfo' => $gwfo,
+			'gwfoLoadMethod' => $gwfo_loadmethod,
+			'gwfoLoadPosition' => $gwfo_loadposition,
+			'gwfoConfigValid' => $gwfo_config_valid,
+			'gwfoConfig' => $gwfo_config,
+			'googleFonts' => $gwfo_googlefonts,
+			'googleFontsAuto' => $gwfo_googlefonts_auto,
+			'googleFontsIgnore' => $gwfo_googlefonts_ignore,
+			'googleFontsRemove' => $gwfo_googlefonts_remove,
+			'loadCSSVersion' => array(
+				'version' => $loadcss_version,
+				'error' => $loadcss_version_error
+			),
+			'webfontVersion' => $webfont_version,
+			'cndVersion' => $this->CTRL->gwfo->cdn_version,
+			'fontThemePath' => htmlentities(str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/'), ENT_COMPAT, 'utf-8')
+		);
+		
+		$admin_values['cssSettings'] = $css_settings;
 
-	$jsdelivery = isset($options['jsdelivery']) && intval($options['jsdelivery']) === 1;
+		// Javascript
+		$jsProxy = (isset($options['js_proxy']) && intval($options['js_proxy']) === 1);
 
-	$jsdelivery_scriptloader = '';
-	if(isset($options['jsdelivery_scriptloader'])) {
-		$jsdelivery_scriptloader = $options['jsdelivery_scriptloader'];
-	}
-	$jsdelivery_position = '';
-	if(isset($options['jsdelivery_position'])){
-		$jsdelivery_position = $options['jsdelivery_position'];
-	}
-	$jsdelivery_ignore = '';
-	if (isset($options['jsdelivery_ignore'])) {
-		$jsdelivery_ignore = $options['jsdelivery_ignore'];
-	}
-	$jsdelivery_remove = '';
-	if (isset($options['jsdelivery_remove'])) {
-		$jsdelivery_remove = $options['jsdelivery_remove'];
-	}
-	$jsdelivery_async_all = !isset($options['jsdelivery_async_all']) || intval($options['jsdelivery_async_all']) === 1;
-	$jsdelivery_async = '';
-	if (isset($options['jsdelivery_async'])){
-		$jsdelivery_async = $options['jsdelivery_async'];
-	}
-	$jsdelivery_async_disabled = '';
-	if (isset($options['jsdelivery_async_disabled'])){
-		$jsdelivery_async_disabled = $options['jsdelivery_async_disabled'];
-	}
-	$jsdelivery_idle = '';
-	if (isset($options['jsdelivery_idle'])) {
-		$jsdelivery_idle = $options['jsdelivery_idle'];
-	}
-	$jsdelivery_deps = isset($options['jsdelivery_deps']) && intval($options['jsdelivery_deps']) === 1;
-	$jsdelivery_jquery = !isset($options['jsdelivery_jquery']) || intval($options['jsdelivery_jquery']) === 1;
-	$js_lazyscripts_enabled = isset($options['lazyscripts_enabled']) && intval($options['lazyscripts_enabled']) === 1;
+    	if (isset($options['jsdelivery_idle']) && !empty($options['jsdelivery_idle'])) {
+    	    foreach ($options['jsdelivery_idle'] as $n => $cnf) {
+    	        $options['jsdelivery_idle'][$n] = $cnf[0];
+    	        if (isset($cnf[1])) {
+    	            $options['jsdelivery_idle'][$n] .= ':' . $cnf[1];
+    	        }
+    	    }
+		}
 
-	$javascript_settings = 
-		'{"proxy":' . json_encode($jsProxy) . 
-		',"delivery":' . json_encode($jsdelivery) .  
-		',"scriptLoader":' . json_encode($jsdelivery_scriptloader) .
-		',"position":' . json_encode($jsdelivery_position) . 
-		',"ignore":' . json_encode($jsdelivery_ignore) . 
-		',"remove":' . json_encode($jsdelivery_remove) . 
-		',"forceAsync":' . json_encode($jsdelivery_async_all) . 
-		',"async":' . json_encode($jsdelivery_async) . 
-		',"asyncDisabled":' . json_encode($jsdelivery_async_disabled) . 
-		',"idleDelivery":' . json_encode($jsdelivery_idle) . 
-		',"abideDeps":' . json_encode($jsdelivery_deps) . 
-		',"jqueryStub":' . json_encode($jsdelivery_jquery) . 
-		',"lazyScripts":' . json_encode($js_lazyscripts_enabled) . 
-		'}'
+		$jsdelivery = isset($options['jsdelivery']) && intval($options['jsdelivery']) === 1;
 
-	?>
-	<input id="javascript_settings" type="hidden" value="<?php echo htmlspecialchars($javascript_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
-	<input id="lazyload_plugins_url" type="hidden" value="<?php print admin_url('plugin-install.php?s=Lazy+Load+XT&tab=search&type=term'); ?>">
-	<!-- HTTP/2 -->
-	<?php
+		$jsdelivery_scriptloader = '';
+		if(isset($options['jsdelivery_scriptloader'])) {
+			$jsdelivery_scriptloader = $options['jsdelivery_scriptloader'];
+		}
+		$jsdelivery_position = '';
+		if(isset($options['jsdelivery_position'])){
+			$jsdelivery_position = $options['jsdelivery_position'];
+		}
+		$jsdelivery_ignore = '';
+		if (isset($options['jsdelivery_ignore'])) {
+			$jsdelivery_ignore = $options['jsdelivery_ignore'];
+		}
+		$jsdelivery_remove = '';
+		if (isset($options['jsdelivery_remove'])) {
+			$jsdelivery_remove = $options['jsdelivery_remove'];
+		}
+		$jsdelivery_async_all = !isset($options['jsdelivery_async_all']) || intval($options['jsdelivery_async_all']) === 1;
+		$jsdelivery_async = '';
+		if (isset($options['jsdelivery_async'])){
+			$jsdelivery_async = $options['jsdelivery_async'];
+		}
+		$jsdelivery_async_disabled = '';
+		if (isset($options['jsdelivery_async_disabled'])){
+			$jsdelivery_async_disabled = $options['jsdelivery_async_disabled'];
+		}
+		$jsdelivery_idle = '';
+		if (isset($options['jsdelivery_idle'])) {
+			$jsdelivery_idle = $options['jsdelivery_idle'];
+		}
+		$jsdelivery_deps = isset($options['jsdelivery_deps']) && intval($options['jsdelivery_deps']) === 1;
+		$jsdelivery_jquery = !isset($options['jsdelivery_jquery']) || intval($options['jsdelivery_jquery']) === 1;
+		$js_lazyscripts_enabled = isset($options['lazyscripts_enabled']) && intval($options['lazyscripts_enabled']) === 1;
+
+		$javascript_settings = array(
+			'proxy' => $jsProxy,
+			'delivery' => $jsdelivery,
+			'scriptLoader' => $jsdelivery_scriptloader,
+			'position' => $jsdelivery_position,
+			'ignore' => $jsdelivery_ignore,
+			'remove' => $jsdelivery_remove,
+			'forceAsync' => $jsdelivery_async_all,
+			'async' => $jsdelivery_async,
+			'asyncDisabled' => $jsdelivery_async_disabled,
+			'idleDelivery' => $jsdelivery_idle,
+			'abideDeps' => $jsdelivery_deps,
+			'jqueryStub' => $jsdelivery_jquery,
+			'lazyScripts' => $js_lazyscripts_enabled,
+			'lazyloadPluginsUrl' => admin_url('plugin-install.php?s=Lazy+Load+XT&tab=search&type=term')
+		);
+
+		$admin_values['javascriptSettings'] = $javascript_settings;
+
+		// HTTP/2
 		$http2_push = isset($options['http2_push']) && intval($options['http2_push'])=== 1;
 
 		// asset cache policy
     	$http2_push_config = (isset($options['http2_push_config']) && is_array($options['http2_push_config'])) ? $options['http2_push_config'] : array();
     	if (!is_array($http2_push_config) || empty($http2_push_config)) {
-    	    $http2_push_config = '[]';
+    	    $http2_push_config = json_decode('[]');
     	} else {
-    	    $http2_push_config = json_encode($http2_push_config);
+    	    $http2_push_config = $http2_push_config;
 		}
 
-		$http2_settings = 
-		'{"push":' . json_encode($http2_push) . 
-		',"pushConfig":' . $http2_push_config . 
-		'}'
-	?>
-	<input id="http2_settings" type="hidden" value='<?php echo $http2_settings ?>'/>
-	<!-- Proxy -->
-	<?php
+		$http2_settings = array(
+			'push' => $http2_push,
+			'pushConfig' => $http2_push_config
+		);
+
+		$admin_values['http2Settings'] = $http2_settings;
+
+		// Proxy
 		// Javascript Proxy Enabled?
     	$jsProxy = (isset($options['js_proxy']) && intval($options['js_proxy']) === 1);
 
@@ -271,35 +269,26 @@
 			$proxy_url = htmlentities($options['proxy_url'], ENT_COMPAT, 'utf-8');
 		}
 
-		$proxy_settings = 
-		'{"jsProxy":' . json_encode($jsProxy) . 
-		',"jsProxyInclude":' . json_encode($jsProxyInclude) . 
-		',"jsProxyExclude":' . json_encode($jsProxyExclude) . 
-		',"jsProxyPreload":' . json_encode($jsProxyPreload) . 
-		',"cssProxy":' . json_encode($cssProxy) . 
-		',"cssProxyInclude":' . json_encode($cssProxyInclude) . 
-		',"cssProxyExclude":' . json_encode($cssProxyExclude) . 
-		',"cssProxyPreload":' . json_encode($cssProxyPreload) . 
-		',"proxyCDN":' . json_encode($proxy_cdn) . 
-		',"proxyURL":' . json_encode($proxy_url) . 
-		'}'
+		$proxy_settings = array(
+			'jsProxy' => $jsProxy,
+			'jsProxyInclude' => $jsProxyInclude,
+			'jsProxyExclude' => $jsProxyExclude,
+			'jsProxyPreload' => $jsProxyPreload,
+			'cssProxy' => $cssProxy,
+			'cssProxyInclude' => $cssProxyInclude,
+			'cssProxyExclude' => $cssProxyExclude,
+			'cssProxyPreload' => $cssProxyPreload,
+			'proxyCDN' => $proxy_cdn,
+			'proxyURL' => $proxy_url
+		);
 
-	?>
-	<input id="proxy_settings" type="hidden" value="<?php echo htmlspecialchars($proxy_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
-	<!-- Settings -->
-	<?php
+		$admin_values['proxySettings'] = $proxy_settings;
+
+		// Settings
 		$settings_adminbar = !isset($options['adminbar']) || intval($options['adminbar']) === 1;
 		$settings_clear_pagecache = !isset($options['clear_pagecache']) || intval($options['clear_pagecache']) === 1;
 		$settings_debug = isset($options['debug']) && intval($options['debug']) === 1;
 
-		$settings_settings = 
-		'{"adminbar":' . json_encode($settings_adminbar) . 
-		',"clearPageCache":' . json_encode($settings_clear_pagecache) .  
-		',"debug":' . json_encode($settings_debug) .
-		'}'
-	?>
-	<input id="settings_settings"  type="hidden" value="<?php echo htmlspecialchars($settings_settings, ENT_COMPAT, 'UTF-8', false) ?>"/>
-	<?php
 		$client_hashes = false;
 
 		$site_url = wp_nonce_url(trailingslashit(site_url()), 'csp_hash_json', 'abtf-csp-hash');
@@ -310,12 +299,19 @@
 			$json = false;
 		}
 		if ($json) {
-			$client_hashes = $json;
+			$client_hashes = json_decode($json);
 		}
-	?>
-	<input id="client_hashes" type="hidden" value='<?php echo $client_hashes ?>'/>
-	<!-- Monitor -->
-	<?php
+
+		$settings_settings = array(
+			'adminbar' => $settings_adminbar,
+			'clearPageCache' => $settings_clear_pagecache,
+			'debug' => $settings_debug,
+			'clientHashes' => $client_hashes
+		);
+
+		$admin_values['settingsSettings'] = $settings_settings;
+
+		// Monitor
 		$uptimerobot_install_link = false;
 		$uptimerobot_overview = false;
 		
@@ -342,11 +338,18 @@
         	    $uptimerobot_overview = do_shortcode('[uptime-robot days="1-7-14-180"]') .
         	    do_shortcode('[uptime-robot-response]');
         	}
-    	}
+		}
+
+		$monitor_settings = array(
+			'uptimerobotStatus' => $uptimerobot_status,
+			'uptimerobotInstallLink' => $uptimerobot_install_link,
+			'uptimerobotOverview' => $uptimerobot_overview
+		);
+		
+		$admin_values['monitorSettings'] = $monitor_settings;
 	?>
-	<input id="uptimerobot_status" type="hidden" value="<?php echo $uptimerobot_status; ?>" />
-	<input id="uptimerobot_install_link" type="hidden" value="<?php echo $uptimerobot_install_link; ?>" />
-	<input id="uptimerobot_overview" type="hidden" value="<?php echo $uptimerobot_overview; ?>" />
+	<input id="admin_values" type="hidden" value="<?php echo htmlspecialchars(json_encode($admin_values), ENT_COMPAT, 'UTF-8', false) ?>"/>
+	<script>console.log(<?php echo json_encode($options) ?>, <?php echo json_encode($admin_values) ?>)</script>
 </span>
 <div id="root">
 </div>

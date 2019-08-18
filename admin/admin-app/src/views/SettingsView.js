@@ -3,8 +3,7 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
-import getValueOf from '../utils/getValueOf';
-import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import { adminUrl, siteTitle, abtfAdminNonce, settingsSettings } from '../utils/globalVars';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
@@ -14,10 +13,8 @@ class SettingsView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(getValueOf('#settings_settings', 'object'))
+      options: settingsSettings
     };
-
-    this.clientHashes = JSON.parse(getValueOf('#client_hashes', 'object'));
 
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
@@ -111,7 +108,7 @@ class SettingsView extends Component {
             <strong>Important:</strong> when you change the configuration of the
             plugin the hashes may change.
           </p>
-          {this.clientHashes === 'false' ? (
+          {this.getOption('clientHashes') === 'false' ? (
             <h3 className="warning_red">
               Failed to retrieve hashes. You can find the hashes in the Dev
               Tools console in the Chrome browser.
@@ -129,7 +126,7 @@ class SettingsView extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(this.clientHashes).map(algorithm => {
+                  {Object.entries(this.getOption('clientHashes')).map(algorithm => {
                     return (
                       <tr key={algorithm[0]}>
                         <td
@@ -165,7 +162,7 @@ class SettingsView extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(this.clientHashes).map(algorithm => {
+                  {Object.entries(this.getOption('clientHashes')).map(algorithm => {
                     return (
                       <tr key={algorithm[0]}>
                         <td

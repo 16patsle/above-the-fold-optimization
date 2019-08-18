@@ -3,8 +3,7 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { getOption } from '../utils/optionUtils';
 import { linkOptionState } from '../utils/linkState';
-import getValueOf from '../utils/getValueOf';
-import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import { adminUrl, siteTitle, abtfAdminNonce, htmlSettings } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
 import SyntaxHighlighter, {
   registerLanguage
@@ -27,7 +26,7 @@ class HtmlView extends Component {
     super(props);
 
     this.state = {
-      options: JSON.parse(getValueOf('#html_settings', 'object'))
+      options: htmlSettings
     };
 
     this.state.options.commentsPreserve = newlineArrayString(

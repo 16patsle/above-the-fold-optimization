@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
-import getValueOf from '../utils/getValueOf';
+import { getOption } from '../utils/optionUtils';
 import {
   homeUrl,
   adminUrl,
@@ -9,7 +9,8 @@ import {
   abtfAdminNonce,
   lgCode,
   utmString,
-  wpAbtfUri
+  wpAbtfUri,
+  monitorSettings
 } from '../utils/globalVars';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
@@ -18,10 +19,13 @@ class MonitorView extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      options: monitorSettings
+    };
+
     this.sllInstalled = new URL(homeUrl).protocol === 'https:';
-    this.uptimerobotStatus = getValueOf('#uptimerobot_status');
-    this.uptimerobotInstallLink = getValueOf('#uptimerobot_install_link');
-    this.uptimerobotOverview = getValueOf('#uptimerobot_overview');
+
+    this.getOption = getOption.bind(this);
   }
 
   render() {
@@ -125,7 +129,7 @@ class MonitorView extends Component {
             </a>
           </div>
           <h4>UptimeRobot.com - uptime monitor</h4>
-          {this.uptimerobotStatus === 'not installed' ? (
+          {this.getOption('uptimerobotStatus') === 'not installed' ? (
             <div>
               <p>
                 The plugin <strong>Uptime Robot for WordPress</strong> is not
@@ -133,22 +137,22 @@ class MonitorView extends Component {
                 display an UptimeRobot.com overview.
               </p>
               <p>
-                <a href={this.uptimerobotInstallLink} className="button">
+                <a href={this.getOption('uptimerobotInstallLink')} className="button">
                   Install plugin
                 </a>
               </p>
             </div>
           ) : null}
-          {this.uptimerobotStatus === 'not configured' ? (
+          {this.getOption('uptimerobotStatus') === 'not configured' ? (
             <p>
               Configure the UptimeRobot.com API key in{' '}
               <strong>Uptime Robot for WordPress</strong>.
             </p>
           ) : null}
-          {this.uptimerobotStatus === 'active' ? (
+          {this.getOption('uptimerobotStatus') === 'active' ? (
             <div
               className="uptime"
-              dangerouslySetInnerHTML={{ __html: this.uptimerobotOverview }}
+              dangerouslySetInnerHTML={{ __html: this.getOption('uptimerobotOverview') }}
             ></div>
           ) : null}
           <div style={{ float: 'right' }}>
