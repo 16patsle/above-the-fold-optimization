@@ -11,6 +11,9 @@ import {
   javascriptSettings
 } from '../utils/globalVars';
 import newlineArrayString from '../utils/newLineArrayString';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
+import vs from 'react-syntax-highlighter/dist/esm/styles/hljs/vs';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
@@ -18,6 +21,8 @@ import SettingSelect from '../components/SettingSelect';
 import SettingTextarea from '../components/SettingTextarea';
 import SettingRadio from '../components/SettingRadio';
 import SubmitButton from '../components/SubmitButton';
+
+SyntaxHighlighter.registerLanguage('xml', xml);
 
 class JavascriptView extends Component {
   constructor(props) {
@@ -39,6 +44,18 @@ class JavascriptView extends Component {
 
     this.getOption = getOption.bind(this);
     this.linkOptionState = linkOptionState.bind(this);
+
+    this.lazyloadExample = `
+<div data-lazy-widget>
+<!--
+    <div id="fblikebutton_1" className="fb-like" data-href="https://github.com/16patsle/" 
+    data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+    <script>
+    FB.XFBML.parse(document.getElementById('fblikebutton_1').parentNode||null);
+    </script>
+-->
+</div>
+    `.trim();
   }
 
   render() {
@@ -493,20 +510,15 @@ class JavascriptView extends Component {
                       that use Lazy Load XT. Those plugins are{' '}
                       <u>not required</u> for this feature.
                     </p>
-                    <pre
-                      style={{ float: 'left', width: '100%', overflow: 'auto' }}
-                      className="lazyscriptsoptions"
-                    >
-                      {`
-<div data-lazy-widget><!--
-    <div id="fblikebutton_1" className="fb-like" data-href="https://github.com/16patsle/" 
-    data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-    <script>
-    FB.XFBML.parse(document.getElementById('fblikebutton_1').parentNode||null);
-    </script>
---></div>
-                            `.trim()}
-                    </pre>
+                    <div style={{ float: 'left', width: '100%', overflow: 'auto' }}>
+                      <SyntaxHighlighter
+                        className="example-code lazyscriptsoptions"
+                        language="xml"
+                        style={vs}
+                      >
+                        {this.lazyloadExample}
+                      </SyntaxHighlighter>
+                    </div>
                   </span>
                 ) : null}
               </SettingCheckbox>
