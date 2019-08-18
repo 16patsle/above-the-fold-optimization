@@ -11,7 +11,8 @@
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.0",
-    "react-syntax-highlighter": "^11.0.2"
+    "react-syntax-highlighter": "^11.0.2",
+    "source-map-explorer": "^2.0.1"
   },
   "devDependencies": {
     "@rescripts/cli": "0.0.11"
@@ -21,7 +22,8 @@
     "build": "rescripts build",
     "test": "rescripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "prettier": "prettier --single-quote --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "prettier": "prettier --single-quote --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "husky": {
     "hooks": {
