@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 
 class Info extends Component {
   render() {
+    let color = 'info_' + this.props.color;
+    if (this.props.color === 'red') {
+      color = 'warning_red';
+    } else if (this.props.color === 'green') {
+      color = 'ok_green';
+    }
+
     return (
-      <div className={'info_' + this.props.color} style={this.props.style}>
+      <div className={color} style={this.props.style}>
         {this.props.children}
       </div>
     );

@@ -7,6 +7,7 @@ import IntroView from './views/IntroView';
 import HtmlView from './views/HtmlView';
 import CssView from './views/CssView';
 import JavascriptView from './views/JavascriptView';
+import PwaView from './views/PwaView';
 import Http2View from './views/Http2View';
 import ProxyView from './views/ProxyView';
 import SettingsView from './views/SettingsView';
@@ -21,6 +22,7 @@ class App extends Component {
         <Route path="/html" component={HtmlView} />
         <Route path="/css" component={CssView} />
         <Route path="/javascript" component={JavascriptView} />
+        <Route path="/pwa" component={PwaView} />
         <Route path="/http2" component={Http2View} />
         <Route path="/proxy" component={ProxyView} />
         <Route path="/settings" component={SettingsView} />

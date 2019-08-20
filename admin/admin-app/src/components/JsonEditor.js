@@ -34,7 +34,7 @@ class JsonEditor extends Component {
         statusBar: false
       };
 
-      let json = [];
+      let json = this.props.objectType === 'object' ? {} : [];
 
       // Set the editor content to the searchReplaceSrc sent from the server
       if (this.props.value !== '') {
@@ -43,16 +43,39 @@ class JsonEditor extends Component {
           try {
             json = JSON.parse(json);
           } catch (e) {
-            json = [];
+            json = this.props.objectType === 'object' ? {} : [];
           }
         }
         if (!json || typeof json !== 'object') {
-          json = [];
+          json = this.props.objectType === 'object' ? {} : [];
         }
       }
+
+      let empty = false;
+      if (this.props.objectType === 'object') {
+        if (json instanceof Array && json.length === 0) {
+          json = {};
+        }
+
+        if (JSON.stringify(json) === '{}') {
+          empty = true;
+          options.mode = 'code';
+        }
+      }
+
       this.editor = new JSONEditor(this.editorRef.current, options, json);
 
-      this.editor.compact(); // collapseAll();
+      if (this.props.objectType === 'object') {
+        if (options.mode === 'code') {
+          if (!empty) {
+            this.editor.editor.setOptions({
+              maxLines: 50
+            });
+          }
+        }
+      } else {
+        this.editor.compact(); // collapseAll();
+      }
 
       // When in code mode (using ace editor), save on blur
       this.editor.aceEditor.on('blur', this.saveJSON.bind(this));
@@ -82,11 +105,11 @@ class JsonEditor extends Component {
         this.changeTimeout = false;
         const t = this.editor.getText();
         // If the editor is still empty
-        // set it to empty array
+        // set it to empty array/object
         if (t.trim() === '') {
-          this.editor.set([]);
+          this.editor.set(this.props.objectType === 'object' ? {} : []);
           //this.editor.aceEditor.moveCursorToPosition({row:1, column:2});
-          this.saveJSON([]);
+          this.saveJSON(this.props.objectType === 'object' ? {} : []);
         }
       }, 25);
 
@@ -105,7 +128,7 @@ class JsonEditor extends Component {
     if (t.trim() === '') {
       // If the content is empty
       // set it to an empty arrray
-      this.editor.set([]);
+      this.editor.set(this.props.objectType === 'object' ? {} : []);
     }
     // expand nodes in tree mode
     if (newMode === 'tree') {

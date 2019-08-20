@@ -283,7 +283,7 @@ submit_button(__('Save'), 'primary large', 'is_submit', false);
 } ?> /> Require preloading to complete in Service Worker installation. This option will activate the service worker after all assets have been preloaded.</label></p>
 		</td>
 	</tr>
-	<tr valign="top">
+	<tr valign="top"><!--FORTSETT HER-->
 		<th scope="row">Web App Manifest<a name="manifest">&nbsp;</a></th>
 		<td>
 

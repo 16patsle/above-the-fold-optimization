@@ -22,6 +22,7 @@ class SettingSelect extends Component {
             })}
           </select>
           <p className="description">{this.props.description}</p>
+          {this.props.children}
         </td>
       </tr>
     );

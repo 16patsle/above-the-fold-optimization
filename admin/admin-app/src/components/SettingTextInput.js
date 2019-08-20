@@ -13,6 +13,8 @@ class SettingTextInput extends Component {
             name={this.props.name}
             value={this.props.link.value}
             onChange={e => this.props.link.set(e.target.value)}
+            size={this.props.size}
+            title={this.props.title}
             placeholder={this.props.placeholder}
             disabled={this.props.disabled}
           />
