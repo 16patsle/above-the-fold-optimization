@@ -76,7 +76,10 @@ class JsonEditor extends Component {
           }
         }
       }
-      if (!this.props.compact === 'none' || this.props.mode === this.props.compact) {
+      if (
+        !this.props.compact === 'none' ||
+        this.props.mode === this.props.compact
+      ) {
         this.editor.compact(); // collapseAll();
       }
 
@@ -139,22 +142,20 @@ class JsonEditor extends Component {
     }
     // expand nodes in tree mode
     if (newMode === 'tree') {
-      if(this.props.compact === 'tree'){
-
+      if (this.props.compact === 'tree') {
       } else {
         this.editor.expandAll();
       }
-    } else if(typeof this.props.maxLines === 'number') {
+    } else if (typeof this.props.maxLines === 'number') {
       this.editor.aceEditor.setOptions({
         maxLines: this.props.maxLines
       });
-}
+    }
     if (newMode === 'code' && this.onBlurSetup === false) {
       // When in code mode (using ace editor), save on blur
       this.editor.aceEditor.on('blur', this.saveJSON.bind(this));
       this.onBlurSetup = true;
     }
-
   }
 
   saveJSON() {
