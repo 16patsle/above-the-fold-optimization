@@ -23,7 +23,7 @@ class JsonEditor extends Component {
 
       const options = {
         name: this.props.name,
-        mode: 'code',
+        mode: this.props.mode || 'code',
         modes: ['code', 'tree'], // allowed modes
         onError: this.onError.bind(this),
         onChange: this.onChange.bind(this),
@@ -37,8 +37,8 @@ class JsonEditor extends Component {
       let json = this.props.objectType === 'object' ? {} : [];
 
       // Set the editor content to the searchReplaceSrc sent from the server
-      if (this.props.value !== '') {
-        json = this.props.value;
+      if (this.props.link.value !== '') {
+        json = this.props.link.value;
         if (typeof json !== 'object') {
           try {
             json = JSON.parse(json);
@@ -65,20 +65,25 @@ class JsonEditor extends Component {
 
       this.editor = new JSONEditor(this.editorRef.current, options, json);
 
-      if (this.props.objectType === 'object') {
+      if (typeof this.props.maxLines === 'number') {
         if (options.mode === 'code') {
           if (!empty) {
-            this.editor.editor.setOptions({
-              maxLines: 50
+            this.editor.aceEditor.setOptions({
+              maxLines: this.props.maxLines
             });
           }
         }
-      } else {
+      }
+      if (!this.props.compact === 'none' || this.props.mode === this.props.compact) {
         this.editor.compact(); // collapseAll();
       }
 
-      // When in code mode (using ace editor), save on blur
-      this.editor.aceEditor.on('blur', this.saveJSON.bind(this));
+      this.onBlurSetup = false;
+      if (options.mode === 'code') {
+        // When in code mode (using ace editor), save on blur
+        this.editor.aceEditor.on('blur', this.saveJSON.bind(this));
+        this.onBlurSetup = true;
+      }
     }
   }
 
@@ -132,8 +137,22 @@ class JsonEditor extends Component {
     }
     // expand nodes in tree mode
     if (newMode === 'tree') {
-      this.editor.expandAll();
+      if(this.props.compact === 'tree'){
+
+      } else {
+        this.editor.expandAll();
+      }
+    } else if(typeof this.props.maxLines === 'number') {
+      this.editor.aceEditor.setOptions({
+        maxLines: this.props.maxLines
+      });
+}
+    if (newMode === 'code' && this.onBlurSetup === false) {
+      // When in code mode (using ace editor), save on blur
+      this.editor.aceEditor.on('blur', this.saveJSON.bind(this));
+      this.onBlurSetup = true;
     }
+
   }
 
   saveJSON() {

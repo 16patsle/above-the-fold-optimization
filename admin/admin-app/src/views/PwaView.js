@@ -367,7 +367,8 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                           name="pwa.cache.assets"
                           schema={pwaAssetCacheSchema}
                           link={this.linkOptionState('cacheAssetsPolicy')}
-                          objectType="object"
+                          compact="tree"
+                          maxLines={50}
                         ></JsonEditor>
                         <input
                           type="hidden"
@@ -626,6 +627,9 @@ jQuery(window).on('sw-update',function(e){
                             schema={pwaManifestSchema}
                             link={this.linkOptionState('manifestJson')}
                             objectType="object"
+                            compact="none"
+                            maxLines={50}
+                            mode="tree"
                           ></JsonEditor>
                           <input
                             type="hidden"
