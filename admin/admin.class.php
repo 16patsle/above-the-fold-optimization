@@ -290,7 +290,7 @@ class Abovethefold_Admin
 
             $this->clear_pagecache();
 
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed-settings' ), admin_url('admin.php')));
+            wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/settings');
             exit;
         }
 
