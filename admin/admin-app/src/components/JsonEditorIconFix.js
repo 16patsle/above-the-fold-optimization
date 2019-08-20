@@ -10,8 +10,9 @@ class JsonEditorIconFix extends Component {
     return (
       <style>
         {`
-                div.jsoneditor-tree button {
-                    background: transparent url("${iconsUrl}");
+                div.jsoneditor-tree button.jsoneditor-button {
+                    background-color: transparent;
+                    background-image: url("${iconsUrl}");
                 }
 
                 div.jsoneditor-tree button.jsoneditor-dragarea {

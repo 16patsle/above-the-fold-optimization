@@ -31,7 +31,9 @@ class JsonEditor extends Component {
         search: false,
         schema: this.props.schema,
         navigationBar: false,
-        statusBar: false
+        statusBar: false,
+        enableSort: false,
+        enableTransform: false
       };
 
       let json = this.props.objectType === 'object' ? {} : [];

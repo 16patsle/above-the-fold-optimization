@@ -74,3 +74,7 @@ table.jsoneditor-search input {
   display: block;
   height: 20px;
 }
+
+.abtf-inner-table .form-table .jsoneditor td {
+  padding: 0;
+}
