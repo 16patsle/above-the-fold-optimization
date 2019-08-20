@@ -3,7 +3,7 @@
 		// Admin values
 		$admin_values = array(
 			'homeUrl' => get_home_url(),
-			'adminUrl' => admin_url('admin.php'),
+			'adminUrl' => admin_url(),
 			'adminTabs' => $this->tabs,
 			'abtfAdminNonce' => wp_nonce_field('abovethefold'),
 			'lgCode' => $lgcode,

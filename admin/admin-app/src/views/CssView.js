@@ -44,13 +44,13 @@ class CssView extends Component {
   }
 
   render() {
-    const proxyUrl = new URL(adminUrl);
+    const proxyUrl = new URL(adminUrl + 'admin.php');
     proxyUrl.searchParams.append('page', 'pagespeed-proxy');
 
     return (
       <form
         method="post"
-        action={adminUrl + '?action=abtf_css_update'}
+        action={adminUrl + 'admin-post.php?action=abtf_css_update'}
         className="clearfix"
         encType="multipart/form-data"
       >

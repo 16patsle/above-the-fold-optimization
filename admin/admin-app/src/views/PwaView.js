@@ -52,7 +52,7 @@ class PwaView extends Component {
     return (
       <form
         method="post"
-        action={adminUrl + '?action=abtf_pwa_update'}
+        action={adminUrl + 'admin-post.php?action=abtf_pwa_update'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>

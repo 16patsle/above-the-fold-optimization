@@ -5,7 +5,7 @@ const adminValues = JSON.parse(getValueOf('#admin_values', 'object'));
 export const reactDir = getValueOf('#reactDir');
 export const homeUrl = adminValues.homeUrl || 'http://localhost';
 export const adminUrl =
-  adminValues.adminUrl || 'http://localhost/wp-admin/admin.php';
+  adminValues.adminUrl || 'http://localhost/wp-admin/';
 export const adminTabs = adminValues.adminTabs || {};
 export const abtfAdminNonce = adminValues.abtfAdminNonce || '';
 export const siteTitle =

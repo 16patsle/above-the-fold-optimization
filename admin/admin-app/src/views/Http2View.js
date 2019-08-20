@@ -95,7 +95,7 @@ class Http2View extends Component {
     return (
       <form
         method="post"
-        action={adminUrl + '?action=abtf_http2_update'}
+        action={adminUrl + 'admin-post.php?action=abtf_http2_update'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>

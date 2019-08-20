@@ -61,7 +61,7 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
     return (
       <form
         method="post"
-        action={adminUrl + '?action=abtf_html_update'}
+        action={adminUrl + 'admin-post.php?action=abtf_html_update'}
         className="clearfix"
         encType="multipart/form-data"
       >

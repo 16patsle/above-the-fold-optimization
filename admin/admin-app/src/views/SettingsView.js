@@ -29,7 +29,7 @@ class SettingsView extends Component {
     return (
       <form
         method="post"
-        action={adminUrl + '?action=abtf_settings_update'}
+        action={adminUrl + 'admin-post.php?action=abtf_settings_update'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>

@@ -59,13 +59,13 @@ class JavascriptView extends Component {
   }
 
   render() {
-    const proxyUrl = new URL(adminUrl);
+    const proxyUrl = new URL(adminUrl + 'admin.php');
     proxyUrl.searchParams.append('page', 'pagespeed-proxy');
 
     return (
       <form
         method="post"
-        action={adminUrl + '?action=abtf_javascript_update'}
+        action={adminUrl + 'admin-post.php?action=abtf_javascript_update'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>

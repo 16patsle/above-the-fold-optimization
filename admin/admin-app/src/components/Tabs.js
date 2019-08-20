@@ -14,7 +14,7 @@ class Tabs extends Component {
         (tabKey === 'criticalcss' && this.props.selected === 'criticalcss-test')
           ? ' nav-tab-active'
           : '';
-      const url = new URL(adminUrl);
+      const url = new URL(adminUrl + 'admin.php');
       url.searchParams.append('page', 'pagespeed');
       url.hash += tabKey !== 'intro' ? '#/' + tabKey : '#/';
       tabElements.push(

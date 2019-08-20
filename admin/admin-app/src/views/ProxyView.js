@@ -69,14 +69,14 @@ class ProxyView extends Component {
   }
 
   render() {
-    const emptyCacheUrl = new URL(adminUrl);
+    const emptyCacheUrl = new URL(adminUrl + 'admin.php');
     emptyCacheUrl.searchParams.append('page', 'pagespeed-proxy');
     emptyCacheUrl.searchParams.append('empty_cache', 1);
 
     return (
       <form
         method="post"
-        action={adminUrl + '?action=abtf_proxy_update'}
+        action={adminUrl + 'admin-post.php?action=abtf_proxy_update'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>

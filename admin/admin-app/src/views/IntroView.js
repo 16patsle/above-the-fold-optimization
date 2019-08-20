@@ -23,7 +23,7 @@ class IntroView extends Component {
       homeUrl
     )}`;
 
-    const monitorUrl = new URL(adminUrl);
+    const monitorUrl = new URL(adminUrl + 'admin.php');
     monitorUrl.searchParams.append('page', 'pagespeed-monitor');
 
     return (
