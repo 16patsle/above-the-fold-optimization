@@ -148,7 +148,7 @@ add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
             value={this.getOption('searchReplace')}
           />
 
-          <Info color="yellow">
+          <Info color="yellow" style={{ marginTop: '30px' }}>
             <SearchReplaceExample title={__('Click to select')}>
               {{
                 string: '"search":"string to match","replace":"newstring"',

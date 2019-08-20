@@ -194,15 +194,6 @@ class Http2View extends Component {
                     Custom resource list
                   </button>
                 </fieldset>
-                <div style={{ float: 'right' }}>
-                  <a
-                    href="https://github.com/josdejong/jsoneditor"
-                    className="ref"
-                    style={{ position: 'relative', top: '-5px' }}
-                  >
-                    JSON editor
-                  </a>
-                </div>
                 <Info color="yellow">
                   <strong>Note:</strong> When using the Progressive Web App
                   Service Worker (PWA), the service worker automatically

@@ -378,16 +378,6 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                             this.getOption('cacheAssetsPolicy')
                           )}
                         />
-                        <div style={{ clear: 'both', height: 10 }} />
-                        <div style={{ float: 'right' }}>
-                          <a
-                            href="https://github.com/josdejong/jsoneditor"
-                            className="ref"
-                            style={{ position: 'relative', top: '-5px' }}
-                          >
-                            JSON editor
-                          </a>
-                        </div>
                       </td>
                     </tr>
                   )}
@@ -642,16 +632,6 @@ jQuery(window).on('sw-update',function(e){
                         </>
                       )
                     )}
-                    <div style={{ clear: 'both', height: 10 }} />
-                    <div style={{ float: 'right' }}>
-                      <a
-                        href="https://github.com/josdejong/jsoneditor"
-                        className="ref"
-                        style={{ position: 'relative', top: '-5px' }}
-                      >
-                        JSON editor
-                      </a>
-                    </div>
                     <p>
                       There are several online tools that can help with Web App
                       Manifest creation.{' '}

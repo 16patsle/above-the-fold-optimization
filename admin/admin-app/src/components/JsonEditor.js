@@ -175,14 +175,17 @@ class JsonEditor extends Component {
     }
 
     return (
-      <span>
+      <>
         <JsonEditorIconFix />
         <div ref={this.editorRef}>
           <div className="loading-json-editor">
             {__('Loading JSON editor...')}
           </div>
         </div>
-      </span>
+        <div style={{ float: 'right', marginTop: '5px' }}>
+          <a href="https://github.com/josdejong/jsoneditor">JSON editor</a>
+        </div>
+      </>
     );
   }
 }
