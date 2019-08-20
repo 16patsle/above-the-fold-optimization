@@ -87,7 +87,7 @@ class Abovethefold_Admin_PWA
                 }
             }
 
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed-pwa' ), admin_url('admin.php')) . '#manifest');
+            wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#pwa');
             exit;
         }
 
@@ -221,7 +221,7 @@ class Abovethefold_Admin_PWA
             $this->install_serviceworker();
         }
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed-pwa' ), admin_url('admin.php')));
+        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#pwa');
         exit;
     }
 
