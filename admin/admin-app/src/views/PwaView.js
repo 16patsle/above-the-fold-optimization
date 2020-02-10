@@ -27,6 +27,7 @@ import SettingNumberInput from '../components/SettingNumberInput';
 import SettingInnerTable from '../components/SettingInnerTable';
 import SettingTextarea from '../components/SettingTextarea';
 import SubmitButton from '../components/SubmitButton';
+import OfflinePageSelect from '../components/OfflinePageSelect';
 
 class PwaView extends Component {
   constructor(props) {
@@ -381,18 +382,12 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                       </td>
                     </tr>
                   )}
-                  <SettingSelect
+                  <OfflinePageSelect
                     header="Offline Page"
                     name="abovethefold[pwa_cache_pages_offline]"
                     link={this.linkOptionState('offlinePage')}
                     size={80}
                     placeholder="/path/to/offline.html"
-                    options={[
-                      {
-                        value: this.getOption('offlinePage'),
-                        name: this.getOption('offlinePageName')
-                      }
-                    ]}
                     description={
                       <>
                         Enter an URL or absolute path to a HTML page to display

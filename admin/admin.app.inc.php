@@ -301,8 +301,10 @@
 			'cacheHeadUpdate' => $pwa_cache_head_update,
 			'cacheUpdateEvent' => $pwa_cache_update_event,
 			'cacheInclude' => $pwa_cache_include,
-			'offlinePage' => $pwa_offline_page,
-			'offlinePageName' => $pwa_offline_page_name,
+			'offlinePage' => array(
+				'label' => $pwa_offline_page_name,
+				'value' => $pwa_offline_page
+			),
 			'pushNotificationPluginsUrl' => admin_url('plugin-install.php?s=push+notifications&tab=search&type=term'),
 			'swFilename' => $sw['filename'],
 			'cacheAssets' => $pwa_cache_assets,
