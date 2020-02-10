@@ -28,6 +28,14 @@ const promiseOptions = async query => {
   return res.map(({name, value})=>({label: name, value}))
 };
 
+const noOptionsMessage = ({ inputValue }) => {
+  if (inputValue) {
+    return 'No results found'
+  } else {
+    return 'Start writing to see options';
+  }
+}
+
 class OfflinePageSelect extends Component {
     render() {
         return (
@@ -45,10 +53,11 @@ class OfflinePageSelect extends Component {
                   if (action === 'select-option') {
                     this.props.link.set(inputValue);
                   } else if (action === 'clear') {
-                    this.props.link.set({label:'',value:''})
+                    this.props.link.set({ label: '', value: '' })
                   }
                 }}
                 isClearable
+                noOptionsMessage={noOptionsMessage}
               />
               <p className="description">{this.props.description}</p>
               {this.props.children}
