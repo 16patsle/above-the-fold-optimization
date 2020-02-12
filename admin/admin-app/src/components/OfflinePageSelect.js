@@ -4,10 +4,10 @@ import AsyncSelect from 'react-select/async';
 const promiseOptions = async query => {
   const formData = new FormData();
   formData.append('action', 'abtf_page_search');
-  formData.append('query', query)
-  formData.append('maxresults', 10)
+  formData.append('query', query);
+  formData.append('maxresults', 10);
 
-  const res = await(await fetch(window.ajaxurl, {
+  const res = await (await fetch(window.ajaxurl, {
     method: 'POST',
     headers: {
       Accept: 'application/json'
@@ -25,46 +25,46 @@ const promiseOptions = async query => {
     }
   }
 
-  return res.map(({name, value})=>({label: name, value}))
+  return res.map(({ name, value }) => ({ label: name, value }));
 };
 
 const noOptionsMessage = ({ inputValue }) => {
   if (inputValue) {
-    return 'No results found'
+    return 'No results found';
   } else {
     return 'Start writing to see options';
   }
-}
+};
 
 class OfflinePageSelect extends Component {
-    render() {
-        return (
-          <tr valign="top">
-            <th scope="row">{this.props.header || ' '}</th>
-            <td>
-              <AsyncSelect
-                loadOptions={promiseOptions}
-                style={this.props.style}
-                className={this.props.textareaClass}
-                name={this.props.name}
-                placeholder={this.props.placeholder}
-                value={this.props.link.value}
-                onChange={(inputValue, { action }) => {
-                  if (action === 'select-option') {
-                    this.props.link.set(inputValue);
-                  } else if (action === 'clear') {
-                    this.props.link.set({ label: '', value: '' })
-                  }
-                }}
-                isClearable
-                noOptionsMessage={noOptionsMessage}
-              />
-              <p className="description">{this.props.description}</p>
-              {this.props.children}
-            </td>
-          </tr>
-        );
-    }
+  render() {
+    return (
+      <tr valign="top">
+        <th scope="row">{this.props.header || ' '}</th>
+        <td>
+          <AsyncSelect
+            loadOptions={promiseOptions}
+            style={this.props.style}
+            className={this.props.textareaClass}
+            name={this.props.name}
+            placeholder={this.props.placeholder}
+            value={this.props.link.value}
+            onChange={(inputValue, { action }) => {
+              if (action === 'select-option') {
+                this.props.link.set(inputValue);
+              } else if (action === 'clear') {
+                this.props.link.set({ label: '', value: '' });
+              }
+            }}
+            isClearable
+            noOptionsMessage={noOptionsMessage}
+          />
+          <p className="description">{this.props.description}</p>
+          {this.props.children}
+        </td>
+      </tr>
+    );
+  }
 }
 
 export default OfflinePageSelect;

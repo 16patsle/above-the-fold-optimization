@@ -1,10 +1,8 @@
-import {
-  abtfRestNonce
-} from './globalVars';
+import { abtfRestNonce } from './globalVars';
 
 /**
  * Get settings JSON from REST API
- * 
+ *
  * @returns {Object} The settings
  */
 export default async function getSettings() {
