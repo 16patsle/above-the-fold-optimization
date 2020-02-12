@@ -6,6 +6,7 @@
 			'adminUrl' => admin_url(),
 			'adminTabs' => $this->tabs,
 			'abtfAdminNonce' => wp_nonce_field('abovethefold'),
+			'abtfRestNonce' => wp_create_nonce('wp_rest'),
 			'lgCode' => $lgcode,
 			'utmString' => $utmstring,
 			'googleIntlCode' => $this->google_intlcode,

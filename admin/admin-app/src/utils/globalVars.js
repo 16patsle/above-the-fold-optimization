@@ -8,6 +8,7 @@ export const adminUrl =
   adminValues.adminUrl || 'http://localhost/wp-admin/';
 export const adminTabs = adminValues.adminTabs || {};
 export const abtfAdminNonce = adminValues.abtfAdminNonce || '';
+export const abtfRestNonce = adminValues.abtfRestNonce || '';
 export const siteTitle =
   '‹' + document.title.split('‹')[1] || '‹ WordPress Site — WordPress';
 export const ajaxUrl = window.ajaxurl || '/wp-admin/admin-ajax.php';
