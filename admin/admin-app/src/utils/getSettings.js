@@ -6,7 +6,7 @@ import { abtfRestNonce } from './globalVars';
  * @returns {Object} The settings
  */
 export default async function getSettings() {
-  const response = await fetch('/wp-json/abtf/v1/settings' + url, {
+  const response = await fetch('/wp-json/abtf/v1/settings', {
     headers: {
       'X-WP-Nonce': abtfRestNonce
     }

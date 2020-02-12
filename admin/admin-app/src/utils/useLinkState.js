@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export default function useLinkState(defaultOptions) {
-  const [options, setOptions] = useState(defaultOptions);
+export default function useLinkState() {
+  const [options, setOptions] = useState();
   const setOption = (option, value) =>
     setOptions({ ...options, [option]: value });
   const linkState = attr => ({

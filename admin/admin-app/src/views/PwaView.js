@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import useSWR from 'swr';
 import useLinkState from '../utils/useLinkState';
 import {
   adminUrl,
@@ -27,18 +28,30 @@ import SettingInnerTable from '../components/SettingInnerTable';
 import SettingTextarea from '../components/SettingTextarea';
 import SubmitButton from '../components/SubmitButton';
 import OfflinePageSelect from '../components/OfflinePageSelect';
+import getSettings from '../utils/getSettings';
 
 const PwaView = props => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState(
-    pwaSettings
-  );
+  const [options, setOption, setOptions, linkOptionState] = useLinkState();
 
   const getOption = option => options[option];
 
+  const { data, error } = useSWR('settings', getSettings)
+
   useEffect(() => {
-    options.cacheInclude = newlineArrayString(options.cacheInclude);
-    options.cachePreload = newlineArrayString(options.cachePreload);
+    if (options) {
+      options.cacheInclude = newlineArrayString(options.cacheInclude);
+      options.cachePreload = newlineArrayString(options.cachePreload);
+    }
   });
+
+  if (!data) {
+    return <div>data</div>
+  }
+
+  if (!options) {
+    setOptions(data);
+    return <div>data</div>;
+  }
 
   return (
     <form
