@@ -1,20 +1,10 @@
 /**
  * Get the value of an option from the state object. Value of this must be bound to React component.
- * @param {Object} a - Options state. For class components, treat this as b and so on.
- * @param {String} [b] - The option name, if no prefix is used, otherwise it's the prefix
- * @param {String} [c] - The option name if a prefix is used, otherwise not necessary
+ * @param {String} a - The option name, if no prefix is used, otherwise it's the prefix
+ * @param {String} [b] - The option name if a prefix is used, otherwise not necessary
  * @returns {Object} The value of the option requested.
  * */
-export function getOption(a, b, c) {
-  let optionsGetter;
-
-  // a is array with options and option setter
-  if (typeof a === 'object') {
-    optionsGetter = a;
-    a = b;
-    b = c;
-  }
-
+export function getOption(a, b) {
   let prefix = '';
   let option = a;
 
@@ -28,33 +18,16 @@ export function getOption(a, b, c) {
     option = prefix + option[0].toUpperCase() + option.slice(1);
   }
 
-  if (optionsGetter) {
-    return optionsGetter[option];
-  } else {
-    return this.state.options[option];
-  }
+  return this.state.options[option];
 }
 
 /**
  * Set the value of an option in the state object. Value of this must be bound to React component.
- * @param {Array} a - Array with options and option setter. For class components, treat this as b and so on.
- * @param {String} b - The option name, if no prefix is used, otherwise it's the prefix
- * @param {String} [c] - The option name if a prefix is used, otherwise it's the value
- * @param {String} [d] - The value if a prefix is used, otherwise not necessary
+ * @param {String} a - The option name, if no prefix is used, otherwise it's the prefix
+ * @param {String} b - The option name if a prefix is used, otherwise it's the value
+ * @param {String} [c] - The value if a prefix is used, otherwise not necessary
  * */
-export function setOption(a, b, c, d) {
-  let optionsGetter;
-  let optionsSetter
-
-  // a is array with options and option setter
-  if (Array.isArray(a)) {
-    optionsGetter = a[0]
-    optionsSetter = a[1]
-    a = b;
-    b = c;
-    c = d;
-  }
-
+export function setOption(a, b, c) {
   let prefix = '';
   let option = a;
   let value = b;
@@ -70,16 +43,9 @@ export function setOption(a, b, c, d) {
     option = prefix + option[0].toUpperCase() + option.slice(1);
   }
 
-  if (optionsGetter && optionsSetter) {
-    const options = { ...optionsGetter };
-    options[option] = value;
-    optionsSetter({ options });
-    this.setState({ options });
-  } else {
-    const options = { ...this.state.options };
-    options[option] = value;
-    this.setState({ options });
-  }
+  const options = { ...this.state.options };
+  options[option] = value;
+  this.setState({ options });
 }
 
 /**

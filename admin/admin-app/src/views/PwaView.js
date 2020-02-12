@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
-import { linkOptionUseState, useLinkState } from '../utils/linkState';
+import useLinkState from '../utils/useLinkState';
 import {
   adminUrl,
   homeUrl,
@@ -28,21 +28,16 @@ import SettingTextarea from '../components/SettingTextarea';
 import SubmitButton from '../components/SubmitButton';
 import OfflinePageSelect from '../components/OfflinePageSelect';
 
-let getOption;
-let setOption;
-let linkOptionState = linkOptionUseState;
+const PwaView = props => {
+  const [options, setOption, setOptions, linkOptionState] = useLinkState(
+    pwaSettings
+  );
 
-const PwaView = (props) => {
-  const [options, setOption, setOptions] = useLinkState(pwaSettings);
+  const getOption = option => options[option];
 
-  getOption = (option) => options[option];
-  linkOptionState = (...args) => linkOptionUseState(getOption, setOption, ...args);
-  
   useEffect(() => {
     options.cacheInclude = newlineArrayString(options.cacheInclude);
-    options.cachePreload = newlineArrayString(
-      options.cachePreload
-    );
+    options.cachePreload = newlineArrayString(options.cachePreload);
   });
 
   return (
@@ -171,9 +166,7 @@ const PwaView = (props) => {
                           Unchecking this option enables to combine the PWA
                           Service Worker with other service workers, for example
                           for{' '}
-                          <a
-                            href={getOption('pushNotificationPluginsUrl')}
-                          >
+                          <a href={getOption('pushNotificationPluginsUrl')}>
                             Push Notifications
                           </a>
                           . If you want to load the PWA Service Worker using{' '}
@@ -196,9 +189,7 @@ const PwaView = (props) => {
                       header="Service Worker Scope"
                       link={linkOptionState('swScope')}
                       placeholder="Leave blank for global scope"
-                      title={`Global scope: ${getOption(
-                        'swScopeCurrent'
-                      )}`}
+                      title={`Global scope: ${getOption('swScopeCurrent')}`}
                       description={
                         <>
                           Enter an optional{' '}
@@ -364,9 +355,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                         type="hidden"
                         name="abovethefold[pwa_cache_assets_policy]"
                         id="cache_assets_src"
-                        value={JSON.stringify(
-                          getOption('cacheAssetsPolicy')
-                        )}
+                        value={JSON.stringify(getOption('cacheAssetsPolicy'))}
                       />
                     </td>
                   </tr>
@@ -707,6 +696,6 @@ jQuery(window).on('sw-update',function(e){
       </PageContent>
     </form>
   );
-}
+};
 
 export default PwaView;
