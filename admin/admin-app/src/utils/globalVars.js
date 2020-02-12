@@ -19,7 +19,6 @@ export const wpAbtfUri = adminValues.wpAbtfUri;
 export const htmlSettings = adminValues.htmlSettings || {};
 export const cssSettings = adminValues.cssSettings || {};
 export const javascriptSettings = adminValues.javascriptSettings || {};
-export const pwaSettings = adminValues.pwaSettings || {};
 export const http2Settings = adminValues.http2Settings || {};
 export const proxySettings = adminValues.proxySettings || {};
 export const settingsSettings = adminValues.settingsSettings || {};

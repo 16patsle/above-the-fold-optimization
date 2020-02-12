@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import useSWR from 'swr';
@@ -8,10 +8,8 @@ import {
   homeUrl,
   siteTitle,
   abtfAdminNonce,
-  wpAbtfUri,
-  pwaSettings
+  wpAbtfUri
 } from '../utils/globalVars';
-import newlineArrayString from '../utils/newLineArrayString';
 import JsonEditor from '../components/JsonEditor';
 import {
   pwaAssetCacheSchema,
@@ -30,27 +28,26 @@ import SubmitButton from '../components/SubmitButton';
 import OfflinePageSelect from '../components/OfflinePageSelect';
 import getSettings from '../utils/getSettings';
 
-const PwaView = props => {
+const PwaView = () => {
   const [options, setOption, setOptions, linkOptionState] = useLinkState();
 
   const getOption = option => options[option];
 
   const { data, error } = useSWR('settings', getSettings)
 
-  useEffect(() => {
-    if (options) {
-      options.cacheInclude = newlineArrayString(options.cacheInclude);
-      options.cachePreload = newlineArrayString(options.cachePreload);
-    }
-  });
+  if (error) {
+    return <div>Error: {error}</div>
+  }
+
+  const loading = <div>Loading...</div>;
 
   if (!data) {
-    return <div>data</div>
+    return loading;
   }
 
   if (!options) {
     setOptions(data);
-    return <div>data</div>;
+    return loading;
   }
 
   return (
@@ -179,18 +176,18 @@ const PwaView = props => {
                           Unchecking this option enables to combine the PWA
                           Service Worker with other service workers, for example
                           for{' '}
-                          <a href={pwaSettings.pushNotificationPluginsUrl}>
+                          <a href={getOption('pushNotificationPluginsUrl')}>
                             Push Notifications
                           </a>
                           . If you want to load the PWA Service Worker using{' '}
                           <code>importScripts</code> use the file{' '}
                           <a
-                            href={`${homeUrl}/${pwaSettings.swFilename}`}
+                            href={`${homeUrl}/${getOption('pwaSwFilename')}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            download={pwaSettings.swFilename}
+                            download={getOption('pwaSwFilename')}
                           >
-                            /{pwaSettings.swFilename}
+                            /{getOption('pwaSwFilename')}
                           </a>
                           .
                         </>
@@ -202,7 +199,7 @@ const PwaView = props => {
                       header="Service Worker Scope"
                       link={linkOptionState('pwaScope')}
                       placeholder="Leave blank for global scope"
-                      title={`Global scope: ${pwaSettings.swScopeCurrent}`}
+                      title={`Global scope: ${getOption('pwaScopeCurrent')}`}
                       description={
                         <>
                           Enter an optional{' '}

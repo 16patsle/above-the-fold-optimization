@@ -38,29 +38,12 @@ class ABTF_Settings_Route extends WP_REST_Controller {
    * @return WP_Error|WP_REST_Response
    */
   public function get_settings( $request ) {
-    $data = $this->convert_to_camel_case_array($this->options);
-
-    $data = array_filter($data, function($val){
-      return !in_array($val, ['updateCount']);
-    }, ARRAY_FILTER_USE_KEY);
-
-    $pwa_manifest_status = false;
-		$pwa_manifest_json = array();
-		$pwa_manifest = trailingslashit(ABSPATH) . 'manifest.json';
-		if (!file_exists($pwa_manifest)) {
-      	$pwa_manifest_status = 'not existing';
-    } elseif (!is_writeable($pwa_manifest)) {
-        $pwa_manifest_status = 'not writable';
-    } else {
-		$pwa_manifest_status = 'good';
-      	$json = file_get_contents(trailingslashit(ABSPATH) . 'manifest.json');
-      	$pwa_manifest_json = @json_decode(trim($json), true);
-      	/*if (!is_array($pwa_manifest_json)) {
-      	    $pwa_manifest_json = array();
-		}*/
-    }
-    $data['pwaManifestStatus'] = $pwa_manifest_status;
-    $data['pwaManifestJson'] = $pwa_manifest_json;
+    $data = array_filter(
+      $this->prepare_settings_for_response($this->options),
+      function($val){
+        return !in_array($val, ['update_count']);
+      }, ARRAY_FILTER_USE_KEY
+    );
   
     return new WP_REST_Response( $data, 200 );
   }
@@ -100,11 +83,62 @@ class ABTF_Settings_Route extends WP_REST_Controller {
   public function get_settings_permissions_check( $request ) {
     return current_user_can( 'manage_options' );
   }
+
+  /**
+   * Prepare settings for the REST response
+   *
+   * @param array $options The settings.
+   * @return array
+   */
+  public function prepare_settings_for_response( $options ) {
+    // PWA
+    $sw = $this->admin->CTRL->pwa->get_sw();
+
+    // verify service worker
+    	if (isset($options['pwa']) && intval($options['pwa']) === 1) {
+    	    $this->pwa->install_serviceworker();
+    }
+    if (isset($options['pwa_cache_pages_offline']) && trim($options['pwa_cache_pages_offline']) !== '') {
+      // WordPress URL?
+    	$postid = url_to_postid($options['pwa_cache_pages_offline']);
+    	if ($postid) {
+    	    $options['pwa_cache_pages_offline_name'] = $postid . '. ' . str_replace(home_url(), '', get_permalink($postid)) . ' - ' . get_the_title($postid);
+    	} else {
+    	    $options['pwa_cache_pages_offline_name'] = $options['pwa_cache_pages_offline'];
+			}
+    }
+    // asset cache policy
+    if(!is_array($options['pwa_cache_assets_policy'])){
+      $options['pwa_cache_assets_policy'] = $this->admin->CTRL->pwa->get_sw_default_policy();
+    }
+    $pwa_manifest_status = false;
+		$pwa_manifest_json = array();
+		$pwa_manifest = trailingslashit(ABSPATH) . 'manifest.json';
+		if (!file_exists($pwa_manifest)) {
+      	$pwa_manifest_status = 'not existing';
+    } elseif (!is_writeable($pwa_manifest)) {
+        $pwa_manifest_status = 'not writable';
+    } else {
+		$pwa_manifest_status = 'good';
+      	$json = file_get_contents(trailingslashit(ABSPATH) . 'manifest.json');
+      	$pwa_manifest_json = @json_decode(trim($json), true);
+      	/*if (!is_array($pwa_manifest_json)) {
+      	    $pwa_manifest_json = array();
+		}*/
+    }
+    $options['pwa_manifest_status'] = $pwa_manifest_status;
+    $options['pwa_manifest_json'] = $pwa_manifest_json;
+    $options['pwa_scope_current'] = $this->admin->CTRL->pwa->get_sw_scope();
+    $options['push_notification_plugins_url'] = admin_url('plugin-install.php?s=push+notifications&tab=search&type=term');
+    $options['pwa_sw_filename'] = $sw['filename'];
+
+    return $this->convert_to_camel_case_array($options);
+  }
   
   /**
    * Prepare the setting for the REST response
    *
-   * @param mixed $item WordPress representation of the setting.
+   * @param mixed $setting WordPress representation of the setting.
    * @param WP_REST_Request $request Request object.
    * @return mixed
    */
