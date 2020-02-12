@@ -42,8 +42,26 @@ class ABTF_Settings_Route extends WP_REST_Controller {
 
     $data = array_filter($data, function($val){
       return !in_array($val, ['updateCount']);
-    });
- 
+    }, ARRAY_FILTER_USE_KEY);
+
+    $pwa_manifest_status = false;
+		$pwa_manifest_json = array();
+		$pwa_manifest = trailingslashit(ABSPATH) . 'manifest.json';
+		if (!file_exists($pwa_manifest)) {
+      	$pwa_manifest_status = 'not existing';
+    } elseif (!is_writeable($pwa_manifest)) {
+        $pwa_manifest_status = 'not writable';
+    } else {
+		$pwa_manifest_status = 'good';
+      	$json = file_get_contents(trailingslashit(ABSPATH) . 'manifest.json');
+      	$pwa_manifest_json = @json_decode(trim($json), true);
+      	/*if (!is_array($pwa_manifest_json)) {
+      	    $pwa_manifest_json = array();
+		}*/
+    }
+    $data['pwaManifestStatus'] = $pwa_manifest_status;
+    $data['pwaManifestJson'] = $pwa_manifest_json;
+  
     return new WP_REST_Response( $data, 200 );
   }
 
@@ -84,13 +102,13 @@ class ABTF_Settings_Route extends WP_REST_Controller {
   }
   
   /**
-   * Prepare the item for the REST response
+   * Prepare the setting for the REST response
    *
-   * @param mixed $item WordPress representation of the item.
+   * @param mixed $item WordPress representation of the setting.
    * @param WP_REST_Request $request Request object.
    * @return mixed
    */
-  public function prepare_item_for_response( $item, $request ) {
+  public function prepare_setting_for_response( $setting, $request ) {
     return array();
   }
 

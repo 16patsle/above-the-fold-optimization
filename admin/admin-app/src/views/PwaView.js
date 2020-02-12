@@ -138,7 +138,7 @@ const PwaView = props => {
               <SettingCheckbox
                 header="Enable PWA"
                 name="abovethefold[pwa]"
-                link={linkOptionState('serviceWorker')}
+                link={linkOptionState('pwa')}
                 label="Enabled"
                 description={
                   <>
@@ -158,39 +158,39 @@ const PwaView = props => {
                 className="serviceworkeroptions"
                 header="Service Worker Settings"
               >
-                {!getOption('serviceWorker') && (
+                {!getOption('pwa') && (
                   <SettingCheckbox
                     name="abovethefold[pwa_unregister]"
                     header="Unregister Service Worker"
-                    link={linkOptionState('swUnregister')}
+                    link={linkOptionState('pwaUnregister')}
                     label="Enabled"
                     description="Unregister the PWA Service Worker for visitors."
                   />
                 )}
-                {getOption('serviceWorker') && (
+                {getOption('pwa') && (
                   <>
                     <SettingCheckbox
                       name="abovethefold[pwa_register]"
                       header="Register Service Worker"
-                      link={linkOptionState('swRegister')}
+                      link={linkOptionState('pwaRegister')}
                       label="Enabled"
                       description={
                         <>
                           Unchecking this option enables to combine the PWA
                           Service Worker with other service workers, for example
                           for{' '}
-                          <a href={getOption('pushNotificationPluginsUrl')}>
+                          <a href={pwaSettings.pushNotificationPluginsUrl}>
                             Push Notifications
                           </a>
                           . If you want to load the PWA Service Worker using{' '}
                           <code>importScripts</code> use the file{' '}
                           <a
-                            href={`${homeUrl}/${getOption('swFilename')}`}
+                            href={`${homeUrl}/${pwaSettings.swFilename}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            download={getOption('swFilename')}
+                            download={pwaSettings.swFilename}
                           >
-                            /{getOption('swFilename')}
+                            /{pwaSettings.swFilename}
                           </a>
                           .
                         </>
@@ -200,9 +200,9 @@ const PwaView = props => {
                     <SettingTextInput
                       name="abovethefold[pwa_scope]"
                       header="Service Worker Scope"
-                      link={linkOptionState('swScope')}
+                      link={linkOptionState('pwaScope')}
                       placeholder="Leave blank for global scope"
-                      title={`Global scope: ${getOption('swScopeCurrent')}`}
+                      title={`Global scope: ${pwaSettings.swScopeCurrent}`}
                       description={
                         <>
                           Enter an optional{' '}
@@ -280,18 +280,18 @@ Notification.requestPermission(function(result){
               <SettingCheckbox
                 name="abovethefold[pwa_cache_pages]"
                 header="Offline Cache"
-                link={linkOptionState('cachePages')}
+                link={linkOptionState('pwaCachePages')}
                 label="Enabled"
                 description="Cache HTML pages in the service worker. This option enables to make a website available offline."
               />
               <SettingInnerTable
                 header="Offline Cache Settings"
-                style={!getOption('cachePages') ? { display: 'none' } : {}}
+                style={!getOption('pwaCachePages') ? { display: 'none' } : {}}
               >
                 <SettingSelect
                   header="HTML Cache Strategy"
                   name="abovethefold[pwa_cache_pages_strategy]"
-                  link={linkOptionState('cacheStrategy')}
+                  link={linkOptionState('pwaCachePagesStrategy')}
                   options={[
                     {
                       value: 'network',
@@ -337,7 +337,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                   header="HTML Cache Include List"
                   textareaClass="json-array-lines"
                   name="abovethefold[pwa_cache_pages_include]"
-                  link={linkOptionState('cacheInclude')}
+                  link={linkOptionState('pwaCacheInclude')}
                   placeholder="Leave blank to cache all pages"
                   description={
                     <>
@@ -349,18 +349,18 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                 <SettingCheckbox
                   name="abovethefold[pwa_cache_assets]"
                   header="Cache Assets"
-                  link={linkOptionState('cacheAssets')}
+                  link={linkOptionState('pwaCacheAssets')}
                   label="Enabled"
                   description="Cache assets such as scripts and styles. Use a request and/or response filter to apply a cache strategy and enable or disable caching for specific assets."
                 />
-                {getOption('cacheAssets') && (
+                {getOption('pwaCacheAssets') && (
                   <tr valign="top">
                     <th scope="row">Asset Cache Include Policy</th>
                     <td>
                       <JsonEditor
                         name="pwa.cache.assets"
                         schema={pwaAssetCacheSchema}
-                        link={linkOptionState('cacheAssetsPolicy')}
+                        link={linkOptionState('pwaCacheAssetsPolicy')}
                         compact="tree"
                         maxLines={50}
                       ></JsonEditor>
@@ -368,7 +368,9 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                         type="hidden"
                         name="abovethefold[pwa_cache_assets_policy]"
                         id="cache_assets_src"
-                        value={JSON.stringify(getOption('cacheAssetsPolicy'))}
+                        value={JSON.stringify(
+                          getOption('pwaCacheAssetsPolicy')
+                        )}
                       />
                     </td>
                   </tr>
@@ -376,7 +378,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                 <OfflinePageSelect
                   header="Offline Page"
                   name="abovethefold[pwa_cache_pages_offline]"
-                  link={linkOptionState('offlinePage')}
+                  link={linkOptionState('pwaCachePagesOffline')}
                   size={80}
                   placeholder="/path/to/offline.html"
                   description={
@@ -390,7 +392,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                 <SettingCheckbox
                   name="abovethefold[pwa_offline_class]"
                   header="CSS online/offline class"
-                  link={linkOptionState('offlineClass')}
+                  link={linkOptionState('pwaOfflineClass')}
                   label="Enabled"
                   description={
                     <>
@@ -408,12 +410,12 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                     </>
                   }
                 />
-                {getOption('cacheStrategy') === 'cache' && (
+                {getOption('pwaCachePagesStrategy') === 'cache' && (
                   <>
                     <SettingNumberInput
                       name="abovethefold[pwa_cache_pages_update_interval]"
                       header="Cache Update Interval"
-                      link={linkOptionState('cacheUpdateInterval')}
+                      link={linkOptionState('pwaCachePagesUpdateInterval')}
                       style={{ width: 120 }}
                       placeholder="Always"
                       description="Enter a time in seconds to update cached pages using the network. Leave blank to update the cache on each request."
@@ -421,14 +423,14 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                     <SettingNumberInput
                       name="abovethefold[pwa_cache_pages_max_age]"
                       header="Cache Max Age"
-                      link={linkOptionState('cacheMaxAge')}
+                      link={linkOptionState('pwaCachePagesMaxAge')}
                       style={{ width: 120 }}
                       description="Enter a expire time in seconds. The maximum age does not override HTTP expire headers."
                     />
                     <SettingCheckbox
                       name="abovethefold[pwa_cache_pages_head_update]"
                       header="HEAD based network update"
-                      link={linkOptionState('cacheHeadUpdate')}
+                      link={linkOptionState('pwaCachePagesHeadUpdate')}
                       label="Enabled"
                       description={
                         <>
@@ -443,7 +445,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                     <SettingCheckbox
                       name="abovethefold[pwa_cache_pages_update_notify]"
                       header="Client event on update"
-                      link={linkOptionState('cacheUpdateEvent')}
+                      link={linkOptionState('pwaCachePagesUpdateNotify')}
                       label="Enabled"
                       description="Send an event to the client when the cache is updated."
                     >
@@ -470,7 +472,7 @@ jQuery(window).on('sw-update',function(e){
                 <SettingNumberInput
                   name="abovethefold[pwa_cache_max_size]"
                   header="Cache Max Size"
-                  link={linkOptionState('cacheMaxSize')}
+                  link={linkOptionState('pwaCacheMaxSize')}
                   style={{ width: 80 }}
                   placeholder={1000}
                   description="Maximum cache entries to maintain. The default is 1000."
@@ -478,7 +480,7 @@ jQuery(window).on('sw-update',function(e){
                 <SettingTextInput
                   name="abovethefold[pwa_cache_version]"
                   header="Cache Version"
-                  link={linkOptionState('cacheVersion')}
+                  link={linkOptionState('pwaCacheVersion')}
                   size={20}
                   description="Optionally enter a cache version. This feature enables to invalidate existing caches."
                 />
@@ -486,7 +488,7 @@ jQuery(window).on('sw-update',function(e){
                   header="Cache Preload"
                   textareaClass="json-array-lines"
                   name="abovethefold[pwa_cache_preload]"
-                  link={linkOptionState('cachePreload')}
+                  link={linkOptionState('pwaCachePreload')}
                   description={
                     <>
                       Enter URLs or absolute path's to preload for offline
@@ -498,7 +500,7 @@ jQuery(window).on('sw-update',function(e){
                 <SettingCheckbox
                   name="abovethefold[pwa_cache_preload_require]"
                   header="Require preloading"
-                  link={linkOptionState('cachePreloadRequired')}
+                  link={linkOptionState('pwaCachePreloadRequired')}
                   label="Enabled"
                   description={
                     <>
@@ -512,7 +514,7 @@ jQuery(window).on('sw-update',function(e){
               <SettingCheckbox
                 name="abovethefold[pwa_preload_mousedown]"
                 header="Preload on Mouse Down"
-                link={linkOptionState('preloadMousedown')}
+                link={linkOptionState('pwaPreloadMousedown')}
                 label="Enabled"
                 description={
                   <>
@@ -559,7 +561,7 @@ jQuery(window).on('sw-update',function(e){
                     </a>
                     )
                   </p>
-                  {getOption('manifestStatus') === 'not existing' && (
+                  {getOption('pwaManifestStatus') === 'not existing' && (
                     <Info color="red" style={{ marginBottom: '1em' }}>
                       <strong>{homeUrl}/manifest.json</strong> not found. Add
                       the file to the root of your WordPress installation and
@@ -642,14 +644,14 @@ jQuery(window).on('sw-update',function(e){
                 <SettingCheckbox
                   name="abovethefold[manifest_json_update]"
                   header="Update manifest.json"
-                  link={linkOptionState('manifestUpdate')}
+                  link={linkOptionState('manifestJsonUpdate')}
                   label="Enabled"
                   description="Update manifest.json when saving settings."
                 />
                 <SettingCheckbox
                   name="abovethefold[pwa_manifest_meta]"
                   header="Link manifest.json in head"
-                  link={linkOptionState('manifestLink')}
+                  link={linkOptionState('pwaManifestMeta')}
                   label="Enabled"
                   description={
                     <>
@@ -665,7 +667,7 @@ jQuery(window).on('sw-update',function(e){
                     height: 200
                   }}
                   name="abovethefold[pwa_meta]"
-                  link={linkOptionState('metaTags')}
+                  link={linkOptionState('pwaMeta')}
                   description={
                     <>
                       Enter Web App related meta tags to include in the{' '}
