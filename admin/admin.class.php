@@ -84,6 +84,9 @@ class Abovethefold_Admin
             $this->CTRL->loader->add_action('wp_enqueue_scripts', $this, 'enqueue_frontend_scripts', 30);
         }
 
+        // Register REST API routes from the controller.
+        $this->CTRL->loader->add_action( 'rest_api_init', $this, 'register_rest_routes' );
+
         /**
          * Admin panel specific
          */
@@ -1236,5 +1239,14 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
         }
         
         return preg_replace('|(\s)fill="#000000"|Ui', '$1fill="'.esc_attr($use_icon_fill_color).'"', $svg);
+    }
+
+    /**
+     * Function to register our REST routes from the controller.
+     */
+    function register_rest_routes() {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/abtf-settings-route.php';
+        $controller = new ABTF_Settings_Route($this);
+        $controller->register_routes();
     }
 }
