@@ -304,20 +304,27 @@ class Abovethefold_Admin
         //wp_enqueue_style('abtf_admincp', plugin_dir_url(__FILE__) . 'css/admincp.min.css', false, WPABTF_VERSION);
 
         // add admin-app JS
-        if (!in_array($_SERVER['HTTP_HOST'], array('127.0.0.1', '::1', 'localhost'))) {
-            // PROD
-            $react_js_main = plugin_dir_url(__FILE__) . '/admin-app/build/static/js/main.js';
-            $react_js_chunk = plugin_dir_url(__FILE__) . '/admin-app/build/static/js/abtf.chunk.js';
-            $react_dir = plugin_dir_url( __FILE__ ) . 'admin-app/build/';
-        } else {
-            // DEV
-            $react_js_main = 'http://localhost:3000/static/js/main.js';
-            $react_js_chunk = 'http://localhost:3000/static/js/abtf.chunk.js';
-            $react_dir = 'http://localhost:3000/';
-        }
+        $react_dir = plugin_dir_url( __FILE__ ) . 'admin-app/build/';
+        $react_script_path =  '/admin-app/build/index.js';
+        $react_script_asset_path = '/admin-app/build/index.asset.php';
+        $react_srcipt_asset      = file_exists( $react_script_asset_path )
+            ? require( $react_script_asset_path ) 
+            : array( 'dependencies' => array(), 'version' => filemtime( __DIR__ . $react_script_path ) );
+
         //React dynamic loading
-        wp_enqueue_script('abtf_react_main', $react_js_main, '', mt_rand(10,1000), true);
-        wp_enqueue_script('abtf_react_chunk', $react_js_chunk, '', mt_rand(10,1000), true);
+        wp_enqueue_script('abtf_react_main', plugins_url( $react_script_path, __FILE__ ), $react_script_asset['dependencies'], $react_script_asset['version'], true);
+
+        // Load chunks from asset manifest
+        $asset_manifest_json = array();
+		$asset_manifest = __DIR__ . '/admin-app/build/asset-manifest.json';
+		if (file_exists($asset_manifest)) {
+      	    $json = file_get_contents($asset_manifest);
+            $asset_manifest_json = @json_decode(trim($json), true);
+            foreach ($asset_manifest_json["entrypoints"] as $key => $entrypoint) {
+                wp_enqueue_script('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtf_react_main'), mt_rand(10,1000), true);
+            }
+        }
+        
         echo '<input id="reactDir" type="hidden" value="' . $react_dir . '" />';
 
         // add admin-app CSS
