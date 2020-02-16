@@ -15,8 +15,6 @@ const getClientEnvironment = require('react-scripts/config/env');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const postcssNormalize = require('postcss-normalize');
 
-const appPackageJson = require('./package.json');
-
 // Source maps are resource heavy and can cause out of memory issue for large source files.cros
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
@@ -46,63 +44,6 @@ module.exports = function(webpackEnv) {
 
   // Get environment variables to inject into our app.
   const env = getClientEnvironment('');
-
-  // common function to get style loaders
-  const getStyleLoaders = (cssOptions, preProcessor) => {
-    const loaders = [
-      isEnvDevelopment && require.resolve('style-loader'),
-      isEnvProduction && {
-        loader: MiniCssExtractPlugin.loader,
-        options: {},
-      },
-      {
-        loader: require.resolve('css-loader'),
-        options: cssOptions,
-      },
-      {
-        // Options for PostCSS as we reference these options twice
-        // Adds vendor prefixing based on your specified browser support in
-        // package.json
-        loader: require.resolve('postcss-loader'),
-        options: {
-          // Necessary for external CSS imports to work
-          // https://github.com/facebook/create-react-app/issues/2677
-          ident: 'postcss',
-          plugins: () => [
-            require('postcss-flexbugs-fixes'),
-            require('postcss-preset-env')({
-              autoprefixer: {
-                flexbox: 'no-2009',
-              },
-              stage: 3,
-            }),
-            // Adds PostCSS Normalize as the reset css with default options,
-            // so that it honors browserslist config in package.json
-            // which in turn let's users customize the target behavior as per their needs.
-            postcssNormalize(),
-          ],
-          sourceMap: isEnvProduction && shouldUseSourceMap,
-        },
-      },
-    ].filter(Boolean);
-    if (preProcessor) {
-      loaders.push(
-        {
-          loader: require.resolve('resolve-url-loader'),
-          options: {
-            sourceMap: isEnvProduction && shouldUseSourceMap,
-          },
-        },
-        {
-          loader: require.resolve(preProcessor),
-          options: {
-            sourceMap: true,
-          },
-        }
-      );
-    }
-    return loaders;
-  };
 
   return {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
@@ -138,7 +79,7 @@ module.exports = function(webpackEnv) {
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
       // Prevents conflicts when multiple Webpack runtimes (from different apps)
       // are used on the same page.
-      jsonpFunction: `webpackJsonp${appPackageJson.name}`
+      jsonpFunction: 'webpackJsonpAbtfAdmin'
     },
     optimization: {
       minimize: isEnvProduction,
@@ -248,7 +189,7 @@ module.exports = function(webpackEnv) {
                 cache: true,
                 formatter: require.resolve('react-dev-utils/eslintFormatter'),
                 eslintPath: require.resolve('eslint'),
-                resolvePluginsRelativeTo: __dirname,
+                resolvePluginsRelativeTo: __dirname
               },
               loader: require.resolve('eslint-loader')
             }
@@ -339,10 +280,45 @@ module.exports = function(webpackEnv) {
             {
               test: cssRegex,
               exclude: cssModuleRegex,
-              use: getStyleLoaders({
-                importLoaders: 1,
-                sourceMap: isEnvProduction && shouldUseSourceMap
-              }),
+              use: [
+                isEnvDevelopment && require.resolve('style-loader'),
+                isEnvProduction && {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {}
+                },
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 1,
+                    sourceMap: isEnvProduction && shouldUseSourceMap
+                  }
+                },
+                {
+                  // Options for PostCSS as we reference these options twice
+                  // Adds vendor prefixing based on your specified browser support in
+                  // package.json
+                  loader: require.resolve('postcss-loader'),
+                  options: {
+                    // Necessary for external CSS imports to work
+                    // https://github.com/facebook/create-react-app/issues/2677
+                    ident: 'postcss',
+                    plugins: () => [
+                      require('postcss-flexbugs-fixes'),
+                      require('postcss-preset-env')({
+                        autoprefixer: {
+                          flexbox: 'no-2009'
+                        },
+                        stage: 3
+                      }),
+                      // Adds PostCSS Normalize as the reset css with default options,
+                      // so that it honors browserslist config in package.json
+                      // which in turn let's users customize the target behavior as per their needs.
+                      postcssNormalize()
+                    ],
+                    sourceMap: isEnvProduction && shouldUseSourceMap
+                  }
+                }
+              ].filter(Boolean),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
               // Remove this when webpack adds a warning or an error for this.
