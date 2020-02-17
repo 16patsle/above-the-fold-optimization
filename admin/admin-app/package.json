@@ -18,13 +18,13 @@
     "swr": "^0.1.16"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^7.1.0",
-    "cross-env": "^7.0.0"
+    "@rescripts/cli": "0.0.13"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development wp-scripts start",
-    "build": "cross-env NODE_ENV=production wp-scripts build",
-    "test": "wp-scripts test-unit-js && wp-scripts test-e2e",
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test --env=jsdom",
+    "eject": "react-scripts eject",
     "prettier": "prettier --single-quote --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
