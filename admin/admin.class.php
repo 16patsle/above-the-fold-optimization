@@ -321,21 +321,23 @@ class Abovethefold_Admin
       	    $json = file_get_contents($asset_manifest);
             $asset_manifest_json = @json_decode(trim($json), true);
             foreach ($asset_manifest_json["entrypoints"] as $key => $entrypoint) {
-                wp_enqueue_script('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtf_react_main'), mt_rand(10,1000), true);
+                if($key > 1) {
+                    wp_enqueue_script('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtf_react_main'), mt_rand(10,1000), true);
+                }
             }
         }
         
         echo '<input id="reactDir" type="hidden" value="' . $react_dir . '" />';
 
         // add admin-app CSS
-        if (!in_array($_SERVER['HTTP_HOST'], array('127.0.0.1', '::1', 'localhost'))) {
+        /*if (!in_array($_SERVER['HTTP_HOST'], array('127.0.0.1', '::1', 'localhost'))) {
             $CSSfiles = scandir(dirname(__FILE__) . '/admin-app/build/static/css/');
                 foreach($CSSfiles as $filename) {
                     if(strpos($filename,'.css')&&!strpos($filename,'.css.map')) {
                         wp_enqueue_style( 'abtf_react_css', plugin_dir_url( __FILE__ ) . 'admin-app/build/static/css/' . $filename, array(), mt_rand(10,1000), 'all' );
                     }
                 }
-          }
+          }*/
     }
 
     /**
