@@ -120,7 +120,7 @@ class ABTF_Settings_Route extends WP_REST_Controller {
         $pwa_manifest_status = 'not writable';
     } else {
 		$pwa_manifest_status = 'good';
-      	$json = file_get_contents(trailingslashit(ABSPATH) . 'manifest.json');
+      	$json = file_get_contents($pwa_manifest);
       	$pwa_manifest_json = @json_decode(trim($json), true);
       	/*if (!is_array($pwa_manifest_json)) {
       	    $pwa_manifest_json = array();
