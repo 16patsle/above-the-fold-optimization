@@ -322,7 +322,11 @@ class Abovethefold_Admin
             $asset_manifest_json = @json_decode(trim($json), true);
             foreach ($asset_manifest_json["entrypoints"] as $key => $entrypoint) {
                 if($key > 1) {
-                    wp_enqueue_script('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtf_react_main'), mt_rand(10,1000), true);
+                    if(preg_match('/\.css$/', $entrypoint)){
+                        wp_enqueue_style('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array(), mt_rand(10,1000));
+                    } else {
+                        wp_enqueue_script('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtf_react_main'), mt_rand(10,1000), true);
+                    }
                 }
             }
         }
