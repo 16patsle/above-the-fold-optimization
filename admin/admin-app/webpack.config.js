@@ -11,31 +11,20 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const modules = require('react-scripts/config/modules');
-const getClientEnvironment = require('react-scripts/config/env');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const postcssNormalize = require('postcss-normalize');
 
-// Source maps are resource heavy and can cause out of memory issue for large source files.cros
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+const getClientEnvironment = require('./webpack-env');
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
 );
 
-// style files regexes
-const cssRegex = /\.css$/;
-const cssModuleRegex = /\.module\.css$/;
-
-// This is the production and development configuration.
-// It is focused on developer experience, fast rebuilds, and a minimal bundle.
-module.exports = function(webpackEnv) {
-  const isEnvDevelopment =
-    webpackEnv === 'development' ||
-    process.env.NODE_ENV === 'development';
-  const isEnvProduction =
-    webpackEnv === 'production' ||
-    process.env.NODE_ENV === 'production' ||
-    !isEnvDevelopment;
+module.exports = function (webpackEnv) {
+  const mode = (webpackEnv === 'development' ||
+    process.env.NODE_ENV === 'development') ? 'development' : 'production'
+  const isEnvDevelopment = mode === 'development';
+  const isEnvProduction = mode === 'production';
 
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
@@ -43,16 +32,14 @@ module.exports = function(webpackEnv) {
     isEnvProduction && process.argv.includes('--profile');
 
   // Get environment variables to inject into our app.
-  const env = getClientEnvironment('');
+  const env = getClientEnvironment();
 
   return {
-    mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
+    mode,
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
-      ? shouldUseSourceMap
-        ? 'source-map'
-        : false
+      ? 'source-map'
       : isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
@@ -123,13 +110,13 @@ module.exports = function(webpackEnv) {
               ascii_only: true
             }
           },
-          sourceMap: shouldUseSourceMap
+          sourceMap: true
         }),
         // This is only used in production mode
         new OptimizeCSSAssetsPlugin({
           cssProcessorOptions: {
             parser: safePostCssParser,
-            map: shouldUseSourceMap
+            map: true
               ? {
                   // `inline: false` forces the sourcemap to be output into a
                   // separate file
@@ -266,8 +253,8 @@ module.exports = function(webpackEnv) {
                 // Babel sourcemaps are needed for debugging into node_modules
                 // code.  Without the options below, debuggers like VSCode
                 // show incorrect code and set breakpoints on the wrong lines.
-                sourceMaps: shouldUseSourceMap,
-                inputSourceMap: shouldUseSourceMap
+                sourceMaps: true,
+                inputSourceMap: true
               }
             },
             // "postcss" loader applies autoprefixer to our CSS.
@@ -278,8 +265,8 @@ module.exports = function(webpackEnv) {
             // of CSS.
             // By default we support CSS Modules with the extension .module.css
             {
-              test: cssRegex,
-              exclude: cssModuleRegex,
+              test: /\.css$/,
+              exclude: /\.module\.css$/,
               use: [
                 isEnvDevelopment && require.resolve('style-loader'),
                 isEnvProduction && {
@@ -290,7 +277,7 @@ module.exports = function(webpackEnv) {
                   loader: require.resolve('css-loader'),
                   options: {
                     importLoaders: 1,
-                    sourceMap: isEnvProduction && shouldUseSourceMap
+                    sourceMap: isEnvProduction
                   }
                 },
                 {
@@ -315,7 +302,7 @@ module.exports = function(webpackEnv) {
                       // which in turn let's users customize the target behavior as per their needs.
                       postcssNormalize()
                     ],
-                    sourceMap: isEnvProduction && shouldUseSourceMap
+                    sourceMap: isEnvProduction
                   }
                 }
               ].filter(Boolean),
