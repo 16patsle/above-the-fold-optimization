@@ -307,8 +307,8 @@ class Abovethefold_Admin
         $react_dir = plugin_dir_url( __FILE__ ) . 'admin-app/build/';
         $react_script_path =  '/admin-app/build/index.js';
         $react_script_asset_path = '/admin-app/build/index.asset.php';
-        $react_srcipt_asset      = file_exists( $react_script_asset_path )
-            ? require( $react_script_asset_path ) 
+        $react_script_asset      = file_exists( __DIR__ . $react_script_asset_path )
+            ? require( __DIR__ . $react_script_asset_path ) 
             : array( 'dependencies' => array(), 'version' => filemtime( __DIR__ . $react_script_path ) );
 
         //React dynamic loading
