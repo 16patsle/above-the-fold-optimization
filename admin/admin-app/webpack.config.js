@@ -10,11 +10,11 @@ const safePostCssParser = require('postcss-safe-parser');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const modules = require('react-scripts/config/modules');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const postcssNormalize = require('postcss-normalize');
 
-const getClientEnvironment = require('./webpack-env');
+const modules = require('./scripts/modules');
+const getClientEnvironment = require('./scripts/env');
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
