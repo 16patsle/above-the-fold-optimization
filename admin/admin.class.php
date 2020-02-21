@@ -314,34 +314,27 @@ class Abovethefold_Admin
         //React dynamic loading
         wp_enqueue_script('abtf_react_main', plugins_url( $react_script_path, __FILE__ ), $react_script_asset['dependencies'], $react_script_asset['version'], true);
 
-        // Load chunks from asset manifest
+        // Load JS and CSS chunks from asset manifest
         $asset_manifest_json = array();
 		$asset_manifest = __DIR__ . '/admin-app/build/asset-manifest.json';
 		if (file_exists($asset_manifest)) {
       	    $json = file_get_contents($asset_manifest);
             $asset_manifest_json = @json_decode(trim($json), true);
+            // Loop through and load entrypoints
             foreach ($asset_manifest_json["entrypoints"] as $key => $entrypoint) {
+                // Don't load index.js and index.asset.php
                 if($key > 1) {
+                    // Is it a css file?
                     if(preg_match('/\.css$/', $entrypoint)){
-                        wp_enqueue_style('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array(), mt_rand(10,1000));
+                        wp_enqueue_style('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array(), $react_script_asset['version']);
                     } else {
-                        wp_enqueue_script('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtf_react_main'), mt_rand(10,1000), true);
+                        wp_enqueue_script('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtf_react_main'), $react_script_asset['version'], true);
                     }
                 }
             }
         }
         
         echo '<input id="reactDir" type="hidden" value="' . $react_dir . '" />';
-
-        // add admin-app CSS
-        /*if (!in_array($_SERVER['HTTP_HOST'], array('127.0.0.1', '::1', 'localhost'))) {
-            $CSSfiles = scandir(dirname(__FILE__) . '/admin-app/build/static/css/');
-                foreach($CSSfiles as $filename) {
-                    if(strpos($filename,'.css')&&!strpos($filename,'.css.map')) {
-                        wp_enqueue_style( 'abtf_react_css', plugin_dir_url( __FILE__ ) . 'admin-app/build/static/css/' . $filename, array(), mt_rand(10,1000), 'all' );
-                    }
-                }
-          }*/
     }
 
     /**
