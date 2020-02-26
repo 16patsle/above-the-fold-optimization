@@ -33,10 +33,10 @@ const PwaView = () => {
 
   const getOption = option => options[option];
 
-  const { data, error } = useSWR('settings', getSettings)
+  const { data, error } = useSWR('settings', getSettings);
 
   if (error) {
-    return <div>Error: {error}</div>
+    return <div>Error: {error}</div>;
   }
 
   const loading = <div>Loading...</div>;

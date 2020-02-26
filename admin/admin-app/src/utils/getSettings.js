@@ -20,12 +20,12 @@ export default async function getSettings() {
     if (shouldNewlineArrayString.includes(key)) {
       result[key] = newlineArrayString(value);
     }
-  })
+  });
 
   result.pwaCachePagesOffline = {
     label: result.pwaCachePagesOfflineName,
     value: result.pwaCachePagesOffline
-  }
+  };
 
   console.log(result);
   return result;
