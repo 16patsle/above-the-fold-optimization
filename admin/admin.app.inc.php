@@ -200,24 +200,6 @@
 
 		$admin_values['javascriptSettings'] = $javascript_settings;
 
-		// HTTP/2
-		$http2_push = isset($options['http2_push']) && intval($options['http2_push'])=== 1;
-
-		// asset cache policy
-    	$http2_push_config = (isset($options['http2_push_config']) && is_array($options['http2_push_config'])) ? $options['http2_push_config'] : array();
-    	if (!is_array($http2_push_config) || empty($http2_push_config)) {
-    	    $http2_push_config = json_decode('[]');
-    	} else {
-    	    $http2_push_config = $http2_push_config;
-		}
-
-		$http2_settings = array(
-			'push' => $http2_push,
-			'pushConfig' => $http2_push_config
-		);
-
-		$admin_values['http2Settings'] = $http2_settings;
-
 		// Proxy
 		// Javascript Proxy Enabled?
     	$jsProxy = (isset($options['js_proxy']) && intval($options['js_proxy']) === 1);

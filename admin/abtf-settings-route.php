@@ -91,6 +91,12 @@ class ABTF_Settings_Route extends WP_REST_Controller {
    * @return array
    */
   public function prepare_settings_for_response( $options ) {
+    // HTTP/2
+		// asset cache policy
+    if (!is_array($options['http2_push_config']) || empty($options['http2_push_config'])) {
+        $options['http2_push_config'] = json_decode('[]');
+    }
+
     // PWA
     $sw = $this->admin->CTRL->pwa->get_sw();
 
