@@ -91,26 +91,61 @@ class ABTF_Settings_Route extends WP_REST_Controller {
    * @return array
    */
   public function prepare_settings_for_response( $options ) {
-    // HTTP/2
-		// asset cache policy
-    if (!is_array($options['http2_push_config']) || empty($options['http2_push_config'])) {
-        $options['http2_push_config'] = json_decode('[]');
+    // CSS
+    if(empty($options['cssdelivery_renderdelay'])) {
+      $options['cssdelivery_renderdelay'] = '';
     }
+    if(empty($options['gwfo_loadmethod'])) {
+			$options['gwfo_loadmethod'] = 'inline';
+    }
+
+    /**
+     * Get version of local loadCSS
+     */
+		$options['css_loadcss_version'] = '';
+		$options['css_loadcss_version_error'] = '';
+    $loadcss_package = WPABTF_PATH . 'public/js/src/loadcss_package.json';
+    if (!file_exists($loadcss_package)) {
+		  $options['css_loadcss_version_error'] = 'not_found';
+    } else {
+     	$package = @json_decode(file_get_contents($loadcss_package), true);
+    	if (!is_array($package)) {
+			  $options['css_loadcss_version_error'] = 'failed_parse';
+      } else {
+        // set version
+        $options['css_loadcss_version'] = $package['version'];
+      }
+    }
+
+    if (empty($options['css_loadcss_version'])) {
+      $options['css_loadcss_version'] = '(unknown)';
+		}
+
+		/**
+     * Get version of local webfont.js
+     */
+    $options['css_webfont_version'] = $this->admin->CTRL->gwfo->package_version(true);
+    if (empty($options['css_webfont_version'])) {
+      $options['css_webfont_version'] = '(unknown)';
+    }
+    
+    $options['gwfo_cdn_version'] = $this->admin->CTRL->gwfo->cdn_version;
+    $options['font_theme_path'] = str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/');
 
     // PWA
     $sw = $this->admin->CTRL->pwa->get_sw();
 
     // verify service worker
-    	if (isset($options['pwa']) && intval($options['pwa']) === 1) {
-    	    $this->pwa->install_serviceworker();
+    if (isset($options['pwa']) && intval($options['pwa']) === 1) {
+    	$this->pwa->install_serviceworker();
     }
     if (isset($options['pwa_cache_pages_offline']) && trim($options['pwa_cache_pages_offline']) !== '') {
       // WordPress URL?
     	$postid = url_to_postid($options['pwa_cache_pages_offline']);
     	if ($postid) {
-    	    $options['pwa_cache_pages_offline_name'] = $postid . '. ' . str_replace(home_url(), '', get_permalink($postid)) . ' - ' . get_the_title($postid);
+    	  $options['pwa_cache_pages_offline_name'] = $postid . '. ' . str_replace(home_url(), '', get_permalink($postid)) . ' - ' . get_the_title($postid);
     	} else {
-    	    $options['pwa_cache_pages_offline_name'] = $options['pwa_cache_pages_offline'];
+    	  $options['pwa_cache_pages_offline_name'] = $options['pwa_cache_pages_offline'];
 			}
     }
     // asset cache policy
@@ -121,22 +156,25 @@ class ABTF_Settings_Route extends WP_REST_Controller {
 		$pwa_manifest_json = array();
 		$pwa_manifest = trailingslashit(ABSPATH) . 'manifest.json';
 		if (!file_exists($pwa_manifest)) {
-      	$pwa_manifest_status = 'not existing';
+      $pwa_manifest_status = 'not existing';
     } elseif (!is_writeable($pwa_manifest)) {
-        $pwa_manifest_status = 'not writable';
+      $pwa_manifest_status = 'not writable';
     } else {
-		$pwa_manifest_status = 'good';
-      	$json = file_get_contents($pwa_manifest);
-      	$pwa_manifest_json = @json_decode(trim($json), true);
-      	/*if (!is_array($pwa_manifest_json)) {
-      	    $pwa_manifest_json = array();
-		}*/
+		  $pwa_manifest_status = 'good';
+      $json = file_get_contents($pwa_manifest);
+      $pwa_manifest_json = @json_decode(trim($json), true);
     }
     $options['pwa_manifest_status'] = $pwa_manifest_status;
     $options['pwa_manifest_json'] = $pwa_manifest_json;
     $options['pwa_scope_current'] = $this->admin->CTRL->pwa->get_sw_scope();
     $options['push_notification_plugins_url'] = admin_url('plugin-install.php?s=push+notifications&tab=search&type=term');
     $options['pwa_sw_filename'] = $sw['filename'];
+
+    // HTTP/2
+		// asset cache policy
+    if (!is_array($options['http2_push_config']) || empty($options['http2_push_config'])) {
+      $options['http2_push_config'] = json_decode('[]');
+    }
 
     return $this->convert_to_camel_case_array($options);
   }

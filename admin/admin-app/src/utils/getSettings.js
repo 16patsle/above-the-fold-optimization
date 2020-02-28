@@ -3,6 +3,10 @@ import newlineArrayString from './newLineArrayString';
 
 const shouldNewlineArrayString = [
   'htmlCommentsPreserve',
+  'cssdeliveryIgnore',
+  'cssdeliveryRemove',
+  'gwfoGoogleFontsIgnore',
+  'gwfoGoogleFontsRemove',
   'pwaCachePagesInclude',
   'pwaCachePreload',
   'jsProxyInclude',
