@@ -1,7 +1,16 @@
 import { abtfRestNonce } from './globalVars';
 import newlineArrayString from './newLineArrayString';
 
-const shouldNewlineArrayString = ['pwaCachePagesInclude', 'pwaCachePreload'];
+const shouldNewlineArrayString = [
+  'pwaCachePagesInclude',
+  'pwaCachePreload',
+  'jsProxyInclude',
+  'jsProxyExclude',
+  'jsProxyPreload',
+  'cssProxyInclude',
+  'cssProxyExclude',
+  'cssProxyPreload'
+];
 
 /**
  * Get settings JSON from REST API
