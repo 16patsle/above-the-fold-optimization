@@ -2,6 +2,7 @@ import { abtfRestNonce } from './globalVars';
 import newlineArrayString from './newLineArrayString';
 
 const shouldNewlineArrayString = [
+  'htmlCommentsPreserve',
   'pwaCachePagesInclude',
   'pwaCachePreload',
   'jsProxyInclude',

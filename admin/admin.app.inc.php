@@ -13,26 +13,6 @@
 			'wpAbtfUri' => WPABTF_URI
 		);
 
-		// HTML
-		$html_minify = isset($options['html_minify']) && intval($options['html_minify']) === 1;
-		$html_comments = isset($options['html_comments']) && intval($options['html_comments']) === 1;
-		$html_comments_preserve = '';
-		if(isset($options['html_comments_preserve'])) {
-			$html_comments_preserve = $options['html_comments_preserve'];
-		}
-		$html_search_replace = null;
-		if (isset($options['html_search_replace']) && is_array($options['html_search_replace'])) {
-    		$html_search_replace = $options['html_search_replace'];
-		}
-		$html_settings = array(
-			'minify' => $html_minify,
-			'comments' => $html_comments,
-			'commentsPreserve' => $html_comments_preserve,
-			'searchReplace' => $html_search_replace
-		);
-
-		$admin_values['htmlSettings'] = $html_settings;
-
 		// CSS
 		$cssdelivery = isset($options['cssdelivery']) && intval($options['cssdelivery']) === 1;
 		$loadcss_enhanced = isset($options['loadcss_enhanced']) && intval($options['loadcss_enhanced']) === 1;
