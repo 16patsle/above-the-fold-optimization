@@ -83,7 +83,11 @@ const CssView = () => {
                   >
                     loadCSS
                   </a>{' '}
-                  (v{getOption('cssLoadcssVersion')}).{' '}
+                  (
+                  {getOption('cssLoadcssVersion')
+                    ? 'v' + getOption('cssLoadcssVersion')
+                    : 'unknown version'}
+                  ).{' '}
                   <a
                     href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${lgCode}`}
                     target="_blank"
@@ -281,7 +285,11 @@ const CssView = () => {
                                 >
                                   webfont.js
                                 </a>{' '}
-                                (v{getOption('cssWebfontVersion')})).
+                                (
+                                {getOption('cssWebfontVersion')
+                                  ? 'v' + getOption('cssWebfontVersion')
+                                  : 'unknown version'}
+                                ).
                               </span>
                             }
                           ></SettingSelect>

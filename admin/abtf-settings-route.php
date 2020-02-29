@@ -117,17 +117,10 @@ class ABTF_Settings_Route extends WP_REST_Controller {
       }
     }
 
-    if (empty($options['css_loadcss_version'])) {
-      $options['css_loadcss_version'] = '(unknown)';
-		}
-
 		/**
      * Get version of local webfont.js
      */
     $options['css_webfont_version'] = $this->admin->CTRL->gwfo->package_version(true);
-    if (empty($options['css_webfont_version'])) {
-      $options['css_webfont_version'] = '(unknown)';
-    }
     
     $options['gwfo_cdn_version'] = $this->admin->CTRL->gwfo->cdn_version;
     $options['font_theme_path'] = str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/');
@@ -141,8 +134,6 @@ class ABTF_Settings_Route extends WP_REST_Controller {
     	        }
     	    }
     }
-    
-    $options['lazyload_plugins_url'] = admin_url('plugin-install.php?s=Lazy+Load+XT&tab=search&type=term');
 
     // PWA
     $sw = $this->admin->CTRL->pwa->get_sw();

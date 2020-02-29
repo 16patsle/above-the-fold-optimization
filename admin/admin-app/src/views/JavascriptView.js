@@ -497,7 +497,12 @@ const JavascriptView = () => {
                 <span>
                   <p className="description lazyscriptsoptions">
                     This option is compatible with{' '}
-                    <a href={getOption('lazyloadPluginsUrl')}>
+                    <a
+                      href={
+                        adminUrl +
+                        'plugin-install.php?s=Lazy+Load+XT&tab=search&type=term'
+                      }
+                    >
                       WordPress lazy load plugins
                     </a>{' '}
                     that use Lazy Load XT. Those plugins are <u>not required</u>{' '}
