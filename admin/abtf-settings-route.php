@@ -132,6 +132,18 @@ class ABTF_Settings_Route extends WP_REST_Controller {
     $options['gwfo_cdn_version'] = $this->admin->CTRL->gwfo->cdn_version;
     $options['font_theme_path'] = str_replace(ABSPATH, '/', trailingslashit(get_stylesheet_directory()) . 'fonts/');
 
+    // Javascript
+    if (isset($options['jsdelivery_idle']) && !empty($options['jsdelivery_idle'])) {
+    	    foreach ($options['jsdelivery_idle'] as $n => $cnf) {
+    	        $options['jsdelivery_idle'][$n] = $cnf[0];
+    	        if (isset($cnf[1])) {
+    	            $options['jsdelivery_idle'][$n] .= ':' . $cnf[1];
+    	        }
+    	    }
+    }
+    
+    $options['lazyload_plugins_url'] = admin_url('plugin-install.php?s=Lazy+Load+XT&tab=search&type=term');
+
     // PWA
     $sw = $this->admin->CTRL->pwa->get_sw();
 
