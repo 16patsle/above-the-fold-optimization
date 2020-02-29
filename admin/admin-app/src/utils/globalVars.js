@@ -16,8 +16,4 @@ export const utmString = adminValues.utmString;
 export const googleIntlCode = adminValues.googleIntlCode;
 export const wpAbtfUri = adminValues.wpAbtfUri;
 
-export const htmlSettings = adminValues.htmlSettings || {};
-export const cssSettings = adminValues.cssSettings || {};
-export const javascriptSettings = adminValues.javascriptSettings || {};
-export const settingsSettings = adminValues.settingsSettings || {};
 export const monitorSettings = adminValues.monitorSettings || {};

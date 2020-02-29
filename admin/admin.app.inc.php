@@ -13,33 +13,6 @@
 			'wpAbtfUri' => WPABTF_URI
 		);
 
-		// Settings
-		$settings_adminbar = !isset($options['adminbar']) || intval($options['adminbar']) === 1;
-		$settings_clear_pagecache = !isset($options['clear_pagecache']) || intval($options['clear_pagecache']) === 1;
-		$settings_debug = isset($options['debug']) && intval($options['debug']) === 1;
-
-		$client_hashes = false;
-
-		$site_url = wp_nonce_url(trailingslashit(site_url()), 'csp_hash_json', 'abtf-csp-hash');
-	
-		try {
-			$json = file_get_contents($site_url);
-		} catch (Exception $err) {
-			$json = false;
-		}
-		if ($json) {
-			$client_hashes = json_decode($json);
-		}
-
-		$settings_settings = array(
-			'adminbar' => $settings_adminbar,
-			'clearPageCache' => $settings_clear_pagecache,
-			'debug' => $settings_debug,
-			'clientHashes' => $client_hashes
-		);
-
-		$admin_values['settingsSettings'] = $settings_settings;
-
 		// Monitor
 		$uptimerobot_install_link = false;
 		$uptimerobot_overview = false;

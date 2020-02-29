@@ -179,6 +179,20 @@ class ABTF_Settings_Route extends WP_REST_Controller {
       $options['http2_push_config'] = json_decode('[]');
     }
 
+    // Settings
+    $options['client_hashes'] = false;
+
+    $hashes_url = wp_nonce_url(trailingslashit(site_url()), 'csp_hash_json', 'abtf-csp-hash');
+	
+    try {
+      $json = file_get_contents($hashes_url);
+    } catch (Exception $err) {
+      $json = false;
+    }
+    if ($json) {
+      $options['client_hashes'] = json_decode($json);
+    }
+
     return $this->convert_to_camel_case_array($options);
   }
   
