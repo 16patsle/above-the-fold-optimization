@@ -12,43 +12,6 @@
 			'googleIntlCode' => $this->google_intlcode,
 			'wpAbtfUri' => WPABTF_URI
 		);
-
-		// Monitor
-		$uptimerobot_install_link = false;
-		$uptimerobot_overview = false;
-		
-		if (is_plugin_inactive('uptime-robot-monitor/uptime-robot-nh.php')) {
-			$uptimerobot_status = 'not installed';
-
-			$uptimerobot_action = 'install-plugin';
-        	$uptimerobot_slug = 'uptime-robot-monitor';
-        	$uptimerobot_install_link = wp_nonce_url(
-        	    add_query_arg(
-        	        array(
-        	            'action' => $uptimerobot_action,
-						'plugin' => $uptimerobot_slug
-					),
-        	        admin_url('update.php')
-        	    ),
-            	$uptimerobot_action.'_'.$uptimerobot_slug
-        	);
-		} elseif (is_plugin_active('uptime-robot-monitor/uptime-robot-nh.php')) {
-        	if (!function_exists('urpro_data') || urpro_data("apikey", "no") === "") {
-        	    $uptimerobot_status = 'not configured';
-        	} else {
-				$uptimerobot_status = 'active';
-        	    $uptimerobot_overview = do_shortcode('[uptime-robot days="1-7-14-180"]') .
-        	    do_shortcode('[uptime-robot-response]');
-        	}
-		}
-
-		$monitor_settings = array(
-			'uptimerobotStatus' => $uptimerobot_status,
-			'uptimerobotInstallLink' => $uptimerobot_install_link,
-			'uptimerobotOverview' => $uptimerobot_overview
-		);
-		
-		$admin_values['monitorSettings'] = $monitor_settings;
 	?>
 	<input id="admin_values" type="hidden" value="<?php echo htmlspecialchars(json_encode($admin_values), ENT_COMPAT, 'UTF-8', false) ?>"/>
 	<script>console.log(<?php echo json_encode($options) ?>, <?php echo json_encode($admin_values) ?>)</script>

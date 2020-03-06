@@ -15,5 +15,3 @@ export const lgCode = adminValues.lgCode;
 export const utmString = adminValues.utmString;
 export const googleIntlCode = adminValues.googleIntlCode;
 export const wpAbtfUri = adminValues.wpAbtfUri;
-
-export const monitorSettings = adminValues.monitorSettings || {};

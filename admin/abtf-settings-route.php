@@ -193,6 +193,41 @@ class ABTF_Settings_Route extends WP_REST_Controller {
       $options['client_hashes'] = json_decode($json);
     }
 
+    // Monitor
+		$options['uptimerobot_install_link'] = false;
+    $options['uptimerobot_overview'] = false;
+    
+    // Makes sure the plugin is defined before trying to use it
+    // Needed to check active plugins
+    if ( ! function_exists( 'is_plugin_inactive' ) ) {
+      require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+    }
+		
+		if (is_plugin_inactive('uptime-robot-monitor/uptime-robot-nh.php')) {
+			$options['uptimerobot_status'] = 'not installed';
+
+			$uptimerobot_action = 'install-plugin';
+      $uptimerobot_slug = 'uptime-robot-monitor';
+      $options['uptimerobot_install_link'] = wp_nonce_url(
+        add_query_arg(
+        	array(
+        	  'action' => $uptimerobot_action,
+						'plugin' => $uptimerobot_slug
+					),
+        	admin_url('update.php')
+        ),
+        $uptimerobot_action.'_'.$uptimerobot_slug
+      );
+		} elseif (is_plugin_active('uptime-robot-monitor/uptime-robot-nh.php')) {
+      if (!function_exists('urpro_data') || urpro_data("apikey", "no") === "") {
+        $options['uptimerobot_status'] = 'not configured';
+      } else {
+				$options['uptimerobot_status'] = 'active';
+        $options['uptimerobot_overview'] = do_shortcode('[uptime-robot days="1-7-14-180"]') .
+        do_shortcode('[uptime-robot-response]');
+      }
+		}
+
     return $this->convert_to_camel_case_array($options);
   }
   
