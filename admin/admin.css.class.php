@@ -94,7 +94,7 @@ class ABTFR_Admin_CSS
                 }
             }
             
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/css');
+            wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/css');
             exit;
         }
 
@@ -179,7 +179,7 @@ class ABTFR_Admin_CSS
         // update settings
         $this->CTRL->admin->save_settings($options, 'CSS optimization settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/css');
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/css');
         exit;
     }
 }

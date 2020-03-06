@@ -19,7 +19,7 @@ import SubmitButton from '../components/SubmitButton';
 import getSettings from '../utils/getSettings';
 
 const emptyCacheUrl = new URL(adminUrl + 'admin.php');
-emptyCacheUrl.searchParams.append('page', 'pagespeed-proxy');
+emptyCacheUrl.searchParams.append('page', 'abtfr-proxy');
 emptyCacheUrl.searchParams.append('empty_cache', 1);
 
 const ProxyView = () => {

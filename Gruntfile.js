@@ -58,7 +58,7 @@ module.exports = function(grunt) {
             closurePath: '../closure-compiler',
             js: CCfiles[file],
             jsOutputFile: file,
-            //reportFile: 'public/js/closure-compiler/reports/pagespeed+' + keys.join('+') + '.txt',
+            //reportFile: 'public/js/closure-compiler/reports/abtfr+' + keys.join('+') + '.txt',
             noreport: true,
             maxBuffer: 500,
             options: {
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
             closurePath: '../closure-compiler',
             js: srcfile,
             jsOutputFile: file,
-            //reportFile: 'public/js/closure-compiler/reports/pagespeed+' + keys.join('+') + '.txt',
+            //reportFile: 'public/js/closure-compiler/reports/abtfr+' + keys.join('+') + '.txt',
             noreport: true,
             maxBuffer: 500,
             options: {

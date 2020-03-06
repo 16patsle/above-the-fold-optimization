@@ -1192,7 +1192,7 @@ class ABTFR_Proxy
         // add warning for admin
         if ($file_count > 500) {
             $this->CTRL->admin->set_notice('<h4 style="margin:0px;padding:0px;">ABTF Reborn</h4><p style="margin:0px;margin-top:4px;">The Proxy Cache directory contains '.number_format($file_count, 0, '.', ',').' cache entries. This may indicate that auto-capture captures a script with a changing url that causes a new cache entry to be created on each request.</p>
-				<p style="margin:0px;">The <a href="'. add_query_arg(array( 'page' => 'pagespeed-proxy' ), admin_url('admin.php')) . '#jsoncnf">Proxy configuration page</a> shows a solution to capture scripts with a changing url using a JSON config object.</p>', 'ERROR', array(
+				<p style="margin:0px;">The <a href="'. add_query_arg(array( 'page' => 'abtfr-proxy' ), admin_url('admin.php')) . '#jsoncnf">Proxy configuration page</a> shows a solution to capture scripts with a changing url using a JSON config object.</p>', 'ERROR', array(
                     'date' => time(),
                     'expire' => (60 * 2)
                 ));

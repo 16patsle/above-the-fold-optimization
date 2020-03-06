@@ -65,7 +65,7 @@ class ABTFR_Admin_Monitor
         // update settings
         //$this->CTRL->admin->save_settings($options, 'Proxy settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/monitor');
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/monitor');
         exit;
     }
 }

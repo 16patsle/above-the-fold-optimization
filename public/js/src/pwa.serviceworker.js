@@ -839,7 +839,7 @@
                 var request = new Request(r);
 
                 // add identifying header to allow server side modification for Service Worker
-                request.headers.set('x-pagespeed-sw', 1);
+                request.headers.set('x-abtfr-sw', 1);
 
                 // add HTTP/2 Cache Digest to request
                 if (digest) {

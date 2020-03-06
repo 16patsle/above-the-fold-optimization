@@ -57,7 +57,7 @@
 </label>
 			<p class="description" style="margin-bottom:1em;">When enabled, the critical CSS is not inlined but instead pushed together with the HTML (<a href="https://developers.google.com/web/fundamentals/performance/http2/#server_push" target="_blank">documentation</a>). </p>
 			
-			<p class="info_yellow" id="http2pushnote" style="margin-bottom:1em;<?php echo ((isset($options['http2_push_criticalcss']) && intval($options['http2_push_criticalcss']) === 1)) ? '' : 'display:none;'; ?>"><strong>Note:</strong> When using this feature, make sure that your server supports HTTP/2 Server Push. See the <a href="<?php echo add_query_arg(array('page' => 'pagespeed-http2'), admin_url('admin.php'));?>">HTTP/2-tab</a> for more information.</p>
+			<p class="info_yellow" id="http2pushnote" style="margin-bottom:1em;<?php echo ((isset($options['http2_push_criticalcss']) && intval($options['http2_push_criticalcss']) === 1)) ? '' : 'display:none;'; ?>"><strong>Note:</strong> When using this feature, make sure that your server supports HTTP/2 Server Push. See the <a href="<?php echo add_query_arg(array('page' => 'abtfr-http2'), admin_url('admin.php'));?>">HTTP/2-tab</a> for more information.</p>
 		</div>
 		
 		<hr />

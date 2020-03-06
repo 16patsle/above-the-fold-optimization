@@ -87,7 +87,7 @@ class ABTFR_Admin_PWA
                 }
             }
 
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/pwa');
+            wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/pwa');
             exit;
         }
 
@@ -221,7 +221,7 @@ class ABTFR_Admin_PWA
             $this->install_serviceworker();
         }
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/pwa');
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/pwa');
         exit;
     }
 
@@ -250,7 +250,7 @@ class ABTFR_Admin_PWA
      */
     public function enqueue_scripts($hook)
     {
-        if (!isset($_REQUEST['page']) || $_GET['page'] !== 'pagespeed-pwa') {
+        if (!isset($_REQUEST['page']) || $_GET['page'] !== 'abtfr-pwa') {
             return;
         }
 

@@ -24,7 +24,7 @@ import getSettings from '../utils/getSettings';
 SyntaxHighlighter.registerLanguage('xml', xml);
 
 const proxyUrl = new URL(adminUrl + 'admin.php');
-proxyUrl.searchParams.append('page', 'pagespeed-proxy');
+proxyUrl.searchParams.append('page', 'abtfr-proxy');
 
 const lazyloadExample = `
 <div data-lazy-widget>

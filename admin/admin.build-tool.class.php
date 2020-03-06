@@ -78,12 +78,12 @@ class ABTFR_Admin_BuildTool
 
         if ($url === '') {
             $this->CTRL->admin->set_notice('You did not select a page.', 'ERROR');
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
+            wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
             exit;
         }
         if ($taskname === '' || !preg_match('|^critical-[a-z0-9\-]+$|Ui', $taskname)) {
             $this->CTRL->admin->set_notice('You did not enter a valid task name.', 'ERROR');
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
+            wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
             exit;
         }
 
@@ -93,7 +93,7 @@ class ABTFR_Admin_BuildTool
                 $dimparts = explode('x', $dim);
                 if (count($dimparts) !== 2 || !is_numeric($dimparts[0]) || !is_numeric($dimparts[1]) || intval($dimparts[0]) <= 0 || intval($dimparts[1]) <= 0) {
                     $this->CTRL->admin->set_notice('Dimension <strong>'.htmlentities($dim, ENT_COMPAT, 'utf-8').'</strong> is not valid.', 'ERROR');
-                    wp_redirect(add_query_arg(array( 'page' => 'pagespeed-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
+                    wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
                     exit;
                 }
                 $dimensions[$n] = $dimparts;
@@ -105,7 +105,7 @@ class ABTFR_Admin_BuildTool
             $criticalcss_files = $this->CTRL->criticalcss->get_theme_criticalcss();
             if (!isset($criticalcss_files[$update])) {
                 $this->CTRL->admin->set_notice('You did not select a valid conditional CSS file to update.', 'ERROR');
-                wp_redirect(add_query_arg(array( 'page' => 'pagespeed-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
+                wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
             }
         } else {
             $update = false;
@@ -263,7 +263,7 @@ class ABTFR_Admin_BuildTool
 		<br /><br />
 		<textarea class="abtfrcmd" onfocus="jQuery(this).select();">cd '.trailingslashit(get_stylesheet_directory()).'abtfr/;' . "\n" . ((!$gulp_installed) ? 'npm install; ' : '') . 'gulp '.$taskname.'</textarea></div>', 'NOTICE');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed-build-tool' ), admin_url('admin.php')));
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool' ), admin_url('admin.php')));
         exit;
     }
 
@@ -435,7 +435,7 @@ class ABTFR_Admin_BuildTool
 		<br /><br />
 		<textarea class="abtfrcmd" onfocus="jQuery(this).select();">cd '.trailingslashit(get_stylesheet_directory()).'abtfr/;' . "\n" . 'npm install</textarea></div>', 'NOTICE');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed-build-tool' ), admin_url('admin.php')));
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool' ), admin_url('admin.php')));
         exit;
     }
 

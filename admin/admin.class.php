@@ -213,15 +213,15 @@ class ABTFR_Admin
         # Check current admin page.
         if( $pagenow == 'admin.php' && isset( $_GET['page'] ) ){
             switch ($_GET['page']) {
-                case 'pagespeed-html':
-                case 'pagespeed-css':
-                case 'pagespeed-javascript':
-                case 'pagespeed-pwa':
-                case 'pagespeed-http2':
-                case 'pagespeed-proxy':
-                case 'pagespeed-settings':
-                case 'pagespeed-monitor':
-                wp_redirect( add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/' . str_replace('pagespeed-', '', $_GET['page']), 301 );
+                case 'abtfr-html':
+                case 'abtfr-css':
+                case 'abtfr-javascript':
+                case 'abtfr-pwa':
+                case 'abtfr-http2':
+                case 'abtfr-proxy':
+                case 'abtfr-settings':
+                case 'abtfr-monitor':
+                wp_redirect( add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/' . str_replace('abtfr-', '', $_GET['page']), 301 );
                 exit;
                 break;
             }
@@ -241,7 +241,7 @@ class ABTFR_Admin
      */
     public function settings_link($links)
     {
-        $settings_link = '<a href="' . add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '">'.__('Settings').'</a>';
+        $settings_link = '<a href="' . add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '">'.__('Settings').'</a>';
         array_unshift($links, $settings_link);
 
         return $links;
@@ -257,7 +257,7 @@ class ABTFR_Admin
         $tab = $default;
 
         // page based tab
-        if (isset($_GET['page']) && strpos($_GET['page'], 'pagespeed-') === 0) {
+        if (isset($_GET['page']) && strpos($_GET['page'], 'abtfr-') === 0) {
             $tab = substr($_GET['page'], 10);
             if ($tab === 'above-the-fold') {
                 $tab = 'criticalcss';
@@ -281,7 +281,7 @@ class ABTFR_Admin
     public function enqueue_scripts($hook)
     {
 
-        if (!isset($_REQUEST['page']) || strpos($_GET['page'], 'pagespeed') !== 0) {
+        if (!isset($_REQUEST['page']) || strpos($_GET['page'], 'abtfr') !== 0) {
             return;
         }
 
@@ -293,7 +293,7 @@ class ABTFR_Admin
 
             $this->clear_pagecache();
 
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/settings');
+            wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/settings');
             exit;
         }
 
@@ -364,7 +364,7 @@ class ABTFR_Admin
             __('Google PageSpeed Optimization', 'pagespeed'),
             __('PageSpeed', 'pagespeed'),
             'manage_options',
-            'pagespeed',
+            'abtfr',
             array(
                 &$this,
                 'settings_page'
@@ -373,42 +373,42 @@ class ABTFR_Admin
             100
         );
 
-        add_submenu_page('pagespeed', __('Critical CSS (Above The Fold) Optimization', 'pagespeed'), __('Critical CSS', 'pagespeed'), 'manage_options', 'pagespeed-criticalcss', array(
+        add_submenu_page('abtfr', __('Critical CSS (Above The Fold) Optimization', 'abtfr'), __('Critical CSS', 'abtfr'), 'manage_options', 'abtfr-criticalcss', array(
             &$this,
             'settings_page'
         ));
 
-        add_submenu_page('pagespeed', __('HTML Optimization', 'pagespeed'), __('HTML', 'pagespeed'), 'manage_options', 'pagespeed-html', array(
+        add_submenu_page('abtfr', __('HTML Optimization', 'abtfr'), __('HTML', 'abtfr'), 'manage_options', 'abtfr-html', array(
             &$this,
             'settings_page'
         ));
 
-        add_submenu_page('pagespeed', __('CSS Optimization', 'pagespeed'), __('CSS', 'pagespeed'), 'manage_options', 'pagespeed-css', array(
+        add_submenu_page('abtfr', __('CSS Optimization', 'abtfr'), __('CSS', 'abtfr'), 'manage_options', 'abtfr-css', array(
             &$this,
             'settings_page'
         ));
 
-        add_submenu_page('pagespeed', __('Javascript Optimization', 'pagespeed'), __('Javascript', 'pagespeed'), 'manage_options', 'pagespeed-javascript', array(
+        add_submenu_page('abtfr', __('Javascript Optimization', 'abtfr'), __('Javascript', 'abtfr'), 'manage_options', 'abtfr-javascript', array(
             &$this,
             'settings_page'
         ));
 
-        add_submenu_page('pagespeed', __('Progressive Web App Optimization', 'pagespeed'), __('PWA', 'pagespeed'), 'manage_options', 'pagespeed-pwa', array(
+        add_submenu_page('abtfr', __('Progressive Web App Optimization', 'abtfr'), __('PWA', 'abtfr'), 'manage_options', 'abtfr-pwa', array(
             &$this,
             'settings_page'
         ));
 
-        add_submenu_page('pagespeed', __('HTTP/2 Optimization', 'pagespeed'), __('HTTP/2', 'pagespeed'), 'manage_options', 'pagespeed-http2', array(
+        add_submenu_page('abtfr', __('HTTP/2 Optimization', 'abtfr'), __('HTTP/2', 'abtfr'), 'manage_options', 'abtfr-http2', array(
             &$this,
             'settings_page'
         ));
 
-        add_submenu_page('pagespeed', __('External Resource Proxy', 'pagespeed'), __('Proxy', 'pagespeed'), 'manage_options', 'pagespeed-proxy', array(
+        add_submenu_page('abtfr', __('External Resource Proxy', 'abtfr'), __('Proxy', 'abtfr'), 'manage_options', 'abtfr-proxy', array(
             &$this,
             'settings_page'
         ));
 
-        add_submenu_page('pagespeed', __('Settings', 'pagespeed'), __('Settings', 'pagespeed'), 'manage_options', 'pagespeed-settings', array(
+        add_submenu_page('abtfr', __('Settings', 'abtfr'), __('Settings', 'abtfr'), 'manage_options', 'abtfr-settings', array(
             &$this,
             'settings_page'
         ));
@@ -416,7 +416,7 @@ class ABTFR_Admin
         /**
          * Add theme settings link to Appearance tab
          */
-        add_submenu_page('themes.php', __('ABTF Reborn', 'pagespeed'), __('Above The Fold', 'pagespeed'), 'manage_options', 'pagespeed-above-the-fold', array(
+        add_submenu_page('themes.php', __('ABTF Reborn', 'abtfr'), __('Above The Fold', 'abtfr'), 'manage_options', 'abtfr-above-the-fold', array(
             &$this,
             'settings_page'
         ));
@@ -424,15 +424,15 @@ class ABTFR_Admin
         /**
          * Hidden pages
          */
-        add_submenu_page(null, __('Critical CSS Quality Test', 'pagespeed'), __('Critical CSS Quality Test', 'pagespeed'), 'manage_options', 'pagespeed-criticalcss-test', array(
+        add_submenu_page(null, __('Critical CSS Quality Test', 'abtfr'), __('Critical CSS Quality Test', 'abtfr'), 'manage_options', 'abtfr-criticalcss-test', array(
             &$this,
             'settings_page'
         ));
-        add_submenu_page(null, __('Critical CSS Gulp.js Build Tool', 'pagespeed'), __('Gulp.js Build Tool', 'pagespeed'), 'manage_options', 'pagespeed-build-tool', array(
+        add_submenu_page(null, __('Critical CSS Gulp.js Build Tool', 'abtfr'), __('Gulp.js Build Tool', 'abtfr'), 'manage_options', 'abtfr-build-tool', array(
             &$this,
             'settings_page'
         ));
-        add_submenu_page(null, __('Website Monitor', 'pagespeed'), __('Website Monitor', 'pagespeed'), 'manage_options', 'pagespeed-monitor', array(
+        add_submenu_page(null, __('Website Monitor', 'abtfr'), __('Website Monitor', 'abtfr'), 'manage_options', 'abtfr-monitor', array(
             &$this,
             'settings_page'
         ));
@@ -449,7 +449,7 @@ class ABTFR_Admin
             return;
         }
 
-        $settings_url = add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php'));
+        $settings_url = add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php'));
         $nonced_url = wp_nonce_url($settings_url, 'abtfr');
 
         if (is_admin()
@@ -463,7 +463,7 @@ class ABTFR_Admin
 
         $admin_bar->add_menu(array(
             'id' => 'abtfr',
-            'title' => '<div class="ab-icon wp-menu-image svg" style="background-image: url(\''.$this->admin_icon().'\') !important;"></div><span class="ab-label">' . __('PageSpeed', 'pagespeed') . '</span>',
+            'title' => '<div class="ab-icon wp-menu-image svg" style="background-image: url(\''.$this->admin_icon().'\') !important;"></div><span class="ab-label">' . __('PageSpeed', 'abtfr') . '</span>',
             'href' => $settings_url,
             'meta' => array( 'title' => __('ABTFR Optimization', 'abtfr'), 'class' => 'ab-sub-secondary' )
 
@@ -570,7 +570,7 @@ class ABTFR_Admin
             'parent' => 'abtfr-optimization',
             'id' => 'abtfr-optimization-html',
             'title' => __('HTML', 'abtfr'),
-            'href' => add_query_arg(array( 'page' => 'pagespeed-html' ), admin_url('admin.php')),
+            'href' => add_query_arg(array( 'page' => 'abtfr-html' ), admin_url('admin.php')),
             'meta' => array( 'title' => __('HTML', 'abtfr') )
         ));
 
@@ -581,7 +581,7 @@ class ABTFR_Admin
             'parent' => 'abtfr-optimization',
             'id' => 'abtfr-optimization-css',
             'title' => __('CSS', 'abtfr'),
-            'href' => add_query_arg(array( 'page' => 'pagespeed-css' ), admin_url('admin.php')),
+            'href' => add_query_arg(array( 'page' => 'abtfr-css' ), admin_url('admin.php')),
             'meta' => array( 'title' => __('CSS', 'abtfr') )
         ));
 
@@ -592,7 +592,7 @@ class ABTFR_Admin
             'parent' => 'abtfr-optimization',
             'id' => 'abtfr-optimization-javascript',
             'title' => __('Javascript', 'abtfr'),
-            'href' => add_query_arg(array( 'page' => 'pagespeed-javascript' ), admin_url('admin.php')),
+            'href' => add_query_arg(array( 'page' => 'abtfr-javascript' ), admin_url('admin.php')),
             'meta' => array( 'title' => __('Javascript', 'abtfr') )
         ));
 
@@ -603,7 +603,7 @@ class ABTFR_Admin
             'parent' => 'abtfr-optimization',
             'id' => 'abtfr-optimization-criticalcss',
             'title' => __('Critical CSS', 'abtfr'),
-            'href' => add_query_arg(array( 'page' => 'pagespeed-criticalcss' ), admin_url('admin.php')),
+            'href' => add_query_arg(array( 'page' => 'abtfr-criticalcss' ), admin_url('admin.php')),
             'meta' => array( 'title' => __('Critical CSS', 'abtfr') )
         ));
 
@@ -614,7 +614,7 @@ class ABTFR_Admin
             'parent' => 'abtfr-optimization',
             'id' => 'abtfr-optimization-pwa',
             'title' => __('Progressive Web App (PWA)', 'abtfr'),
-            'href' => add_query_arg(array( 'page' => 'pagespeed-pwa' ), admin_url('admin.php')),
+            'href' => add_query_arg(array( 'page' => 'abtfr-pwa' ), admin_url('admin.php')),
             'meta' => array( 'title' => __('PWA', 'abtfr') )
         ));
 
@@ -625,7 +625,7 @@ class ABTFR_Admin
             'parent' => 'abtfr-optimization',
             'id' => 'abtfr-optimization-http2',
             'title' => __('HTTP/2', 'abtfr'),
-            'href' => add_query_arg(array( 'page' => 'pagespeed-http2' ), admin_url('admin.php')),
+            'href' => add_query_arg(array( 'page' => 'abtfr-http2' ), admin_url('admin.php')),
             'meta' => array( 'title' => __('HTTP/2', 'abtfr') )
         ));
 
@@ -636,14 +636,14 @@ class ABTFR_Admin
             'parent' => 'abtfr-optimization',
             'id' => 'abtfr-optimization-proxy',
             'title' => __('Proxy', 'abtfr'),
-            'href' => add_query_arg(array( 'page' => 'pagespeed-proxy' ), admin_url('admin.php')),
+            'href' => add_query_arg(array( 'page' => 'abtfr-proxy' ), admin_url('admin.php')),
             'meta' => array( 'title' => __('Proxy', 'abtfr') )
         ));
 
         /**
          * Page cache clear
          */
-        $clear_url = add_query_arg(array( 'page' => 'pagespeed', 'clear' => 'pagecache' ), admin_url('admin.php'));
+        $clear_url = add_query_arg(array( 'page' => 'abtfr', 'clear' => 'pagecache' ), admin_url('admin.php'));
         $nonced_url = wp_nonce_url($clear_url, 'abtfr');
         $admin_bar->add_node(array(
             'parent' => 'abtfr-tools',
@@ -1239,7 +1239,7 @@ window.abtfr_pagesearch_optgroups = <?php print json_encode($this->page_search_o
             $current_pagenow = !empty($GLOBALS['pagenow']) ? $GLOBALS['pagenow'] : '';
             $current_page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : '';
 
-            if ($current_page && strpos($_GET['page'], 'pagespeed') === 0) {
+            if ($current_page && strpos($_GET['page'], 'abtfr') === 0) {
                 $use_icon_fill_color = $icon_colors['current'];
             }
         }

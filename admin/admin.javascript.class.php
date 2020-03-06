@@ -109,7 +109,7 @@ class ABTFR_Admin_Javascript
         // update settings
         $this->CTRL->admin->save_settings($options, 'Javascript optimization settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/javascript');
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/javascript');
         exit;
     }
 }

@@ -15,7 +15,7 @@ class Tabs extends Component {
           ? ' nav-tab-active'
           : '';
       const url = new URL(adminUrl + 'admin.php');
-      url.searchParams.append('page', 'pagespeed');
+      url.searchParams.append('page', 'abtfr');
       url.hash += tabKey !== 'intro' ? '#/' + tabKey : '#/';
       tabElements.push(
         <a className={'nav-tab' + className} href={encodeURI(url)} key={tabKey}>

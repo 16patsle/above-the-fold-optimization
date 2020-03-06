@@ -19,7 +19,7 @@ import './CssView.css';
 import getSettings from '../utils/getSettings';
 
 const proxyUrl = new URL(adminUrl + 'admin.php');
-proxyUrl.searchParams.append('page', 'pagespeed-proxy');
+proxyUrl.searchParams.append('page', 'abtfr-proxy');
 
 const CssView = () => {
   const [options, setOption, setOptions, linkOptionState] = useLinkState();

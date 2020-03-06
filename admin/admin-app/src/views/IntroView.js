@@ -24,7 +24,7 @@ class IntroView extends Component {
     )}`;
 
     const monitorUrl = new URL(adminUrl + 'admin.php');
-    monitorUrl.searchParams.append('page', 'pagespeed-monitor');
+    monitorUrl.searchParams.append('page', 'abtfr-monitor');
 
     return (
       <PageContent header={__('Introduction')}>

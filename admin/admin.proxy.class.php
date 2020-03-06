@@ -63,14 +63,14 @@ class ABTFR_Admin_Proxy
         if (isset($_GET['empty_cache']) && intval($_GET['empty_cache']) === 1) {
             $this->CTRL->proxy->empty_cache();
             $this->CTRL->admin->set_notice('<p style="font-size:18px;">The proxy cache directory has been emptied.</p>', 'NOTICE');
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/proxy');
+            wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/proxy');
         }
 
         // update cache stats, deprecated
         if (isset($_GET['update_cache_stats']) && intval($_GET['update_cache_stats']) === 1) {
             $this->CTRL->proxy->prune(true);
             $this->CTRL->admin->set_notice('<p style="font-size:18px;">The proxy cache directory has been emptied.</p>', 'NOTICE');
-            wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/proxy');
+            wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/proxy');
         }
     }
 
@@ -123,14 +123,14 @@ class ABTFR_Admin_Proxy
             if (!preg_match('|^http(s)?://|Ui', $options['proxy_url'])) {
                 $this->CTRL->admin->set_notice('<p style="font-size:18px;">Invalid proxy url.</p>', 'ERROR');
 
-                wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/proxy');
+                wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/proxy');
                 exit;
             }
 
             if (strpos($options['proxy_url'], '{PROXY:URL}') === false) {
                 $this->CTRL->admin->set_notice('<p style="font-size:18px;">Proxy url does not contain <code>{PROXY:URL}</code>.</p>', 'ERROR');
  
-                wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/proxy');
+                wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/proxy');
                 exit;
             }
         }
@@ -251,7 +251,7 @@ class ABTFR_Admin_Proxy
         // update settings
         $this->CTRL->admin->save_settings($options, 'Proxy settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#proxy');
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#proxy');
         exit;
     }
 

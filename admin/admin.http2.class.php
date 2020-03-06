@@ -82,7 +82,7 @@ class ABTFR_Admin_HTTP2
         // update settings
         $this->CTRL->admin->save_settings($options, 'HTTP/2 Optimization settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php')) . '#/http2');
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/http2');
         exit;
     }
 }
