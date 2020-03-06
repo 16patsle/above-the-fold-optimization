@@ -361,8 +361,8 @@ class ABTFR_Admin
         global $submenu;
 
         add_menu_page(
-            __('Google PageSpeed Optimization', 'pagespeed'),
-            __('PageSpeed', 'pagespeed'),
+            __('Above the Fold Reborn', 'abtfr'),
+            __('ABTF Reborn', 'abtfr'),
             'manage_options',
             'abtfr',
             array(
@@ -463,7 +463,7 @@ class ABTFR_Admin
 
         $admin_bar->add_menu(array(
             'id' => 'abtfr',
-            'title' => '<div class="ab-icon wp-menu-image svg" style="background-image: url(\''.$this->admin_icon().'\') !important;"></div><span class="ab-label">' . __('PageSpeed', 'abtfr') . '</span>',
+            'title' => '<div class="ab-icon wp-menu-image svg" style="background-image: url(\''.$this->admin_icon().'\') !important;"></div><span class="ab-label">' . __('ABTF Reborn', 'abtfr') . '</span>',
             'href' => $settings_url,
             'meta' => array( 'title' => __('ABTFR Optimization', 'abtfr'), 'class' => 'ab-sub-secondary' )
 
