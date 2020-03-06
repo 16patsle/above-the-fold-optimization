@@ -287,7 +287,7 @@ class ABTFR_OPP_W3TotalCache extends ABTFR_OPP
     public function ob_callback($buffer)
     {
 
-        // apply Above The Fold Optimization
+        // apply ABTF Reborn
         $buffer = $this->CTRL->optimization->process_output_buffer($buffer);
 
         // apply W3 Total Cache pagecache output filter
@@ -295,7 +295,7 @@ class ABTFR_OPP_W3TotalCache extends ABTFR_OPP
             if (is_callable($this->pagecache_callback)) {
                 $buffer = call_user_func($this->pagecache_callback, $buffer);
             } elseif (function_exists('wp_get_current_user') && current_user_can('administrator')) {
-                return 'Failed to process W3 Total Cache callback. Please contact the author of the <a href="https://goo.gl/C1gw96" target="_blank">Above The Fold Optimization</a> plugin</a>. This message is only visible to administrators.';
+                return 'Failed to process W3 Total Cache callback. Please contact the author of the <a href="https://goo.gl/C1gw96" target="_blank">ABTF Reborn</a> plugin</a>. This message is only visible to administrators.';
             }
         }
 
@@ -305,7 +305,7 @@ class ABTFR_OPP_W3TotalCache extends ABTFR_OPP
     /**
      * HTML output hook
      *
-     * The goal is to apply above the fold optimization after the output of optimization plugins, but before full page cache.
+     * The goal is to apply ABTF Reborn after the output of optimization plugins, but before full page cache.
      *
      * Use the active() -> "html_output_buffer" method above to enable/disable this HTML output buffer hook.
      */

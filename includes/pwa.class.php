@@ -35,7 +35,7 @@ class ABTFR_PWA
         }
 
         if ($this->CTRL->disabled) {
-            return; // above the fold optimization disabled for area / page
+            return; // ABTF Reborn disabled for area / page
         }
     }
 
@@ -204,7 +204,7 @@ class ABTFR_PWA
         foreach ($sources as $sourcefile => $sw_path) {
             $source = trailingslashit(WPABTFR_PATH) . 'public/js/' . $sourcefile;
             if (!file_exists($source)) {
-                $this->CTRL->admin->set_notice('The service worker source file (above-the-fold-optimization/public/js/'.$sourcefile.') is missing.', 'ERROR');
+                $this->CTRL->admin->set_notice('The service worker source file (abtfr/public/js/'.$sourcefile.') is missing.', 'ERROR');
             } else {
                 $sw_ok = true;
                 if (!file_exists($sw_path) || md5_file($source) !== md5_file($sw_path)) {

@@ -233,7 +233,7 @@ class ABTFR_Admin_PWA
 
         // update service worker files
         if (!$this->CTRL->pwa->update_sw()) {
-            $this->CTRL->admin->set_notice('Failed to install the Service Worker. Please copy the file manually from plugins/above-the-fold-optimization/public/js/pwa-serviceworker.js (and .debug.js) to the root directory of the WordPress installation.', 'ERROR');
+            $this->CTRL->admin->set_notice('Failed to install the Service Worker. Please copy the file manually from plugins/abtfr/public/js/pwa-serviceworker.js (and .debug.js) to the root directory of the WordPress installation.', 'ERROR');
         }
 
         // update abtfr-pwa-policy.json config

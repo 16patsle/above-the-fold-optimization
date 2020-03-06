@@ -1,5 +1,5 @@
 /**
- * Above the fold optimization Javascript
+ * ABTF Reborn Javascript
  *
  * This javascript handles the CSS delivery optimization.
  *
@@ -22,7 +22,7 @@
         b[c] ? b[c]('DOMContentLoaded', a) : window.attachEvent('onload', a);
     };
 
-    // init Above the fold optimization client
+    // init ABTF Reborn client
     var MODULE_QUEUE = [];
     var CORE_MODULE_LOADED;
     Abtfr[CONFIG.LOAD_MODULE] = function(factory, core) {

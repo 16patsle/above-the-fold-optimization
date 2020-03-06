@@ -117,7 +117,7 @@ class ABTFR_Proxy
         $this->CTRL = & $CTRL;
 
         if ($this->CTRL->disabled) {
-            return; // above the fold optimization disabled for area / page
+            return; // ABTF Reborn disabled for area / page
         }
 
         if (!isset($this->CTRL->options['js_proxy'])) {
@@ -428,7 +428,7 @@ class ABTFR_Proxy
         while (ob_get_level()) {
             ob_end_clean();
         };
-        wp_die($text, 'Proxy Forbidden - Above The Fold Optimization', array(
+        wp_die($text, 'Proxy Forbidden - ABTF Reborn', array(
             'response' => '403'
         ));
     }
@@ -441,7 +441,7 @@ class ABTFR_Proxy
         while (ob_get_level()) {
             ob_end_clean();
         };
-        wp_die($text, 'Proxy Error - Above The Fold Optimization', array(
+        wp_die($text, 'Proxy Error - ABTF Reborn', array(
             'response' => '500'
         ));
     }
@@ -842,7 +842,7 @@ class ABTFR_Proxy
                 $expire_time = $this->default_cache_expire;
             }
 
-            $file_data = "/** " . (($type === 'js') ? 'Javascript' : 'CSS') . " Proxy / Above The Fold Optimization v".WPABTFR_VERSION."\n * @url ".$url."\n * @expire ".date("Y/m/d H:i:s", (time() + $expire_time))." */\n" . $file_data;
+            $file_data = "/** " . (($type === 'js') ? 'Javascript' : 'CSS') . " Proxy / ABTF Reborn v".WPABTFR_VERSION."\n * @url ".$url."\n * @expire ".date("Y/m/d H:i:s", (time() + $expire_time))." */\n" . $file_data;
         }
 
         /**
@@ -1191,7 +1191,7 @@ class ABTFR_Proxy
 
         // add warning for admin
         if ($file_count > 500) {
-            $this->CTRL->admin->set_notice('<h4 style="margin:0px;padding:0px;">Above The Fold Optimization</h4><p style="margin:0px;margin-top:4px;">The Proxy Cache directory contains '.number_format($file_count, 0, '.', ',').' cache entries. This may indicate that auto-capture captures a script with a changing url that causes a new cache entry to be created on each request.</p>
+            $this->CTRL->admin->set_notice('<h4 style="margin:0px;padding:0px;">ABTF Reborn</h4><p style="margin:0px;margin-top:4px;">The Proxy Cache directory contains '.number_format($file_count, 0, '.', ',').' cache entries. This may indicate that auto-capture captures a script with a changing url that causes a new cache entry to be created on each request.</p>
 				<p style="margin:0px;">The <a href="'. add_query_arg(array( 'page' => 'pagespeed-proxy' ), admin_url('admin.php')) . '#jsoncnf">Proxy configuration page</a> shows a solution to capture scripts with a changing url using a JSON config object.</p>', 'ERROR', array(
                     'date' => time(),
                     'expire' => (60 * 2)
@@ -1202,7 +1202,7 @@ class ABTFR_Proxy
         if ($file_count > 5000) {
             $this->empty_cache();
 
-            $this->CTRL->admin->set_notice('<h4 style="margin:0px;padding:0px;">Above The Fold Optimization</h4><p style="margin:0px;margin-top:4px;">The Proxy Cache directory reached '.number_format($file_count, 0, '.', ',').' cache entries. The cache directory has been emptied.</p>', 'ERROR', array(
+            $this->CTRL->admin->set_notice('<h4 style="margin:0px;padding:0px;">ABTF Reborn</h4><p style="margin:0px;margin-top:4px;">The Proxy Cache directory reached '.number_format($file_count, 0, '.', ',').' cache entries. The cache directory has been emptied.</p>', 'ERROR', array(
                     'date' => time(),
                     'expire' => (60 * 2)
                 ));

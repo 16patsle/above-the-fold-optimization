@@ -120,7 +120,7 @@ class ABTFR_Admin
             $this->CTRL->loader->add_action('admin_enqueue_scripts', $this, 'enqueue_scripts', 30);
 
             // add settings link to plugin overview
-            $this->CTRL->loader->add_filter('plugin_action_links_above-the-fold-optimization/abtfr.php', $this, 'settings_link');
+            $this->CTRL->loader->add_filter('plugin_action_links_abtfr/abtfr.php', $this, 'settings_link');
 
             // Handle admin notices
             $this->CTRL->loader->add_action('admin_notices', $this, 'show_notices');
@@ -416,7 +416,7 @@ class ABTFR_Admin
         /**
          * Add theme settings link to Appearance tab
          */
-        add_submenu_page('themes.php', __('Above The Fold Optimization', 'pagespeed'), __('Above The Fold', 'pagespeed'), 'manage_options', 'pagespeed-above-the-fold', array(
+        add_submenu_page('themes.php', __('ABTF Reborn', 'pagespeed'), __('Above The Fold', 'pagespeed'), 'manage_options', 'pagespeed-above-the-fold', array(
             &$this,
             'settings_page'
         ));
@@ -981,7 +981,7 @@ class ABTFR_Admin
         $this->CTRL->plugins->clear_pagecache();
 
         if ($notice) {
-            $this->set_notice('Page related caches from <a href="https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/" target="_blank">supported plugins</a> cleared.<p><strong>Note:</strong> This plugin does not contain a page cache. The page cache clear function for other plugins is a tool.', 'NOTICE');
+            $this->set_notice('Page related caches from <a href="https://github.com/16patsle/abtf-reborn/tree/master/modules/plugins/" target="_blank">supported plugins</a> cleared.<p><strong>Note:</strong> This plugin does not contain a page cache. The page cache clear function for other plugins is a tool.', 'NOTICE');
         }
     }
 
@@ -1016,7 +1016,7 @@ class ABTFR_Admin
         if ($options['clear_pagecache']) {
             $this->CTRL->admin->clear_pagecache(false);
 
-            $saved_notice .= '<p style="font-style:italic;font-size:14px;line-height:16px;">Page related caches from <a href="https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/" target="_blank">supported plugins</a> cleared.</p>';
+            $saved_notice .= '<p style="font-style:italic;font-size:14px;line-height:16px;">Page related caches from <a href="https://github.com/16patsle/abtf-reborn/tree/master/modules/plugins/" target="_blank">supported plugins</a> cleared.</p>';
         }
 
         $this->set_notice($saved_notice, 'NOTICE');

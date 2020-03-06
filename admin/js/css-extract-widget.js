@@ -531,7 +531,7 @@
             alert('Your browser does not support javascript based file download. The critical CSS is printed in the console.')
         } else {
 
-            var criticalCSS = "/**\n * Simple Critical CSS\n *\n * @url " + document.location.href + "\n * @title " + document.title + "\n * @viewport " + window.innerWidth + "x" + window.innerHeight + "\n * @size " + humanFileSize(css.length) + "\n *\n * Extracted using the Above the Fold Optimization CSS extract widget.\n * @link https://wordpress.org/plugins/above-the-fold-optimization/\n * @source https://github.com/optimalisatie/above-the-fold-optimization/blob/master/admin/js/css-extract-widget.js (.min.js)\n *\n * For professional Critical CSS generators see https://github.com/addyosmani/critical-path-css-tools\n *\n * @sources";
+            var criticalCSS = "/**\n * Simple Critical CSS\n *\n * @url " + document.location.href + "\n * @title " + document.title + "\n * @viewport " + window.innerWidth + "x" + window.innerHeight + "\n * @size " + humanFileSize(css.length) + "\n *\n * Extracted using the ABTF Reborn CSS extract widget.\n * @link https://wordpress.org/plugins/abtfr/\n * @source https://github.com/16patsle/abtf-reborn/blob/master/admin/js/css-extract-widget.js (.min.js)\n *\n * For professional Critical CSS generators see https://github.com/addyosmani/critical-path-css-tools\n *\n * @sources";
 
             var hlines = criticalCSS.split(/\r\n|\r|\n/).length;
             hlines += files.length + 3;
@@ -585,7 +585,7 @@
             alert('Your browser does not support javascript based file download. The full CSS is printed in the console.')
         } else {
 
-            var fullcss = "/**\n * Full CSS\n *\n * @url " + document.location.href + "\n * @title " + document.title + "\n * @size " + humanFileSize(css.length) + "\n *\n * Extracted using the Above the Fold Optimization CSS extract widget.\n * @link https://wordpress.org/plugins/above-the-fold-optimization/\n * @source https://github.com/optimalisatie/above-the-fold-optimization/blob/master/admin/js/css-extract-widget.js (.min.js)\n */\n\n" +
+            var fullcss = "/**\n * Full CSS\n *\n * @url " + document.location.href + "\n * @title " + document.title + "\n * @size " + humanFileSize(css.length) + "\n *\n * Extracted using the ABTF Reborn CSS extract widget.\n * @link https://wordpress.org/plugins/abtfr/\n * @source https://github.com/16patsle/abtf-reborn/blob/master/admin/js/css-extract-widget.js (.min.js)\n */\n\n" +
                 css;
 
             if (callback) {

@@ -1,4 +1,4 @@
-"Project-Id-Version: Above The Fold Optimization 1.0.0\n"
+"Project-Id-Version: ABTF Reborn 1.0.0\n"
 "Report-Msgid-Bugs-To: info@optimalisatie.nl\n"
 "POT-Creation-Date: 2015-02-12 12:00+0200\n"
 "PO-Revision-Date: 2015-05-15 17:15+0200\n"
@@ -15,5 +15,5 @@
 msgid "Above The Fold"
 msgstr ""
 
-msgid "Above The Fold Optimization"
+msgid "ABTF Reborn"
 msgstr ""

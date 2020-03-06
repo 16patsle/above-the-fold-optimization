@@ -72,7 +72,7 @@ class ABTFR_Optimization
         $this->CTRL = & $CTRL;
 
         if ($this->CTRL->disabled) {
-            return; // above the fold optimization disabled for area / page
+            return; // ABTF Reborn disabled for area / page
         }
         
         // load client config index
@@ -168,7 +168,7 @@ class ABTFR_Optimization
             if (!$this->CTRL->plugins->html_output_hook($this)) {
 
                 /**
-                 * Use Above The Fold Optimization standard output buffer
+                 * Use ABTF Reborn standard output buffer
                  */
                 $this->CTRL->loader->add_action('init', $this, 'start_output_buffer', 99999);
 
@@ -211,7 +211,7 @@ class ABTFR_Optimization
     }
 
     /**
-     * Move Above The Fold Optimization output buffer to front
+     * Move ABTF Reborn output buffer to front
      */
     public function move_ob_to_front()
     {
@@ -219,7 +219,7 @@ class ABTFR_Optimization
         // get active output buffers
         $ob_callbacks = ob_list_handlers();
 
-        // check if Above The Fold Optimization is last output buffer
+        // check if ABTF Reborn is last output buffer
         // try to move to front
         if (
             !empty($ob_callbacks)
@@ -271,7 +271,7 @@ class ABTFR_Optimization
                 }
             }
 
-            // restore Above The Fold Optimization output buffer in front
+            // restore ABTF Reborn output buffer in front
             ob_start(array($this, 'process_output_buffer'));
 
             $ob_callbacks = ob_list_handlers();

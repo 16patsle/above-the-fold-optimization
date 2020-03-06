@@ -6,12 +6,12 @@ class TabsView extends Component {
   render() {
     return (
       <div>
-        <h1>{__('Above the Fold Optimization')}</h1>
+        <h1>{__('ABTF Reborn')}</h1>
         <nav className="nav-tab-wrapper" style={{ position: 'relative' }}>
           <div className="ref">
             <div className="links">
               <a
-                href="https://github.com/16patsle/above-the-fold-optimization"
+                href="https://github.com/16patsle/abtf-reborn"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -19,13 +19,13 @@ class TabsView extends Component {
               </a>{' '}
               ‐{' '}
               <a
-                href="https://github.com/16patsle/above-the-fold-optimization/issues"
+                href="https://github.com/16patsle/abtf-reborn/issues"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Report a bug
               </a>{' '}
-              {/*‐ <a href="https://wordpress.org/support/plugin/above-the-fold-optimization/reviews/#new-post" target="_blank" rel="noopener noreferrer">Review plugin</a>*/}
+              {/*‐ <a href="https://wordpress.org/support/plugin/abtfr/reviews/#new-post" target="_blank" rel="noopener noreferrer">Review plugin</a>*/}
             </div>
           </div>
           <Tabs

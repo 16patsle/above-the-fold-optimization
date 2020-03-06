@@ -49,7 +49,7 @@ class ABTFR_WebFonts
         $this->CTRL = & $CTRL;
 
         if ($this->CTRL->disabled || defined('O10N_FONTS_MODULE_LOADED')) {
-            return; // above the fold optimization disabled for area / page
+            return; // ABTF Reborn disabled for area / page
         }
 
         // set default state

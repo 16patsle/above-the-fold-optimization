@@ -100,7 +100,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         meta: {
-            banner: '/*! Above The Fold Optimization v<%= pkg.version %> */'
+            banner: '/*! ABTF Reborn v<%= pkg.version %> */'
         },
 
         'closure-compiler': CC,

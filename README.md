@@ -1,14 +1,14 @@
-# Above the Fold Optimization
+# ABTF Reborn
 
 The ABTF Reborn plugin is a toolkit for WordPress Optimization with a focus on SEO. The plugin enables to achieve a 100 score in the [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) test.
 
-The plugin is compatible with most optimization, caching and minification plugins such as Autoptimize and W3 Total Cache. The plugin offers modular compatibility and can be extended to support any optimization plugin. ([more info](https://github.com/16patsle/above-the-fold-optimization/tree/master/trunk/modules/plugins/))
+The plugin is compatible with most optimization, caching and minification plugins such as Autoptimize and W3 Total Cache. The plugin offers modular compatibility and can be extended to support any optimization plugin. ([more info](https://github.com/16patsle/abtf-reborn/tree/master/modules/plugins/))
 
 ## Installation
 
 This plugin is not available from the WordPress plugin repository at the moment, but can be installed and updated using [Github Updater](https://github.com/afragen/github-updater) ([installation instructions](https://github.com/afragen/github-updater/wiki/Installation))
 
-# Above the Fold Optimization Description
+# ABTF Reborn Description
 
 ## Critical CSS Tools
 
@@ -20,7 +20,7 @@ Some of the features:
 * Management via text editor and FTP (critical CSS files are stored in the theme directory)
 * Full CSS Extraction: selectively export CSS files of a page as a single file or as raw text for use in critical CSS generators.
 * Quality Test: test the quality of Critical CSS by comparing it side-by-side with the full CSS display of a page. This tool can be used to detect a flash of unstyled content ([FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)).
-* A [javascript widget](https://github.com/optimalisatie/above-the-fold-optimization/blob/master/admin/js/css-extract-widget.js) to extract simple critical CSS with a click from the WordPress admin bar.
+* A [javascript widget](https://github.com/16patsle/abtf-reborn/blob/master/admin/js/css-extract-widget.js) to extract simple critical CSS with a click from the WordPress admin bar.
 * A live critical CSS editor.
 
 Read more about Critical CSS in the [documentation by Google](https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent). 

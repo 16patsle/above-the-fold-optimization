@@ -25,7 +25,7 @@ Some of the supported plugins include:
 * [Cache Enabler (KeyCDN.com)](https://wordpress.org/plugins/cache-enabler/)
 * [Better WordPress Minify](https://wordpress.org/plugins/bwp-minify/)
 * [WP Super Minify](https://wordpress.org/plugins/wp-super-minify/)
-* [Click here](https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/) for a list with supported plugins. 
+* [Click here](https://github.com/16patsle/abtf-reborn/tree/master/modules/plugins/) for a list with supported plugins. 
 
 **Warning:** *This plugin is not a simple 'on/off' plugin. It is a tool for optimization professionals and advanced WordPress users to achieve a Google PageSpeed 100 Score.*
 
@@ -39,7 +39,7 @@ Some of the features:
 * Management via text editor and FTP (critical CSS files are stored in the theme directory)
 * Full CSS Extraction: selectively export CSS files of a page as a single file or as raw text for use in critical CSS generators.
 * Quality Test: test the quality of Critical CSS by comparing it side-by-side with the full CSS display of a page. This tool can be used to detect a flash of unstyled content ([FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)).
-* A [javascript widget](https://github.com/optimalisatie/above-the-fold-optimization/blob/master/admin/js/css-extract-widget.js) to extract simple critical CSS with a click from the WordPress admin bar.
+* A [javascript widget](https://github.com/16patsle/abtf-reborn/blob/master/admin/js/css-extract-widget.js) to extract simple critical CSS with a click from the WordPress admin bar.
 * A live critical CSS editor.
 
 Read more about Critical CSS in the [documentation by Google](https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent). 
@@ -116,7 +116,7 @@ The plugin contains a tool to create Critical CSS based on [Gulp.js](https://gul
 
 ### WordPress plugin installation
 
-1. Upload the `above-the-fold-optimization/` directory to the `/wp-content/plugins/` directory.
+1. Upload the `abtfr/` directory to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Navigate to the plugin settings page.
 4. Configure Critical CSS and tune the options for a Google PageSpeed 100 Score.

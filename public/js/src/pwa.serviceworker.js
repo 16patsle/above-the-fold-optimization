@@ -1,5 +1,5 @@
 /**
- * Above the fold optimization Service Worker / Google PWA
+ * ABTF Reborn Service Worker / Google PWA
  *
  * @package    abtfr
  * @subpackage abtfr/public

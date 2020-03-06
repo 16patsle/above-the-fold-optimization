@@ -117,7 +117,7 @@ class ABTFR_OPP_WpFastestCache extends ABTFR_OPP
         $prefix = '';
         @unlink($wpfc->cacheFilePath."/".$prefix."index.".$extension);
 
-        // apply Above The Fold Optimization
+        // apply ABTF Reborn
         $buffer = $this->CTRL->optimization->process_output_buffer($buffer);
 
         // update page cache with Above The Fold optimized HTML
@@ -129,7 +129,7 @@ class ABTFR_OPP_WpFastestCache extends ABTFR_OPP
     /**
      * HTML output hook
      *
-     * The goal is to apply above the fold optimization after the output of optimization plugins, but before full page cache.
+     * The goal is to apply ABTF Reborn after the output of optimization plugins, but before full page cache.
      *
      * Use the active() -> "html_output_buffer" method above to enable/disable this HTML output buffer hook.
      */
@@ -139,7 +139,7 @@ class ABTFR_OPP_WpFastestCache extends ABTFR_OPP
         /**
          * Check if WP Fastest Cache output buffer is defined, and if it is the last output buffer to replace it with a modified callback.
          *
-         * This override will fail if a second output buffer is started after WP Fastest Cache and before Above The Fold Optimization
+         * This override will fail if a second output buffer is started after WP Fastest Cache and before ABTF Reborn
          *
          * An idea for improvement? Please contact the author of this plugin.
          *
@@ -151,7 +151,7 @@ class ABTFR_OPP_WpFastestCache extends ABTFR_OPP
             // stop WP Fastest Cache output buffer
             ob_end_clean();
 
-            // start modified output buffer for WP Fastest Cache + Above The Fold Optimization
+            // start modified output buffer for WP Fastest Cache + ABTF Reborn
             ob_start(array($this, 'ob_callback'));
 
             return true;

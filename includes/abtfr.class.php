@@ -194,7 +194,7 @@ class ABTFR
         $this->lazy = new ABTFR_LazyScripts($this);
 
         /**
-         * Use Above The Fold Optimization standard output buffer
+         * Use ABTF Reborn standard output buffer
          */
         $this->loader->add_action('template_redirect', $this, 'template_redirect', -10);
 
@@ -233,7 +233,7 @@ class ABTFR
         }
 
         /**
-         * Disable above the fold optimization
+         * Disable ABTF Reborn
          */
         if (defined('DONOTABTFR') && DONOTABTFR) {
             return false;

@@ -14,7 +14,7 @@
  * Version:           2.10.0
  * Author:            Optimization.Team, Patrick Sletvold
  * Author URI:        https://github.com/16patsle/
- * GitHub Plugin URI: https://github.com/16patsle/above-the-fold-optimization
+ * GitHub Plugin URI: https://github.com/16patsle/abtf-reborn
  * Text Domain:       abtfr
  * Domain Path:       /languages
  */

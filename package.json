@@ -1,10 +1,10 @@
 {
     "name": "abtfr",
     "version": "2.9.10",
-    "description": "Above The Fold Optimization",
+    "description": "ABTF Reborn",
     "license": "MIT",
     "repository": {
-        "url": "https://github.com/16patsle/above-the-fold-optimization"
+        "url": "https://github.com/16patsle/abtf-reborn"
     },
     "author": "Patrick Sletvold",
     "contributors": [

@@ -84,7 +84,7 @@ class ABTFR_OPP_WpSuperCache extends ABTFR_OPP
     /**
      * HTML output hook
      *
-     * The goal is to apply above the fold optimization after the output of optimization plugins, but before full page cache.
+     * The goal is to apply ABTF Reborn after the output of optimization plugins, but before full page cache.
      *
      * Use the active() -> "html_output_buffer" method above to enable/disable this HTML output buffer hook.
      */

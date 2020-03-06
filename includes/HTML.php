@@ -3,7 +3,7 @@
 /**
  * HTML Minifier
  *
- * Based on HTML.php from Minify, improved for Above The Fold Optimization
+ * Based on HTML.php from Minify, improved for ABTF Reborn
  *
  * - 500 char line length based on Google's closure compiler documentation
  * https://developers.google.com/closure/compiler/faq

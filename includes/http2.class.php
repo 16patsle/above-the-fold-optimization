@@ -32,7 +32,7 @@ class ABTFR_HTTP2
         $this->CTRL = & $CTRL;
 
         if ($this->CTRL->disabled) {
-            return; // above the fold optimization disabled for area / page
+            return; // ABTF Reborn disabled for area / page
         }
 
         // HTTP/2 optimization enabled

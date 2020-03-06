@@ -49,7 +49,7 @@ class ABTFR_Plugins
     public function html_output_hook($optimization)
     {
         if ($this->CTRL->disabled) {
-            return false; // above the fold optimization disabled for area / page
+            return false; // ABTF Reborn disabled for area / page
         }
 
         foreach ($this->active_modules as $module) {

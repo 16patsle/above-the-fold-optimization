@@ -40,7 +40,7 @@ const SettingsView = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Settings')}>
         <Helmet>
-          <title>Above the Fold Optimization Settings {siteTitle}</title>
+          <title>ABTF Reborn Settings {siteTitle}</title>
         </Helmet>
         <table className="form-table">
           <tbody>
@@ -66,7 +66,7 @@ const SettingsView = () => {
                 <span>
                   If enabled, the page related caches of{' '}
                   <a
-                    href="https://github.com/optimalisatie/above-the-fold-optimization/tree/master/trunk/modules/plugins/"
+                    href="https://github.com/16patsle/abtf-reborn/tree/master/modules/plugins/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -102,7 +102,7 @@ const SettingsView = () => {
         <br />
         <h1>Content Security Policy</h1>
         <p>
-          Based on your current configuration, the Above The Fold Optimization
+          Based on your current configuration, the ABTF Reborn
           inline client javascript can be white listed using the following
           hashes. (
           <a

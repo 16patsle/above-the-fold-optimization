@@ -71,8 +71,8 @@
 /**
  * Custom Critical Path CSS Condition
  *
- * @plugin Above The Fold Optimization
- * @link https://wordpress.org/plugins/above-the-fold-optimization/
+ * @plugin ABTF Reborn
+ * @link https://wordpress.org/plugins/abtfr/
  */
 function my_critical_css_condition( $params = array() ) {
 

@@ -66,7 +66,7 @@ class IntroView extends Component {
           experience a problem or have an idea for better performance, we are
           thankful if you{' '}
           <a
-            href="https://wordpress.org/support/plugin/above-the-fold-optimization"
+            href="https://wordpress.org/support/plugin/abtfr"
             target="_blank"
             rel="noopener noreferrer"
           >

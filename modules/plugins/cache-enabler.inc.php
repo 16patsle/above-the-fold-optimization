@@ -72,7 +72,7 @@ class ABTFR_OPP_CacheEnabler extends ABTFR_OPP
 
 
     /**
-     * Move output buffer after Above The Fold optimization output buffer
+     * Move output buffer after ABTF Reborn output buffer
      */
     public function move_output_buffer()
     {

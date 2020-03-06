@@ -2,7 +2,7 @@
 	<div class="authorbox">
 		<div class="inside" style="width:auto;margin:0px;float:left;position:relative;margin-right:2em;">
 			<p style="z-index:999;">Developed by <strong><a href="https://github.com/16patsle/" target="_blank">Patrick Sletvold, based on the original plugin by o10n-x</a></strong>
-			<br />Contribute via <a href="https://github.com/16patsle/above-the-fold-optimization/" target="_blank">Github</a> &dash; <a href="https://github.com/16patsle/above-the-fold-optimization/issues" target="_blank">Report a bug</a> <!--&dash; <a href="https://wordpress.org/support/plugin/above-the-fold-optimization/reviews/?rate=5#new-post" target="_blank">Review this plugin</a>-->
+			<br />Contribute via <a href="https://github.com/16patsle/abtf-reborn/" target="_blank">Github</a> &dash; <a href="https://github.com/16patsle/abtf-reborn/issues" target="_blank">Report a bug</a> <!--&dash; <a href="https://wordpress.org/support/plugin/abtfr/reviews/?rate=5#new-post" target="_blank">Review this plugin</a>-->
 			</p>
 
 		</div>
