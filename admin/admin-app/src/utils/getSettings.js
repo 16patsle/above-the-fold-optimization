@@ -36,7 +36,7 @@ export default async function getSettings() {
   const result = await response.json();
   if (!response.ok) {
     if (result.message) {
-      return Promise.reject(result.message)
+      return Promise.reject(result.message);
     } else {
       return Promise.reject(`${response.status} ${response.statusText}`);
     }

@@ -3,11 +3,7 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../utils/useLinkState';
-import {
-  adminUrl,
-  siteTitle,
-  abtfAdminNonce
-} from '../utils/globalVars';
+import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
@@ -140,31 +136,29 @@ const SettingsView = () => {
                 </tr>
               </thead>
               <tbody>
-                {Object.entries(getOption('clientHashes')).map(
-                  algorithm => {
-                    return (
-                      <tr key={algorithm[0]}>
-                        <td
-                          style={{
-                            fontWeight: 'bold',
-                            textAlign: 'right',
-                            paddingRight: '5px'
-                          }}
-                        >
-                          {algorithm[0].toUpperCase()}
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            value={algorithm[0] + '-' + algorithm[1].public}
-                            style={{ width: '100%' }}
-                            readOnly
-                          />
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
+                {Object.entries(getOption('clientHashes')).map(algorithm => {
+                  return (
+                    <tr key={algorithm[0]}>
+                      <td
+                        style={{
+                          fontWeight: 'bold',
+                          textAlign: 'right',
+                          paddingRight: '5px'
+                        }}
+                      >
+                        {algorithm[0].toUpperCase()}
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          value={algorithm[0] + '-' + algorithm[1].public}
+                          style={{ width: '100%' }}
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
             <strong>Debug mode client (admin users only)</strong>
@@ -178,31 +172,29 @@ const SettingsView = () => {
                 </tr>
               </thead>
               <tbody>
-                {Object.entries(getOption('clientHashes')).map(
-                  algorithm => {
-                    return (
-                      <tr key={algorithm[0]}>
-                        <td
-                          style={{
-                            fontWeight: 'bold',
-                            textAlign: 'right',
-                            paddingRight: '5px'
-                          }}
-                        >
-                          {algorithm[0].toUpperCase()}
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            value={algorithm[0] + '-' + algorithm[1].debug}
-                            style={{ width: '100%' }}
-                            readOnly
-                          />
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
+                {Object.entries(getOption('clientHashes')).map(algorithm => {
+                  return (
+                    <tr key={algorithm[0]}>
+                      <td
+                        style={{
+                          fontWeight: 'bold',
+                          textAlign: 'right',
+                          paddingRight: '5px'
+                        }}
+                      >
+                        {algorithm[0].toUpperCase()}
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          value={algorithm[0] + '-' + algorithm[1].debug}
+                          style={{ width: '100%' }}
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </span>
@@ -210,7 +202,6 @@ const SettingsView = () => {
       </PageContent>
     </form>
   );
-}
-
+};
 
 export default SettingsView;
