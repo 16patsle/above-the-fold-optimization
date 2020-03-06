@@ -138,6 +138,13 @@ class ABTF_Settings_Route extends WP_REST_Controller {
     // PWA
     $sw = $this->admin->CTRL->pwa->get_sw();
 
+    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/admin.pwa.class.php';
+
+    /**
+     * Load PWA management
+     */
+    $this->pwa = new Abovethefold_Admin_PWA($this->admin->CTRL);
+
     // verify service worker
     if (isset($options['pwa']) && intval($options['pwa']) === 1) {
     	$this->pwa->install_serviceworker();
