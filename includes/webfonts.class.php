@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Abovethefold Web Font optimization functions and hooks.
+ * ABTFR Web Font optimization functions and hooks.
  *
  * This class provides the functionality for Web Font optimization functions and hooks.
  *
  * @since      2.5.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
 
-class Abovethefold_WebFonts
+class ABTFR_WebFonts
 {
 
     /**
@@ -39,7 +39,7 @@ class Abovethefold_WebFonts
     /**
      * Web Font replacement string
      */
-    public $webfont_inline_replacement_string = 'ABTF_WEBFONT_INLINE_CONFIG';
+    public $webfont_inline_replacement_string = 'ABTFR_WEBFONT_INLINE_CONFIG';
 
     /**
      * Initialize the class and set its properties
@@ -82,16 +82,16 @@ class Abovethefold_WebFonts
         if ($this->CTRL->options['gwfo']) {
 
             // add filter for CSS minificaiton output
-            $this->CTRL->loader->add_filter('abtf_css', $this, 'process_css');
+            $this->CTRL->loader->add_filter('abtfr_css', $this, 'process_css');
 
             // add filter for CSS file processing
-            $this->CTRL->loader->add_filter('abtf_cssfile_pre', $this, 'process_cssfile');
+            $this->CTRL->loader->add_filter('abtfr_cssfile_pre', $this, 'process_cssfile');
 
             // add filter for HTML output
-            $this->CTRL->loader->add_filter('abtf_html_pre', $this, 'process_html_pre');
+            $this->CTRL->loader->add_filter('abtfr_html_pre', $this, 'process_html_pre');
 
             // add filter for HTML output
-            $this->CTRL->loader->add_filter('abtf_html_replace', $this, 'replace_html');
+            $this->CTRL->loader->add_filter('abtfr_html_replace', $this, 'replace_html');
 
             if (isset($this->CTRL->options['gwfo_loadmethod']) && $this->CTRL->options['gwfo_loadmethod'] === 'wordpress') {
 
@@ -281,9 +281,9 @@ class Abovethefold_WebFonts
             $current_googlefonts = array_unique($current_googlefonts);
             
             if ($this->googlefonts_autodetect) {
-                $options = get_option('abovethefold');
+                $options = get_option('abtfr');
                 $options['gwfo_googlefonts'] = $current_googlefonts;
-                update_option('abovethefold', $options);
+                update_option('abtfr', $options);
             }
 
             $this->CTRL->options['gwfo_googlefonts'] = $current_googlefonts;
@@ -461,7 +461,7 @@ REGEX;
          * Google Web Font Loader WordPress inlcude
          */
         $in_footer = (isset($this->CTRL->options['gwfo_loadposition']) && $this->CTRL->options['gwfo_loadposition'] === 'footer') ? true : false;
-        wp_enqueue_script('abtf_webfontjs', WPABTF_URI . 'public/js/webfont.js', array(), $this->package_version(), $in_footer);
+        wp_enqueue_script('abtfr_webfontjs', WPABTFR_URI . 'public/js/webfont.js', array(), $this->package_version(), $in_footer);
     }
 
     /**
@@ -470,14 +470,14 @@ REGEX;
     public function package_version($reset = false)
     {
         if (!$reset) {
-            $version = get_option('abtf_webfontjs_version');
+            $version = get_option('abtfr_webfontjs_version');
             if ($version) {
                 return $version;
             }
         }
 
         // check existence of package file
-        $webfont_package = WPABTF_PATH . 'public/js/src/webfontjs_package.json';
+        $webfont_package = WPABTFR_PATH . 'public/js/src/webfontjs_package.json';
         if (!file_exists($webfont_package)) {
             $this->CTRL->admin->set_notice('PLUGIN INSTALLATION NOT COMPLETE, MISSING public/js/src/webfontjs_package.json', 'ERROR');
 
@@ -489,7 +489,7 @@ REGEX;
 
                 return false;
             } else {
-                $version = update_option('abtf_webfontjs_version', $package['version']);
+                $version = update_option('abtfr_webfontjs_version', $package['version']);
 
                 // return version
                 return $package['version'];
@@ -551,7 +551,7 @@ REGEX;
                 // async url
                 if ($this->CTRL->options['gwfo_loadmethod'] === 'async' || $this->CTRL->options['gwfo_loadmethod'] === 'async_cdn') {
                     if ($this->CTRL->options['gwfo_loadmethod'] === 'async') {
-                        $jssettings[$gfwindex][$this->CTRL->optimization->client_config_ref['gwf-sub']['async_url']] = WPABTF_URI . 'public/js/webfont.js';
+                        $jssettings[$gfwindex][$this->CTRL->optimization->client_config_ref['gwf-sub']['async_url']] = WPABTFR_URI . 'public/js/webfont.js';
                     } else {
 
                     // load from Google CDN
@@ -563,7 +563,7 @@ REGEX;
                  * Load webfont.js inline
                  */
                 if ($this->CTRL->options['gwfo_loadmethod'] === 'inline') {
-                    $jsfiles[] = WPABTF_PATH . 'public/js/webfont.js';
+                    $jsfiles[] = WPABTFR_PATH . 'public/js/webfont.js';
                 }
             }
         }

@@ -1,13 +1,13 @@
 /**
  * Above the fold optimization Service Worker / Google PWA
  *
- * @package    abovethefold
- * @subpackage abovethefold/public
+ * @package    abtfr
+ * @subpackage abtfr/public
  * @author     Optimization.Team <info@optimization.team>
  */
 (function(self, fetch, Cache) {
 
-    // ABTF Service Worker / PWA config
+    // ABTFR Service Worker / PWA config
     var PWA_POLICY = false;
     var PWA_CONFIG_TIMESTAMP = false;
     var PWA_ROOT;
@@ -28,7 +28,7 @@
         }
         var config_file = url.searchParams.get('config');
         if (!config_file) {
-            config_file = 'abtf-pwa-config.json';
+            config_file = 'abtfr-pwa-config.json';
         }
         PWA_CONFIG_URL = PWA_ROOT + config_file;
 
@@ -573,15 +573,15 @@
                 if (response && response.ok && response.status < 400) {
                     return response.json().then(function(pwaConfig) {
 
-                        if (ABTFDEBUG) {
-                            console.info('Abtf.sw() ➤ config ' + ((!PWA_POLICY) ? 'loaded' : 'updated'), pwaConfig);
+                        if (ABTFRDEBUG) {
+                            console.info('Abtfr.sw() ➤ config ' + ((!PWA_POLICY) ? 'loaded' : 'updated'), pwaConfig);
                         }
 
                         if (!pwaConfig) {
                             return;
                         }
 
-                        // < v2.8.5 abtf-pwa-policy.json
+                        // < v2.8.5 abtfr-pwa-policy.json
                         if (pwaConfig instanceof Array) {
                             pwaConfig = {
                                 policy: pwaConfig
@@ -589,7 +589,7 @@
                         }
 
                         // set PWA cache store
-                        PWA_CACHE = 'abtf';
+                        PWA_CACHE = 'abtfr';
 
                         // set custom cache version
                         if (pwaConfig.cache_version) {
@@ -728,8 +728,8 @@
 
                             // delete old cache
                             if (cacheName.indexOf(PWA_CACHE) !== 0) {
-                                if (ABTFDEBUG) {
-                                    console.info('Abtf.sw() ➤ old cache deleted', cacheName);
+                                if (ABTFRDEBUG) {
+                                    console.info('Abtfr.sw() ➤ old cache deleted', cacheName);
                                 }
                                 return caches.delete(cacheName);
                             } else {
@@ -740,8 +740,8 @@
                                         cache.keys()
                                             .then(function(keys) {
 
-                                                if (ABTFDEBUG) {
-                                                    console.info('Abtf.sw() ➤ prune cache', cacheName, 'size:', keys.length, PWA_CACHE_MAX_SIZE);
+                                                if (ABTFRDEBUG) {
+                                                    console.info('Abtfr.sw() ➤ prune cache', cacheName, 'size:', keys.length, PWA_CACHE_MAX_SIZE);
                                                 }
 
                                                 // prune cache when over max size
@@ -769,14 +769,14 @@
                                                         responses.forEach(function(response, key) {
 
                                                             if (response && response.headers) {
-                                                                var timestamp = response.headers.get('x-abtf-sw');
+                                                                var timestamp = response.headers.get('x-abtfr-sw');
 
                                                                 if (timestamp) {
-                                                                    var max_age = response.headers.get('x-abtf-sw-expire');
+                                                                    var max_age = response.headers.get('x-abtfr-sw-expire');
                                                                     if (max_age) {
                                                                         if (timestamp && timestamp < (TIMESTAMP() - max_age)) {
-                                                                            if (ABTFDEBUG) {
-                                                                                console.info('Abtf.sw() ➤ cache ➤ expired', response.url);
+                                                                            if (ABTFRDEBUG) {
+                                                                                console.info('Abtfr.sw() ➤ cache ➤ expired', response.url);
                                                                             }
                                                                             cache.delete(cacheRequests[key]);
                                                                             return;
@@ -850,8 +850,8 @@
                 var url = request.url;
                 if (!preloadRequest && PRELOADING && url in PRELOADING && PRELOADING[url] && PRELOADING[url][0] > (TIMESTAMP() - 5)) {
 
-                    if (ABTFDEBUG) {
-                        console.info('Abtf.sw() ➤ hook into preload initiated request', url);
+                    if (ABTFRDEBUG) {
+                        console.info('Abtfr.sw() ➤ hook into preload initiated request', url);
                     }
                     return PRELOADING[url][1];
                 }
@@ -1026,11 +1026,11 @@
                                         }
                                     });
 
-                                    if (ABTFDEBUG) {
+                                    if (ABTFRDEBUG) {
                                         if (!shouldCache) {
-                                            console.info('Abtf.sw() ➤ cache condition ➤ no cache', request.url, cachePolicy.conditions);
+                                            console.info('Abtfr.sw() ➤ cache condition ➤ no cache', request.url, cachePolicy.conditions);
                                         } else {
-                                            console.info('Abtf.sw() ➤ cache condition ➤ cache', request.url, cachePolicy.conditions);
+                                            console.info('Abtfr.sw() ➤ cache condition ➤ cache', request.url, cachePolicy.conditions);
                                         }
                                     }
                                 }
@@ -1091,8 +1091,8 @@
         var lastmodified = UNIX_TIMESTAMP(cacheResponse.headers.get('last-modified'));
         if (!etag && !lastmodified) {
 
-            if (ABTFDEBUG) {
-                console.warn('Abtf.sw() ➤ HEAD ➤ no etag or last-modified', request.url);
+            if (ABTFRDEBUG) {
+                console.warn('Abtfr.sw() ➤ HEAD ➤ no etag or last-modified', request.url);
             }
 
             // initiate request
@@ -1132,8 +1132,8 @@
                 // update cache
                 if (update) {
 
-                    if (ABTFDEBUG) {
-                        console.info('Abtf.sw() ➤ HEAD ➤ update', request.url);
+                    if (ABTFRDEBUG) {
+                        console.info('Abtfr.sw() ➤ HEAD ➤ update', request.url);
                     }
 
                     // initiate request
@@ -1224,9 +1224,9 @@
 
                         // verify if cache is expired
                         if (cacheResponse) {
-                            var maxAge = cacheResponse.headers.get('x-abtf-sw-expire');
+                            var maxAge = cacheResponse.headers.get('x-abtfr-sw-expire');
                             if (maxAge) {
-                                var cacheAge = cacheResponse.headers.get('x-abtf-sw');
+                                var cacheAge = cacheResponse.headers.get('x-abtfr-sw');
                             }
                             var expire = cacheResponse.headers.get('expire');
                             if (expire) {
@@ -1235,14 +1235,14 @@
                             if (maxAge && cacheAge < (TIMESTAMP() - maxAge)) {
                                 cacheResponse = false;
 
-                                if (ABTFDEBUG) {
-                                    console.info('Abtf.sw() ➤ cache expired by policy', request.url, 'max age:', maxAge);
+                                if (ABTFRDEBUG) {
+                                    console.info('Abtfr.sw() ➤ cache expired by policy', request.url, 'max age:', maxAge);
                                 }
                             } else if (expire && expire < TIMESTAMP()) {
                                 cacheResponse = false;
 
-                                if (ABTFDEBUG) {
-                                    console.info('Abtf.sw() ➤ cache expired by HTTP expire', request.url, cacheResponse.headers.get('expire'));
+                                if (ABTFRDEBUG) {
+                                    console.info('Abtfr.sw() ➤ cache expired by HTTP expire', request.url, cacheResponse.headers.get('expire'));
                                 }
                             }
                         }
@@ -1290,8 +1290,8 @@
                     // URL
                     var url = request.url;
 
-                    if (ABTFDEBUG) {
-                        console.info('Abtf.sw() ➤ preload', url);
+                    if (ABTFRDEBUG) {
+                        console.info('Abtfr.sw() ➤ preload', url);
                     }
 
                     // fetch request
@@ -1341,9 +1341,9 @@
                 });
 
                 // add timestamp
-                headers['x-abtf-sw'] = TIMESTAMP();
+                headers['x-abtfr-sw'] = TIMESTAMP();
                 if (cachePolicy && cachePolicy.max_age) {
-                    headers['x-abtf-sw-expire'] = cachePolicy.max_age;
+                    headers['x-abtfr-sw-expire'] = cachePolicy.max_age;
                 }
 
                 // read response
@@ -1535,14 +1535,14 @@
             });
 
             if (!policyMatch) {
-                if (ABTFDEBUG) {
-                    console.info('Abtf.sw() ➤ policy ➤ no match', event.request.url);
+                if (ABTFRDEBUG) {
+                    console.info('Abtfr.sw() ➤ policy ➤ no match', event.request.url);
                 }
                 return false;
             }
 
-            if (ABTFDEBUG) {
-                console.info('Abtf.sw() ➤ policy ➤ match', event.request.url, policyMatch);
+            if (ABTFRDEBUG) {
+                console.info('Abtfr.sw() ➤ policy ➤ match', event.request.url, policyMatch);
             }
 
             // cache maintenance
@@ -1580,7 +1580,7 @@
                                 if (interval) {
 
                                     // verify cache date
-                                    var cache_time = cacheResponse.headers.get('x-abtf-sw');
+                                    var cache_time = cacheResponse.headers.get('x-abtfr-sw');
                                     if (cache_time && parseInt(cache_time) > (TIMESTAMP() - interval)) {
 
                                         // do not update
@@ -1609,15 +1609,15 @@
                                             }
                                             if (policyMatch.cache.head_update) {
 
-                                                if (ABTFDEBUG) {
-                                                    console.info('Abtf.sw() ➤ HEAD ➤ verify', request.url);
+                                                if (ABTFRDEBUG) {
+                                                    console.info('Abtfr.sw() ➤ HEAD ➤ verify', request.url);
                                                 }
 
                                                 HEAD_UPDATE(request, policyMatch.cache, cacheResponse, afterUpdate);
                                             } else {
 
-                                                if (ABTFDEBUG) {
-                                                    console.info('Abtf.sw() ➤ update cache', request.url);
+                                                if (ABTFRDEBUG) {
+                                                    console.info('Abtfr.sw() ➤ update cache', request.url);
                                                 }
 
                                                 var fetchRequest = FETCH(request, policyMatch.cache);
@@ -1630,8 +1630,8 @@
                                     })(event.request.clone(), cacheResponse.clone());
                                 }
 
-                                if (ABTFDEBUG) {
-                                    console.info('Abtf.sw() ➤ from cache', event.request.url);
+                                if (ABTFRDEBUG) {
+                                    console.info('Abtfr.sw() ➤ from cache', event.request.url);
                                 }
                                 return cacheResponse;
                             } else {
@@ -1641,15 +1641,15 @@
                                     // return offline page
                                     if (policyMatch.offline) {
 
-                                        if (ABTFDEBUG) {
-                                            console.warn('Abtf.sw() ➤ no cache ➤ network failed ➤ offline page', request.url);
+                                        if (ABTFRDEBUG) {
+                                            console.warn('Abtfr.sw() ➤ no cache ➤ network failed ➤ offline page', request.url);
                                         }
 
                                         return OFFLINE(policyMatch.offline, request.clone());
                                     } else {
 
-                                        if (ABTFDEBUG) {
-                                            console.warn('Abtf.sw() ➤ no cache ➤ network failed ➤ empty 404 response', request.url, fetchResponse, error);
+                                        if (ABTFRDEBUG) {
+                                            console.warn('Abtfr.sw() ➤ no cache ➤ network failed ➤ empty 404 response', request.url, fetchResponse, error);
                                         }
                                         // return original result of fetch response
                                         if (!fetchResponse) {
@@ -1676,8 +1676,8 @@
                             // return cache
                             if (cacheResponse) {
 
-                                if (ABTFDEBUG) {
-                                    console.info('Abtf.sw() ➤ from cache', event.request.url);
+                                if (ABTFRDEBUG) {
+                                    console.info('Abtfr.sw() ➤ from cache', event.request.url);
                                 }
                                 return cacheResponse;
                             } else {
@@ -1687,15 +1687,15 @@
                                     // return offline page
                                     if (policyMatch.offline) {
 
-                                        if (ABTFDEBUG) {
-                                            console.warn('Abtf.sw() ➤ no cache ➤ network failed ➤ offline page', request.url);
+                                        if (ABTFRDEBUG) {
+                                            console.warn('Abtfr.sw() ➤ no cache ➤ network failed ➤ offline page', request.url);
                                         }
 
                                         return OFFLINE(policyMatch.offline, request.clone());
                                     } else {
 
-                                        if (ABTFDEBUG) {
-                                            console.warn('Abtf.sw() ➤ no cache ➤ network failed ➤ empty 404 response', request.url, fetchResponse);
+                                        if (ABTFRDEBUG) {
+                                            console.warn('Abtfr.sw() ➤ no cache ➤ network failed ➤ empty 404 response', request.url, fetchResponse);
                                         }
                                         // return original result of fetch response
                                         if (!fetchResponse) {
@@ -1718,8 +1718,8 @@
                 default:
                     return FETCH(event.request, policyMatch.cache, function(request, fetchResponse, error) {
 
-                        if (ABTFDEBUG) {
-                            console.warn('Abtf.sw() ➤ network failed', request.url, (fetchResponse || error));
+                        if (ABTFRDEBUG) {
+                            console.warn('Abtfr.sw() ➤ network failed', request.url, (fetchResponse || error));
                         }
 
                         // try cache
@@ -1728,8 +1728,8 @@
 
                                 // return cache
                                 if (response) {
-                                    if (ABTFDEBUG) {
-                                        console.info('Abtf.sw() ➤ fallback from cache', request.url);
+                                    if (ABTFRDEBUG) {
+                                        console.info('Abtfr.sw() ➤ fallback from cache', request.url);
                                     }
                                     return response;
                                 }
@@ -1737,15 +1737,15 @@
                                 // return offline page
                                 if (policyMatch.offline) {
 
-                                    if (ABTFDEBUG) {
-                                        console.warn('Abtf.sw() ➤ no cache ➤ offline page', request.url);
+                                    if (ABTFRDEBUG) {
+                                        console.warn('Abtfr.sw() ➤ no cache ➤ offline page', request.url);
                                     }
 
                                     return OFFLINE(policyMatch.offline, request.clone());
                                 } else {
 
-                                    if (ABTFDEBUG) {
-                                        console.warn('Abtf.sw() ➤ no cache ➤ empty 404 response', request.url);
+                                    if (ABTFRDEBUG) {
+                                        console.warn('Abtfr.sw() ➤ no cache ➤ empty 404 response', request.url);
                                     }
                                     // return original result of fetch response
                                     if (!fetchResponse) {
@@ -1838,8 +1838,8 @@
                                 });
                                 resolve(null, status);
                             }).catch(function(err) {
-                                if (ABTFDEBUG) {
-                                    console.error('Abtf.sw() ➤ preload', err);
+                                if (ABTFRDEBUG) {
+                                    console.error('Abtfr.sw() ➤ preload', err);
                                 }
                             });
                         }

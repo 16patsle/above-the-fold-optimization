@@ -15,8 +15,8 @@ module.exports = function(grunt) {
 		},
 
         clean: {
-            abovethefold: [
-                'css/abovethefold/',
+            abtfr: [
+                'css/abtfr/',
                 'css/inline.raw.css'
             ]
         },
@@ -125,63 +125,63 @@ module.exports = function(grunt) {
          */
         penthouse: {
             frontpage : {
-                outfile : 'css/abovethefold/frontpage.css',
+                outfile : 'css/abtfr/frontpage.css',
                 css : 'css/full.css',
                 url : 'https://WWW.WEBSITE.COM/',
                 width : 1600,
                 height : 1200
             },
             frontpage_mid : {
-                outfile : 'css/abovethefold/frontpage_mid.css',
+                outfile : 'css/abtfr/frontpage_mid.css',
                 css : 'css/full.css',
                 url : 'https://WWW.WEBSITE.COM/',
                 width : 1200,
                 height : 800
             },
             frontpage_small : {
-                outfile : 'css/abovethefold/frontpage_small2.css',
+                outfile : 'css/abtfr/frontpage_small2.css',
                 css : 'css/full.css',
                 url : 'https://www.dermarolling.nl/',
                 width : 640,
                 height : 400
             },
             product: {
-                outfile : 'css/abovethefold/product.css',
+                outfile : 'css/abtfr/product.css',
                 css : 'css/full.css',
                 url : 'https://WWW.WEBSITE.COM/product/titanium/',
                 width : 1600,
                 height : 1200
             },
             product_mid: {
-                outfile : 'css/abovethefold/product_mid.css',
+                outfile : 'css/abtfr/product_mid.css',
                 css : 'css/full.css',
                 url : 'https://WWW.WEBSITE.COM/product/titanium/',
                 width : 1200,
                 height : 800
             },
             product_small: {
-                outfile : 'css/abovethefold/product_small.css',
+                outfile : 'css/abtfr/product_small.css',
                 css : 'css/full.css',
                 url : 'https://WWW.WEBSITE.COM/product/titanium/',
                 width : 640,
                 height : 400
             },
             category: {
-                outfile : 'css/abovethefold/category.css',
+                outfile : 'css/abtfr/category.css',
                 css : 'css/full.css',
                 url : 'https://WWW.WEBSITE.COM/product-category/w7-cosmetics/',
                 width : 1600,
                 height : 1200
             },
             category_mid: {
-                outfile : 'css/abovethefold/category_mid.css',
+                outfile : 'css/abtfr/category_mid.css',
                 css : 'css/full.css',
                 url : 'https://WWW.WEBSITE.COM/product-category/w7-cosmetics/',
                 width : 1200,
                 height : 800
             },
             category_small: {
-                outfile : 'css/abovethefold/category_small.css',
+                outfile : 'css/abtfr/category_small.css',
                 css : 'css/full.css',
                 url : 'https://WWW.WEBSITE.COM/product-category/w7-cosmetics/',
                 width : 640,
@@ -198,7 +198,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: [
-                    'css/abovethefold/*.css'
+                    'css/abtfr/*.css'
                 ],
                 dest: 'css/inline.raw.css',
             },
@@ -238,7 +238,7 @@ module.exports = function(grunt) {
      * Task abovefold
      */
     grunt.registerTask( 'abovefold', [
-        'clean:abovethefold',
+        'clean:abtfr',
         'cssmin:full',
         'penthouse',
         'concat',

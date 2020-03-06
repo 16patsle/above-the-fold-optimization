@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Abovethefold Lazy Script Loading functions and hooks.
+ * ABTFR Lazy Script Loading functions and hooks.
  *
  * This class provides the functionality for lazy script loading functions and hooks.
  *
  * @since      2.5.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
 
-class Abovethefold_LazyScripts
+class ABTFR_LazyScripts
 {
 
     /**
@@ -106,14 +106,14 @@ class Abovethefold_LazyScripts
          * Lazy Load XT is not loaded, include jQuery Lazy XT library
          */
         if (!$lazyxt_loaded) {
-            wp_enqueue_script('jquery-lazyloadxt', WPABTF_URI . 'public/js/jquery.lazyloadxt.min.js', array( 'jquery' ), '1.1.0', $in_footer);
+            wp_enqueue_script('jquery-lazyloadxt', WPABTFR_URI . 'public/js/jquery.lazyloadxt.min.js', array( 'jquery' ), '1.1.0', $in_footer);
             $lazyxt_script_dependencies[] = 'jquery-lazyloadxt';
         }
 
         /**
          * Load Lazy Load XT widget module
          */
-        wp_enqueue_script('jquery-lazyloadxt-widget', WPABTF_URI . 'public/js/jquery.lazyloadxt.widget.min.js', $lazyxt_script_dependencies, $this->package_version(), $in_footer);
+        wp_enqueue_script('jquery-lazyloadxt-widget', WPABTFR_URI . 'public/js/jquery.lazyloadxt.widget.min.js', $lazyxt_script_dependencies, $this->package_version(), $in_footer);
     }
 
     /**
@@ -122,14 +122,14 @@ class Abovethefold_LazyScripts
     public function package_version($reset = false)
     {
         if (!$reset) {
-            $version = get_option('abtf_lazyxt_version');
+            $version = get_option('abtfr_lazyxt_version');
             if ($version) {
                 return $version;
             }
         }
 
         // check existence of package file
-        $package_json = WPABTF_PATH . 'public/js/src/lazyloadxt_package.json';
+        $package_json = WPABTFR_PATH . 'public/js/src/lazyloadxt_package.json';
         if (!file_exists($package_json)) {
             $this->CTRL->admin->set_notice('PLUGIN INSTALLATION NOT COMPLETE, MISSING public/js/src/lazyloadxt_package.json', 'ERROR');
 
@@ -141,7 +141,7 @@ class Abovethefold_LazyScripts
 
                 return false;
             } else {
-                $version = update_option('abtf_lazyxt_version', $package['version']);
+                $version = update_option('abtfr_lazyxt_version', $package['version']);
 
                 // return version
                 return $package['version'];

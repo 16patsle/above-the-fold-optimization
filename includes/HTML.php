@@ -11,15 +11,15 @@
  * @link https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php
  * @link https://github.com/mrclay/minify/
  *
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class ABTF_HTMLMinify
+class ABTFR_HTMLMinify
 {
     protected $_jsCleanComments = true;
     protected $_isXhtml = null;

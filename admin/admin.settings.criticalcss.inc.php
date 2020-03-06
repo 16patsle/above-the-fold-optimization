@@ -28,9 +28,9 @@
 	</div>
 
 	<div id="ccss_editor_global" class="ccss_editor">
-		<textarea class="abtfcss" id="abtfcss"<?php if (!isset($options['csseditor']) || intval($options['csseditor']) === 1) {
+		<textarea class="abtfrcss" id="abtfrcss"<?php if (!isset($options['csseditor']) || intval($options['csseditor']) === 1) {
     print 'data-advanced="1"';
-} ?> name="abovethefold[css]"><?php echo htmlentities($inlinecss, ENT_COMPAT, 'utf-8'); ?></textarea>
+} ?> name="abtfr[css]"><?php echo htmlentities($inlinecss, ENT_COMPAT, 'utf-8'); ?></textarea>
 
 		<!-- .menu-item-settings-->
 	
@@ -41,7 +41,7 @@
 		<a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank" class="button button-secondary button-small">CSS<span style="color:#768c1c;font-weight:bold;margin-left:1px;">LINT</span></a>
 		</div>
 		<div class="criticalcss-editorswitch">
-			<label><input type="checkbox" name="abovethefold[csseditor]" value="1"<?php if (!isset($options['csseditor']) || intval($options['csseditor']) === 1) {
+			<label><input type="checkbox" name="abtfr[csseditor]" value="1"<?php if (!isset($options['csseditor']) || intval($options['csseditor']) === 1) {
     print ' checked=""';
 } ?>> Use a CSS editor with error reporting (<a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">CSS Lint</a> using <a href="https://codemirror.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">CodeMirror</a>).</label>
 		</div>
@@ -51,7 +51,7 @@
 		<ul class="menu-item-transport"></ul>
 
 		<div style="margin-top:1em;">
-			<label><input type="checkbox" name="abovethefold[http2_push_criticalcss]" value="1" onclick="if (jQuery(this).is(':checked')) { jQuery('#http2pushnote').show(); } else { jQuery('#http2pushnote').hide(); }"<?php if (isset($options['http2_push_criticalcss']) && intval($options['http2_push_criticalcss']) === 1) {
+			<label><input type="checkbox" name="abtfr[http2_push_criticalcss]" value="1" onclick="if (jQuery(this).is(':checked')) { jQuery('#http2pushnote').show(); } else { jQuery('#http2pushnote').hide(); }"<?php if (isset($options['http2_push_criticalcss']) && intval($options['http2_push_criticalcss']) === 1) {
     print ' checked';
 } ?>> Push Critical CSS using HTTP/2 Server Push
 </label>

@@ -4,13 +4,13 @@
  * Proxy admin controller
  *
  * @since      2.5.4
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  * @author     Patrick Sletvold
  */
 
-class Abovethefold_Admin_Proxy
+class ABTFR_Admin_Proxy
 {
 
     /**
@@ -39,7 +39,7 @@ class Abovethefold_Admin_Proxy
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtf_proxy_update', $this, 'update_settings');
+            $this->CTRL->loader->add_action('admin_post_abtfr_proxy_update', $this, 'update_settings');
 
             /**
              * Handle form submissions
@@ -49,7 +49,7 @@ class Abovethefold_Admin_Proxy
             /**
              * Handle Ajax proxy cache stats
              */
-            $this->CTRL->loader->add_action('wp_ajax_abtf_cache_stats', $this, 'ajax_cache_stats');
+            $this->CTRL->loader->add_action('wp_ajax_abtfr_cache_stats', $this, 'ajax_cache_stats');
         }
     }
 
@@ -102,18 +102,18 @@ class Abovethefold_Admin_Proxy
      */
     public function update_settings()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }
 
         // input
-        $input = (isset($_POST['abovethefold']) && is_array($_POST['abovethefold'])) ? $_POST['abovethefold'] : array();
+        $input = (isset($_POST['abtfr']) && is_array($_POST['abtfr'])) ? $_POST['abtfr'] : array();
 
         /**
          * Proxy settings

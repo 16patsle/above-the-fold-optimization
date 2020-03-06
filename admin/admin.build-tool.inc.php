@@ -1,6 +1,6 @@
 <?php
 
-    $default = get_option('abtf-build-tool-default');
+    $default = get_option('abtfr-build-tool-default');
     if (!is_array($default)) {
         $default = array();
     }
@@ -15,15 +15,15 @@
 	<span class="t">Submenu:</span>
 	<a href="<?php echo add_query_arg(array('page' => 'pagespeed-criticalcss-test'), admin_url('admin.php')); ?>" class="f">Quality Test (mirror)</a><a href="<?php echo add_query_arg(array('page' => 'pagespeed-build-tool'), admin_url('admin.php')); ?>" class="s">Gulp.js Critical CSS Generator</a>
 </nav>
-<form method="post" action="<?php echo admin_url('admin-post.php?action=abtf_create_critical_package'); ?>" class="clearfix abtf-bt-builder">
-	<?php wp_nonce_field('abovethefold'); ?>
-	<div class="wrap abovethefold-wrapper">
+<form method="post" action="<?php echo admin_url('admin-post.php?action=abtfr_create_critical_package'); ?>" class="clearfix abtfr-bt-builder">
+	<?php wp_nonce_field('abtfr'); ?>
+	<div class="wrap abtfr-wrapper">
 		<div id="poststuff">
 			<div id="post-body" class="metabox-holder">
 				<div id="post-body-content">
 					<div class="postbox">
 						<h3 class="hndle">
-							<span><?php _e('Critical Path CSS Creator', 'abovethefold'); ?></span>
+							<span><?php _e('Critical Path CSS Creator', 'abtfr'); ?></span>
 						</h3>
 						<div class="inside testcontent">
 
@@ -33,7 +33,7 @@
 							<table class="form-table">
 								<tr valign="top">
 									<td style="padding:0px;">
-										<div class="abtf-inner-table">
+										<div class="abtfr-inner-table">
 
 											<h3 class="h"><span>Create a Gulp.js Critical CSS Task Package</span></h3>
 											<div class="inside">
@@ -45,7 +45,7 @@
 						                                    <input type="text" name="taskname" size="50" value="<?php if ($taskname) {
     print htmlentities($taskname, ENT_COMPAT, 'utf-8');
 } ?>" pattern="^[a-z\d-]*$" placeholder="Enter a Gulp.js task name (no spaces)." />
-						                                    <p class="description">The task name is used as task command and as subdirectory (/theme/abovethefold/<strong>task-name</strong>/).</p>
+						                                    <p class="description">The task name is used as task command and as subdirectory (/theme/abtfr/<strong>task-name</strong>/).</p>
 														</td>
 													</tr>
 													<tr valign="top">
@@ -124,7 +124,7 @@
 							
 							<p><strong>Step 1:</strong> Follow the <a href="#installation">installation instructions</a> </p>
 							<p><strong>Step 2:</strong> create a Critical CSS Task Package</p>
-							<p><strong>Step 3:</strong> start a command line prompt or SSH shell, navigate to <code>/wp-content/themes/THEME_NAME/abovethefold/</code> and run the task, e.g. <code>gulp <strong class="gulp-task-name">task-name</strong></code>.</p>
+							<p><strong>Step 3:</strong> start a command line prompt or SSH shell, navigate to <code>/wp-content/themes/THEME_NAME/abtfr/</code> and run the task, e.g. <code>gulp <strong class="gulp-task-name">task-name</strong></code>.</p>
 
 							<p>Test the quality of the created critical path CSS using the <a href="<?php print add_query_arg(array( 'page' => 'pagespeed-compare' ), admin_url('admin.php')); ?>">Critical CSS Quality Test</a> and optionally use the file <code>extra.css</code> to fix problems in the generated Critical Path CSS.</p>
 
@@ -137,8 +137,8 @@
 								<li style="margin-bottom:2px;">The installation of <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md" target="_blank">Gulp.js</a> (<code>npm install --global gulp-cli</code>).</li>
 							</ul>
 
-							<p>The installation of the <em>WordPress Gulp.js Critical Path CSS Generator</em> is required just once for your theme. NPM (Node.js Package Manager) will read the dependencies from package.json and will install them in the /abovethefold/ directory.</p>
-							<p><strong>Step 1:</strong> download <strong>package.json</strong> and <strong>gulpfile.js</strong> and upload the files to <code>/wp-content/themes/THEME_NAME/<strong>abovethefold</strong>/</code>. Alternatively click "<em>Auto install</em>" (this will copy the files to your theme directory).</p>
+							<p>The installation of the <em>WordPress Gulp.js Critical Path CSS Generator</em> is required just once for your theme. NPM (Node.js Package Manager) will read the dependencies from package.json and will install them in the /abtfr/ directory.</p>
+							<p><strong>Step 1:</strong> download <strong>package.json</strong> and <strong>gulpfile.js</strong> and upload the files to <code>/wp-content/themes/THEME_NAME/<strong>abtfr</strong>/</code>. Alternatively click "<em>Auto install</em>" (this will copy the files to your theme directory).</p>
 							<p style="margin-top:1em;">
 
 <?php
@@ -153,7 +153,7 @@
 ?>
 								<button type="submit" name="download_package" class="button button-small">Download package.json &amp; gulpfile.js</button>
 							</p>
-							<p><strong>Step 2:</strong> start a command line prompt or SSH shell and navigate to <code>/wp-content/themes/THEME_NAME/abovethefold/</code>.</p>
+							<p><strong>Step 2:</strong> start a command line prompt or SSH shell and navigate to <code>/wp-content/themes/THEME_NAME/abtfr/</code>.</p>
 							<p><strong>Step 3:</strong> run the command <code><strong>npm install</strong></code>.</p>
 							
 							<p><strong>If there are errors during installation you will not be able to get support via the WordPress support forums.</strong><br />Please seek help in platform or software related support forums, for example Github.</p>

@@ -1,8 +1,8 @@
 /**
  * Critical CSS Quality Test View
  *
- * @package    abovethefold
- * @subpackage abovethefold/public
+ * @package    abtfr
+ * @subpackage abtfr/public
  * @author     Optimization.Team <info@optimization.team>
  */
 
@@ -17,7 +17,7 @@
     eventer(messageEvent, function(e) {
         if (e.data && e.data.action) {
 
-            if (!document.getElementById('AbtfCSS')) {
+            if (!document.getElementById('AbtfrCSS')) {
                 alert('Error: Critical CSS <style> element not found.');
                 return;
             }
@@ -42,7 +42,7 @@
                     break;
                 case "set":
 
-                    var style = document.getElementById('AbtfCSS');
+                    var style = document.getElementById('AbtfrCSS');
                     if (style.styleSheet) {
                         style.styleSheet.cssText = e.data.css;
                     } else {
@@ -53,7 +53,7 @@
                 case "get":
 
                     var css;
-                    var style = document.getElementById('AbtfCSS');
+                    var style = document.getElementById('AbtfrCSS');
                     if (style.styleSheet) {
                         css = style.styleSheet.cssText;
                     } else {

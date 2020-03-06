@@ -4,13 +4,13 @@
  * Service Worker Optimization / PWA Validation Controller
  *
  * @since      2.8.3
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  * @author     Patrick Sletvold
  */
 
-class Abovethefold_Admin_PWA
+class ABTFR_Admin_PWA
 {
 
     /**
@@ -39,7 +39,7 @@ class Abovethefold_Admin_PWA
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtf_pwa_update', $this, 'update_settings');
+            $this->CTRL->loader->add_action('admin_post_abtfr_pwa_update', $this, 'update_settings');
 
             // add scripts/styles
             $this->CTRL->loader->add_action('admin_enqueue_scripts', $this, 'enqueue_scripts', 30);
@@ -51,7 +51,7 @@ class Abovethefold_Admin_PWA
      */
     public function update_settings()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         // create manifest.json template
         if (isset($_POST['create_manifest'])) {
@@ -94,13 +94,13 @@ class Abovethefold_Admin_PWA
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }
 
         // input
-        $input = (isset($_POST['abovethefold']) && is_array($_POST['abovethefold'])) ? $_POST['abovethefold'] : array();
+        $input = (isset($_POST['abtfr']) && is_array($_POST['abtfr'])) ? $_POST['abtfr'] : array();
 
         /**
          * Google PWA optimization
@@ -236,7 +236,7 @@ class Abovethefold_Admin_PWA
             $this->CTRL->admin->set_notice('Failed to install the Service Worker. Please copy the file manually from plugins/above-the-fold-optimization/public/js/pwa-serviceworker.js (and .debug.js) to the root directory of the WordPress installation.', 'ERROR');
         }
 
-        // update abtf-pwa-policy.json config
+        // update abtfr-pwa-policy.json config
         if (!$this->CTRL->pwa->update_sw_config()) {
             
             // get service worker path
@@ -255,11 +255,11 @@ class Abovethefold_Admin_PWA
         }
 
         // add global admin CSS
-        wp_enqueue_style('abtf_admincp_jsoneditor_editor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.css', false, WPABTF_VERSION);
-        wp_enqueue_style('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'css/admincp-jsoneditor.min.css', false, WPABTF_VERSION);
+        wp_enqueue_style('abtfr_admincp_jsoneditor_editor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.css', false, WPABTFR_VERSION);
+        wp_enqueue_style('abtfr_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'css/admincp-jsoneditor.min.css', false, WPABTFR_VERSION);
 
         // add general admin javascript
-        wp_enqueue_script('abtf_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.js', array( 'jquery' ), WPABTF_VERSION);
-        wp_enqueue_script('abtf_admincp_pwa', plugin_dir_url(__FILE__) . 'js/admincp-pwa.min.js', array( 'jquery', 'abtf_admincp_jsoneditor' ), WPABTF_VERSION);
+        wp_enqueue_script('abtfr_admincp_jsoneditor', plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.js', array( 'jquery' ), WPABTFR_VERSION);
+        wp_enqueue_script('abtfr_admincp_pwa', plugin_dir_url(__FILE__) . 'js/admincp-pwa.min.js', array( 'jquery', 'abtfr_admincp_jsoneditor' ), WPABTFR_VERSION);
     }
 }

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../utils/useLinkState';
-import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import { adminUrl, siteTitle, abtfrAdminNonce } from '../utils/globalVars';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import php from 'react-syntax-highlighter/dist/esm/languages/hljs/php';
 import vs from 'react-syntax-highlighter/dist/esm/styles/hljs/vs';
@@ -33,7 +33,7 @@ function your_html_search_and_replace( &$search, &$replace, &$search_regex, &$re
 	return $search; // required
 }
 
-add_filter( 'abtf_html_replace', 'your_html_search_and_replace', 10, 4 );
+add_filter( 'abtfr_html_replace', 'your_html_search_and_replace', 10, 4 );
 		`.trim();
 
 const HtmlView = () => {
@@ -61,11 +61,11 @@ const HtmlView = () => {
   return (
     <form
       method="post"
-      action={adminUrl + 'admin-post.php?action=abtf_html_update'}
+      action={adminUrl + 'admin-post.php?action=abtfr_html_update'}
       className="clearfix"
       encType="multipart/form-data"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('HTML Optimization')}>
         <Helmet>
           <title>HTML Optimization {siteTitle}</title>
@@ -74,7 +74,7 @@ const HtmlView = () => {
           <tbody>
             <SettingCheckbox
               header="Minify HTML"
-              name="abovethefold[html_minify]"
+              name="abtfr[html_minify]"
               link={linkOptionState('htmlMinify')}
               label="Enabled"
               description={
@@ -94,7 +94,7 @@ const HtmlView = () => {
             ></SettingCheckbox>
             <SettingCheckbox
               header="Strip HTML comments"
-              name="abovethefold[html_comments]"
+              name="abtfr[html_comments]"
               link={linkOptionState('htmlComments')}
               label="Enabled"
               description={
@@ -107,7 +107,7 @@ const HtmlView = () => {
             <SettingTextarea
               title="&nbsp;Preserve List"
               textareaClass="json-array-lines"
-              name="abovethefold[html_comments_preserve]"
+              name="abtfr[html_comments_preserve]"
               link={linkOptionState('htmlCommentsPreserve')}
               description="Enter (parts of) HTML comments to exclude from removal. One string per line."
               disabled={!getOption('htmlComments')}
@@ -143,7 +143,7 @@ const HtmlView = () => {
         ></JsonEditor>
         <input
           type="hidden"
-          name="abovethefold[html_search_replace]"
+          name="abtfr[html_search_replace]"
           id="html_search_replace_src"
           value={getOption('htmlSearchReplace')}
         />
@@ -160,7 +160,7 @@ const HtmlView = () => {
         </Info>
         <p>
           You can also add a search and replace configuration using the
-          WordPress filter hook <code>abtf_html_replace</code>.
+          WordPress filter hook <code>abtfr_html_replace</code>.
         </p>
         <div id="wp_html_search_replace_example">
           <SyntaxHighlighter className="example-code" language="php" style={vs}>

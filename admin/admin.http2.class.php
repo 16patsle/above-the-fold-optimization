@@ -4,13 +4,13 @@
  * HTTP/2 Optimization Controller
  *
  * @since      2.9.0
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  * @author     Patrick Sletvold
  */
 
-class Abovethefold_Admin_HTTP2
+class ABTFR_Admin_HTTP2
 {
 
     /**
@@ -39,7 +39,7 @@ class Abovethefold_Admin_HTTP2
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtf_http2_update', $this, 'update_settings');
+            $this->CTRL->loader->add_action('admin_post_abtfr_http2_update', $this, 'update_settings');
         }
     }
 
@@ -48,18 +48,18 @@ class Abovethefold_Admin_HTTP2
      */
     public function update_settings()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }
 
         // input
-        $input = (isset($_POST['abovethefold']) && is_array($_POST['abovethefold'])) ? $_POST['abovethefold'] : array();
+        $input = (isset($_POST['abtfr']) && is_array($_POST['abtfr'])) ? $_POST['abtfr'] : array();
 
         /**
          * HTTP/2 Server Push optimization

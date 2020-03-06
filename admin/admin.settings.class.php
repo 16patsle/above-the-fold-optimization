@@ -4,13 +4,13 @@
  * Settings admin controller
  *
  * @since      2.5.4
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  * @author     Patrick Sletvold
  */
 
-class Abovethefold_Admin_Settings
+class ABTFR_Admin_Settings
 {
 
     /**
@@ -39,7 +39,7 @@ class Abovethefold_Admin_Settings
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtf_settings_update', $this, 'update_settings');
+            $this->CTRL->loader->add_action('admin_post_abtfr_settings_update', $this, 'update_settings');
         }
     }
 
@@ -48,13 +48,13 @@ class Abovethefold_Admin_Settings
      */
     public function update_settings()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         /**
          * Clear page cache
          */
         if (isset($_POST['clear_pagecache'])) {
-            check_admin_referer('abovethefold');
+            check_admin_referer('abtfr');
 
             $this->CTRL->admin->clear_pagecache();
 
@@ -65,13 +65,13 @@ class Abovethefold_Admin_Settings
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }
 
         // input
-        $input = (isset($_POST['abovethefold']) && is_array($_POST['abovethefold'])) ? $_POST['abovethefold'] : array();
+        $input = (isset($_POST['abtfr']) && is_array($_POST['abtfr'])) ? $_POST['abtfr'] : array();
 
         /**
          * Debug / admin options

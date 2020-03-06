@@ -30,7 +30,7 @@ jQuery(function ($) {
             optgroupField: 'class',
             labelField: 'name',
             searchField: ['name'],
-            optgroups: window.abtf_pagesearch_optgroups,
+            optgroups: window.abtfr_pagesearch_optgroups,
             onType: function (str) {
                 if (/^http(s)?:\/\/[^\/]+\//.test(str)) {
                     var selectize = page_select_menu[0].selectize;
@@ -44,7 +44,7 @@ jQuery(function ($) {
                     type: 'POST',
                     dataType: 'json',
                     data: {
-                        action: 'abtf_page_search',
+                        action: 'abtfr_page_search',
                         query: query,
                         maxresults: 10
                     },

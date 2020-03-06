@@ -6,12 +6,12 @@
  * This class provides the functionality for HTTP/2 optimization functions and hooks.
  *
  * @since      2.9.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_HTTP2
+class ABTFR_HTTP2
 {
 
     /**
@@ -51,7 +51,7 @@ class Abovethefold_HTTP2
         if (is_array($this->push)) {
 
             // add headers
-            $this->CTRL->loader->add_action('abtf_html_pre', $this, 'push_headers', 10);
+            $this->CTRL->loader->add_action('abtfr_html_pre', $this, 'push_headers', 10);
         }
     }
 

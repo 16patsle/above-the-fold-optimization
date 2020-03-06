@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Abovethefold critical css optimization functions and hooks.
+ * ABTFR critical css optimization functions and hooks.
  *
  * This class provides the functionality for critical css  related functions and hooks.
  *
  * @since      2.7
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_Critical_CSS
+class ABTFR_Critical_CSS
 {
 
     /**
@@ -35,12 +35,12 @@ class Abovethefold_Critical_CSS
         $errors = array();
 
         // get config cache
-        $fileconfig = get_option('abovethefold-criticalcss', array());
+        $fileconfig = get_option('abtfr-criticalcss', array());
         if (!is_array($fileconfig)) {
             $fileconfig = array();
         }
 
-        // read critical CSS files from theme directory (/abovethefold/critical-css/)
+        // read critical CSS files from theme directory (/abtfr/critical-css/)
         $criticalcss_dir = $this->CTRL->theme_path('critical-css');
         $criticalcss_files = (is_dir($criticalcss_dir)) ? array_diff(scandir($criticalcss_dir), array('..', '.')) : array();
 
@@ -239,7 +239,7 @@ class Abovethefold_Critical_CSS
                 return ($a['weight'] < $b['weight']) ? +1 : -1;
             });
 
-            update_option('abovethefold-criticalcss', $newfileconfig, true);
+            update_option('abtfr-criticalcss', $newfileconfig, true);
 
             return $newfileconfig;
         } else {
@@ -645,7 +645,7 @@ class Abovethefold_Critical_CSS
         $criticalCSS = '';
 
         if ($debug_criticalcss) {
-            $criticalCSS .= "/**\n * Critical CSS Editor\n *\n * The extracted Critical CSS has been annotated with file references for easy editing. \n * The Critical CSS source files are located in the theme directory .../".basename(get_stylesheet_directory())."/abovethefold/critical-css/\n */\n\n";
+            $criticalCSS .= "/**\n * Critical CSS Editor\n *\n * The extracted Critical CSS has been annotated with file references for easy editing. \n * The Critical CSS source files are located in the theme directory .../".basename(get_stylesheet_directory())."/abtfr/critical-css/\n */\n\n";
         }
 
         /**

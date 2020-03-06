@@ -6,7 +6,7 @@ import useLinkState from '../utils/useLinkState';
 import {
   adminUrl,
   siteTitle,
-  abtfAdminNonce,
+  abtfrAdminNonce,
   utmString
 } from '../utils/globalVars';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -63,10 +63,10 @@ const JavascriptView = () => {
   return (
     <form
       method="post"
-      action={adminUrl + 'admin-post.php?action=abtf_javascript_update'}
+      action={adminUrl + 'admin-post.php?action=abtfr_javascript_update'}
       className="clearfix"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Javascript Optimization')}>
         <Helmet>
           <title>Javascript Optimization {siteTitle}</title>
@@ -110,7 +110,7 @@ const JavascriptView = () => {
           <tbody>
             <SettingCheckbox
               header="Optimize Javascript Loading"
-              name="abovethefold[jsdelivery]"
+              name="abtfr[jsdelivery]"
               label="Enabled"
               link={linkOptionState('jsdelivery')}
               description={
@@ -145,7 +145,7 @@ const JavascriptView = () => {
               style={!getOption('jsdelivery') ? { display: 'none' } : {}}
             >
               <td colSpan="2" style={{ paddingTop: '0px' }}>
-                <div className="abtf-inner-table">
+                <div className="abtfr-inner-table">
                   <h3 className="h">
                     <span>Javascript Load Optimization</span>
                   </h3>
@@ -167,7 +167,7 @@ const JavascriptView = () => {
                       <tbody>
                         <SettingRadio
                           header="Script Loader"
-                          name="abovethefold[jsdelivery_scriptloader]"
+                          name="abtfr[jsdelivery_scriptloader]"
                           link={linkOptionState('jsdeliveryScriptloader')}
                           radios={[
                             {
@@ -290,7 +290,7 @@ const JavascriptView = () => {
                         </SettingRadio>
                         <SettingSelect
                           header="Position"
-                          name="abovethefold[jsdelivery_position]"
+                          name="abtfr[jsdelivery_position]"
                           link={linkOptionState('jsdeliveryPosition')}
                           options={[
                             {
@@ -311,7 +311,7 @@ const JavascriptView = () => {
                             height: '50px',
                             fontSize: '11px'
                           }}
-                          name="abovethefold[jsdelivery_ignore]"
+                          name="abtfr[jsdelivery_ignore]"
                           link={linkOptionState('jsdeliveryIgnore')}
                           description="Scripts to ignore in Javascript delivery optimization. One script per line. The files will be left untouched in the HTML."
                         ></SettingTextarea>
@@ -322,13 +322,13 @@ const JavascriptView = () => {
                             height: '50px',
                             fontSize: '11px'
                           }}
-                          name="abovethefold[jsdelivery_remove]"
+                          name="abtfr[jsdelivery_remove]"
                           link={linkOptionState('jsdeliveryRemove')}
                           description="Scripts to remove from HTML. One script per line. This feature enables to include small plugin related scripts inline."
                         ></SettingTextarea>
                         <SettingCheckbox
                           header="Force Async"
-                          name="abovethefold[jsdelivery_async_all]"
+                          name="abtfr[jsdelivery_async_all]"
                           label="Enabled"
                           link={linkOptionState('jsdeliveryAsyncAll')}
                           description="When enabled, all scripts are loaded asynchronously."
@@ -341,7 +341,7 @@ const JavascriptView = () => {
                               height: '50px',
                               fontSize: '11px'
                             }}
-                            name="abovethefold[jsdelivery_async]"
+                            name="abtfr[jsdelivery_async]"
                             link={linkOptionState('jsdeliveryAsync')}
                             description="Enter (parts of) scripts to force to load async. All other scripts are loaded in sequential blocking order if not specifically configured as async in HTML."
                           >
@@ -372,7 +372,7 @@ const JavascriptView = () => {
                             height: '50px',
                             fontSize: '11px'
                           }}
-                          name="abovethefold[jsdelivery_async_disabled]"
+                          name="abtfr[jsdelivery_async_disabled]"
                           link={linkOptionState('jsdeliveryAsyncDisabled')}
                           description="Enter (parts of) scripts to force to load blocking (non-async)."
                         ></SettingTextarea>
@@ -383,7 +383,7 @@ const JavascriptView = () => {
                             height: '50px',
                             fontSize: '11px'
                           }}
-                          name="abovethefold[jsdelivery_idle]"
+                          name="abtfr[jsdelivery_idle]"
                           disabled={
                             !getOption('jsProxy') &&
                             getOption('jsdeliveryScriptloader') !== 'html5'
@@ -432,7 +432,7 @@ const JavascriptView = () => {
                         </SettingTextarea>
                         <SettingCheckbox
                           header="Abide Dependencies"
-                          name="abovethefold[jsdelivery_deps]"
+                          name="abtfr[jsdelivery_deps]"
                           label="Enabled"
                           link={linkOptionState('jsdeliveryDeps')}
                           description={
@@ -453,7 +453,7 @@ const JavascriptView = () => {
                         ></SettingCheckbox>
                         <SettingCheckbox
                           header="jQuery Stub"
-                          name="abovethefold[jsdelivery_jquery]"
+                          name="abtfr[jsdelivery_jquery]"
                           label="Enabled"
                           link={linkOptionState('jsdeliveryJquery')}
                           description={
@@ -475,7 +475,7 @@ const JavascriptView = () => {
             </tr>
             <SettingCheckbox
               header="Lazy Load Scripts"
-              name="abovethefold[lazyscripts_enabled]"
+              name="abtfr[lazyscripts_enabled]"
               label="Enabled"
               link={linkOptionState('lazyscriptsEnabled')}
               description={

@@ -3,8 +3,8 @@
  *
  * This controller file manages Gulp.js tasks for the Critical CSS Generator.
  *
- * @package    abovethefold
- * @subpackage abovethefold/modules/critical-css-build-tool
+ * @package    abtfr
+ * @subpackage abtfr/modules/critical-css-build-tool
  * @author     Optimization.Team <info@optimization.team>
  */
 'use strict';

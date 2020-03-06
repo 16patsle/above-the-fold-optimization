@@ -4,13 +4,13 @@
  * Base optimization plugin controller
  *
  * @since      2.5
- * @package    abovethefold
- * @subpackage abovethefold/modules
+ * @package    abtfr
+ * @subpackage abtfr/modules
  * @author     Optimization.Team <info@optimization.team>
  */
 
 
-abstract class Abovethefold_OPP
+abstract class ABTFR_OPP
 {
 
     /**
@@ -28,7 +28,7 @@ abstract class Abovethefold_OPP
      */
     public function __construct(&$CTRL)
     {
-        $this->classname = str_replace('Abovethefold_OPP_', '', get_called_class());
+        $this->classname = str_replace('ABTFR_OPP_', '', get_called_class());
         if (!isset($this->name)) {
             $this->name = $this->classname;
         }
@@ -50,7 +50,7 @@ abstract class Abovethefold_OPP
             //$js = $this->CTRL->localizejs->parse_js($js);
         //}
 
-        //return apply_filters('abtf_js', $js);
+        //return apply_filters('abtfr_js', $js);
     }
 
     // Disable CSS minification

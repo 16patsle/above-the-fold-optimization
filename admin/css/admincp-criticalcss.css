@@ -7,55 +7,55 @@
 }
 
 
-.abtf-criticalcss .add-new-menu-action {
+.abtfr-criticalcss .add-new-menu-action {
     display: inline-block;
     margin-right: 3px;
     vertical-align: middle;
 }
 
-.abtf-criticalcss .meta-sep,
-.abtf-criticalcss .submitdelete,
-.abtf-criticalcss .submitcancel {
+.abtfr-criticalcss .meta-sep,
+.abtfr-criticalcss .submitdelete,
+.abtfr-criticalcss .submitcancel {
 	display: block;
 	float: left;
 	margin: 6px 0;
 	line-height: 15px;
 }
 
-.abtf-criticalcss .howto span {
+.abtfr-criticalcss .howto span {
 	float: left;
 	margin-top: 6px;
 }
 
 
-.abtf-criticalcss .list-wrap {
+.abtfr-criticalcss .list-wrap {
 	display: none;
 	clear: both;
 	margin-bottom: 10px;
 }
 
-.abtf-criticalcss .postbox p.submit {
+.abtfr-criticalcss .postbox p.submit {
 	margin-bottom: 0;
 }
 
 /* Listings */
-.abtf-criticalcss .list li {
+.abtfr-criticalcss .list li {
 	display: none;
 	margin: 0;
 	margin-bottom: 5px;
 }
 
-.abtf-criticalcss .list li .menu-item-title {
+.abtfr-criticalcss .list li .menu-item-title {
 	cursor: pointer;
 	display: block;
 }
 
-.abtf-criticalcss .list li .menu-item-title input {
+.abtfr-criticalcss .list li .menu-item-title input {
 	margin-right: 3px;
 	margin-top: -3px;
 }
 
-.abtf-criticalcss .item-delete {
+.abtfr-criticalcss .item-delete {
 	position: absolute;
 	right: 12px;
 	top: 7px;
@@ -67,7 +67,7 @@
 	white-space: nowrap;
 }
 
-.abtf-criticalcss .item-edit {
+.abtfr-criticalcss .item-edit {
 	position: absolute;
 	right: -20px;
 	top: 0;
@@ -82,7 +82,7 @@
 }
 
 
-.abtf-criticalcss .item-edit:before {
+.abtfr-criticalcss .item-edit:before {
 	margin-top: 10px;
 	margin-left: 4px;
 	width: 20px;
@@ -91,12 +91,12 @@
 	text-indent: -1px; /* account for the dashicon alignment */
 }
 
-.abtf-criticalcss .item-edit:focus {
+.abtfr-criticalcss .item-edit:focus {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 
-.abtf-criticalcss .item-edit:focus:before {
+.abtfr-criticalcss .item-edit:focus:before {
 	-webkit-box-shadow:
 		0 0 0 1px #5b9dd9,
 		0 0 2px 1px rgba(30, 140, 190, .8);
@@ -107,54 +107,54 @@
 
 
 /* Major/minor publishing actions (classes) */
-.abtf-criticalcss .major-publishing-actions {
+.abtfr-criticalcss .major-publishing-actions {
 	clear: both;
 	padding: 7px 0 6px;
 }
 
-.abtf-criticalcss .major-publishing-actions .publishing-action {
+.abtfr-criticalcss .major-publishing-actions .publishing-action {
 	text-align: right;
 	float: right;
 }
 
-.abtf-criticalcss .blank-slate .menu-settings {
+.abtfr-criticalcss .blank-slate .menu-settings {
 	display: none;
 }
 
-.abtf-criticalcss .delete-action {
+.abtfr-criticalcss .delete-action {
 	float: left;
 	margin-top: 2px;
 }
 
-.abtf-criticalcss .submitbox .submitcancel {
+.abtfr-criticalcss .submitbox .submitcancel {
 	border-bottom: 1px solid #0073aa;
 	padding: 1px 2px;
 	color: #0073aa;
 	text-decoration: none;
 }
 
-.abtf-criticalcss .submitbox .submitcancel:hover {
+.abtfr-criticalcss .submitbox .submitcancel:hover {
 	background: #0073aa;
 	color: #fff;
 }
 
-.abtf-criticalcss .major-publishing-actions .form-invalid {
+.abtfr-criticalcss .major-publishing-actions .form-invalid {
 	padding-left: 4px;
 	margin-left: -4px;
 }
 
 
 /* Back-compat for nav-menus screen */
-.abtf-criticalcss .metabox-holder h3 {
+.abtfr-criticalcss .metabox-holder h3 {
 	padding: 10px 10px 11px 14px;
 	line-height: 21px;
 }
-.abtf-criticalcss .item-edit:focus {
+.abtfr-criticalcss .item-edit:focus {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 
-.abtf-criticalcss .item-edit:focus:before {
+.abtfr-criticalcss .item-edit:focus:before {
 	-webkit-box-shadow:
 		0 0 0 1px #5b9dd9,
 		0 0 2px 1px rgba(30, 140, 190, .8);
@@ -162,7 +162,7 @@
 		0 0 0 1px #5b9dd9,
 		0 0 2px 1px rgba(30, 140, 190, .8);
 }
-.abtf-criticalcss .item-edit:before {
+.abtfr-criticalcss .item-edit:before {
 	right: 0;
 	content: "\f140";
 	border: none;
@@ -178,33 +178,33 @@
 	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none !important;
 }
-.abtf-criticalcss .menu-item-edit-active .item-edit:before {
+.abtfr-criticalcss .menu-item-edit-active .item-edit:before {
 	content: "\f142";
 }
 
 @media screen and ( max-width: 782px ) {
 
-	.abtf-criticalcss .item-controls .item-type {
+	.abtfr-criticalcss .item-controls .item-type {
 		margin-top: 2px;
 	}
 
-	.abtf-criticalcss .customlinkdiv .howto input {
+	.abtfr-criticalcss .customlinkdiv .howto input {
 		width: 65%;
 	}
 
-	.abtf-criticalcss .quick-search {
+	.abtfr-criticalcss .quick-search {
 		width: 85%;
 	}
 
-	.abtf-criticalcss .menu-name-label.howto span {
+	.abtfr-criticalcss .menu-name-label.howto span {
 		margin-top: 13px
 	}
 
-	.abtf-criticalcss .major-publishing-actions .publishing-action {
+	.abtfr-criticalcss .major-publishing-actions .publishing-action {
 		margin-top: 6px;
 	}
 
-	.abtf-criticalcss .delete-action {
+	.abtfr-criticalcss .delete-action {
 		font-size: 14px;
 		line-height: 50px;
 		margin-top: 12px;

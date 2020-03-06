@@ -4,13 +4,13 @@
  * Critical CSS admin controller
  *
  * @since      2.5.4
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  * @author     Patrick Sletvold
  */
 
-class Abovethefold_Admin_CriticalCSS
+class ABTFR_Admin_CriticalCSS
 {
 
     /**
@@ -42,12 +42,12 @@ class Abovethefold_Admin_CriticalCSS
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtf_criticalcss_update', $this, 'update_settings');
-            $this->CTRL->loader->add_action('admin_post_abtf_add_ccss', $this, 'add_conditional_criticalcss');
-            $this->CTRL->loader->add_action('admin_post_abtf_delete_ccss', $this, 'delete_conditional_criticalcss');
+            $this->CTRL->loader->add_action('admin_post_abtfr_criticalcss_update', $this, 'update_settings');
+            $this->CTRL->loader->add_action('admin_post_abtfr_add_ccss', $this, 'add_conditional_criticalcss');
+            $this->CTRL->loader->add_action('admin_post_abtfr_delete_ccss', $this, 'delete_conditional_criticalcss');
 
             // AJAX page search
-            $this->CTRL->loader->add_action('wp_ajax_abtf_condition_search', $this, 'ajax_condition_search');
+            $this->CTRL->loader->add_action('wp_ajax_abtfr_condition_search', $this, 'ajax_condition_search');
 
             // Clear CSS condition cache
             $this->CTRL->loader->add_action('save_post', $this, 'clear_conditioncache');
@@ -67,7 +67,7 @@ class Abovethefold_Admin_CriticalCSS
      */
     public function clear_conditioncache()
     {
-        delete_option('abtf-conditionoptions');
+        delete_option('abtfr-conditionoptions');
     }
 
     /**
@@ -122,14 +122,14 @@ class Abovethefold_Admin_CriticalCSS
         switch ($tab) {
             case "criticalcss":
 
-                $options = get_option('abovethefold');
+                $options = get_option('abtfr');
                 if (!isset($options['csseditor']) || intval($options['csseditor']) === 1) {
 
                     /**
                      * Codemirror CSS highlighting
                      */
-                    wp_enqueue_style('abtf_codemirror', plugin_dir_url(__FILE__) . 'css/codemirror.min.css');
-                    wp_enqueue_script('abtf_codemirror', plugin_dir_url(__FILE__) . 'js/codemirror.min.js', array( 'jquery','jquery-ui-resizable','abtf_admincp' ));
+                    wp_enqueue_style('abtfr_codemirror', plugin_dir_url(__FILE__) . 'css/codemirror.min.css');
+                    wp_enqueue_script('abtfr_codemirror', plugin_dir_url(__FILE__) . 'js/codemirror.min.js', array( 'jquery','jquery-ui-resizable','abtfr_admincp' ));
                 }
             break;
         }
@@ -292,39 +292,39 @@ class Abovethefold_Admin_CriticalCSS
 
         $conditional_groups = array();
         $conditional_groups['pagetype'] = array(
-            'title' => __('Page Types', 'abovethefold'),
+            'title' => __('Page Types', 'abtfr'),
             'class' => 'optgroup-pagetype'
         );
         $conditional_groups['category'] = array(
-            'title' => __('Category', 'abovethefold'),
+            'title' => __('Category', 'abtfr'),
             'class' => 'optgroup-cat'
         );
         $conditional_groups['taxonomy'] = array(
-            'title' => __('Taxonomy', 'abovethefold'),
+            'title' => __('Taxonomy', 'abtfr'),
             'class' => 'optgroup-post'
         );
         $conditional_groups['page'] = array(
-            'title' => __('Pages', 'abovethefold'),
+            'title' => __('Pages', 'abtfr'),
             'class' => 'optgroup-page'
         );
         $conditional_groups['post'] = array(
-            'title' => __('Posts', 'abovethefold'),
+            'title' => __('Posts', 'abtfr'),
             'class' => 'optgroup-post'
         );
         $conditional_groups['filter'] = array(
-            'title' => __('Custom Filters', 'abovethefold'),
+            'title' => __('Custom Filters', 'abtfr'),
             'class' => 'optgroup-filter'
         );
         $conditional_groups['woocommerce'] = array(
-            'title' => __('WooCommerce', 'abovethefold'),
+            'title' => __('WooCommerce', 'abtfr'),
             'class' => 'optgroup-woocommerce'
         );
 
         // apply filters
-        $conditional_options = apply_filters('abtf_default_conditional_options', $conditional_options);
+        $conditional_options = apply_filters('abtfr_default_conditional_options', $conditional_options);
 
         // apply filters
-        $conditional_groups = apply_filters('abtf_default_conditional_groups', $conditional_groups);
+        $conditional_groups = apply_filters('abtfr_default_conditional_groups', $conditional_groups);
 
         return array($conditional_options,$conditional_groups);
     }
@@ -524,19 +524,19 @@ class Abovethefold_Admin_CriticalCSS
      */
     public function update_settings()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         // stripslashes should always be called
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }
 
         // input
-        $input = (isset($_POST['abovethefold']) && is_array($_POST['abovethefold'])) ? $_POST['abovethefold'] : array();
+        $input = (isset($_POST['abtfr']) && is_array($_POST['abtfr'])) ? $_POST['abtfr'] : array();
 
         /**
          * Critical CSS settings
@@ -599,7 +599,7 @@ class Abovethefold_Admin_CriticalCSS
                         $error = true;
                         $this->CTRL->admin->set_notice('Conditional Critical CSS not configured.', 'ERROR');
                     } else {
-                        $criticalcss_files[$cssfile]['conditions'] = explode('|==abtf==|', $data['conditions']);
+                        $criticalcss_files[$cssfile]['conditions'] = explode('|==abtfr==|', $data['conditions']);
                         $criticalcss_files[$cssfile]['weight'] = (isset($data['weight']) && intval($data['weight']) > 0) ? intval($data['weight']) : 1;
 
                         if (isset($data['appendToAny']) && intval($data['appendToAny']) === 1) {
@@ -649,12 +649,12 @@ class Abovethefold_Admin_CriticalCSS
      */
     public function add_conditional_criticalcss()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }
@@ -685,7 +685,7 @@ class Abovethefold_Admin_CriticalCSS
             'weight' => 1
         );
 
-        $config['conditions'] = explode('|==abtf==|', $_POST['conditions']);
+        $config['conditions'] = explode('|==abtfr==|', $_POST['conditions']);
 
         if (file_exists($criticalcss_dir . $cssfile) && !is_writable($criticalcss_dir . $cssfile)) {
             $this->CTRL->admin->set_notice('<p style="font-size:18px;">Failed to write to Conditional Critical CSS storage file. Please check the write permissions for the following file:</p><p style="font-size:22px;color:red;"><strong>'.str_replace(trailingslashit(ABSPATH), '/', $criticalcss_dir . $cssfile).'</strong></p>', 'ERROR');
@@ -712,12 +712,12 @@ class Abovethefold_Admin_CriticalCSS
      */
     public function delete_conditional_criticalcss()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }

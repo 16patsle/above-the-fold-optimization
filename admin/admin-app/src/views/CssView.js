@@ -6,7 +6,7 @@ import useLinkState from '../utils/useLinkState';
 import {
   adminUrl,
   siteTitle,
-  abtfAdminNonce,
+  abtfrAdminNonce,
   lgCode
 } from '../utils/globalVars';
 import PageContent from '../components/PageContent';
@@ -46,11 +46,11 @@ const CssView = () => {
   return (
     <form
       method="post"
-      action={adminUrl + 'admin-post.php?action=abtf_css_update'}
+      action={adminUrl + 'admin-post.php?action=abtfr_css_update'}
       className="clearfix"
       encType="multipart/form-data"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('CSS Optimization')}>
         <Helmet>
           <title>CSS Optimization {siteTitle}</title>
@@ -70,7 +70,7 @@ const CssView = () => {
           <tbody>
             <SettingCheckbox
               header="Optimize CSS Delivery"
-              name="abovethefold[cssdelivery]"
+              name="abtfr[cssdelivery]"
               link={linkOptionState('cssdelivery')}
               label="Enabled"
               description={
@@ -102,7 +102,7 @@ const CssView = () => {
             {getOption('cssdelivery') ? (
               <tr valign="top" className="cssdeliveryoptions">
                 <td colSpan="2" style={{ paddingTop: '0px' }}>
-                  <div className="abtf-inner-table">
+                  <div className="abtfr-inner-table">
                     <h3 className="h">
                       <span>CSS Delivery Optimization</span>
                     </h3>
@@ -111,7 +111,7 @@ const CssView = () => {
                         <tbody>
                           <SettingCheckbox
                             header="Enhanced loadCSS"
-                            name="abovethefold[loadcss_enhanced]"
+                            name="abtfr[loadcss_enhanced]"
                             link={linkOptionState('loadcssEnhanced')}
                             label="Enabled"
                             description={
@@ -137,7 +137,7 @@ const CssView = () => {
                               min="0"
                               max="3000"
                               step="1"
-                              name="abovethefold[cssdelivery_renderdelay]"
+                              name="abtfr[cssdelivery_renderdelay]"
                               className="enchanceloadcssoptions"
                               link={linkOptionState('cssdeliveryRenderdelay')}
                               placeholder="0 ms"
@@ -175,7 +175,7 @@ const CssView = () => {
                           ) : null}
                           <SettingSelect
                             header="Position"
-                            name="abovethefold[cssdelivery_position]"
+                            name="abtfr[cssdelivery_position]"
                             link={linkOptionState('cssdeliveryPosition')}
                             options={[
                               {
@@ -196,7 +196,7 @@ const CssView = () => {
                               height: '50px',
                               fontSize: '11px'
                             }}
-                            name="abovethefold[cssdelivery_ignore]"
+                            name="abtfr[cssdelivery_ignore]"
                             link={linkOptionState('cssdeliveryIgnore')}
                             description="Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML."
                           ></SettingTextarea>
@@ -207,7 +207,7 @@ const CssView = () => {
                               height: '50px',
                               fontSize: '11px'
                             }}
-                            name="abovethefold[cssdelivery_remove]"
+                            name="abtfr[cssdelivery_remove]"
                             link={linkOptionState('cssdeliveryRemove')}
                             description="Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline."
                           ></SettingTextarea>
@@ -220,7 +220,7 @@ const CssView = () => {
             ) : null}
             <SettingCheckbox
               header="Optimize Web Fonts"
-              name="abovethefold[gwfo]"
+              name="abtfr[gwfo]"
               link={linkOptionState('gwfo')}
               label="Enabled"
               description={
@@ -240,7 +240,7 @@ const CssView = () => {
             {getOption('gwfo') ? (
               <tr valign="top" className="gwfooptions">
                 <td colSpan="2" style={{ paddingTop: '0px' }}>
-                  <div className="abtf-inner-table">
+                  <div className="abtfr-inner-table">
                     <h3 className="h">
                       <span>Web Font Optimization</span>
                     </h3>
@@ -249,7 +249,7 @@ const CssView = () => {
                         <tbody>
                           <SettingSelect
                             header="webfont.js Load Method"
-                            name="abovethefold[gwfo_loadmethod]"
+                            name="abtfr[gwfo_loadmethod]"
                             link={linkOptionState('gwfoLoadmethod')}
                             options={[
                               {
@@ -296,7 +296,7 @@ const CssView = () => {
                           {getOption('gwfoLoadmethod') !== 'disabled' ? (
                             <SettingSelect
                               header="Load Position"
-                              name="abovethefold[gwfo_loadposition]"
+                              name="abtfr[gwfo_loadposition]"
                               link={linkOptionState('gwfoLoadposition')}
                               options={[
                                 {
@@ -338,7 +338,7 @@ const CssView = () => {
                                     ? 'red'
                                     : 'notacolor'
                                 }}
-                                name="abovethefold[gwfo_config]"
+                                name="abtfr[gwfo_config]"
                                 placeholder="WebFontConfig = { classes: false, typekit: { id: 'xxxxxx' }, loading: function() {}, google: { families: ['Droid Sans', 'Droid Serif'] } };"
                                 link={linkOptionState('gwfoConfig')}
                                 description={
@@ -372,7 +372,7 @@ const CssView = () => {
                                       : '50px',
                                   fontSize: '11px'
                                 }}
-                                name="abovethefold[gwfo_googlefonts]"
+                                name="abtfr[gwfo_googlefonts]"
                                 placeholder="Droid Sans"
                                 link={linkOptionState('gwfoGooglefonts')}
                                 description={
@@ -406,7 +406,7 @@ const CssView = () => {
                                 }
                               ></SettingTextarea>
                               <SettingCheckbox
-                                name="abovethefold[gwfo_googlefonts_auto]"
+                                name="abtfr[gwfo_googlefonts_auto]"
                                 label="Auto-detect enabled"
                                 link={linkOptionState('gwfoGooglefontsAuto')}
                                 description="When enabled, fonts are automatically extracted from the HTML, CSS and existing WebFontConfig."
@@ -421,7 +421,7 @@ const CssView = () => {
                                       : '50px',
                                   fontSize: '11px'
                                 }}
-                                name="abovethefold[gwfo_googlefonts_ignore]"
+                                name="abtfr[gwfo_googlefonts_ignore]"
                                 link={linkOptionState('gwfoGooglefontsIgnore')}
                                 description={
                                   <span>
@@ -442,7 +442,7 @@ const CssView = () => {
                                       : '50px',
                                   fontSize: '11px'
                                 }}
-                                name="abovethefold[gwfo_googlefonts_remove]"
+                                name="abtfr[gwfo_googlefonts_remove]"
                                 link={linkOptionState('gwfoGooglefontsRemove')}
                                 description={
                                   <span>

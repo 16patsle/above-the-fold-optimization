@@ -7,10 +7,10 @@ import {
   homeUrl,
   adminUrl,
   siteTitle,
-  abtfAdminNonce,
+  abtfrAdminNonce,
   lgCode,
   utmString,
-  wpAbtfUri
+  wpAbtfrUri
 } from '../utils/globalVars';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
@@ -43,10 +43,10 @@ const MonitorView = () => {
   return (
     <form
       method="post"
-      action={adminUrl + 'admin-post.php?action=abtf_monitor_update'}
+      action={adminUrl + 'admin-post.php?action=abtfr_monitor_update'}
       className="clearfix"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Website Monitor')}>
         <Helmet>
           <title>Website Monitor {siteTitle}</title>
@@ -58,7 +58,7 @@ const MonitorView = () => {
             rel="noopener noreferrer"
           >
             <img
-              src={wpAbtfUri + 'admin/images/googlebot.png'}
+              src={wpAbtfrUri + 'admin/images/googlebot.png'}
               alt="Google Bot"
               title="Google Webmasters Monitor"
             />
@@ -133,7 +133,7 @@ const MonitorView = () => {
             rel="noopener noreferrer"
           >
             <img
-              src={wpAbtfUri + 'admin/images/uptimerobot.png'}
+              src={wpAbtfrUri + 'admin/images/uptimerobot.png'}
               alt="UptimeRobot.com"
               title="UptimeRobot.com - Free website monitor"
             />
@@ -175,7 +175,7 @@ const MonitorView = () => {
             rel="noopener noreferrer"
           >
             <img
-              src={wpAbtfUri + 'admin/images/google-security.png'}
+              src={wpAbtfrUri + 'admin/images/google-security.png'}
               alt="Google Security Blog"
               title="Google Security Blog"
             />

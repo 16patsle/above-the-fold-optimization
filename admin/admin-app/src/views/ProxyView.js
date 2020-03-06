@@ -6,10 +6,10 @@ import useLinkState from '../utils/useLinkState';
 import {
   adminUrl,
   siteTitle,
-  abtfAdminNonce,
+  abtfrAdminNonce,
   ajaxUrl,
   lgCode,
-  wpAbtfUri
+  wpAbtfrUri
 } from '../utils/globalVars';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
@@ -34,7 +34,7 @@ const ProxyView = () => {
     error: cacheStatsError,
     revalidate: updateCacheStats
   } = useSWR(
-    ajaxUrl + '?action=abtf_cache_stats',
+    ajaxUrl + '?action=abtfr_cache_stats',
     async url => await (await fetch(url)).json()
   );
 
@@ -56,17 +56,17 @@ const ProxyView = () => {
   return (
     <form
       method="post"
-      action={adminUrl + 'admin-post.php?action=abtf_proxy_update'}
+      action={adminUrl + 'admin-post.php?action=abtfr_proxy_update'}
       className="clearfix"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('External Resource Proxy')}>
         <Helmet>
           <title>External Resource Proxy {siteTitle}</title>
         </Helmet>
         <div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
           <img
-            src={wpAbtfUri + 'admin/images/browsercache-error.png'}
+            src={wpAbtfrUri + 'admin/images/browsercache-error.png'}
             alt="Google Bot"
             width={225}
             title="Leverage browser caching"
@@ -91,7 +91,7 @@ const ProxyView = () => {
           <tbody>
             <SettingCheckbox
               header="Proxy Scripts"
-              name="abovethefold[js_proxy]"
+              name="abtfr[js_proxy]"
               link={linkOptionState('jsProxy')}
               label="Enabled"
               description="Capture external scripts and load the scripts through a caching proxy."
@@ -99,7 +99,7 @@ const ProxyView = () => {
             {getOption('jsProxy') ? (
               <tr valign="top" className="proxyjsoptions">
                 <td colSpan="2" style={{ paddingTop: '0px' }}>
-                  <div className="abtf-inner-table">
+                  <div className="abtfr-inner-table">
                     <h3 className="h">
                       <span>Script Proxy Settings</span>
                     </h3>
@@ -113,7 +113,7 @@ const ProxyView = () => {
                               height: 50,
                               fontSize: 11
                             }}
-                            name="abovethefold[js_proxy_include]"
+                            name="abtfr[js_proxy_include]"
                             link={linkOptionState('jsProxyInclude')}
                             placeholder="Leave blank to proxy all external scripts..."
                             description={
@@ -133,7 +133,7 @@ const ProxyView = () => {
                               height: 50,
                               fontSize: 11
                             }}
-                            name="abovethefold[js_proxy_exclude]"
+                            name="abtfr[js_proxy_exclude]"
                             link={linkOptionState('jsProxyExclude')}
                             description={
                               <span>
@@ -149,7 +149,7 @@ const ProxyView = () => {
                               height: 50,
                               fontSize: 11
                             }}
-                            name="abovethefold[js_proxy_preload]"
+                            name="abtfr[js_proxy_preload]"
                             link={linkOptionState('jsProxyPreload')}
                             description={
                               <span>
@@ -186,7 +186,7 @@ const ProxyView = () => {
             ) : null}
             <SettingCheckbox
               header="Proxy Stylesheets"
-              name="abovethefold[css_proxy]"
+              name="abtfr[css_proxy]"
               link={linkOptionState('cssProxy')}
               label="Enabled"
               description="Capture external stylesheets and load the files through a caching proxy."
@@ -194,7 +194,7 @@ const ProxyView = () => {
             {getOption('cssProxy') ? (
               <tr valign="top" className="proxycssoptions">
                 <td colSpan="2" style={{ paddingTop: '0px' }}>
-                  <div className="abtf-inner-table">
+                  <div className="abtfr-inner-table">
                     <h3 className="h">
                       <span>Stylesheet Proxy Settings</span>
                     </h3>
@@ -208,7 +208,7 @@ const ProxyView = () => {
                               height: 50,
                               fontSize: 11
                             }}
-                            name="abovethefold[css_proxy_include]"
+                            name="abtfr[css_proxy_include]"
                             link={linkOptionState('cssProxyInclude')}
                             placeholder="Leave blank to proxy all external stylesheets..."
                             description={
@@ -226,7 +226,7 @@ const ProxyView = () => {
                               height: 50,
                               fontSize: 11
                             }}
-                            name="abovethefold[css_proxy_exclude]"
+                            name="abtfr[css_proxy_exclude]"
                             link={linkOptionState('cssProxyExclude')}
                             description={
                               <span>
@@ -242,7 +242,7 @@ const ProxyView = () => {
                               height: 50,
                               fontSize: 11
                             }}
-                            name="abovethefold[css_proxy_preload]"
+                            name="abtfr[css_proxy_preload]"
                             link={linkOptionState('cssProxyPreload')}
                             description={
                               <span>
@@ -316,7 +316,7 @@ const ProxyView = () => {
               header="Proxy CDN"
               type="url"
               style={{ width: '100%' }}
-              name="abovethefold[proxy_cdn]"
+              name="abtfr[proxy_cdn]"
               link={linkOptionState('proxyCdn')}
               placeholder="Leave blank for the default WordPress (plugin modified) upload directory url..."
               description={
@@ -324,7 +324,7 @@ const ProxyView = () => {
                   Enter the default CDN url for cached resources, e.g.{' '}
                   <code>
                     <strong>https://cdn.domain.com</strong>
-                    /wp-content/uploads/abovethefold/proxy/.../resource.js
+                    /wp-content/uploads/abtfr/proxy/.../resource.js
                   </code>
                   . You can set a custom CDN per individual resource using a
                   JSON config object.
@@ -335,7 +335,7 @@ const ProxyView = () => {
               header="Proxy URL"
               type="url"
               style={{ width: '100%' }}
-              name="abovethefold[proxy_url]"
+              name="abtfr[proxy_url]"
               link={linkOptionState('proxyUrl')}
               placeholder="Leave blank for the default WordPress PHP based proxy url..."
               description={

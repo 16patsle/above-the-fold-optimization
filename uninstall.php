@@ -6,7 +6,7 @@
  * @link       https://github.com/16patsle/
  * @since      2.5.0
  *
- * @package    abovethefold
+ * @package    abtfr
  */
 
 if (! defined('WP_UNINSTALL_PLUGIN')) {
@@ -15,47 +15,47 @@ if (! defined('WP_UNINSTALL_PLUGIN')) {
 
 // remove settings
 $options_to_remove = array(
-    'abovethefold',
-    'abovethefold-proxy-stats',
-    'abovethefold-criticalcss',
-    'abtf-build-tool-default',
-    'abovethefold_notices',
-    'wpabtf_version',
-    'abtf_lazyxt_version',
-    'abtf_webfontjs_version'
+    'abtfr',
+    'abtfr-proxy-stats',
+    'abtfr-criticalcss',
+    'abtfr-build-tool-default',
+    'abtfr_notices',
+    'abtfr_version',
+    'abtfr_lazyxt_version',
+    'abtfr_webfontjs_version'
 );
 foreach ($options_to_remove as $option) {
     delete_option($option);
 }
 
 // remove cron
-wp_clear_scheduled_hook('abtf_cron');
+wp_clear_scheduled_hook('abtfr_cron');
 
 // remove above the fold cache directory
-if (defined('ABTF_CACHE_DIR') && strpos(ABTF_CACHE_DIR, '/abtf/') !== false) {
-    $path = trailingslashit(ABTF_CACHE_DIR);
+if (defined('ABTFR_CACHE_DIR') && strpos(ABTFR_CACHE_DIR, '/abtfr/') !== false) {
+    $path = trailingslashit(ABTFR_CACHE_DIR);
     if (is_dir($path)) {
 
     // Recursive delete
-        function abtf_rmdir_recursive($dir)
+        function abtfr_rmdir_recursive($dir)
         {
             $files = array_diff(scandir($dir), array('.','..'));
             foreach ($files as $file) {
-                (is_dir("$dir/$file")) ? abtf_rmdir_recursive("$dir/$file") : @unlink("$dir/$file");
+                (is_dir("$dir/$file")) ? abtfr_rmdir_recursive("$dir/$file") : @unlink("$dir/$file");
             }
 
             return @rmdir($dir);
         }
-        abtf_rmdir_recursive($path);
+        abtfr_rmdir_recursive($path);
     }
 }
 
 // remove service worker
 $path = trailingslashit(ABSPATH);
 $sw_files = array(
-    'abtf-pwa.js',
-    'abtf-pwa.debug.js',
-    'abtf-pwa-config.json'
+    'abtfr-pwa.js',
+    'abtfr-pwa.debug.js',
+    'abtfr-pwa-config.json'
 );
 foreach ($sw_files as $file) {
     if (file_exists($path . $file)) {

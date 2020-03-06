@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../utils/useLinkState';
-import { adminUrl, siteTitle, abtfAdminNonce } from '../utils/globalVars';
+import { adminUrl, siteTitle, abtfrAdminNonce } from '../utils/globalVars';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
@@ -34,10 +34,10 @@ const SettingsView = () => {
   return (
     <form
       method="post"
-      action={adminUrl + 'admin-post.php?action=abtf_settings_update'}
+      action={adminUrl + 'admin-post.php?action=abtfr_settings_update'}
       className="clearfix"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Settings')}>
         <Helmet>
           <title>Above the Fold Optimization Settings {siteTitle}</title>
@@ -46,7 +46,7 @@ const SettingsView = () => {
           <tbody>
             <SettingCheckbox
               header="Admin Bar"
-              name="abovethefold[adminbar]"
+              name="abtfr[adminbar]"
               label="Enabled"
               link={linkOptionState('adminbar')}
               description={
@@ -59,7 +59,7 @@ const SettingsView = () => {
             ></SettingCheckbox>
             <SettingCheckbox
               header="Clear Page Caches"
-              name="abovethefold[clear_pagecache]"
+              name="abtfr[clear_pagecache]"
               label="Enabled"
               link={linkOptionState('clearPagecache')}
               description={
@@ -78,7 +78,7 @@ const SettingsView = () => {
             ></SettingCheckbox>
             <SettingCheckbox
               header="Debug Mode"
-              name="abovethefold[debug]"
+              name="abtfr[debug]"
               label="Enabled"
               link={linkOptionState('debug')}
               description={

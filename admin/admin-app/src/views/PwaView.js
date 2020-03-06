@@ -7,8 +7,8 @@ import {
   adminUrl,
   homeUrl,
   siteTitle,
-  abtfAdminNonce,
-  wpAbtfUri
+  abtfrAdminNonce,
+  wpAbtfrUri
 } from '../utils/globalVars';
 import JsonEditor from '../components/JsonEditor';
 import {
@@ -53,10 +53,10 @@ const PwaView = () => {
   return (
     <form
       method="post"
-      action={adminUrl + 'admin-post.php?action=abtf_pwa_update'}
+      action={adminUrl + 'admin-post.php?action=abtfr_pwa_update'}
       className="clearfix"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Progressive Web App Optimization')}>
         <Helmet>
           <title>Progressive Web App Optimization {siteTitle}</title>
@@ -69,7 +69,7 @@ const PwaView = () => {
               rel="noopener noreferrer"
             >
               <img
-                src={`${wpAbtfUri}admin/images/google-lighthouse-pwa-validation.jpg`}
+                src={`${wpAbtfrUri}admin/images/google-lighthouse-pwa-validation.jpg`}
                 alt="Google Bot"
                 width="100%"
                 style={{ maxWidth: 1141, maxHeight: 359 }}
@@ -134,7 +134,7 @@ const PwaView = () => {
             <tbody>
               <SettingCheckbox
                 header="Enable PWA"
-                name="abovethefold[pwa]"
+                name="abtfr[pwa]"
                 link={linkOptionState('pwa')}
                 label="Enabled"
                 description={
@@ -157,7 +157,7 @@ const PwaView = () => {
               >
                 {!getOption('pwa') && (
                   <SettingCheckbox
-                    name="abovethefold[pwa_unregister]"
+                    name="abtfr[pwa_unregister]"
                     header="Unregister Service Worker"
                     link={linkOptionState('pwaUnregister')}
                     label="Enabled"
@@ -167,7 +167,7 @@ const PwaView = () => {
                 {getOption('pwa') && (
                   <>
                     <SettingCheckbox
-                      name="abovethefold[pwa_register]"
+                      name="abtfr[pwa_register]"
                       header="Register Service Worker"
                       link={linkOptionState('pwaRegister')}
                       label="Enabled"
@@ -195,7 +195,7 @@ const PwaView = () => {
                     />
 
                     <SettingTextInput
-                      name="abovethefold[pwa_scope]"
+                      name="abtfr[pwa_scope]"
                       header="Service Worker Scope"
                       link={linkOptionState('pwaScope')}
                       placeholder="Leave blank for global scope"
@@ -233,7 +233,7 @@ const PwaView = () => {
                         <ApiExample
                           description={
                             <>
-                              The API is <code>Abtf.push(title,options)</code>
+                              The API is <code>Abtfr.push(title,options)</code>
                             </>
                           }
                         >
@@ -244,7 +244,7 @@ const PwaView = () => {
 */
 Notification.requestPermission(function(result){
   if (result === 'granted') {
-    Abtf.push('Welcome back!',{
+    Abtfr.push('Welcome back!',{
       body: 'Buzz! Buzz!',
       icon: '../images/touch/chrome-touch-icon-192x192.png',
       vibrate: [200, 100, 200, 100, 200, 100, 200],
@@ -275,7 +275,7 @@ Notification.requestPermission(function(result){
                 </td>
               </tr>
               <SettingCheckbox
-                name="abovethefold[pwa_cache_pages]"
+                name="abtfr[pwa_cache_pages]"
                 header="Offline Cache"
                 link={linkOptionState('pwaCachePages')}
                 label="Enabled"
@@ -287,7 +287,7 @@ Notification.requestPermission(function(result){
               >
                 <SettingSelect
                   header="HTML Cache Strategy"
-                  name="abovethefold[pwa_cache_pages_strategy]"
+                  name="abtfr[pwa_cache_pages_strategy]"
                   link={linkOptionState('pwaCachePagesStrategy')}
                   options={[
                     {
@@ -317,13 +317,13 @@ Notification.requestPermission(function(result){
                   <ApiExample
                     description={
                       <>
-                        The API is <code>Abtf.offline(url);</code> which can
+                        The API is <code>Abtfr.offline(url);</code> which can
                         also be used for precaching.
                       </>
                     }
                   >
                     {`
-Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-image.jpg'])
+Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-image.jpg'])
   .then(function(status) {
     console.log('Resources available offline', status);
   });
@@ -333,7 +333,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                 <SettingTextarea
                   header="HTML Cache Include List"
                   textareaClass="json-array-lines"
-                  name="abovethefold[pwa_cache_pages_include]"
+                  name="abtfr[pwa_cache_pages_include]"
                   link={linkOptionState('pwaCacheInclude')}
                   placeholder="Leave blank to cache all pages"
                   description={
@@ -344,7 +344,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                   }
                 />
                 <SettingCheckbox
-                  name="abovethefold[pwa_cache_assets]"
+                  name="abtfr[pwa_cache_assets]"
                   header="Cache Assets"
                   link={linkOptionState('pwaCacheAssets')}
                   label="Enabled"
@@ -363,7 +363,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                       ></JsonEditor>
                       <input
                         type="hidden"
-                        name="abovethefold[pwa_cache_assets_policy]"
+                        name="abtfr[pwa_cache_assets_policy]"
                         id="cache_assets_src"
                         value={JSON.stringify(
                           getOption('pwaCacheAssetsPolicy')
@@ -374,7 +374,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                 )}
                 <OfflinePageSelect
                   header="Offline Page"
-                  name="abovethefold[pwa_cache_pages_offline]"
+                  name="abtfr[pwa_cache_pages_offline]"
                   link={linkOptionState('pwaCachePagesOffline')}
                   size={80}
                   placeholder="/path/to/offline.html"
@@ -387,7 +387,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                   }
                 />
                 <SettingCheckbox
-                  name="abovethefold[pwa_offline_class]"
+                  name="abtfr[pwa_offline_class]"
                   header="CSS online/offline class"
                   link={linkOptionState('pwaOfflineClass')}
                   label="Enabled"
@@ -410,7 +410,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                 {getOption('pwaCachePagesStrategy') === 'cache' && (
                   <>
                     <SettingNumberInput
-                      name="abovethefold[pwa_cache_pages_update_interval]"
+                      name="abtfr[pwa_cache_pages_update_interval]"
                       header="Cache Update Interval"
                       link={linkOptionState('pwaCachePagesUpdateInterval')}
                       style={{ width: 120 }}
@@ -418,14 +418,14 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                       description="Enter a time in seconds to update cached pages using the network. Leave blank to update the cache on each request."
                     />
                     <SettingNumberInput
-                      name="abovethefold[pwa_cache_pages_max_age]"
+                      name="abtfr[pwa_cache_pages_max_age]"
                       header="Cache Max Age"
                       link={linkOptionState('pwaCachePagesMaxAge')}
                       style={{ width: 120 }}
                       description="Enter a expire time in seconds. The maximum age does not override HTTP expire headers."
                     />
                     <SettingCheckbox
-                      name="abovethefold[pwa_cache_pages_head_update]"
+                      name="abtfr[pwa_cache_pages_head_update]"
                       header="HEAD based network update"
                       link={linkOptionState('pwaCachePagesHeadUpdate')}
                       label="Enabled"
@@ -440,7 +440,7 @@ Abtf.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-im
                       }
                     />
                     <SettingCheckbox
-                      name="abovethefold[pwa_cache_pages_update_notify]"
+                      name="abtfr[pwa_cache_pages_update_notify]"
                       header="Client event on update"
                       link={linkOptionState('pwaCachePagesUpdateNotify')}
                       label="Enabled"
@@ -467,7 +467,7 @@ jQuery(window).on('sw-update',function(e){
                   </>
                 )}
                 <SettingNumberInput
-                  name="abovethefold[pwa_cache_max_size]"
+                  name="abtfr[pwa_cache_max_size]"
                   header="Cache Max Size"
                   link={linkOptionState('pwaCacheMaxSize')}
                   style={{ width: 80 }}
@@ -475,7 +475,7 @@ jQuery(window).on('sw-update',function(e){
                   description="Maximum cache entries to maintain. The default is 1000."
                 />
                 <SettingTextInput
-                  name="abovethefold[pwa_cache_version]"
+                  name="abtfr[pwa_cache_version]"
                   header="Cache Version"
                   link={linkOptionState('pwaCacheVersion')}
                   size={20}
@@ -484,7 +484,7 @@ jQuery(window).on('sw-update',function(e){
                 <SettingTextarea
                   header="Cache Preload"
                   textareaClass="json-array-lines"
-                  name="abovethefold[pwa_cache_preload]"
+                  name="abtfr[pwa_cache_preload]"
                   link={linkOptionState('pwaCachePreload')}
                   description={
                     <>
@@ -495,7 +495,7 @@ jQuery(window).on('sw-update',function(e){
                   }
                 />
                 <SettingCheckbox
-                  name="abovethefold[pwa_cache_preload_require]"
+                  name="abtfr[pwa_cache_preload_require]"
                   header="Require preloading"
                   link={linkOptionState('pwaCachePreloadRequired')}
                   label="Enabled"
@@ -509,7 +509,7 @@ jQuery(window).on('sw-update',function(e){
                 />
               </SettingInnerTable>
               <SettingCheckbox
-                name="abovethefold[pwa_preload_mousedown]"
+                name="abtfr[pwa_preload_mousedown]"
                 header="Preload on Mouse Down"
                 link={linkOptionState('pwaPreloadMousedown')}
                 label="Enabled"
@@ -606,7 +606,7 @@ jQuery(window).on('sw-update',function(e){
                         ></JsonEditor>
                         <input
                           type="hidden"
-                          name="abovethefold[manifest_json]"
+                          name="abtfr[manifest_json]"
                           id="webapp_manifest_src"
                           value={JSON.stringify(getOption('manifestJson'))}
                         />
@@ -639,14 +639,14 @@ jQuery(window).on('sw-update',function(e){
               </tr>
               <SettingInnerTable header="Web App Manifest Settings">
                 <SettingCheckbox
-                  name="abovethefold[manifest_json_update]"
+                  name="abtfr[manifest_json_update]"
                   header="Update manifest.json"
                   link={linkOptionState('manifestJsonUpdate')}
                   label="Enabled"
                   description="Update manifest.json when saving settings."
                 />
                 <SettingCheckbox
-                  name="abovethefold[pwa_manifest_meta]"
+                  name="abtfr[pwa_manifest_meta]"
                   header="Link manifest.json in head"
                   link={linkOptionState('pwaManifestMeta')}
                   label="Enabled"
@@ -663,7 +663,7 @@ jQuery(window).on('sw-update',function(e){
                   style={{
                     height: 200
                   }}
-                  name="abovethefold[pwa_meta]"
+                  name="abtfr[pwa_meta]"
                   link={linkOptionState('pwaMeta')}
                   description={
                     <>

@@ -3,7 +3,7 @@ import AsyncSelect from 'react-select/async';
 
 const promiseOptions = async query => {
   const formData = new FormData();
-  formData.append('action', 'abtf_page_search');
+  formData.append('action', 'abtfr_page_search');
   formData.append('query', query);
   formData.append('maxresults', 10);
 

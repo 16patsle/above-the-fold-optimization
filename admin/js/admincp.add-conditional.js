@@ -50,7 +50,7 @@ jQuery(function() {
             // create add form
             var form = jQuery('<form />');
             form.attr('method','post');
-            form.attr('action',jQuery('#abtf_settings_form').data('addccss'));
+            form.attr('action',jQuery('#abtfr_settings_form').data('addccss'));
 
             var input = jQuery('<input type="hidden" name="name" />');
             input.val(name);

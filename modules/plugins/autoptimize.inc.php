@@ -8,12 +8,12 @@
  * Tested with @version 2.1.0
  *
  * @since      2.5.0
- * @package    abovethefold
- * @subpackage abovethefold/modules/plugins
+ * @package    abtfr
+ * @subpackage abtfr/modules/plugins
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
+class ABTFR_OPP_Autoptimize extends ABTFR_OPP
 {
 
     /**
@@ -91,7 +91,7 @@ class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
      */
     public function skip_css($excludeCSS)
     {
-        $excludeCSS .= ',data-abtf';
+        $excludeCSS .= ',data-abtfr';
 
         return $excludeCSS;
     }
@@ -101,7 +101,7 @@ class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
      */
     public function skip_js($excludeJS)
     {
-        $excludeJS .= ',data-abtf,' . $this->CTRL->optimization->criticalcss_replacement_string;
+        $excludeJS .= ',data-abtfr,' . $this->CTRL->optimization->criticalcss_replacement_string;
 
         return $excludeJS;
     }
@@ -111,7 +111,7 @@ class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
      */
     public function process_minified_css($css)
     {
-        return apply_filters('abtf_css', $css);
+        return apply_filters('abtfr_css', $css);
     }
 
     /**
@@ -119,7 +119,7 @@ class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
      */
     public function process_minified_js($js)
     {
-        return apply_filters('abtf_js', $js);
+        return apply_filters('abtfr_js', $js);
     }
 
     /**
@@ -127,7 +127,7 @@ class Abovethefold_OPP_Autoptimize extends Abovethefold_OPP
      */
     public function process_minified_html($html)
     {
-        return apply_filters('abtf_html', $html);
+        return apply_filters('abtfr_html', $html);
     }
 
     /**

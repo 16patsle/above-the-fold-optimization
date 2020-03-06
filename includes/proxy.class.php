@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Abovethefold caching external resource proxy.
+ * ABTFR caching external resource proxy.
  *
  * This class provides the functionality for caching external resource proxy functions and hooks.
  *
  * @since      2.5.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
 
-class Abovethefold_Proxy
+class ABTFR_Proxy
 {
 
     /**
@@ -160,7 +160,7 @@ class Abovethefold_Proxy
         if ($this->CTRL->options['css_proxy']) {
         
             // add filter for CSS file processing
-            $this->CTRL->loader->add_filter('abtf_cssfile_pre', $this, 'process_cssfile');
+            $this->CTRL->loader->add_filter('abtfr_cssfile_pre', $this, 'process_cssfile');
 
             /**
              * Preload urls
@@ -177,7 +177,7 @@ class Abovethefold_Proxy
         if ($this->CTRL->options['js_proxy']) {
         
             // add filter for javascript file processing
-            $this->CTRL->loader->add_filter('abtf_jsfile_pre', $this, 'process_jsfile');
+            $this->CTRL->loader->add_filter('abtfr_jsfile_pre', $this, 'process_jsfile');
 
             /**
              * Preload urls
@@ -330,7 +330,7 @@ class Abovethefold_Proxy
 
             // default WordPress PHP proxy url
             $site_url = site_url();
-            $proxy_url = $site_url . ((strpos($site_url, '?') !== false) ? $amp : '?') . 'url=' . $url . $amp . 'type=' . $type . $amp . 'abtf-proxy=' . md5(SECURE_AUTH_KEY . AUTH_KEY);
+            $proxy_url = $site_url . ((strpos($site_url, '?') !== false) ? $amp : '?') . 'url=' . $url . $amp . 'type=' . $type . $amp . 'abtfr-proxy=' . md5(SECURE_AUTH_KEY . AUTH_KEY);
         }
 
         return $proxy_url;
@@ -842,13 +842,13 @@ class Abovethefold_Proxy
                 $expire_time = $this->default_cache_expire;
             }
 
-            $file_data = "/** " . (($type === 'js') ? 'Javascript' : 'CSS') . " Proxy / Above The Fold Optimization v".WPABTF_VERSION."\n * @url ".$url."\n * @expire ".date("Y/m/d H:i:s", (time() + $expire_time))." */\n" . $file_data;
+            $file_data = "/** " . (($type === 'js') ? 'Javascript' : 'CSS') . " Proxy / Above The Fold Optimization v".WPABTFR_VERSION."\n * @url ".$url."\n * @expire ".date("Y/m/d H:i:s", (time() + $expire_time))." */\n" . $file_data;
         }
 
         /**
          * Apply optimization filters to resource content
          */
-        $file_data = apply_filters('abtf_css', $file_data);
+        $file_data = apply_filters('abtfr_css', $file_data);
 
         if ($file_data) {
             $this->CTRL->file_put_contents($cache_file, $file_data);
@@ -1135,7 +1135,7 @@ class Abovethefold_Proxy
             ksort($jssettings[$proxyindex]);
         }
 
-        $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-proxy'.$jsdebug.'.min.js';
+        $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-proxy'.$jsdebug.'.min.js';
     }
 
     /**
@@ -1212,7 +1212,7 @@ class Abovethefold_Proxy
         }
 
         // update proxy stats
-        $stats = get_option('abovethefold-proxy-stats');
+        $stats = get_option('abtfr-proxy-stats');
         if (!is_array($stats)) {
             $stats = array();
         }
@@ -1222,7 +1222,7 @@ class Abovethefold_Proxy
 
         $stats['date'] = time();
 
-        update_option('abovethefold-proxy-stats', $stats, false);
+        update_option('abtfr-proxy-stats', $stats, false);
 
         return $stats;
     }
@@ -1246,7 +1246,7 @@ class Abovethefold_Proxy
      */
     public function cache_stats()
     {
-        $stats = get_option('abovethefold-proxy-stats');
+        $stats = get_option('abtfr-proxy-stats');
         if (is_array($stats) && isset($stats['date']) && intval($stats['date']) > (time() - (60 * 60))) {
             return $stats;
         }

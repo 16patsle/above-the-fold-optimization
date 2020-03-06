@@ -8,12 +8,12 @@
  * Tested with @version 1.3.3
  *
  * @since      2.5.0
- * @package    abovethefold
- * @subpackage abovethefold/modules/plugins
+ * @package    abtfr
+ * @subpackage abtfr/modules/plugins
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_OPP_BwpMinify extends Abovethefold_OPP
+class ABTFR_OPP_BwpMinify extends ABTFR_OPP
 {
 
     /**

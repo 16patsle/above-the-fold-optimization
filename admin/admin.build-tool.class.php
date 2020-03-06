@@ -4,13 +4,13 @@
  * Build Tool admin controller
  *
  * @since      2.6.0
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  * @author     Patrick Sletvold
  */
 
-class Abovethefold_Admin_BuildTool
+class ABTFR_Admin_BuildTool
 {
 
     /**
@@ -39,7 +39,7 @@ class Abovethefold_Admin_BuildTool
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtf_create_critical_package', $this, 'create_critical_package');
+            $this->CTRL->loader->add_action('admin_post_abtfr_create_critical_package', $this, 'create_critical_package');
         }
     }
 
@@ -48,12 +48,12 @@ class Abovethefold_Admin_BuildTool
      */
     public function create_critical_package()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }
@@ -126,7 +126,7 @@ class Abovethefold_Admin_BuildTool
         // Update default build tool settings
         
 
-        $default = get_option('abtf-build-tool-default');
+        $default = get_option('abtfr-build-tool-default');
         if (!is_array($default)) {
             $default = array();
         }
@@ -138,7 +138,7 @@ class Abovethefold_Admin_BuildTool
         $default['update'] = $update;
 
         // update settings
-        update_option('abtf-build-tool-default', $default, false);
+        update_option('abtfr-build-tool-default', $default, false);
 
         // download
         if (isset($_POST['download'])) {
@@ -149,7 +149,7 @@ class Abovethefold_Admin_BuildTool
         /**
          * Initialize
          */
-        $gulpdir = get_stylesheet_directory() . '/abovethefold/';
+        $gulpdir = get_stylesheet_directory() . '/abtfr/';
         if (!is_dir($gulpdir)) {
             if (!@$this->CTRL->mkdir($gulpdir)) {
                 wp_die('Failed to create ' . $gulpdir);
@@ -161,16 +161,16 @@ class Abovethefold_Admin_BuildTool
         if (is_dir($gulptaskdir)) {
 
             // remove existing
-            function abtf_rmdir_recursive($dir, $delete = true)
+            function abtfr_rmdir_recursive($dir, $delete = true)
             {
                 $files = array_diff(scandir($dir), array('.','..'));
                 foreach ($files as $file) {
-                    (is_dir("$dir/$file")) ? abtf_rmdir_recursive("$dir/$file") : @unlink("$dir/$file");
+                    (is_dir("$dir/$file")) ? abtfr_rmdir_recursive("$dir/$file") : @unlink("$dir/$file");
                 }
 
                 return ($delete) ? @rmdir($dir) : false;
             }
-            abtf_rmdir_recursive($gulptaskdir, false);
+            abtfr_rmdir_recursive($gulptaskdir, false);
         }
 
         if (!is_dir($gulptaskdir)) {
@@ -205,12 +205,12 @@ class Abovethefold_Admin_BuildTool
 
         // copy package.json if it does not exist
         if (!file_exists($gulpdir . 'package.json')) {
-            copy(WPABTF_PATH . 'modules/critical-css-build-tool/package.json', $gulpdir . 'package.json');
+            copy(WPABTFR_PATH . 'modules/critical-css-build-tool/package.json', $gulpdir . 'package.json');
             chmod($gulpdir . 'package.json', 0666);
         }
         // copy gulpfile.js if it does not exist
         if (!file_exists($gulpdir . 'gulpfile.js')) {
-            copy(WPABTF_PATH . 'modules/critical-css-build-tool/gulpfile.js', $gulpdir . 'gulpfile.js');
+            copy(WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js', $gulpdir . 'gulpfile.js');
             chmod($gulpdir . 'gulpfile.js', 0666);
         }
 
@@ -246,7 +246,7 @@ class Abovethefold_Admin_BuildTool
          * Create gulp-critical-task.js
          */
         $taskjs = false;
-        include(WPABTF_PATH . 'modules/critical-css-build-tool/gulp-critical-task.php');
+        include(WPABTFR_PATH . 'modules/critical-css-build-tool/gulp-critical-task.php');
         if (empty($taskjs)) {
             wp_die('Failed to load gulp-critical.task.js');
         }
@@ -257,11 +257,11 @@ class Abovethefold_Admin_BuildTool
         
 
         // add notice
-        $this->CTRL->admin->set_notice('<div style="font-size:18px;line-height:20px;margin:0px;">The package has been installed in <strong>'.trailingslashit(str_replace(home_url(), '', get_stylesheet_directory_uri())).'abovethefold/</strong>
+        $this->CTRL->admin->set_notice('<div style="font-size:18px;line-height:20px;margin:0px;">The package has been installed in <strong>'.trailingslashit(str_replace(home_url(), '', get_stylesheet_directory_uri())).'abtfr/</strong>
 		<br /><br />
 		Run <code>gulp '.$taskname.'</code> to generate critical CSS.
 		<br /><br />
-		<textarea class="abtfcmd" onfocus="jQuery(this).select();">cd '.trailingslashit(get_stylesheet_directory()).'abovethefold/;' . "\n" . ((!$gulp_installed) ? 'npm install; ' : '') . 'gulp '.$taskname.'</textarea></div>', 'NOTICE');
+		<textarea class="abtfrcmd" onfocus="jQuery(this).select();">cd '.trailingslashit(get_stylesheet_directory()).'abtfr/;' . "\n" . ((!$gulp_installed) ? 'npm install; ' : '') . 'gulp '.$taskname.'</textarea></div>', 'NOTICE');
 
         wp_redirect(add_query_arg(array( 'page' => 'pagespeed-build-tool' ), admin_url('admin.php')));
         exit;
@@ -321,7 +321,7 @@ class Abovethefold_Admin_BuildTool
          * Create gulp-critical-task.js
          */
         $taskjs = false;
-        include(WPABTF_PATH . 'modules/critical-css-build-tool/gulp-critical-task.php');
+        include(WPABTFR_PATH . 'modules/critical-css-build-tool/gulp-critical-task.php');
         if (empty($taskjs)) {
             wp_die('Failed to load gulp-critical.task.js');
         }
@@ -330,13 +330,13 @@ class Abovethefold_Admin_BuildTool
         $zip->addFromString($taskname . '/gulp-critical-task.js', $taskjs);
 
         // add package.json
-        $data = file_get_contents(WPABTF_PATH . 'modules/critical-css-build-tool/package.json');
+        $data = file_get_contents(WPABTFR_PATH . 'modules/critical-css-build-tool/package.json');
 
         // add package.json
         $zip->addFromString('package.json', $data);
 
         // add package.json
-        $data = file_get_contents(WPABTF_PATH . 'modules/critical-css-build-tool/gulpfile.js');
+        $data = file_get_contents(WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js');
 
         // add package.json
         $zip->addFromString('gulpfile.js', $data);
@@ -380,13 +380,13 @@ class Abovethefold_Admin_BuildTool
         }
 
         // add package.json
-        $data = file_get_contents(WPABTF_PATH . 'modules/critical-css-build-tool/package.json');
+        $data = file_get_contents(WPABTFR_PATH . 'modules/critical-css-build-tool/package.json');
 
         // add package.json
         $zip->addFromString('package.json', $data);
 
         // add package.json
-        $data = file_get_contents(WPABTF_PATH . 'modules/critical-css-build-tool/gulpfile.js');
+        $data = file_get_contents(WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js');
 
         // add package.json
         $zip->addFromString('gulpfile.js', $data);
@@ -398,7 +398,7 @@ class Abovethefold_Admin_BuildTool
          * Download zipfile
          */
         header("Content-type: application/zip");
-        header("Content-Disposition: attachment; filename=wp-abtf-gulp-critical-css.zip");
+        header("Content-Disposition: attachment; filename=wp-abtfr-gulp-critical-css.zip");
         header("Content-length: " . filesize($tmp_file));
         header("Pragma: no-cache");
         header("Expires: 0");
@@ -412,7 +412,7 @@ class Abovethefold_Admin_BuildTool
      */
     public function install_package()
     {
-        $gulpdir = get_stylesheet_directory() . '/abovethefold/';
+        $gulpdir = get_stylesheet_directory() . '/abtfr/';
         if (!is_dir($gulpdir)) {
             if (!$this->CTRL->mkdir($gulpdir)) {
                 wp_die('Failed to create ' . $gulpdir);
@@ -421,19 +421,19 @@ class Abovethefold_Admin_BuildTool
 
         // copy package.json if it does not exist
         if (!file_exists($gulpdir . 'package.json')) {
-            copy(WPABTF_PATH . 'modules/critical-css-build-tool/package.json', $gulpdir . 'package.json');
+            copy(WPABTFR_PATH . 'modules/critical-css-build-tool/package.json', $gulpdir . 'package.json');
         }
         // copy gulpfile.js if it does not exist
         if (!file_exists($gulpdir . 'gulpfile.js')) {
-            copy(WPABTF_PATH . 'modules/critical-css-build-tool/gulpfile.js', $gulpdir . 'gulpfile.js');
+            copy(WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js', $gulpdir . 'gulpfile.js');
         }
 
         // add notice
-        $this->CTRL->admin->set_notice('<div style="font-size:18px;line-height:20px;margin:0px;">The Gulp.js Critical CSS Generator files have been installed in <strong>'.trailingslashit(str_replace(home_url(), '', get_stylesheet_directory_uri())).'abovethefold/</strong>
+        $this->CTRL->admin->set_notice('<div style="font-size:18px;line-height:20px;margin:0px;">The Gulp.js Critical CSS Generator files have been installed in <strong>'.trailingslashit(str_replace(home_url(), '', get_stylesheet_directory_uri())).'abtfr/</strong>
 		<br /><br />
 		Run <code><strong>npm install</strong></code> to install the dependencies.
 		<br /><br />
-		<textarea class="abtfcmd" onfocus="jQuery(this).select();">cd '.trailingslashit(get_stylesheet_directory()).'abovethefold/;' . "\n" . 'npm install</textarea></div>', 'NOTICE');
+		<textarea class="abtfrcmd" onfocus="jQuery(this).select();">cd '.trailingslashit(get_stylesheet_directory()).'abtfr/;' . "\n" . 'npm install</textarea></div>', 'NOTICE');
 
         wp_redirect(add_query_arg(array( 'page' => 'pagespeed-build-tool' ), admin_url('admin.php')));
         exit;
@@ -446,7 +446,7 @@ class Abovethefold_Admin_BuildTool
     {
 
         // get HTML without CSS
-        $html = trim($this->CTRL->remote_get($this->CTRL->view_url('abtf-buildtool-html', false, $url)));
+        $html = trim($this->CTRL->remote_get($this->CTRL->view_url('abtfr-buildtool-html', false, $url)));
         if ($html === '') {
 
             // no HTML
@@ -454,7 +454,7 @@ class Abovethefold_Admin_BuildTool
         }
 
         // extract full CSS
-        $cssdata = $this->CTRL->remote_get($this->CTRL->view_url('abtf-buildtool-css', false, $url));
+        $cssdata = $this->CTRL->remote_get($this->CTRL->view_url('abtfr-buildtool-css', false, $url));
         if ($cssdata === '') {
 
             // no CSS data
@@ -536,7 +536,7 @@ class Abovethefold_Admin_BuildTool
      */
     public function is_installed()
     {
-        $gulpdir = get_stylesheet_directory() . '/abovethefold/';
+        $gulpdir = get_stylesheet_directory() . '/abtfr/';
         if (!is_dir($gulpdir)) {
             return false;
         }

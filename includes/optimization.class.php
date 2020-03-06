@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Abovethefold optimization functions and hooks.
+ * ABTFR optimization functions and hooks.
  *
  * This class provides the functionality for optimization functions and hooks.
  *
  * @since      1.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
 
-class Abovethefold_Optimization
+class ABTFR_Optimization
 {
 
     /**
@@ -43,12 +43,12 @@ class Abovethefold_Optimization
     /**
      * Javascript replacement string
      */
-    public $js_replacement_string = 'ABTF_JS';
+    public $js_replacement_string = 'ABTFR_JS';
 
     /**
      * Critical CSS replacement string
      */
-    public $criticalcss_replacement_string = 'ABTF_CRITICALCSS';
+    public $criticalcss_replacement_string = 'ABTFR_CRITICALCSS';
 
     /**
      * HTTP/2 Server Push Critical CSS
@@ -76,7 +76,7 @@ class Abovethefold_Optimization
         }
         
         // load client config index
-        $config_index = WPABTF_PATH . 'public/js/src/config-index.json';
+        $config_index = WPABTFR_PATH . 'public/js/src/config-index.json';
         try {
             if (file_exists($config_index)) {
                 $this->client_config_index = json_decode(file_get_contents($config_index), true);
@@ -85,7 +85,7 @@ class Abovethefold_Optimization
             $this->client_config_index = false;
         }
         if (!$this->client_config_index) {
-            wp_die('Failed to read ' . str_replace(ABSPATH, '', WPABTF_PATH . 'public/js/src/config.index.json'));
+            wp_die('Failed to read ' . str_replace(ABSPATH, '', WPABTFR_PATH . 'public/js/src/config.index.json'));
         }
 
         // set key index references
@@ -134,7 +134,7 @@ class Abovethefold_Optimization
 
         // ignore critical css view controller in javascript optimization
         if ($this->CTRL->view === 'critical-css-view' && !defined('O10N_CSS_MODULE_LOADED')) {
-            add_filter('abtf_jsfile_pre', function ($file) {
+            add_filter('abtfr_jsfile_pre', function ($file) {
                 if (strpos($file, 'critical-css-view.min.js') !== false) {
                     return 'ignore';
                 }
@@ -146,16 +146,16 @@ class Abovethefold_Optimization
         /**
          * Extract Full CSS view
          */
-        if (in_array($this->CTRL->view, array('extract-css','abtf-buildtool-css')) && !defined('O10N_CSS_MODULE_LOADED')) {
+        if (in_array($this->CTRL->view, array('extract-css','abtfr-buildtool-css')) && !defined('O10N_CSS_MODULE_LOADED')) {
 
             // load optimization controller
-            $this->CTRL->extractcss = new Abovethefold_ExtractFullCss($this->CTRL);
+            $this->CTRL->extractcss = new ABTFR_ExtractFullCss($this->CTRL);
         } elseif ($this->CTRL->view === 'critical-css-editor' && !defined('O10N_CSS_MODULE_LOADED')) {
 
             /**
              * Compare Critical CSS view
              */
-            $this->CTRL->critical_css_test = new Abovethefold_CriticalCSSEditor($this->CTRL);
+            $this->CTRL->critical_css_test = new ABTFR_CriticalCSSEditor($this->CTRL);
         } else {
 
             /**
@@ -185,11 +185,11 @@ class Abovethefold_Optimization
     }
 
     /**
-     * Ignore ABTF client
+     * Ignore ABTFR client
      */
-    public function ignore_abtf($text, $tag)
+    public function ignore_abtfr($text, $tag)
     {
-        if (strpos($tag, 'data-abtf') !== false) {
+        if (strpos($tag, 'data-abtfr') !== false) {
             return 'ignore';
         }
     }
@@ -223,13 +223,13 @@ class Abovethefold_Optimization
         // try to move to front
         if (
             !empty($ob_callbacks)
-            && in_array('Abovethefold_Optimization::process_output_buffer', $ob_callbacks)
-            && $ob_callbacks[(count($ob_callbacks) - 1)] !== 'Abovethefold_Optimization::process_output_buffer'
+            && in_array('ABTFR_Optimization::process_output_buffer', $ob_callbacks)
+            && $ob_callbacks[(count($ob_callbacks) - 1)] !== 'ABTFR_Optimization::process_output_buffer'
          ) {
             $callbacks_to_move = array();
 
             $n = count($ob_callbacks) - 1;
-            while ($ob_callbacks[$n] && $ob_callbacks[$n] !== 'Abovethefold_Optimization::process_output_buffer') {
+            while ($ob_callbacks[$n] && $ob_callbacks[$n] !== 'ABTFR_Optimization::process_output_buffer') {
                 if ($ob_callbacks[$n] === 'default output handler') {
                     $callbacks_to_move[] = false;
                 } else {
@@ -305,7 +305,7 @@ class Abovethefold_Optimization
                     || strpos($stylesheet, 'stylesheet') === false
 
                     // ignore HTTP/2 server push stylesheet
-                    || (strpos($stylesheet, 'AbtfCSS') !== false)
+                    || (strpos($stylesheet, 'AbtfrCSS') !== false)
                     
                     || !preg_match('#href\s*=\s*["\']([^"\']+)["\']#i', $stylesheet, $hrefOut)) {
                     continue 1;
@@ -447,7 +447,7 @@ class Abovethefold_Optimization
             return $buffer;
         }
 
-        if ($this->CTRL->view === 'abtf-buildtool-html') {
+        if ($this->CTRL->view === 'abtfr-buildtool-html') {
             return $buffer;
         }
 
@@ -460,7 +460,7 @@ class Abovethefold_Optimization
         $replace_regex = array();
 
         // apply pre HTML filters
-        $buffer = apply_filters('abtf_html_pre', $buffer);
+        $buffer = apply_filters('abtfr_html_pre', $buffer);
 
         /**
          * CSS Delivery Optimization
@@ -505,7 +505,7 @@ class Abovethefold_Optimization
                     }
 
                     // apply css file filter pre processing
-                    $filterResult = apply_filters('abtf_cssfile_pre', $file);
+                    $filterResult = apply_filters('abtfr_cssfile_pre', $file);
 
                     if (is_array($filterResult)) {
                         if ($filterResult[1] === 'ignore') {
@@ -610,7 +610,7 @@ class Abovethefold_Optimization
                         }
 
                         // apply filter for css file pre processing
-                        $filterResult = apply_filters('abtf_cssfile_pre', $file);
+                        $filterResult = apply_filters('abtfr_cssfile_pre', $file);
 
                         // ignore file
                         if ($filterResult === 'ignore') {
@@ -722,7 +722,7 @@ class Abovethefold_Optimization
                     }
 
                     // apply css file filter pre processing
-                    $filterResult = apply_filters('abtf_jsfile_pre', $file);
+                    $filterResult = apply_filters('abtfr_jsfile_pre', $file);
 
                     // ignore file
                     if ($filterResult === 'ignore') {
@@ -846,7 +846,7 @@ class Abovethefold_Optimization
                         }
 
                         // apply filter for css file pre processing
-                        $filterResult = apply_filters('abtf_jsfile_pre', $file);
+                        $filterResult = apply_filters('abtfr_jsfile_pre', $file);
 
                         // ignore file
                         if ($filterResult === 'ignore') {
@@ -884,7 +884,7 @@ class Abovethefold_Optimization
             /**
              * Remove full CSS and show critical CSS only
              */
-            if ($this->CTRL->view === 'critical-css-view') { // , 'abtf-buildtool-html'
+            if ($this->CTRL->view === 'critical-css-view') { // , 'abtfr-buildtool-html'
 
                 // do not render the stylesheet files
                 $styles_json = 'false';
@@ -961,7 +961,7 @@ class Abovethefold_Optimization
         }
 
         // apply search replace filter
-        $searchreplace = apply_filters('abtf_html_replace', array($search,$replace,$search_regex,$replace_regex));
+        $searchreplace = apply_filters('abtfr_html_replace', array($search,$replace,$search_regex,$replace_regex));
         if (is_array($searchreplace) && count($searchreplace) === 4) {
             list($search, $replace, $search_regex, $replace_regex) = $searchreplace;
         }
@@ -1006,7 +1006,7 @@ class Abovethefold_Optimization
 
         // apply HTML filters
         try {
-            $replaced = apply_filters('abtf_html', $buffer);
+            $replaced = apply_filters('abtfr_html', $buffer);
         } catch (Exception $e) {
             $replaced = false;
         }
@@ -1065,7 +1065,7 @@ class Abovethefold_Optimization
         }
 
         if (in_array($this->CTRL->view, array('critical-css-view', 'full-css-view'))) {
-            require_once WPABTF_PATH . 'includes/critical-css-view-header.inc.php';
+            require_once WPABTFR_PATH . 'includes/critical-css-view-header.inc.php';
         }
 
         // debug enabled?
@@ -1102,11 +1102,11 @@ class Abovethefold_Optimization
         }
 
         // print javascript
-        print '<script '.((!defined('ABTF_NOREF') || !ABTF_NOREF) ? 'data-ref="https://goo.gl/C1gw96"' : '').' data-abtf=\''.str_replace('\'', '&#39;', json_encode($clientjs['config'])).'\'>'.$clientjs['client'].'</script>';
+        print '<script '.((!defined('ABTFR_NOREF') || !ABTFR_NOREF) ? 'data-ref="https://goo.gl/C1gw96"' : '').' data-abtfr=\''.str_replace('\'', '&#39;', json_encode($clientjs['config'])).'\'>'.$clientjs['client'].'</script>';
 
         // HTTP/2 Server Push Critical CSS
         if ($this->http2push_criticalcss && !defined('O10N_CSS_MODULE_LOADED')) {
-            print '<link href="'.$this->http2push_criticalcss.'" media="all" rel="stylesheet" id="AbtfCSS" data-abtf/>';
+            print '<link href="'.$this->http2push_criticalcss.'" media="all" rel="stylesheet" id="AbtfrCSS" data-abtfr/>';
         }
 
         // print meta
@@ -1116,7 +1116,7 @@ class Abovethefold_Optimization
 
         // inline Critical CSS
         if (!$this->http2push_criticalcss && !defined('O10N_CSS_MODULE_LOADED')) {
-            print '<style type="text/css" id="AbtfCSS" data-abtf>' . $inlineCSS . '</style>';
+            print '<style type="text/css" id="AbtfrCSS" data-abtfr>' . $inlineCSS . '</style>';
         }
     }
 
@@ -1154,7 +1154,7 @@ class Abovethefold_Optimization
         }
 
         /** main client controller */
-        $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold'.$jsdebug.'.min.js';
+        $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr'.$jsdebug.'.min.js';
 
         /**
          * Google PWA Optimization
@@ -1180,17 +1180,17 @@ class Abovethefold_Optimization
 
             // jQuery ready stub
             if (isset($this->CTRL->options['jsdelivery_jquery']) && $this->CTRL->options['jsdelivery_jquery']) {
-                $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-jquery-stub'.$jsdebug.'.min.js';
+                $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-jquery-stub'.$jsdebug.'.min.js';
             }
 
-            $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-js'.$jsdebug.'.min.js';
+            $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-js'.$jsdebug.'.min.js';
 
             // script loader
             if (isset($this->CTRL->options['jsdelivery_scriptloader']) && $this->CTRL->options['jsdelivery_scriptloader'] !== 'little-loader') {
 
                 // proxy is required for HTML5 script loader
                 if ($this->CTRL->options['jsdelivery_scriptloader'] === 'html5' && $this->CTRL->options['js_proxy']) {
-                    $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-js-localstorage'.$jsdebug.'.min.js';
+                    $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-js-localstorage'.$jsdebug.'.min.js';
                 }
             }
         }
@@ -1199,13 +1199,13 @@ class Abovethefold_Optimization
          * CSS delivery optimization
          */
         if ($this->optimize_css_delivery && !defined('O10N_CSS_MODULE_LOADED')) {
-            $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-css'.$jsdebug.'.min.js';
+            $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-css'.$jsdebug.'.min.js';
 
             /** Async CSS controller */
             if (intval($this->CTRL->options['loadcss_enhanced']) === 1) {
-                $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-loadcss-enhanced'.$jsdebug.'.min.js';
+                $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-loadcss-enhanced'.$jsdebug.'.min.js';
             } else {
-                $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-loadcss'.$jsdebug.'.min.js';
+                $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-loadcss'.$jsdebug.'.min.js';
             }
         }
 
@@ -1267,7 +1267,7 @@ class Abovethefold_Optimization
             'html_before' => $html_before,
             'html_after' => $html_after,
             'config' => $jssettings,
-            'client' => trim($script_code_before . 'window.Abtf={};' . $script_code . 'Abtf['.$this->client_config_ref['header_load'].']();')
+            'client' => trim($script_code_before . 'window.Abtfr={};' . $script_code . 'Abtfr['.$this->client_config_ref['header_load'].']();')
         );
     }
 
@@ -1288,8 +1288,8 @@ class Abovethefold_Optimization
     {
        
         // use PHP minifier
-        require_once WPABTF_PATH . 'includes/HTML.php';
-        $htmlmin = new ABTF_HTMLMinify();
+        require_once WPABTFR_PATH . 'includes/HTML.php';
+        $htmlmin = new ABTFR_HTMLMinify();
 
         // try minification
         try {

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Abovethefold optimization functions and hooks.
+ * ABTFR optimization functions and hooks.
  *
  * This class provides the functionality for optimization functions and hooks.
  *
  * @since      1.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_ExtractFullCss
+class ABTFR_ExtractFullCss
 {
 
     /**
@@ -103,7 +103,7 @@ class Abovethefold_ExtractFullCss
         $csscode = array();
 
         $cssfiles = array();
-        $store_cssfiles = ((isset($_REQUEST['output']) && strtolower($_REQUEST['output']) === 'print') || $this->CTRL->view === 'abtf-buildtool-css');
+        $store_cssfiles = ((isset($_REQUEST['output']) && strtolower($_REQUEST['output']) === 'print') || $this->CTRL->view === 'abtfr-buildtool-css');
         $reflog = array();
 
         $remove = array();
@@ -269,7 +269,7 @@ class Abovethefold_ExtractFullCss
             }
             $reflog[$hash] = 1;
 
-            if ($style->getAttribute('rel') === 'abtf') {
+            if ($style->getAttribute('rel') === 'abtfr') {
                 continue 1;
             }
 
@@ -316,7 +316,7 @@ class Abovethefold_ExtractFullCss
         /**
          * Build Tool CSS JSON output
          */
-        if ($this->CTRL->view === 'abtf-buildtool-css') {
+        if ($this->CTRL->view === 'abtfr-buildtool-css') {
             return "--FULL-CSS-JSON--\n" . json_encode($cssfiles) . "\n--FULL-CSS-JSON--";
         }
 

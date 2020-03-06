@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Abovethefold optimization plugin module functions and hooks.
+ * ABTFR optimization plugin module functions and hooks.
  *
  * This class provides the functionality for optimization plugin module functions and hooks.
  *
  * @since      2.5.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
 
-class Abovethefold_Plugins
+class ABTFR_Plugins
 {
 
     /**
@@ -105,7 +105,7 @@ class Abovethefold_Plugins
     {
         $dirs = array(
             plugin_dir_path(realpath(dirname(__FILE__) . '/')) . 'modules/plugins/',
-            get_stylesheet_directory() . '/abovethefold/plugins/'
+            get_stylesheet_directory() . '/abtfr/plugins/'
         );
 
         $modules = array();
@@ -201,7 +201,7 @@ class Abovethefold_Plugins
         // requore plugin module class
         require_once($module_file);
 
-        $classnameName = 'Abovethefold_OPP_' . $classname;
+        $classnameName = 'ABTFR_OPP_' . $classname;
         if (!class_exists($classnameName)) {
             return $this->falseReference;
         }

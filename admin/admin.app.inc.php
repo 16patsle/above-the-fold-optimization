@@ -5,12 +5,12 @@
 			'homeUrl' => get_home_url(),
 			'adminUrl' => admin_url(),
 			'adminTabs' => $this->tabs,
-			'abtfAdminNonce' => wp_nonce_field('abovethefold'),
-			'abtfRestNonce' => wp_create_nonce('wp_rest'),
+			'abtfrAdminNonce' => wp_nonce_field('abtfr'),
+			'abtfrRestNonce' => wp_create_nonce('wp_rest'),
 			'lgCode' => $lgcode,
 			'utmString' => $utmstring,
 			'googleIntlCode' => $this->google_intlcode,
-			'wpAbtfUri' => WPABTF_URI
+			'wpAbtfrUri' => WPABTFR_URI
 		);
 	?>
 	<input id="admin_values" type="hidden" value="<?php echo htmlspecialchars(json_encode($admin_values), ENT_COMPAT, 'UTF-8', false) ?>"/>

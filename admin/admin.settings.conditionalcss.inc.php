@@ -13,7 +13,7 @@ window.conditional_options = <?php print json_encode($conditional_options, true)
 
 	<h3 style="padding:0px;margin:0px;margin-top:1em;margin-bottom:10px;">Conditional Critical Path CSS</h3>
 
-	<p class="description" style="margin-bottom:0px;"><?php _e('Configure tailored critical path CSS for individual posts, pages, post types, categories or templates.', 'abovethefold'); ?></p>
+	<p class="description" style="margin-bottom:0px;"><?php _e('Configure tailored critical path CSS for individual posts, pages, post types, categories or templates.', 'abtfr'); ?></p>
 
 	<p style="margin-top:1em;margin-bottom:1em;">
 		<button type="button" id="addcriticalcss" class="button" style="margin-right:0.5em;">Add Conditional Critical CSS</button>
@@ -62,7 +62,7 @@ window.conditional_options = <?php print json_encode($conditional_options, true)
             $condition_values[] = $condition['value'];
         }
 
-        $condition_values = implode('|==abtf==|', $condition_values); ?>
+        $condition_values = implode('|==abtfr==|', $condition_values); ?>
 	<li class="menu-item menu-item-depth-0 menu-item-page pending" style="display: list-item; position: relative; top: 0px;">
 		<div class="menu-item-bar criticalcss-edit-header" rel="<?php print htmlentities(md5($file), ENT_COMPAT, 'utf-8'); ?>" data-file="<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>">
 			<div class="menu-item-handle" style="width:auto!important;cursor: pointer;">
@@ -82,14 +82,14 @@ window.conditional_options = <?php print json_encode($conditional_options, true)
 					</span>
 				</span>
 				<span class="item-controls">
-					<a class="item-delete button button-small button-del" title="Delete conditional Critical CSS" href="javascript:void(0);" data-confirm="<?php echo htmlentities(__('Are you sure you want to delete this conditional Critical CSS?', 'abovethefold'), ENT_COMPAT, 'utf-8'); ?>">&#x2717;</a>
+					<a class="item-delete button button-small button-del" title="Delete conditional Critical CSS" href="javascript:void(0);" data-confirm="<?php echo htmlentities(__('Are you sure you want to delete this conditional Critical CSS?', 'abtfr'), ENT_COMPAT, 'utf-8'); ?>">&#x2717;</a>
 					<a class="item-edit" href="javascript:void(0);">^</a>
 				</span>
 			</div>
 		</div>
 
 		<div id="ccss_editor_<?php print htmlentities(md5($file), ENT_COMPAT, 'utf-8'); ?>" class="ccss_editor" style="display:none;">
-			<textarea class="abtfcss" name="abovethefold[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][css]"><?php echo htmlentities($inlinecss, ENT_COMPAT, 'utf-8'); ?></textarea>
+			<textarea class="abtfrcss" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][css]"><?php echo htmlentities($inlinecss, ENT_COMPAT, 'utf-8'); ?></textarea>
 			<div class="conditions edit-conditional-critical-css">
 				
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-bottom:5px;margin-top:0px;">
@@ -103,22 +103,22 @@ window.conditional_options = <?php print json_encode($conditional_options, true)
 							</div>
 						</td>
 						<td style="padding:0px;padding-right:10px;">
-							<label><input type="checkbox" name="abovethefold[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][appendToAny]" value="1" <?php if (isset($config['appendToAny'])) {
+							<label><input type="checkbox" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][appendToAny]" value="1" <?php if (isset($config['appendToAny'])) {
             print ' checked="checked"';
         } ?> /> Append to any</label>
 						</td>
 						<td style="padding:0px;padding-right:10px;">
-							<label><input type="checkbox" name="abovethefold[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][prependToAny]" value="1" <?php if (isset($config['prependToAny'])) {
+							<label><input type="checkbox" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][prependToAny]" value="1" <?php if (isset($config['prependToAny'])) {
             print ' checked="checked"';
         } ?> /> Prepend to any</label>
 						</td>
 						<td style="padding:0px;padding-right:10px;">
-							Weight: <input type="number" size="3" min="1" style="width:50px;" name="abovethefold[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][weight]" value="<?php print(isset($config['weight']) ? intval($config['weight']) : '1'); ?>" placeholder="..." />
+							Weight: <input type="number" size="3" min="1" style="width:50px;" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][weight]" value="<?php print(isset($config['weight']) ? intval($config['weight']) : '1'); ?>" placeholder="..." />
 							&nbsp;(higher weight is selected over lower weight conditions)
 						</td>
 					</tr>	
 				</table>
-				<input type="text" name="abovethefold[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][conditions]" rel="conditions" multiple="multiple" data-conditions="<?php print htmlentities(json_encode($conditions, true), ENT_COMPAT, 'utf-8'); ?>" value="<?php print htmlentities($condition_values, ENT_COMPAT, 'utf-8'); ?>" />
+				<input type="text" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][conditions]" rel="conditions" multiple="multiple" data-conditions="<?php print htmlentities(json_encode($conditions, true), ENT_COMPAT, 'utf-8'); ?>" value="<?php print htmlentities($condition_values, ENT_COMPAT, 'utf-8'); ?>" />
 				
 				<div style="margin-top:5px;margin-bottom:0px;">
 					The configuration is stored in <code><?php print str_replace(home_url(), '', $this->CTRL->theme_dir('', 'critical-css') . '<strong>' . htmlentities($file, ENT_COMPAT, 'utf-8')); ?></strong></code> and is editable via FTP. 

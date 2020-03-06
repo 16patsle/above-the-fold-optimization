@@ -1,10 +1,10 @@
 jQuery(function() {
 
-    if (jQuery('.abtf-bt-builder').length === 0) {
+    if (jQuery('.abtfr-bt-builder').length === 0) {
         return;
     }
     
-    jQuery('.abtf-bt-builder input[name="taskname"]').on('keyup change', function() {
+    jQuery('.abtfr-bt-builder input[name="taskname"]').on('keyup change', function() {
         var name = jQuery(this).val();
         if (name === '') {
             name = 'task-name';
@@ -25,7 +25,7 @@ jQuery(function() {
         }
         jQuery('.gulp-task-name').html(name);
     });
-    jQuery('.abtf-bt-builder input[name="taskname"]').on('blur', function() {
+    jQuery('.abtfr-bt-builder input[name="taskname"]').on('blur', function() {
         var name = jQuery(this).val();
 
         if (name === 'critical-') {
@@ -41,13 +41,13 @@ jQuery(function() {
             jQuery('.gulp-task-name').html(newname);
         }
     });
-    jQuery('.abtf-bt-builder input[name="taskname"]').on('focus', function() {
+    jQuery('.abtfr-bt-builder input[name="taskname"]').on('focus', function() {
         var name = jQuery(this).val();
         if (name === '') {
             jQuery(this).val('critical-');
         }
     });
-    jQuery('.abtf-bt-builder input[name="taskname"]').on('click', function() {
+    jQuery('.abtfr-bt-builder input[name="taskname"]').on('click', function() {
          jQuery(this).blur().focus().val(jQuery(this).val());
     });
 });

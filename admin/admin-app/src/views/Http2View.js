@@ -7,9 +7,9 @@ import {
   adminUrl,
   homeUrl,
   siteTitle,
-  abtfAdminNonce,
+  abtfrAdminNonce,
   lgCode,
-  wpAbtfUri
+  wpAbtfrUri
 } from '../utils/globalVars';
 import JsonEditor from '../components/JsonEditor';
 import { http2Schema } from '../components/editorSchema';
@@ -98,10 +98,10 @@ const Http2View = () => {
   return (
     <form
       method="post"
-      action={adminUrl + 'admin-post.php?action=abtf_http2_update'}
+      action={adminUrl + 'admin-post.php?action=abtfr_http2_update'}
       className="clearfix"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('HTTP/2 Optimization')}>
         <Helmet>
           <title>HTTP/2 Optimization {siteTitle}</title>
@@ -132,7 +132,7 @@ const Http2View = () => {
           <tbody>
             <SettingCheckbox
               header="HTTP/2 Server Push"
-              name="abovethefold[http2_push]"
+              name="abtfr[http2_push]"
               link={linkOptionState('http2Push')}
               label="Enabled"
               description={
@@ -157,7 +157,7 @@ const Http2View = () => {
               ></JsonEditor>
               <input
                 type="hidden"
-                name="abovethefold[http2_push_config]"
+                name="abtfr[http2_push_config]"
                 id="http2_push_config_src"
                 value={JSON.stringify(getOption('http2PushConfig'))}
               />
@@ -223,7 +223,7 @@ const Http2View = () => {
                 <br />
                 <br />
                 <img
-                  src={`${wpAbtfUri}admin/images/Cache_Digest_-_Warm_Cache.png`}
+                  src={`${wpAbtfrUri}admin/images/Cache_Digest_-_Warm_Cache.png`}
                   alt="Cache-Digest"
                   style={{ width: '100%', maxWidth: 600 }}
                   title="Cache-Digest"

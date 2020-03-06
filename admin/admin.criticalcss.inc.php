@@ -6,16 +6,16 @@
 	<a href="<?php echo add_query_arg(array('page' => 'pagespeed-build-tool'), admin_url('admin.php')); ?>">Gulp.js Critical CSS Generator</a>
 </nav>
 
-<form method="post" action="<?php echo admin_url('admin-post.php?action=abtf_criticalcss_update'); ?>" data-addccss="<?php echo admin_url('admin-post.php?action=abtf_add_ccss'); ?>" data-delccss="<?php echo admin_url('admin-post.php?action=abtf_delete_ccss'); ?>" id="abtf_settings_form" class="clearfix" style="margin-top:0px;">
-	<?php wp_nonce_field('abovethefold'); ?>
-	<div class="wrap abovethefold-wrapper">
+<form method="post" action="<?php echo admin_url('admin-post.php?action=abtfr_criticalcss_update'); ?>" data-addccss="<?php echo admin_url('admin-post.php?action=abtfr_add_ccss'); ?>" data-delccss="<?php echo admin_url('admin-post.php?action=abtfr_delete_ccss'); ?>" id="abtfr_settings_form" class="clearfix" style="margin-top:0px;">
+	<?php wp_nonce_field('abtfr'); ?>
+	<div class="wrap abtfr-wrapper">
 		<div id="poststuff">
 			<div id="post-body" class="metabox-holder">
 				<div id="post-body-content">
 					<div class="postbox">
 
 						<h3 class="hndle">
-							<span><?php _e('Critical Path CSS', 'abovethefold'); ?></span>
+							<span><?php _e('Critical Path CSS', 'abtfr'); ?></span>
 						</h3>
 						<div class="inside testcontent">
 
@@ -32,7 +32,7 @@
 
 										<h3 style="padding:0px;margin:0px;margin-bottom:10px;">Critical Path CSS</h3>
 
-										<p class="description" style="margin-bottom:1em;"><?php _e('Configure the Critical Path CSS to be inserted inline into the <code>&lt;head&gt;</code> of the page.', 'abovethefold'); ?></p>
+										<p class="description" style="margin-bottom:1em;"><?php _e('Configure the Critical Path CSS to be inserted inline into the <code>&lt;head&gt;</code> of the page.', 'abtfr'); ?></p>
 
 										<ul class="menu ui-sortable" style="width:auto!important;margin-top:0px;padding-top:0px;">
 											
@@ -50,7 +50,7 @@
 									<td class="criticalcsstable">
 										<br />
 
-										<h3 style="padding:0px;margin:0px;margin-bottom:10px;"><?php _e('Extract Full CSS', 'abovethefold'); ?></h3>
+										<h3 style="padding:0px;margin:0px;margin-bottom:10px;"><?php _e('Extract Full CSS', 'abtfr'); ?></h3>
 
 										<p class="description">For the creation of Critical Path CSS you need the full CSS of a page. This tool allows you to extract the full CSS from any url and optionally to select the specific CSS files you want to extract.</p>
 										<p class="description" style="margin-bottom:1em;">You can quickly output the full CSS of any url by adding the query string <code><strong>?extract-css=<?php print md5(SECURE_AUTH_KEY . AUTH_KEY); ?>&amp;output=print</strong></code>.</p>

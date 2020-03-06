@@ -8,12 +8,12 @@
  * Tested with @version 1.0.85
  *
  * @since      2.6.16
- * @package    abovethefold
- * @subpackage abovethefold/modules/plugins
+ * @package    abtfr
+ * @subpackage abtfr/modules/plugins
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_OPP_AmpSupremacy extends Abovethefold_OPP
+class ABTFR_OPP_AmpSupremacy extends ABTFR_OPP
 {
 
     /**

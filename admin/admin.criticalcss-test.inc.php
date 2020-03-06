@@ -6,15 +6,15 @@
 	<a href="<?php echo add_query_arg(array('page' => 'pagespeed-build-tool'), admin_url('admin.php')); ?>">Gulp.js Critical CSS Generator</a>
 </nav>
 
-<form method="post" action="<?php echo admin_url('admin-post.php?action=abovethefold_compare'); ?>" class="clearfix">
-	<?php wp_nonce_field('abovethefold'); ?>
-	<div class="wrap abovethefold-wrapper">
+<form method="post" action="<?php echo admin_url('admin-post.php?action=abtfr_compare'); ?>" class="clearfix">
+	<?php wp_nonce_field('abtfr'); ?>
+	<div class="wrap abtfr-wrapper">
 		<div id="poststuff">
 			<div id="post-body" class="metabox-holder">
 				<div id="post-body-content">
 					<div class="postbox">
 						<h3 class="hndle">
-							<span><?php _e('Above The Fold Quality Test', 'abovethefold'); ?></span>
+							<span><?php _e('Above The Fold Quality Test', 'abtfr'); ?></span>
 						</h3>
 						<div class="inside testcontent">
 
@@ -35,7 +35,7 @@
 
 							<p>The following example shows how subtle problems in the critical CSS can have an impact on the above the fold display.</p>
 
-							<table class="abtfexample">
+							<table class="abtfrexample">
 								<thead>
 									<tr>
 										<td class="err"><span>&#x2717;</span> Invalid</td>
@@ -44,8 +44,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><img src="<?php print WPABTF_URI; ?>admin/abtf-example-invalid.png" width="343" height="572" border="0" alt="Invalid Critical CSS"></td>
-										<td><img src="<?php print WPABTF_URI; ?>admin/abtf-example-valid.png" width="343" height="572" border="0" alt="Valid Critical CSS"></td>
+										<td><img src="<?php print WPABTFR_URI; ?>admin/abtfr-example-invalid.png" width="343" height="572" border="0" alt="Invalid Critical CSS"></td>
+										<td><img src="<?php print WPABTFR_URI; ?>admin/abtfr-example-valid.png" width="343" height="572" border="0" alt="Valid Critical CSS"></td>
 									</tr>
 								</tbody>
 							</table>

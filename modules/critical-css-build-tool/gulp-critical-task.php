@@ -6,8 +6,8 @@
  * This template creates gulp-critical-task.js.
  *
  * @since      2.6.0
- * @package    abovethefold
- * @subpackage abovethefold/modules/critical-css-build-tool
+ * @package    abtfr
+ * @subpackage abtfr/modules/critical-css-build-tool
  * @author     Optimization.Team <info@optimization.team>
  */
 
@@ -56,8 +56,8 @@ if (isset($settings['dimensions']) && !empty($settings['dimensions'])) {
     }
 ?>
  *
- * @package    abovethefold
- * @subpackage abovethefold/modules/critical-css-build-tool
+ * @package    abtfr
+ * @subpackage abtfr/modules/critical-css-build-tool
  * @author     Optimization.Team <info@optimization.team>
  */
 module.exports = function (gulp, plugins, critical) {
@@ -151,7 +151,7 @@ module.exports = function (gulp, plugins, critical) {
 				height: 900,' . "\n";
     }
 ?>
-				pathPrefix: '../../../../', // wordpress root from /themes/THEME-NAME/abovethefold/
+				pathPrefix: '../../../../', // wordpress root from /themes/THEME-NAME/abtfr/
 				timeout: 120000
 		    });
         };
@@ -256,7 +256,7 @@ module.exports = function (gulp, plugins, critical) {
 				console.log('\n' + plugins.util.colors.green.bold('Update <?php if ($settings['update'] !== 'global.css') {
             print 'Conditional ';
         } ?>Critical CSS storage file...'));
-				console.log(' ➤ ' + plugins.util.colors.green('/abovethefold/css/<?php print $filename; ?>'));
+				console.log(' ➤ ' + plugins.util.colors.green('/abtfr/css/<?php print $filename; ?>'));
 
 				// append extra.css
 				gulp.src([taskpath + 'output/critical.min.css'])

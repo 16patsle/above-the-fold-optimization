@@ -3,13 +3,13 @@
  * The plugin upgrade controller.
  *
  * @since      2.7.0
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  * @author     Patrick Sletvold
  */
 
-class Abovethefold_Upgrade
+class ABTFR_Upgrade
 {
 
     /**
@@ -30,13 +30,13 @@ class Abovethefold_Upgrade
      */
     public function upgrade()
     {
-        $current_version = get_option('wpabtf_version');
+        $current_version = get_option('abtfr_version');
         $update_options = false;
 
-        if (!defined('WPABTF_VERSION') || WPABTF_VERSION !== $current_version) {
-            $options = get_option('abovethefold');
+        if (!defined('WPABTFR_VERSION') || WPABTFR_VERSION !== $current_version) {
+            $options = get_option('abtfr');
 
-            update_option('wpabtf_version', WPABTF_VERSION, false);
+            update_option('abtfr_version', WPABTFR_VERSION, false);
 
             /**
              * Pre 2.5.0 update
@@ -44,7 +44,7 @@ class Abovethefold_Upgrade
             if (version_compare($current_version, '2.5.0', '<')) {
 
                 /**
-                 * Disable Google Web Font Optimizer plugin if ABTF Webfont Optimization is enabled
+                 * Disable Google Web Font Optimizer plugin if ABTFR Webfont Optimization is enabled
                  */
                 if (isset($options['gwfo']) && $options['gwfo']) {
                     @deactivate_plugins('google-webfont-optimizer/google-webfont-optimizer.php');
@@ -148,7 +148,7 @@ class Abovethefold_Upgrade
              */
             if (version_compare($current_version, '2.7', '<=')) {
                 $dir = wp_upload_dir();
-                $old_cachepath = trailingslashit($dir['basedir']) . 'abovethefold/';
+                $old_cachepath = trailingslashit($dir['basedir']) . 'abtfr/';
                 if (!is_dir($old_cachepath)) {
                     $old_cachepath = false;
                 }
@@ -321,7 +321,7 @@ class Abovethefold_Upgrade
                  * Remove plugin directory from /uploads/
                  */
                 $dir = wp_upload_dir();
-                $old_cachepath = trailingslashit($dir['basedir']) . 'abovethefold/';
+                $old_cachepath = trailingslashit($dir['basedir']) . 'abtfr/';
                 if (is_dir($old_cachepath)) {
                     $this->CTRL->rmdir($old_cachepath);
                 }
@@ -344,8 +344,8 @@ class Abovethefold_Upgrade
                 $options['html_search_replace'] = array();
                 $options['jsdelivery_idle'] = array();
 
-                delete_option('abtf-pageoptions');
-                delete_option('abtf-conditionoptions');
+                delete_option('abtfr-pageoptions');
+                delete_option('abtfr-conditionoptions');
             }
 
 
@@ -360,11 +360,11 @@ class Abovethefold_Upgrade
                     $options['pwa_meta'] = true;
                 }
                 
-                // update new abtf-pwa-policy.json format
+                // update new abtfr-pwa-policy.json format
                 if (isset($options['pwa']) && $options['pwa']) {
 
                     // delete old config
-                    $old_sw_config = trailingslashit(ABSPATH) . 'abtf-pwa-policy.json';
+                    $old_sw_config = trailingslashit(ABSPATH) . 'abtfr-pwa-policy.json';
                     if (file_exists($old_sw_config)) {
                         @unlink($old_sw_config);
                     }
@@ -394,8 +394,8 @@ class Abovethefold_Upgrade
                         if (isset($options['pwa']) && $options['pwa']) {
 
                             // fix invalid service worker src
-                            if (is_array($json) && isset($json['serviceworker']) && isset($json['serviceworker']['src']) && $json['serviceworker']['src'] !== '/abtf-pwa.js') {
-                                $json['start_url'] = '/abtf-pwa.js';
+                            if (is_array($json) && isset($json['serviceworker']) && isset($json['serviceworker']['src']) && $json['serviceworker']['src'] !== '/abtfr-pwa.js') {
+                                $json['start_url'] = '/abtfr-pwa.js';
                                 $updated_json = true;
                             }
                         }
@@ -535,7 +535,7 @@ class Abovethefold_Upgrade
                 }
             }
 
-            // update new abtf-pwa-policy.json format
+            // update new abtfr-pwa-policy.json format
             if (isset($options['pwa']) && $options['pwa']) {
 
                 // update service worker
@@ -544,7 +544,7 @@ class Abovethefold_Upgrade
                 } catch (Exception $error) {
                 }
 
-                // update abtf-pwa-config.json to latest format
+                // update abtfr-pwa-config.json to latest format
                 try {
                     $this->CTRL->pwa->update_sw_config();
                 } catch (Exception $error) {
@@ -578,7 +578,7 @@ class Abovethefold_Upgrade
             }
 
             if ($update_options) {
-                update_option('abovethefold', $options, true);
+                update_option('abtfr', $options, true);
             }
 
             /**

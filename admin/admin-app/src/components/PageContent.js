@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class PageContent extends Component {
   render() {
     return (
-      <div className="wrap abovethefold-wrapper">
+      <div className="wrap abtfr-wrapper">
         <div id="poststuff">
           <div id="post-body" className="metabox-holder">
             <div id="post-body-content">

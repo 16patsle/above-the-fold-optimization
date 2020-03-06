@@ -7,14 +7,14 @@
  * enqueue the dashboard-specific stylesheet and JavaScript.
  *
  * @since      2.0
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  * @author     Patrick Sletvold
  */
 
 
-class Abovethefold_Admin
+class ABTFR_Admin
 {
 
     /**
@@ -120,7 +120,7 @@ class Abovethefold_Admin
             $this->CTRL->loader->add_action('admin_enqueue_scripts', $this, 'enqueue_scripts', 30);
 
             // add settings link to plugin overview
-            $this->CTRL->loader->add_filter('plugin_action_links_above-the-fold-optimization/abovethefold.php', $this, 'settings_link');
+            $this->CTRL->loader->add_filter('plugin_action_links_above-the-fold-optimization/abtfr.php', $this, 'settings_link');
 
             // Handle admin notices
             $this->CTRL->loader->add_action('admin_notices', $this, 'show_notices');
@@ -129,7 +129,7 @@ class Abovethefold_Admin
             $this->CTRL->loader->add_filter('admin_body_class', $this, 'admin_body_class');
 
             // AJAX page search
-            $this->CTRL->loader->add_action('wp_ajax_abtf_page_search', $this, 'ajax_page_search');
+            $this->CTRL->loader->add_action('wp_ajax_abtfr_page_search', $this, 'ajax_page_search');
 
             /**
              * Load dependencies
@@ -148,52 +148,52 @@ class Abovethefold_Admin
             /**
              * Load critical CSS management
              */
-            $this->criticalcss = new Abovethefold_Admin_CriticalCSS($CTRL);
+            $this->criticalcss = new ABTFR_Admin_CriticalCSS($CTRL);
 
             /**
              * Load CSS management
              */
-            $this->css = new Abovethefold_Admin_CSS($CTRL);
+            $this->css = new ABTFR_Admin_CSS($CTRL);
 
             /**
              * Load HTML management
              */
-            $this->html = new Abovethefold_Admin_HTML($CTRL);
+            $this->html = new ABTFR_Admin_HTML($CTRL);
 
             /**
              * Load Javascript management
              */
-            $this->javascript = new Abovethefold_Admin_Javascript($CTRL);
+            $this->javascript = new ABTFR_Admin_Javascript($CTRL);
 
             /**
              * Load PWA management
              */
-            $this->pwa = new Abovethefold_Admin_PWA($CTRL);
+            $this->pwa = new ABTFR_Admin_PWA($CTRL);
 
             /**
              * Load HTTP/2 management
              */
-            $this->http2 = new Abovethefold_Admin_HTTP2($CTRL);
+            $this->http2 = new ABTFR_Admin_HTTP2($CTRL);
 
             /**
              * Load proxy management
              */
-            $this->proxy = new Abovethefold_Admin_Proxy($CTRL);
+            $this->proxy = new ABTFR_Admin_Proxy($CTRL);
 
             /**
              * Load settings management
              */
-            $this->settings = new Abovethefold_Admin_Settings($CTRL);
+            $this->settings = new ABTFR_Admin_Settings($CTRL);
 
             /**
              * Load settings management
              */
-            $this->buildtool = new Abovethefold_Admin_BuildTool($CTRL);
+            $this->buildtool = new ABTFR_Admin_BuildTool($CTRL);
 
             /**
              * Load monitor management
              */
-            $this->monitor = new Abovethefold_Admin_Monitor($CTRL);
+            $this->monitor = new ABTFR_Admin_Monitor($CTRL);
         }
     }
 
@@ -233,7 +233,7 @@ class Abovethefold_Admin
      */
     public function admin_body_class($classes)
     {
-        return "$classes abtf-criticalcss";
+        return "$classes abtfr-criticalcss";
     }
 
     /**
@@ -289,7 +289,7 @@ class Abovethefold_Admin
          * Clear page cache
          */
         if ((isset($_REQUEST['clear']) && $_REQUEST['clear'] === 'pagecache') || isset($_POST['clear_pagecache'])) {
-            check_admin_referer('abovethefold');
+            check_admin_referer('abtfr');
 
             $this->clear_pagecache();
 
@@ -298,10 +298,10 @@ class Abovethefold_Admin
         }
 
         // add general admin javascript
-        //wp_enqueue_script('abtf_admincp', plugin_dir_url(__FILE__) . 'js/admincp.min.js', array( 'jquery' ), WPABTF_VERSION);
+        //wp_enqueue_script('abtfr_admincp', plugin_dir_url(__FILE__) . 'js/admincp.min.js', array( 'jquery' ), WPABTFR_VERSION);
 
         // add general admin CSS
-        //wp_enqueue_style('abtf_admincp', plugin_dir_url(__FILE__) . 'css/admincp.min.css', false, WPABTF_VERSION);
+        //wp_enqueue_style('abtfr_admincp', plugin_dir_url(__FILE__) . 'css/admincp.min.css', false, WPABTFR_VERSION);
 
         // add admin-app JS
         $react_dir = plugin_dir_url( __FILE__ ) . 'admin-app/build/';
@@ -312,7 +312,7 @@ class Abovethefold_Admin
             : array( 'dependencies' => array(), 'version' => filemtime( __DIR__ . $react_script_path ) );
 
         //React dynamic loading
-        wp_enqueue_script('abtf_react_main', plugins_url( $react_script_path, __FILE__ ), $react_script_asset['dependencies'], $react_script_asset['version'], true);
+        wp_enqueue_script('abtfr_react_main', plugins_url( $react_script_path, __FILE__ ), $react_script_asset['dependencies'], $react_script_asset['version'], true);
 
         // Load JS and CSS chunks from asset manifest
         $asset_manifest_json = array();
@@ -326,9 +326,9 @@ class Abovethefold_Admin
                 if($key > 1) {
                     // Is it a css file?
                     if(preg_match('/\.css$/', $entrypoint)){
-                        wp_enqueue_style('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array(), $react_script_asset['version']);
+                        wp_enqueue_style('abtfr_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array(), $react_script_asset['version']);
                     } else {
-                        wp_enqueue_script('abtf_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtf_react_main'), $react_script_asset['version'], true);
+                        wp_enqueue_script('abtfr_react_chunk_' . $key, plugins_url( '/admin-app/build/' . $entrypoint, __FILE__ ), array('abtfr_react_main'), $react_script_asset['version'], true);
                     }
                 }
             }
@@ -347,10 +347,10 @@ class Abovethefold_Admin
         }
 
         // add global admin CSS
-        wp_enqueue_style('abtf_admincp_global', plugin_dir_url(__FILE__) . 'css/admincp-global.min.css', false, WPABTF_VERSION);
+        wp_enqueue_style('abtfr_admincp_global', plugin_dir_url(__FILE__) . 'css/admincp-global.min.css', false, WPABTFR_VERSION);
 
         // add general admin javascript
-        wp_enqueue_script('abtf_css_extract_widget', plugin_dir_url(__FILE__) . 'js/css-extract-widget.min.js', array( 'jquery' ), WPABTF_VERSION);
+        wp_enqueue_script('abtfr_css_extract_widget', plugin_dir_url(__FILE__) . 'js/css-extract-widget.min.js', array( 'jquery' ), WPABTFR_VERSION);
     }
 
     /**
@@ -444,13 +444,13 @@ class Abovethefold_Admin
      */
     public function admin_bar($admin_bar)
     {
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!empty($options['adminbar']) && intval($options['adminbar']) !== 1) {
             return;
         }
 
         $settings_url = add_query_arg(array( 'page' => 'pagespeed' ), admin_url('admin.php'));
-        $nonced_url = wp_nonce_url($settings_url, 'abovethefold');
+        $nonced_url = wp_nonce_url($settings_url, 'abtfr');
 
         if (is_admin()
             || (defined('DOING_AJAX') && DOING_AJAX)
@@ -462,16 +462,16 @@ class Abovethefold_Admin
         }
 
         $admin_bar->add_menu(array(
-            'id' => 'abovethefold',
+            'id' => 'abtfr',
             'title' => '<div class="ab-icon wp-menu-image svg" style="background-image: url(\''.$this->admin_icon().'\') !important;"></div><span class="ab-label">' . __('PageSpeed', 'pagespeed') . '</span>',
             'href' => $settings_url,
-            'meta' => array( 'title' => __('ABTF Optimization', 'abovethefold'), 'class' => 'ab-sub-secondary' )
+            'meta' => array( 'title' => __('ABTFR Optimization', 'abtfr'), 'class' => 'ab-sub-secondary' )
 
         ));
 
         $admin_bar->add_group(array(
-            'parent' => 'abovethefold',
-            'id' => 'abovethefold-top',
+            'parent' => 'abtfr',
+            'id' => 'abtfr-top',
             'meta' => array(
                 'class' => 'ab-sub-secondary', //
             )
@@ -481,85 +481,85 @@ class Abovethefold_Admin
          * Optimization menu
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-top',
-            'id' => 'abovethefold-optimization',
-            'title' => __('Optimization', 'abovethefold')
+            'parent' => 'abtfr-top',
+            'id' => 'abtfr-optimization',
+            'title' => __('Optimization', 'abtfr')
         ));
 
         /**
          * Critical CSS menu
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-top',
-            'id' => 'abovethefold-critical-css',
-            'title' => __('Critical CSS', 'abovethefold'),
+            'parent' => 'abtfr-top',
+            'id' => 'abtfr-critical-css',
+            'title' => __('Critical CSS', 'abtfr'),
             'href' => $this->CTRL->view_url('critical-css-test'),
-            'meta' => array( 'title' => __('Critical CSS', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Critical CSS', 'abtfr'), 'target' => '_blank' )
         ));
 
         /**
          * Other tools menu
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-top',
-            'id' => 'abovethefold-tools',
-            'title' => __('Other Tools', 'abovethefold')
+            'parent' => 'abtfr-top',
+            'id' => 'abtfr-tools',
+            'title' => __('Other Tools', 'abtfr')
         ));
 
         // critical CSS quality test
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-critical-css',
-            'id' => 'abovethefold-critical-css-quality',
-            'title' => __('Quality Test (split view)', 'abovethefold'),
+            'parent' => 'abtfr-critical-css',
+            'id' => 'abtfr-critical-css-quality',
+            'title' => __('Quality Test (split view)', 'abtfr'),
             'href' => $this->CTRL->view_url('critical-css-editor'),
-            'meta' => array( 'title' => __('Critical CSS Quality Test (split view)', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Critical CSS Quality Test (split view)', 'abtfr'), 'target' => '_blank' )
         ));
 
         // critical CSS quality test
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-critical-css',
-            'id' => 'abovethefold-critical-css-editor',
-            'title' => __('Critical CSS Editor', 'abovethefold'),
+            'parent' => 'abtfr-critical-css',
+            'id' => 'abtfr-critical-css-editor',
+            'title' => __('Critical CSS Editor', 'abtfr'),
             'href' => $this->CTRL->view_url('critical-css-editor') . '#editor',
-            'meta' => array( 'title' => __('Critical CSS Editor', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Critical CSS Editor', 'abtfr'), 'target' => '_blank' )
         ));
 
         if (!is_admin()) {
             // extract Critical CSS
             $admin_bar->add_node(array(
-                'parent' => 'abovethefold-critical-css',
-                'id' => 'abovethefold-extract-critical-css-widget',
-                'title' => __('Extract Critical CSS (JS widget)', 'abovethefold'),
+                'parent' => 'abtfr-critical-css',
+                'id' => 'abtfr-extract-critical-css-widget',
+                'title' => __('Extract Critical CSS (JS widget)', 'abtfr'),
                 'href' => '#',
-                'meta' => array( 'title' => __('Extract Critical CSS (javascript widget)', 'abovethefold'), 'onclick' => 'window.extractCriticalCSS();return false;' )
+                'meta' => array( 'title' => __('Extract Critical CSS (javascript widget)', 'abtfr'), 'onclick' => 'window.extractCriticalCSS();return false;' )
             ));
         }
 
         // extract full CSS
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-critical-css',
-            'id' => 'abovethefold-extract-full-css',
-            'title' => __('Extract Full CSS (plugin)', 'abovethefold'),
+            'parent' => 'abtfr-critical-css',
+            'id' => 'abtfr-extract-full-css',
+            'title' => __('Extract Full CSS (plugin)', 'abtfr'),
             'href' => $this->CTRL->view_url('extract-css', array('output' => 'print')),
-            'meta' => array( 'title' => __('Extract Full CSS (plugin)', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Extract Full CSS (plugin)', 'abtfr'), 'target' => '_blank' )
         ));
 
 
         if (!is_admin()) {
             $admin_bar->add_node(array(
-                'parent' => 'abovethefold-critical-css',
-                'id' => 'abovethefold-extract-full-css-widget',
-                'title' => __('Extract Full CSS (JS widget)', 'abovethefold'),
+                'parent' => 'abtfr-critical-css',
+                'id' => 'abtfr-extract-full-css-widget',
+                'title' => __('Extract Full CSS (JS widget)', 'abtfr'),
                 'href' => '#',
-                'meta' => array( 'title' => __('Extract Full CSS (javascript widget)', 'abovethefold'), 'onclick' => 'window.extractFullCSS();return false;' )
+                'meta' => array( 'title' => __('Extract Full CSS (javascript widget)', 'abtfr'), 'onclick' => 'window.extractFullCSS();return false;' )
             ));
         } else {
             $admin_bar->add_node(array(
-                'parent' => 'abovethefold-critical-css',
-                'id' => 'abovethefold-extract-critical-css-widget-link',
-                'title' => __('See frontend for more options...', 'abovethefold'),
+                'parent' => 'abtfr-critical-css',
+                'id' => 'abtfr-extract-critical-css-widget-link',
+                'title' => __('See frontend for more options...', 'abtfr'),
                 'href' => home_url(),
-                'meta' => array( 'title' => __('Extract Full CSS (javascript widget)', 'abovethefold'))
+                'meta' => array( 'title' => __('Extract Full CSS (javascript widget)', 'abtfr'))
             ));
         }
 
@@ -567,120 +567,120 @@ class Abovethefold_Admin
          * Optimize HTML
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-optimization',
-            'id' => 'abovethefold-optimization-html',
-            'title' => __('HTML', 'abovethefold'),
+            'parent' => 'abtfr-optimization',
+            'id' => 'abtfr-optimization-html',
+            'title' => __('HTML', 'abtfr'),
             'href' => add_query_arg(array( 'page' => 'pagespeed-html' ), admin_url('admin.php')),
-            'meta' => array( 'title' => __('HTML', 'abovethefold') )
+            'meta' => array( 'title' => __('HTML', 'abtfr') )
         ));
 
         /**
          * Optimize CSS
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-optimization',
-            'id' => 'abovethefold-optimization-css',
-            'title' => __('CSS', 'abovethefold'),
+            'parent' => 'abtfr-optimization',
+            'id' => 'abtfr-optimization-css',
+            'title' => __('CSS', 'abtfr'),
             'href' => add_query_arg(array( 'page' => 'pagespeed-css' ), admin_url('admin.php')),
-            'meta' => array( 'title' => __('CSS', 'abovethefold') )
+            'meta' => array( 'title' => __('CSS', 'abtfr') )
         ));
 
         /**
          * Optimize Javascript
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-optimization',
-            'id' => 'abovethefold-optimization-javascript',
-            'title' => __('Javascript', 'abovethefold'),
+            'parent' => 'abtfr-optimization',
+            'id' => 'abtfr-optimization-javascript',
+            'title' => __('Javascript', 'abtfr'),
             'href' => add_query_arg(array( 'page' => 'pagespeed-javascript' ), admin_url('admin.php')),
-            'meta' => array( 'title' => __('Javascript', 'abovethefold') )
+            'meta' => array( 'title' => __('Javascript', 'abtfr') )
         ));
 
         /**
          * Optimize Critical CSS
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-optimization',
-            'id' => 'abovethefold-optimization-criticalcss',
-            'title' => __('Critical CSS', 'abovethefold'),
+            'parent' => 'abtfr-optimization',
+            'id' => 'abtfr-optimization-criticalcss',
+            'title' => __('Critical CSS', 'abtfr'),
             'href' => add_query_arg(array( 'page' => 'pagespeed-criticalcss' ), admin_url('admin.php')),
-            'meta' => array( 'title' => __('Critical CSS', 'abovethefold') )
+            'meta' => array( 'title' => __('Critical CSS', 'abtfr') )
         ));
 
         /**
          * Optimize PWA
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-optimization',
-            'id' => 'abovethefold-optimization-pwa',
-            'title' => __('Progressive Web App (PWA)', 'abovethefold'),
+            'parent' => 'abtfr-optimization',
+            'id' => 'abtfr-optimization-pwa',
+            'title' => __('Progressive Web App (PWA)', 'abtfr'),
             'href' => add_query_arg(array( 'page' => 'pagespeed-pwa' ), admin_url('admin.php')),
-            'meta' => array( 'title' => __('PWA', 'abovethefold') )
+            'meta' => array( 'title' => __('PWA', 'abtfr') )
         ));
 
         /**
          * Optimize HTTP2
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-optimization',
-            'id' => 'abovethefold-optimization-http2',
-            'title' => __('HTTP/2', 'abovethefold'),
+            'parent' => 'abtfr-optimization',
+            'id' => 'abtfr-optimization-http2',
+            'title' => __('HTTP/2', 'abtfr'),
             'href' => add_query_arg(array( 'page' => 'pagespeed-http2' ), admin_url('admin.php')),
-            'meta' => array( 'title' => __('HTTP/2', 'abovethefold') )
+            'meta' => array( 'title' => __('HTTP/2', 'abtfr') )
         ));
 
         /**
          * Optimize Proxy
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-optimization',
-            'id' => 'abovethefold-optimization-proxy',
-            'title' => __('Proxy', 'abovethefold'),
+            'parent' => 'abtfr-optimization',
+            'id' => 'abtfr-optimization-proxy',
+            'title' => __('Proxy', 'abtfr'),
             'href' => add_query_arg(array( 'page' => 'pagespeed-proxy' ), admin_url('admin.php')),
-            'meta' => array( 'title' => __('Proxy', 'abovethefold') )
+            'meta' => array( 'title' => __('Proxy', 'abtfr') )
         ));
 
         /**
          * Page cache clear
          */
         $clear_url = add_query_arg(array( 'page' => 'pagespeed', 'clear' => 'pagecache' ), admin_url('admin.php'));
-        $nonced_url = wp_nonce_url($clear_url, 'abovethefold');
+        $nonced_url = wp_nonce_url($clear_url, 'abtfr');
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-tools',
-            'id' => 'abovethefold-tools-clear-pagecache',
-            'title' => __('Clear Page Caches', 'abovethefold'),
+            'parent' => 'abtfr-tools',
+            'id' => 'abtfr-tools-clear-pagecache',
+            'title' => __('Clear Page Caches', 'abtfr'),
             'href' => $nonced_url,
-            'meta' => array( 'title' => __('Clear Page Caches', 'abovethefold') )
+            'meta' => array( 'title' => __('Clear Page Caches', 'abtfr') )
         ));
 
         /**
          * Google PageSpeed Score Test
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold',
-            'id' => 'abovethefold-check-pagespeed-scores',
-            'title' => __('Google PageSpeed Scores', 'abovethefold'),
+            'parent' => 'abtfr',
+            'id' => 'abtfr-check-pagespeed-scores',
+            'title' => __('Google PageSpeed Scores', 'abtfr'),
             'href' => 'https://testmysite.' . (($this->google_intlcode === 'en-us') ? 'think' : '') . 'withgoogle.com/intl/'.$this->google_intlcode.'?url=' . urlencode($currenturl),
-            'meta' => array( 'title' => __('Google PageSpeed Scores', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Google PageSpeed Scores', 'abtfr'), 'target' => '_blank' )
         ));
 
         /**
          * Test Groups
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold',
-            'id' => 'abovethefold-check-google',
-            'title' => __('Google tests', 'abovethefold')
+            'parent' => 'abtfr',
+            'id' => 'abtfr-check-google',
+            'title' => __('Google tests', 'abtfr')
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold',
-            'id' => 'abovethefold-check-speed',
-            'title' => __('Speed tests', 'abovethefold')
+            'parent' => 'abtfr',
+            'id' => 'abtfr-check-speed',
+            'title' => __('Speed tests', 'abtfr')
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold',
-            'id' => 'abovethefold-check-technical',
-            'title' => __('Technical & security tests', 'abovethefold')
+            'parent' => 'abtfr',
+            'id' => 'abtfr-check-technical',
+            'title' => __('Technical & security tests', 'abtfr')
         ));
 
 
@@ -688,110 +688,110 @@ class Abovethefold_Admin
          * Google Tests
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-google',
-            'id' => 'abovethefold-check-pagespeed',
-            'title' => __('Google PageSpeed Insights', 'abovethefold'),
+            'parent' => 'abtfr-check-google',
+            'id' => 'abtfr-check-pagespeed',
+            'title' => __('Google PageSpeed Insights', 'abtfr'),
             'href' => 'https://developers.google.com/speed/pagespeed/insights/?url='.urlencode($currenturl) . '&hl=' . $this->google_lgcode,
-            'meta' => array( 'title' => __('Google PageSpeed Insights', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Google PageSpeed Insights', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-google',
-            'id' => 'abovethefold-check-google-mobile',
-            'title' => __('Google Mobile Test', 'abovethefold'),
+            'parent' => 'abtfr-check-google',
+            'id' => 'abtfr-check-google-mobile',
+            'title' => __('Google Mobile Test', 'abtfr'),
             'href' => 'https://search.google.com/search-console/mobile-friendly?url='.urlencode($currenturl) . '&hl=' . $this->google_lgcode,
-            'meta' => array( 'title' => __('Google Mobile Test', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Google Mobile Test', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-google',
-            'id' => 'abovethefold-check-google-malware',
-            'title' => __('Google Malware & Security', 'abovethefold'),
+            'parent' => 'abtfr-check-google',
+            'id' => 'abtfr-check-google-malware',
+            'title' => __('Google Malware & Security', 'abtfr'),
             'href' => 'https://www.google.com/transparencyreport/safebrowsing/diagnostic/index.html?hl=' . $this->google_lgcode . '#url='.urlencode(str_replace('www.', '', parse_url($currenturl, PHP_URL_HOST))),
-            'meta' => array( 'title' => __('Google Malware & Security', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Google Malware & Security', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-google',
-            'id' => 'abovethefold-check-google-more',
-            'title' => __('More tests', 'abovethefold'),
+            'parent' => 'abtfr-check-google',
+            'id' => 'abtfr-check-google-more',
+            'title' => __('More tests', 'abtfr'),
             'href' => 'https://github.com/16patsle/tests#url='.urlencode($currenturl),
-            'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('More tests', 'abtfr'), 'target' => '_blank' )
         ));
 
         /**
          * Speed Tests
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-speed',
-            'id' => 'abovethefold-check-webpagetest',
-            'title' => __('WebPageTest.org', 'abovethefold'),
+            'parent' => 'abtfr-check-speed',
+            'id' => 'abtfr-check-webpagetest',
+            'title' => __('WebPageTest.org', 'abtfr'),
             'href' => 'http://www.webpagetest.org/?url='.urlencode($currenturl).'',
-            'meta' => array( 'title' => __('WebPageTest.org', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('WebPageTest.org', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-speed',
-            'id' => 'abovethefold-check-pingdom',
-            'title' => __('Pingdom Tools', 'abovethefold'),
+            'parent' => 'abtfr-check-speed',
+            'id' => 'abtfr-check-pingdom',
+            'title' => __('Pingdom Tools', 'abtfr'),
             'href' => 'http://tools.pingdom.com/fpt/?url='.urlencode($currenturl).'',
-            'meta' => array( 'title' => __('Pingdom Tools', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Pingdom Tools', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-speed',
-            'id' => 'abovethefold-check-gtmetrix',
-            'title' => __('GTmetrix', 'abovethefold'),
+            'parent' => 'abtfr-check-speed',
+            'id' => 'abtfr-check-gtmetrix',
+            'title' => __('GTmetrix', 'abtfr'),
             'href' => 'http://gtmetrix.com/?url='.urlencode($currenturl).'',
-            'meta' => array( 'title' => __('GTmetrix', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('GTmetrix', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-speed',
-            'id' => 'abovethefold-check-speed-more',
-            'title' => __('More tests', 'abovethefold'),
+            'parent' => 'abtfr-check-speed',
+            'id' => 'abtfr-check-speed-more',
+            'title' => __('More tests', 'abtfr'),
             'href' => 'https://github.com/16patsle/tests#url='.urlencode($currenturl),
-            'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('More tests', 'abtfr'), 'target' => '_blank' )
         ));
 
         /**
          * Technical & Security Tests
          */
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-technical',
-            'id' => 'abovethefold-check-securityheaders',
-            'title' => __('SecurityHeaders.io', 'abovethefold'),
+            'parent' => 'abtfr-check-technical',
+            'id' => 'abtfr-check-securityheaders',
+            'title' => __('SecurityHeaders.io', 'abtfr'),
             'href' => 'https://securityheaders.io/?q='.urlencode($currenturl).'&hide=on&followRedirects=on',
-            'meta' => array( 'title' => __('SecurityHeaders.io', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('SecurityHeaders.io', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-technical',
-            'id' => 'abovethefold-check-w3c',
-            'title' => __('W3C HTML Validator', 'abovethefold'),
+            'parent' => 'abtfr-check-technical',
+            'id' => 'abtfr-check-w3c',
+            'title' => __('W3C HTML Validator', 'abtfr'),
             'href' => 'https://validator.w3.org/nu/?doc='.urlencode($currenturl).'',
-            'meta' => array( 'title' => __('W3C HTML Validator', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('W3C HTML Validator', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-technical',
-            'id' => 'abovethefold-check-ssllabs',
-            'title' => __('SSL Labs', 'abovethefold'),
+            'parent' => 'abtfr-check-technical',
+            'id' => 'abtfr-check-ssllabs',
+            'title' => __('SSL Labs', 'abtfr'),
             'href' => 'https://www.ssllabs.com/ssltest/analyze.html?d='.urlencode($currenturl).'',
-            'meta' => array( 'title' => __('SSL Labs', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('SSL Labs', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-technical',
-            'id' => 'abovethefold-check-intodns',
-            'title' => __('Into DNS', 'abovethefold'),
+            'parent' => 'abtfr-check-technical',
+            'id' => 'abtfr-check-intodns',
+            'title' => __('Into DNS', 'abtfr'),
             'href' => 'http://www.intodns.com/'.urlencode(str_replace('www.', '', parse_url($currenturl, PHP_URL_HOST))).'',
-            'meta' => array( 'title' => __('Into DNS', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('Into DNS', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-technical',
-            'id' => 'abovethefold-check-http2',
-            'title' => __('HTTP/2', 'abovethefold'),
+            'parent' => 'abtfr-check-technical',
+            'id' => 'abtfr-check-http2',
+            'title' => __('HTTP/2', 'abtfr'),
             'href' => 'https://tools.keycdn.com/http2-test?url='.urlencode($currenturl).'',
-            'meta' => array( 'title' => __('HTTP/2', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('HTTP/2', 'abtfr'), 'target' => '_blank' )
         ));
         $admin_bar->add_node(array(
-            'parent' => 'abovethefold-check-technical',
-            'id' => 'abovethefold-check-technical-more',
-            'title' => __('More tests', 'abovethefold'),
+            'parent' => 'abtfr-check-technical',
+            'id' => 'abtfr-check-technical-more',
+            'title' => __('More tests', 'abtfr'),
             'href' => 'https://github.com/16patsle/tests#url='.urlencode($currenturl),
-            'meta' => array( 'title' => __('More tests', 'abovethefold'), 'target' => '_blank' )
+            'meta' => array( 'title' => __('More tests', 'abtfr'), 'target' => '_blank' )
         ));
     }
 
@@ -1001,7 +1001,7 @@ class Abovethefold_Admin
         $options['update_count']++;
 
         // update settings
-        update_option('abovethefold', $options, true);
+        update_option('abtfr', $options, true);
 
         if (!$notice) {
             return;
@@ -1030,13 +1030,13 @@ class Abovethefold_Admin
         global $pagenow, $wp_query;
 
         // load options
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         } ?>
 <script>
 // pagesearch optgroups
-window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_optgroups()); ?>;
+window.abtfr_pagesearch_optgroups = <?php print json_encode($this->page_search_optgroups()); ?>;
 </script>
 
 <?php
@@ -1073,9 +1073,9 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
      */
     public function show_notices()
     {
-        settings_errors('abovethefold');
+        settings_errors('abtfr');
 
-        $notices = get_option('abovethefold_notices', '');
+        $notices = get_option('abtfr_notices', '');
         $persisted_notices = array();
         if (! empty($notices)) {
             $noticerows = array();
@@ -1084,7 +1084,7 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
                     case "ERROR":
                         $noticerows[] = '<div class="error">
 							<p>
-								'.__($notice['text'], 'abovethefold').'
+								'.__($notice['text'], 'abtfr').'
 							</p>
 						</div>';
 
@@ -1099,7 +1099,7 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
                     break;
                     default:
                         $noticerows[] = '<div class="updated"><p>
-							'.__($notice['text'], 'abovethefold').'
+							'.__($notice['text'], 'abtfr').'
 						</p></div>';
                     break;
                 }
@@ -1109,7 +1109,7 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
 			</div>
 			<?php
 
-            update_option('abovethefold_notices', $persisted_notices, false);
+            update_option('abtfr_notices', $persisted_notices, false);
         }
     }
 
@@ -1120,19 +1120,19 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
     {
         $type = strtoupper($type);
 
-        $notices = get_option('abovethefold_notices', '');
+        $notices = get_option('abtfr_notices', '');
         if (!is_array($notices)) {
             $notices = array();
         }
         if (empty($notice)) {
-            delete_option('abovethefold_notices');
+            delete_option('abtfr_notices');
         } else {
             $notice_config = (is_array($notice_config)) ? $notice_config : array();
             $notice_config['text'] = $notice;
             $notice_config['type'] = $type;
 
             array_unshift($notices, $notice_config);
-            update_option('abovethefold_notices', $notices, false);
+            update_option('abtfr_notices', $notices, false);
         }
     }
 
@@ -1176,8 +1176,8 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
      */
     public function upgrade()
     {
-        require_once WPABTF_PATH . 'admin/upgrade.class.php';
-        $upgrade = new Abovethefold_Upgrade($this->CTRL);
+        require_once WPABTFR_PATH . 'admin/upgrade.class.php';
+        $upgrade = new ABTFR_Upgrade($this->CTRL);
         $upgrade->upgrade();
     }
 
@@ -1198,7 +1198,7 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
      */
     final public function admin_icon($color = false)
     {
-        $icon = file_get_contents(WPABTF_PATH.'public/100.svg');
+        $icon = file_get_contents(WPABTFR_PATH.'public/100.svg');
         $icon = 'data:image/svg+xml;base64,'.base64_encode($this->menu_svg_color($icon, $color));
 
         return $icon;
@@ -1251,8 +1251,8 @@ window.abtf_pagesearch_optgroups = <?php print json_encode($this->page_search_op
      * Function to register our REST routes from the controller.
      */
     function register_rest_routes() {
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/abtf-settings-route.php';
-        $controller = new ABTF_Settings_Route($this);
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/abtfr-settings-route.php';
+        $controller = new ABTFR_Settings_Route($this);
         $controller->register_routes();
     }
 }

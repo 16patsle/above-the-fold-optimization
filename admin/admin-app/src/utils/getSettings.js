@@ -1,4 +1,4 @@
-import { abtfRestNonce } from './globalVars';
+import { abtfrRestNonce } from './globalVars';
 import newlineArrayString from './newLineArrayString';
 
 const shouldNewlineArrayString = [
@@ -28,9 +28,9 @@ const shouldNewlineArrayString = [
  * @returns {Object} The settings
  */
 export default async function getSettings() {
-  const response = await fetch('/wp-json/abtf/v1/settings', {
+  const response = await fetch('/wp-json/abtfr/v1/settings', {
     headers: {
-      'X-WP-Nonce': abtfRestNonce
+      'X-WP-Nonce': abtfrRestNonce
     }
   });
   const result = await response.json();

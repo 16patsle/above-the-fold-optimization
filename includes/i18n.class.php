@@ -7,12 +7,12 @@
  * so that it is ready for translation.
  *
  * @since      1.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_i18n
+class ABTFR_i18n
 {
 
     /**

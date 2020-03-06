@@ -1,8 +1,8 @@
 /**
  * Above the fold Extract Full CSS Page Controller
  *
- * @package    abovethefold
- * @subpackage abovethefold/public
+ * @package    abtfr
+ * @subpackage abtfr/public
  * @author     Optimization.Team <info@optimization.team>
  */
 var EXTRACTFULL = (function(window, document) {

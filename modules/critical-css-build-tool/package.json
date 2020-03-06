@@ -1,5 +1,5 @@
 {
-    "name": "wp-abtf-gulp-critical-css",
+    "name": "wp-abtfr-gulp-critical-css",
     "description": "WordPress Critical Path CSS generator based on Gulp.js. Part of Above The Fold Optimization Plugin.",
     "version": "0.0.1",
     "private": true,

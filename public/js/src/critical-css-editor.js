@@ -1,8 +1,8 @@
 /**
  * Critical CSS Quality Test View
  *
- * @package    abovethefold
- * @subpackage abovethefold/public
+ * @package    abtfr
+ * @subpackage abtfr/public
  * @author     Optimization.Team <info@optimization.team>
  */
 
@@ -180,13 +180,13 @@ jQuery(function($) {
         $('.split').removeClass('split-vertical');
         $('.split').addClass('split-horizontal');
 
-        if (!$('abtfcss').data('editor')) {
+        if (!$('abtfrcss').data('editor')) {
 
-            $('#abtfcss').prop('disabled', '');
+            $('#abtfrcss').prop('disabled', '');
 
             // codemirror
             cssEditor = CodeMirror.fromTextArea(
-                $('#abtfcss')[0], {
+                $('#abtfrcss')[0], {
                     lineWrapping: true,
                     lineNumbers: true,
                     gutters: ["CodeMirror-lint-markers"],
@@ -204,7 +204,7 @@ jQuery(function($) {
                 "action": "get"
             });
 
-            $('abtfcss').data('editor', cssEditor);
+            $('abtfrcss').data('editor', cssEditor);
         }
 
         splitView = Split(['#critical-css-view', '#css-editor-view'], {

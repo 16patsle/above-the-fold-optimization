@@ -3,7 +3,7 @@ jQuery(function() {
     /**
      * Advanced Critical CSS editor
      */
-    var advancedEditor = (jQuery('#abtfcss').length > 0 && parseInt(jQuery('#abtfcss').data('advanced')) === 1) ? true : false;
+    var advancedEditor = (jQuery('#abtfrcss').length > 0 && parseInt(jQuery('#abtfrcss').data('advanced')) === 1) ? true : false;
 
     // CodeMirror instances
     var advancedEditors = {};
@@ -13,13 +13,13 @@ jQuery(function() {
         // load editor
         var loadEditor = function(editor_id) {
 
-            if (jQuery('#ccss_editor_'+editor_id+' .abtfcss').length === 0) {
+            if (jQuery('#ccss_editor_'+editor_id+' .abtfrcss').length === 0) {
                 return;
             }
 
             // codemirror
             advancedEditors[editor_id] = CodeMirror.fromTextArea(
-                jQuery('#ccss_editor_'+editor_id+' .abtfcss')[0], {
+                jQuery('#ccss_editor_'+editor_id+' .abtfrcss')[0], {
                 lineWrapping: true,
                 lineNumbers: true,
                 gutters: ["CodeMirror-lint-markers"],
@@ -90,7 +90,7 @@ jQuery(function() {
             persist : true,
             optgroupField: 'optgroup',
             placeholder: "Select one or more conditions. Type the name of a page or post to search (autocomplete)...",
-            delimiter: '|==abtf==|',
+            delimiter: '|==abtfr==|',
             render: {
                 optgroup_header: function(item, escape) {
                     return '<div class="optgroup-header "><span class="'+item.class+'">&nbsp;</span>' + escape(item.title) + '</div>';
@@ -136,7 +136,7 @@ jQuery(function() {
                     type: 'POST',
                     dataType: 'json',
                     data: {
-                        action: 'abtf_condition_search',
+                        action: 'abtfr_condition_search',
                         query: query,
                         maxresults: 10
                     },
@@ -336,7 +336,7 @@ jQuery(function() {
                         // create delete form
                         var form = jQuery('<form />');
                         form.attr('method','post');
-                        form.attr('action',jQuery('#abtf_settings_form').data('delccss'));
+                        form.attr('action',jQuery('#abtfr_settings_form').data('delccss'));
 
                         var input = jQuery('<input type="hidden" name="file" />');
                         input.val(ccss_file);
@@ -359,7 +359,7 @@ jQuery(function() {
     /**
      * Advanced Critical CSS editor
      */
-    if (jQuery('#abtfcss').length > 0 && parseInt(jQuery('#abtfcss').data('advanced')) === 1) {
+    if (jQuery('#abtfrcss').length > 0 && parseInt(jQuery('#abtfrcss').data('advanced')) === 1) {
 
         jQuery('.ccss_editor').each(function(i,el) {
 
@@ -372,7 +372,7 @@ jQuery(function() {
         });
 
 /*
-        window.abtfcssToggle = function(obj) {
+        window.abtfrcssToggle = function(obj) {
             if (jQuery('.CodeMirror').hasClass('large')) {
                 jQuery(obj).html('[+] Large Editor');
             } else {
@@ -380,7 +380,7 @@ jQuery(function() {
             }
 
             jQuery('.CodeMirror').toggleClass('large');
-            //window.abtfcss.refresh();
+            //window.abtfrcss.refresh();
         };*/
     }
 });

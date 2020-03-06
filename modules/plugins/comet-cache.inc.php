@@ -8,12 +8,12 @@
  * Tested with @version 160917
  *
  * @since      2.5.0
- * @package    abovethefold
- * @subpackage abovethefold/modules/plugins
+ * @package    abtfr
+ * @subpackage abtfr/modules/plugins
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_OPP_CometCache extends Abovethefold_OPP
+class ABTFR_OPP_CometCache extends ABTFR_OPP
 {
 
     /**

@@ -34,16 +34,16 @@ module.exports = function(grunt) {
     // closure compiler
     var CC = {}
     var CCfiles = {
-        'public/js/abovethefold.min.js': 'public/js/min/abovethefold.js',
-        'public/js/abovethefold-proxy.min.js': 'public/js/min/abovethefold-proxy.js',
-        'public/js/abovethefold-jquery-stub.min.js': 'public/js/min/abovethefold-jquery-stub.js',
-        'public/js/abovethefold-js-localstorage.min.js': 'public/js/min/abovethefold-js-localstorage.js',
-        'public/js/abovethefold-js.min.js': 'public/js/min/abovethefold-js.js',
-        'public/js/abovethefold-pwa-unregister.min.js': 'public/js/min/abovethefold-pwa-unregister.js',
-        'public/js/abovethefold-css.min.js': 'public/js/min/abovethefold-css.js',
-        'public/js/abovethefold-loadcss-enhanced.min.js': 'public/js/min/abovethefold-loadcss-enhanced.js',
-        'public/js/abovethefold-loadcss.min.js': 'public/js/min/abovethefold-loadcss.js',
-        'public/js/abovethefold-pwa.min.js': 'public/js/min/abovethefold-pwa.js',
+        'public/js/abtfr.min.js': 'public/js/min/abtfr.js',
+        'public/js/abtfr-proxy.min.js': 'public/js/min/abtfr-proxy.js',
+        'public/js/abtfr-jquery-stub.min.js': 'public/js/min/abtfr-jquery-stub.js',
+        'public/js/abtfr-js-localstorage.min.js': 'public/js/min/abtfr-js-localstorage.js',
+        'public/js/abtfr-js.min.js': 'public/js/min/abtfr-js.js',
+        'public/js/abtfr-pwa-unregister.min.js': 'public/js/min/abtfr-pwa-unregister.js',
+        'public/js/abtfr-css.min.js': 'public/js/min/abtfr-css.js',
+        'public/js/abtfr-loadcss-enhanced.min.js': 'public/js/min/abtfr-loadcss-enhanced.js',
+        'public/js/abtfr-loadcss.min.js': 'public/js/min/abtfr-loadcss.js',
+        'public/js/abtfr-pwa.min.js': 'public/js/min/abtfr-pwa.js',
         'public/js/pwa-serviceworker.js': 'public/js/min/pwa.serviceworker.js',
         'admin/js/css-extract-widget.min.js': 'public/js/min/css-extract-widget.js'
     };
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
             options: {
                 compilation_level: 'ADVANCED_OPTIMIZATIONS',
                 language_in: 'ECMASCRIPT5_STRICT',
-                externs: ['public/js/closure-compiler/abtf-externs.js']
+                externs: ['public/js/closure-compiler/abtfr-externs.js']
             }
         };
 
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
             options: {
                 compilation_level: 'ADVANCED_OPTIMIZATIONS',
                 language_in: 'ECMASCRIPT5_STRICT',
-                externs: ['public/js/closure-compiler/abtf-externs.js']
+                externs: ['public/js/closure-compiler/abtfr-externs.js']
             }
         };
     }
@@ -114,52 +114,52 @@ module.exports = function(grunt) {
                 options: {
                     compress: {
                         global_defs: merge({
-                            "ABTFDEBUG": false
+                            "ABTFRDEBUG": false
                         }, CONFIG_INDEX)
                     }
                 },
                 files: {
 
                     // Above The Fold Javascript Controller
-                    'public/js/min/abovethefold.js': [
-                        'public/js/src/abovethefold.js'
+                    'public/js/min/abtfr.js': [
+                        'public/js/src/abtfr.js'
                     ],
 
                     // Proxy
-                    'public/js/min/abovethefold-proxy.js': [
-                        'public/js/src/abovethefold.proxy.js'
+                    'public/js/min/abtfr-proxy.js': [
+                        'public/js/src/abtfr.proxy.js'
                     ],
 
                     // jQuery Stub
-                    'public/js/min/abovethefold-jquery-stub.js': [
-                        'public/js/src/abovethefold.jquery-stub.js'
+                    'public/js/min/abtfr-jquery-stub.js': [
+                        'public/js/src/abtfr.jquery-stub.js'
                     ],
 
                     // Javascript optimization
-                    'public/js/min/abovethefold-js.js': [
-                        'public/js/src/abovethefold.js.js',
-                        'public/js/src/abovethefold.loadscript.js'
+                    'public/js/min/abtfr-js.js': [
+                        'public/js/src/abtfr.js.js',
+                        'public/js/src/abtfr.loadscript.js'
                     ],
 
                     // Javascript localstorage script loader
-                    'public/js/min/abovethefold-js-localstorage.js': [
-                        'public/js/src/abovethefold.loadscript-localstorage.js'
+                    'public/js/min/abtfr-js-localstorage.js': [
+                        'public/js/src/abtfr.loadscript-localstorage.js'
                     ],
 
                     // CSS optimization
-                    'public/js/min/abovethefold-css.js': [
-                        'public/js/src/abovethefold.css.js'
+                    'public/js/min/abtfr-css.js': [
+                        'public/js/src/abtfr.css.js'
                     ],
 
                     // Enhanced loadCSS
-                    'public/js/min/abovethefold-loadcss-enhanced.js': [
-                        'public/js/src/abovethefold.loadcss-modified.js'
+                    'public/js/min/abtfr-loadcss-enhanced.js': [
+                        'public/js/src/abtfr.loadcss-modified.js'
                     ],
 
                     // Original loadCSS
-                    'public/js/min/abovethefold-loadcss.js': [
+                    'public/js/min/abtfr-loadcss.js': [
                         'public/js/src/loadcss.js',
-                        'public/js/src/abovethefold.loadcss.js'
+                        'public/js/src/abtfr.loadcss.js'
                     ],
 
                     // Critical CSS Editor
@@ -204,52 +204,52 @@ module.exports = function(grunt) {
                 options: {
                     compress: {
                         global_defs: merge({
-                            "ABTFDEBUG": true
+                            "ABTFRDEBUG": true
                         }, CONFIG_INDEX)
                     }
                 },
                 files: {
 
                     // Above The Fold Javascript Controller
-                    'public/js/min/abovethefold.debug.js': [
-                        'public/js/src/abovethefold.js'
+                    'public/js/min/abtfr.debug.js': [
+                        'public/js/src/abtfr.js'
                     ],
 
                     // Proxy
-                    'public/js/min/abovethefold-proxy.debug.js': [
-                        'public/js/src/abovethefold.proxy.js'
+                    'public/js/min/abtfr-proxy.debug.js': [
+                        'public/js/src/abtfr.proxy.js'
                     ],
 
                     // Javascript optimization
-                    'public/js/min/abovethefold-js.debug.js': [
-                        'public/js/src/abovethefold.js.js',
-                        'public/js/src/abovethefold.loadscript.js'
+                    'public/js/min/abtfr-js.debug.js': [
+                        'public/js/src/abtfr.js.js',
+                        'public/js/src/abtfr.loadscript.js'
                     ],
 
                     // Javascript localstorage script loader
-                    'public/js/min/abovethefold-js-localstorage.debug.js': [
-                        'public/js/src/abovethefold.loadscript-localstorage.js'
+                    'public/js/min/abtfr-js-localstorage.debug.js': [
+                        'public/js/src/abtfr.loadscript-localstorage.js'
                     ],
 
                     // jQuery Stub
-                    'public/js/min/abovethefold-jquery-stub.debug.js': [
-                        'public/js/src/abovethefold.jquery-stub.js'
+                    'public/js/min/abtfr-jquery-stub.debug.js': [
+                        'public/js/src/abtfr.jquery-stub.js'
                     ],
 
                     // CSS optimization
-                    'public/js/min/abovethefold-css.debug.js': [
-                        'public/js/src/abovethefold.css.js'
+                    'public/js/min/abtfr-css.debug.js': [
+                        'public/js/src/abtfr.css.js'
                     ],
 
                     // Enhanced loadCSS
-                    'public/js/min/abovethefold-loadcss-enhanced.debug.js': [
-                        'public/js/src/abovethefold.loadcss-modified.js'
+                    'public/js/min/abtfr-loadcss-enhanced.debug.js': [
+                        'public/js/src/abtfr.loadcss-modified.js'
                     ],
 
                     // Original loadCSS
-                    'public/js/min/abovethefold-loadcss.debug.js': [
+                    'public/js/min/abtfr-loadcss.debug.js': [
                         'public/js/src/loadcss.js',
-                        'public/js/src/abovethefold.loadcss.js'
+                        'public/js/src/abtfr.loadcss.js'
                     ]
 
                 }
@@ -258,7 +258,7 @@ module.exports = function(grunt) {
                 options: {
                     compress: {
                         global_defs: merge({
-                            "ABTFDEBUG": false
+                            "ABTFRDEBUG": false
                         }, CONFIG_INDEX)
                     }
                 },
@@ -309,20 +309,20 @@ module.exports = function(grunt) {
                 options: {
                     compress: {
                         global_defs: merge({
-                            "ABTFDEBUG": false
+                            "ABTFRDEBUG": false
                         }, CONFIG_INDEX)
                     }
                 },
                 files: {
 
                     // Google PWA controller
-                    'public/js/min/abovethefold-pwa.js': [
-                        'public/js/src/abovethefold.pwa.js'
+                    'public/js/min/abtfr-pwa.js': [
+                        'public/js/src/abtfr.pwa.js'
                     ],
 
                     // Google PWA `unregister controller
-                    'public/js/min/abovethefold-pwa-unregister.js': [
-                        'public/js/src/abovethefold.pwa-unregister.js'
+                    'public/js/min/abtfr-pwa-unregister.js': [
+                        'public/js/src/abtfr.pwa-unregister.js'
                     ],
 
                     // Service Worker
@@ -336,20 +336,20 @@ module.exports = function(grunt) {
                 options: {
                     compress: {
                         global_defs: merge({
-                            "ABTFDEBUG": true
+                            "ABTFRDEBUG": true
                         }, CONFIG_INDEX)
                     }
                 },
                 files: {
 
                     // Google PWA controller
-                    'public/js/min/abovethefold-pwa.debug.js': [
-                        'public/js/src/abovethefold.pwa.js'
+                    'public/js/min/abtfr-pwa.debug.js': [
+                        'public/js/src/abtfr.pwa.js'
                     ],
 
                     // Google PWA `unregister controller
-                    'public/js/min/abovethefold-pwa-unregister.debug.js': [
-                        'public/js/src/abovethefold.pwa-unregister.js'
+                    'public/js/min/abtfr-pwa-unregister.debug.js': [
+                        'public/js/src/abtfr.pwa-unregister.js'
                     ],
                     // Service Worker
                     'public/js/min/pwa.serviceworker.debug.js': [
@@ -414,11 +414,11 @@ module.exports = function(grunt) {
             },*/
             serviceworker: {
                 src: 'public/js/pwa-serviceworker.js',
-                dest: '../test-blog/abtf-pwa.js'
+                dest: '../test-blog/abtfr-pwa.js'
             },
             serviceworker_debug: {
                 src: 'public/js/pwa-serviceworker.debug.js',
-                dest: '../test-blog/abtf-pwa.debug.js'
+                dest: '../test-blog/abtfr-pwa.debug.js'
             },
             test_serviceworker: {
                 src: 'public/js/min/pwa.serviceworker.js',
@@ -430,11 +430,11 @@ module.exports = function(grunt) {
             },
             test_serviceworkerx: {
                 src: 'public/js/min/pwa.serviceworker.js',
-                dest: '../test-blog/abtf-pwa.js'
+                dest: '../test-blog/abtfr-pwa.js'
             },
             test_serviceworkerx_debug: {
                 src: 'public/js/min/pwa.serviceworker.debug.js',
-                dest: '../test-blog/abtf-pwa.debug.js'
+                dest: '../test-blog/abtfr-pwa.debug.js'
             }
         }
     });

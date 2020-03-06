@@ -4,8 +4,8 @@
  * Extract Full CSS template
  *
  * @since      2.3.5
- * @package    abovethefold
- * @subpackage abovethefold/admin
+ * @package    abtfr
+ * @subpackage abtfr/admin
  * @author     Optimization.Team <info@optimization.team>
  */
 
@@ -14,7 +14,7 @@ $output = '<!DOCTYPE html>
 <head>
 <title>Full CSS extraction</title>
 <meta name="robots" content="noindex, nofollow" />
-<link rel="stylesheet" href="'.WPABTF_URI.'public/css/extractfull.min.css" />
+<link rel="stylesheet" href="'.WPABTFR_URI.'public/css/extractfull.min.css" />
 </head>
 <body rel="'.$url.'?extract-css='.$extractkey.'&output=download&files=">
 <h1>Full CSS Extraction</h1>
@@ -43,6 +43,6 @@ $output .= '
 | <a href="http://csslint.net/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">CSS<span style="color:#768c1c;font-weight:bold;margin-left:2px;">LINT</span></a>
 
 </div></fieldset>
-<script src="'.WPABTF_URI.'public/js/extractfull.min.js"></script>
+<script src="'.WPABTFR_URI.'public/js/extractfull.min.js"></script>
 </body>
 </html>';

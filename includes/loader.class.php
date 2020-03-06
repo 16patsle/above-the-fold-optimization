@@ -8,12 +8,12 @@
  * run function to execute the list of actions and filters.
  *
  * @since      1.0
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_Loader
+class Abtfr_Loader
 {
 
     /**

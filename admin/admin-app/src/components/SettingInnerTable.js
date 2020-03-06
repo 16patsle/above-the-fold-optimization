@@ -9,7 +9,7 @@ class SettingInnerTable extends Component {
         style={this.props.style}
       >
         <td colSpan="2" style={{ paddingTop: '0px' }}>
-          <div className="abtf-inner-table">
+          <div className="abtfr-inner-table">
             <h3 className="h">
               <span>{this.props.header}</span>
             </h3>

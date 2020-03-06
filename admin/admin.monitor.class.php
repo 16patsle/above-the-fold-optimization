@@ -8,7 +8,7 @@
  * @author     Patrick Sletvold
  */
 
-class Abovethefold_Admin_Monitor
+class ABTFR_Admin_Monitor
 {
 
     /**
@@ -37,9 +37,9 @@ class Abovethefold_Admin_Monitor
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtf_monitor_update', $this, 'update_settings');
+            $this->CTRL->loader->add_action('admin_post_abtfr_monitor_update', $this, 'update_settings');
             // Legacy version
-            $this->CTRL->loader->add_action('admin_post_abovethefold-monitor-update', $this, 'update_settings');
+            $this->CTRL->loader->add_action('admin_post_abtfr-monitor-update', $this, 'update_settings');
         }
     }
 
@@ -48,12 +48,12 @@ class Abovethefold_Admin_Monitor
      */
     public function update_settings()
     {
-        check_admin_referer('abovethefold');
+        check_admin_referer('abtfr');
 
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
         $_POST = array_map('stripslashes_deep', $_POST);
 
-        $options = get_option('abovethefold');
+        $options = get_option('abtfr');
         if (!is_array($options)) {
             $options = array();
         }

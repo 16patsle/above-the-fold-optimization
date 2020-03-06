@@ -9,12 +9,12 @@
  * @link https://wordpress.org/support/topic/please-add-support-for-litespeed-cache/
  *
  * @since      2.7.7
- * @package    abovethefold
- * @subpackage abovethefold/modules/plugins
+ * @package    abtfr
+ * @subpackage abtfr/modules/plugins
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class Abovethefold_OPP_LitespeedCache extends Abovethefold_OPP
+class ABTFR_OPP_LitespeedCache extends ABTFR_OPP
 {
 
     /**

@@ -1,6 +1,6 @@
 # Above the Fold Optimization
 
-The Above the Fold Optimization plugin is a toolkit for WordPress Optimization with a focus on SEO. The plugin enables to achieve a 100 score in the [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) test.
+The ABTF Reborn plugin is a toolkit for WordPress Optimization with a focus on SEO. The plugin enables to achieve a 100 score in the [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) test.
 
 The plugin is compatible with most optimization, caching and minification plugins such as Autoptimize and W3 Total Cache. The plugin offers modular compatibility and can be extended to support any optimization plugin. ([more info](https://github.com/16patsle/above-the-fold-optimization/tree/master/trunk/modules/plugins/))
 

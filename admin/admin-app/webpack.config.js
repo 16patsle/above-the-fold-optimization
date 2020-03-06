@@ -66,7 +66,7 @@ module.exports = function (webpackEnv) {
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
       // Prevents conflicts when multiple Webpack runtimes (from different apps)
       // are used on the same page.
-      jsonpFunction: 'webpackJsonpAbtfAdmin'
+      jsonpFunction: 'webpackJsonpAbtfrAdmin'
     },
     optimization: {
       minimize: isEnvProduction,
@@ -137,7 +137,7 @@ module.exports = function (webpackEnv) {
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
       splitChunks: {
         chunks: 'all',
-        name: 'abtf'
+        name: 'abtfr'
       },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985

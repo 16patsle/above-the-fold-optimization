@@ -6,13 +6,13 @@
  * This class provides the functionality for Google PWA optimization functions and hooks.
  *
  * @since      2.8.3
- * @package    abovethefold
- * @subpackage abovethefold/includes
+ * @package    abtfr
+ * @subpackage abtfr/includes
  * @author     Optimization.Team <info@optimization.team>
  */
 
 
-class Abovethefold_PWA
+class ABTFR_PWA
 {
 
     /**
@@ -46,9 +46,9 @@ class Abovethefold_PWA
     {
         $path = trailingslashit(ABSPATH);
 
-        $sw_filename = 'abtf-pwa.js';
-        $sw_filename_debug = 'abtf-pwa.debug.js';
-        $sw_config_filename = 'abtf-pwa-config.json';
+        $sw_filename = 'abtfr-pwa.js';
+        $sw_filename_debug = 'abtfr-pwa.debug.js';
+        $sw_config_filename = 'abtfr-pwa-config.json';
 
         return array(
             'filename' => $sw_filename,
@@ -71,7 +71,7 @@ class Abovethefold_PWA
             $scope = trailingslashit(parse_url(site_url(), PHP_URL_PATH));
         }
 
-        return apply_filters('abtf_pwa_sw_scope', $scope);
+        return apply_filters('abtfr_pwa_sw_scope', $scope);
     }
 
     /**
@@ -83,7 +83,7 @@ class Abovethefold_PWA
         $file = ($debug) ? $sw['filename_debug'] : $sw['filename'];
         $path = trailingslashit(parse_url(site_url(), PHP_URL_PATH));
 
-        return apply_filters('abtf_pwa_sw_path', $path . $file . '?path=' . urlencode($path));
+        return apply_filters('abtfr_pwa_sw_path', $path . $file . '?path=' . urlencode($path));
     }
 
     /**
@@ -171,7 +171,7 @@ class Abovethefold_PWA
         // preload assets
         
         // apply filters
-        $this->preload = apply_filters('abtf_pwa_preload', $this->preload);
+        $this->preload = apply_filters('abtfr_pwa_preload', $this->preload);
 
         if (!empty($this->preload)) {
             $config['preload'] = $this->preload;
@@ -202,7 +202,7 @@ class Abovethefold_PWA
             'pwa-serviceworker.debug.js' => $sw['file_debug']
         );
         foreach ($sources as $sourcefile => $sw_path) {
-            $source = trailingslashit(WPABTF_PATH) . 'public/js/' . $sourcefile;
+            $source = trailingslashit(WPABTFR_PATH) . 'public/js/' . $sourcefile;
             if (!file_exists($source)) {
                 $this->CTRL->admin->set_notice('The service worker source file (above-the-fold-optimization/public/js/'.$sourcefile.') is missing.', 'ERROR');
             } else {
@@ -222,7 +222,7 @@ class Abovethefold_PWA
 
                 if (!$sw_ok) {
                     if (isset($this->CTRL->admin)) {
-                        $this->CTRL->admin->set_notice('Failed to install the Service Worker on <strong>' . esc_html(str_replace(ABSPATH, '[ABSPATH]/', $sw_path)) . '</strong>. Please check the permissions or copy the file manually from ' . esc_html(str_replace(ABSPATH, '[ABSPATH]/', trailingslashit(WPABTF_PATH) . 'public/js/'.$sourcefile)) . ' (<a href="' . esc_attr(trailingslashit(WPABTF_URI) . 'public/js/'.$sourcefile) . '" download="'.$sourcefile.'">download</a>).', 'ERROR');
+                        $this->CTRL->admin->set_notice('Failed to install the Service Worker on <strong>' . esc_html(str_replace(ABSPATH, '[ABSPATH]/', $sw_path)) . '</strong>. Please check the permissions or copy the file manually from ' . esc_html(str_replace(ABSPATH, '[ABSPATH]/', trailingslashit(WPABTFR_PATH) . 'public/js/'.$sourcefile)) . ' (<a href="' . esc_attr(trailingslashit(WPABTFR_URI) . 'public/js/'.$sourcefile) . '" download="'.$sourcefile.'">download</a>).', 'ERROR');
                     }
                 }
             }
@@ -350,7 +350,7 @@ class Abovethefold_PWA
 
                 // unregister
                 $jssettings[$this->CTRL->optimization->client_config_ref['pwa_unregister']] = true;
-                $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-pwa-unregister'.$jsdebug.'.min.js';
+                $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-pwa-unregister'.$jsdebug.'.min.js';
             }
 
             // disabled
@@ -441,6 +441,6 @@ class Abovethefold_PWA
             }
             ksort($jssettings[$pwaindex]);
         }
-        $jsfiles[] = WPABTF_PATH . 'public/js/abovethefold-pwa'.$jsdebug.'.min.js';
+        $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-pwa'.$jsdebug.'.min.js';
     }
 }
