@@ -1,12 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../utils/useLinkState';
 import {
   adminUrl,
   siteTitle,
-  abtfAdminNonce,
+  abtfrAdminNonce,
   utmString
 } from '../utils/globalVars';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -46,10 +46,10 @@ const JavascriptView = () => {
   const { data, error } = useSWR('settings', getSettings);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>{sprintf(__('Error: $s', 'abtfr'), error)}</div>;
   }
 
-  const loading = <div>Loading...</div>;
+  const loading = <div>{__('Loading...', 'abtfr')}</div>;
 
   if (!data) {
     return loading;
@@ -66,7 +66,7 @@ const JavascriptView = () => {
       action={adminUrl + 'admin-post.php?action=abtf_javascript_update'}
       className="clearfix"
     >
-      <div dangerouslySetInnerHTML={{ __html: abtfAdminNonce }}></div>
+      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Javascript Optimization', 'abtfr')}>
         <Helmet>
           <title>Javascript Optimization {siteTitle}</title>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../utils/useLinkState';
 import {
@@ -81,10 +81,10 @@ const Http2View = () => {
   };
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>{sprintf(__('Error: $s', 'abtfr'), error)}</div>;
   }
 
-  const loading = <div>Loading...</div>;
+  const loading = <div>{__('Loading...', 'abtfr')}</div>;
 
   if (!data) {
     return loading;
