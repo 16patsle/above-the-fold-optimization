@@ -60,7 +60,7 @@ const ProxyView = () => {
       className="clearfix"
     >
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
-      <PageContent header={__('External Resource Proxy')}>
+      <PageContent header={__('External Resource Proxy', 'abtfr')}>
         <Helmet>
           <title>External Resource Proxy {siteTitle}</title>
         </Helmet>
@@ -366,7 +366,7 @@ const ProxyView = () => {
         </table>
         <hr />
         <SubmitButton type={['primary', 'large']} name="is_submit">
-          {__('Save')}
+          {__('Save', 'abtfr')}
         </SubmitButton>
         <br />
         <br />

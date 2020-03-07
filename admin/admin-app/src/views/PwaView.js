@@ -57,7 +57,7 @@ const PwaView = () => {
       className="clearfix"
     >
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
-      <PageContent header={__('Progressive Web App Optimization')}>
+      <PageContent header={__('Progressive Web App Optimization', 'abtfr')}>
         <Helmet>
           <title>Progressive Web App Optimization {siteTitle}</title>
         </Helmet>
@@ -703,7 +703,7 @@ jQuery(window).on('sw-update',function(e){
         </div>
         <hr />
         <SubmitButton type={['primary', 'large']} name="is_submit">
-          {__('Save')}
+          {__('Save', 'abtfr')}
         </SubmitButton>
       </PageContent>
     </form>

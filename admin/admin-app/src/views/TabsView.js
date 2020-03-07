@@ -6,7 +6,7 @@ class TabsView extends Component {
   render() {
     return (
       <div>
-        <h1>{__('ABTF Reborn')}</h1>
+        <h1>{__('ABTF Reborn', 'abtfr')}</h1>
         <nav className="nav-tab-wrapper" style={{ position: 'relative' }}>
           <div className="ref">
             <div className="links">

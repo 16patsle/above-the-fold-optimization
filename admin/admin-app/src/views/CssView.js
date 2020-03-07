@@ -51,7 +51,7 @@ const CssView = () => {
       encType="multipart/form-data"
     >
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
-      <PageContent header={__('CSS Optimization')}>
+      <PageContent header={__('CSS Optimization', 'abtfr')}>
         <Helmet>
           <title>CSS Optimization {siteTitle}</title>
         </Helmet>
@@ -571,7 +571,7 @@ const CssView = () => {
         </table>
         <hr />
         <SubmitButton type={['primary', 'large']} name="is_submit">
-          {__('Save')}
+          {__('Save', 'abtfr')}
         </SubmitButton>
       </PageContent>
     </form>

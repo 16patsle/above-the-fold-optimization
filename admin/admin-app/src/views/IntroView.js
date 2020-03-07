@@ -27,7 +27,7 @@ class IntroView extends Component {
     monitorUrl.searchParams.append('page', 'abtfr-monitor');
 
     return (
-      <PageContent header={__('Introduction')}>
+      <PageContent header={__('Introduction', 'abtfr')}>
         <Helmet>
           <title>Google PageSpeed Optimization {siteTitle}</title>
         </Helmet>

@@ -38,7 +38,16 @@
         if (!$criticalcss_configured) {
             print '<div class="error" data-count="'.intval($this->CTRL->options['update_count']).'">
 		<p style="font-size:16px;">
-			'.__('<strong>Warning:</strong> <a href="' . add_query_arg(array( 'page' => 'abtfr-criticalcss' ), admin_url('admin.php')) . '">Critical Path CSS</a> is empty. This may cause a <a href="https://en.wikipedia.org/wiki/Flash_of_unstyled_content" target="_blank">Flash of Unstyled Content</a> when CSS optimization is enabled and it may trigger the two Google PageSpeed rules <a href="https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=<?php print $lgcode;?" target="_blank"><em>Eliminate render-blocking JavaScript and CSS in above-the-fold content</em></a> and <a href="https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent?hl=<?php print $lgcode;?" target="_blank"><em>Prioritize visible content</em></a> that cause a significant penalty in the Google PageSpeed score.', 'abtfr').'
+			' . sprintf(
+                __('<strong>Warning:</strong> <a href="%1$s">Critical Path CSS</a> is empty. This may cause a <a href="%2$s" target="_blank">Flash of Unstyled Content</a> when CSS optimization is enabled and it may trigger the two Google PageSpeed rules <a href="%3$s" target="_blank">%4$s</a> and <a href="%5$s" target="_blank">%6$s</a> that cause a significant penalty in the Google PageSpeed score.', 'abtfr'),
+                add_query_arg(array( 'page' => 'abtfr-criticalcss' ), admin_url('admin.php')),
+                'https://en.wikipedia.org/wiki/Flash_of_unstyled_content',
+                'https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=' . $lgcode,
+                '<em>' . __('Eliminate render-blocking JavaScript and CSS in above-the-fold content', 'abtfr') . '</em>',
+                'https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent?hl=' . $lgcode,
+                '<em>' . __('Prioritize visible content', 'abtfr') . '</em>'
+            )
+            .'
 			</p>
 		<p>
 			<a class="button" href="https://developers.google.com/speed/pagespeed/insights/?url=' . urlencode(home_url()) . '&amp;hl=' . $lgcode . '" target="_blank">Test Google PageSpeed Score</a>

@@ -179,7 +179,7 @@ class JsonEditor extends Component {
         <JsonEditorIconFix />
         <div ref={this.editorRef}>
           <div className="loading-json-editor">
-            {__('Loading JSON editor...')}
+            {__('Loading JSON editor...', 'abtfr')}
           </div>
         </div>
         <div style={{ float: 'right', marginTop: '5px' }}>

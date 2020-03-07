@@ -102,7 +102,7 @@ const Http2View = () => {
       className="clearfix"
     >
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
-      <PageContent header={__('HTTP/2 Optimization')}>
+      <PageContent header={__('HTTP/2 Optimization', 'abtfr')}>
         <Helmet>
           <title>HTTP/2 Optimization {siteTitle}</title>
         </Helmet>
@@ -245,7 +245,7 @@ const Http2View = () => {
         </table>
         <hr />
         <SubmitButton type={['primary', 'large']} name="is_submit">
-          {__('Save')}
+          {__('Save', 'abtfr')}
         </SubmitButton>
       </PageContent>
     </form>

@@ -47,7 +47,7 @@ const MonitorView = () => {
       className="clearfix"
     >
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
-      <PageContent header={__('Website Monitor')}>
+      <PageContent header={__('Website Monitor', 'abtfr')}>
         <Helmet>
           <title>Website Monitor {siteTitle}</title>
         </Helmet>

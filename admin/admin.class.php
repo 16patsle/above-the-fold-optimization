@@ -241,7 +241,7 @@ class ABTFR_Admin
      */
     public function settings_link($links)
     {
-        $settings_link = '<a href="' . add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '">'.__('Settings').'</a>';
+        $settings_link = '<a href="' . add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '">'.__('Settings', 'abtfr').'</a>';
         array_unshift($links, $settings_link);
 
         return $links;
@@ -804,20 +804,20 @@ class ABTFR_Admin
 
         $optgroups[] = array(
             'value' => 'posts',
-            'label' => __('Posts')
+            'label' => __('Posts', 'abtfr')
         );
         $optgroups[] = array(
             'value' => 'pages',
-            'label' => __('Pages')
+            'label' => __('Pages', 'abtfr')
         );
         $optgroups[] = array(
             'value' => 'categories',
-            'label' => __('Categories')
+            'label' => __('Categories', 'abtfr')
         );
         if (class_exists('WooCommerce')) {
             $optgroups[] = array(
                 'value' => 'woocommerce',
-                'label' => __('WooCommerce')
+                'label' => __('WooCommerce', 'abtfr')
             );
         }
 

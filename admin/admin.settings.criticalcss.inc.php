@@ -62,7 +62,7 @@
 		
 		<hr />
 		<?php
-            submit_button(__('Save'), 'primary large', 'is_submit', false);
+            submit_button(__('Save', 'abtfr'), 'primary large', 'is_submit', false);
         ?><a name="conditional">&nbsp;</a>
 
 	</div>

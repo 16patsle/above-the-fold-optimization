@@ -38,7 +38,7 @@ const SettingsView = () => {
       className="clearfix"
     >
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
-      <PageContent header={__('Settings')}>
+      <PageContent header={__('Settings', 'abtfr')}>
         <Helmet>
           <title>ABTF Reborn Settings {siteTitle}</title>
         </Helmet>
@@ -93,7 +93,7 @@ const SettingsView = () => {
                 <th scope="row">Import Settings</th>
                 <td>
                   <SubmitButton type={['large']} name="import_settings_abtf">
-                    {__('Import settings from ABTF')}
+                    {__('Import settings from ABTF', 'abtfr')}
                   </SubmitButton>
                   <p className="description">
                     Migrate settings from the plugin Above the Fold
@@ -108,11 +108,11 @@ const SettingsView = () => {
         </table>
         <hr />
         <SubmitButton type={['primary', 'large']} name="is_submit">
-          {__('Save')}
+          {__('Save', 'abtfr')}
         </SubmitButton>
         &nbsp;
         <SubmitButton type={['large']} name="clear_pagecache">
-          {__('Clear Page Caches')}
+          {__('Clear Page Caches', 'abtfr')}
         </SubmitButton>
         <br />
         <br />

@@ -135,6 +135,6 @@ window.conditional_options = <?php print json_encode($conditional_options, true)
 	<li>
 		<br />
 		<?php
-            submit_button(__('Save'), 'primary large', 'is_submit', false);
+            submit_button(__('Save', 'abtfr'), 'primary large', 'is_submit', false);
         ?>
 	</li>

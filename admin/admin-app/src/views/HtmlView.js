@@ -66,7 +66,7 @@ const HtmlView = () => {
       encType="multipart/form-data"
     >
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
-      <PageContent header={__('HTML Optimization')}>
+      <PageContent header={__('HTML Optimization', 'abtfr')}>
         <Helmet>
           <title>HTML Optimization {siteTitle}</title>
         </Helmet>
@@ -115,7 +115,7 @@ const HtmlView = () => {
             <tr valign="top">
               <td colSpan="2" style={{ padding: '0px' }}>
                 <SubmitButton type={['primary', 'large']} name="is_submit">
-                  {__('Save')}
+                  {__('Save', 'abtfr')}
                 </SubmitButton>
               </td>
             </tr>
@@ -149,7 +149,7 @@ const HtmlView = () => {
         />
 
         <Info color="yellow" style={{ marginTop: '30px' }}>
-          <SearchReplaceExample title={__('Click to select')}>
+          <SearchReplaceExample title={__('Click to select', 'abtfr')}>
             {{
               string: '"search":"string to match","replace":"newstring"',
               regex: __(
@@ -169,7 +169,7 @@ const HtmlView = () => {
         </div>
         <hr />
         <SubmitButton type={['primary', 'large']} name="is_submit">
-          {__('Save')}
+          {__('Save', 'abtfr')}
         </SubmitButton>
       </PageContent>
     </form>
