@@ -1001,10 +1001,10 @@ class ABTFR_Admin
         $options['update_count']++;
 
         // update settings
-        update_option('abtfr', $options, true);
+        $settings_changed = update_option('abtfr', $options, true);
 
         if (!$notice) {
-            return;
+            return $settings_changed;
         }
 
         // add notice
@@ -1020,6 +1020,8 @@ class ABTFR_Admin
         }
 
         $this->set_notice($saved_notice, 'NOTICE');
+
+        return $settings_changed;
     }
 
     /**

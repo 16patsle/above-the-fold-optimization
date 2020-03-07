@@ -88,6 +88,22 @@ const SettingsView = () => {
                 </span>
               }
             ></SettingCheckbox>
+            {getOption('abtfOptionsExists') && (
+              <tr valign="top">
+                <th scope="row">Import Settings</th>
+                <td>
+                  <SubmitButton type={['large']} name="import_settings_abtf">
+                    {__('Import settings from ABTF')}
+                  </SubmitButton>
+                  <p className="description">
+                    Migrate settings from the plugin Above the Fold
+                    Optimization. This will overwrite all existing settings for
+                    this plugin with the ones from ABTF and afterwards delete
+                    the old settings.
+                  </p>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
         <hr />
@@ -102,9 +118,8 @@ const SettingsView = () => {
         <br />
         <h1>Content Security Policy</h1>
         <p>
-          Based on your current configuration, the ABTF Reborn
-          inline client javascript can be white listed using the following
-          hashes. (
+          Based on your current configuration, the ABTF Reborn inline client
+          javascript can be white listed using the following hashes. (
           <a
             href="https://content-security-policy.com/faq/"
             target="_blank"

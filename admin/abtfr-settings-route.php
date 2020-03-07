@@ -187,6 +187,12 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     }
 
     // Settings
+    // Used for settings import
+    $options['abtf_options_exists'] = false;
+    if(get_option('abovethefold')) {
+      $options['abtf_options_exists'] = true;
+    }
+
     $options['client_hashes'] = false;
 
     $hashes_url = wp_nonce_url(trailingslashit(site_url()), 'csp_hash_json', 'abtfr-csp-hash');
@@ -233,7 +239,7 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
         $options['uptimerobot_overview'] = do_shortcode('[uptime-robot days="1-7-14-180"]') .
         do_shortcode('[uptime-robot-response]');
       }
-		}
+    }
 
     return $this->convert_to_camel_case_array($options);
   }
