@@ -53,26 +53,36 @@ const CssView = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('CSS Optimization', 'abtfr')}>
         <Helmet>
-          <title>CSS Optimization {siteTitle}</title>
+          <title>
+            {__('CSS Optimization', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         {getOption('cssLoadcssVersionError') === 'not_found' ? (
           <h1 style={{ color: 'red' }}>
-            WARNING: PLUGIN INSTALLATION NOT COMPLETE, MISSING
-            public/js/src/loadcss_package.json
+            {sprintf(
+              __(
+                'WARNING: PLUGIN INSTALLATION NOT COMPLETE, MISSING %s',
+                'abtfr'
+              ),
+              'public/js/src/loadcss_package.json'
+            )}
           </h1>
         ) : null}
         {getOption('cssLoadcssVersionError') === 'failed_parse' ? (
           <h1 style={{ color: 'red' }}>
-            failed to parse public/js/src/loadcss_package.json
+            {sprintf(
+              __('failed to parse %s', 'abtfr'),
+              'public/js/src/loadcss_package.json'
+            )}
           </h1>
         ) : null}
         <table className="form-table">
           <tbody>
             <SettingCheckbox
-              header="Optimize CSS Delivery"
+              header={__('Optimize CSS Delivery', 'abtfr')}
               name="abtfr[cssdelivery]"
               link={linkOptionState('cssdelivery')}
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               description={
                 <span>
                   When enabled, CSS files are loaded asynchronously via{' '}
@@ -104,16 +114,16 @@ const CssView = () => {
                 <td colSpan="2" style={{ paddingTop: '0px' }}>
                   <div className="abtfr-inner-table">
                     <h3 className="h">
-                      <span>CSS Delivery Optimization</span>
+                      <span>{__('CSS Delivery Optimization', 'abtfr')}</span>
                     </h3>
                     <div className="inside">
                       <table className="form-table">
                         <tbody>
                           <SettingCheckbox
-                            header="Enhanced loadCSS"
+                            header={__('Enhanced loadCSS', 'abtfr')}
                             name="abtfr[loadcss_enhanced]"
                             link={linkOptionState('loadcssEnhanced')}
-                            label="Enabled"
+                            label={__('Enabled', 'abtfr')}
                             description={
                               <span>
                                 When enabled, a customized version of loadCSS is
@@ -133,7 +143,7 @@ const CssView = () => {
                           ></SettingCheckbox>
                           {getOption('loadcssEnhanced') ? (
                             <SettingNumberInput
-                              header="CSS render delay"
+                              header={__('CSS render delay', 'abtfr')}
                               min="0"
                               max="3000"
                               step="1"
@@ -160,37 +170,41 @@ const CssView = () => {
                                   >
                                     Warning:{' '}
                                   </span>
-                                  A higher Google PageSpeed score may sometimes
-                                  be achieved using this option but it may not
-                                  be beneficial to the page rendering experience
-                                  of your users. Often it is best to seek an
-                                  alternative solution.
+                                  {__(
+                                    'A higher Google PageSpeed score may sometimes be achieved using this option but it may not be beneficial to the page rendering experience of your users. Often it is best to seek an alternative solution.',
+                                    'abtfr'
+                                  )}
                                 </span>
                               </p>
                               <p className="description">
-                                Optionally, enter a time in milliseconds to
-                                delay the rendering of CSS files.
+                                {__(
+                                  'Optionally, enter a time in milliseconds to delay the rendering of CSS files.',
+                                  'abtfr'
+                                )}
                               </p>
                             </SettingNumberInput>
                           ) : null}
                           <SettingSelect
-                            header="Position"
+                            header={__('Position', 'abtfr')}
                             name="abtfr[cssdelivery_position]"
                             link={linkOptionState('cssdeliveryPosition')}
                             options={[
                               {
                                 value: 'header',
-                                name: 'Header'
+                                name: __('Header', 'abtfr')
                               },
                               {
                                 value: 'footer',
-                                name: 'Footer'
+                                name: __('Footer', 'abtfr')
                               }
                             ]}
-                            description="Select the position where the async loading of CSS will start."
+                            description={__(
+                              'Select the position where the async loading of CSS will start.',
+                              'abtfr'
+                            )}
                           ></SettingSelect>
                           <SettingTextarea
-                            header="Ignore List"
+                            header={__('Ignore List', 'abtfr')}
                             style={{
                               width: '100%',
                               height: '50px',
@@ -198,10 +212,13 @@ const CssView = () => {
                             }}
                             name="abtfr[cssdelivery_ignore]"
                             link={linkOptionState('cssdeliveryIgnore')}
-                            description="Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML."
+                            description={__(
+                              'Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML.',
+                              'abtfr'
+                            )}
                           ></SettingTextarea>
                           <SettingTextarea
-                            header="Remove List"
+                            header={__('Remove List', 'abtfr')}
                             style={{
                               width: '100%',
                               height: '50px',
@@ -209,7 +226,10 @@ const CssView = () => {
                             }}
                             name="abtfr[cssdelivery_remove]"
                             link={linkOptionState('cssdeliveryRemove')}
-                            description="Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline."
+                            description={__(
+                              'Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline.',
+                              'abtfr'
+                            )}
                           ></SettingTextarea>
                         </tbody>
                       </table>
@@ -219,10 +239,10 @@ const CssView = () => {
               </tr>
             ) : null}
             <SettingCheckbox
-              header="Optimize Web Fonts"
+              header={__('Optimize Web Fonts', 'abtfr')}
               name="abtfr[gwfo]"
               link={linkOptionState('gwfo')}
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               description={
                 <span>
                   When enabled, web fonts are optimized using{' '}
@@ -242,37 +262,38 @@ const CssView = () => {
                 <td colSpan="2" style={{ paddingTop: '0px' }}>
                   <div className="abtfr-inner-table">
                     <h3 className="h">
-                      <span>Web Font Optimization</span>
+                      <span>{__('Web Font Optimization', 'abtfr')}</span>
                     </h3>
                     <div className="inside">
                       <table className="form-table">
                         <tbody>
                           <SettingSelect
-                            header="webfont.js Load Method"
+                            header={__('webfont.js Load Method', 'abtfr')}
                             name="abtfr[gwfo_loadmethod]"
                             link={linkOptionState('gwfoLoadmethod')}
                             options={[
                               {
                                 value: 'inline',
-                                name: 'Inline'
+                                name: __('Inline', 'abtfr')
                               },
                               {
                                 value: 'async',
-                                name: 'Async'
+                                name: __('Async', 'abtfr')
                               },
                               {
                                 value: 'async_cdn',
-                                name: `Async from Google CDN (v${getOption(
-                                  'gwfoCdnVersion'
-                                )})`
+                                name: sprintf(
+                                  __('Async from Google CDN (v$%s)', 'abtfr'),
+                                  getOption('gwfoCdnVersion')
+                                )
                               },
                               {
                                 value: 'wordpress',
-                                name: 'WordPress include'
+                                name: __('WordPress include', 'abtfr')
                               },
                               {
                                 value: 'disabled',
-                                name: 'Disabled (remove all fonts)'
+                                name: __('Disabled (remove all fonts)', 'abtfr')
                               }
                             ]}
                             description={
@@ -295,20 +316,23 @@ const CssView = () => {
                           ></SettingSelect>
                           {getOption('gwfoLoadmethod') !== 'disabled' ? (
                             <SettingSelect
-                              header="Load Position"
+                              header={__('Load Position', 'abtfr')}
                               name="abtfr[gwfo_loadposition]"
                               link={linkOptionState('gwfoLoadposition')}
                               options={[
                                 {
                                   value: 'header',
-                                  name: 'Header'
+                                  name: __('Header', 'abtfr')
                                 },
                                 {
                                   value: 'footer',
-                                  name: 'Footer'
+                                  name: __('Footer', 'abtfr')
                                 }
                               ]}
-                              description="Select the position where the loading of web fonts will start."
+                              description={__(
+                                'Select the position where the loading of web fonts will start.',
+                                'abtfr'
+                              )}
                             ></SettingSelect>
                           ) : null}
                           {!getOption('gwfoConfigValid') ? (
@@ -321,7 +345,10 @@ const CssView = () => {
                                     marginBottom: '2px'
                                   }}
                                 >
-                                  WebFontConfig variable not recognized.
+                                  {__(
+                                    'WebFontConfig variable not recognized.',
+                                    'abtfr'
+                                  )}
                                 </p>
                               </td>
                             </tr>
@@ -329,7 +356,7 @@ const CssView = () => {
                           {getOption('gwfoLoadmethod') !== 'disabled' ? (
                             <React.Fragment>
                               <SettingTextarea
-                                header="WebFontConfig"
+                                header={__('WebFontConfig', 'abtfr')}
                                 style={{
                                   width: '100%',
                                   height: '100px',
@@ -363,7 +390,7 @@ const CssView = () => {
                                 }
                               ></SettingTextarea>
                               <SettingTextarea
-                                header="Google Web Fonts"
+                                header={__('Google Web Fonts', 'abtfr')}
                                 style={{
                                   width: '100%',
                                   height:
@@ -407,9 +434,12 @@ const CssView = () => {
                               ></SettingTextarea>
                               <SettingCheckbox
                                 name="abtfr[gwfo_googlefonts_auto]"
-                                label="Auto-detect enabled"
+                                label={__('Auto-detect enabled', 'abtfr')}
                                 link={linkOptionState('gwfoGooglefontsAuto')}
-                                description="When enabled, fonts are automatically extracted from the HTML, CSS and existing WebFontConfig."
+                                description={__(
+                                  'When enabled, fonts are automatically extracted from the HTML, CSS and existing WebFontConfig.',
+                                  'abtfr'
+                                )}
                               ></SettingCheckbox>
                               <SettingTextarea
                                 title="&nbsp;Ignore List"
@@ -491,7 +521,10 @@ const CssView = () => {
                               </p>
 
                               <h4 className="h">
-                                Step 1: download the font files and CSS
+                                {__(
+                                  'Step 1: download the font files and CSS',
+                                  'abtfr'
+                                )}
                               </h4>
 
                               <p>
@@ -509,7 +542,10 @@ const CssView = () => {
                               </p>
 
                               <h4 className="h">
-                                Step 2: upload the fonts to your theme directory
+                                {__(
+                                  'Step 2: upload the fonts to your theme directory',
+                                  'abtfr'
+                                )}
                               </h4>
                               <p>
                                 Extract the zip-file and upload the font files
@@ -527,13 +563,15 @@ const CssView = () => {
                                   name="uploadgooglefontzip"
                                   className="button button-primary button-green"
                                 >
-                                  Upload &amp; Extract
+                                  {__('Upload & Extract', 'abtfr')}
                                 </button>
                               </p>
 
                               <h4 className="h">
-                                Step 3: create a Conditional Critical Path CSS
-                                entry for Google Fonts
+                                {__(
+                                  'Step 3: create a Conditional Critical Path CSS entry for Google Fonts',
+                                  'abtfr'
+                                )}
                               </h4>
                               <p>
                                 Create a Conditional Critical Path CSS entry

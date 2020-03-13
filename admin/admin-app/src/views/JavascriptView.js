@@ -69,7 +69,9 @@ const JavascriptView = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Javascript Optimization', 'abtfr')}>
         <Helmet>
-          <title>Javascript Optimization {siteTitle}</title>
+          <title>
+            {__('Javascript Optimization', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         <Info
           color="seagreen"
@@ -109,9 +111,9 @@ const JavascriptView = () => {
         <table className="form-table">
           <tbody>
             <SettingCheckbox
-              header="Optimize Javascript Loading"
+              header={__('Optimize Javascript Loading', 'abtfr')}
               name="abovethefold[jsdelivery]"
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               link={linkOptionState('jsdelivery')}
               description={
                 <span>
@@ -147,7 +149,7 @@ const JavascriptView = () => {
               <td colSpan="2" style={{ paddingTop: '0px' }}>
                 <div className="abtf-inner-table">
                   <h3 className="h">
-                    <span>Javascript Load Optimization</span>
+                    <span>{__('Javascript Load Optimization', 'abtfr')}</span>
                   </h3>
                   <div className="inside">
                     <p
@@ -158,15 +160,17 @@ const JavascriptView = () => {
                       }}
                     >
                       <span style={{ color: 'red', fontWeight: 'bold' }}>
-                        Warning:
+                        {__('Warning:', 'abtfr')}
                       </span>{' '}
-                      It may require some tweaking of the settings to prevent
-                      javascript problems.
+                      {__(
+                        'It may require some tweaking of the settings to prevent javascript problems.',
+                        'abtfr'
+                      )}
                     </p>
                     <table className="form-table">
                       <tbody>
                         <SettingRadio
-                          header="Script Loader"
+                          header={__('Script Loader', 'abtfr')}
                           name="abovethefold[jsdelivery_scriptloader]"
                           link={linkOptionState('jsdeliveryScriptloader')}
                           radios={[
@@ -197,15 +201,19 @@ const JavascriptView = () => {
                               ),
                               description: (
                                 <span style={{ marginBottom: '5px' }}>
-                                  A stable async script loader that works in old
-                                  browsers.
+                                  {__(
+                                    'A stable async script loader that works in old browsers.',
+                                    'abtfr'
+                                  )}
                                 </span>
                               )
                             },
                             {
                               value: 'html5',
-                              label:
-                                ' little-loader + HTML5 Web Worker and Fetch API based script loader with localStorage cache',
+                              label: __(
+                                'little-loader + HTML5 Web Worker and Fetch API based script loader with localStorage cache',
+                                'abtfr'
+                              ),
                               description: (
                                 <span>
                                   {!getOption('jsProxy') ? (
@@ -254,7 +262,10 @@ const JavascriptView = () => {
                               style={{ marginTop: '0px' }}
                             >
                               <strong>
-                                Advantages of the HTML5 script loader
+                                {__(
+                                  'Advantages of the HTML5 script loader',
+                                  'abtfr'
+                                )}
                               </strong>
                             </p>
                             <span
@@ -264,48 +275,58 @@ const JavascriptView = () => {
                               <ul style={{ margin: '0px', padding: '0px' }}>
                                 <li style={{ margin: '0px', padding: '0px' }}>
                                   &nbsp;
-                                  <span style={{ color: '#666' }}>➤</span> 0
-                                  javascript file download during navigation
-                                </li>
-                                <li style={{ margin: '0px', padding: '0px' }}>
-                                  &nbsp;
-                                  <span style={{ color: '#666' }}>➤</span> 0
-                                  javascript file download for returning
-                                  visitors
-                                </li>
-                                <li style={{ margin: '0px', padding: '0px' }}>
-                                  &nbsp;
-                                  <span style={{ color: '#666' }}>➤</span> abide
-                                  WordPress dependencies
+                                  <span style={{ color: '#666' }}>➤</span>{' '}
+                                  {__(
+                                    '0 javascript file download during navigation',
+                                    'abtfr'
+                                  )}
                                 </li>
                                 <li style={{ margin: '0px', padding: '0px' }}>
                                   &nbsp;
                                   <span style={{ color: '#666' }}>➤</span>{' '}
-                                  faster script loading than browser cache,
-                                  especially on mobile
+                                  {__(
+                                    '0 javascript file download for returning visitors',
+                                    'abtfr'
+                                  )}
+                                </li>
+                                <li style={{ margin: '0px', padding: '0px' }}>
+                                  &nbsp;
+                                  <span style={{ color: '#666' }}>➤</span>{' '}
+                                  {__('abide WordPress dependencies', 'abtfr')}
+                                </li>
+                                <li style={{ margin: '0px', padding: '0px' }}>
+                                  &nbsp;
+                                  <span style={{ color: '#666' }}>➤</span>{' '}
+                                  {__(
+                                    'faster script loading than browser cache, especially on mobile',
+                                    'abtfr'
+                                  )}
                                 </li>
                               </ul>
                             </span>
                           </div>
                         </SettingRadio>
                         <SettingSelect
-                          header="Position"
+                          header={__('Position', 'abtfr')}
                           name="abovethefold[jsdelivery_position]"
                           link={linkOptionState('jsdeliveryPosition')}
                           options={[
                             {
                               value: 'header',
-                              name: 'Header'
+                              name: __('Header', 'abtfr')
                             },
                             {
                               value: 'footer',
-                              name: 'Footer'
+                              name: __('Footer', 'abtfr')
                             }
                           ]}
-                          description="Select the position where the async loading of Javascript will start."
+                          description={__(
+                            'Select the position where the async loading of Javascript will start.',
+                            'abtfr'
+                          )}
                         ></SettingSelect>
                         <SettingTextarea
-                          header="Ignore List"
+                          header={__('Ignore List', 'abtfr')}
                           style={{
                             width: '100%',
                             height: '50px',
@@ -313,10 +334,13 @@ const JavascriptView = () => {
                           }}
                           name="abovethefold[jsdelivery_ignore]"
                           link={linkOptionState('jsdeliveryIgnore')}
-                          description="Scripts to ignore in Javascript delivery optimization. One script per line. The files will be left untouched in the HTML."
+                          description={__(
+                            'Scripts to ignore in Javascript delivery optimization. One script per line. The files will be left untouched in the HTML.',
+                            'abtfr'
+                          )}
                         ></SettingTextarea>
                         <SettingTextarea
-                          header="Remove List"
+                          header={__('Remove List', 'abtfr')}
                           style={{
                             width: '100%',
                             height: '50px',
@@ -324,18 +348,24 @@ const JavascriptView = () => {
                           }}
                           name="abovethefold[jsdelivery_remove]"
                           link={linkOptionState('jsdeliveryRemove')}
-                          description="Scripts to remove from HTML. One script per line. This feature enables to include small plugin related scripts inline."
+                          description={__(
+                            'Scripts to remove from HTML. One script per line. This feature enables to include small plugin related scripts inline.',
+                            'abtfr'
+                          )}
                         ></SettingTextarea>
                         <SettingCheckbox
-                          header="Force Async"
+                          header={__('Force Async', 'abtfr')}
                           name="abovethefold[jsdelivery_async_all]"
-                          label="Enabled"
+                          label={__('Enabled', 'abtfr')}
                           link={linkOptionState('jsdeliveryAsyncAll')}
-                          description="When enabled, all scripts are loaded asynchronously."
+                          description={__(
+                            'When enabled, all scripts are loaded asynchronously.',
+                            'abtfr'
+                          )}
                         ></SettingCheckbox>
                         {!getOption('jsdeliveryAsyncAll') ? (
                           <SettingTextarea
-                            header="Async Force List"
+                            header={__('Async Force List', 'abtfr')}
                             style={{
                               width: '100%',
                               height: '50px',
@@ -343,7 +373,10 @@ const JavascriptView = () => {
                             }}
                             name="abovethefold[jsdelivery_async]"
                             link={linkOptionState('jsdeliveryAsync')}
-                            description="Enter (parts of) scripts to force to load async. All other scripts are loaded in sequential blocking order if not specifically configured as async in HTML."
+                            description={__(
+                              'Enter (parts of) scripts to force to load async. All other scripts are loaded in sequential blocking order if not specifically configured as async in HTML.',
+                              'abtfr'
+                            )}
                           >
                             <span className="description">
                               Example:
@@ -355,18 +388,22 @@ const JavascriptView = () => {
                                   marginTop: '10px'
                                 }}
                               >
-                                <li>Script1: non-async [wait...]</li>
                                 <li>
-                                  Script 2,3,4: async, Script 5: non-async
-                                  [wait...]
+                                  {__('Script1: non-async [wait...]', 'abtfr')}
                                 </li>
-                                <li>Script 6</li>
+                                <li>
+                                  {__(
+                                    'Script 2,3,4: async, Script 5: non-async [wait...]',
+                                    'abtfr'
+                                  )}
+                                </li>
+                                <li>{__('Script 6', 'abtfr')}</li>
                               </ol>
                             </span>
                           </SettingTextarea>
                         ) : null}
                         <SettingTextarea
-                          header="Async Disabled List"
+                          header={__('Async Disabled List', 'abtfr')}
                           style={{
                             width: '100%',
                             height: '50px',
@@ -374,10 +411,13 @@ const JavascriptView = () => {
                           }}
                           name="abovethefold[jsdelivery_async_disabled]"
                           link={linkOptionState('jsdeliveryAsyncDisabled')}
-                          description="Enter (parts of) scripts to force to load blocking (non-async)."
+                          description={__(
+                            'Enter (parts of) scripts to force to load blocking (non-async).',
+                            'abtfr'
+                          )}
                         ></SettingTextarea>
                         <SettingTextarea
-                          header="requestIdleCallback"
+                          header={__('requestIdleCallback', 'abtfr')}
                           style={{
                             width: '100%',
                             height: '50px',
@@ -415,12 +455,17 @@ const JavascriptView = () => {
                                 color: 'maroon'
                               }}
                             >
-                              This feature requires the HTML5 script loader.
+                              {__(
+                                'This feature requires the HTML5 script loader.',
+                                'abtfr'
+                              )}
                             </p>
                           ) : (
                             <p style={{ paddingBottom: '5px' }}>
-                              This feature only applies to localStorage cached
-                              scripts.
+                              {__(
+                                'This feature only applies to localStorage cached scripts.',
+                                'abtfr'
+                              )}
                               {/* Our new plugin will enable this option for all scripts.*/}
                             </p>
                           )}
@@ -431,9 +476,9 @@ const JavascriptView = () => {
                           </Info>
                         </SettingTextarea>
                         <SettingCheckbox
-                          header="Abide Dependencies"
+                          header={__('Abide Dependencies', 'abtfr')}
                           name="abovethefold[jsdelivery_deps]"
-                          label="Enabled"
+                          label={__('Enabled', 'abtfr')}
                           link={linkOptionState('jsdeliveryDeps')}
                           description={
                             <span>
@@ -452,9 +497,9 @@ const JavascriptView = () => {
                           }
                         ></SettingCheckbox>
                         <SettingCheckbox
-                          header="jQuery Stub"
+                          header={__('jQuery Stub', 'abtfr')}
                           name="abovethefold[jsdelivery_jquery]"
-                          label="Enabled"
+                          label={__('Enabled', 'abtfr')}
                           link={linkOptionState('jsdeliveryJquery')}
                           description={
                             <span>
@@ -474,9 +519,9 @@ const JavascriptView = () => {
               </td>
             </tr>
             <SettingCheckbox
-              header="Lazy Load Scripts"
+              header={__('Lazy Load Scripts', 'abtfr')}
               name="abovethefold[lazyscripts_enabled]"
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               link={linkOptionState('lazyscriptsEnabled')}
               description={
                 <span>

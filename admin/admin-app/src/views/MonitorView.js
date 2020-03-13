@@ -49,7 +49,9 @@ const MonitorView = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Website Monitor', 'abtfr')}>
         <Helmet>
-          <title>Website Monitor {siteTitle}</title>
+          <title>
+            {__('Website Monitor', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         <div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
           <a
@@ -65,11 +67,10 @@ const MonitorView = () => {
           </a>
         </div>
         <p>
-          Google wants to provide its customers (searching users) with an
-          optimal internet experience. Websites with a proven track record of
-          quality and reliability will obtain a preferred position, especially
-          for premium search terms and when Google has to (temporarily) select a
-          website for a higher amount of traffic.
+          {__(
+            'Google wants to provide its customers (searching users) with an optimal internet experience. Websites with a proven track record of quality and reliability will obtain a preferred position, especially for premium search terms and when Google has to (temporarily) select a website for a higher amount of traffic.',
+            'abtfr'
+          )}
         </p>
         <p>
           To ensure uptime and website quality it is required to monitor all
@@ -225,10 +226,10 @@ const MonitorView = () => {
         </p>
         <h4>Professional &amp; advanced website monitoring</h4>
         <p>
-          Consider using robot solutions that simulate real-user behaviour on
-          your website, from multiple (mobile) devices, to monitor the physical
-          performance and user experience of your website including details such
-          as the functionality of a mobile menu.
+          {__(
+            'Consider using robot solutions that simulate real-user behaviour on your website, from multiple (mobile) devices, to monitor the physical performance and user experience of your website including details such as the functionality of a mobile menu.',
+            'abtfr'
+          )}
         </p>
         <p>
           One of the many solutions is{' '}

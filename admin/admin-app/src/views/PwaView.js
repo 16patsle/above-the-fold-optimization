@@ -59,7 +59,9 @@ const PwaView = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Progressive Web App Optimization', 'abtfr')}>
         <Helmet>
-          <title>Progressive Web App Optimization {siteTitle}</title>
+          <title>
+            {__('Progressive Web App Optimization', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         <div>
           <div style={{ textAlign: 'center' }}>
@@ -133,10 +135,10 @@ const PwaView = () => {
           <table className="form-table">
             <tbody>
               <SettingCheckbox
-                header="Enable PWA"
+                header={__('Enable PWA', 'abtfr')}
                 name="abtfr[pwa]"
                 link={linkOptionState('pwa')}
-                label="Enabled"
+                label={__('Enabled', 'abtfr')}
                 description={
                   <>
                     Enable PWA functionality in browsers that support{' '}
@@ -153,24 +155,27 @@ const PwaView = () => {
               />
               <SettingInnerTable
                 className="serviceworkeroptions"
-                header="Service Worker Settings"
+                header={__('Service Worker Settings', 'abtfr')}
               >
                 {!getOption('pwa') && (
                   <SettingCheckbox
                     name="abtfr[pwa_unregister]"
-                    header="Unregister Service Worker"
+                    header={__('Unregister Service Worker', 'abtfr')}
                     link={linkOptionState('pwaUnregister')}
-                    label="Enabled"
-                    description="Unregister the PWA Service Worker for visitors."
+                    label={__('Enabled', 'abtfr')}
+                    description={__(
+                      'Unregister the PWA Service Worker for visitors.',
+                      'abtfr'
+                    )}
                   />
                 )}
                 {getOption('pwa') && (
                   <>
                     <SettingCheckbox
                       name="abtfr[pwa_register]"
-                      header="Register Service Worker"
+                      header={__('Register Service Worker', 'abtfr')}
                       link={linkOptionState('pwaRegister')}
-                      label="Enabled"
+                      label={__('Enabled', 'abtfr')}
                       description={
                         <>
                           Unchecking this option enables to combine the PWA
@@ -196,7 +201,7 @@ const PwaView = () => {
 
                     <SettingTextInput
                       name="abtfr[pwa_scope]"
-                      header="Service Worker Scope"
+                      header={__('Service Worker Scope', 'abtfr')}
                       link={linkOptionState('pwaScope')}
                       placeholder="Leave blank for global scope"
                       title={`Global scope: ${getOption('pwaScopeCurrent')}`}
@@ -239,19 +244,19 @@ const PwaView = () => {
                         >
                           {`
 /*
-  You must first obtain permissions
+  ${__('You must first obtain permissions', 'abtfr')}
   https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission
 */
 Notification.requestPermission(function(result){
   if (result === 'granted') {
-    Abtfr.push('Welcome back!',{
+    Abtfr.push('${__('Welcome back!', 'abtfr')}',{
       body: 'Buzz! Buzz!',
       icon: '../images/touch/chrome-touch-icon-192x192.png',
       vibrate: [200, 100, 200, 100, 200, 100, 200],
       tag: 'vibration-sample'
     })
     .then(function(status) {
-      console.log('Notification sent', status);
+      console.log('${__('Notification sent', 'abtfr')}', status);
     });
   }
 });
@@ -276,43 +281,40 @@ Notification.requestPermission(function(result){
               </tr>
               <SettingCheckbox
                 name="abtfr[pwa_cache_pages]"
-                header="Offline Cache"
+                header={__('Offline Cache', 'abtfr')}
                 link={linkOptionState('pwaCachePages')}
-                label="Enabled"
-                description="Cache HTML pages in the service worker. This option enables to make a website available offline."
+                label={__('Enabled', 'abtfr')}
+                description={__(
+                  'Cache HTML pages in the service worker. This option enables to make a website available offline.',
+                  'abtfr'
+                )}
               />
               <SettingInnerTable
-                header="Offline Cache Settings"
+                header={__('Offline Cache Settings', 'abtfr')}
                 style={!getOption('pwaCachePages') ? { display: 'none' } : {}}
               >
                 <SettingSelect
-                  header="HTML Cache Strategy"
+                  header={__('HTML Cache Strategy', 'abtfr')}
                   name="abtfr[pwa_cache_pages_strategy]"
                   link={linkOptionState('pwaCachePagesStrategy')}
                   options={[
                     {
                       value: 'network',
-                      name: 'Network → Cache'
+                      name: __('Network → Cache', 'abtfr')
                     },
                     {
                       value: 'cache',
-                      name: 'Cache → Network'
+                      name: __('Cache → Network', 'abtfr')
                     },
                     {
                       value: 'event',
-                      name: 'On demand (event based)'
+                      name: __('On demand (event based)', 'abtfr')
                     }
                   ]}
-                  description={
-                    <>
-                      By default HTML pages are fetched from the network with
-                      the cache as fallback when the network fails. Select the
-                      Cache First strategy to serve pages from cache with the
-                      network as backup. Select the On demand strategy to use a
-                      Cache First strategy with a manual (event based) cache
-                      storage (e.g. "click to read this page offline").
-                    </>
-                  }
+                  description={__(
+                    'By default HTML pages are fetched from the network with the cache as fallback when the network fails. Select the Cache First strategy to serve pages from cache with the network as backup. Select the On demand strategy to use a Cache First strategy with a manual (event based) cache storage (e.g. "click to read this page offline").',
+                    'abtfr'
+                  )}
                 >
                   <ApiExample
                     description={
@@ -325,13 +327,13 @@ Notification.requestPermission(function(result){
                     {`
 Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-image.jpg'])
   .then(function(status) {
-    console.log('Resources available offline', status);
+    console.log('${__('Resources available offline', 'abtfr')}', status);
   });
                       `.trim()}
                   </ApiExample>
                 </SettingSelect>
                 <SettingTextarea
-                  header="HTML Cache Include List"
+                  header={__('HTML Cache Include List', 'abtfr')}
                   textareaClass="json-array-lines"
                   name="abtfr[pwa_cache_pages_include]"
                   link={linkOptionState('pwaCacheInclude')}
@@ -345,14 +347,19 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                 />
                 <SettingCheckbox
                   name="abtfr[pwa_cache_assets]"
-                  header="Cache Assets"
+                  header={__('Cache Assets', 'abtfr')}
                   link={linkOptionState('pwaCacheAssets')}
-                  label="Enabled"
-                  description="Cache assets such as scripts and styles. Use a request and/or response filter to apply a cache strategy and enable or disable caching for specific assets."
+                  label={__('Enabled', 'abtfr')}
+                  description={__(
+                    'Cache assets such as scripts and styles. Use a request and/or response filter to apply a cache strategy and enable or disable caching for specific assets.',
+                    'abtfr'
+                  )}
                 />
                 {getOption('pwaCacheAssets') && (
                   <tr valign="top">
-                    <th scope="row">Asset Cache Include Policy</th>
+                    <th scope="row">
+                      {__('Asset Cache Include Policy', 'abtfr')}
+                    </th>
                     <td>
                       <JsonEditor
                         name="pwa.cache.assets"
@@ -373,24 +380,21 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                   </tr>
                 )}
                 <OfflinePageSelect
-                  header="Offline Page"
+                  header={__('Offline Page', 'abtfr')}
                   name="abtfr[pwa_cache_pages_offline]"
                   link={linkOptionState('pwaCachePagesOffline')}
                   size={80}
                   placeholder="/path/to/offline.html"
-                  description={
-                    <>
-                      Enter an URL or absolute path to a HTML page to display
-                      when the network is offline and when the requested page is
-                      not available in cache.
-                    </>
-                  }
+                  description={__(
+                    'Enter an URL or absolute path to a HTML page to display when the network is offline and when the requested page is not available in cache.',
+                    'abtfr'
+                  )}
                 />
                 <SettingCheckbox
                   name="abtfr[pwa_offline_class]"
-                  header="CSS online/offline class"
+                  header={__('CSS online/offline class', 'abtfr')}
                   link={linkOptionState('pwaOfflineClass')}
-                  label="Enabled"
+                  label={__('Enabled', 'abtfr')}
                   description={
                     <>
                       Add the class <code>offline</code> to{' '}
@@ -411,24 +415,30 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                   <>
                     <SettingNumberInput
                       name="abtfr[pwa_cache_pages_update_interval]"
-                      header="Cache Update Interval"
+                      header={__('Cache Update Interval', 'abtfr')}
                       link={linkOptionState('pwaCachePagesUpdateInterval')}
                       style={{ width: 120 }}
                       placeholder="Always"
-                      description="Enter a time in seconds to update cached pages using the network. Leave blank to update the cache on each request."
+                      description={__(
+                        'Enter a time in seconds to update cached pages using the network. Leave blank to update the cache on each request.',
+                        'abtfr'
+                      )}
                     />
                     <SettingNumberInput
                       name="abtfr[pwa_cache_pages_max_age]"
-                      header="Cache Max Age"
+                      header={__('Cache Max Age', 'abtfr')}
                       link={linkOptionState('pwaCachePagesMaxAge')}
                       style={{ width: 120 }}
-                      description="Enter a expire time in seconds. The maximum age does not override HTTP expire headers."
+                      description={__(
+                        'Enter a expire time in seconds. The maximum age does not override HTTP expire headers.',
+                        'abtfr'
+                      )}
                     />
                     <SettingCheckbox
                       name="abtfr[pwa_cache_pages_head_update]"
-                      header="HEAD based network update"
+                      header={__('HEAD based network update', 'abtfr')}
                       link={linkOptionState('pwaCachePagesHeadUpdate')}
-                      label="Enabled"
+                      label={__('Enabled', 'abtfr')}
                       description={
                         <>
                           Use a HTTP HEAD request and <code>etag</code> and/or{' '}
@@ -441,10 +451,13 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                     />
                     <SettingCheckbox
                       name="abtfr[pwa_cache_pages_update_notify]"
-                      header="Client event on update"
+                      header={__('Client event on update', 'abtfr')}
                       link={linkOptionState('pwaCachePagesUpdateNotify')}
-                      label="Enabled"
-                      description="Send an event to the client when the cache is updated."
+                      label={__('Enabled', 'abtfr')}
+                      description={__(
+                        'Send an event to the client when the cache is updated.',
+                        'abtfr'
+                      )}
                     >
                       <ApiExample
                         description={
@@ -468,21 +481,27 @@ jQuery(window).on('sw-update',function(e){
                 )}
                 <SettingNumberInput
                   name="abtfr[pwa_cache_max_size]"
-                  header="Cache Max Size"
+                  header={__('Cache Max Size', 'abtfr')}
                   link={linkOptionState('pwaCacheMaxSize')}
                   style={{ width: 80 }}
                   placeholder={1000}
-                  description="Maximum cache entries to maintain. The default is 1000."
+                  description={__(
+                    'Maximum cache entries to maintain. The default is 1000.',
+                    'abtfr'
+                  )}
                 />
                 <SettingTextInput
                   name="abtfr[pwa_cache_version]"
-                  header="Cache Version"
+                  header={__('Cache Version', 'abtfr')}
                   link={linkOptionState('pwaCacheVersion')}
                   size={20}
-                  description="Optionally enter a cache version. This feature enables to invalidate existing caches."
+                  description={__(
+                    'Optionally enter a cache version. This feature enables to invalidate existing caches.',
+                    'abtfr'
+                  )}
                 />
                 <SettingTextarea
-                  header="Cache Preload"
+                  header={__('Cache Preload', 'abtfr')}
                   textareaClass="json-array-lines"
                   name="abtfr[pwa_cache_preload]"
                   link={linkOptionState('pwaCachePreload')}
@@ -496,23 +515,20 @@ jQuery(window).on('sw-update',function(e){
                 />
                 <SettingCheckbox
                   name="abtfr[pwa_cache_preload_require]"
-                  header="Require preloading"
+                  header={__('Require preloading', 'abtfr')}
                   link={linkOptionState('pwaCachePreloadRequired')}
-                  label="Enabled"
-                  description={
-                    <>
-                      Require preloading to complete in Service Worker
-                      installation. This option will activate the service worker
-                      after all assets have been preloaded.
-                    </>
-                  }
+                  label={__('Enabled', 'abtfr')}
+                  description={__(
+                    'Require preloading to complete in Service Worker installation. This option will activate the service worker after all assets have been preloaded.',
+                    'abtfr'
+                  )}
                 />
               </SettingInnerTable>
               <SettingCheckbox
                 name="abtfr[pwa_preload_mousedown]"
-                header="Preload on Mouse Down"
+                header={__('Preload on Mouse Down', 'abtfr')}
                 link={linkOptionState('pwaPreloadMousedown')}
-                label="Enabled"
+                label={__('Enabled', 'abtfr')}
                 description={
                   <>
                     Start preloading navigation requests in the Service Worker
@@ -637,19 +653,24 @@ jQuery(window).on('sw-update',function(e){
                   </p>
                 </td>
               </tr>
-              <SettingInnerTable header="Web App Manifest Settings">
+              <SettingInnerTable
+                header={__('Web App Manifest Settings', 'abtfr')}
+              >
                 <SettingCheckbox
                   name="abtfr[manifest_json_update]"
-                  header="Update manifest.json"
+                  header={__('Update manifest.json', 'abtfr')}
                   link={linkOptionState('manifestJsonUpdate')}
-                  label="Enabled"
-                  description="Update manifest.json when saving settings."
+                  label={__('Enabled', 'abtfr')}
+                  description={__(
+                    'Update manifest.json when saving settings.',
+                    'abtfr'
+                  )}
                 />
                 <SettingCheckbox
                   name="abtfr[pwa_manifest_meta]"
-                  header="Link manifest.json in head"
+                  header={__('Link manifest.json in head', 'abtfr')}
                   link={linkOptionState('pwaManifestMeta')}
-                  label="Enabled"
+                  label={__('Enabled', 'abtfr')}
                   description={
                     <>
                       Add a link to manifest.json in the{' '}
@@ -658,7 +679,7 @@ jQuery(window).on('sw-update',function(e){
                   }
                 />
                 <SettingTextarea
-                  header="Web App Meta Tags"
+                  header={__('Web App Meta Tags', 'abtfr')}
                   textareaClass="json-array-lines"
                   style={{
                     height: 200

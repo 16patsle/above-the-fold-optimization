@@ -40,14 +40,16 @@ const SettingsView = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('Settings', 'abtfr')}>
         <Helmet>
-          <title>ABTF Reborn Settings {siteTitle}</title>
+          <title>
+            {__('ABTF Reborn Settings', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         <table className="form-table">
           <tbody>
             <SettingCheckbox
-              header="Admin Bar"
+              header={__('Admin Bar', 'abtfr')}
               name="abtfr[adminbar]"
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               link={linkOptionState('adminbar')}
               description={
                 <span>
@@ -58,9 +60,9 @@ const SettingsView = () => {
               }
             ></SettingCheckbox>
             <SettingCheckbox
-              header="Clear Page Caches"
+              header={__('Clear Page Caches', 'abtfr')}
               name="abtfr[clear_pagecache]"
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               link={linkOptionState('clearPagecache')}
               description={
                 <span>
@@ -77,16 +79,14 @@ const SettingsView = () => {
               }
             ></SettingCheckbox>
             <SettingCheckbox
-              header="Debug Mode"
+              header={__('Debug Mode', 'abtfr')}
               name="abtfr[debug]"
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               link={linkOptionState('debug')}
-              description={
-                <span>
-                  Show debug info in the browser console for logged in
-                  admin-users.
-                </span>
-              }
+              description={__(
+                'Show debug info in the browser console for logged in admin-users.',
+                'abtfr'
+              )}
             ></SettingCheckbox>
             {getOption('abtfOptionsExists') && (
               <tr valign="top">
@@ -96,10 +96,10 @@ const SettingsView = () => {
                     {__('Import settings from ABTF', 'abtfr')}
                   </SubmitButton>
                   <p className="description">
-                    Migrate settings from the plugin Above the Fold
-                    Optimization. This will overwrite all existing settings for
-                    this plugin with the ones from ABTF and afterwards delete
-                    the old settings.
+                    {__(
+                      'Migrate settings from the plugin Above the Fold Optimization. This will overwrite all existing settings for this plugin with the ones from ABTF and afterwards delete the old settings.',
+                      'abtfr'
+                    )}
                   </p>
                 </td>
               </tr>
@@ -116,7 +116,7 @@ const SettingsView = () => {
         </SubmitButton>
         <br />
         <br />
-        <h1>Content Security Policy</h1>
+        <h1>{__('Content Security Policy', 'abtfr')}</h1>
         <p>
           Based on your current configuration, the ABTF Reborn inline client
           javascript can be white listed using the following hashes. (
@@ -135,19 +135,21 @@ const SettingsView = () => {
         </p>
         {getOption('clientHashes') === 'false' ? (
           <h3 className="warning_red">
-            Failed to retrieve hashes. You can find the hashes in the Dev Tools
-            console in the Chrome browser.
+            {__(
+              'Failed to retrieve hashes. You can find the hashes in the Dev Tools console in the Chrome browser.',
+              'abtfr'
+            )}
           </h3>
         ) : (
           <span>
-            <strong>Public client</strong>
+            <strong>{__('Public client', 'abtfr')}</strong>
             <table width="100%">
               <thead>
                 <tr>
                   <td width="100" style={{ textAlign: 'center' }}>
-                    Algorithm
+                    {__('Algorithm', 'abtfr')}
                   </td>
-                  <td>Hash</td>
+                  <td>{__('Hash', 'abtfr')}</td>
                 </tr>
               </thead>
               <tbody>
@@ -176,14 +178,16 @@ const SettingsView = () => {
                 })}
               </tbody>
             </table>
-            <strong>Debug mode client (admin users only)</strong>
+            <strong>
+              {__('Debug mode client (admin users only)', 'abtfr')}
+            </strong>
             <table width="100%">
               <thead>
                 <tr>
                   <td width="100" style={{ textAlign: 'center' }}>
-                    Algorithm
+                    {__('Algorithm', 'abtfr')}
                   </td>
-                  <td>Hash</td>
+                  <td>{__('Hash', 'abtfr')}</td>
                 </tr>
               </thead>
               <tbody>

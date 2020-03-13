@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AsyncSelect from 'react-select/async';
+import { __ } from '@wordpress/i18n';
 
 const promiseOptions = async query => {
   const formData = new FormData();
@@ -30,9 +31,9 @@ const promiseOptions = async query => {
 
 const noOptionsMessage = ({ inputValue }) => {
   if (inputValue) {
-    return 'No results found';
+    return __('No results found', 'abtfr');
   } else {
-    return 'Start writing to see options';
+    return __('Start writing to see options', 'abtfr');
   }
 };
 

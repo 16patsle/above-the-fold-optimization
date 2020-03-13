@@ -104,7 +104,9 @@ const Http2View = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('HTTP/2 Optimization', 'abtfr')}>
         <Helmet>
-          <title>HTTP/2 Optimization {siteTitle}</title>
+          <title>
+            {__('HTTP/2 Optimization', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         <p>
           <a
@@ -126,15 +128,15 @@ const Http2View = () => {
           rel="noopener noreferrer"
           className="button"
         >
-          Test your website for HTTP/2 support
+          {__('Test your website for HTTP/2 support', 'abtfr')}
         </a>
         <table className="form-table">
           <tbody>
             <SettingCheckbox
-              header="HTTP/2 Server Push"
+              header={__('HTTP/2 Server Push', 'abtfr')}
               name="abtfr[http2_push]"
               link={linkOptionState('http2Push')}
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               description={
                 <span>
                   When enabled, resources such as scripts, stylesheets and
@@ -163,14 +165,14 @@ const Http2View = () => {
               />
               <div style={{ clear: 'both', height: 10 }}></div>
               <fieldset>
-                <legend>Insert</legend>
+                <legend>{__('Insert', 'abtfr')}</legend>
                 <button
                   type="button"
                   onClick={handleInsertClick}
                   className="button"
                   data-http2-insert="scripts"
                 >
-                  WordPress scripts
+                  {__('WordPress scripts', 'abtfr')}
                 </button>
                 <button
                   type="button"
@@ -178,7 +180,7 @@ const Http2View = () => {
                   className="button"
                   data-http2-insert="stylesheets"
                 >
-                  WordPress stylesheets
+                  {__('WordPress stylesheets', 'abtfr')}
                 </button>
                 <button
                   type="button"
@@ -186,7 +188,7 @@ const Http2View = () => {
                   className="button"
                   data-http2-insert="images"
                 >
-                  HTML images
+                  {__('HTML images', 'abtfr')}
                 </button>
                 <button
                   type="button"
@@ -194,7 +196,7 @@ const Http2View = () => {
                   className="button"
                   data-http2-insert="custom"
                 >
-                  Custom resource list
+                  {__('Custom resource list', 'abtfr')}
                 </button>
               </fieldset>
               <Info color="yellow">

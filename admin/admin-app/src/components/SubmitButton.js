@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { __ } from '@wordpress/i18n';
 
 class SubmitButton extends Component {
   render() {
@@ -14,7 +15,7 @@ class SubmitButton extends Component {
         name={this.props.name || 'submit'}
         id={this.props.id || this.props.name || 'submit'}
         className={className}
-        value={this.props.children || 'Save Changes'}
+        value={this.props.children || __('Save Changes', 'abtfr')}
         {...this.props.attributes}
       />
     );

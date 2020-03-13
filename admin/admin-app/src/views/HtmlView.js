@@ -68,15 +68,17 @@ const HtmlView = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('HTML Optimization', 'abtfr')}>
         <Helmet>
-          <title>HTML Optimization {siteTitle}</title>
+          <title>
+            {__('HTML Optimization', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         <table className="form-table">
           <tbody>
             <SettingCheckbox
-              header="Minify HTML"
+              header={__('Minify HTML', 'abtfr')}
               name="abtfr[html_minify]"
               link={linkOptionState('htmlMinify')}
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               description={
                 <span>
                   Compress HTML using an enhanced version of{' '}
@@ -93,10 +95,10 @@ const HtmlView = () => {
               }
             ></SettingCheckbox>
             <SettingCheckbox
-              header="Strip HTML comments"
+              header={__('Strip HTML comments', 'abtfr')}
               name="abtfr[html_comments]"
               link={linkOptionState('htmlComments')}
-              label="Enabled"
+              label={__('Enabled', 'abtfr')}
               description={
                 <span>
                   Remove HTML comments from HTML, e.g.{' '}
@@ -109,7 +111,10 @@ const HtmlView = () => {
               textareaClass="json-array-lines"
               name="abtfr[html_comments_preserve]"
               link={linkOptionState('htmlCommentsPreserve')}
-              description="Enter (parts of) HTML comments to exclude from removal. One string per line."
+              description={__(
+                'Enter (parts of) HTML comments to exclude from removal. One string per line.',
+                'abtfr'
+              )}
               disabled={!getOption('htmlComments')}
             ></SettingTextarea>
             <tr valign="top">
@@ -130,11 +135,13 @@ const HtmlView = () => {
           }}
           id="searchreplace"
         >
-          Search & Replace
+          {__('Search & Replace', 'abtfr')}
         </h3>
         <p className="description">
-          This option enables to replace strings in the HTML. Enter an array of
-          JSON objects.
+          {__(
+            'This option enables to replace strings in the HTML. Enter an array of JSON objects.',
+            'abtfr'
+          )}
         </p>
         <JsonEditor
           name="html.replace"
@@ -151,9 +158,13 @@ const HtmlView = () => {
         <Info color="yellow" style={{ marginTop: '30px' }}>
           <SearchReplaceExample title={__('Click to select', 'abtfr')}>
             {{
-              string: '"search":"string to match","replace":"newstring"',
+              string: __(
+                '"search":"string to match","replace":"newstring"',
+                'abtfr'
+              ),
               regex: __(
-                '{"search":"|string to (match)|i","replace":"newstring $1","regex":true}'
+                '{"search":"|string to (match)|i","replace":"newstring $1","regex":true}',
+                'abtfr'
               )
             }}
           </SearchReplaceExample>

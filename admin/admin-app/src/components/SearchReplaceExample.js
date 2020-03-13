@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { __ } from '@wordpress/i18n';
 
 class SearchReplaceExample extends Component {
   constructor(props) {
     super(props);
 
-    this.showString = this.props.showString || 'show string';
-    this.showRegex = this.props.showRegex || 'show regular expression';
+    this.showString = this.props.showString || __('show string', 'abtfr');
+    this.showRegex =
+      this.props.showRegex || __('show regular expression', 'abtfr');
 
     this.state = {
       showLinkContent: this.showRegex,

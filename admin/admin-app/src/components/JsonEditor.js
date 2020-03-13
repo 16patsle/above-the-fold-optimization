@@ -99,7 +99,12 @@ class JsonEditor extends Component {
   onError(err) {
     // Log the error
     console.error('JSON', err.toString());
-    alert('JSON error. Please verify your input.\n\nSee console for details.');
+    alert(
+      __(
+        'JSON error. Please verify your input.\n\nSee console for details.',
+        'abtfr'
+      )
+    );
   }
 
   onChange() {
@@ -183,7 +188,9 @@ class JsonEditor extends Component {
           </div>
         </div>
         <div style={{ float: 'right', marginTop: '5px' }}>
-          <a href="https://github.com/josdejong/jsoneditor">JSON editor</a>
+          <a href="https://github.com/josdejong/jsoneditor">
+            {__('JSON editor', 'abtfr')}
+          </a>
         </div>
       </>
     );

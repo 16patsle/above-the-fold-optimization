@@ -62,7 +62,9 @@ const ProxyView = () => {
       <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
       <PageContent header={__('External Resource Proxy', 'abtfr')}>
         <Helmet>
-          <title>External Resource Proxy {siteTitle}</title>
+          <title>
+            {__('External Resource Proxy', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         <div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
           <img
@@ -73,8 +75,10 @@ const ProxyView = () => {
           />
         </div>
         <p>
-          The external resource proxy loads external resources such as scripts
-          and stylesheets via a caching proxy.
+          {__(
+            'The external resource proxy loads external resources such as scripts and stylesheets via a caching proxy.',
+            'abtfr'
+          )}
         </p>
         <p>
           This feature enables to pass the{' '}
@@ -93,15 +97,18 @@ const ProxyView = () => {
               header="Proxy Scripts"
               name="abtfr[js_proxy]"
               link={linkOptionState('jsProxy')}
-              label="Enabled"
-              description="Capture external scripts and load the scripts through a caching proxy."
+              label={__('Enabled', 'abtfr')}
+              description={__(
+                'Capture external scripts and load the scripts through a caching proxy.',
+                'abtfr'
+              )}
             ></SettingCheckbox>
             {getOption('jsProxy') ? (
               <tr valign="top" className="proxyjsoptions">
                 <td colSpan="2" style={{ paddingTop: '0px' }}>
                   <div className="abtfr-inner-table">
                     <h3 className="h">
-                      <span>Script Proxy Settings</span>
+                      <span>{__('Script Proxy Settings', 'abtfr')}</span>
                     </h3>
                     <div className="inside">
                       <table className="form-table">
@@ -135,12 +142,9 @@ const ProxyView = () => {
                             }}
                             name="abtfr[js_proxy_exclude]"
                             link={linkOptionState('jsProxyExclude')}
-                            description={
-                              <span>
-                                Enter (parts of) external javascript files to
-                                exclude from the proxy. One script per line.
-                              </span>
-                            }
+                            description={__(
+                              'Enter (parts of) external javascript files to exclude from the proxy. One script per line.'
+                            )}
                           ></SettingTextarea>
                           <SettingTextarea
                             header="Proxy Preload List"
@@ -188,15 +192,18 @@ const ProxyView = () => {
               header="Proxy Stylesheets"
               name="abtfr[css_proxy]"
               link={linkOptionState('cssProxy')}
-              label="Enabled"
-              description="Capture external stylesheets and load the files through a caching proxy."
+              label={__('Enabled', 'abtfr')}
+              description={__(
+                'Capture external stylesheets and load the files through a caching proxy.',
+                'abtfr'
+              )}
             ></SettingCheckbox>
             {getOption('cssProxy') ? (
               <tr valign="top" className="proxycssoptions">
                 <td colSpan="2" style={{ paddingTop: '0px' }}>
                   <div className="abtfr-inner-table">
                     <h3 className="h">
-                      <span>Stylesheet Proxy Settings</span>
+                      <span>{__('Stylesheet Proxy Settings', 'abtfr')}</span>
                     </h3>
                     <div className="inside">
                       <table className="form-table">
