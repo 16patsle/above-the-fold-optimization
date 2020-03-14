@@ -94,12 +94,6 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     
     //global critical CSS
     $data['inlinecss'] = (isset($criticalcss_files['global.css'])) ? $this->CTRL->criticalcss->get_file_contents($criticalcss_files['global.css']['file']) : '';
-
-    $data['inlinecss_size'] = 0;
-
-    if (trim($inlinecss) !== '') {
-      $data['inlinecss_size'] = size_format(strlen($inlinecss), 2);
-    }
   
     return new WP_REST_Response( $this->convert_to_camel_case_array($data), 200 );
   }

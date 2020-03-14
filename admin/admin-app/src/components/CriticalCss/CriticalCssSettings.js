@@ -6,8 +6,10 @@ import { adminUrl, lgCode, utmString } from '../../utils/globalVars';
 import Info from '../Info';
 import SettingCheckbox from '../SettingCheckbox';
 import SubmitButton from '../SubmitButton';
-import getSettings, { getJSON } from '../../utils/getSettings';
 import CssEditor from '../CssEditor';
+import getSettings, { getJSON } from '../../utils/getSettings';
+import sizeFormat from '../../utils/sizeFormat';
+import byteCount from '../../utils/byteCount';
 import './CriticalCssSettings.css';
 
 const CriticalCssSettings = () => {
@@ -75,8 +77,8 @@ const CriticalCssSettings = () => {
           <span className="item-title">
             <span className="menu-item-title">{__('Global', 'abtfr')}</span>
             <span className="is-submenu">
-              {criticalCssData.inlinecss.trim() !== '' ? (
-                <span>{criticalCssData.inlinecssSize}</span>
+              {criticalCss.trim() !== '' ? (
+                <span>{sizeFormat(byteCount(criticalCss), 2)}</span>
               ) : (
                 <span style={{ color: '#f1b70a' }}>{__('empty', 'abtfr')}</span>
               )}
