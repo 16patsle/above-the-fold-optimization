@@ -12,6 +12,7 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const postcssNormalize = require('postcss-normalize');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const modules = require('./scripts/modules');
 const getClientEnvironment = require('./scripts/env');
@@ -49,6 +50,9 @@ module.exports = function (webpackEnv) {
       path: path.resolve(__dirname, 'build'),
       // Add /* filename */ comments to generated require()s in the output.
       pathinfo: isEnvDevelopment,
+      // Webpack uses `publicPath` to determine where the app is being served from.
+      // It requires a trailing slash, or the file assets will get an incorrect path.
+      publicPath: '../wp-content/plugins/abtfr/admin/admin-app/build/',
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
       filename: 'index.js',
@@ -382,6 +386,10 @@ module.exports = function (webpackEnv) {
             entrypoints: entrypointFiles
           };
         }
+      }),
+      new MonacoWebpackPlugin({
+        // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+        languages: ['css']
       }),
       new DependencyExtractionWebpackPlugin()
     ].filter(Boolean),

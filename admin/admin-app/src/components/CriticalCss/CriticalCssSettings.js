@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../../utils/useLinkState';
@@ -13,11 +13,12 @@ import Info from '../Info';
 import SettingCheckbox from '../SettingCheckbox';
 import SubmitButton from '../SubmitButton';
 import getSettings, { getJSON } from '../../utils/getSettings';
+import CssEditor from '../CssEditor';
 
 const CriticalCssSettings = () => {
   const [options, setOption, setOptions, linkOptionState] = useLinkState();
 
-  const [criticalCss, setCriticalCss] = useState(false)
+  const [criticalCss, setCriticalCss] = useState(false);
 
   const getOption = option => options[option];
 
@@ -28,6 +29,10 @@ const CriticalCssSettings = () => {
       return getJSON('criticalcss');
     }
   );
+
+  const [editorLoaded, setEditorLoaded] = useState(false);
+
+  const [showEditor, setShowEditor] = useState(true);
 
   if (error || criticalCssError) {
     return (
@@ -48,17 +53,26 @@ const CriticalCssSettings = () => {
     return loading;
   }
 
-  if(criticalCss === false) {
+  if (criticalCss === false) {
     setCriticalCss(criticalCssData.inlinecss);
     return loading;
   }
 
   return (
     <li
-      className="menu-item menu-item-depth-0 menu-item-page pending menu-item-edit-inactive"
+      className={
+        'menu-item menu-item-depth-0 menu-item-page pending ' +
+        (editorLoaded ? 'menu-item-edit-active' : 'menu-item-edit-inactive')
+      }
       style={{ display: 'list-item', position: 'relative', top: '0px' }}
     >
-      <div className="menu-item-bar criticalcss-edit-header" rel="global">
+      <div
+        className="menu-item-bar criticalcss-edit-header"
+        onClick={e => {
+          e.preventDefault();
+          setShowEditor(!showEditor);
+        }}
+      >
         <div
           className="menu-item-handle"
           style={{ width: 'auto!important', cursor: 'pointer' }}
@@ -73,34 +87,46 @@ const CriticalCssSettings = () => {
               )}
             </span>
           </span>
-          <span
-            className="is-submenu loading-editor"
-            style={{ display: 'none' }}
-          >
-            <span style={{ color: '#ea4335' }}>Loading editor...</span>
-          </span>
+          {!editorLoaded && (
+            <span className="is-submenu loading-editor">
+              <span style={{ color: '#ea4335' }}>Loading editor...</span>
+            </span>
+          )}
           <span className="item-controls">
-            <a className="item-edit" href="javascript:void(0);">
+            <a className="item-edit" href="#">
               ^
             </a>
           </span>
         </div>
       </div>
 
-      <div id="ccss_editor_global" className="ccss_editor">
+      <div
+        id="ccss_editor_global"
+        className="ccss_editor"
+        style={showEditor ? {} : { display: 'none' }}
+      >
         {getOption('csseditor') ? (
-          <input
-            type="hidden"
-            name="abtfr[css]"
-            id="abtfrcss"
-            value={criticalCss}
-          />
+          <>
+            <CssEditor
+              link={{ value: criticalCss, set: setCriticalCss }}
+              editorDidMount={() => {
+                setEditorLoaded(true);
+              }}
+            />
+            <input
+              type="hidden"
+              name="abtfr[css]"
+              id="abtfrcss"
+              value={criticalCss}
+            />
+          </>
         ) : (
           <textarea
             className="abtfrcss"
             id="abtfrcss"
             name="abtfr[css]"
             value={criticalCss}
+            onChange={e => setCriticalCss(e.target.value)}
           />
         )}
         <div className="criticalcss-buttons">
@@ -161,28 +187,16 @@ const CriticalCssSettings = () => {
           <tbody>
             <SettingCheckbox
               name="abtfr[csseditor]"
-              header={__('Use a CSS editor with error reporting', 'abtfr')}
+              header={__('Use advanced CSS editor', 'abtfr')}
               link={linkOptionState('csseditor')}
               label={__('Enabled', 'abtfr')}
               description={
                 <>
-                  Use a CSS editor with error reporting (
-                  <a
-                    href={`http://csslint.net/#${utmString}`}
+                  Use the <a
+                    href="https://microsoft.github.io/monaco-editor/"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    CSS Lint
-                  </a>{' '}
-                  using{' '}
-                  <a
-                    href={`https://codemirror.net/#${utmString}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    CodeMirror
-                  </a>
-                  ).
+                  >Monaco editor</a> with CSS error reporting.
                 </>
               }
             />
