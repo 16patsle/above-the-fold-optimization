@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { __ } from '@wordpress/i18n';
 
 class ApiExample extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class ApiExample extends Component {
               this.setState({ exampleShown: !this.state.exampleShown })
             }
           >
-            show example
+            {__('show example', 'abtfr')}
           </button>
           ).
         </p>
