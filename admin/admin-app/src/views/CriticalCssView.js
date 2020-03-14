@@ -15,10 +15,10 @@ import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import php from 'react-syntax-highlighter/dist/esm/languages/hljs/php';
 import vs from 'react-syntax-highlighter/dist/esm/styles/hljs/vs';
 import PageContent from '../components/PageContent';
-import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
 import getSettings from '../utils/getSettings';
 import Info from '../components/Info';
+import PageSelect from '../components/PageSelect';
 
 SyntaxHighlighter.registerLanguage('php', php);
 
@@ -187,12 +187,20 @@ const SettingsView = () => {
                     </code>
                     .
                   </p>
-                  <select id="fullcsspages" className="wp-pageselect">
-                    <option value />
-                    <option value={homeUrl}>
-                      {__('Home Page (index)', 'abtfr')}
-                    </option>
-                  </select>
+                  <PageSelect
+                    wrapper={false}
+                    size={80}
+                    placeholder={__(
+                      'Search a post/page/category ID or name...',
+                      'abtfr'
+                    )}
+                    defaultOptions={[
+                      {
+                        label: __('Home Page (index)', 'abtfr'),
+                        value: homeUrl
+                      }
+                    ]}
+                  />
                   <div style={{ marginTop: '10px' }}>
                     <button
                       type="button"

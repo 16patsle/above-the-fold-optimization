@@ -25,7 +25,7 @@ import SettingNumberInput from '../components/SettingNumberInput';
 import SettingInnerTable from '../components/SettingInnerTable';
 import SettingTextarea from '../components/SettingTextarea';
 import SubmitButton from '../components/SubmitButton';
-import OfflinePageSelect from '../components/OfflinePageSelect';
+import PageSelect from '../components/PageSelect';
 import getSettings from '../utils/getSettings';
 
 const PwaView = () => {
@@ -379,7 +379,7 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                     </td>
                   </tr>
                 )}
-                <OfflinePageSelect
+                <PageSelect
                   header={__('Offline Page', 'abtfr')}
                   name="abtfr[pwa_cache_pages_offline]"
                   link={linkOptionState('pwaCachePagesOffline')}
