@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../../utils/useLinkState';
@@ -16,6 +16,8 @@ import getSettings, { getJSON } from '../../utils/getSettings';
 
 const CriticalCssSettings = () => {
   const [options, setOption, setOptions, linkOptionState] = useLinkState();
+
+  const [criticalCss, setCriticalCss] = useState(false)
 
   const getOption = option => options[option];
 
@@ -43,6 +45,11 @@ const CriticalCssSettings = () => {
 
   if (!options) {
     setOptions(data);
+    return loading;
+  }
+
+  if(criticalCss === false) {
+    setCriticalCss(criticalCssData.inlinecss);
     return loading;
   }
 
@@ -81,13 +88,21 @@ const CriticalCssSettings = () => {
       </div>
 
       <div id="ccss_editor_global" className="ccss_editor">
-        <textarea
-          className="abtfrcss"
-          id="abtfrcss"
-          name="abtfr[css]"
-          value={criticalCssData.inlinecss}
-          data-advanced={getOption('csseditor') ? 1 : null}
-        />
+        {getOption('csseditor') ? (
+          <input
+            type="hidden"
+            name="abtfr[css]"
+            id="abtfrcss"
+            value={criticalCss}
+          />
+        ) : (
+          <textarea
+            className="abtfrcss"
+            id="abtfrcss"
+            name="abtfr[css]"
+            value={criticalCss}
+          />
+        )}
         <div className="criticalcss-buttons">
           <a
             href={`https://www.google.com/search?q=beautify+css+online&hl=${lgCode}`}
