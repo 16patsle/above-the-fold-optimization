@@ -29,7 +29,7 @@ import PageSelect from '../components/PageSelect';
 import getSettings from '../utils/getSettings';
 
 const PwaView = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
+  const [options, , setOptions, linkOptionState] = useLinkState();
 
   const getOption = option => options[option];
 

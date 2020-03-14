@@ -22,7 +22,7 @@ const proxyUrl = new URL(adminUrl + 'admin.php');
 proxyUrl.searchParams.append('page', 'abtfr-proxy');
 
 const CssView = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
+  const [options, , setOptions, linkOptionState] = useLinkState();
 
   const getOption = option => options[option];
 

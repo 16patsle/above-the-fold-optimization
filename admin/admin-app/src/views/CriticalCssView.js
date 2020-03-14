@@ -37,7 +37,7 @@ const extractCssButtonClicked = (href = '', output = 'download') => {
   document.location.href = `${href}extract-css=${extractCssKey}&output=${output}`;
 };
 
-const SettingsView = () => {
+const CriticalCssView = () => {
   const [extractCss, setExtractCss] = useState({});
 
   return (
@@ -53,7 +53,7 @@ const SettingsView = () => {
         <a
           href={criticalCssEditorUrl + '#editor'}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
         >
           Live Editor
         </a>
@@ -81,6 +81,7 @@ const SettingsView = () => {
             <a
               href={`https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent?hl=${lgCode}`}
               target="_blank"
+              rel="noopener noreferrer"
             >
               documentation by Google
             </a>{' '}
@@ -90,6 +91,7 @@ const SettingsView = () => {
             <a
               href="https://github.com/addyosmani/critical-path-css-tools"
               target="_blank"
+              rel="noopener noreferrer"
             >
               This article
             </a>{' '}
@@ -98,6 +100,7 @@ const SettingsView = () => {
             <a
               href={`https://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/?${utmString}`}
               target="_blank"
+              rel="noopener noreferrer"
             >
               This blog
             </a>{' '}
@@ -110,6 +113,7 @@ const SettingsView = () => {
               <a
                 href="https://en.wikipedia.org/wiki/Flash_of_unstyled_content"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Flash of Unstyled Content
               </a>{' '}
@@ -124,7 +128,7 @@ const SettingsView = () => {
           <table className="form-table">
             <tbody>
               <tr valign="top">
-                <td class="criticalcsstable">
+                <td className="criticalcsstable">
                   <h3
                     style={{
                       padding: '0px',
@@ -153,7 +157,7 @@ const SettingsView = () => {
               </tr>
               <tr valign="top">
                 <td
-                  class="criticalcsstable"
+                  className="criticalcsstable"
                   style={{ paddingTop: '17px', paddingBottom: '34px' }}
                 >
                   <h3
@@ -199,26 +203,24 @@ const SettingsView = () => {
                     link={{ value: extractCss, set: setExtractCss }}
                   />
                   <div style={{ marginTop: '10px' }}>
-                    <a
-                      href="#"
+                    <button
+                      type="button"
                       className="button button-large"
                       onClick={e => {
-                        e.preventDefault();
                         extractCssButtonClicked(extractCss.value);
                       }}
                     >
                       {__('Download', 'abtfr')}
-                    </a>
-                    <a
-                      href="#"
+                    </button>
+                    <button
+                      type="button"
                       className="button button-large"
                       onClick={e => {
-                        e.preventDefault();
                         extractCssButtonClicked(extractCss.value, 'print');
                       }}
                     >
                       {__('Print', 'abtfr')}
-                    </a>
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -268,4 +270,4 @@ function my_critical_css_condition( $params = array() ) {
   );
 };
 
-export default SettingsView;
+export default CriticalCssView;

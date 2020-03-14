@@ -37,7 +37,7 @@ add_filter( 'abtfr_html_replace', 'your_html_search_and_replace', 10, 4 );
 		`.trim();
 
 const HtmlView = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
+  const [options, , setOptions, linkOptionState] = useLinkState();
 
   const getOption = option => options[option];
 

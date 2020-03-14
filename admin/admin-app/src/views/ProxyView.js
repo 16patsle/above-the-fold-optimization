@@ -23,7 +23,7 @@ emptyCacheUrl.searchParams.append('page', 'abtfr-proxy');
 emptyCacheUrl.searchParams.append('empty_cache', 1);
 
 const ProxyView = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
+  const [options, , setOptions, linkOptionState] = useLinkState();
 
   const getOption = option => options[option];
 

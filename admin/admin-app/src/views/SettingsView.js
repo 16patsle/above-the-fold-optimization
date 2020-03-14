@@ -10,7 +10,7 @@ import SubmitButton from '../components/SubmitButton';
 import getSettings from '../utils/getSettings';
 
 const SettingsView = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
+  const [options, , setOptions, linkOptionState] = useLinkState();
 
   const getOption = option => options[option];
 

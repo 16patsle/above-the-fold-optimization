@@ -39,7 +39,7 @@ const lazyloadExample = `
     `.trim();
 
 const JavascriptView = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
+  const [options, , setOptions, linkOptionState] = useLinkState();
 
   const getOption = option => options[option];
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { __ } from '@wordpress/i18n';
 import MonacoEditor from 'react-monaco-editor';
 
 class CssEditor extends Component {

@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../../utils/useLinkState';
-import {
-  homeUrl,
-  adminUrl,
-  lgCode,
-  utmString,
-  wpAbtfrUri
-} from '../../utils/globalVars';
+import { adminUrl, lgCode, utmString } from '../../utils/globalVars';
 import Info from '../Info';
 import SettingCheckbox from '../SettingCheckbox';
 import SubmitButton from '../SubmitButton';
@@ -17,7 +11,7 @@ import CssEditor from '../CssEditor';
 import './CriticalCssSettings.css';
 
 const CriticalCssSettings = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
+  const [options, , setOptions, linkOptionState] = useLinkState();
 
   const [criticalCss, setCriticalCss] = useState(false);
 
@@ -94,9 +88,9 @@ const CriticalCssSettings = () => {
             </span>
           )}
           <span className="item-controls">
-            <a className="item-edit" href="#">
+            <button type="button" className="item-edit">
               ^
-            </a>
+            </button>
           </span>
         </div>
       </div>
@@ -246,7 +240,7 @@ const CriticalCssSettings = () => {
         <SubmitButton type={['primary', 'large']} name="is_submit">
           {__('Save', 'abtfr')}
         </SubmitButton>
-        <a name="conditional">&nbsp;</a>
+        <div id="conditional">&nbsp;</div>
       </div>
     </li>
   );

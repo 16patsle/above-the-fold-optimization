@@ -19,7 +19,7 @@ import getSettings from '../utils/getSettings';
 const sllInstalled = new URL(homeUrl).protocol === 'https:';
 
 const MonitorView = () => {
-  const [options, setOption, setOptions] = useLinkState();
+  const [options, , setOptions] = useLinkState();
 
   const getOption = option => options[option];
 
