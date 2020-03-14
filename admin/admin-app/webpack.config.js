@@ -14,6 +14,8 @@ const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extract
 const postcssNormalize = require('postcss-normalize');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
+const { defaultRequestToExternal, defaultRequestToHandle } = require('@wordpress/dependency-extraction-webpack-plugin/util');
+
 const modules = require('./scripts/modules');
 const getClientEnvironment = require('./scripts/env');
 
@@ -391,7 +393,20 @@ module.exports = function (webpackEnv) {
         // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
         languages: ['css']
       }),
-      new DependencyExtractionWebpackPlugin()
+      isEnvProduction && new DependencyExtractionWebpackPlugin(),
+      isEnvDevelopment && new DependencyExtractionWebpackPlugin({
+        useDefaults: false,
+        requestToExternal: request => {
+          switch (request) {
+            case 'react':
+            case 'react-dom':
+              return undefined;
+            default:
+              return defaultRequestToExternal(request)
+          }
+        },
+        requestToHandle: defaultRequestToHandle
+      })
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
