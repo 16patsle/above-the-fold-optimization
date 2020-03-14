@@ -25,6 +25,12 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
       'callback'            => array( $this, 'get_setting' ),
       'permission_callback' => array( $this, 'get_settings_permissions_check' ),
     ) );
+    register_rest_route( $namespace, '/criticalcss', array(
+      'methods'             => WP_REST_Server::READABLE,
+      'callback'            => array( $this, 'get_criticalcss' ),
+      'permission_callback' => array( $this, 'get_settings_permissions_check' ),
+      'args'                => array(),
+    ) );
     register_rest_route( $namespace, '/' . $base . '/schema', array(
       'methods'  => WP_REST_Server::READABLE,
       'callback' => array( $this, 'get_public_item_schema' ),
@@ -72,6 +78,30 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     } else {
       return new WP_REST_Response( $data, 200 );
     }
+  }
+
+  /**
+   * Get the critical CSS
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function get_criticalcss( $request ) {
+    $data = array();
+
+    // get critical css files
+    $data['criticalcss_files'] = $this->admin->CTRL->criticalcss->get_theme_criticalcss();
+    
+    //global critical CSS
+    $data['inlinecss'] = (isset($criticalcss_files['global.css'])) ? $this->CTRL->criticalcss->get_file_contents($criticalcss_files['global.css']['file']) : '';
+
+    $data['inlinecss_size'] = 0;
+
+    if (trim($inlinecss) !== '') {
+      $data['inlinecss_size'] = size_format(strlen($inlinecss), 2);
+    }
+  
+    return new WP_REST_Response( $this->convert_to_camel_case_array($data), 200 );
   }
  
   /**

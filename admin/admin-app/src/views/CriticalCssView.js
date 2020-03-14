@@ -18,6 +18,7 @@ import PageContent from '../components/PageContent';
 import SubmitButton from '../components/SubmitButton';
 import Info from '../components/Info';
 import PageSelect from '../components/PageSelect';
+import CriticalCssSettings from '../components/CriticalCss/CriticalCssSettings';
 
 SyntaxHighlighter.registerLanguage('php', php);
 
@@ -145,7 +146,7 @@ const SettingsView = () => {
                       paddingTop: '0px'
                     }}
                   >
-                    {/*?php require_once('admin.settings.criticalcss.inc.php'); ?*/}
+                    <CriticalCssSettings/>
                     {/*?php require_once('admin.settings.conditionalcss.inc.php'); ?*/}
                   </ul>
                 </td>

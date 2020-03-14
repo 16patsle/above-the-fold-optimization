@@ -23,12 +23,12 @@ const shouldNewlineArrayString = [
 ];
 
 /**
- * Get settings JSON from REST API
- *
- * @returns {Object} The settings
+ * Fetch JSON from API
+ * @param {String} url API URL to fetch
+ * @returns {Object} The JSON
  */
-export default async function getSettings() {
-  const response = await fetch('/wp-json/abtfr/v1/settings', {
+export async function getJSON(url) {
+  const response = await fetch('/wp-json/abtfr/v1/' + url, {
     headers: {
       'X-WP-Nonce': abtfrRestNonce
     }
@@ -36,10 +36,23 @@ export default async function getSettings() {
   const result = await response.json();
   if (!response.ok) {
     if (result.message) {
-      return Promise.reject(result.message);
+      return {_error: result.message};
     } else {
-      return Promise.reject(`${response.status} ${response.statusText}`);
+      return {_error: `${response.status} ${response.statusText}`};
     }
+  }
+}
+
+/**
+ * Get settings JSON from REST API
+ *
+ * @returns {Object} The settings
+ */
+export default async function getSettings() {
+  const result = await getJSON('settings');
+
+  if(result._error) {
+    return Promise.reject(result._error)
   }
 
   Object.entries(result).forEach(([key, value]) => {
