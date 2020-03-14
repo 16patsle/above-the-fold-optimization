@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { __, sprintf } from '@wordpress/i18n';
-import useSWR from 'swr';
-import useLinkState from '../utils/useLinkState';
+import { __ } from '@wordpress/i18n';
 import {
   adminUrl,
   homeUrl,
@@ -18,7 +16,6 @@ import php from 'react-syntax-highlighter/dist/esm/languages/hljs/php';
 import vs from 'react-syntax-highlighter/dist/esm/styles/hljs/vs';
 import PageContent from '../components/PageContent';
 import SubmitButton from '../components/SubmitButton';
-import getSettings from '../utils/getSettings';
 import Info from '../components/Info';
 import PageSelect from '../components/PageSelect';
 
@@ -40,28 +37,7 @@ const extractCssButtonClicked = (href = '', output = 'download') => {
 };
 
 const SettingsView = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
-
   const [extractCss, setExtractCss] = useState({});
-
-  const getOption = option => options[option];
-
-  const { data, error } = useSWR('settings', getSettings);
-
-  if (error) {
-    return <div>{sprintf(__('Error: $s', 'abtfr'), error)}</div>;
-  }
-
-  const loading = <div>{__('Loading...', 'abtfr')}</div>;
-
-  if (!data) {
-    return loading;
-  }
-
-  if (!options) {
-    setOptions(data);
-    return loading;
-  }
 
   return (
     <>
@@ -281,7 +257,6 @@ function my_critical_css_condition( $params = array() ) {
             <code>:1,2,3,"variable","var"</code>. The filter function should
             return true or false.
           </p>
-          <br />
           <hr />
           <SubmitButton type={['primary', 'large']} name="is_submit">
             {__('Save', 'abtfr')}
