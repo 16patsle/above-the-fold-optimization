@@ -15,3 +15,4 @@ export const lgCode = adminValues.lgCode;
 export const utmString = adminValues.utmString;
 export const googleIntlCode = adminValues.googleIntlCode;
 export const wpAbtfrUri = adminValues.wpAbtfrUri;
+export const criticalCssEditorUrl = adminValues.criticalCssEditorUrl;

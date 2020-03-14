@@ -10,7 +10,8 @@
 			'lgCode' => $lgcode,
 			'utmString' => $utmstring,
 			'googleIntlCode' => $this->google_intlcode,
-			'wpAbtfrUri' => WPABTFR_URI
+			'wpAbtfrUri' => WPABTFR_URI,
+			'criticalCssEditorUrl' => $this->CTRL->view_url('critical-css-editor')
 		);
 	?>
 	<input id="admin_values" type="hidden" value="<?php echo htmlspecialchars(json_encode($admin_values), ENT_COMPAT, 'UTF-8', false) ?>"/>
