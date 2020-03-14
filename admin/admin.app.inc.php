@@ -11,7 +11,8 @@
 			'utmString' => $utmstring,
 			'googleIntlCode' => $this->google_intlcode,
 			'wpAbtfrUri' => WPABTFR_URI,
-			'criticalCssEditorUrl' => $this->CTRL->view_url('critical-css-editor')
+			'criticalCssEditorUrl' => $this->CTRL->view_url('critical-css-editor'),
+			'extractCssKey' => md5(SECURE_AUTH_KEY . AUTH_KEY)
 		);
 	?>
 	<input id="admin_values" type="hidden" value="<?php echo htmlspecialchars(json_encode($admin_values), ENT_COMPAT, 'UTF-8', false) ?>"/>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
@@ -9,7 +9,9 @@ import {
   siteTitle,
   abtfrAdminNonce,
   lgCode,
-  criticalCssEditorUrl
+  criticalCssEditorUrl,
+  extractCssKey,
+  utmString
 } from '../utils/globalVars';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import php from 'react-syntax-highlighter/dist/esm/languages/hljs/php';
@@ -22,8 +24,25 @@ import PageSelect from '../components/PageSelect';
 
 SyntaxHighlighter.registerLanguage('php', php);
 
+const extractCssButtonClicked = (href = '', output = 'download') => {
+  if (href === '') {
+    alert('Select a page...');
+    return;
+  }
+
+  if (/\?/.test(href)) {
+    href += '&';
+  } else {
+    href += '?';
+  }
+
+  document.location.href = `${href}extract-css=${extractCssKey}&output=${output}`;
+};
+
 const SettingsView = () => {
   const [options, setOption, setOptions, linkOptionState] = useLinkState();
+
+  const [extractCss, setExtractCss] = useState({});
 
   const getOption = option => options[option];
 
@@ -100,7 +119,7 @@ const SettingsView = () => {
             by a Google engineer provides information about the available
             methods for creating critical path CSS.{' '}
             <a
-              href="https://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/?<?php print $utmstring; ?>"
+              href={`https://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/?${utmString}`}
               target="_blank"
             >
               This blog
@@ -181,7 +200,7 @@ const SettingsView = () => {
                     <code>
                       <strong>
                         ?extract-css=
-                        {/*?php print md5(SECURE_AUTH_KEY . AUTH_KEY); ?*/}
+                        {extractCssKey}
                         &amp;output=print
                       </strong>
                     </code>
@@ -200,24 +219,29 @@ const SettingsView = () => {
                         value: homeUrl
                       }
                     ]}
+                    link={{ value: extractCss, set: setExtractCss }}
                   />
                   <div style={{ marginTop: '10px' }}>
-                    <button
-                      type="button"
-                      id="fullcsspages_dl"
-                      rel="<?php print md5(SECURE_AUTH_KEY . AUTH_KEY); ?>"
+                    <a
+                      href="#"
                       className="button button-large"
+                      onClick={e => {
+                        e.preventDefault();
+                        extractCssButtonClicked(extractCss.value);
+                      }}
                     >
                       {__('Download', 'abtfr')}
-                    </button>
-                    <button
-                      type="button"
-                      id="fullcsspages_print"
-                      rel="<?php print md5(SECURE_AUTH_KEY . AUTH_KEY); ?>"
+                    </a>
+                    <a
+                      href="#"
                       className="button button-large"
+                      onClick={e => {
+                        e.preventDefault();
+                        extractCssButtonClicked(extractCss.value, 'print');
+                      }}
                     >
                       {__('Print', 'abtfr')}
-                    </button>
+                    </a>
                   </div>
                 </td>
               </tr>

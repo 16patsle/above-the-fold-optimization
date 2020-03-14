@@ -16,3 +16,4 @@ export const utmString = adminValues.utmString;
 export const googleIntlCode = adminValues.googleIntlCode;
 export const wpAbtfrUri = adminValues.wpAbtfrUri;
 export const criticalCssEditorUrl = adminValues.criticalCssEditorUrl;
+export const extractCssKey = adminValues.extractCssKey;
