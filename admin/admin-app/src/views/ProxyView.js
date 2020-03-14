@@ -39,7 +39,7 @@ const ProxyView = () => {
   );
 
   if (error) {
-    return <div>{sprintf(__('Error: $s', 'abtfr'), error)}</div>;
+    return <div>{sprintf(__('Error: %s', 'abtfr'), error)}</div>;
   }
 
   const loading = <div>{__('Loading...', 'abtfr')}</div>;
