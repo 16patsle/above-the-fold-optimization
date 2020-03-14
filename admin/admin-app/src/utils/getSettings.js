@@ -36,11 +36,12 @@ export async function getJSON(url) {
   const result = await response.json();
   if (!response.ok) {
     if (result.message) {
-      return {_error: result.message};
+      return { _error: result.message };
     } else {
-      return {_error: `${response.status} ${response.statusText}`};
+      return { _error: `${response.status} ${response.statusText}` };
     }
   }
+  return result;
 }
 
 /**
@@ -51,8 +52,8 @@ export async function getJSON(url) {
 export default async function getSettings() {
   const result = await getJSON('settings');
 
-  if(result._error) {
-    return Promise.reject(result._error)
+  if (result._error) {
+    return Promise.reject(result._error);
   }
 
   Object.entries(result).forEach(([key, value]) => {
