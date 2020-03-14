@@ -146,7 +146,7 @@ const SettingsView = () => {
                       paddingTop: '0px'
                     }}
                   >
-                    <CriticalCssSettings/>
+                    <CriticalCssSettings />
                     {/*?php require_once('admin.settings.conditionalcss.inc.php'); ?*/}
                   </ul>
                 </td>
