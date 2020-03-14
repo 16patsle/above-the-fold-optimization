@@ -14,6 +14,7 @@ import SettingCheckbox from '../SettingCheckbox';
 import SubmitButton from '../SubmitButton';
 import getSettings, { getJSON } from '../../utils/getSettings';
 import CssEditor from '../CssEditor';
+import './CriticalCssSettings.css';
 
 const CriticalCssSettings = () => {
   const [options, setOption, setOptions, linkOptionState] = useLinkState();
@@ -75,7 +76,7 @@ const CriticalCssSettings = () => {
       >
         <div
           className="menu-item-handle"
-          style={{ width: 'auto!important', cursor: 'pointer' }}
+          style={{ width: 'auto', cursor: 'pointer' }}
         >
           <span className="item-title">
             <span className="menu-item-title">{__('Global', 'abtfr')}</span>
@@ -192,11 +193,15 @@ const CriticalCssSettings = () => {
               label={__('Enabled', 'abtfr')}
               description={
                 <>
-                  Use the <a
+                  Use the{' '}
+                  <a
                     href="https://microsoft.github.io/monaco-editor/"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >Monaco editor</a> with CSS error reporting.
+                  >
+                    Monaco editor
+                  </a>{' '}
+                  with CSS error reporting.
                 </>
               }
             />
