@@ -201,6 +201,10 @@ class ABTFR_Admin_CriticalCSS
             }
         }
 
+        if ( ! function_exists( 'get_page_templates' ) ) {
+            require_once( ABSPATH . '/wp-admin/includes/theme.php' );
+        }
+
         /**
          * Templates
          */

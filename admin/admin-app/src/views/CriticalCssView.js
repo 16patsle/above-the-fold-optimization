@@ -19,6 +19,7 @@ import SubmitButton from '../components/SubmitButton';
 import Info from '../components/Info';
 import PageSelect from '../components/PageSelect';
 import CriticalCssSettings from '../components/CriticalCss/CriticalCssSettings';
+import ConditionalCssSettings from '../components/CriticalCss/ConditionalCssSettings';
 
 SyntaxHighlighter.registerLanguage('php', php);
 
@@ -151,7 +152,7 @@ const CriticalCssView = () => {
                     }}
                   >
                     <CriticalCssSettings />
-                    {/*?php require_once('admin.settings.conditionalcss.inc.php'); ?*/}
+                    <ConditionalCssSettings />
                   </ul>
                 </td>
               </tr>

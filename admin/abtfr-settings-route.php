@@ -31,6 +31,12 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
       'permission_callback' => array( $this, 'get_settings_permissions_check' ),
       'args'                => array(),
     ) );
+    register_rest_route( $namespace, '/conditionalcss', array(
+      'methods'             => WP_REST_Server::READABLE,
+      'callback'            => array( $this, 'get_conditionalcss' ),
+      'permission_callback' => array( $this, 'get_settings_permissions_check' ),
+      'args'                => array(),
+    ) );
     register_rest_route( $namespace, '/' . $base . '/schema', array(
       'methods'  => WP_REST_Server::READABLE,
       'callback' => array( $this, 'get_public_item_schema' ),
@@ -94,6 +100,60 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     
     //global critical CSS
     $data['inlinecss'] = (isset($criticalcss_files['global.css'])) ? $this->admin->CTRL->criticalcss->get_file_contents($criticalcss_files['global.css']['file']) : '';
+  
+    return new WP_REST_Response( $this->convert_to_camel_case_array($data), 200 );
+  }
+
+  /**
+   * Get the conditional CSS
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function get_conditionalcss( $request ) {
+    $data = array();
+
+    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/admin.criticalcss.class.php';
+
+    /**
+     * Load critical css management
+     */
+    $this->criticalcss = new ABTFR_Admin_CriticalCSS($this->admin->CTRL);
+
+    /**
+     * Conditional Options
+     */
+    $data['conditional_options'] = $this->criticalcss->get_default_conditional_options();
+
+    // get critical css files
+    $criticalcss_files = $this->admin->CTRL->criticalcss->get_theme_criticalcss();
+
+    $data['conditional_values'] = array();
+
+    foreach ($criticalcss_files as $file => $config) {
+      if ($file === 'global.css') {
+          continue 1;
+      }
+
+      // critical CSS
+      $inlinecss = $this->admin->CTRL->criticalcss->get_file_contents($config['file']);
+
+      // conditions
+      $conditions = (isset($config['conditions'])) ? $this->criticalcss->get_condition_values($config['conditions']) : array();
+
+      $condition_values = array();
+      foreach ($conditions as $condition) {
+        $condition_values[] = $condition['value'];
+      }
+
+      $condition_values = implode('|==abtfr==|', $condition_values);
+
+      $data['conditional_values'][$file] = array(
+        'css' => $inlinecss,
+        'conditions' => $condition_values,
+        'config' => $config
+      );
+    }
   
     return new WP_REST_Response( $this->convert_to_camel_case_array($data), 200 );
   }

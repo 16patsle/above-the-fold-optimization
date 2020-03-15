@@ -70,7 +70,7 @@ const CriticalCssEditor = props => {
       </div>
 
       <div
-        id="ccss_editor_global"
+        id={`ccss_editor_${props.title.toLowerCase()}`}
         className="ccss_editor"
         style={showEditor ? {} : { display: 'none' }}
       >
