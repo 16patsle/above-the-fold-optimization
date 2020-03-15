@@ -90,10 +90,10 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     $data = array();
 
     // get critical css files
-    $data['criticalcss_files'] = $this->admin->CTRL->criticalcss->get_theme_criticalcss();
+    $criticalcss_files = $this->admin->CTRL->criticalcss->get_theme_criticalcss();
     
     //global critical CSS
-    $data['inlinecss'] = (isset($criticalcss_files['global.css'])) ? $this->CTRL->criticalcss->get_file_contents($criticalcss_files['global.css']['file']) : '';
+    $data['inlinecss'] = (isset($criticalcss_files['global.css'])) ? $this->admin->CTRL->criticalcss->get_file_contents($criticalcss_files['global.css']['file']) : '';
   
     return new WP_REST_Response( $this->convert_to_camel_case_array($data), 200 );
   }
