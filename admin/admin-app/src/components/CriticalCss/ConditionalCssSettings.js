@@ -9,6 +9,7 @@ import SubmitButton from '../SubmitButton';
 import CssEditor from '../CssEditor';
 import getSettings, { getJSON } from '../../utils/getSettings';
 import CriticalCssEditor from './CriticalCssEditor';
+import AddConditional from './AddConditional';
 
 const ConditionalCssSettings = () => {
   const [options, , setOptions, linkOptionState] = useLinkState();
@@ -18,35 +19,50 @@ const ConditionalCssSettings = () => {
   const getOption = option => options[option];
 
   const { data, error } = useSWR('settings', getSettings);
-  const { data: conditionalCssData2, error: conditionalCssError } = useSWR(
-    'conditionalcss',
-    query => {
-      return getJSON(query);
-    }
-  );
+  const {
+    data: conditionalCssData,
+    error: conditionalCssError,
+    revalidate
+  } = useSWR('conditionalcss', query => {
+    return getJSON(query);
+  });
 
-  const conditionalCssData = {
-    filename1: {
-      css: 'inlinecss1',
-      conditions: 'condition values',
-      config: {
-        name: 'test1',
-        appendToAny: false,
-        prependToAny: false,
-        weight: false
-      }
-    },
-    filename2: {
-      css: 'inlinecss2',
-      conditions: 'condition values',
-      config: {
-        name: 'test2',
-        appendToAny: false,
-        prependToAny: false,
-        weight: false
+  console.log(conditionalCssData);
+
+  /*
+  const conditionalCssData2 = {
+    conditionalValues: {
+      'filename1.css': {
+        css: 'inlinecss1',
+        conditions: 'condition values',
+        config: {
+          name: 'test1',
+          weight: 1,
+          file: 'path/to/filename1.css',
+          t: 12345,
+          appendToAny: false,
+          prependToAny: false,
+          weight: false
+        }
+      },
+      'filename2.css': {
+        css: 'inlinecss2',
+        conditions: 'condition values',
+        config: {
+          name: 'test2',
+          weight: 2,
+          file: 'path/to/filename2.css',
+          t: 67890,
+          appendToAny: false,
+          prependToAny: false,
+          weight: false
+        }
       }
     }
   };
+  */
+
+  const [showAddConditional, setShowAddConditional] = useState(false);
 
   if (error || conditionalCssError) {
     return (
@@ -97,76 +113,14 @@ const ConditionalCssSettings = () => {
             id="addcriticalcss"
             className="button"
             style={{ marginRight: '0.5em' }}
+            onClick={() => setShowAddConditional(!showAddConditional)}
           >
             {__('Add Conditional Critical CSS', 'abtfr')}
           </button>
         </p>
-        <div
-          id="addcriticalcss-form"
-          className="edit-conditional-critical-css"
-          style={{
-            background: '#f1f1f1',
-            border: 'solid 1px #e5e5e5',
-            marginBottom: '1em',
-            display: 'none'
-          }}
-        >
-          <h3 className="hndle" style={{ borderBottom: 'solid 1px #e5e5e5' }}>
-            <span>{__('Add Conditional Critical CSS', 'abtfr')}</span>
-          </h3>
-          <div className="inside" style={{ paddingBottom: '0px' }}>
-            <table
-              className="form-table add-form"
-              style={{ marginBottom: '5px' }}
-            >
-              <tbody>
-                <tr valign="top">
-                  <td>
-                    <input
-                      type="text"
-                      id="addcc_name"
-                      defaultValue
-                      placeholder="Name"
-                      style={{ width: '100%' }}
-                    />
-                    {/*name*/}
-                  </td>
-                </tr>
-                <tr valign="top">
-                  <td>
-                    <input type="text" id="addcc_conditions" rel="selectize" />
-                    <p className="description">
-                      Type <code>filter:your_filter_function</code> to add a
-                      custom filter condition. You can add a comma separated
-                      list with JSON encoded values to be passed to the filter
-                      by appending <code>:1,2,3,"variable","var"</code>. The
-                      filter function should return true or false.
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <button
-              type="button"
-              className="button button-yellow button-small"
-              id="addcc_save"
-            >
-              {__('Save', 'abtfr')}
-            </button>
-            <div
-              style={{
-                height: '10px',
-                clear: 'both',
-                overflow: 'hidden',
-                fontSize: '1px'
-              }}
-            >
-              &nbsp;
-            </div>
-          </div>
-        </div>
+        {showAddConditional && <AddConditional revalidate={revalidate} />}
       </li>
-      {Object.entries(conditionalCss).map(([file, data]) => (
+      {Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
         <CriticalCssEditor
           key={file}
           link={{
@@ -174,7 +128,10 @@ const ConditionalCssSettings = () => {
             set: value =>
               setConditionalCss({
                 ...conditionalCss,
-                ...{ [file]: { ...data, ...{ css: value } } }
+                conditionalValues: {
+                  ...conditionalCss.conditionalValues,
+                  ...{ [file]: { ...data, ...{ css: value } } }
+                }
               })
           }}
           itemTitle="TODO"
@@ -189,17 +146,20 @@ const ConditionalCssSettings = () => {
                 name={`abtfr[conditional_css][${file}][appendToAny]`}
                 header={__('Append to any', 'abtfr')}
                 link={{
-                  value: data.config.appendToAny,
+                  value: data.config.appendToAny || false,
                   set: value =>
                     setConditionalCss({
                       ...conditionalCss,
-                      ...{
-                        [file]: {
-                          ...data,
-                          ...{
-                            config: {
-                              ...data.config,
-                              ...{ appendToAny: value }
+                      conditionalValues: {
+                        ...conditionalCss.conditionalValues,
+                        ...{
+                          [file]: {
+                            ...data,
+                            ...{
+                              config: {
+                                ...data.config,
+                                ...{ appendToAny: value }
+                              }
                             }
                           }
                         }
@@ -212,17 +172,20 @@ const ConditionalCssSettings = () => {
                 name={`abtfr[conditional_css][${file}][prependToAny]`}
                 header={__('Prepend to any', 'abtfr')}
                 link={{
-                  value: data.config.prependToAny,
+                  value: data.config.prependToAny || false,
                   set: value =>
                     setConditionalCss({
                       ...conditionalCss,
-                      ...{
-                        [file]: {
-                          ...data,
-                          ...{
-                            config: {
-                              ...data.config,
-                              ...{ prependToAny: value }
+                      conditionalValues: {
+                        ...conditionalCss.conditionalValues,
+                        ...{
+                          [file]: {
+                            ...data,
+                            ...{
+                              config: {
+                                ...data.config,
+                                ...{ prependToAny: value }
+                              }
                             }
                           }
                         }
