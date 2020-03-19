@@ -29,11 +29,7 @@ const noOptionsMessage = ({ inputValue }) => {
 };
 
 const formatGroupLabel = data => {
-  return (
-    <div className={'optgroup ' + data.class}>
-      {data.label}
-    </div>
-  );
+  return <div className={'optgroup ' + data.class}>{data.label}</div>;
 };
 
 const ConditionalSelect = props => {

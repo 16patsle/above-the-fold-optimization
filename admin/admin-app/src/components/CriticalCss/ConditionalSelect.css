@@ -42,7 +42,7 @@
 }
 
 .edit-conditional-critical-css .optgroup::before {
-  content:'';
+  content: '';
   display: inline-block;
   width: 15px;
   height: 9px;
@@ -72,4 +72,3 @@
   font-weight: thin;
   color: #999;
 }
-
