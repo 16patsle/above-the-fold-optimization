@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../../utils/useLinkState';
-import { adminUrl, lgCode, utmString } from '../../utils/globalVars';
+import { homeUrl } from '../../utils/globalVars';
 import Info from '../Info';
 import SettingCheckbox from '../SettingCheckbox';
 import SubmitButton from '../SubmitButton';
-import CssEditor from '../CssEditor';
 import getSettings, { getJSON } from '../../utils/getSettings';
 import CriticalCssEditor from './CriticalCssEditor';
 import AddConditional from './AddConditional';
@@ -118,7 +117,12 @@ const ConditionalCssSettings = () => {
             {__('Add Conditional Critical CSS', 'abtfr')}
           </button>
         </p>
-        {showAddConditional && <AddConditional revalidate={revalidate} />}
+        {showAddConditional && (
+          <AddConditional
+            revalidate={revalidate}
+            conditionalOptions={conditionalCssData.conditionalOptions}
+          />
+        )}
       </li>
       {Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
         <CriticalCssEditor
@@ -196,6 +200,35 @@ const ConditionalCssSettings = () => {
               />
             </tbody>
           </table>
+          <input
+            type="text"
+            name={`abtfr[conditional_css][${file}][conditions]`}
+            defaultValue={data.conditions.toString()}
+          />
+          <div style={{ marginTop: '5px', marginBottom: '0px' }}>
+            The configuration is stored in{' '}
+            <code>
+              {conditionalCssData.conditionalPath.replace(homeUrl, '')}
+              <strong>{file}</strong>
+            </code>{' '}
+            and is editable via FTP.
+            <p style={{ marginTop: '7px', marginBottom: '0px' }}>
+              You can append or prepend relative links to CSS files using{' '}
+              <code>@append</code> and <code>@prepend</code>, e.g.{' '}
+              <em>../../style.css</em>. Use <code>@matchType</code> (any or all)
+              to match any or all condtions.
+            </p>
+          </div>
+          <div
+            style={{
+              height: '10px',
+              clear: 'both',
+              overflow: 'hidden',
+              fontSize: '1px'
+            }}
+          >
+            &nbsp;
+          </div>
           <SubmitButton type={['primary', 'large']} name="is_submit">
             {__('Save', 'abtfr')}
           </SubmitButton>

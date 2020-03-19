@@ -144,19 +144,19 @@ class ABTFR_Admin_CriticalCSS
 
         $conditional_options[] = array(
             'value' => 'is_front_page()',
-            'title' => 'Front Page',
+            'label' => 'Front Page',
             'optgroup' => 'pagetype',
             'class' => 'pagetype'
         );
         $conditional_options[] = array(
             'value' => 'is_category()',
-            'title' => 'Categories',
+            'label' => 'Categories',
             'optgroup' => 'pagetype',
             'class' => 'pagetype'
         );
         $conditional_options[] = array(
             'value' => 'is_tag()',
-            'title' => 'Tags',
+            'label' => 'Tags',
             'optgroup' => 'pagetype',
             'class' => 'pagetype'
         );
@@ -171,7 +171,7 @@ class ABTFR_Admin_CriticalCSS
                 case "attachment":
                     $conditional_options[] = array(
                         'value' => 'is_'.$pt.'()',
-                        'title' => ''.ucfirst($pt).'s',
+                        'label' => ''.ucfirst($pt).'s',
                         'optgroup' => 'pagetype',
                         'class' => 'pagetype'
                     );
@@ -179,13 +179,13 @@ class ABTFR_Admin_CriticalCSS
                 case "post":
                     $conditional_options[] = array(
                         'value' => 'is_single()',
-                        'title' => 'Posts',
+                        'label' => 'Posts',
                         'optgroup' => 'pagetype',
                         'class' => 'pagetype'
                     );
                     $conditional_options[] = array(
                         'value' => 'is_singular():'.$pt,
-                        'title' => 'Blog Posts',
+                        'label' => 'Blog Posts',
                         'optgroup' => 'pagetype',
                         'class' => 'pagetype'
                     );
@@ -193,7 +193,7 @@ class ABTFR_Admin_CriticalCSS
                 default:
                     $conditional_options[] = array(
                         'value' => 'is_singular():'.$pt,
-                        'title' => 'Post Type: '.$pt.'',
+                        'label' => 'Post Type: '.$pt.'',
                         'optgroup' => 'pagetype',
                         'class' => 'pagetype'
                     );
@@ -212,7 +212,7 @@ class ABTFR_Admin_CriticalCSS
         foreach ($templates as $tplname => $file) {
             $conditional_options[] = array(
                 'value' => 'is_page_template():'.htmlentities($file, ENT_COMPAT, 'utf-8').'',
-                'title' => 'Template: '.htmlentities($tplname, ENT_COMPAT, 'utf-8').'',
+                'label' => 'Template: '.htmlentities($tplname, ENT_COMPAT, 'utf-8').'',
                 'optgroup' => 'pagetype',
                 'class' => 'pagetype'
             );
@@ -236,8 +236,8 @@ class ABTFR_Admin_CriticalCSS
             foreach ($wcopts as $opt) {
                 $conditional_options[] = array(
                     'value' => $opt,
-                    'title' => 'WC: ' . $opt,
-                    'titlelong' => 'WooCommerce: ' . $opt,
+                    'label' => 'WC: ' . $opt,
+                    'labellong' => 'WooCommerce: ' . $opt,
                     'optgroup' => 'woocommerce',
                     'class' => 'woocommerce'
                 );
@@ -251,7 +251,7 @@ class ABTFR_Admin_CriticalCSS
             foreach ($terms as $term) {
                 $conditional_options[] = array(
                     'value' => 'is_category():' . $term->term_id,
-                    'title' => $term->term_id . ': '.$term->slug,
+                    'label' => $term->term_id . ': '.$term->slug,
                     'optgroup' => 'category',
                     'class' => 'cat'
                 );
@@ -265,10 +265,10 @@ class ABTFR_Admin_CriticalCSS
             foreach ($terms as $term) {
                 $conditional_options[] = array(
                     'value' => 'has_category():' . $term->term_id,
-                    'title' => 'P/w/c: ' . $term->term_id . ': '.$term->slug,
-                    'titlelong' => 'Posts with category: ' . $term->term_id . ': '.$term->slug,
+                    'label' => 'P/w/c: ' . $term->term_id . ': '.$term->slug,
+                    'labellong' => 'Posts with category: ' . $term->term_id . ': '.$term->slug,
                     'optgroup' => 'post',
-                    'class' => 'cat'
+                    'class' => 'post'
                 );
             }
         }
@@ -285,7 +285,7 @@ class ABTFR_Admin_CriticalCSS
                     default:
                         $conditional_options[] = array(
                             'value' => 'is_tax():' . $tax,
-                            'title' => $tax,
+                            'label' => $tax,
                             'optgroup' => 'taxonomy',
                             'class' => 'post'
                         );
@@ -296,31 +296,31 @@ class ABTFR_Admin_CriticalCSS
 
         $conditional_groups = array();
         $conditional_groups['pagetype'] = array(
-            'title' => __('Page Types', 'abtfr'),
+            'label' => __('Page Types', 'abtfr'),
             'class' => 'optgroup-pagetype'
         );
         $conditional_groups['category'] = array(
-            'title' => __('Category', 'abtfr'),
+            'label' => __('Category', 'abtfr'),
             'class' => 'optgroup-cat'
         );
         $conditional_groups['taxonomy'] = array(
-            'title' => __('Taxonomy', 'abtfr'),
+            'label' => __('Taxonomy', 'abtfr'),
             'class' => 'optgroup-post'
         );
         $conditional_groups['page'] = array(
-            'title' => __('Pages', 'abtfr'),
+            'label' => __('Pages', 'abtfr'),
             'class' => 'optgroup-page'
         );
         $conditional_groups['post'] = array(
-            'title' => __('Posts', 'abtfr'),
+            'label' => __('Posts', 'abtfr'),
             'class' => 'optgroup-post'
         );
         $conditional_groups['filter'] = array(
-            'title' => __('Custom Filters', 'abtfr'),
+            'label' => __('Custom Filters', 'abtfr'),
             'class' => 'optgroup-filter'
         );
         $conditional_groups['woocommerce'] = array(
-            'title' => __('WooCommerce', 'abtfr'),
+            'label' => __('WooCommerce', 'abtfr'),
             'class' => 'optgroup-woocommerce'
         );
 
@@ -352,7 +352,7 @@ class ABTFR_Admin_CriticalCSS
                             }
                             $conditions[] = array(
                                 'value' => $key . ':' . $filter_name,
-                                'title' => $key . ':' . $filter_name,
+                                'label' => $key . ':' . $filter_name,
                                 'optgroup' => 'filter',
                                 'class' => 'filter'
                             );
@@ -369,7 +369,7 @@ class ABTFR_Admin_CriticalCSS
                             // not found
                             $conditions[] = array(
                                 'value' => $key . ':' . $refid,
-                                'title' => $key . ':' . $refid
+                                'label' => $key . ':' . $refid
                             );
                         }
                     } else {
@@ -377,7 +377,7 @@ class ABTFR_Admin_CriticalCSS
                         // not found
                         $conditions[] = array(
                             'value' => $key,
-                            'title' => $key
+                            'label' => $key
                         );
                     }
                 break;
@@ -418,8 +418,8 @@ class ABTFR_Admin_CriticalCSS
                         case "page":
                             $results[] = array(
                                 'value' => 'is_'.$pt.'():' . get_the_ID(),
-                                'title' => get_the_ID(),
-                                'titlelong' => get_the_ID() . '. ' . str_replace(home_url(), '', get_permalink(get_the_ID())) . ' - ' . get_the_title(),
+                                'label' => get_the_ID(),
+                                'labellong' => get_the_ID() . '. ' . str_replace(home_url(), '', get_permalink(get_the_ID())) . ' - ' . get_the_title(),
                                 'optgroup' => 'page',
                                 'class' => 'page'
                             );
@@ -430,8 +430,8 @@ class ABTFR_Admin_CriticalCSS
                         default:
                             $results[] = array(
                                 'value' => 'is_single():' . get_the_ID(),
-                                'title' => get_the_ID(),
-                                'titlelong' => get_the_ID() . '. ' . str_replace(home_url(), '', get_permalink(get_the_ID())) . ' - ' . get_the_title(),
+                                'label' => get_the_ID(),
+                                'labellong' => get_the_ID() . '. ' . str_replace(home_url(), '', get_permalink(get_the_ID())) . ' - ' . get_the_title(),
                                 'optgroup' => 'post',
                                 'class' => 'post'
                             );
@@ -471,8 +471,8 @@ class ABTFR_Admin_CriticalCSS
                                     case "product_brand":
                                         $results[] = array(
                                             'value' => 'is_tax():' . $taxonomy . ':' . $term->slug,
-                                            'title' => 'Term: ' . $taxonomy . '/' . $term->name,
-                                            'titlelong' => 'Term: ' . $term->term_id.'. ' . str_replace(home_url(), '', get_category_link($term->term_id)) . ' - ' . $term->name,
+                                            'label' => 'Term: ' . $taxonomy . '/' . $term->name,
+                                            'labellong' => 'Term: ' . $term->term_id.'. ' . str_replace(home_url(), '', get_category_link($term->term_id)) . ' - ' . $term->name,
                                             'optgroup' => 'category',
                                             'class' => 'cat'
                                         );
@@ -480,8 +480,8 @@ class ABTFR_Admin_CriticalCSS
                                     case "post_tag":
                                         $results[] = array(
                                             'value' => 'is_tag():' . $term->slug,
-                                            'title' => 'Tag: ' . $term->name,
-                                            'titlelong' => 'Tag: ' . $term->term_id.'. ' . str_replace(home_url(), '', get_category_link($term->term_id)) . ' - ' . $term->name,
+                                            'label' => 'Tag: ' . $term->name,
+                                            'labellong' => 'Tag: ' . $term->term_id.'. ' . str_replace(home_url(), '', get_category_link($term->term_id)) . ' - ' . $term->name,
                                             'optgroup' => 'category',
                                             'class' => 'cat'
                                         );
@@ -489,8 +489,8 @@ class ABTFR_Admin_CriticalCSS
                                     default:
                                         $results[] = array(
                                             'value' => 'is_tax():' . $taxonomy . ':' . $term->slug,
-                                            'title' => 'Term: ' . $taxonomy . '/' . $term->name,
-                                            'titlelong' => 'Term: ' . $term->term_id.'. ' . str_replace(home_url(), '', get_category_link($term->term_id)) . ' - ' . $term->name,
+                                            'label' => 'Term: ' . $taxonomy . '/' . $term->name,
+                                            'labellong' => 'Term: ' . $term->term_id.'. ' . str_replace(home_url(), '', get_category_link($term->term_id)) . ' - ' . $term->name,
                                             'optgroup' => 'category',
                                             'class' => 'cat'
                                         );

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { adminUrl } from '../../utils/globalVars';
+import ConditionalSelect from './ConditionalSelect';
 
 const AddConditional = props => {
   const [name, setName] = useState('');
-  const [conditions, setConditions] = useState(false);
+  const [conditions, setConditions] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const nameRef = React.createRef();
@@ -73,7 +74,10 @@ const AddConditional = props => {
             </tr>
             <tr valign="top">
               <td>
-                <input type="text" id="addcc_conditions" rel="selectize" />
+                <ConditionalSelect
+                  conditionalOptions={props.conditionalOptions}
+                  link={{ value: conditions, set: setConditions }}
+                />
                 <p className="description">
                   Type <code>filter:your_filter_function</code> to add a custom
                   filter condition. You can add a comma separated list with JSON

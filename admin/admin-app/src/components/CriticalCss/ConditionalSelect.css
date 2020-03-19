@@ -1,0 +1,75 @@
+.edit-conditional-critical-css .conditional-select .optvalue {
+  margin: 0 3px 3px 0;
+  padding: 2px 6px;
+  background: var(--optvalue-primary-color);
+  color: var(--optvalue-text-color);
+  border: 1px solid var(--optvalue-secondary-color);
+  border-radius: 3px;
+}
+.edit-conditional-critical-css .conditional-select .optvalue .remove {
+  border-left: 1px solid var(--optvalue-secondary-color);
+}
+
+.edit-conditional-critical-css .conditional-select .optvalue.post {
+  --optvalue-primary-color: #4285f4;
+  --optvalue-secondary-color: #3366b9;
+  --optvalue-text-color: #fff;
+}
+.edit-conditional-critical-css .conditional-select .optvalue.page {
+  --optvalue-primary-color: #079c2d;
+  --optvalue-secondary-color: #065e1c;
+  --optvalue-text-color: #fff;
+}
+.edit-conditional-critical-css .conditional-select .optvalue.cat {
+  --optvalue-primary-color: #ea4335;
+  --optvalue-secondary-color: #cd3a2e;
+  --optvalue-text-color: #fff;
+}
+.edit-conditional-critical-css .conditional-select .optvalue.pagetype {
+  --optvalue-primary-color: #f1b70a;
+  --optvalue-secondary-color: #b28708;
+  --optvalue-text-color: #1c1700;
+}
+.edit-conditional-critical-css .conditional-select .optvalue.filter {
+  --optvalue-primary-color: #ddd;
+  --optvalue-secondary-color: #b4b9be;
+  --optvalue-text-color: #1c1700;
+}
+.edit-conditional-critical-css .conditional-select .optvalue.woocommerce {
+  --optvalue-primary-color: #19c244;
+  --optvalue-secondary-color: #079c2d;
+  --optvalue-text-color: #fff;
+}
+
+.edit-conditional-critical-css .optgroup::before {
+  content:'';
+  display: inline-block;
+  width: 15px;
+  height: 9px;
+  margin-right: 6px;
+}
+
+.edit-conditional-critical-css .optgroup-post::before {
+  background-color: #4285f4;
+}
+.edit-conditional-critical-css .optgroup-page::before {
+  background-color: #079c2d;
+}
+.edit-conditional-critical-css .optgroup-cat::before {
+  background-color: #ea4335;
+}
+.edit-conditional-critical-css .optgroup-pagetype::before {
+  background-color: #f1b70a;
+}
+.edit-conditional-critical-css .optgroup-filter::before {
+  background-color: #ddd;
+}
+.edit-conditional-critical-css .optgroup-woocommerce::before {
+  background-color: #079c2d;
+}
+
+.edit-conditional-critical-css .opt .desc {
+  font-weight: thin;
+  color: #999;
+}
+

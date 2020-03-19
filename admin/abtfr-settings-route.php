@@ -154,6 +154,8 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
         'config' => $config
       );
     }
+
+    $data['conditional_path'] = $this->admin->CTRL->theme_dir('', 'critical-css');
   
     return new WP_REST_Response( $this->convert_to_camel_case_array($data), 200 );
   }
