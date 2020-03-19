@@ -5,7 +5,6 @@
   "dependencies": {
     "jsoneditor": "^5.34.0",
     "monaco-editor": "^0.20.0",
-    "prettier": "1.18.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-app-polyfill": "^1.0.6",
@@ -48,6 +47,7 @@
     "postcss-normalize": "8.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
+    "prettier": "^1.18.2",
     "react-dev-utils": "^10.2.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "2.3.4",
