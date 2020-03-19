@@ -9,6 +9,7 @@ import SubmitButton from '../SubmitButton';
 import getSettings, { getJSON } from '../../utils/getSettings';
 import CriticalCssEditor from './CriticalCssEditor';
 import AddConditional from './AddConditional';
+import ConditionalSelect from './ConditionalSelect';
 
 const ConditionalCssSettings = () => {
   const [options, , setOptions, linkOptionState] = useLinkState();
@@ -127,6 +128,7 @@ const ConditionalCssSettings = () => {
       {Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
         <CriticalCssEditor
           key={file}
+          className="edit-conditional-critical-css"
           link={{
             value: data.css,
             set: value =>
@@ -200,10 +202,20 @@ const ConditionalCssSettings = () => {
               />
             </tbody>
           </table>
-          <input
-            type="text"
+          <ConditionalSelect
             name={`abtfr[conditional_css][${file}][conditions]`}
-            defaultValue={data.conditions.toString()}
+            conditionalOptions={conditionalCssData.conditionalOptions}
+            link={{
+              value: data.conditions,
+              set: value =>
+                setConditionalCss({
+                  ...conditionalCss,
+                  conditionalValues: {
+                    ...conditionalCss.conditionalValues,
+                    ...{ [file]: { ...data, ...{ conditions: value } } }
+                  }
+                })
+            }}
           />
           <div style={{ marginTop: '5px', marginBottom: '0px' }}>
             The configuration is stored in{' '}

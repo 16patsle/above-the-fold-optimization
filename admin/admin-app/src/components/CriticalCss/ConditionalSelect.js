@@ -17,17 +17,7 @@ const promiseOptions = async query => {
     body: formData
   })).json();
 
-  if (res && document.location.host) {
-    var l = res.length;
-    for (var i = 0; i < l; i++) {
-      res[i].value = res[i].value.replace(
-        document.location.protocol + '//' + document.location.host,
-        ''
-      );
-    }
-  }
-
-  return res.map(({ name, value }) => ({ label: name, value }));
+  return res;
 };
 
 const noOptionsMessage = ({ inputValue }) => {
@@ -46,30 +36,6 @@ const formatGroupLabel = data => {
   );
 };
 
-const formatOptionLabel = (data,{context}) => {
-  if (context === 'menu') {
-    return (
-      <div className="opt">
-        <span className="label">
-          <span className="name">
-            {data.labellong ? data.labellong : data.label}
-          </span>
-          <span className="desc">&nbsp;&nbsp;{data.value}</span>
-        </span>
-      </div>
-    );
-  } else if (context === 'value') {
-    return (
-      <div
-        className={'optvalue ' + data.class}
-        title={data.value + (data.labellong ? ' - ' + data.labellong : '')}
-      >
-        <span className="name">{data.label}</span>
-      </div>
-    );
-  }
-};
-
 const ConditionalSelect = props => {
   const groupOptions = Object.entries(props.conditionalOptions[1]).map(
     ([key, value]) => {
@@ -80,7 +46,57 @@ const ConditionalSelect = props => {
     }
   );
 
-  console.log(groupOptions);
+  const formatOptionLabel = (data, { context }) => {
+    if (context === 'menu') {
+      return (
+        <div className="opt">
+          <span className="label">
+            <span className="name">
+              {data.labellong ? data.labellong : data.label}
+            </span>
+            <span className="desc">&nbsp;&nbsp;{data.value}</span>
+          </span>
+        </div>
+      );
+    } else if (context === 'value') {
+      let label = data.label;
+      let className = data.class;
+
+      // Try finding a good label/class if it's missing
+      if (!data.class) {
+        const [type, id] = data.value.split(':');
+
+        let typeObject = props.conditionalOptions[0].find(
+          ({ value }) => value === data.value
+        );
+        if (typeObject) {
+          label = typeObject.label;
+          className = typeObject.class;
+        } else {
+          typeObject = props.conditionalOptions[0].find(
+            ({ value }) =>
+              value.split(':').length > 1 && value.split(':')[0] === type
+          );
+          if (typeObject) {
+            const split = typeObject.value.split(':');
+            label = split[0] + ': ' + id;
+            className = typeObject.class;
+          } else {
+            label = id.replace('is_single()', 'Post: ');
+            className = 'post';
+          }
+        }
+      }
+      return (
+        <div
+          className={'optvalue ' + className}
+          title={data.value + (data.labellong ? ' - ' + data.labellong : '')}
+        >
+          <span className="name">{label}</span>
+        </div>
+      );
+    }
+  };
 
   return (
     <AsyncCreatableSelect

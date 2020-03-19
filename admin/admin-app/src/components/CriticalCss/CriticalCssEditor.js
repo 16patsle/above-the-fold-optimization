@@ -71,7 +71,7 @@ const CriticalCssEditor = props => {
 
       <div
         id={`ccss_editor_${props.title.toLowerCase()}`}
-        className="ccss_editor"
+        className={'ccss_editor ' + props.className}
         style={showEditor ? {} : { display: 'none' }}
       >
         {props.advancedEditor ? (

@@ -150,7 +150,7 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
 
       $data['conditional_values'][$file] = array(
         'css' => $inlinecss,
-        'conditions' => $condition_values,
+        'conditions' => $conditions,
         'config' => $config
       );
     }
