@@ -643,7 +643,7 @@ class ABTFR_Admin_CriticalCSS
         // update settings
         $this->CTRL->admin->save_settings($options, 'Critical CSS saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'abtfr-criticalcss' ), admin_url('admin.php')));
+        wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/criticalcss');
         exit;
     }
 

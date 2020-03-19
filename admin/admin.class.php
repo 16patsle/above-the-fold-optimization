@@ -216,6 +216,7 @@ class ABTFR_Admin
                 case 'abtfr-html':
                 case 'abtfr-css':
                 case 'abtfr-javascript':
+                case 'abtfr-criticalcss';
                 case 'abtfr-pwa':
                 case 'abtfr-http2':
                 case 'abtfr-proxy':
@@ -1061,7 +1062,6 @@ window.abtfr_pagesearch_optgroups = <?php print json_encode($this->page_search_o
          
         // print tab content
         switch ($tab) {
-            case "criticalcss":
             case "extract":
             case "criticalcss-test":
             case "build-tool":
