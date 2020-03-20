@@ -14,9 +14,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class ABTFR_OPP_LitespeedCache extends ABTFR_OPP
-{
-
+class ABTFR_OPP_LitespeedCache extends ABTFR_OPP {
     /**
      * Plugin file reference
      */
@@ -25,8 +23,7 @@ class ABTFR_OPP_LitespeedCache extends ABTFR_OPP
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
+    public function __construct(&$CTRL) {
         parent::__construct($CTRL);
 
         // Is the plugin enabled?
@@ -38,14 +35,12 @@ class ABTFR_OPP_LitespeedCache extends ABTFR_OPP
     /**
      * Is plugin active?
      */
-    public function active($type = false)
-    {
+    public function active($type = false) {
         if (!class_exists('LiteSpeed_Cache')) {
             return false;
         }
 
         if ($this->CTRL->plugins->active($this->plugin_file)) {
-
             // plugin is active
             if (!$type) {
                 return true;
@@ -58,8 +53,7 @@ class ABTFR_OPP_LitespeedCache extends ABTFR_OPP
     /**
      * Clear full page cache
      */
-    public function clear_pagecache()
-    {
+    public function clear_pagecache() {
         if (class_exists('LiteSpeed_Cache')) {
             try {
                 $cache = LiteSpeed_Cache::plugin();

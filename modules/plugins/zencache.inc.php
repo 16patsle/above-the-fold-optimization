@@ -13,9 +13,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class ABTFR_OPP_Zencache extends ABTFR_OPP
-{
-
+class ABTFR_OPP_Zencache extends ABTFR_OPP {
     /**
      * Clear page cache flag
      */
@@ -34,8 +32,7 @@ class ABTFR_OPP_Zencache extends ABTFR_OPP
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
+    public function __construct(&$CTRL) {
         parent::__construct($CTRL);
 
         // Is the plugin enabled?
@@ -45,16 +42,18 @@ class ABTFR_OPP_Zencache extends ABTFR_OPP
 
         // setup special hook for zencache setup
         // @see https://wordpress.org/support/topic/clearing-cache-from-autoptimize-base_dir-option/
-        $this->CTRL->loader->add_action('after_theme_setup', $this, 'theme_setup');
+        $this->CTRL->loader->add_action(
+            'after_theme_setup',
+            $this,
+            'theme_setup'
+        );
     }
 
     /**
      * Is plugin active?
      */
-    public function active($type = false)
-    {
+    public function active($type = false) {
         if ($this->CTRL->plugins->active($this->plugin_file)) {
-
             // plugin is active
             if (!$type) {
                 return true;
@@ -67,8 +66,7 @@ class ABTFR_OPP_Zencache extends ABTFR_OPP
     /**
      * Theme setup hook
      */
-    public function theme_setup()
-    {
+    public function theme_setup() {
         $this->theme_setup_completed = true;
 
         // clear pagecache called, perform cache clear action
@@ -80,14 +78,11 @@ class ABTFR_OPP_Zencache extends ABTFR_OPP
     /**
      * Clear full page cache
      */
-    public function clear_pagecache()
-    {
-
+    public function clear_pagecache() {
         // zencache setup
         if ($this->theme_setup_completed) {
             $this->do_clear_pagecache();
         } else {
-
             // set clear cache flag
             $this->clear_cache = true;
         }
@@ -96,8 +91,7 @@ class ABTFR_OPP_Zencache extends ABTFR_OPP
     /**
      * Perform cache clear action
      */
-    public function do_clear_pagecache()
-    {
+    public function do_clear_pagecache() {
         if (!class_exists('zencache')) {
             return;
         }

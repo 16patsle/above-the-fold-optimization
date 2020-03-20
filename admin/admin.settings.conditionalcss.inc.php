@@ -1,19 +1,23 @@
 <?php
 
-    /**
-     * Conditional Options
-     */
-    $conditional_options = $this->CTRL->admin->criticalcss->get_default_conditional_options();
-
-?>
+/**
+ * Conditional Options
+ */
+$conditional_options = $this->CTRL->admin->criticalcss->get_default_conditional_options(); ?>
 <script>
-window.conditional_options = <?php print json_encode($conditional_options, true); ?>;
+window.conditional_options = <?php print json_encode(
+    $conditional_options,
+    true
+); ?>;
 </script>
 <li>
 
 	<h3 style="padding:0px;margin:0px;margin-top:1em;margin-bottom:10px;">Conditional Critical Path CSS</h3>
 
-	<p class="description" style="margin-bottom:0px;"><?php _e('Configure tailored critical path CSS for individual posts, pages, post types, categories or templates.', 'abtfr'); ?></p>
+	<p class="description" style="margin-bottom:0px;"><?php _e(
+     'Configure tailored critical path CSS for individual posts, pages, post types, categories or templates.',
+     'abtfr'
+ ); ?></p>
 
 	<p style="margin-top:1em;margin-bottom:1em;">
 		<button type="button" id="addcriticalcss" class="button" style="margin-right:0.5em;">Add Conditional Critical CSS</button>
@@ -37,59 +41,99 @@ window.conditional_options = <?php print json_encode($conditional_options, true)
 						</td>
 					</tr>
 				</table>
-				<button type="button" class="button button-yellow button-small" id="addcc_save"><?php _e('Save'); ?></button>
+				<button type="button" class="button button-yellow button-small" id="addcc_save"><?php _e(
+        'Save'
+    ); ?></button>
 
 				<div style="height:10px;clear:both;overflow:hidden;font-size:1px;">&nbsp;</div>
 			</div>
 
 		</div>
 </li>
-<?php 
+<?php foreach ($criticalcss_files as $file => $config) {
 
-    foreach ($criticalcss_files as $file => $config) {
-        if ($file === 'global.css') {
-            continue 1;
-        }
+    if ($file === 'global.css') {
+        continue;
+    }
 
-        // critical CSS
-        $inlinecss = $this->CTRL->criticalcss->get_file_contents($config['file']);
+    // critical CSS
+    $inlinecss = $this->CTRL->criticalcss->get_file_contents($config['file']);
 
-        // conditions
-        $conditions = (isset($config['conditions'])) ? $this->CTRL->admin->criticalcss->get_condition_values($config['conditions']) : array();
+    // conditions
+    $conditions = isset($config['conditions'])
+        ? $this->CTRL->admin->criticalcss->get_condition_values(
+            $config['conditions']
+        )
+        : array();
 
-        $condition_values = array();
-        foreach ($conditions as $condition) {
-            $condition_values[] = $condition['value'];
-        }
+    $condition_values = array();
+    foreach ($conditions as $condition) {
+        $condition_values[] = $condition['value'];
+    }
 
-        $condition_values = implode('|==abtfr==|', $condition_values); ?>
+    $condition_values = implode('|==abtfr==|', $condition_values);
+    ?>
 	<li class="menu-item menu-item-depth-0 menu-item-page pending" style="display: list-item; position: relative; top: 0px;">
-		<div class="menu-item-bar criticalcss-edit-header" rel="<?php print htmlentities(md5($file), ENT_COMPAT, 'utf-8'); ?>" data-file="<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>">
+		<div class="menu-item-bar criticalcss-edit-header" rel="<?php print htmlentities(
+      md5($file),
+      ENT_COMPAT,
+      'utf-8'
+  ); ?>" data-file="<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>">
 			<div class="menu-item-handle" style="width:auto!important;cursor: pointer;">
-				<span class="item-title" title="<?php print str_replace(home_url(), '', $this->CTRL->theme_dir('', 'critical-css') . htmlentities($file, ENT_COMPAT, 'utf-8')); ?>">
-					<span class="menu-item-title"><?php print htmlentities($config['name'], ENT_COMPAT, 'utf-8'); ?></span> 
+				<span class="item-title" title="<?php print str_replace(
+        home_url(),
+        '',
+        $this->CTRL->theme_dir('', 'critical-css') .
+            htmlentities($file, ENT_COMPAT, 'utf-8')
+    ); ?>">
+					<span class="menu-item-title"><?php print htmlentities(
+         $config['name'],
+         ENT_COMPAT,
+         'utf-8'
+     ); ?></span> 
 					<span class="is-submenu" ><?php if (trim($inlinecss) !== '') {
-            print '<span>'.size_format(strlen($inlinecss), 2).'</span>';
-        } else {
-            print '<span style="color:#f1b70a;">empty</span>';
-        } ?> <span style="float:right;">Weight: <?php if (isset($config['weight'])) {
-            print $config['weight'];
-        } else {
-            print '1';
-        } ?></span></span>
+         print '<span>' . size_format(strlen($inlinecss), 2) . '</span>';
+     } else {
+         print '<span style="color:#f1b70a;">empty</span>';
+     } ?> <span style="float:right;">Weight: <?php if (
+     isset($config['weight'])
+ ) {
+     print $config['weight'];
+ } else {
+     print '1';
+ } ?></span></span>
 					<span class="is-submenu loading-editor" style="display:none;">
 						<span style="color:#ea4335;">Loading editor...</span>
 					</span>
 				</span>
 				<span class="item-controls">
-					<a class="item-delete button button-small button-del" title="Delete conditional Critical CSS" href="javascript:void(0);" data-confirm="<?php echo htmlentities(__('Are you sure you want to delete this conditional Critical CSS?', 'abtfr'), ENT_COMPAT, 'utf-8'); ?>">&#x2717;</a>
+					<a class="item-delete button button-small button-del" title="Delete conditional Critical CSS" href="javascript:void(0);" data-confirm="<?php echo htmlentities(
+         __(
+             'Are you sure you want to delete this conditional Critical CSS?',
+             'abtfr'
+         ),
+         ENT_COMPAT,
+         'utf-8'
+     ); ?>">&#x2717;</a>
 					<a class="item-edit" href="javascript:void(0);">^</a>
 				</span>
 			</div>
 		</div>
 
-		<div id="ccss_editor_<?php print htmlentities(md5($file), ENT_COMPAT, 'utf-8'); ?>" class="ccss_editor" style="display:none;">
-			<textarea class="abtfrcss" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][css]"><?php echo htmlentities($inlinecss, ENT_COMPAT, 'utf-8'); ?></textarea>
+		<div id="ccss_editor_<?php print htmlentities(
+      md5($file),
+      ENT_COMPAT,
+      'utf-8'
+  ); ?>" class="ccss_editor" style="display:none;">
+			<textarea class="abtfrcss" name="abtfr[conditional_css][<?php print htmlentities(
+       $file,
+       ENT_COMPAT,
+       'utf-8'
+   ); ?>][css]"><?php echo htmlentities(
+    $inlinecss,
+    ENT_COMPAT,
+    'utf-8'
+); ?></textarea>
 			<div class="conditions edit-conditional-critical-css">
 				
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-bottom:5px;margin-top:0px;">
@@ -103,25 +147,59 @@ window.conditional_options = <?php print json_encode($conditional_options, true)
 							</div>
 						</td>
 						<td style="padding:0px;padding-right:10px;">
-							<label><input type="checkbox" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][appendToAny]" value="1" <?php if (isset($config['appendToAny'])) {
-            print ' checked="checked"';
-        } ?> /> Append to any</label>
+							<label><input type="checkbox" name="abtfr[conditional_css][<?php print htmlentities(
+           $file,
+           ENT_COMPAT,
+           'utf-8'
+       ); ?>][appendToAny]" value="1" <?php if (isset($config['appendToAny'])) {
+    print ' checked="checked"';
+} ?> /> Append to any</label>
 						</td>
 						<td style="padding:0px;padding-right:10px;">
-							<label><input type="checkbox" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][prependToAny]" value="1" <?php if (isset($config['prependToAny'])) {
-            print ' checked="checked"';
-        } ?> /> Prepend to any</label>
+							<label><input type="checkbox" name="abtfr[conditional_css][<?php print htmlentities(
+           $file,
+           ENT_COMPAT,
+           'utf-8'
+       ); ?>][prependToAny]" value="1" <?php if (
+    isset($config['prependToAny'])
+) {
+    print ' checked="checked"';
+} ?> /> Prepend to any</label>
 						</td>
 						<td style="padding:0px;padding-right:10px;">
-							Weight: <input type="number" size="3" min="1" style="width:50px;" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][weight]" value="<?php print(isset($config['weight']) ? intval($config['weight']) : '1'); ?>" placeholder="..." />
+							Weight: <input type="number" size="3" min="1" style="width:50px;" name="abtfr[conditional_css][<?php print htmlentities(
+           $file,
+           ENT_COMPAT,
+           'utf-8'
+       ); ?>][weight]" value="<?php print isset($config['weight'])
+    ? intval($config['weight'])
+    : '1'; ?>" placeholder="..." />
 							&nbsp;(higher weight is selected over lower weight conditions)
 						</td>
 					</tr>	
 				</table>
-				<input type="text" name="abtfr[conditional_css][<?php print htmlentities($file, ENT_COMPAT, 'utf-8'); ?>][conditions]" rel="conditions" multiple="multiple" data-conditions="<?php print htmlentities(json_encode($conditions, true), ENT_COMPAT, 'utf-8'); ?>" value="<?php print htmlentities($condition_values, ENT_COMPAT, 'utf-8'); ?>" />
+				<input type="text" name="abtfr[conditional_css][<?php print htmlentities(
+        $file,
+        ENT_COMPAT,
+        'utf-8'
+    ); ?>][conditions]" rel="conditions" multiple="multiple" data-conditions="<?php print htmlentities(
+    json_encode($conditions, true),
+    ENT_COMPAT,
+    'utf-8'
+); ?>" value="<?php print htmlentities(
+    $condition_values,
+    ENT_COMPAT,
+    'utf-8'
+); ?>" />
 				
 				<div style="margin-top:5px;margin-bottom:0px;">
-					The configuration is stored in <code><?php print str_replace(home_url(), '', $this->CTRL->theme_dir('', 'critical-css') . '<strong>' . htmlentities($file, ENT_COMPAT, 'utf-8')); ?></strong></code> and is editable via FTP. 
+					The configuration is stored in <code><?php print str_replace(
+         home_url(),
+         '',
+         $this->CTRL->theme_dir('', 'critical-css') .
+             '<strong>' .
+             htmlentities($file, ENT_COMPAT, 'utf-8')
+     ); ?></strong></code> and is editable via FTP. 
 					<p style="margin-top:7px;margin-bottom:0px;">You can append or prepend relative links to CSS files using <code>@append</code> and <code>@prepend</code>, e.g. <em>../../style.css</em>. Use <code>@matchType</code> (any or all) to match any or all condtions.</p>
 				</div>
 			</div>
@@ -130,11 +208,13 @@ window.conditional_options = <?php print json_encode($conditional_options, true)
 		<ul class="menu-item-transport"></ul>
 	</li>
 <?php
-    }
-?>
+} ?>
 	<li>
 		<br />
-		<?php
-            submit_button(__('Save', 'abtfr'), 'primary large', 'is_submit', false);
-        ?>
+		<?php submit_button(
+      __('Save', 'abtfr'),
+      'primary large',
+      'is_submit',
+      false
+  ); ?>
 	</li>

@@ -11,10 +11,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-
-class ABTFR_LazyScripts
-{
-
+class ABTFR_LazyScripts {
     /**
      * Above the fold controller
      */
@@ -23,9 +20,8 @@ class ABTFR_LazyScripts
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
-        $this->CTRL = & $CTRL;
+    public function __construct(&$CTRL) {
+        $this->CTRL = &$CTRL;
 
         if ($this->CTRL->disabled) {
             return; // ABTF Reborn disabled for area / page
@@ -34,18 +30,24 @@ class ABTFR_LazyScripts
         /**
          * Lazy loading of scripts enabled
          */
-        if (isset($this->CTRL->options['lazyscripts_enabled']) && $this->CTRL->options['lazyscripts_enabled']) {
-
+        if (
+            isset($this->CTRL->options['lazyscripts_enabled']) &&
+            $this->CTRL->options['lazyscripts_enabled']
+        ) {
             // enqueue jquery Lazy XT widget module
-            $this->CTRL->loader->add_action('wp_enqueue_scripts', $this, 'enqueue_lazyxt', 10);
+            $this->CTRL->loader->add_action(
+                'wp_enqueue_scripts',
+                $this,
+                'enqueue_lazyxt',
+                10
+            );
         }
     }
 
     /**
      * Enqueue jQuery Lazy XT widget extension
      */
-    public function enqueue_lazyxt()
-    {
+    public function enqueue_lazyxt() {
         global $a3_lazy_load_global_settings;
 
         // load in footer?
@@ -63,12 +65,17 @@ class ABTFR_LazyScripts
          * @link https://wordpress.org/plugins/a3-lazy-load/
          * @version  1.7.1
          */
-        if (defined('A3_LAZY_VERSION') && isset($a3_lazy_load_global_settings) && $a3_lazy_load_global_settings['a3l_apply_lazyloadxt']) {
+        if (
+            defined('A3_LAZY_VERSION') &&
+            isset($a3_lazy_load_global_settings) &&
+            $a3_lazy_load_global_settings['a3l_apply_lazyloadxt']
+        ) {
             $in_footer = true;
 
             $a3l_effect = $a3_lazy_load_global_settings['a3l_effect'];
 
-            $theme_loader_function = $a3_lazy_load_global_settings['a3l_theme_loader'];
+            $theme_loader_function =
+                $a3_lazy_load_global_settings['a3l_theme_loader'];
 
             if ($theme_loader_function == 'wp_head') {
                 $in_footer = false;
@@ -80,21 +87,19 @@ class ABTFR_LazyScripts
                 $lazyxt_script_dependencies[] = 'jquery-lazyloadxt';
             }
         } elseif (class_exists('LazyLoadXT')) {
-
             /**
              * WordPress Lazy Load XT plugin
              *
              * @link https://wordpress.org/plugins/lazy-load-xt/
              * @version 0.5.3
              */
-            
+
             // is libary loaded?
             $lazyxt_loaded = wp_script_is('lazy-load-xt-script');
             if ($lazyxt_loaded) {
                 $lazyxt_script_dependencies[] = 'lazy-load-xt-script';
             }
         } else {
-
             // try common name
             $lazyxt_loaded = wp_script_is('jquery-lazyloadxt');
             if ($lazyxt_loaded) {
@@ -106,21 +111,32 @@ class ABTFR_LazyScripts
          * Lazy Load XT is not loaded, include jQuery Lazy XT library
          */
         if (!$lazyxt_loaded) {
-            wp_enqueue_script('jquery-lazyloadxt', WPABTFR_URI . 'public/js/jquery.lazyloadxt.min.js', array( 'jquery' ), '1.1.0', $in_footer);
+            wp_enqueue_script(
+                'jquery-lazyloadxt',
+                WPABTFR_URI . 'public/js/jquery.lazyloadxt.min.js',
+                array('jquery'),
+                '1.1.0',
+                $in_footer
+            );
             $lazyxt_script_dependencies[] = 'jquery-lazyloadxt';
         }
 
         /**
          * Load Lazy Load XT widget module
          */
-        wp_enqueue_script('jquery-lazyloadxt-widget', WPABTFR_URI . 'public/js/jquery.lazyloadxt.widget.min.js', $lazyxt_script_dependencies, $this->package_version(), $in_footer);
+        wp_enqueue_script(
+            'jquery-lazyloadxt-widget',
+            WPABTFR_URI . 'public/js/jquery.lazyloadxt.widget.min.js',
+            $lazyxt_script_dependencies,
+            $this->package_version(),
+            $in_footer
+        );
     }
 
     /**
      * Get package version
      */
-    public function package_version($reset = false)
-    {
+    public function package_version($reset = false) {
         if (!$reset) {
             $version = get_option('abtfr_lazyxt_version');
             if ($version) {
@@ -131,17 +147,26 @@ class ABTFR_LazyScripts
         // check existence of package file
         $package_json = WPABTFR_PATH . 'public/js/src/lazyloadxt_package.json';
         if (!file_exists($package_json)) {
-            $this->CTRL->admin->set_notice('PLUGIN INSTALLATION NOT COMPLETE, MISSING public/js/src/lazyloadxt_package.json', 'ERROR');
+            $this->CTRL->admin->set_notice(
+                'PLUGIN INSTALLATION NOT COMPLETE, MISSING public/js/src/lazyloadxt_package.json',
+                'ERROR'
+            );
 
             return false;
         } else {
             $package = @json_decode(file_get_contents($package_json), true);
             if (!is_array($package)) {
-                $this->CTRL->admin->set_notice('failed to parse public/js/src/lazyloadxt_package.json', 'ERROR');
+                $this->CTRL->admin->set_notice(
+                    'failed to parse public/js/src/lazyloadxt_package.json',
+                    'ERROR'
+                );
 
                 return false;
             } else {
-                $version = update_option('abtfr_lazyxt_version', $package['version']);
+                $version = update_option(
+                    'abtfr_lazyxt_version',
+                    $package['version']
+                );
 
                 // return version
                 return $package['version'];

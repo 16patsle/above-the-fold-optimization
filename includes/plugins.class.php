@@ -11,10 +11,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-
-class ABTFR_Plugins
-{
-
+class ABTFR_Plugins {
     /**
      * Above the fold controller
      */
@@ -36,9 +33,8 @@ class ABTFR_Plugins
     /**
      * Initialize the class and set its properties.
      */
-    public function __construct(&$CTRL)
-    {
-        $this->CTRL = & $CTRL;
+    public function __construct(&$CTRL) {
+        $this->CTRL = &$CTRL;
 
         $this->active_plugins = (array) get_option('active_plugins', array());
     }
@@ -46,15 +42,16 @@ class ABTFR_Plugins
     /**
      * Hook to HTML buffer of full page cache plugin
      */
-    public function html_output_hook($optimization)
-    {
+    public function html_output_hook($optimization) {
         if ($this->CTRL->disabled) {
             return false; // ABTF Reborn disabled for area / page
         }
 
         foreach ($this->active_modules as $module) {
-            if ($module->active('html_output_buffer') && method_exists($module, 'html_output_hook')) {
-
+            if (
+                $module->active('html_output_buffer') &&
+                method_exists($module, 'html_output_hook')
+            ) {
                 // apply first hook, ignore potential other / conflicting hooks
                 // most of the times a website has just 1 full page cache hook
                 // @todo verify compatibility issues between plugins
@@ -68,8 +65,7 @@ class ABTFR_Plugins
     /**
      * Disable CSS minification in applicable plugins
      */
-    public function diable_css_minification()
-    {
+    public function diable_css_minification() {
         foreach ($this->active_modules as $module) {
             $module->disable_css_minify();
         }
@@ -78,9 +74,7 @@ class ABTFR_Plugins
     /**
      * Clear full page cache
      */
-    public function clear_pagecache()
-    {
-
+    public function clear_pagecache() {
         /**
          * Clear full page cache from active plugin modules
          */
@@ -101,10 +95,10 @@ class ABTFR_Plugins
     /**
      * Get plugin modules
      */
-    public function get_modules()
-    {
+    public function get_modules() {
         $dirs = array(
-            plugin_dir_path(realpath(dirname(__FILE__) . '/')) . 'modules/plugins/',
+            plugin_dir_path(realpath(dirname(__FILE__) . '/')) .
+            'modules/plugins/',
             get_stylesheet_directory() . '/abtfr/plugins/'
         );
 
@@ -112,15 +106,13 @@ class ABTFR_Plugins
 
         foreach ($dirs as $dir) {
             if (!is_dir($dir)) {
-                continue 1;
+                continue;
             }
 
             $files = scandir($dir);
 
             foreach ($files as $file) {
-                if (is_file($dir . $file)
-                    && substr($file, -7) === 'inc.php'
-                ) {
+                if (is_file($dir . $file) && substr($file, -7) === 'inc.php') {
                     $hash = md5($file);
                     $modules[$hash] = $dir . $file;
                 }
@@ -136,16 +128,15 @@ class ABTFR_Plugins
     /**
      * Load modules
      */
-    public function load_modules()
-    {
+    public function load_modules() {
         $modules = $this->get_modules();
 
         $this->active_modules = array();
 
         foreach ($modules as $module_file) {
-            $plugin_module = & $this->load_module($module_file);
+            $plugin_module = &$this->load_module($module_file);
             if ($plugin_module && $plugin_module->active()) {
-                $this->active_modules[] = & $plugin_module;
+                $this->active_modules[] = &$plugin_module;
             }
         }
     }
@@ -153,8 +144,7 @@ class ABTFR_Plugins
     /**
      * Check if plugin is active
      */
-    public function active($plugin_name)
-    {
+    public function active($plugin_name) {
         if (in_array($plugin_name, $this->active_plugins)) {
             return true;
         }
@@ -165,8 +155,7 @@ class ABTFR_Plugins
     /**
      * Load module
      */
-    public function &load_module($module_file)
-    {
+    public function &load_module($module_file) {
         if (!file_exists($module_file)) {
             return $this->falseReference;
         }
@@ -193,13 +182,13 @@ class ABTFR_Plugins
         foreach ($parts as $part) {
             $classname .= ucfirst($part);
         }
-        
+
         if (isset($this->modules[$classname])) {
             return $this->modules[$classname];
         }
 
         // requore plugin module class
-        require_once($module_file);
+        require_once $module_file;
 
         $classnameName = 'ABTFR_OPP_' . $classname;
         if (!class_exists($classnameName)) {

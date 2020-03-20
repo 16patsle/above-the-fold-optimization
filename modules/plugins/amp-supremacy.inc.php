@@ -13,9 +13,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class ABTFR_OPP_AmpSupremacy extends ABTFR_OPP
-{
-
+class ABTFR_OPP_AmpSupremacy extends ABTFR_OPP {
     /**
      * Plugin file reference
      */
@@ -24,8 +22,7 @@ class ABTFR_OPP_AmpSupremacy extends ABTFR_OPP
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
+    public function __construct(&$CTRL) {
         parent::__construct($CTRL);
 
         // Is the plugin enabled?
@@ -42,11 +39,12 @@ class ABTFR_OPP_AmpSupremacy extends ABTFR_OPP
     /**
      * Is plugin active?
      */
-    public function init()
-    {
-
+    public function init() {
         // Disable Above The Fold on AMP pages
-        if (class_exists('MAMP_Render') && MAMP_Render::extractAMP($_SERVER['REQUEST_URI'])) {
+        if (
+            class_exists('MAMP_Render') &&
+            MAMP_Render::extractAMP($_SERVER['REQUEST_URI'])
+        ) {
             $this->CTRL->disabled = true;
         }
     }
@@ -54,10 +52,8 @@ class ABTFR_OPP_AmpSupremacy extends ABTFR_OPP
     /**
      * Is plugin active?
      */
-    public function active($type = false)
-    {
+    public function active($type = false) {
         if ($this->CTRL->plugins->active($this->plugin_file)) {
-
             // plugin is active
             if (!$type) {
                 return true;

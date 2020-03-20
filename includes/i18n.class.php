@@ -12,9 +12,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class ABTFR_i18n
-{
-
+class ABTFR_i18n {
     /**
      * The domain specified for this plugin
      */
@@ -23,8 +21,7 @@ class ABTFR_i18n
     /**
      * Load the plugin text domain for translation
      */
-    public function load_plugin_textdomain()
-    {
+    public function load_plugin_textdomain() {
         load_plugin_textdomain(
             $this->domain,
             false,
@@ -35,8 +32,7 @@ class ABTFR_i18n
     /**
      * Set the domain equal to that of the specified domain
      */
-    public function set_domain($domain)
-    {
+    public function set_domain($domain) {
         $this->domain = $domain;
     }
 }

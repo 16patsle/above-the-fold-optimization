@@ -9,8 +9,8 @@
  * @package    abtfr
  */
 
-if (! defined('WP_UNINSTALL_PLUGIN')) {
-    exit;
+if (!defined('WP_UNINSTALL_PLUGIN')) {
+    exit();
 }
 
 // remove settings
@@ -32,16 +32,19 @@ foreach ($options_to_remove as $option) {
 wp_clear_scheduled_hook('abtfr_cron');
 
 // remove above the fold cache directory
-if (defined('ABTFR_CACHE_DIR') && strpos(ABTFR_CACHE_DIR, '/abtfr/') !== false) {
+if (
+    defined('ABTFR_CACHE_DIR') &&
+    strpos(ABTFR_CACHE_DIR, '/abtfr/') !== false
+) {
     $path = trailingslashit(ABTFR_CACHE_DIR);
     if (is_dir($path)) {
-
-    // Recursive delete
-        function abtfr_rmdir_recursive($dir)
-        {
-            $files = array_diff(scandir($dir), array('.','..'));
+        // Recursive delete
+        function abtfr_rmdir_recursive($dir) {
+            $files = array_diff(scandir($dir), array('.', '..'));
             foreach ($files as $file) {
-                (is_dir("$dir/$file")) ? abtfr_rmdir_recursive("$dir/$file") : @unlink("$dir/$file");
+                is_dir("$dir/$file")
+                    ? abtfr_rmdir_recursive("$dir/$file")
+                    : @unlink("$dir/$file");
             }
 
             return @rmdir($dir);

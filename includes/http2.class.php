@@ -11,9 +11,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class ABTFR_HTTP2
-{
-
+class ABTFR_HTTP2 {
     /**
      * Above the fold controller
      */
@@ -27,40 +25,52 @@ class ABTFR_HTTP2
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
-        $this->CTRL = & $CTRL;
+    public function __construct(&$CTRL) {
+        $this->CTRL = &$CTRL;
 
         if ($this->CTRL->disabled) {
             return; // ABTF Reborn disabled for area / page
         }
 
         // HTTP/2 optimization enabled
-        if (isset($this->CTRL->options['http2_push']) && $this->CTRL->options['http2_push']) {
-            $this->push = (isset($this->CTRL->options['http2_push_config']) && is_array($this->CTRL->options['http2_push_config'])) ? $this->CTRL->options['http2_push_config'] : array();
+        if (
+            isset($this->CTRL->options['http2_push']) &&
+            $this->CTRL->options['http2_push']
+        ) {
+            $this->push =
+                isset($this->CTRL->options['http2_push_config']) &&
+                is_array($this->CTRL->options['http2_push_config'])
+                    ? $this->CTRL->options['http2_push_config']
+                    : array();
         }
         if (empty($this->push)) {
             $this->push = false;
         }
 
-        if (!$this->push && isset($this->CTRL->options['http2_push_criticalcss']) && $this->CTRL->options['http2_push_criticalcss']) {
+        if (
+            !$this->push &&
+            isset($this->CTRL->options['http2_push_criticalcss']) &&
+            $this->CTRL->options['http2_push_criticalcss']
+        ) {
             $this->push = array();
         }
 
         // HTTP/2 Server Push enabled
         if (is_array($this->push)) {
-
             // add headers
-            $this->CTRL->loader->add_action('abtfr_html_pre', $this, 'push_headers', 10);
+            $this->CTRL->loader->add_action(
+                'abtfr_html_pre',
+                $this,
+                'push_headers',
+                10
+            );
         }
     }
 
     /**
      * Output HTTP/2 push headers
      */
-    public function push_headers($buffer)
-    {
-        
+    public function push_headers($buffer) {
         // push HTML images?
         $pushTypes = array();
         foreach ($this->push as $push) {
@@ -75,9 +85,17 @@ class ABTFR_HTTP2
 
         // first priority: Critical CSS
         if ($this->CTRL->optimization->http2push_criticalcss) {
-            $local = $this->is_local($this->CTRL->optimization->http2push_criticalcss);
+            $local = $this->is_local(
+                $this->CTRL->optimization->http2push_criticalcss
+            );
             $pushResources[] = array(
-                'src' => esc_url((($local) ? $this->url_to_relative_path($this->CTRL->optimization->http2push_criticalcss) : $this->CTRL->optimization->http2push_criticalcss)),
+                'src' => esc_url(
+                    $local
+                        ? $this->url_to_relative_path(
+                            $this->CTRL->optimization->http2push_criticalcss
+                        )
+                        : $this->CTRL->optimization->http2push_criticalcss
+                ),
                 'local' => $local,
                 'type' => 'style',
                 'meta' => true
@@ -98,7 +116,9 @@ class ABTFR_HTTP2
                 if ($match) {
                     $local = $this->is_local($src); // (strpos($src, home_url()) !== false);
                     $pushResources[] = array(
-                        'src' => esc_url((($local) ? $this->url_to_relative_path($src) : $src)),
+                        'src' => esc_url(
+                            $local ? $this->url_to_relative_path($src) : $src
+                        ),
                         'local' => $local,
                         'type' => 'style',
                         'meta' => $meta
@@ -121,7 +141,9 @@ class ABTFR_HTTP2
                 if ($match) {
                     $local = $this->is_local($src);
                     $pushResources[] = array(
-                        'src' => esc_url((($local) ? $this->url_to_relative_path($src) : $src)),
+                        'src' => esc_url(
+                            $local ? $this->url_to_relative_path($src) : $src
+                        ),
                         'local' => $local,
                         'type' => 'script',
                         'meta' => $meta
@@ -132,17 +154,15 @@ class ABTFR_HTTP2
 
         // HTML images
         if (isset($pushTypes['image'])) {
-            
             // image regex
             $image_regex = '#<img[^>]+src[^>]+>#is';
 
             if (preg_match_all($image_regex, $buffer, $out)) {
                 foreach ($out[0] as $n => $image) {
-
                     // extract image
                     $src = $this->src_regex($out[0][$n]);
                     if (!$src) {
-                        continue 1;
+                        continue;
                     }
 
                     // not a valid URL / path
@@ -161,7 +181,11 @@ class ABTFR_HTTP2
                     if ($match) {
                         $local = $this->is_local($src);
                         $pushResources[] = array(
-                            'src' => esc_url((($local) ? $this->url_to_relative_path($src) : $src)),
+                            'src' => esc_url(
+                                $local
+                                    ? $this->url_to_relative_path($src)
+                                    : $src
+                            ),
                             'local' => $local,
                             'type' => 'image',
                             'meta' => $meta
@@ -179,11 +203,21 @@ class ABTFR_HTTP2
                         $local = $this->is_local($resource['file']);
                         $src = $resource['file'];
                         $pushResources[] = array(
-                            'src' => esc_url((($local) ? $this->url_to_relative_path($src) : $src)),
+                            'src' => esc_url(
+                                $local
+                                    ? $this->url_to_relative_path($src)
+                                    : $src
+                            ),
                             'local' => $local,
                             'type' => $resource['type'],
-                            'mime' => (isset($resource['mime']) && $resource['mime']) ? $resource['mime'] : false,
-                            'meta' => (isset($push['meta']) && $push['meta']) ? $push['meta'] : false
+                            'mime' =>
+                                isset($resource['mime']) && $resource['mime']
+                                    ? $resource['mime']
+                                    : false,
+                            'meta' =>
+                                isset($push['meta']) && $push['meta']
+                                    ? $push['meta']
+                                    : false
                         );
                     }
                 }
@@ -202,7 +236,10 @@ class ABTFR_HTTP2
                 $link .= '; crossorigin';
             }
             if (isset($resource['mime']) && $resource['mime']) {
-                $link .= sprintf('; type=\'%s\'', str_replace('\'', '\\\'', $resource['mime']));
+                $link .= sprintf(
+                    '; type=\'%s\'',
+                    str_replace('\'', '\\\'', $resource['mime'])
+                );
             }
 
             // CloudFlare support for ServerPush appears to be broken as of Sept. 8, 2017
@@ -225,9 +262,12 @@ class ABTFR_HTTP2
                     $link .= ' crossorigin';
                 }
                 if (isset($resource['mime']) && $resource['mime']) {
-                    $link .= sprintf(' type="%s"', str_replace('"', '&quot;', $resource['mime']));
+                    $link .= sprintf(
+                        ' type="%s"',
+                        str_replace('"', '&quot;', $resource['mime'])
+                    );
                 }
-                $meta[] = $link .'>';
+                $meta[] = $link . '>';
             }
         }
 
@@ -235,7 +275,11 @@ class ABTFR_HTTP2
         //header('Link: ' . implode(',',$links), false);
 
         // include fallback meta
-        $buffer = str_replace('<link rel=http2push>', implode('', $meta), $buffer);
+        $buffer = str_replace(
+            '<link rel=http2push>',
+            implode('', $meta),
+            $buffer
+        );
 
         return $buffer;
     }
@@ -243,18 +287,22 @@ class ABTFR_HTTP2
     /**
      * Extract src from tag
      */
-    public function src_regex($tag)
-    {
-
+    public function src_regex($tag) {
         // detect if tag has href
         $srcpos = strpos($tag, 'src');
         if ($srcpos !== false) {
-
             // regex
-            $char = substr($tag, ($srcpos + 4), 1);
+            $char = substr($tag, $srcpos + 4, 1);
             if ($char === '"' || $char === '\'') {
                 $char = preg_quote($char);
-                $regex = '#(src\s*=\s*'.$char.')([^'.$char.']+)('.$char.')#Usmi';
+                $regex =
+                    '#(src\s*=\s*' .
+                    $char .
+                    ')([^' .
+                    $char .
+                    ']+)(' .
+                    $char .
+                    ')#Usmi';
             } elseif ($char === ' ' || $char === "\n") {
                 $regex = '#(src\s*=\s*["|\'])([^"|\']+)(["|\'])#Usmi';
             } else {
@@ -275,16 +323,20 @@ class ABTFR_HTTP2
     /**
      * Match resource push rule
      */
-    public function matchRule($src, $rule, &$match, &$meta)
-    {
+    public function matchRule($src, $rule, &$match, &$meta) {
         if ($rule['match'] === 'all') {
             $match = true;
             if (isset($rule['meta'])) {
                 $meta = $rule['meta'];
             }
-        } elseif (isset($rule['match']) && is_array($rule['match']) && isset($rule['match']['pattern'])) {
-            $regex = (isset($rule['match']['regex']) && $rule['match']['regex']);
-            $exclude = (isset($rule['match']['exclude']) && $rule['match']['exclude']);
+        } elseif (
+            isset($rule['match']) &&
+            is_array($rule['match']) &&
+            isset($rule['match']['pattern'])
+        ) {
+            $regex = isset($rule['match']['regex']) && $rule['match']['regex'];
+            $exclude =
+                isset($rule['match']['exclude']) && $rule['match']['exclude'];
             if ($exclude && !$match) {
                 // not included
             } else {
@@ -304,7 +356,6 @@ class ABTFR_HTTP2
                     }
                 } else {
                     if (strpos($src, $rule['match']['pattern']) !== false) {
-
                         // exclude resource
                         if ($exclude) {
                             $match = false;
@@ -319,15 +370,13 @@ class ABTFR_HTTP2
             }
         }
 
-        return array($match,$meta);
+        return array($match, $meta);
     }
 
     /**
      * Local resource?
      */
-    public function is_local($src)
-    {
-
+    public function is_local($src) {
         // relative path
         if (strpos($src, '://') === false && strpos($src, '//') !== 0) {
             return true;
@@ -339,28 +388,25 @@ class ABTFR_HTTP2
     /**
      * URL to relative path
      */
-    public function url_to_relative_path($src)
-    {
-        return '//' === substr($src, 0, 2) ? preg_replace('/^\/\/([^\/]*)\//', '/', $src) : preg_replace('/^http(s)?:\/\/[^\/]*/', '', $src);
+    public function url_to_relative_path($src) {
+        return '//' === substr($src, 0, 2)
+            ? preg_replace('/^\/\/([^\/]*)\//', '/', $src)
+            : preg_replace('/^http(s)?:\/\/[^\/]*/', '', $src);
     }
 
     /**
      * Return enqueue type
      */
-    public static function enqueue_type($current_hook)
-    {
+    public static function enqueue_type($current_hook) {
         return 'style_loader_src' === $current_hook ? 'style' : 'script';
     }
 
     /**
      * Javascript client settings
      */
-    public function client_jssettings(&$html_after)
-    {
-
+    public function client_jssettings(&$html_after) {
         // HTTP/2 optimization enabled
         if (!$this->push) {
-
             // disabled
             return;
         }

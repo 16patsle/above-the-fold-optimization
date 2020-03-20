@@ -10,9 +10,7 @@
  * @author     Patrick Sletvold
  */
 
-class ABTFR_Admin_BuildTool
-{
-
+class ABTFR_Admin_BuildTool {
     /**
      * Above the fold controller
      */
@@ -26,28 +24,29 @@ class ABTFR_Admin_BuildTool
     /**
      * Initialize the class and set its properties.
      */
-    public function __construct(&$CTRL)
-    {
-        $this->CTRL = & $CTRL;
-        $this->options = & $CTRL->options;
+    public function __construct(&$CTRL) {
+        $this->CTRL = &$CTRL;
+        $this->options = &$CTRL->options;
 
         /**
          * Admin panel specific
          */
         if (is_admin()) {
-
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtfr_create_critical_package', $this, 'create_critical_package');
+            $this->CTRL->loader->add_action(
+                'admin_post_abtfr_create_critical_package',
+                $this,
+                'create_critical_package'
+            );
         }
     }
 
     /**
      * Create critical package
      */
-    public function create_critical_package()
-    {
+    public function create_critical_package() {
         check_admin_referer('abtfr');
 
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
@@ -61,40 +60,101 @@ class ABTFR_Admin_BuildTool
         // download package
         if (isset($_POST['download_package'])) {
             $this->download_package();
-            exit;
+            exit();
         }
 
         // install package
         if (isset($_POST['install_package'])) {
             $this->install_package();
-            exit;
+            exit();
         }
 
-        $url = (isset($_POST['url'])) ? trim($_POST['url']) : '';
-        $taskname = (isset($_POST['taskname'])) ? trim($_POST['taskname']) : '';
-        $dimensions = (isset($_POST['dimensions'])) ? $this->CTRL->admin->newline_array(trim($_POST['dimensions'])) : '';
-        $extra = (isset($_POST['extra']) && intval($_POST['extra']) === 1) ? true : false;
-        $update = (isset($_POST['update']) && trim($_POST['update']) !== '') ? trim($_POST['update']) : false;
+        $url = isset($_POST['url']) ? trim($_POST['url']) : '';
+        $taskname = isset($_POST['taskname']) ? trim($_POST['taskname']) : '';
+        $dimensions = isset($_POST['dimensions'])
+            ? $this->CTRL->admin->newline_array(trim($_POST['dimensions']))
+            : '';
+        $extra =
+            isset($_POST['extra']) && intval($_POST['extra']) === 1
+                ? true
+                : false;
+        $update =
+            isset($_POST['update']) && trim($_POST['update']) !== ''
+                ? trim($_POST['update'])
+                : false;
 
         if ($url === '') {
-            $this->CTRL->admin->set_notice('You did not select a page.', 'ERROR');
-            wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
-            exit;
+            $this->CTRL->admin->set_notice(
+                'You did not select a page.',
+                'ERROR'
+            );
+            wp_redirect(
+                add_query_arg(
+                    array(
+                        'page' => 'abtfr-build-tool',
+                        'taskname' => $taskname,
+                        'dimensions' => $dimensions,
+                        'extra' => $extra,
+                        'update' => $update
+                    ),
+                    admin_url('admin.php')
+                )
+            );
+            exit();
         }
-        if ($taskname === '' || !preg_match('|^critical-[a-z0-9\-]+$|Ui', $taskname)) {
-            $this->CTRL->admin->set_notice('You did not enter a valid task name.', 'ERROR');
-            wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
-            exit;
+        if (
+            $taskname === '' ||
+            !preg_match('|^critical-[a-z0-9\-]+$|Ui', $taskname)
+        ) {
+            $this->CTRL->admin->set_notice(
+                'You did not enter a valid task name.',
+                'ERROR'
+            );
+            wp_redirect(
+                add_query_arg(
+                    array(
+                        'page' => 'abtfr-build-tool',
+                        'taskname' => $taskname,
+                        'dimensions' => $dimensions,
+                        'extra' => $extra,
+                        'update' => $update
+                    ),
+                    admin_url('admin.php')
+                )
+            );
+            exit();
         }
 
         $originalDimensions = $dimensions;
         if (!empty($dimensions)) {
             foreach ($dimensions as $n => $dim) {
                 $dimparts = explode('x', $dim);
-                if (count($dimparts) !== 2 || !is_numeric($dimparts[0]) || !is_numeric($dimparts[1]) || intval($dimparts[0]) <= 0 || intval($dimparts[1]) <= 0) {
-                    $this->CTRL->admin->set_notice('Dimension <strong>'.htmlentities($dim, ENT_COMPAT, 'utf-8').'</strong> is not valid.', 'ERROR');
-                    wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
-                    exit;
+                if (
+                    count($dimparts) !== 2 ||
+                    !is_numeric($dimparts[0]) ||
+                    !is_numeric($dimparts[1]) ||
+                    intval($dimparts[0]) <= 0 ||
+                    intval($dimparts[1]) <= 0
+                ) {
+                    $this->CTRL->admin->set_notice(
+                        'Dimension <strong>' .
+                            htmlentities($dim, ENT_COMPAT, 'utf-8') .
+                            '</strong> is not valid.',
+                        'ERROR'
+                    );
+                    wp_redirect(
+                        add_query_arg(
+                            array(
+                                'page' => 'abtfr-build-tool',
+                                'taskname' => $taskname,
+                                'dimensions' => $dimensions,
+                                'extra' => $extra,
+                                'update' => $update
+                            ),
+                            admin_url('admin.php')
+                        )
+                    );
+                    exit();
                 }
                 $dimensions[$n] = $dimparts;
             }
@@ -104,8 +164,22 @@ class ABTFR_Admin_BuildTool
         if ($update) {
             $criticalcss_files = $this->CTRL->criticalcss->get_theme_criticalcss();
             if (!isset($criticalcss_files[$update])) {
-                $this->CTRL->admin->set_notice('You did not select a valid conditional CSS file to update.', 'ERROR');
-                wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool','taskname' => $taskname, 'dimensions' => $dimensions, 'extra' => $extra, 'update' => $update ), admin_url('admin.php')));
+                $this->CTRL->admin->set_notice(
+                    'You did not select a valid conditional CSS file to update.',
+                    'ERROR'
+                );
+                wp_redirect(
+                    add_query_arg(
+                        array(
+                            'page' => 'abtfr-build-tool',
+                            'taskname' => $taskname,
+                            'dimensions' => $dimensions,
+                            'extra' => $extra,
+                            'update' => $update
+                        ),
+                        admin_url('admin.php')
+                    )
+                );
             }
         } else {
             $update = false;
@@ -124,7 +198,6 @@ class ABTFR_Admin_BuildTool
         );
 
         // Update default build tool settings
-        
 
         $default = get_option('abtfr-build-tool-default');
         if (!is_array($default)) {
@@ -142,8 +215,13 @@ class ABTFR_Admin_BuildTool
 
         // download
         if (isset($_POST['download'])) {
-            $this->download_critical_task_package($pagejson, $url, $taskname, $settings);
-            exit;
+            $this->download_critical_task_package(
+                $pagejson,
+                $url,
+                $taskname,
+                $settings
+            );
+            exit();
         }
 
         /**
@@ -159,16 +237,16 @@ class ABTFR_Admin_BuildTool
         $gulptaskdir = $gulpdir . $taskname . '/';
 
         if (is_dir($gulptaskdir)) {
-
             // remove existing
-            function abtfr_rmdir_recursive($dir, $delete = true)
-            {
-                $files = array_diff(scandir($dir), array('.','..'));
+            function abtfr_rmdir_recursive($dir, $delete = true) {
+                $files = array_diff(scandir($dir), array('.', '..'));
                 foreach ($files as $file) {
-                    (is_dir("$dir/$file")) ? abtfr_rmdir_recursive("$dir/$file") : @unlink("$dir/$file");
+                    is_dir("$dir/$file")
+                        ? abtfr_rmdir_recursive("$dir/$file")
+                        : @unlink("$dir/$file");
                 }
 
-                return ($delete) ? @rmdir($dir) : false;
+                return $delete ? @rmdir($dir) : false;
             }
             abtfr_rmdir_recursive($gulptaskdir, false);
         }
@@ -191,7 +269,6 @@ class ABTFR_Admin_BuildTool
         // gulp-header added in version 2.7
         // @since 2.7
         if (!is_dir($gulpdir . 'node_modules/gulp-header/')) {
-            
             // remove package / gulpfile to re-create in next steps
             if (file_exists($gulpdir . 'package.json')) {
                 @unlink($gulpdir . 'package.json');
@@ -205,26 +282,37 @@ class ABTFR_Admin_BuildTool
 
         // copy package.json if it does not exist
         if (!file_exists($gulpdir . 'package.json')) {
-            copy(WPABTFR_PATH . 'modules/critical-css-build-tool/package.json', $gulpdir . 'package.json');
+            copy(
+                WPABTFR_PATH . 'modules/critical-css-build-tool/package.json',
+                $gulpdir . 'package.json'
+            );
             chmod($gulpdir . 'package.json', 0666);
         }
         // copy gulpfile.js if it does not exist
         if (!file_exists($gulpdir . 'gulpfile.js')) {
-            copy(WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js', $gulpdir . 'gulpfile.js');
+            copy(
+                WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js',
+                $gulpdir . 'gulpfile.js'
+            );
             chmod($gulpdir . 'gulpfile.js', 0666);
         }
 
         // add html file
-        $this->CTRL->file_put_contents($gulptaskdir . '/page.html', $pagejson['html']);
+        $this->CTRL->file_put_contents(
+            $gulptaskdir . '/page.html',
+            $pagejson['html']
+        );
 
         $fullcss = '';
         $taskjs_cssfiles = array();
 
         # add css files
         foreach ($pagejson['css'] as $file) {
-
             #add it to the zip
-            $this->CTRL->file_put_contents($gulptaskdir . '/css/' . $file['file'], $file['code']);
+            $this->CTRL->file_put_contents(
+                $gulptaskdir . '/css/' . $file['file'],
+                $file['code']
+            );
 
             $fullcss .= $file['code'];
 
@@ -236,43 +324,72 @@ class ABTFR_Admin_BuildTool
 
         // add extra css file
         if ($extra) {
-            $this->CTRL->file_put_contents($gulptaskdir . '/extra.css', '/** 
+            $this->CTRL->file_put_contents(
+                $gulptaskdir . '/extra.css',
+                '/** 
  * Use this file to append extra CSS to critical.css. 
  * This CSS code is not processed by the Critical CSS generator to enable correction of the output of the Critical CSS generator.
- */');
+ */'
+            );
         }
 
         /**
          * Create gulp-critical-task.js
          */
         $taskjs = false;
-        include(WPABTFR_PATH . 'modules/critical-css-build-tool/gulp-critical-task.php');
+        include WPABTFR_PATH .
+            'modules/critical-css-build-tool/gulp-critical-task.php';
         if (empty($taskjs)) {
             wp_die('Failed to load gulp-critical.task.js');
         }
 
         // add full css file
-        $this->CTRL->file_put_contents($gulptaskdir . '/gulp-critical-task.js', $taskjs);
-
-        
+        $this->CTRL->file_put_contents(
+            $gulptaskdir . '/gulp-critical-task.js',
+            $taskjs
+        );
 
         // add notice
-        $this->CTRL->admin->set_notice('<div style="font-size:18px;line-height:20px;margin:0px;">The package has been installed in <strong>'.trailingslashit(str_replace(home_url(), '', get_stylesheet_directory_uri())).'abtfr/</strong>
+        $this->CTRL->admin->set_notice(
+            '<div style="font-size:18px;line-height:20px;margin:0px;">The package has been installed in <strong>' .
+                trailingslashit(
+                    str_replace(home_url(), '', get_stylesheet_directory_uri())
+                ) .
+                'abtfr/</strong>
 		<br /><br />
-		Run <code>gulp '.$taskname.'</code> to generate critical CSS.
+		Run <code>gulp ' .
+                $taskname .
+                '</code> to generate critical CSS.
 		<br /><br />
-		<textarea class="abtfrcmd" onfocus="jQuery(this).select();">cd '.trailingslashit(get_stylesheet_directory()).'abtfr/;' . "\n" . ((!$gulp_installed) ? 'npm install; ' : '') . 'gulp '.$taskname.'</textarea></div>', 'NOTICE');
+		<textarea class="abtfrcmd" onfocus="jQuery(this).select();">cd ' .
+                trailingslashit(get_stylesheet_directory()) .
+                'abtfr/;' .
+                "\n" .
+                (!$gulp_installed ? 'npm install; ' : '') .
+                'gulp ' .
+                $taskname .
+                '</textarea></div>',
+            'NOTICE'
+        );
 
-        wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool' ), admin_url('admin.php')));
-        exit;
+        wp_redirect(
+            add_query_arg(
+                array('page' => 'abtfr-build-tool'),
+                admin_url('admin.php')
+            )
+        );
+        exit();
     }
 
     /**
      * Download critical package zip
      */
-    public function download_critical_task_package($pagejson, $url, $taskname, $settings)
-    {
-
+    public function download_critical_task_package(
+        $pagejson,
+        $url,
+        $taskname,
+        $settings
+    ) {
         // ZipArchive requires PHP v5.2+
         if (!version_compare(PHP_VERSION, '5.2.0', '>=')) {
             wp_die('Creating zipfiles requires PHP v5.2+.');
@@ -286,7 +403,9 @@ class ABTFR_Admin_BuildTool
         # create a temp file & open it
         $tmp_file = tempnam('.', '');
         if ($zip->open($tmp_file, ZipArchive::CREATE) !== true) {
-            wp_die('Failed to create zip archive. Please check PHP ZipArchive permissions.');
+            wp_die(
+                'Failed to create zip archive. Please check PHP ZipArchive permissions.'
+            );
         }
 
         // add html file
@@ -297,9 +416,11 @@ class ABTFR_Admin_BuildTool
 
         # add css files
         foreach ($pagejson['css'] as $file) {
-
             #add it to the zip
-            $zip->addFromString($taskname . '/css/' . $file['file'], $file['code']);
+            $zip->addFromString(
+                $taskname . '/css/' . $file['file'],
+                $file['code']
+            );
             $fullcss .= $file['code'];
 
             $taskjs_cssfiles[] = 'TASKPATH/css/' . $file['file'];
@@ -309,19 +430,22 @@ class ABTFR_Admin_BuildTool
         $zip->addFromString($taskname . '/full.css', $fullcss);
 
         if ($settings['extra']) {
-
             // add extra css file
-            $zip->addFromString($taskname . '/extra.css', '/** 
+            $zip->addFromString(
+                $taskname . '/extra.css',
+                '/** 
  * Use this file to append extra CSS to critical.css. 
  * This CSS code is not processed by the Critical CSS generator to enable correction of the output of the Critical CSS generator.
- */');
+ */'
+            );
         }
 
         /**
          * Create gulp-critical-task.js
          */
         $taskjs = false;
-        include(WPABTFR_PATH . 'modules/critical-css-build-tool/gulp-critical-task.php');
+        include WPABTFR_PATH .
+            'modules/critical-css-build-tool/gulp-critical-task.php';
         if (empty($taskjs)) {
             wp_die('Failed to load gulp-critical.task.js');
         }
@@ -330,39 +454,42 @@ class ABTFR_Admin_BuildTool
         $zip->addFromString($taskname . '/gulp-critical-task.js', $taskjs);
 
         // add package.json
-        $data = file_get_contents(WPABTFR_PATH . 'modules/critical-css-build-tool/package.json');
+        $data = file_get_contents(
+            WPABTFR_PATH . 'modules/critical-css-build-tool/package.json'
+        );
 
         // add package.json
         $zip->addFromString('package.json', $data);
 
         // add package.json
-        $data = file_get_contents(WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js');
+        $data = file_get_contents(
+            WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js'
+        );
 
         // add package.json
         $zip->addFromString('gulpfile.js', $data);
-
 
         $zip->close();
 
         /**
          * Download zipfile
          */
-        header("Content-type: application/zip");
-        header("Content-Disposition: attachment; filename=".$taskname.".zip");
-        header("Content-length: " . filesize($tmp_file));
-        header("Pragma: no-cache");
-        header("Expires: 0");
+        header('Content-type: application/zip');
+        header(
+            'Content-Disposition: attachment; filename=' . $taskname . '.zip'
+        );
+        header('Content-length: ' . filesize($tmp_file));
+        header('Pragma: no-cache');
+        header('Expires: 0');
         readfile($tmp_file);
 
-        exit;
+        exit();
     }
 
     /**
      * Download package.json and gulpfile.js
      */
-    public function download_package()
-    {
-
+    public function download_package() {
         // ZipArchive requires PHP v5.2+
         if (!version_compare(PHP_VERSION, '5.2.0', '>=')) {
             wp_die('Creating zipfiles requires PHP v5.2+.');
@@ -376,42 +503,48 @@ class ABTFR_Admin_BuildTool
         # create a temp file & open it
         $tmp_file = tempnam('.', '');
         if ($zip->open($tmp_file, ZipArchive::CREATE) !== true) {
-            wp_die('Failed to create zip archive. Please check PHP ZipArchive permissions.');
+            wp_die(
+                'Failed to create zip archive. Please check PHP ZipArchive permissions.'
+            );
         }
 
         // add package.json
-        $data = file_get_contents(WPABTFR_PATH . 'modules/critical-css-build-tool/package.json');
+        $data = file_get_contents(
+            WPABTFR_PATH . 'modules/critical-css-build-tool/package.json'
+        );
 
         // add package.json
         $zip->addFromString('package.json', $data);
 
         // add package.json
-        $data = file_get_contents(WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js');
+        $data = file_get_contents(
+            WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js'
+        );
 
         // add package.json
         $zip->addFromString('gulpfile.js', $data);
-
 
         $zip->close();
 
         /**
          * Download zipfile
          */
-        header("Content-type: application/zip");
-        header("Content-Disposition: attachment; filename=wp-abtfr-gulp-critical-css.zip");
-        header("Content-length: " . filesize($tmp_file));
-        header("Pragma: no-cache");
-        header("Expires: 0");
+        header('Content-type: application/zip');
+        header(
+            'Content-Disposition: attachment; filename=wp-abtfr-gulp-critical-css.zip'
+        );
+        header('Content-length: ' . filesize($tmp_file));
+        header('Pragma: no-cache');
+        header('Expires: 0');
         readfile($tmp_file);
 
-        exit;
+        exit();
     }
 
     /**
      * Install package.json and gulpfile.js
      */
-    public function install_package()
-    {
+    public function install_package() {
         $gulpdir = get_stylesheet_directory() . '/abtfr/';
         if (!is_dir($gulpdir)) {
             if (!$this->CTRL->mkdir($gulpdir)) {
@@ -421,42 +554,66 @@ class ABTFR_Admin_BuildTool
 
         // copy package.json if it does not exist
         if (!file_exists($gulpdir . 'package.json')) {
-            copy(WPABTFR_PATH . 'modules/critical-css-build-tool/package.json', $gulpdir . 'package.json');
+            copy(
+                WPABTFR_PATH . 'modules/critical-css-build-tool/package.json',
+                $gulpdir . 'package.json'
+            );
         }
         // copy gulpfile.js if it does not exist
         if (!file_exists($gulpdir . 'gulpfile.js')) {
-            copy(WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js', $gulpdir . 'gulpfile.js');
+            copy(
+                WPABTFR_PATH . 'modules/critical-css-build-tool/gulpfile.js',
+                $gulpdir . 'gulpfile.js'
+            );
         }
 
         // add notice
-        $this->CTRL->admin->set_notice('<div style="font-size:18px;line-height:20px;margin:0px;">The Gulp.js Critical CSS Generator files have been installed in <strong>'.trailingslashit(str_replace(home_url(), '', get_stylesheet_directory_uri())).'abtfr/</strong>
+        $this->CTRL->admin->set_notice(
+            '<div style="font-size:18px;line-height:20px;margin:0px;">The Gulp.js Critical CSS Generator files have been installed in <strong>' .
+                trailingslashit(
+                    str_replace(home_url(), '', get_stylesheet_directory_uri())
+                ) .
+                'abtfr/</strong>
 		<br /><br />
 		Run <code><strong>npm install</strong></code> to install the dependencies.
 		<br /><br />
-		<textarea class="abtfrcmd" onfocus="jQuery(this).select();">cd '.trailingslashit(get_stylesheet_directory()).'abtfr/;' . "\n" . 'npm install</textarea></div>', 'NOTICE');
+		<textarea class="abtfrcmd" onfocus="jQuery(this).select();">cd ' .
+                trailingslashit(get_stylesheet_directory()) .
+                'abtfr/;' .
+                "\n" .
+                'npm install</textarea></div>',
+            'NOTICE'
+        );
 
-        wp_redirect(add_query_arg(array( 'page' => 'abtfr-build-tool' ), admin_url('admin.php')));
-        exit;
+        wp_redirect(
+            add_query_arg(
+                array('page' => 'abtfr-build-tool'),
+                admin_url('admin.php')
+            )
+        );
+        exit();
     }
 
     /**
      * Retrieve HTML and CSS JSON
      */
-    public function get_page_json($url)
-    {
-
+    public function get_page_json($url) {
         // get HTML without CSS
-        $html = trim($this->CTRL->remote_get($this->CTRL->view_url('abtfr-buildtool-html', false, $url)));
+        $html = trim(
+            $this->CTRL->remote_get(
+                $this->CTRL->view_url('abtfr-buildtool-html', false, $url)
+            )
+        );
         if ($html === '') {
-
             // no HTML
             return false;
         }
 
         // extract full CSS
-        $cssdata = $this->CTRL->remote_get($this->CTRL->view_url('abtfr-buildtool-css', false, $url));
+        $cssdata = $this->CTRL->remote_get(
+            $this->CTRL->view_url('abtfr-buildtool-css', false, $url)
+        );
         if ($cssdata === '') {
-
             // no CSS data
             return false;
         }
@@ -466,7 +623,7 @@ class ABTFR_Admin_BuildTool
         if (trim($cssdata_parsed[1]) === '') {
             return false;
         }
-        
+
         $css = @json_decode(trim($cssdata_parsed[1]), true);
         if (!is_array($css)) {
             // no CSS
@@ -488,19 +645,56 @@ class ABTFR_Admin_BuildTool
 
                 if (!isset($file['inline']) || intval($file['inline']) !== 1) {
                     $cssfilehost = parse_url($file['src'], PHP_URL_HOST);
-                    $filename = preg_replace(array('|[^a-z0-9\-]+|is','|-+|is'), array('-','-'), $cssfilehost) . '-' . preg_replace('|\?.*$|Ui', '', basename($file['src']));
+                    $filename =
+                        preg_replace(
+                            array('|[^a-z0-9\-]+|is', '|-+|is'),
+                            array('-', '-'),
+                            $cssfilehost
+                        ) .
+                        '-' .
+                        preg_replace('|\?.*$|Ui', '', basename($file['src']));
                 }
 
                 if (in_array('all', $file['media'])) {
-                    if (isset($file['inline']) && intval($file['inline']) === 1) {
-                        $header = "/**\n * Inline CSS exported from ".$url."\n *\n * @inline " . $file['src'] . "\n * @size " . $this->CTRL->admin->human_filesize(strlen($file['inlinecode'])) . "\n * @media ".implode(', ', $file['media']) . "\n * @position ".$file_number."\n */\n\n";
+                    if (
+                        isset($file['inline']) &&
+                        intval($file['inline']) === 1
+                    ) {
+                        $header =
+                            "/**\n * Inline CSS exported from " .
+                            $url .
+                            "\n *\n * @inline " .
+                            $file['src'] .
+                            "\n * @size " .
+                            $this->CTRL->admin->human_filesize(
+                                strlen($file['inlinecode'])
+                            ) .
+                            "\n * @media " .
+                            implode(', ', $file['media']) .
+                            "\n * @position " .
+                            $file_number .
+                            "\n */\n\n";
 
                         $json_result['css'][] = array(
-                            'file' => $file_number . '-' . $file['src'] . '.css',
+                            'file' =>
+                                $file_number . '-' . $file['src'] . '.css',
                             'code' => $header . $file['inlinecode']
                         );
                     } else {
-                        $header = "/**\n * CSS file exported from ".$url."\n *\n * @file " . $file['src'] . "\n * @size " . $this->CTRL->admin->human_filesize(strlen($file['code'])) . "\n * @media ".implode(', ', $file['media']) . "\n * @position ".$file_number."\n  */\n\n";
+                        $header =
+                            "/**\n * CSS file exported from " .
+                            $url .
+                            "\n *\n * @file " .
+                            $file['src'] .
+                            "\n * @size " .
+                            $this->CTRL->admin->human_filesize(
+                                strlen($file['code'])
+                            ) .
+                            "\n * @media " .
+                            implode(', ', $file['media']) .
+                            "\n * @position " .
+                            $file_number .
+                            "\n  */\n\n";
 
                         $json_result['css'][] = array(
                             'file' => $file_number . '-' . $filename,
@@ -508,20 +702,62 @@ class ABTFR_Admin_BuildTool
                         );
                     }
                 } else {
-                    if (isset($file['inline']) && intval($file['inline']) === 1) {
-                        $header = "/**\n * Inline CSS exported from ".$url."\n *\n * @inline " . $file['src'] . "\n * @size " . $this->CTRL->admin->human_filesize(strlen($file['inlinecode'])) . "\n * @media ".implode(', ', $file['media']) . "\n * @position ".$file_number."\n */\n\n";
+                    if (
+                        isset($file['inline']) &&
+                        intval($file['inline']) === 1
+                    ) {
+                        $header =
+                            "/**\n * Inline CSS exported from " .
+                            $url .
+                            "\n *\n * @inline " .
+                            $file['src'] .
+                            "\n * @size " .
+                            $this->CTRL->admin->human_filesize(
+                                strlen($file['inlinecode'])
+                            ) .
+                            "\n * @media " .
+                            implode(', ', $file['media']) .
+                            "\n * @position " .
+                            $file_number .
+                            "\n */\n\n";
 
                         $json_result['css'][] = array(
-                            'file' => $file_number . '-' . $file['src'] . '.css',
-                            'code' => $header . '@media '.implode(', ', $file['media']).' { ' . $file['inlinecode'] . ' }'
+                            'file' =>
+                                $file_number . '-' . $file['src'] . '.css',
+                            'code' =>
+                                $header .
+                                '@media ' .
+                                implode(', ', $file['media']) .
+                                ' { ' .
+                                $file['inlinecode'] .
+                                ' }'
                         );
                     } else {
-                        $header = "/**\n * CSS file exported from ".$url."\n *\n * @file " . $file['src'] . "\n * @size " . $this->CTRL->admin->human_filesize(strlen($file['code'])) . "\n * @media ".implode(', ', $file['media']) . "\n * @position ".$file_number."\n  */\n\n";
+                        $header =
+                            "/**\n * CSS file exported from " .
+                            $url .
+                            "\n *\n * @file " .
+                            $file['src'] .
+                            "\n * @size " .
+                            $this->CTRL->admin->human_filesize(
+                                strlen($file['code'])
+                            ) .
+                            "\n * @media " .
+                            implode(', ', $file['media']) .
+                            "\n * @position " .
+                            $file_number .
+                            "\n  */\n\n";
 
                         // media query
                         $json_result['css'][] = array(
                             'file' => $file_number . '-' . $filename,
-                            'code' => $header . '@media '.implode(', ', $file['media']).' { ' . $file['code'] . ' }'
+                            'code' =>
+                                $header .
+                                '@media ' .
+                                implode(', ', $file['media']) .
+                                ' { ' .
+                                $file['code'] .
+                                ' }'
                         );
                     }
                 }
@@ -534,13 +770,12 @@ class ABTFR_Admin_BuildTool
     /**
      * Installed
      */
-    public function is_installed()
-    {
+    public function is_installed() {
         $gulpdir = get_stylesheet_directory() . '/abtfr/';
         if (!is_dir($gulpdir)) {
             return false;
         }
-        
+
         if (!file_exists($gulpdir . 'package.json')) {
             return false;
         }

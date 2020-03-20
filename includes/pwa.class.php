@@ -11,10 +11,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-
-class ABTFR_PWA
-{
-
+class ABTFR_PWA {
     /**
      * Above the fold controller
      */
@@ -26,11 +23,13 @@ class ABTFR_PWA
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
-        $this->CTRL = & $CTRL;
+    public function __construct(&$CTRL) {
+        $this->CTRL = &$CTRL;
 
-        if (isset($this->CTRL->options['pwa_cache_preload']) && $this->CTRL->options['pwa_cache_preload']) {
+        if (
+            isset($this->CTRL->options['pwa_cache_preload']) &&
+            $this->CTRL->options['pwa_cache_preload']
+        ) {
             $this->preload = $this->CTRL->options['pwa_cache_preload'];
         }
 
@@ -42,8 +41,7 @@ class ABTFR_PWA
     /**
      * Return service worker path
      */
-    public function get_sw()
-    {
+    public function get_sw() {
         $path = trailingslashit(ABSPATH);
 
         $sw_filename = 'abtfr-pwa.js';
@@ -63,9 +61,11 @@ class ABTFR_PWA
     /**
      * Return service worker scope
      */
-    public function get_sw_scope()
-    {
-        if (isset($this->CTRL->options['pwa_scope']) && trim($this->CTRL->options['pwa_scope']) !== '') {
+    public function get_sw_scope() {
+        if (
+            isset($this->CTRL->options['pwa_scope']) &&
+            trim($this->CTRL->options['pwa_scope']) !== ''
+        ) {
             $scope = $this->CTRL->options['pwa_scope'];
         } else {
             $scope = trailingslashit(parse_url(site_url(), PHP_URL_PATH));
@@ -77,37 +77,48 @@ class ABTFR_PWA
     /**
      * Return service worker path
      */
-    public function get_sw_path($debug = false)
-    {
+    public function get_sw_path($debug = false) {
         $sw = $this->get_sw();
-        $file = ($debug) ? $sw['filename_debug'] : $sw['filename'];
+        $file = $debug ? $sw['filename_debug'] : $sw['filename'];
         $path = trailingslashit(parse_url(site_url(), PHP_URL_PATH));
 
-        return apply_filters('abtfr_pwa_sw_path', $path . $file . '?path=' . urlencode($path));
+        return apply_filters(
+            'abtfr_pwa_sw_path',
+            $path . $file . '?path=' . urlencode($path)
+        );
     }
 
     /**
      * Get Service Worker config
      */
-    public function get_sw_config()
-    {
+    public function get_sw_config() {
         $cache_policy = array();
 
         // asset cache
-        if (isset($this->CTRL->options['pwa_cache_assets']) && $this->CTRL->options['pwa_cache_assets'] && is_array($this->CTRL->options['pwa_cache_assets_policy'])) {
+        if (
+            isset($this->CTRL->options['pwa_cache_assets']) &&
+            $this->CTRL->options['pwa_cache_assets'] &&
+            is_array($this->CTRL->options['pwa_cache_assets_policy'])
+        ) {
             $cache_policy = $this->CTRL->options['pwa_cache_assets_policy'];
         } else {
             $cache_policy = array(); // $this->get_sw_default_policy();
         }
 
         // page cache
-        if (isset($this->CTRL->options['pwa_cache_pages']) && $this->CTRL->options['pwa_cache_pages']) {
-
+        if (
+            isset($this->CTRL->options['pwa_cache_pages']) &&
+            $this->CTRL->options['pwa_cache_pages']
+        ) {
             // create page cache policy
             $page_cache_policy = array(
                 'title' => 'Match pages',
                 'match' => array(
-                    array( 'type' => 'header', 'name' => 'Accept', 'pattern' => 'text/html')
+                    array(
+                        'type' => 'header',
+                        'name' => 'Accept',
+                        'pattern' => 'text/html'
+                    )
                 ),
                 'strategy' => $this->CTRL->options['pwa_cache_pages_strategy'],
                 'cache' => array(
@@ -122,15 +133,23 @@ class ABTFR_PWA
             );
 
             // add URL match based on include list
-            if (isset($this->CTRL->options['pwa_cache_pages_include']) && $this->CTRL->options['pwa_cache_pages_include']) {
+            if (
+                isset($this->CTRL->options['pwa_cache_pages_include']) &&
+                $this->CTRL->options['pwa_cache_pages_include']
+            ) {
                 $page_cache_policy['match'][] = array(
-                    'type' => 'url', 'pattern' => $this->CTRL->options['pwa_cache_pages_include']
+                    'type' => 'url',
+                    'pattern' => $this->CTRL->options['pwa_cache_pages_include']
                 );
             }
 
             // offline page
-            if (isset($this->CTRL->options['pwa_cache_pages_offline']) && $this->CTRL->options['pwa_cache_pages_offline']) {
-                $page_cache_policy['offline'] = $this->CTRL->options['pwa_cache_pages_offline'];
+            if (
+                isset($this->CTRL->options['pwa_cache_pages_offline']) &&
+                $this->CTRL->options['pwa_cache_pages_offline']
+            ) {
+                $page_cache_policy['offline'] =
+                    $this->CTRL->options['pwa_cache_pages_offline'];
             }
 
             // cache strategy
@@ -139,26 +158,55 @@ class ABTFR_PWA
                     $page_cache_policy['cache'] = array();
                 }
 
-                if (isset($this->CTRL->options['pwa_cache_pages_update_interval']) && $this->CTRL->options['pwa_cache_pages_update_interval']) {
-                    $page_cache_policy['cache']['update_interval'] = intval($this->CTRL->options['pwa_cache_pages_update_interval']);
+                if (
+                    isset(
+                        $this->CTRL->options['pwa_cache_pages_update_interval']
+                    ) &&
+                    $this->CTRL->options['pwa_cache_pages_update_interval']
+                ) {
+                    $page_cache_policy['cache']['update_interval'] = intval(
+                        $this->CTRL->options['pwa_cache_pages_update_interval']
+                    );
                 }
-                if (isset($this->CTRL->options['pwa_cache_pages_max_age']) && $this->CTRL->options['pwa_cache_pages_max_age']) {
-                    $page_cache_policy['cache']['max_age'] = intval($this->CTRL->options['pwa_cache_pages_max_age']);
+                if (
+                    isset($this->CTRL->options['pwa_cache_pages_max_age']) &&
+                    $this->CTRL->options['pwa_cache_pages_max_age']
+                ) {
+                    $page_cache_policy['cache']['max_age'] = intval(
+                        $this->CTRL->options['pwa_cache_pages_max_age']
+                    );
                 }
-                $page_cache_policy['cache']['head_update'] = (isset($this->CTRL->options['pwa_cache_pages_head_update']) && $this->CTRL->options['pwa_cache_pages_head_update']) ? true : false;
+                $page_cache_policy['cache']['head_update'] =
+                    isset(
+                        $this->CTRL->options['pwa_cache_pages_head_update']
+                    ) && $this->CTRL->options['pwa_cache_pages_head_update']
+                        ? true
+                        : false;
 
-                $page_cache_policy['cache']['notify'] = (isset($this->CTRL->options['pwa_cache_pages_update_notify']) && $this->CTRL->options['pwa_cache_pages_update_notify']) ? true : false;
+                $page_cache_policy['cache']['notify'] =
+                    isset(
+                        $this->CTRL->options['pwa_cache_pages_update_notify']
+                    ) && $this->CTRL->options['pwa_cache_pages_update_notify']
+                        ? true
+                        : false;
             }
 
             $cache_policy[] = $page_cache_policy;
 
             // Lighthouse audit bug results in false negative, require URL based match of start URL
             // @link https://github.com/GoogleChrome/lighthouse/issues/4312
-            if (isset($this->CTRL->options['pwa_manifest_start_url']) && $this->CTRL->options['pwa_manifest_start_url'] && $this->CTRL->options['pwa_manifest_start_url'] !== '/') {
-
+            if (
+                isset($this->CTRL->options['pwa_manifest_start_url']) &&
+                $this->CTRL->options['pwa_manifest_start_url'] &&
+                $this->CTRL->options['pwa_manifest_start_url'] !== '/'
+            ) {
                 // create start url cache policy
                 $page_cache_policy['match'] = array(
-                        array( 'type' => 'url', 'pattern' => $this->CTRL->options['pwa_manifest_start_url'] )
+                    array(
+                        'type' => 'url',
+                        'pattern' =>
+                            $this->CTRL->options['pwa_manifest_start_url']
+                    )
                 );
                 $cache_policy[] = $page_cache_policy;
             }
@@ -169,22 +217,34 @@ class ABTFR_PWA
         );
 
         // preload assets
-        
+
         // apply filters
         $this->preload = apply_filters('abtfr_pwa_preload', $this->preload);
 
         if (!empty($this->preload)) {
             $config['preload'] = $this->preload;
 
-            $config['preload_install'] = (isset($this->CTRL->options['pwa_cache_preload_require']) && $this->CTRL->options['pwa_cache_preload_require']) ? true : false;
+            $config['preload_install'] =
+                isset($this->CTRL->options['pwa_cache_preload_require']) &&
+                $this->CTRL->options['pwa_cache_preload_require']
+                    ? true
+                    : false;
         }
 
-        if (isset($this->CTRL->options['pwa_manifest_start_url']) && $this->CTRL->options['pwa_manifest_start_url']) {
-            $config['start_url'] = $this->CTRL->options['pwa_manifest_start_url'];
+        if (
+            isset($this->CTRL->options['pwa_manifest_start_url']) &&
+            $this->CTRL->options['pwa_manifest_start_url']
+        ) {
+            $config['start_url'] =
+                $this->CTRL->options['pwa_manifest_start_url'];
         }
 
-        if (isset($this->CTRL->options['pwa_cache_version']) && $this->CTRL->options['pwa_cache_version']) {
-            $config['cache_version'] = $this->CTRL->options['pwa_cache_version'];
+        if (
+            isset($this->CTRL->options['pwa_cache_version']) &&
+            $this->CTRL->options['pwa_cache_version']
+        ) {
+            $config['cache_version'] =
+                $this->CTRL->options['pwa_cache_version'];
         }
 
         return $config;
@@ -193,8 +253,7 @@ class ABTFR_PWA
     /**
      * Update Service Worker file
      */
-    public function update_sw()
-    {
+    public function update_sw() {
         $sw_ok = false;
         $sw = $this->get_sw();
         $sources = array(
@@ -202,27 +261,67 @@ class ABTFR_PWA
             'pwa-serviceworker.debug.js' => $sw['file_debug']
         );
         foreach ($sources as $sourcefile => $sw_path) {
-            $source = trailingslashit(WPABTFR_PATH) . 'public/js/' . $sourcefile;
+            $source =
+                trailingslashit(WPABTFR_PATH) . 'public/js/' . $sourcefile;
             if (!file_exists($source)) {
-                $this->CTRL->admin->set_notice('The service worker source file (abtfr/public/js/'.$sourcefile.') is missing.', 'ERROR');
+                $this->CTRL->admin->set_notice(
+                    'The service worker source file (abtfr/public/js/' .
+                        $sourcefile .
+                        ') is missing.',
+                    'ERROR'
+                );
             } else {
                 $sw_ok = true;
-                if (!file_exists($sw_path) || md5_file($source) !== md5_file($sw_path)) {
+                if (
+                    !file_exists($sw_path) ||
+                    md5_file($source) !== md5_file($sw_path)
+                ) {
                     try {
-                        @file_put_contents($sw_path, file_get_contents($source));
+                        @file_put_contents(
+                            $sw_path,
+                            file_get_contents($source)
+                        );
                     } catch (Exception $error) {
                         $sw_ok = false;
                     }
                     if (!file_exists($sw_path)) {
                         $sw_ok = false;
-                    } elseif ($sw_ok && md5_file($source) !== md5_file($sw_path)) {
+                    } elseif (
+                        $sw_ok &&
+                        md5_file($source) !== md5_file($sw_path)
+                    ) {
                         $sw_ok = false;
                     }
                 }
 
                 if (!$sw_ok) {
                     if (isset($this->CTRL->admin)) {
-                        $this->CTRL->admin->set_notice('Failed to install the Service Worker on <strong>' . esc_html(str_replace(ABSPATH, '[ABSPATH]/', $sw_path)) . '</strong>. Please check the permissions or copy the file manually from ' . esc_html(str_replace(ABSPATH, '[ABSPATH]/', trailingslashit(WPABTFR_PATH) . 'public/js/'.$sourcefile)) . ' (<a href="' . esc_attr(trailingslashit(WPABTFR_URI) . 'public/js/'.$sourcefile) . '" download="'.$sourcefile.'">download</a>).', 'ERROR');
+                        $this->CTRL->admin->set_notice(
+                            'Failed to install the Service Worker on <strong>' .
+                                esc_html(
+                                    str_replace(ABSPATH, '[ABSPATH]/', $sw_path)
+                                ) .
+                                '</strong>. Please check the permissions or copy the file manually from ' .
+                                esc_html(
+                                    str_replace(
+                                        ABSPATH,
+                                        '[ABSPATH]/',
+                                        trailingslashit(WPABTFR_PATH) .
+                                            'public/js/' .
+                                            $sourcefile
+                                    )
+                                ) .
+                                ' (<a href="' .
+                                esc_attr(
+                                    trailingslashit(WPABTFR_URI) .
+                                        'public/js/' .
+                                        $sourcefile
+                                ) .
+                                '" download="' .
+                                $sourcefile .
+                                '">download</a>).',
+                            'ERROR'
+                        );
                     }
                 }
             }
@@ -231,21 +330,22 @@ class ABTFR_PWA
         if (!$sw_ok) {
             return false;
         }
-        
+
         return true;
     }
 
     /**
      * Update Service Worker config
      */
-    public function update_sw_config()
-    {
+    public function update_sw_config() {
         $sw = $this->get_sw();
         $config = $this->get_sw_config();
         $config_json = json_encode($config);
 
         $sw_config_ok = true;
-        $current_config = (file_exists($sw['file_config'])) ? file_get_contents($sw['file_config']) : false;
+        $current_config = file_exists($sw['file_config'])
+            ? file_get_contents($sw['file_config'])
+            : false;
         if (!$current_config || md5($current_config) !== md5($config_json)) {
             try {
                 @file_put_contents($sw['file_config'], $config_json);
@@ -254,7 +354,10 @@ class ABTFR_PWA
             }
             if (!file_exists($sw['file_config'])) {
                 $sw_config_ok = false;
-            } elseif ($sw_config_ok && md5(file_get_contents($sw['file_config'])) !== md5($config_json)) {
+            } elseif (
+                $sw_config_ok &&
+                md5(file_get_contents($sw['file_config'])) !== md5($config_json)
+            ) {
                 $sw_config_ok = false;
             }
         }
@@ -262,16 +365,14 @@ class ABTFR_PWA
         if (!$sw_config_ok) {
             return false;
         }
-        
+
         return true;
     }
 
     /**
      * Return default asset cache policy
      */
-    public function get_sw_default_policy()
-    {
-
+    public function get_sw_default_policy() {
         // default cache policy
         return array(
             array(
@@ -289,9 +390,9 @@ class ABTFR_PWA
                         'pattern' => 'text/html'
                     ),
                     array(
-                        "not" => true,
-                        "type" => "url",
-                        "pattern" => "google-analytics.com/collect"
+                        'not' => true,
+                        'type' => 'url',
+                        'pattern' => 'google-analytics.com/collect'
                     )
                 ),
                 'strategy' => 'cache',
@@ -302,7 +403,10 @@ class ABTFR_PWA
                         array(
                             'type' => 'header',
                             'name' => 'content-length',
-                            'pattern' => array( 'operator' => '<',  'value' => 35840 )
+                            'pattern' => array(
+                                'operator' => '<',
+                                'value' => 35840
+                            )
                         )
                     )
                 ),
@@ -313,7 +417,8 @@ class ABTFR_PWA
                 'match' => array(
                     array(
                         'type' => 'url',
-                        'pattern' => '/\.(css|js|woff|woff2|ttf|otf|eot)(\?.*)?$/i',
+                        'pattern' =>
+                            '/\.(css|js|woff|woff2|ttf|otf|eot)(\?.*)?$/i',
                         'regex' => true
                     )
                 ),
@@ -327,30 +432,55 @@ class ABTFR_PWA
         );
     }
 
-
     /**
      * Javascript client settings
      */
-    public function client_jssettings(&$jssettings, &$jsfiles, &$inlineJS, $jsdebug, &$html_before)
-    {
-
+    public function client_jssettings(
+        &$jssettings,
+        &$jsfiles,
+        &$inlineJS,
+        $jsdebug,
+        &$html_before
+    ) {
         // print link to manifest.json
-        if (isset($this->CTRL->options['pwa_manifest_meta']) && $this->CTRL->options['pwa_manifest_meta']) {
-            $html_before .= '<link rel="manifest" href="' . esc_attr(site_url('manifest.json')) . '">';
+        if (
+            isset($this->CTRL->options['pwa_manifest_meta']) &&
+            $this->CTRL->options['pwa_manifest_meta']
+        ) {
+            $html_before .=
+                '<link rel="manifest" href="' .
+                esc_attr(site_url('manifest.json')) .
+                '">';
         }
 
         // print Web App meta
-        if (isset($this->CTRL->options['pwa_meta']) && $this->CTRL->options['pwa_meta']) {
+        if (
+            isset($this->CTRL->options['pwa_meta']) &&
+            $this->CTRL->options['pwa_meta']
+        ) {
             $html_before .= $this->CTRL->options['pwa_meta'];
         }
 
         // PWA client
-        if (!isset($this->CTRL->options['pwa']) || !$this->CTRL->options['pwa']) {
-            if (isset($this->CTRL->options['pwa_unregister']) && $this->CTRL->options['pwa_unregister']) {
-
+        if (
+            !isset($this->CTRL->options['pwa']) ||
+            !$this->CTRL->options['pwa']
+        ) {
+            if (
+                isset($this->CTRL->options['pwa_unregister']) &&
+                $this->CTRL->options['pwa_unregister']
+            ) {
                 // unregister
-                $jssettings[$this->CTRL->optimization->client_config_ref['pwa_unregister']] = true;
-                $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-pwa-unregister'.$jsdebug.'.min.js';
+                $jssettings[
+                    $this->CTRL->optimization->client_config_ref[
+                        'pwa_unregister'
+                    ]
+                ] = true;
+                $jsfiles[] =
+                    WPABTFR_PATH .
+                    'public/js/abtfr-pwa-unregister' .
+                    $jsdebug .
+                    '.min.js';
             }
 
             // disabled
@@ -361,9 +491,8 @@ class ABTFR_PWA
         $sw = $this->get_sw();
 
         // verify if service worker file exist
-        $swfile = ($jsdebug) ? $sw['filename_debug'] : $sw['filename'];
+        $swfile = $jsdebug ? $sw['filename_debug'] : $sw['filename'];
         if (!file_exists($swfile)) {
-
             // debug file missing, fallback to regular
             if ($jsdebug && file_exists($sw['filename'])) {
                 $swfile = $sw['filename'];
@@ -387,30 +516,45 @@ class ABTFR_PWA
             'path' => $this->get_sw_path($jsdebug),
             'scope' => $this->get_sw_scope(),
             'policy' => filemtime($sw['file_config']),
-            'register' => (!isset($this->CTRL->options['pwa_register']) || $this->CTRL->options['pwa_register'])
+            'register' =>
+                !isset($this->CTRL->options['pwa_register']) ||
+                $this->CTRL->options['pwa_register']
         );
 
         // offline class
-        if (isset($this->CTRL->options['pwa_offline_class']) && $this->CTRL->options['pwa_offline_class']) {
+        if (
+            isset($this->CTRL->options['pwa_offline_class']) &&
+            $this->CTRL->options['pwa_offline_class']
+        ) {
             $pwasettings['offline_class'] = true;
         }
 
         // version
-        if (isset($this->CTRL->options['pwa_cache_version']) && $this->CTRL->options['pwa_cache_version'] !== '') {
+        if (
+            isset($this->CTRL->options['pwa_cache_version']) &&
+            $this->CTRL->options['pwa_cache_version'] !== ''
+        ) {
             $pwasettings['version'] = $this->CTRL->options['pwa_cache_version'];
         } else {
             $pwasettings['version'] = '';
         }
 
         // version
-        if (isset($this->CTRL->options['pwa_cache_max_size']) && $this->CTRL->options['pwa_cache_max_size'] !== '') {
-            $pwasettings['max_size'] = $this->CTRL->options['pwa_cache_max_size'];
+        if (
+            isset($this->CTRL->options['pwa_cache_max_size']) &&
+            $this->CTRL->options['pwa_cache_max_size'] !== ''
+        ) {
+            $pwasettings['max_size'] =
+                $this->CTRL->options['pwa_cache_max_size'];
         } else {
             $pwasettings['max_size'] = '';
         }
 
         // preload on mouse down
-        if (isset($this->CTRL->options['pwa_preload_mousedown']) && $this->CTRL->options['pwa_preload_mousedown']) {
+        if (
+            isset($this->CTRL->options['pwa_preload_mousedown']) &&
+            $this->CTRL->options['pwa_preload_mousedown']
+        ) {
             $pwasettings['preload_mousedown'] = true;
         } else {
             $pwasettings['preload_mousedown'] = false;
@@ -419,11 +563,19 @@ class ABTFR_PWA
         // add pwa settings to client settings
         $jssettings[$pwaindex] = array();
         foreach ($pwasettings as $key => $value) {
-            if (!isset($this->CTRL->optimization->client_config_ref['pwa-sub'][$key])) {
+            if (
+                !isset(
+                    $this->CTRL->optimization->client_config_ref['pwa-sub'][
+                        $key
+                    ]
+                )
+            ) {
                 continue;
             }
 
-            $jssettings[$pwaindex][$this->CTRL->optimization->client_config_ref['pwa-sub'][$key]] = $value;
+            $jssettings[$pwaindex][
+                $this->CTRL->optimization->client_config_ref['pwa-sub'][$key]
+            ] = $value;
         }
 
         // fill empty array values to preserve JSON array format
@@ -441,6 +593,7 @@ class ABTFR_PWA
             }
             ksort($jssettings[$pwaindex]);
         }
-        $jsfiles[] = WPABTFR_PATH . 'public/js/abtfr-pwa'.$jsdebug.'.min.js';
+        $jsfiles[] =
+            WPABTFR_PATH . 'public/js/abtfr-pwa' . $jsdebug . '.min.js';
     }
 }

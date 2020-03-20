@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Critical CSS View header
  *
@@ -9,4 +8,4 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 ?>
-<script src="<?php print WPABTFR_URI;?>public/js/critical-css-view.min.js"></script>
+<script src="<?php print WPABTFR_URI; ?>public/js/critical-css-view.min.js"></script>

@@ -10,9 +10,7 @@
  * @author     Patrick Sletvold
  */
 
-class ABTFR_Admin_Settings
-{
-
+class ABTFR_Admin_Settings {
     /**
      * Above the fold controller
      */
@@ -26,28 +24,29 @@ class ABTFR_Admin_Settings
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
-        $this->CTRL = & $CTRL;
-        $this->options = & $CTRL->options;
+    public function __construct(&$CTRL) {
+        $this->CTRL = &$CTRL;
+        $this->options = &$CTRL->options;
 
         /**
          * Admin panel specific
          */
         if (is_admin()) {
-
             /**
              * Handle form submissions
              */
-            $this->CTRL->loader->add_action('admin_post_abtfr_settings_update', $this, 'update_settings');
+            $this->CTRL->loader->add_action(
+                'admin_post_abtfr_settings_update',
+                $this,
+                'update_settings'
+            );
         }
     }
 
     /**
      * Update settings
      */
-    public function update_settings()
-    {
+    public function update_settings() {
         check_admin_referer('abtfr');
 
         /**
@@ -58,8 +57,13 @@ class ABTFR_Admin_Settings
 
             $this->CTRL->admin->clear_pagecache();
 
-            wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/settings');
-            exit;
+            wp_redirect(
+                add_query_arg(
+                    array('page' => 'abtfr'),
+                    admin_url('admin.php')
+                ) . '#/settings'
+            );
+            exit();
         }
 
         /**
@@ -68,25 +72,43 @@ class ABTFR_Admin_Settings
         if (isset($_POST['import_settings_abtf'])) {
             check_admin_referer('abtfr');
 
-            if(get_option('abovethefold')){
-                $settings_updated = $this->CTRL->admin->save_settings(get_option('abovethefold'));
-                if($settings_updated) {
+            if (get_option('abovethefold')) {
+                $settings_updated = $this->CTRL->admin->save_settings(
+                    get_option('abovethefold')
+                );
+                if ($settings_updated) {
                     $settings_deleted = delete_option('abovethefold');
-                    if($settings_deleted) {
-                        $this->CTRL->admin->set_notice('Settings have been imported from Above the Fold Optimization', 'NOTICE');
+                    if ($settings_deleted) {
+                        $this->CTRL->admin->set_notice(
+                            'Settings have been imported from Above the Fold Optimization',
+                            'NOTICE'
+                        );
                     } else {
-                        $this->CTRL->admin->set_notice('Settings have been imported, but the old ones could not be deleted', 'ERROR');
+                        $this->CTRL->admin->set_notice(
+                            'Settings have been imported, but the old ones could not be deleted',
+                            'ERROR'
+                        );
                     }
                 } else {
-                    $this->CTRL->admin->set_notice('Settings were not updated, either due to an error or that the settings are identical to the ones already existing.', 'ERROR');
+                    $this->CTRL->admin->set_notice(
+                        'Settings were not updated, either due to an error or that the settings are identical to the ones already existing.',
+                        'ERROR'
+                    );
                 }
             } else {
-                $this->CTRL->admin->set_notice('Above the Fold Optimization settings not found', 'ERROR');
+                $this->CTRL->admin->set_notice(
+                    'Above the Fold Optimization settings not found',
+                    'ERROR'
+                );
             }
-            
 
-            wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/settings');
-            exit;
+            wp_redirect(
+                add_query_arg(
+                    array('page' => 'abtfr'),
+                    admin_url('admin.php')
+                ) . '#/settings'
+            );
+            exit();
         }
 
         // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
@@ -98,19 +120,35 @@ class ABTFR_Admin_Settings
         }
 
         // input
-        $input = (isset($_POST['abtfr']) && is_array($_POST['abtfr'])) ? $_POST['abtfr'] : array();
+        $input =
+            isset($_POST['abtfr']) && is_array($_POST['abtfr'])
+                ? $_POST['abtfr']
+                : array();
 
         /**
          * Debug / admin options
          */
-        $options['debug'] = (isset($input['debug']) && intval($input['debug']) === 1) ? true : false;
-        $options['clear_pagecache'] = (isset($input['clear_pagecache']) && intval($input['clear_pagecache']) === 1) ? true : false;
-        $options['adminbar'] = (isset($input['adminbar']) && intval($input['adminbar']) === 1) ? true : false;
-    
+        $options['debug'] =
+            isset($input['debug']) && intval($input['debug']) === 1
+                ? true
+                : false;
+        $options['clear_pagecache'] =
+            isset($input['clear_pagecache']) &&
+            intval($input['clear_pagecache']) === 1
+                ? true
+                : false;
+        $options['adminbar'] =
+            isset($input['adminbar']) && intval($input['adminbar']) === 1
+                ? true
+                : false;
+
         // update settings
         $this->CTRL->admin->save_settings($options, 'Settings saved.');
 
-        wp_redirect(add_query_arg(array( 'page' => 'abtfr' ), admin_url('admin.php')) . '#/settings');
-        exit;
+        wp_redirect(
+            add_query_arg(array('page' => 'abtfr'), admin_url('admin.php')) .
+                '#/settings'
+        );
+        exit();
     }
 }

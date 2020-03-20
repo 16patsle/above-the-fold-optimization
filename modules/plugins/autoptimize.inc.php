@@ -13,9 +13,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class ABTFR_OPP_Autoptimize extends ABTFR_OPP
-{
-
+class ABTFR_OPP_Autoptimize extends ABTFR_OPP {
     /**
      * Plugin file reference
      */
@@ -24,8 +22,7 @@ class ABTFR_OPP_Autoptimize extends ABTFR_OPP
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
+    public function __construct(&$CTRL) {
         parent::__construct($CTRL);
 
         // Is the plugin enabled?
@@ -36,31 +33,49 @@ class ABTFR_OPP_Autoptimize extends ABTFR_OPP
         /**
          * Autoptimize: skip Critical Path CSS
          */
-        $this->CTRL->loader->add_filter('autoptimize_filter_css_exclude', $this, 'skip_css', 10, 3);
+        $this->CTRL->loader->add_filter(
+            'autoptimize_filter_css_exclude',
+            $this,
+            'skip_css',
+            10,
+            3
+        );
 
         /**
          * Autoptimize: skip Critical Path Javascript
          */
-        $this->CTRL->loader->add_filter('autoptimize_filter_js_exclude', $this, 'skip_js', 10, 3);
+        $this->CTRL->loader->add_filter(
+            'autoptimize_filter_js_exclude',
+            $this,
+            'skip_js',
+            10,
+            3
+        );
 
         /**
          * Autoptimize: process @import (Google fonts etc)
          */
-        $this->CTRL->loader->add_filter('autoptimize_css_after_minify', $this, 'process_minified_css');
+        $this->CTRL->loader->add_filter(
+            'autoptimize_css_after_minify',
+            $this,
+            'process_minified_css'
+        );
 
         /**
          * Autoptimize: process HTML
          */
-        $this->CTRL->loader->add_filter('autoptimize_html_after_minify', $this, 'process_minified_html');
+        $this->CTRL->loader->add_filter(
+            'autoptimize_html_after_minify',
+            $this,
+            'process_minified_html'
+        );
     }
 
     /**
      * Is plugin active?
      */
-    public function active($type = false)
-    {
+    public function active($type = false) {
         if ($this->CTRL->plugins->active($this->plugin_file)) {
-
             // plugin is active
             if (!$type) {
                 return true;
@@ -68,16 +83,15 @@ class ABTFR_OPP_Autoptimize extends ABTFR_OPP
 
             // verify if plugin is active for optimization type
             switch ($type) {
-
                 // CSS optimization?
-                case "css":
-                    return (get_option('autoptimize_css')) ? true : false;
-                break;
+                case 'css':
+                    return get_option('autoptimize_css') ? true : false;
+                    break;
 
                 // HTML optimization?
-                case "html":
-                    return (get_option('autoptimize_html')) ? true : false;
-                break;
+                case 'html':
+                    return get_option('autoptimize_html') ? true : false;
+                    break;
             }
 
             return false;
@@ -89,8 +103,7 @@ class ABTFR_OPP_Autoptimize extends ABTFR_OPP
     /**
      * Skip CSS from Autoptimize minificaiton
      */
-    public function skip_css($excludeCSS)
-    {
+    public function skip_css($excludeCSS) {
         $excludeCSS .= ',data-abtfr';
 
         return $excludeCSS;
@@ -99,9 +112,10 @@ class ABTFR_OPP_Autoptimize extends ABTFR_OPP
     /**
      * Skip Javascript from Autoptimize minificaiton
      */
-    public function skip_js($excludeJS)
-    {
-        $excludeJS .= ',data-abtfr,' . $this->CTRL->optimization->criticalcss_replacement_string;
+    public function skip_js($excludeJS) {
+        $excludeJS .=
+            ',data-abtfr,' .
+            $this->CTRL->optimization->criticalcss_replacement_string;
 
         return $excludeJS;
     }
@@ -109,76 +123,77 @@ class ABTFR_OPP_Autoptimize extends ABTFR_OPP
     /**
      * Process minified CSS
      */
-    public function process_minified_css($css)
-    {
+    public function process_minified_css($css) {
         return apply_filters('abtfr_css', $css);
     }
 
     /**
      * Process minified javascript
      */
-    public function process_minified_js($js)
-    {
+    public function process_minified_js($js) {
         return apply_filters('abtfr_js', $js);
     }
 
     /**
      * Autoptimize: process HTML
      */
-    public function process_minified_html($html)
-    {
+    public function process_minified_html($html) {
         return apply_filters('abtfr_html', $html);
     }
 
     /**
      * Disable CSS minification
      */
-    public function disable_css_minify()
-    {
-
-       /**
-        * Add Autoptimize filter to disable CSS optimization
-        */
-        $this->CTRL->loader->add_filter('autoptimize_filter_css_noptimize', $this, 'noptimize');
+    public function disable_css_minify() {
+        /**
+         * Add Autoptimize filter to disable CSS optimization
+         */
+        $this->CTRL->loader->add_filter(
+            'autoptimize_filter_css_noptimize',
+            $this,
+            'noptimize'
+        );
     }
 
     /**
      * Disable HTML minification
      */
-    public function disable_html_minify()
-    {
-
-       /**
-        * Add Autoptimize filter to disable CSS optimization
-        */
-        $this->CTRL->loader->add_filter('autoptimize_filter_html_noptimize', $this, 'noptimize');
+    public function disable_html_minify() {
+        /**
+         * Add Autoptimize filter to disable CSS optimization
+         */
+        $this->CTRL->loader->add_filter(
+            'autoptimize_filter_html_noptimize',
+            $this,
+            'noptimize'
+        );
     }
 
     /**
      * Disable Javascript minification
      */
-    public function disable_js_minify()
-    {
-
-       /**
-        * Add Autoptimize filter to disable CSS optimization
-        */
-        $this->CTRL->loader->add_filter('autoptimize_filter_js_noptimize', $this, 'noptimize');
+    public function disable_js_minify() {
+        /**
+         * Add Autoptimize filter to disable CSS optimization
+         */
+        $this->CTRL->loader->add_filter(
+            'autoptimize_filter_js_noptimize',
+            $this,
+            'noptimize'
+        );
     }
 
     /**
      * Disable CSS optimization
      */
-    public function noptimize()
-    {
+    public function noptimize() {
         return true;
     }
 
     /**
      * Clear cache
      */
-    public function clear_pagecache()
-    {
+    public function clear_pagecache() {
         if (class_exists('autoptimizeCache')) {
             try {
                 // clean the Autoptimize cache

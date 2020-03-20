@@ -28,8 +28,8 @@ define('WPABTFR_SELF', __FILE__);
 define('ABTFR_CACHE_DIR', trailingslashit(WP_CONTENT_DIR) . 'cache/abtfr/');
 define('ABTFR_CACHE_URL', trailingslashit(WP_CONTENT_URL) . 'cache/abtfr/');
 
-if (! defined('WPINC')) {
-    die; //
+if (!defined('WPINC')) {
+    die(); //
 }
 
 /**
@@ -45,8 +45,7 @@ require plugin_dir_path(__FILE__) . 'includes/abtfr.class.php';
  *
  * @since    1.0
  */
-function run_ABTFR()
-{
+function run_ABTFR() {
     $GLOBALS['ABTFR'] = new ABTFR();
     $GLOBALS['ABTFR']->run();
 }

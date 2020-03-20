@@ -1,12 +1,22 @@
 
 <nav class="subnav">
 	<span class="t">Submenu:</span>
-	<a href="<?php echo add_query_arg(array('page' => 'abtfr-criticalcss-test'), admin_url('admin.php')); ?>" class="f">Quality Test (Split View)</a>
-	<a href="<?php echo $this->CTRL->view_url('critical-css-editor'); ?>#editor"  target="_blank" rel="noopener">Live Editor</a>
-	<a href="<?php echo add_query_arg(array('page' => 'abtfr-build-tool'), admin_url('admin.php')); ?>">Gulp.js Critical CSS Generator</a>
+	<a href="<?php echo add_query_arg(
+     array('page' => 'abtfr-criticalcss-test'),
+     admin_url('admin.php')
+ ); ?>" class="f">Quality Test (Split View)</a>
+	<a href="<?php echo $this->CTRL->view_url(
+     'critical-css-editor'
+ ); ?>#editor"  target="_blank" rel="noopener">Live Editor</a>
+	<a href="<?php echo add_query_arg(
+     array('page' => 'abtfr-build-tool'),
+     admin_url('admin.php')
+ ); ?>">Gulp.js Critical CSS Generator</a>
 </nav>
 
-<form method="post" action="<?php echo admin_url('admin-post.php?action=abtfr_compare'); ?>" class="clearfix">
+<form method="post" action="<?php echo admin_url(
+    'admin-post.php?action=abtfr_compare'
+); ?>" class="clearfix">
 	<?php wp_nonce_field('abtfr'); ?>
 	<div class="wrap abtfr-wrapper">
 		<div id="poststuff">
@@ -23,12 +33,18 @@
 								<div>
 								<select id="criticalcss-test-pages" class="wp-pageselect"><option value=""></option><option value="<?php print home_url(); ?>">Home Page (index)</option></select>
 
-								<button type="button" id="splitview" rel="<?php print md5(SECURE_AUTH_KEY . AUTH_KEY); ?>" class="button button-large">Split View (Quality Test)</button>
-								<button type="button" id="editorview" rel="<?php print md5(SECURE_AUTH_KEY . AUTH_KEY); ?>" class="button button-large">Critical CSS Editor</button>
-								<button type="button" id="fullview" rel="<?php print md5(SECURE_AUTH_KEY . AUTH_KEY); ?>" class="button button-large">Critical CSS View (Critical CSS only)</button>
+								<button type="button" id="splitview" rel="<?php print md5(
+            SECURE_AUTH_KEY . AUTH_KEY
+        ); ?>" class="button button-large">Split View (Quality Test)</button>
+								<button type="button" id="editorview" rel="<?php print md5(
+            SECURE_AUTH_KEY . AUTH_KEY
+        ); ?>" class="button button-large">Critical CSS Editor</button>
+								<button type="button" id="fullview" rel="<?php print md5(
+            SECURE_AUTH_KEY . AUTH_KEY
+        ); ?>" class="button button-large">Critical CSS View (Critical CSS only)</button>
 							</div>
 
-							<p>To test the above the fold quality in a responsive test, you can use Chrome or Firefox Dev Tools or alternatively an online responsive test (<a href="https://encrypted.google.com/search?q=responsive+test&amp;hl=<?php print $lgcode;?>" target="_blank">see Google</a>).</p>
+							<p>To test the above the fold quality in a responsive test, you can use Chrome or Firefox Dev Tools or alternatively an online responsive test (<a href="https://encrypted.google.com/search?q=responsive+test&amp;hl=<?php print $lgcode; ?>" target="_blank">see Google</a>).</p>
 
 							<h1>What to test?</h1>
 							<p>The critical CSS display of the above the fold content should match the full CSS display of a page.</p>
@@ -50,7 +66,7 @@
 								</tbody>
 							</table>
 
-							<p>For more information about the above the fold display, read the <a href="https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent?hl=<?php print $lgcode;?>" target="_blank">documentation by Google</a> or see <a href="https://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">this blog</a> (with video) by two Google engineers.</p>
+							<p>For more information about the above the fold display, read the <a href="https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent?hl=<?php print $lgcode; ?>" target="_blank">documentation by Google</a> or see <a href="https://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/#utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization" target="_blank">this blog</a> (with video) by two Google engineers.</p>
 
 
 						</div>

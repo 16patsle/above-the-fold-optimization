@@ -27,7 +27,6 @@ $height = 900;
 $dimensions = false;
 
 if (isset($settings['dimensions']) && !empty($settings['dimensions'])) {
-
     // single dimension
     if (count($settings['dimensions']) === 1) {
         $width = intval($settings['dimensions'][0][0]);
@@ -47,14 +46,12 @@ if (isset($settings['dimensions']) && !empty($settings['dimensions'])) {
  * WordPress Gulp.js Critical CSS Task Package
  *
  * This file contains a task to create critical path CSS.
-<?php
+<?php if ($settings['update']) {
+    print " *\n * @warning This task automatically updates WordPress Critical CSS.\n";
     if ($settings['update']) {
-        print " *\n * @warning This task automatically updates WordPress Critical CSS.\n";
-        if ($settings['update']) {
-            print " * @criticalcss ".$settings['update']."\n";
-        }
+        print ' * @criticalcss ' . $settings['update'] . "\n";
     }
-?>
+} ?>
  *
  * @package    abtfr
  * @subpackage abtfr/modules/critical-css-build-tool
@@ -85,26 +82,30 @@ module.exports = function (gulp, plugins, critical) {
     		extraCSS = true;
         }
 
-<?php
-    if ($settings['update']) {
-        ?>
+<?php if ($settings['update']) { ?>
 		// check if css file exists in package
-    	if (plugins.fs.existsSync('css/' + <?php print json_encode($settings['update']); ?>)) {
+    	if (plugins.fs.existsSync('css/' + <?php print json_encode(
+         $settings['update']
+     ); ?>)) {
 
     		// extract config comment to preserve on auto update
-    		var csscontent = plugins.fs.readFileSync('css/' + <?php print json_encode($settings['update']); ?>, 'utf-8');
+    		var csscontent = plugins.fs.readFileSync('css/' + <?php print json_encode(
+          $settings['update']
+      ); ?>, 'utf-8');
 			var match = csscontent.match(/\/\*\*(.|\n)+?\*\//g);
 			if (!match || !match[0]) {
-				throw new Error(<?php print json_encode($settings['update']); ?> + ' does not contain a valid config header.');
+				throw new Error(<?php print json_encode(
+        $settings['update']
+    ); ?> + ' does not contain a valid config header.');
             	return false;
 			}
     		var configheader = match[0] + '\n';
         } else {
-        	var configheader = '/*\n * '+<?php print json_encode($settings['update']); ?>+'\n */\n';
+        	var configheader = '/*\n * '+<?php print json_encode(
+             $settings['update']
+         ); ?>+'\n */\n';
         }
-<?php
-    }
-?>
+<?php } ?>
 
         // optimization tasks
         var TASKS = {};
@@ -127,9 +128,12 @@ module.exports = function (gulp, plugins, critical) {
         // create citical CSS
         TASKS['critical'] = function() {
 
-        	console.log('\n' + plugins.util.colors.yellow.bold('Creating <?php if ($settings['update'] && $settings['update'] !== 'global.css') {
-    print 'Conditional ';
-} ?>Critical Path CSS...'));
+        	console.log('\n' + plugins.util.colors.yellow.bold('Creating <?php if (
+             $settings['update'] &&
+             $settings['update'] !== 'global.css'
+         ) {
+             print 'Conditional ';
+         } ?>Critical Path CSS...'));
 
 			/**
 	    	 * Perform critical CSS generation
@@ -143,14 +147,12 @@ module.exports = function (gulp, plugins, critical) {
 		        minify: false,
 				css: <?php print str_replace('"TASKPATH', 'taskpath + "', $cssfilejson); ?>,
 				extract: false,
-<?php
-    if ($dimensions) {
-        print '				dimensions: ' . json_encode($dimensions, $encodeflag) . ",\n";
-    } else {
-        print '				width: 1300,
+<?php if ($dimensions) {
+    print '				dimensions: ' . json_encode($dimensions, $encodeflag) . ",\n";
+} else {
+    print '				width: 1300,
 				height: 900,' . "\n";
-    }
-?>
+} ?>
 				pathPrefix: '../../../../', // wordpress root from /themes/THEME-NAME/abtfr/
 				timeout: 120000
 		    });
@@ -191,8 +193,8 @@ module.exports = function (gulp, plugins, critical) {
 			            "aggressiveMerging": true,
 			            "showLog": true
 					}))<?php if ($settings['update']) {
-    print '.pipe(plugins.header(configheader))';
-} ?>
+         print '.pipe(plugins.header(configheader))';
+     } ?>
     				.pipe(plugins.rename({ suffix: '.min' }))
 			        .pipe(gulp.dest(taskpath + 'output/'))
 	    			.on('error', reject)
@@ -204,65 +206,75 @@ module.exports = function (gulp, plugins, critical) {
         TASKS['copy'] = function() {
 			return new Promise(function(resolve, reject) {
 
-<?php
-    if (!$settings['update']) {
-        print 'resolve();';
-    } else {
-        $filename = $settings['update'];
+<?php if (!$settings['update']) {
+    print 'resolve();';
+} else {
 
-        // default 664
-        $permissions = array(
-            'owner' => array(
-                'read' => true,
-                'write' => true,
-                'execute' => false
-            ),
-            'group' => array(
-                'read' => true,
-                'write' => true,
-                'execute' => false
-            ),
-            'others' => array(
-                'read' => true,
-                'write' => false,
-                'execute' => false
-            )
-        );
+    $filename = $settings['update'];
 
-        $chmodfile = (! defined('FS_CHMOD_FILE')) ? intval(substr(sprintf('%o', fileperms(ABSPATH . 'index.php')), -4), 8) : FS_CHMOD_FILE;
-        $chmod = (string)decoct($chmodfile);
-        if (strlen($chmod) === 3) {
-            $chmodparts = str_split($chmod);
-            $perm_user = intval($chmodparts[0]);
-            $perm_group = intval($chmodparts[1]);
-            $perm_others = intval($chmodparts[2]);
+    // default 664
+    $permissions = array(
+        'owner' => array(
+            'read' => true,
+            'write' => true,
+            'execute' => false
+        ),
+        'group' => array(
+            'read' => true,
+            'write' => true,
+            'execute' => false
+        ),
+        'others' => array(
+            'read' => true,
+            'write' => false,
+            'execute' => false
+        )
+    );
 
-            if ($perm_user === 7) {
-                $permissions['owner']['execute'] = true;
-            }
-            if ($perm_group === 7) {
-                $permissions['group']['execute'] = true;
-            }
-            if ($perm_others === 7) {
-                $permissions['others']['execute'] = true;
-            }
-            if ($perm_others <= 4 && $perm_others !== 2) {
-                $permissions['others']['write'] = false;
-            }
-            if ($perm_others === 0) {
-                $permissions['others']['read'] = false;
-            }
-        } ?>
-				console.log('\n' + plugins.util.colors.green.bold('Update <?php if ($settings['update'] !== 'global.css') {
-            print 'Conditional ';
-        } ?>Critical CSS storage file...'));
+    $chmodfile = !defined('FS_CHMOD_FILE')
+        ? intval(substr(sprintf('%o', fileperms(ABSPATH . 'index.php')), -4), 8)
+        : FS_CHMOD_FILE;
+    $chmod = (string) decoct($chmodfile);
+    if (strlen($chmod) === 3) {
+        $chmodparts = str_split($chmod);
+        $perm_user = intval($chmodparts[0]);
+        $perm_group = intval($chmodparts[1]);
+        $perm_others = intval($chmodparts[2]);
+
+        if ($perm_user === 7) {
+            $permissions['owner']['execute'] = true;
+        }
+        if ($perm_group === 7) {
+            $permissions['group']['execute'] = true;
+        }
+        if ($perm_others === 7) {
+            $permissions['others']['execute'] = true;
+        }
+        if ($perm_others <= 4 && $perm_others !== 2) {
+            $permissions['others']['write'] = false;
+        }
+        if ($perm_others === 0) {
+            $permissions['others']['read'] = false;
+        }
+    }
+    ?>
+				console.log('\n' + plugins.util.colors.green.bold('Update <?php if (
+        $settings['update'] !== 'global.css'
+    ) {
+        print 'Conditional ';
+    } ?>Critical CSS storage file...'));
 				console.log(' ➤ ' + plugins.util.colors.green('/abtfr/css/<?php print $filename; ?>'));
 
 				// append extra.css
 				gulp.src([taskpath + 'output/critical.min.css'])
     				.pipe(plugins.rename('<?php print $filename; ?>'))
-    				.pipe(plugins.chmod(<?php print json_encode($permissions, $encodeflag); ?>)) // WordPress permissions
-    				.pipe(plugins.chown(<?php print (string) getmyuid() . "," . (string) getmygid(); ?>)) // set to PHP user
+    				.pipe(plugins.chmod(<?php print json_encode(
+            $permissions,
+            $encodeflag
+        ); ?>)) // WordPress permissions
+    				.pipe(plugins.chown(<?php print (string) getmyuid() .
+            ',' .
+            (string) getmygid(); ?>)) // set to PHP user
 			        .pipe(gulp.dest('css'))
 			        .pipe(plugins.es.map(function(file, callback) {
 		                plugins.fs.chown(file.path, file.stat.uid, file.stat.gid, callback);
@@ -270,8 +282,7 @@ module.exports = function (gulp, plugins, critical) {
 	    			.on('error', reject)
 			        .on('end', resolve);
 <?php
-    }
-?>
+} ?>
 			});
 
         };
@@ -280,11 +291,13 @@ module.exports = function (gulp, plugins, critical) {
         TASKS['size'] = function() {
         	return new Promise(function(resolve, reject) {
 
-				console.log('\nCritical CSS processor completed successfully.<?php
-    if (!$settings['update']) {
-        print ' The critical CSS files are located in /'.$taskname.'/output/';
-    }
-?>');
+				console.log('\nCritical CSS processor completed successfully.<?php if (
+        !$settings['update']
+    ) {
+        print ' The critical CSS files are located in /' .
+            $taskname .
+            '/output/';
+    } ?>');
 
 				gulp.src(taskpath + 'output/*')
 	    			.pipe(plugins.size( { showFiles: true } ))
@@ -315,6 +328,6 @@ module.exports = function (gulp, plugins, critical) {
     };
 };
 <?php
-
 // load js
 $taskjs = ob_get_clean();
+?>

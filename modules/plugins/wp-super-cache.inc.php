@@ -13,9 +13,7 @@
  * @author     Optimization.Team <info@optimization.team>
  */
 
-class ABTFR_OPP_WpSuperCache extends ABTFR_OPP
-{
-
+class ABTFR_OPP_WpSuperCache extends ABTFR_OPP {
     /**
      * Plugin file reference
      */
@@ -24,8 +22,7 @@ class ABTFR_OPP_WpSuperCache extends ABTFR_OPP
     /**
      * Initialize the class and set its properties
      */
-    public function __construct(&$CTRL)
-    {
+    public function __construct(&$CTRL) {
         parent::__construct($CTRL);
 
         // Is the plugin enabled?
@@ -37,10 +34,8 @@ class ABTFR_OPP_WpSuperCache extends ABTFR_OPP
     /**
      * Is plugin active?
      */
-    public function active($type = false)
-    {
+    public function active($type = false) {
         if ($this->CTRL->plugins->active($this->plugin_file)) {
-
             // plugin is active
             if (!$type) {
                 return true;
@@ -48,16 +43,13 @@ class ABTFR_OPP_WpSuperCache extends ABTFR_OPP
 
             // verify if plugin is active for optimization type
             switch ($type) {
-
-                case "html_output_buffer": // hook to WP Page Cache Output Buffer
-
+                case 'html_output_buffer': // hook to WP Page Cache Output Buffer
                     global $cache_enabled;
-                    
+
                     if ($cache_enabled) {
                         return true;
                     }
-                break;
-
+                    break;
             }
 
             return false;
@@ -69,8 +61,7 @@ class ABTFR_OPP_WpSuperCache extends ABTFR_OPP
     /**
      * Clear cache
      */
-    public function clear_pagecache()
-    {
+    public function clear_pagecache() {
         global $file_prefix;
 
         if (function_exists('wp_cache_clean_cache')) {
@@ -88,11 +79,13 @@ class ABTFR_OPP_WpSuperCache extends ABTFR_OPP
      *
      * Use the active() -> "html_output_buffer" method above to enable/disable this HTML output buffer hook.
      */
-    public function html_output_hook($optimization)
-    {
-
+    public function html_output_hook($optimization) {
         // hook to wp super cache output buffer
-        $this->CTRL->loader->add_filter('wp_cache_ob_callback_filter', $optimization, 'process_output_buffer');
+        $this->CTRL->loader->add_filter(
+            'wp_cache_ob_callback_filter',
+            $optimization,
+            'process_output_buffer'
+        );
 
         return true;
     }
