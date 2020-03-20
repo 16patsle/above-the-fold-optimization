@@ -62,7 +62,7 @@
     "start": "cross-env NODE_ENV=development wp-scripts start",
     "build": "cross-env NODE_ENV=production wp-scripts build",
     "test": "wp-scripts test-unit-js && wp-scripts test-e2e",
-    "prettier": "prettier --single-quote --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "eslint": "eslint --fix \"src/**/*.js\"",
     "stylelint": "stylelint \"src/**/*.css\"",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
@@ -83,5 +83,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "prettier": {
+    "singleQuote": true
+  }
 }
