@@ -1,8 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __, sprintf } from '@wordpress/i18n';
-import useSWR from 'swr';
-import useLinkState from '../utils/useLinkState';
+import useSettings from '../utils/useSettings';
 import {
   adminUrl,
   homeUrl,
@@ -18,7 +17,6 @@ import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
 import './Http2View.css';
-import getSettings from '../utils/getSettings';
 
 const http2Insert = {
   scripts: [
@@ -58,11 +56,15 @@ const http2Insert = {
 };
 
 const Http2View = () => {
-  const [options, setOption, setOptions, linkOptionState] = useLinkState();
+  const {linkOptionState, getOption, setOption, shouldRender, error} = useSettings();
 
-  const getOption = option => options[option];
+  if (error) {
+    return <div>{sprintf(__('Error: %s', 'abtfr'), error)}</div>;
+  }
 
-  const { data, error } = useSWR('settings', getSettings);
+  if (!shouldRender) {
+    return <div>{__('Loading...', 'abtfr')}</div>;;
+  }
 
   const handleInsertClick = e => {
     var json = getOption('http2PushConfig');
@@ -79,21 +81,6 @@ const Http2View = () => {
       setOption('http2PushConfig', json);
     }
   };
-
-  if (error) {
-    return <div>{sprintf(__('Error: %s', 'abtfr'), error)}</div>;
-  }
-
-  const loading = <div>{__('Loading...', 'abtfr')}</div>;
-
-  if (!data) {
-    return loading;
-  }
-
-  if (!options) {
-    setOptions(data);
-    return loading;
-  }
 
   return (
     <form

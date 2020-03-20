@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
-import useLinkState from '../utils/useLinkState';
+import useSettings from '../utils/useSettings';
 import {
   adminUrl,
   siteTitle,
@@ -16,18 +16,13 @@ import SettingCheckbox from '../components/SettingCheckbox';
 import SettingTextarea from '../components/SettingTextarea';
 import SettingTextInput from '../components/SettingTextInput';
 import SubmitButton from '../components/SubmitButton';
-import getSettings from '../utils/getSettings';
 
 const emptyCacheUrl = new URL(adminUrl + 'admin.php');
 emptyCacheUrl.searchParams.append('page', 'abtfr-proxy');
 emptyCacheUrl.searchParams.append('empty_cache', 1);
 
 const ProxyView = () => {
-  const [options, , setOptions, linkOptionState] = useLinkState();
-
-  const getOption = option => options[option];
-
-  const { data, error } = useSWR('settings', getSettings);
+  const {linkOptionState, getOption, shouldRender, error} = useSettings();
 
   const {
     data: cacheStats,
@@ -42,15 +37,8 @@ const ProxyView = () => {
     return <div>{sprintf(__('Error: %s', 'abtfr'), error)}</div>;
   }
 
-  const loading = <div>{__('Loading...', 'abtfr')}</div>;
-
-  if (!data) {
-    return loading;
-  }
-
-  if (!options) {
-    setOptions(data);
-    return loading;
+  if (!shouldRender) {
+    return <div>{__('Loading...', 'abtfr')}</div>;;
   }
 
   return (

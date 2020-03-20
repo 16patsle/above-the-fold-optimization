@@ -1,31 +1,21 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __, sprintf } from '@wordpress/i18n';
-import useSWR from 'swr';
-import useLinkState from '../utils/useLinkState';
+import useSettings from '../utils/useSettings';
 import { adminUrl, siteTitle, abtfrAdminNonce } from '../utils/globalVars';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
-import getSettings from '../utils/getSettings';
 
 const SettingsView = () => {
-  const [options, , setOptions, linkOptionState, getOption] = useLinkState();
-
-  const { data, error } = useSWR('settings', getSettings);
+  const {linkOptionState, getOption, shouldRender, error} = useSettings();
 
   if (error) {
     return <div>{sprintf(__('Error: %s', 'abtfr'), error)}</div>;
   }
 
-  const loading = <div>{__('Loading...', 'abtfr')}</div>;
-
-  if (options === undefined) {
-    setOptions({});
-    return loading;
-  } else if (data && Object.entries(options).length === 0) {
-    setOptions(data);
-    return loading;
+  if (!shouldRender) {
+    return <div>{__('Loading...', 'abtfr')}</div>;;
   }
 
   return (

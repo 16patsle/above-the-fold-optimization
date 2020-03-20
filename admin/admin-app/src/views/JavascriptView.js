@@ -1,8 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __, sprintf } from '@wordpress/i18n';
-import useSWR from 'swr';
-import useLinkState from '../utils/useLinkState';
+import useSettings from '../utils/useSettings';
 import {
   adminUrl,
   siteTitle,
@@ -19,7 +18,6 @@ import SettingSelect from '../components/SettingSelect';
 import SettingTextarea from '../components/SettingTextarea';
 import SettingRadio from '../components/SettingRadio';
 import SubmitButton from '../components/SubmitButton';
-import getSettings from '../utils/getSettings';
 
 SyntaxHighlighter.registerLanguage('xml', xml);
 
@@ -39,25 +37,14 @@ const lazyloadExample = `
     `.trim();
 
 const JavascriptView = () => {
-  const [options, , setOptions, linkOptionState] = useLinkState();
-
-  const getOption = option => options[option];
-
-  const { data, error } = useSWR('settings', getSettings);
+  const {linkOptionState, getOption, shouldRender, error} = useSettings();
 
   if (error) {
     return <div>{sprintf(__('Error: %s', 'abtfr'), error)}</div>;
   }
 
-  const loading = <div>{__('Loading...', 'abtfr')}</div>;
-
-  if (!data) {
-    return loading;
-  }
-
-  if (!options) {
-    setOptions(data);
-    return loading;
+  if (!shouldRender) {
+    return <div>{__('Loading...', 'abtfr')}</div>;;
   }
 
   return (

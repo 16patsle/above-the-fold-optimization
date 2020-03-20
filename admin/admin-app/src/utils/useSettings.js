@@ -1,7 +1,8 @@
 import useSWR from 'swr';
 import useLinkState from './useLinkState';
+import getSettings from './getSettings';
 
-export default function useSettings(identifier, callback) {
+export function useJSON(identifier, callback) {
   const [options, setOption, setOptions, linkOptionState, getOption] = useLinkState();
   const { data, ...swr } = useSWR(identifier, callback);
   let shouldRender = true;
@@ -12,4 +13,8 @@ export default function useSettings(identifier, callback) {
   }
 
   return {options: options || {}, setOption, setOptions, linkOptionState, getOption, shouldRender, ...swr};
+}
+
+export default function useSettings() {
+  return useJSON('settings', getSettings)
 }
