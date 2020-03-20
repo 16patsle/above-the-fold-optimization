@@ -3,7 +3,7 @@ import { useState } from 'react';
 export default function useLinkState() {
   const [options, setOptions] = useState();
   const getOption = option => {
-    if (options[option] === undefined) {
+    if (!options || options[option] === undefined) {
       return false;
     }
     return options[option];
