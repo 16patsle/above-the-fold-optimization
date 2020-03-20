@@ -1,14 +1,14 @@
 .form-table fieldset {
   border: 1px solid #efefef;
   padding: 5px;
-  padding-top: 0px;
+  padding-top: 0;
   display: inline;
   position: relative;
   top: -4px;
 }
 
 .form-table fieldset legend {
-  padding: 0px;
+  padding: 0;
   padding-left: 7px;
   font-weight: bold;
 }

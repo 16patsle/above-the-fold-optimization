@@ -1,13 +1,13 @@
 .json-editor-container {
-  margin: 0px !important;
-  padding: 0px !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 div.jsoneditor-menu {
   background-color: #079c2d;
   border-bottom: solid 1px #079c2d;
 }
 div.jsoneditor {
-  border: 0px;
+  border: 0;
 }
 table.jsoneditor-search div.jsoneditor-frame {
   background-color: #148b33;
@@ -18,11 +18,11 @@ div.jsoneditor-contextmenu ul li button.jsoneditor-selected:hover {
   background-color: #079c2d;
 }
 table.jsoneditor-search input {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   padding-top: 2px;
   padding-left: 4px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .json-editor-copyright .ref {
@@ -40,10 +40,10 @@ table.jsoneditor-search input {
   display: block;
   height: 35px;
   padding-left: 5px;
-  border-top: 1px solid #ccc !important;
-  border-right: 1px solid #ccc !important;
-  border-left: 1px solid #ddd !important;
-  border: 1px solid #ddd !important;
+  border-top: 1px solid #cccccc !important;
+  border-right: 1px solid #cccccc !important;
+  border-left: 1px solid #dddddd !important;
+  border: 1px solid #dddddd !important;
   padding-right: 5px;
   background: #e5e5e5;
 }
@@ -51,21 +51,21 @@ table.jsoneditor-search input {
   background: none !important;
   border: none !important;
   box-shadow: none !important;
-  font-family: droid sans mono, consolas, monospace, courier new, courier,
-    sans-serif !important;
+  font-family: 'Droid Sans Mono', 'Consolas', monospace, 'Courier New',
+    'Courier', sans-serif !important;
   font-size: 16px !important;
   line-height: 35px !important;
-  color: #555 !important;
+  color: #555555 !important;
   font-weight: normal !important;
 }
 .json-toggle button span {
-  color: #555 !important;
+  color: #555555 !important;
 }
 .json-toggle:hover {
   background: #eaeaea;
 }
 .json-toggle:hover button {
-  color: #000 !important;
+  color: #000000 !important;
 }
 
 .json-title,

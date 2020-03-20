@@ -41,7 +41,7 @@
 }
 
 .CodeMirror {
-  border: 1px solid #eee;
+  border: 1px solid #eeeeee;
   font-size: 10px !important;
   width: 100%;
   height: 150px !important;
@@ -49,7 +49,7 @@
 }
 
 .CodeMirror.large {
-  border: 1px solid #eee;
+  border: 1px solid #eeeeee;
   font-size: 14px !important;
   width: 100%;
   height: 500px !important;
@@ -67,7 +67,7 @@
  */
 
 .form-table td.criticalcsstable {
-  padding: 0px;
+  padding: 0;
 }
 
 .abtfr-inner-table {
@@ -85,8 +85,8 @@
 .form-table h5.h {
   font-size: 12px;
   line-height: 14px;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   padding-bottom: 2px;
   font-weight: bold;
 }
@@ -118,26 +118,11 @@
   white-space: nowrap;
 }
 
-.criticalcsstable .item-edit {
-  position: absolute;
-  right: -20px;
-  top: 0;
-  display: block;
-  width: 30px;
-  height: 40px;
-  margin-right: 0 !important;
-  text-indent: 100%;
-  outline: 0;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 .wp-core-ui .button-yellow {
   background: #f1b70a;
   border-color: #dda809 #cd9c09 #cd9c09;
-  -webkit-box-shadow: 0 1px 0 #cd9c09;
   box-shadow: 0 1px 0 #cd9c09;
-  color: #000;
+  color: #000000;
   text-decoration: none;
   text-shadow: none;
 }
@@ -146,15 +131,14 @@
 .wp-core-ui .button-yellow:hover {
   background: #f9bd0b;
   border-color: #cd9c09;
-  color: #000;
+  color: #000000;
 }
 
 .wp-core-ui .button-green {
   background: #079c2d;
   border-color: #068827 #056f21 #056f21;
-  -webkit-box-shadow: 0 1px 0 #056f21;
   box-shadow: 0 1px 0 #056f21;
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
   text-shadow: none;
 }
@@ -163,7 +147,7 @@
 .wp-core-ui .button-green:hover {
   background: #079c2d;
   border-color: #056f21;
-  color: #fff;
+  color: #ffffff;
 }
 
 .wp-core-ui .button-del {
@@ -174,7 +158,7 @@
 .wp-core-ui .button-del:hover {
   background: #ff0000;
   border-color: #ab0000;
-  color: #fff;
+  color: #ffffff;
 }
 
 textarea.abtfrcmd {
@@ -184,8 +168,9 @@ textarea.abtfrcmd {
   line-height: 18px;
   padding: 5px;
   padding-left: 8px;
-  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono,
-    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  font-family: 'Consolas', 'Menlo', 'Monaco', 'Lucida Console',
+    'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+    'Courier New', monospace, serif;
 }
 
 #livehtml {
@@ -203,12 +188,10 @@ textarea.abtfrcmd {
 }
 
 .live span.tag {
-  font-family: Consolas, monospace;
+  font-family: 'Consolas', monospace;
   white-space: nowrap;
   overflow: hidden;
   color: black;
-  -webkit-animation: pulsate 3s ease-out;
-  -webkit-animation-iteration-count: infinite;
   animation: pulsate 3s ease-out;
   animation-iteration-count: infinite;
   opacity: 0.7;
@@ -216,21 +199,23 @@ textarea.abtfrcmd {
 
 .live span.text {
   overflow: hidden;
+
   /* Ensures the content is not revealed until the animation */
-  border-right: 1px solid #444;
+  border-right: 1px solid #444444;
+
   /* The typwriter cursor */
   white-space: nowrap;
+
   /* Keeps the content on a single line */
   margin: 0 auto;
+
   /* Gives that scrolling effect as the typing happens */
   display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
   vertical-align: bottom;
   animation: typing 3.5s steps(64, end), blink-caret 0.75s step-end infinite;
 }
 
-@-webkit-keyframes pulsate {
+@keyframes pulsate {
   0% {
     opacity: 0.5;
   }
@@ -268,9 +253,6 @@ textarea.abtfrcmd {
   border: solid 1px #ffdf82;
 }
 
-.info_yellow .mark {
-}
-
 .info_seagreen {
   background: #f1fffe;
   border: solid 1px #019e97;
@@ -294,7 +276,7 @@ textarea.abtfrcmd {
 
 fieldset.limited {
   border: solid 4px #079c2d;
-  padding: 0px;
+  padding: 0;
   background: white;
 }
 
@@ -308,7 +290,7 @@ fieldset.limited legend {
 
 fieldset.limited div.c {
   padding: 10px;
-  padding-top: 0px;
+  padding-top: 0;
   font-size: 16px;
 }
 
@@ -326,8 +308,8 @@ fieldset.limited ul {
 
 nav div.ref {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 0;
+  right: 0;
   text-align: right;
 }
 
@@ -342,8 +324,8 @@ nav div.ref a.logo {
 }
 
 nav div.ref .links {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   font-size: 12px;
   line-height: 14px;
 }
@@ -358,18 +340,18 @@ nav.subnav {
   padding: 5px;
   font-size: 16px;
   line-height: 20px;
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 nav.subnav a {
   display: inline-block;
   padding-left: 10px;
-  border-left: solid 1px #ccc;
+  border-left: solid 1px #cccccc;
   margin-left: 10px;
 }
 
 nav.subnav a.f {
-  padding-left: 0px;
+  padding-left: 0;
   margin-left: 2px;
   border-left: 0;
 }
@@ -378,9 +360,6 @@ nav.subnav a.s {
   color: inherit;
   font-weight: bold;
   text-decoration: none;
-}
-
-nav.subnav .t {
 }
 
 textarea.json-array-lines {

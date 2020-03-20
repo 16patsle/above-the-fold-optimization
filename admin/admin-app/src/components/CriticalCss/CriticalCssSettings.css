@@ -4,12 +4,12 @@
   padding: 0;
 }
 
-.abtfr-criticalcss .item-edit:before {
+.abtfr-criticalcss .item-edit::before {
   right: 0;
   content: '\f140';
   border: none;
   background: 0 0;
-  font: normal 20px/1 dashicons;
+  font: normal 20px/1 'dashicons', sans-serif;
   speak: none;
   display: block;
   padding: 0;
@@ -26,7 +26,7 @@
   border-radius: 50%;
 }
 
-.abtfr-criticalcss .item-edit:focus:before {
+.abtfr-criticalcss .item-edit:focus::before {
   box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
 }
 

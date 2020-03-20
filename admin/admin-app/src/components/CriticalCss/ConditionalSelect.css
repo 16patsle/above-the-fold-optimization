@@ -13,17 +13,17 @@
 .edit-conditional-critical-css .conditional-select .optvalue.post {
   --optvalue-primary-color: #4285f4;
   --optvalue-secondary-color: #3366b9;
-  --optvalue-text-color: #fff;
+  --optvalue-text-color: #ffffff;
 }
 .edit-conditional-critical-css .conditional-select .optvalue.page {
   --optvalue-primary-color: #079c2d;
   --optvalue-secondary-color: #065e1c;
-  --optvalue-text-color: #fff;
+  --optvalue-text-color: #ffffff;
 }
 .edit-conditional-critical-css .conditional-select .optvalue.cat {
   --optvalue-primary-color: #ea4335;
   --optvalue-secondary-color: #cd3a2e;
-  --optvalue-text-color: #fff;
+  --optvalue-text-color: #ffffff;
 }
 .edit-conditional-critical-css .conditional-select .optvalue.pagetype {
   --optvalue-primary-color: #f1b70a;
@@ -31,14 +31,14 @@
   --optvalue-text-color: #1c1700;
 }
 .edit-conditional-critical-css .conditional-select .optvalue.filter {
-  --optvalue-primary-color: #ddd;
+  --optvalue-primary-color: #dddddd;
   --optvalue-secondary-color: #b4b9be;
   --optvalue-text-color: #1c1700;
 }
 .edit-conditional-critical-css .conditional-select .optvalue.woocommerce {
   --optvalue-primary-color: #19c244;
   --optvalue-secondary-color: #079c2d;
-  --optvalue-text-color: #fff;
+  --optvalue-text-color: #ffffff;
 }
 
 .edit-conditional-critical-css .optgroup::before {
@@ -62,7 +62,7 @@
   background-color: #f1b70a;
 }
 .edit-conditional-critical-css .optgroup-filter::before {
-  background-color: #ddd;
+  background-color: #dddddd;
 }
 .edit-conditional-critical-css .optgroup-woocommerce::before {
   background-color: #079c2d;
@@ -70,5 +70,5 @@
 
 .edit-conditional-critical-css .opt .desc {
   font-weight: thin;
-  color: #999;
+  color: #999999;
 }
