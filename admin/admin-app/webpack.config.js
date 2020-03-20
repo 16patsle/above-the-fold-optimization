@@ -13,6 +13,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const postcssNormalize = require('postcss-normalize');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 const { defaultRequestToExternal, defaultRequestToHandle } = require('@wordpress/dependency-extraction-webpack-plugin/util');
 
@@ -392,6 +393,11 @@ module.exports = function (webpackEnv) {
       new MonacoWebpackPlugin({
         // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
         languages: ['css']
+      }),
+      new StylelintPlugin({
+        files: 'src/**/*.css',
+        fix: true,
+        failOnError: isEnvProduction
       }),
       isEnvProduction && new DependencyExtractionWebpackPlugin(),
       isEnvDevelopment && new DependencyExtractionWebpackPlugin({
