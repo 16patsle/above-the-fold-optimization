@@ -26,41 +26,6 @@ const ConditionalCssSettings = () => {
     return getJSON(query);
   });
 
-  console.log(conditionalCssData);
-
-  /*
-  const conditionalCssData2 = {
-    conditionalValues: {
-      'filename1.css': {
-        css: 'inlinecss1',
-        conditions: 'condition values',
-        config: {
-          name: 'test1',
-          weight: 1,
-          file: 'path/to/filename1.css',
-          t: 12345,
-          appendToAny: false,
-          prependToAny: false,
-          weight: false
-        }
-      },
-      'filename2.css': {
-        css: 'inlinecss2',
-        conditions: 'condition values',
-        config: {
-          name: 'test2',
-          weight: 2,
-          file: 'path/to/filename2.css',
-          t: 67890,
-          appendToAny: false,
-          prependToAny: false,
-          weight: false
-        }
-      }
-    }
-  };
-  */
-
   const [showAddConditional, setShowAddConditional] = useState(false);
 
   if (error || conditionalCssError) {
