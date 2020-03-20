@@ -17,7 +17,7 @@ const AddConditional = props => {
       return;
     }
 
-    if (!/^[a-zA-Z0-9\-\_ ]+$/.test(name)) {
+    if (!/^[a-zA-Z0-9\-_ ]+$/.test(name)) {
       alert(__('The name contains invalid characters.', 'abtfr'));
       nameRef.focus();
       return;

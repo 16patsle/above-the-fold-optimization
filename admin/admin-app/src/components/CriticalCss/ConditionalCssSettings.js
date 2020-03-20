@@ -3,7 +3,6 @@ import { __, sprintf } from '@wordpress/i18n';
 import useSWR from 'swr';
 import useLinkState from '../../utils/useLinkState';
 import { homeUrl } from '../../utils/globalVars';
-import Info from '../Info';
 import SettingCheckbox from '../SettingCheckbox';
 import SubmitButton from '../SubmitButton';
 import getSettings, { getJSON } from '../../utils/getSettings';
@@ -12,7 +11,7 @@ import AddConditional from './AddConditional';
 import ConditionalSelect from './ConditionalSelect';
 
 const ConditionalCssSettings = () => {
-  const [options, , setOptions, linkOptionState] = useLinkState();
+  const [options, , setOptions] = useLinkState();
 
   const [conditionalCss, setConditionalCss] = useState(false);
 
