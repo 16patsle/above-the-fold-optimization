@@ -1,4 +1,4 @@
-import { abtfrRestNonce } from './globalVars';
+import { abtfrRestNonce, homeUrl } from './globalVars';
 import newlineArrayString from './newLineArrayString';
 
 const shouldNewlineArrayString = [
@@ -25,13 +25,22 @@ const shouldNewlineArrayString = [
 /**
  * Fetch JSON from API
  * @param {String} url API URL to fetch
+ * @param {boolean} useAuth Should the request be authenticated?
  * @returns {Object} The JSON
  */
-export async function getJSON(url) {
-  const response = await fetch('/wp-json/abtfr/v1/' + url, {
-    headers: {
-      'X-WP-Nonce': abtfrRestNonce
-    }
+export async function getJSON(url, useAuth = true) {
+  let headers = {};
+  if (useAuth) {
+    header = {
+      headers: {
+        'X-WP-Nonce': abtfrRestNonce
+      }
+    };
+  }
+  const response = await fetch(`${homeUrl}/wp-json/abtfr/v1/${url}`, {
+    mode: 'cors',
+    credentials: 'same-origin',
+    headers
   });
   const result = await response.json();
   if (!response.ok) {
@@ -50,7 +59,7 @@ export async function getJSON(url) {
  * @returns {Object} The settings
  */
 export default async function getSettings() {
-  const result = await getJSON('settings');
+  const result = await getJSON('settings', false);
 
   if (result._error) {
     return Promise.reject(result._error);

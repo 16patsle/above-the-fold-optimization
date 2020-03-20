@@ -138,6 +138,14 @@ class ABTFR_Admin {
                 30
             );
 
+            // Add link preload in head
+            $this->CTRL->loader->add_action(
+                'admin_head',
+                $this,
+                'add_link_preload',
+                30
+            );
+
             // Hook in the admin styles and scripts
             $this->CTRL->loader->add_action(
                 'admin_enqueue_scripts',
@@ -336,6 +344,13 @@ class ABTFR_Admin {
         }
 
         return $tab;
+    }
+
+    /**
+     * Add link preload for API
+     */
+    public function add_link_preload($hook) {
+        echo '<link rel="preload" href="' . get_home_url() . '/wp-json/abtfr/v1/settings" as="fetch" crossorigin="anonymous">';
     }
 
     /**

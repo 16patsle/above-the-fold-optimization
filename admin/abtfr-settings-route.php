@@ -28,13 +28,13 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     register_rest_route( $namespace, '/criticalcss', array(
       'methods'             => WP_REST_Server::READABLE,
       'callback'            => array( $this, 'get_criticalcss' ),
-      'permission_callback' => array( $this, 'get_settings_permissions_check' ),
+      'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
       'args'                => array(),
     ) );
     register_rest_route( $namespace, '/conditionalcss', array(
       'methods'             => WP_REST_Server::READABLE,
       'callback'            => array( $this, 'get_conditionalcss' ),
-      'permission_callback' => array( $this, 'get_settings_permissions_check' ),
+      'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
       'args'                => array(),
     ) );
     register_rest_route( $namespace, '/' . $base . '/schema', array(
@@ -167,6 +167,17 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
    * @return WP_Error|bool
    */
   public function get_settings_permissions_check( $request ) {
+    //return current_user_can( 'manage_options' );
+    return true;
+  }
+
+  /**
+   * Check if a given request has access to get critical css
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|bool
+   */
+  public function get_criticalcss_permissions_check( $request ) {
     return current_user_can( 'manage_options' );
   }
 
