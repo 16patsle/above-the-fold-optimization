@@ -37,6 +37,10 @@
     "prettier": "^1.18.2"
   },
   "scripts": {
-    "prettier": "prettier --single-quote --write \"**/*.php\""
+    "prettier": "prettier --write \"**/*.php\""
+  },
+  "prettier": {
+    "singleQuote": true,
+    "braceStyle": "1tbs"
   }
 }
