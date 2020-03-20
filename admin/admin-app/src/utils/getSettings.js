@@ -31,10 +31,8 @@ const shouldNewlineArrayString = [
 export async function getJSON(url, useAuth = true) {
   let headers = {};
   if (useAuth) {
-    header = {
-      headers: {
-        'X-WP-Nonce': abtfrRestNonce
-      }
+    headers = {
+      'X-WP-Nonce': abtfrRestNonce
     };
   }
   const response = await fetch(`${homeUrl}/wp-json/abtfr/v1/${url}`, {
