@@ -45,7 +45,6 @@ const AddConditional = props => {
 
   return (
     <div
-      id="addcriticalcss-form"
       className="edit-conditional-critical-css"
       style={{
         background: '#f1f1f1',
@@ -63,7 +62,6 @@ const AddConditional = props => {
               <td>
                 <input
                   type="text"
-                  id="addcc_name"
                   placeholder="Name"
                   style={{ width: '100%' }}
                   value={name}
@@ -91,8 +89,7 @@ const AddConditional = props => {
         </table>
         <button
           type="button"
-          className="button button-yellow button-small"
-          id="addcc_save"
+          className="button button-small"
           onClick={handleClick}
         >
           {__('Save', 'abtfr')}

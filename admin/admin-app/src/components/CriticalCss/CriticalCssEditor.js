@@ -82,17 +82,11 @@ const CriticalCssEditor = props => {
                 setEditorLoaded(true);
               }}
             />
-            <input
-              type="hidden"
-              name={props.name}
-              id="abtfrcss"
-              value={props.link.value}
-            />
+            <input type="hidden" name={props.name} value={props.link.value} />
           </>
         ) : (
           <textarea
             className="abtfrcss"
-            id="abtfrcss"
             name={props.name}
             value={props.link.value}
             onChange={e => props.link.set(e.target.value)}

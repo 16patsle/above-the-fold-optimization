@@ -110,7 +110,6 @@ const ConditionalCssSettings = () => {
         <p style={{ marginTop: '1em', marginBottom: '1em' }}>
           <button
             type="button"
-            id="addcriticalcss"
             className="button"
             style={{ marginRight: '0.5em' }}
             onClick={() => setShowAddConditional(!showAddConditional)}
