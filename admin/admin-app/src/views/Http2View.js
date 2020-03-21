@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import useSettings from '../utils/useSettings';
 import {
   adminUrl,
@@ -10,6 +10,7 @@ import {
   lgCode,
   wpAbtfrUri
 } from '../utils/globalVars';
+import LoadingWrapper from '../components/LoadingWrapper';
 import JsonEditor from '../components/JsonEditor';
 import { http2Schema } from '../components/editorSchema';
 import Info from '../components/Info';
@@ -56,15 +57,13 @@ const http2Insert = {
 };
 
 const Http2View = () => {
-  const {linkOptionState, getOption, setOption, shouldRender, error} = useSettings();
-
-  if (error) {
-    return <div>{sprintf(__('Error: %s', 'abtfr'), error)}</div>;
-  }
-
-  if (!shouldRender) {
-    return <div>{__('Loading...', 'abtfr')}</div>;;
-  }
+  const {
+    linkOptionState,
+    getOption,
+    setOption,
+    shouldRender,
+    error
+  } = useSettings();
 
   const handleInsertClick = e => {
     var json = getOption('http2PushConfig');
@@ -83,161 +82,163 @@ const Http2View = () => {
   };
 
   return (
-    <form
-      method="post"
-      action={adminUrl + 'admin-post.php?action=abtfr_http2_update'}
-      className="clearfix"
-    >
-      <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
-      <PageContent header={__('HTTP/2 Optimization', 'abtfr')}>
-        <Helmet>
-          <title>
-            {__('HTTP/2 Optimization', 'abtfr')} {siteTitle}
-          </title>
-        </Helmet>
-        <p>
+    <LoadingWrapper shouldRender={shouldRender} error={error}>
+      <form
+        method="post"
+        action={adminUrl + 'admin-post.php?action=abtfr_http2_update'}
+        className="clearfix"
+      >
+        <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
+        <PageContent header={__('HTTP/2 Optimization', 'abtfr')}>
+          <Helmet>
+            <title>
+              {__('HTTP/2 Optimization', 'abtfr')} {siteTitle}
+            </title>
+          </Helmet>
+          <p>
+            <a
+              href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${lgCode}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              HTTP/2
+            </a>{' '}
+            is a new version of the internet protocol originally developed by
+            Google (SPDY). This plugin enables to make use of some it's
+            optimization potential.
+          </p>
           <a
-            href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${lgCode}`}
+            href={`https://tools.keycdn.com/http2-test?url=${encodeURIComponent(
+              homeUrl
+            )}`}
             target="_blank"
             rel="noopener noreferrer"
+            className="button"
           >
-            HTTP/2
-          </a>{' '}
-          is a new version of the internet protocol originally developed by
-          Google (SPDY). This plugin enables to make use of some it's
-          optimization potential.
-        </p>
-        <a
-          href={`https://tools.keycdn.com/http2-test?url=${encodeURIComponent(
-            homeUrl
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="button"
-        >
-          {__('Test your website for HTTP/2 support', 'abtfr')}
-        </a>
-        <table className="form-table">
-          <tbody>
-            <SettingCheckbox
-              header={__('HTTP/2 Server Push', 'abtfr')}
-              name="abtfr[http2_push]"
-              link={linkOptionState('http2Push')}
-              label={__('Enabled', 'abtfr')}
-              description={
-                <span>
-                  When enabled, resources such as scripts, stylesheets and
-                  images can be pushed to visitors together with the HTML (
+            {__('Test your website for HTTP/2 support', 'abtfr')}
+          </a>
+          <table className="form-table">
+            <tbody>
+              <SettingCheckbox
+                header={__('HTTP/2 Server Push', 'abtfr')}
+                name="abtfr[http2_push]"
+                link={linkOptionState('http2Push')}
+                label={__('Enabled', 'abtfr')}
+                description={
+                  <span>
+                    When enabled, resources such as scripts, stylesheets and
+                    images can be pushed to visitors together with the HTML (
+                    <a
+                      href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${lgCode}#server_push`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      documentation
+                    </a>
+                    ).
+                  </span>
+                }
+              >
+                <JsonEditor
+                  name="http2.push"
+                  schema={http2Schema}
+                  link={linkOptionState('http2PushConfig')}
+                ></JsonEditor>
+                <input
+                  type="hidden"
+                  name="abtfr[http2_push_config]"
+                  id="http2_push_config_src"
+                  value={JSON.stringify(getOption('http2PushConfig'))}
+                />
+                <div style={{ clear: 'both', height: 10 }}></div>
+                <fieldset>
+                  <legend>{__('Insert', 'abtfr')}</legend>
+                  <button
+                    type="button"
+                    onClick={handleInsertClick}
+                    className="button"
+                    data-http2-insert="scripts"
+                  >
+                    {__('WordPress scripts', 'abtfr')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleInsertClick}
+                    className="button"
+                    data-http2-insert="stylesheets"
+                  >
+                    {__('WordPress stylesheets', 'abtfr')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleInsertClick}
+                    className="button"
+                    data-http2-insert="images"
+                  >
+                    {__('HTML images', 'abtfr')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleInsertClick}
+                    className="button"
+                    data-http2-insert="custom"
+                  >
+                    {__('Custom resource list', 'abtfr')}
+                  </button>
+                </fieldset>
+                <Info color="yellow">
+                  <strong>Note:</strong> When using the Progressive Web App
+                  Service Worker (PWA), the service worker automatically
+                  calculates a <strong>Cache Digest</strong> based on previously
+                  pushed resources. This feature is based on the hash
+                  calculation implementation of{' '}
                   <a
-                    href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${lgCode}#server_push`}
+                    href="https://gitlab.com/sebdeckers/cache-digest-immutable/#-cache-digest-immutable"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    documentation
+                    Cache-Digest-Immutable
+                  </a>{' '}
+                  and enables the server to only push resources that aren't
+                  already available in the client. For more information, see{' '}
+                  <a
+                    href="https://calendar.perfplanet.com/2016/cache-digests-http2-server-push/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    this article
+                  </a>{' '}
+                  on PerfPlanet.com.
+                  <br />
+                  <br />
+                  <img
+                    src={`${wpAbtfrUri}admin/images/Cache_Digest_-_Warm_Cache.png`}
+                    alt="Cache-Digest"
+                    style={{ width: '100%', maxWidth: 600 }}
+                    title="Cache-Digest"
+                  />
+                  <br />
+                  <br />
+                  It is not possible to push resources that are not used on a
+                  page. For more information, see{' '}
+                  <a
+                    href="https://jakearchibald.com/2017/h2-push-tougher-than-i-thought/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    this article
                   </a>
-                  ).
-                </span>
-              }
-            >
-              <JsonEditor
-                name="http2.push"
-                schema={http2Schema}
-                link={linkOptionState('http2PushConfig')}
-              ></JsonEditor>
-              <input
-                type="hidden"
-                name="abtfr[http2_push_config]"
-                id="http2_push_config_src"
-                value={JSON.stringify(getOption('http2PushConfig'))}
-              />
-              <div style={{ clear: 'both', height: 10 }}></div>
-              <fieldset>
-                <legend>{__('Insert', 'abtfr')}</legend>
-                <button
-                  type="button"
-                  onClick={handleInsertClick}
-                  className="button"
-                  data-http2-insert="scripts"
-                >
-                  {__('WordPress scripts', 'abtfr')}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleInsertClick}
-                  className="button"
-                  data-http2-insert="stylesheets"
-                >
-                  {__('WordPress stylesheets', 'abtfr')}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleInsertClick}
-                  className="button"
-                  data-http2-insert="images"
-                >
-                  {__('HTML images', 'abtfr')}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleInsertClick}
-                  className="button"
-                  data-http2-insert="custom"
-                >
-                  {__('Custom resource list', 'abtfr')}
-                </button>
-              </fieldset>
-              <Info color="yellow">
-                <strong>Note:</strong> When using the Progressive Web App
-                Service Worker (PWA), the service worker automatically
-                calculates a <strong>Cache Digest</strong> based on previously
-                pushed resources. This feature is based on the hash calculation
-                implementation of{' '}
-                <a
-                  href="https://gitlab.com/sebdeckers/cache-digest-immutable/#-cache-digest-immutable"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Cache-Digest-Immutable
-                </a>{' '}
-                and enables the server to only push resources that aren't
-                already available in the client. For more information, see{' '}
-                <a
-                  href="https://calendar.perfplanet.com/2016/cache-digests-http2-server-push/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  this article
-                </a>{' '}
-                on PerfPlanet.com.
-                <br />
-                <br />
-                <img
-                  src={`${wpAbtfrUri}admin/images/Cache_Digest_-_Warm_Cache.png`}
-                  alt="Cache-Digest"
-                  style={{ width: '100%', maxWidth: 600 }}
-                  title="Cache-Digest"
-                />
-                <br />
-                <br />
-                It is not possible to push resources that are not used on a
-                page. For more information, see{' '}
-                <a
-                  href="https://jakearchibald.com/2017/h2-push-tougher-than-i-thought/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  this article
-                </a>
-              </Info>
-            </SettingCheckbox>
-          </tbody>
-        </table>
-        <hr />
-        <SubmitButton type={['primary', 'large']} name="is_submit">
-          {__('Save', 'abtfr')}
-        </SubmitButton>
-      </PageContent>
-    </form>
+                </Info>
+              </SettingCheckbox>
+            </tbody>
+          </table>
+          <hr />
+          <SubmitButton type={['primary', 'large']} name="is_submit">
+            {__('Save', 'abtfr')}
+          </SubmitButton>
+        </PageContent>
+      </form>
+    </LoadingWrapper>
   );
 };
 
