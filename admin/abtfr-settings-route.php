@@ -32,14 +32,38 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
       'args'                => array(),
     ) );
     register_rest_route( $namespace, '/conditionalcss', array(
-      'methods'             => WP_REST_Server::READABLE,
-      'callback'            => array( $this, 'get_conditionalcss' ),
-      'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
-      'args'                => array(),
+      array(
+        'methods'             => WP_REST_Server::READABLE,
+        'callback'            => array( $this, 'get_conditionalcss' ),
+        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'args'                => array(),
+      ),
+      array(
+        'methods'             => WP_REST_Server::CREATABLE,
+        'callback'            => array( $this, 'create_conditionalcss_item' ),
+        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'args'                => $this->get_endpoint_args_for_item_schema( true ),
+      ),
     ) );
-    register_rest_route( $namespace, '/' . $base . '/schema', array(
-      'methods'  => WP_REST_Server::READABLE,
-      'callback' => array( $this, 'get_public_item_schema' ),
+    register_rest_route( $namespace, '/conditionalcss/(?P<file>[^.\/]+\.css)', array(
+      array(
+        'methods'             => WP_REST_Server::READABLE,
+        'callback'            => array( $this, 'get_conditionalcss_item' ),
+        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'args'                => array(),
+      ),
+      array(
+        'methods'             => WP_REST_Server::EDITABLE,
+        'callback'            => array( $this, 'update_conditionalcss_item' ),
+        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'args'                => $this->get_endpoint_args_for_item_schema( false ),
+      ),
+      array(
+        'methods'             => WP_REST_Server::DELETABLE,
+        'callback'            => array( $this, 'delete_conditionalcss_item' ),
+        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'args'                => array(),
+      ),
     ) );
   }
  
@@ -158,6 +182,238 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     $data['conditional_path'] = $this->admin->CTRL->theme_dir('', 'critical-css');
   
     return new WP_REST_Response( $this->convert_to_camel_case_array($data), 200 );
+  }
+
+  /**
+   * Get a specific conditional CSS item
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function get_conditionalcss_item( $request ) {
+    $params = $request->get_params();
+    $data = array();
+
+    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/admin.criticalcss.class.php';
+
+    /**
+     * Load critical css management
+     */
+    $this->criticalcss = new ABTFR_Admin_CriticalCSS($this->admin->CTRL);
+
+    // get critical css files
+    $criticalcss_files = $this->admin->CTRL->criticalcss->get_theme_criticalcss();
+
+    foreach ($criticalcss_files as $file => $config) {
+      if ($file === $params['file']) {
+        // critical CSS
+        $inlinecss = $this->admin->CTRL->criticalcss->get_file_contents($config['file']);
+
+        // conditions
+        $conditions = (isset($config['conditions'])) ? $this->criticalcss->get_condition_values($config['conditions']) : array();
+
+        $condition_values = array();
+        foreach ($conditions as $condition) {
+          $condition_values[] = $condition['value'];
+        }
+
+        $condition_values = implode('|==abtfr==|', $condition_values);
+
+        $data = array(
+          'css' => $inlinecss,
+          'conditions' => $conditions,
+          'config' => $config
+        );
+
+        break;
+      }
+    }
+
+    if(isset($data['css'])) {
+      return new WP_REST_Response( $this->convert_to_camel_case_array($data), 200 );
+    } else {
+      return new WP_Error( 'not-found',  __( 'Not found.', 'abtfr' ), array( 'status' => 404 ) );
+    }  
+  }
+
+  /**
+   * Create a conditional CSS item
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function create_conditionalcss_item( $request ) {
+    // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
+    $params = array_map('stripslashes_deep', $request->get_params());
+
+    $criticalcss_dir = $this->admin->CTRL->theme_path('critical-css');
+
+    // get current critical css config
+    $criticalcss_files = $this->admin->CTRL->criticalcss->get_theme_criticalcss();
+
+    // name (reference)
+    $name = isset($params['name']) ? trim($params['name']) : '';
+    if ($name === '') {
+      return new WP_Error( 'no-name', __( 'You did not enter a name.', 'abtfr' ), array( 'status' => 400 ) );
+    }
+
+    $cssfile =
+      trim(
+      preg_replace(
+        array('|\s+|is', '|[^a-z0-9\-]+|is'),
+        array('-', ''),
+        strtolower($name)
+      )
+    ) . '.css';
+
+    if (isset($criticalcss_files[$cssfile])) {
+      return new WP_Error( 'file-exists', sprintf( __( 'A conditional critical CSS configuration with the filename %s already exists.', 'abtfr' ), $cssfile ), array( 'status' => 400 ) );
+    }
+
+    $config = array(
+      'name' => $name,
+      'weight' => 1
+    );
+
+    $config['conditions'] = explode('|==abtfr==|', $params['conditions']);
+
+    if (
+      file_exists($criticalcss_dir . $cssfile) &&
+      !is_writable($criticalcss_dir . $cssfile)
+    ) {
+      return new WP_Error( 'write-failed', sprintf( __( 'Failed to write to Conditional Critical CSS storage file. Please check the write permissions for the following file: %s', 'abtfr' ), str_replace(
+        trailingslashit(ABSPATH),
+        '/',
+        $criticalcss_dir . $cssfile
+    ) ), array( 'status' => 500 ) );
+    } else {
+      // save file with config header
+      $this->admin->CTRL->criticalcss->save_file_contents(
+        $cssfile,
+        $config,
+        ' '
+      );
+
+      // failed to store Critical CSS
+      if (
+        !file_exists($criticalcss_dir . $cssfile) ||
+        !is_writable($criticalcss_dir . $cssfile)
+      ) {
+        return new WP_Error( 'write-failed', sprintf( __( 'Failed to write to Conditional Critical CSS storage file. Please check the write permissions for the following file: %s', 'abtfr' ), str_replace(
+          trailingslashit(ABSPATH),
+          '/',
+          $criticalcss_dir . $cssfile
+      ) ), array( 'status' => 500 ) );
+      }
+    }
+ 
+    return new WP_REST_Response( true, 201 );
+  }
+ 
+  /**
+   * Update a specific conditional CSS item
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function update_conditionalcss_item( $request ) {
+    // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
+    $params = array_map('stripslashes_deep', $request->get_params());
+
+    $criticalcss_dir = $this->admin->CTRL->theme_path('critical-css');
+
+    // get current critical css config
+    $criticalcss_files = $this->admin->CTRL->criticalcss->get_theme_criticalcss();
+
+    // conditional css id
+    $file = isset($params['file']) ? trim($params['file']) : '';
+
+    if (!isset($criticalcss_files[$file])) {
+      return new WP_Error( 'not-found', sprintf( __( 'A conditional critical CSS configuration with the filename %s doesn\'t exist.', 'abtfr' ), $cssfile ), array( 'status' => 404 ) );
+    }
+
+    $criticalcss_files[$file]['conditions'] = explode('|==abtfr==|', $params['conditions']);
+
+    $criticalcss_files[$file]['weight'] =
+      isset($params['weight']) &&
+      intval($params['weight']) > 0
+          ? intval($params['weight'])
+          : 1;
+
+    if (
+      isset($params['appendToAny']) &&
+      intval($params['appendToAny']) === 1
+    ) {
+      $criticalcss_files[$file]['appendToAny'] = true;
+    } else {
+      unset($criticalcss_files[$file]['appendToAny']);
+    }
+    if (
+      isset($params['prependToAny']) &&
+      intval($params['prependToAny']) === 1
+    ) {
+      $criticalcss_files[$file]['prependToAny'] = true;
+    } else {
+      unset($criticalcss_files[$file]['prependToAny']);
+    }
+
+    if (
+      file_exists($criticalcss_dir . $file) &&
+      !is_writable($criticalcss_dir . $file)
+    ) {
+      return new WP_Error( 'write-failed', sprintf( __( 'Failed to write to Conditional Critical CSS storage file. Please check the write permissions for the following file: %s', 'abtfr' ), str_replace(
+        trailingslashit(ABSPATH),
+        '/',
+        $criticalcss_dir . $file
+    ) ), array( 'status' => 500 ) );
+    } else {
+      // save file with config header
+      $error = $this->admin->CTRL->criticalcss->save_file_contents(
+        $file,
+        $criticalcss_files[$file],
+        trim($params['css'])
+      );
+
+      if ($error && is_array($error)) {
+        $error_msg = '';
+        foreach ($error as $err) {
+          $error_msg .= '\n' . $err['message'];
+        }
+        return new WP_Error( 'error', sprintf( __( 'Error(s) occured: %s', 'abtfr' ), $error_msg ), array( 'status' => 500 ) );
+      }
+
+      // failed to store Critical CSS
+      if (
+        !file_exists($criticalcss_dir . $file) ||
+        !is_writable($criticalcss_dir . $file)
+      ) {
+        return new WP_Error( 'write-failed', sprintf( __( 'Failed to write to Conditional Critical CSS storage file. Please check the write permissions for the following file: %s', 'abtfr' ), str_replace(
+          trailingslashit(ABSPATH),
+          '/',
+          $criticalcss_dir . $file
+      ) ), array( 'status' => 500 ) );
+      }
+    }
+ 
+    return new WP_REST_Response( true, 200 );
+  }
+ 
+  /**
+   * Delete a specific conditional CSS item
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function delete_conditionalcss_item( $request ) {
+    // @link https://codex.wordpress.org/Function_Reference/stripslashes_deep
+    $params = array_map('stripslashes_deep', $request->get_params());
+
+    // conditional css id
+    $file = isset($params['file']) ? trim($params['file']) : '';
+
+    $this->admin->CTRL->criticalcss->delete_file($file);
+
+    return new WP_REST_Response( true, 200 );
   }
  
   /**
