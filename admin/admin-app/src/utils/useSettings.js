@@ -3,7 +3,13 @@ import useLinkState from './useLinkState';
 import getSettings from './getSettings';
 
 export function useJSON(identifier, callback) {
-  const [options, setOption, setOptions, linkOptionState, getOption] = useLinkState();
+  const [
+    options,
+    setOption,
+    setOptions,
+    linkOptionState,
+    getOption
+  ] = useLinkState();
   const { data, ...swr } = useSWR(identifier, callback);
   let shouldRender = true;
 
@@ -12,9 +18,17 @@ export function useJSON(identifier, callback) {
     shouldRender = false;
   }
 
-  return {options: options || {}, setOption, setOptions, linkOptionState, getOption, shouldRender, ...swr};
+  return {
+    options: options || {},
+    setOption,
+    setOptions,
+    linkOptionState,
+    getOption,
+    shouldRender,
+    ...swr
+  };
 }
 
 export default function useSettings() {
-  return useJSON('settings', getSettings)
+  return useJSON('settings', getSettings);
 }
