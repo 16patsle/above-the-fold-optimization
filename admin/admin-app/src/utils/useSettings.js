@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import useLinkState from './useLinkState';
 import getSettings from './getSettings';
 
-export function useJSON(identifier, callback) {
+export function useJSON(identifier, callback, datafield, defaultValue = {}) {
   const [
     options,
     setOption,
@@ -14,12 +14,16 @@ export function useJSON(identifier, callback) {
   let shouldRender = true;
 
   if (data && !options) {
-    setOptions(data);
+    if (datafield) {
+      setOptions(data[datafield]);
+    } else {
+      setOptions(data);
+    }
     shouldRender = false;
   }
 
   return {
-    options: options || {},
+    options: options || defaultValue,
     setOption,
     setOptions,
     linkOptionState,

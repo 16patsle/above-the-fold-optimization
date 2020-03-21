@@ -1,59 +1,37 @@
 import React, { useState } from 'react';
-import { __, sprintf } from '@wordpress/i18n';
-import useSWR from 'swr';
-import useLinkState from '../../utils/useLinkState';
+import { __ } from '@wordpress/i18n';
+import useSettings, { useJSON } from '../../utils/useSettings';
 import { homeUrl } from '../../utils/globalVars';
+import { getJSON } from '../../utils/getSettings';
+import LoadingWrapper from '../LoadingWrapper';
 import SettingCheckbox from '../SettingCheckbox';
 import SubmitButton from '../SubmitButton';
-import getSettings, { getJSON } from '../../utils/getSettings';
 import CriticalCssEditor from './CriticalCssEditor';
 import AddConditional from './AddConditional';
 import ConditionalSelect from './ConditionalSelect';
 
 const ConditionalCssSettings = () => {
-  const [options, , setOptions] = useLinkState();
-
-  const [conditionalCss, setConditionalCss] = useState(false);
-
-  const getOption = option => options[option];
-
-  const { data, error } = useSWR('settings', getSettings);
+  const { getOption, shouldRender, error } = useSettings();
   const {
-    data: conditionalCssData,
+    options: conditionalCss,
+    setOptions: setConditionalCss,
+    shouldRender: shouldRenderConditional,
     error: conditionalCssError,
     revalidate
-  } = useSWR('conditionalcss', query => {
-    return getJSON(query);
-  });
+  } = useJSON(
+    'conditionalcss',
+    query => {
+      return getJSON(query);
+    }
+  );
 
   const [showAddConditional, setShowAddConditional] = useState(false);
 
-  if (error || conditionalCssError) {
-    return (
-      <div>
-        {sprintf(__('Error: %s', 'abtfr'), error ? error : conditionalCssError)}
-      </div>
-    );
-  }
-
-  const loading = <div>{__('Loading...', 'abtfr')}</div>;
-
-  if (!data || !conditionalCssData) {
-    return loading;
-  }
-
-  if (!options) {
-    setOptions(data);
-    return loading;
-  }
-
-  if (conditionalCss === false) {
-    setConditionalCss(conditionalCssData);
-    return loading;
-  }
-
   return (
-    <>
+    <LoadingWrapper
+      shouldRender={!(!shouldRender || !shouldRenderConditional)}
+      error={error || conditionalCssError}
+    >
       <li>
         <h3
           style={{
@@ -84,11 +62,11 @@ const ConditionalCssSettings = () => {
         {showAddConditional && (
           <AddConditional
             revalidate={revalidate}
-            conditionalOptions={conditionalCssData.conditionalOptions}
+            conditionalOptions={conditionalCss.conditionalOptions}
           />
         )}
       </li>
-      {Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
+      {conditionalCss.conditionalValues && Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
         <CriticalCssEditor
           key={file}
           className="edit-conditional-critical-css"
@@ -167,7 +145,7 @@ const ConditionalCssSettings = () => {
           </table>
           <ConditionalSelect
             name={`abtfr[conditional_css][${file}][conditions]`}
-            conditionalOptions={conditionalCssData.conditionalOptions}
+            conditionalOptions={conditionalCss.conditionalOptions}
             link={{
               value: data.conditions,
               set: value =>
@@ -183,7 +161,7 @@ const ConditionalCssSettings = () => {
           <div style={{ marginTop: '5px', marginBottom: '0px' }}>
             The configuration is stored in{' '}
             <code>
-              {conditionalCssData.conditionalPath.replace(homeUrl, '')}
+              {conditionalCss.conditionalPath.replace(homeUrl, '')}
               <strong>{file}</strong>
             </code>{' '}
             and is editable via FTP.
@@ -209,7 +187,7 @@ const ConditionalCssSettings = () => {
           </SubmitButton>
         </CriticalCssEditor>
       ))}
-    </>
+    </LoadingWrapper>
   );
 };
 
