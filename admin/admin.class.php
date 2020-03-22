@@ -323,16 +323,13 @@ class ABTFR_Admin {
     /**
      * Get active tab
      */
-    public function active_tab($default = 'criticalcss') {
+    public function active_tab($default = 'intro') {
         // get tab from query string
         $tab = $default;
 
         // page based tab
         if (isset($_GET['page']) && strpos($_GET['page'], 'abtfr-') === 0) {
-            $tab = substr($_GET['page'], 10);
-            if ($tab === 'above-the-fold') {
-                $tab = 'criticalcss';
-            }
+            $tab = substr($_GET['page'], 6);
             if (isset($this->tabs[$tab])) {
                 $this->active_tab = $tab;
             }
@@ -379,6 +376,11 @@ class ABTFR_Admin {
                 ) . '#/settings'
             );
             exit();
+        }
+
+        // TODO: Remove when all pages are react
+        if (strpos($_GET['page'], 'abtfr-') === 0) {
+            return;
         }
 
         // add general admin javascript
@@ -1141,34 +1143,6 @@ class ABTFR_Admin {
     }
 
     /**
-     * Return optgroup json for page search
-     */
-    public function page_search_optgroups() {
-        $optgroups = array();
-
-        $optgroups[] = array(
-            'value' => 'posts',
-            'label' => __('Posts', 'abtfr')
-        );
-        $optgroups[] = array(
-            'value' => 'pages',
-            'label' => __('Pages', 'abtfr')
-        );
-        $optgroups[] = array(
-            'value' => 'categories',
-            'label' => __('Categories', 'abtfr')
-        );
-        if (class_exists('WooCommerce')) {
-            $optgroups[] = array(
-                'value' => 'woocommerce',
-                'label' => __('WooCommerce', 'abtfr')
-            );
-        }
-
-        return $optgroups;
-    }
-
-    /**
      * Return options for page selection menu
      */
     public function ajax_page_search() {
@@ -1456,39 +1430,25 @@ class ABTFR_Admin {
         if (!is_array($options)) {
             $options = array();
         }
-        ?>
-<script>
-// pagesearch optgroups
-window.abtfr_pagesearch_optgroups = <?php print json_encode(
-    $this->page_search_optgroups()
-); ?>;
-</script>
+        // active tab
+        $tab = $this->active_tab('intro');
 
-<?php
-// active tab
-$tab = $this->active_tab('intro');
+        $lgcode = $this->google_lgcode;
 
-// invalid tab
-if (!isset($this->tabs[$tab])) {
-    $tab = 'intro';
-}
+        // Google Analytics tracking code
+        $utmstring = $this->utm_string;
 
-$lgcode = $this->google_lgcode;
-
-// Google Analytics tracking code
-$utmstring = $this->utm_string;
-
-// print the HTML required by the React app
-require_once 'admin.app.inc.php';
-
-// print tab content
-switch ($tab) {
-    case 'extract':
-    case 'criticalcss-test':
-    case 'build-tool':
-        require_once 'admin.' . $tab . '.inc.php';
-        break;
-}
+        // print tab content
+        switch ($tab) {
+            case 'extract':
+            case 'criticalcss-test':
+            case 'build-tool':
+                require_once 'admin.' . $tab . '.inc.php';
+                break;
+            default:
+                // print the HTML required by the React app
+                require_once 'admin.app.inc.php';
+        }
     }
 
     /**
