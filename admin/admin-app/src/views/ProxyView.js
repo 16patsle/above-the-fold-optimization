@@ -17,6 +17,7 @@ import SettingCheckbox from '../components/SettingCheckbox';
 import SettingTextarea from '../components/SettingTextarea';
 import SettingTextInput from '../components/SettingTextInput';
 import SubmitButton from '../components/SubmitButton';
+import SettingInnerTable from '../components/SettingInnerTable';
 
 const emptyCacheUrl = new URL(adminUrl + 'admin.php');
 emptyCacheUrl.searchParams.append('page', 'abtfr-proxy');
@@ -86,89 +87,76 @@ const ProxyView = () => {
                 )}
               ></SettingCheckbox>
               {getOption('jsProxy') ? (
-                <tr valign="top" className="proxyjsoptions">
-                  <td colSpan="2" style={{ paddingTop: '0px' }}>
-                    <div className="abtfr-inner-table">
-                      <h3 className="h">
-                        <span>{__('Script Proxy Settings', 'abtfr')}</span>
-                      </h3>
-                      <div className="inside">
-                        <table className="form-table">
-                          <tbody>
-                            <SettingTextarea
-                              header="Proxy Include List"
-                              style={{
-                                width: '100%',
-                                height: 50,
-                                fontSize: 11
-                              }}
-                              name="abtfr[js_proxy_include]"
-                              link={linkOptionState('jsProxyInclude')}
-                              placeholder="Leave blank to proxy all external scripts..."
-                              description={
-                                <span>
-                                  Enter (parts of) external javascript files to
-                                  proxy, e.g.{' '}
-                                  <code>google-analytics.com/analytics.js</code>{' '}
-                                  or <code>facebook.net/en_US/sdk.js</code>. One
-                                  script per line.
-                                </span>
-                              }
-                            ></SettingTextarea>
-                            <SettingTextarea
-                              header="Proxy Exclude List"
-                              style={{
-                                width: '100%',
-                                height: 50,
-                                fontSize: 11
-                              }}
-                              name="abtfr[js_proxy_exclude]"
-                              link={linkOptionState('jsProxyExclude')}
-                              description={__(
-                                'Enter (parts of) external javascript files to exclude from the proxy. One script per line.'
-                              )}
-                            ></SettingTextarea>
-                            <SettingTextarea
-                              header="Proxy Preload List"
-                              style={{
-                                width: '100%',
-                                height: 50,
-                                fontSize: 11
-                              }}
-                              name="abtfr[js_proxy_preload]"
-                              link={linkOptionState('jsProxyPreload')}
-                              description={
-                                <span>
-                                  Enter the exact url or JSON config object [
-                                  <a
-                                    href="#jsoncnf"
-                                    onClick={function(e) {
-                                      e.preventDefault();
-                                      document
-                                        .querySelector('#jsoncnf')
-                                        .scrollIntoView();
-                                    }}
-                                    title="More information"
-                                  >
-                                    ?
-                                  </a>
-                                  ] of external scripts to preload for "script
-                                  injected" async script capture, e.g.{' '}
-                                  <code>
-                                    https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js
-                                  </code>
-                                  . This setting will enable the proxy to load
-                                  the cache url instead of the WordPress PHP
-                                  proxy url. One url or JSON object per line.
-                                </span>
-                              }
-                            ></SettingTextarea>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                <SettingInnerTable
+                  className="proxyjsoptions"
+                  header={__('Script Proxy Settings', 'abtfr')}
+                >
+                  <SettingTextarea
+                    header="Proxy Include List"
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      fontSize: 11
+                    }}
+                    name="abtfr[js_proxy_include]"
+                    link={linkOptionState('jsProxyInclude')}
+                    placeholder="Leave blank to proxy all external scripts..."
+                    description={
+                      <span>
+                        Enter (parts of) external javascript files to proxy,
+                        e.g. <code>google-analytics.com/analytics.js</code> or{' '}
+                        <code>facebook.net/en_US/sdk.js</code>. One script per
+                        line.
+                      </span>
+                    }
+                  ></SettingTextarea>
+                  <SettingTextarea
+                    header="Proxy Exclude List"
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      fontSize: 11
+                    }}
+                    name="abtfr[js_proxy_exclude]"
+                    link={linkOptionState('jsProxyExclude')}
+                    description={__(
+                      'Enter (parts of) external javascript files to exclude from the proxy. One script per line.'
+                    )}
+                  ></SettingTextarea>
+                  <SettingTextarea
+                    header="Proxy Preload List"
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      fontSize: 11
+                    }}
+                    name="abtfr[js_proxy_preload]"
+                    link={linkOptionState('jsProxyPreload')}
+                    description={
+                      <span>
+                        Enter the exact url or JSON config object [
+                        <a
+                          href="#jsoncnf"
+                          onClick={function(e) {
+                            e.preventDefault();
+                            document.querySelector('#jsoncnf').scrollIntoView();
+                          }}
+                          title="More information"
+                        >
+                          ?
+                        </a>
+                        ] of external scripts to preload for "script injected"
+                        async script capture, e.g.{' '}
+                        <code>
+                          https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js
+                        </code>
+                        . This setting will enable the proxy to load the cache
+                        url instead of the WordPress PHP proxy url. One url or
+                        JSON object per line.
+                      </span>
+                    }
+                  ></SettingTextarea>
+                </SettingInnerTable>
               ) : null}
               <SettingCheckbox
                 header="Proxy Stylesheets"
@@ -181,80 +169,68 @@ const ProxyView = () => {
                 )}
               ></SettingCheckbox>
               {getOption('cssProxy') ? (
-                <tr valign="top" className="proxycssoptions">
-                  <td colSpan="2" style={{ paddingTop: '0px' }}>
-                    <div className="abtfr-inner-table">
-                      <h3 className="h">
-                        <span>{__('Stylesheet Proxy Settings', 'abtfr')}</span>
-                      </h3>
-                      <div className="inside">
-                        <table className="form-table">
-                          <tbody>
-                            <SettingTextarea
-                              header="Proxy Include List"
-                              style={{
-                                width: '100%',
-                                height: 50,
-                                fontSize: 11
-                              }}
-                              name="abtfr[css_proxy_include]"
-                              link={linkOptionState('cssProxyInclude')}
-                              placeholder="Leave blank to proxy all external stylesheets..."
-                              description={
-                                <span>
-                                  Enter (parts of) external stylesheets to
-                                  proxy, e.g.{' '}
-                                  <code>googleapis.com/jquery-ui.css</code>. One
-                                  stylesheet per line.
-                                </span>
-                              }
-                            ></SettingTextarea>
-                            <SettingTextarea
-                              header="Proxy Exclude List"
-                              style={{
-                                width: '100%',
-                                height: 50,
-                                fontSize: 11
-                              }}
-                              name="abtfr[css_proxy_exclude]"
-                              link={linkOptionState('cssProxyExclude')}
-                              description={
-                                <span>
-                                  Enter (parts of) external stylesheets to
-                                  exclude from the proxy. One stylesheet per
-                                  line.
-                                </span>
-                              }
-                            ></SettingTextarea>
-                            <SettingTextarea
-                              header="Proxy Preload List"
-                              style={{
-                                width: '100%',
-                                height: 50,
-                                fontSize: 11
-                              }}
-                              name="abtfr[css_proxy_preload]"
-                              link={linkOptionState('cssProxyPreload')}
-                              description={
-                                <span>
-                                  Enter the exact url or JSON config object of
-                                  external stylesheets to preload for "script
-                                  injected" async stylesheet capture, e.g.{' '}
-                                  <code>
-                                    http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css
-                                  </code>
-                                  . This setting will enable the proxy to load
-                                  the cache url instead of the WordPress PHP
-                                  proxy url. One url or JSON object per line.
-                                </span>
-                              }
-                            ></SettingTextarea>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                <SettingInnerTable
+                  className="proxycssoptions"
+                  header={__('Stylesheet Proxy Settings', 'abtfr')}
+                >
+                  <SettingTextarea
+                    header="Proxy Include List"
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      fontSize: 11
+                    }}
+                    name="abtfr[css_proxy_include]"
+                    link={linkOptionState('cssProxyInclude')}
+                    placeholder="Leave blank to proxy all external stylesheets..."
+                    description={
+                      <span>
+                        Enter (parts of) external stylesheets to proxy, e.g.{' '}
+                        <code>googleapis.com/jquery-ui.css</code>. One
+                        stylesheet per line.
+                      </span>
+                    }
+                  ></SettingTextarea>
+                  <SettingTextarea
+                    header="Proxy Exclude List"
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      fontSize: 11
+                    }}
+                    name="abtfr[css_proxy_exclude]"
+                    link={linkOptionState('cssProxyExclude')}
+                    description={
+                      <span>
+                        Enter (parts of) external stylesheets to exclude from
+                        the proxy. One stylesheet per line.
+                      </span>
+                    }
+                  ></SettingTextarea>
+                  <SettingTextarea
+                    header="Proxy Preload List"
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      fontSize: 11
+                    }}
+                    name="abtfr[css_proxy_preload]"
+                    link={linkOptionState('cssProxyPreload')}
+                    description={
+                      <span>
+                        Enter the exact url or JSON config object of external
+                        stylesheets to preload for "script injected" async
+                        stylesheet capture, e.g.{' '}
+                        <code>
+                          http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css
+                        </code>
+                        . This setting will enable the proxy to load the cache
+                        url instead of the WordPress PHP proxy url. One url or
+                        JSON object per line.
+                      </span>
+                    }
+                  ></SettingTextarea>
+                </SettingInnerTable>
               ) : null}
               <tr valign="top">
                 <th scope="row">&nbsp;</th>
