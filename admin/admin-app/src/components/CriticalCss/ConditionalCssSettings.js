@@ -147,127 +147,129 @@ const ConditionalCssSettings = () => {
           />
         )}
       </li>
-      {conditionalCss.conditionalValues && Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
-        <CriticalCssEditor
-          key={file}
-          className="edit-conditional-critical-css"
-          link={{
-            value: data.css,
-            set: value =>
-              setConditionalCss({
-                ...conditionalCss,
-                conditionalValues: {
-                  ...conditionalCss.conditionalValues,
-                  ...{ [file]: { ...data, ...{ css: value } } }
-                }
-              })
-          }}
-          itemTitle="TODO"
-          title={data.config.name}
-          name={`abtfr[conditional_css][${file}][css]`}
-          advancedEditor={getOption('csseditor')}
-          config={data.config}
-        >
-          <table className="form-table">
-            <tbody>
-              <SettingCheckbox
-                name={`abtfr[conditional_css][${file}][appendToAny]`}
-                header={__('Append to any', 'abtfr')}
-                link={{
-                  value: data.config.appendToAny || false,
-                  set: value =>
-                    setConditionalCss({
-                      ...conditionalCss,
-                      conditionalValues: {
-                        ...conditionalCss.conditionalValues,
-                        ...{
-                          [file]: {
-                            ...data,
-                            ...{
-                              config: {
-                                ...data.config,
-                                ...{ appendToAny: value }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    })
-                }}
-                label={__('Enabled', 'abtfr')}
-              />
-              <SettingCheckbox
-                name={`abtfr[conditional_css][${file}][prependToAny]`}
-                header={__('Prepend to any', 'abtfr')}
-                link={{
-                  value: data.config.prependToAny || false,
-                  set: value =>
-                    setConditionalCss({
-                      ...conditionalCss,
-                      conditionalValues: {
-                        ...conditionalCss.conditionalValues,
-                        ...{
-                          [file]: {
-                            ...data,
-                            ...{
-                              config: {
-                                ...data.config,
-                                ...{ prependToAny: value }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    })
-                }}
-                label={__('Enabled', 'abtfr')}
-              />
-            </tbody>
-          </table>
-          <ConditionalSelect
-            name={`abtfr[conditional_css][${file}][conditions]`}
-            conditionalOptions={conditionalCss.conditionalOptions}
+      {conditionalCss.conditionalValues &&
+        Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
+          <CriticalCssEditor
+            key={file}
+            className="edit-conditional-critical-css"
             link={{
-              value: data.conditions,
+              value: data.css,
               set: value =>
                 setConditionalCss({
                   ...conditionalCss,
                   conditionalValues: {
                     ...conditionalCss.conditionalValues,
-                    ...{ [file]: { ...data, ...{ conditions: value } } }
+                    ...{ [file]: { ...data, ...{ css: value } } }
                   }
                 })
             }}
-          />
-          <div style={{ marginTop: '5px', marginBottom: '0px' }}>
-            The configuration is stored in{' '}
-            <code>
-              {conditionalCss.conditionalPath.replace(homeUrl, '')}
-              <strong>{file}</strong>
-            </code>{' '}
-            and is editable via FTP.
-            <p style={{ marginTop: '7px', marginBottom: '0px' }}>
-              You can append or prepend relative links to CSS files using{' '}
-              <code>@append</code> and <code>@prepend</code>, e.g.{' '}
-              <em>../../style.css</em>. Use <code>@matchType</code> (any or all)
-              to match any or all condtions.
-            </p>
-          </div>
-          <div
-            style={{
-              height: '10px',
-              clear: 'both',
-              overflow: 'hidden',
-              fontSize: '1px'
-            }}
+            itemTitle="TODO"
+            title={data.config.name}
+            name={`abtfr[conditional_css][${file}][css]`}
+            advancedEditor={getOption('csseditor')}
+            config={data.config}
+            onDeleteClick={handleDelete.bind(this, file)}
           >
-            &nbsp;
-          </div>
-          <SubmitButton type={['primary', 'large']} name="is_submit">
-            {__('Save', 'abtfr')}
-          </SubmitButton>
-        </CriticalCssEditor>
-      ))}
+            <table className="form-table">
+              <tbody>
+                <SettingCheckbox
+                  name={`abtfr[conditional_css][${file}][appendToAny]`}
+                  header={__('Append to any', 'abtfr')}
+                  link={{
+                    value: data.config.appendToAny || false,
+                    set: value =>
+                      setConditionalCss({
+                        ...conditionalCss,
+                        conditionalValues: {
+                          ...conditionalCss.conditionalValues,
+                          ...{
+                            [file]: {
+                              ...data,
+                              ...{
+                                config: {
+                                  ...data.config,
+                                  ...{ appendToAny: value }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      })
+                  }}
+                  label={__('Enabled', 'abtfr')}
+                />
+                <SettingCheckbox
+                  name={`abtfr[conditional_css][${file}][prependToAny]`}
+                  header={__('Prepend to any', 'abtfr')}
+                  link={{
+                    value: data.config.prependToAny || false,
+                    set: value =>
+                      setConditionalCss({
+                        ...conditionalCss,
+                        conditionalValues: {
+                          ...conditionalCss.conditionalValues,
+                          ...{
+                            [file]: {
+                              ...data,
+                              ...{
+                                config: {
+                                  ...data.config,
+                                  ...{ prependToAny: value }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      })
+                  }}
+                  label={__('Enabled', 'abtfr')}
+                />
+              </tbody>
+            </table>
+            <ConditionalSelect
+              name={`abtfr[conditional_css][${file}][conditions]`}
+              conditionalOptions={conditionalCss.conditionalOptions}
+              link={{
+                value: data.conditions,
+                set: value =>
+                  setConditionalCss({
+                    ...conditionalCss,
+                    conditionalValues: {
+                      ...conditionalCss.conditionalValues,
+                      ...{ [file]: { ...data, ...{ conditions: value } } }
+                    }
+                  })
+              }}
+            />
+            <div style={{ marginTop: '5px', marginBottom: '0px' }}>
+              The configuration is stored in{' '}
+              <code>
+                {conditionalCss.conditionalPath.replace(homeUrl, '')}
+                <strong>{file}</strong>
+              </code>{' '}
+              and is editable via FTP.
+              <p style={{ marginTop: '7px', marginBottom: '0px' }}>
+                You can append or prepend relative links to CSS files using{' '}
+                <code>@append</code> and <code>@prepend</code>, e.g.{' '}
+                <em>../../style.css</em>. Use <code>@matchType</code> (any or
+                all) to match any or all condtions.
+              </p>
+            </div>
+            <div
+              style={{
+                height: '10px',
+                clear: 'both',
+                overflow: 'hidden',
+                fontSize: '1px'
+              }}
+            >
+              &nbsp;
+            </div>
+            <SubmitButton type={['primary', 'large']} name="is_submit">
+              {__('Save', 'abtfr')}
+            </SubmitButton>
+          </CriticalCssEditor>
+        ))}
     </LoadingWrapper>
   );
 };
