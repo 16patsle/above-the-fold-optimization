@@ -66,8 +66,6 @@ const CriticalCssView = () => {
       <form
         method="post"
         action={adminUrl + 'admin-post.php?action=abtfr_criticalcss_update'}
-        data-addccss={adminUrl + 'admin-post.php?action=abtfr_add_ccss'}
-        data-delccss={adminUrl + 'admin-post.php?action=abtfr_delete_ccss'}
         className="clearfix"
       >
         <div dangerouslySetInnerHTML={{ __html: abtfrAdminNonce }}></div>
