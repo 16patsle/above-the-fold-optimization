@@ -269,24 +269,7 @@ module.exports = function(grunt) {
                         'admin/js/jquery.debounce.js',
                         'admin/js/admincp.js',
                         'admin/js/admincp.build-tool.js',
-                        'admin/js/admincp.add-conditional.js',
-                        'admin/js/admincp.criticalcss-editor.js',
                         'node_modules/selectize/dist/js/standalone/selectize.min.js'
-                    ],
-
-                    // admincp html
-                    'admin/js/admincp-html.min.js': [
-                        'admin/js/admincp-html.js'
-                    ],
-
-                    // admincp PWA
-                    'admin/js/admincp-pwa.min.js': [
-                        'admin/js/admincp-pwa.js'
-                    ],
-
-                    // admincp HTTP2
-                    'admin/js/admincp-http2.min.js': [
-                        'admin/js/admincp-http2.js'
                     ],
 
                     // Codemirror
@@ -369,17 +352,8 @@ module.exports = function(grunt) {
                     processImport: true
                 },
                 files: {
-                    'admin/css/admincp.min.css': [
-                        'admin/css/admincp.css',
-                        'admin/css/admincp-criticalcss.css',
-                        'admin/css/admincp-mobile.css',
-                        'node_modules/selectize/dist/css/selectize.default.css'
-                    ],
                     'admin/css/admincp-global.min.css': [
                         'admin/css/admincp-global.css'
-                    ],
-                    'admin/css/admincp-jsoneditor.min.css': [
-                        'admin/css/admincp-jsoneditor.css'
                     ],
                     'admin/css/codemirror.min.css': [
                         'node_modules/codemirror/lib/codemirror.css',
