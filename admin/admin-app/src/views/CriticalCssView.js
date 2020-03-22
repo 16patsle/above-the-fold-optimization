@@ -59,7 +59,7 @@ const CriticalCssView = () => {
         >
           Live Editor
         </a>
-        <a href={adminUrl + 'admin.php?page=abtfr-build-tool'}>
+        <a href={adminUrl + 'admin.php?page=abtfr#/build-tool'}>
           Gulp.js Critical CSS Generator
         </a>
       </nav>

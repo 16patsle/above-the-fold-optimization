@@ -14,6 +14,7 @@ import Http2View from './views/Http2View';
 import ProxyView from './views/ProxyView';
 import SettingsView from './views/SettingsView';
 import MonitorView from './views/MonitorView';
+import BuildToolView from './views/BuildToolView';
 
 class App extends Component {
   render() {
@@ -30,6 +31,8 @@ class App extends Component {
         <Route path="/proxy" component={ProxyView} />
         <Route path="/settings" component={SettingsView} />
         <Route path="/monitor" component={MonitorView} />
+        
+        <Route path="/build-tool" component={BuildToolView}/>
       </div>
     );
   }
