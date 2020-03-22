@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
-import { adminUrl } from '../../utils/globalVars';
 import ConditionalSelect from './ConditionalSelect';
 
 const AddConditional = props => {
@@ -10,7 +9,7 @@ const AddConditional = props => {
 
   const nameRef = React.createRef();
 
-  const handleClick = async () => {
+  const handleClick = () => {
     if (name === '') {
       alert(__('Enter a name (admin reference)...', 'abtfr'));
       nameRef.focus();
@@ -23,23 +22,13 @@ const AddConditional = props => {
       return;
     }
 
-    const formData = new FormData();
-
-    formData.append('name', name);
-    formData.append('conditions', conditions);
-    formData.append('_wpnonce', document.querySelector('#_wpnonce').value);
-
     setLoading(true);
 
-    await fetch(adminUrl + 'admin-post.php?action=abtfr_add_ccss', {
-      method: 'POST',
-      body: formData
-    });
-
-    setLoading(false);
-
-    if (props.revalidate) {
-      props.revalidate();
+    if (props.onAddClick) {
+      props.onAddClick(
+        name,
+        conditions.map(val => val.value).join('|==abtfr==|')
+      );
     }
   };
 

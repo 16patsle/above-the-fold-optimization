@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import useSettings, { useJSON } from '../../utils/useSettings';
-import { homeUrl } from '../../utils/globalVars';
+import { homeUrl, abtfrRestNonce } from '../../utils/globalVars';
 import { getJSON } from '../../utils/getSettings';
 import LoadingWrapper from '../LoadingWrapper';
 import SettingCheckbox from '../SettingCheckbox';
@@ -16,16 +16,97 @@ const ConditionalCssSettings = () => {
     options: conditionalCss,
     setOptions: setConditionalCss,
     shouldRender: shouldRenderConditional,
-    error: conditionalCssError,
-    revalidate
-  } = useJSON(
-    'conditionalcss',
-    query => {
-      return getJSON(query);
-    }
-  );
+    error: conditionalCssError
+  } = useJSON('conditionalcss', query => {
+    return getJSON(query);
+  });
 
   const [showAddConditional, setShowAddConditional] = useState(false);
+
+  const handleDelete = async filename => {
+    if (
+      confirm(
+        __(
+          'Are you sure you want to delete this conditional Critical CSS?',
+          'abtfr'
+        )
+      )
+    ) {
+      const conditionalCssOld = conditionalCss;
+
+      setConditionalCss({
+        ...conditionalCss,
+        conditionalValues: Object.fromEntries(
+          Object.entries(conditionalCss.conditionalValues).filter(([key]) => {
+            return key !== filename;
+          })
+        )
+      });
+
+      const result = await fetch(
+        `${homeUrl}/wp-json/abtfr/v1/conditionalcss/${filename}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'X-WP-Nonce': abtfrRestNonce
+          }
+        }
+      );
+
+      if ((await result.json()) === true) {
+        return;
+      } else {
+        setConditionalCss(conditionalCssOld);
+      }
+    }
+  };
+
+  const handleAdd = async (name, conditions) => {
+    const conditionalCssOld = conditionalCss;
+
+    const filename =
+      name
+        .toLowerCase()
+        .replace(/\s+/is, '-')
+        .replace(/[^a-z0-9-]+/is, '')
+        .trim() + '.css';
+
+    setConditionalCss({
+      ...conditionalCss,
+      conditionalValues: {
+        ...conditionalCss.conditionalValues,
+        [filename]: {
+          css: '',
+          conditions,
+          config: {
+            weight: 1,
+            name
+          }
+        }
+      }
+    });
+
+    const formData = new FormData();
+
+    formData.append('name', name);
+    formData.append('conditions', conditions);
+
+    const result = await fetch(homeUrl + '/wp-json/abtfr/v1/conditionalcss', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-WP-Nonce': abtfrRestNonce
+      }
+    });
+
+    if ((await result.json()) === true) {
+      setShowAddConditional(false);
+      // stop changing state in add conditional (isLoading to false)
+      return;
+    } else {
+      setConditionalCss(conditionalCssOld);
+    }
+  };
 
   return (
     <LoadingWrapper
@@ -61,7 +142,7 @@ const ConditionalCssSettings = () => {
         </p>
         {showAddConditional && (
           <AddConditional
-            revalidate={revalidate}
+            onAddClick={handleAdd}
             conditionalOptions={conditionalCss.conditionalOptions}
           />
         )}

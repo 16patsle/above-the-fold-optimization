@@ -57,7 +57,7 @@ const CriticalCssEditor = props => {
                 type="button"
                 className="item-delete button button-small button-del"
                 title="Delete conditional Critical CSS"
-                data-confirm="<?php echo htmlentities(__('Are you sure you want to delete this conditional Critical CSS?', 'abtfr'), ENT_COMPAT, 'utf-8'); ?>"
+                onClick={props.onDeleteClick}
               >
                 ✗
               </button>
