@@ -17,6 +17,7 @@ class SettingTextInput extends Component {
             title={this.props.title}
             placeholder={this.props.placeholder}
             disabled={this.props.disabled}
+            pattern={this.props.pattern}
           />
           <p className="description">{this.props.description}</p>
           {this.props.children}

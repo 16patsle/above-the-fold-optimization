@@ -31,8 +31,8 @@ class App extends Component {
         <Route path="/proxy" component={ProxyView} />
         <Route path="/settings" component={SettingsView} />
         <Route path="/monitor" component={MonitorView} />
-        
-        <Route path="/build-tool" component={BuildToolView}/>
+
+        <Route path="/build-tool" component={BuildToolView} />
       </div>
     );
   }

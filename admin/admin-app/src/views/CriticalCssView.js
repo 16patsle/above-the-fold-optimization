@@ -50,17 +50,17 @@ const CriticalCssView = () => {
           href={adminUrl + 'admin.php?page=abtfr-criticalcss-test'}
           className="f"
         >
-          Quality Test (Split View)
+          {__('Quality Test (Split View)', 'abtfr')}
         </a>
         <a
           href={criticalCssEditorUrl + '#editor'}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Live Editor
+          {__('Live Editor', 'abtfr')}
         </a>
         <a href={adminUrl + 'admin.php?page=abtfr#/build-tool'}>
-          Gulp.js Critical CSS Generator
+          {__('Gulp.js Critical CSS Generator', 'abtfr')}
         </a>
       </nav>
       <form

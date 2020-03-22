@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+const optionRenderer = option => (
+  <option value={option.value} key={option.value} disabled={option.disabled}>
+    {option.name}
+  </option>
+);
+
 class SettingSelect extends Component {
   render() {
     return (
@@ -14,11 +20,16 @@ class SettingSelect extends Component {
             onChange={e => this.props.link.set(e.target.value)}
           >
             {this.props.options.map(option => {
-              return (
-                <option value={option.value} key={option.value}>
-                  {option.name}
-                </option>
-              );
+              if (option.options) {
+                // Option is an optgroup
+                return (
+                  <optgroup key={option.name} label={option.name}>
+                    {option.options.map(optionRenderer)}
+                  </optgroup>
+                );
+              }
+
+              return optionRenderer(option);
             })}
           </select>
           <p className="description">{this.props.description}</p>
