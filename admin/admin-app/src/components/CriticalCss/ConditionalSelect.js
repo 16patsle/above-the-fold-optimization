@@ -73,12 +73,17 @@ const ConditionalSelect = props => {
             ({ value }) =>
               value.split(':').length > 1 && value.split(':')[0] === type
           );
-          if (typeObject) {
-            const split = typeObject.value.split(':');
-            label = split[0] + ': ' + id;
-            className = typeObject.class;
+          if (id) {
+            if (typeObject) {
+              const split = typeObject.value.split(':');
+              label = split[0] + ': ' + id;
+              className = typeObject.class;
+            } else {
+              label = id.replace('is_single()', 'Post: ');
+              className = 'post';
+            }
           } else {
-            label = id.replace('is_single()', 'Post: ');
+            label = data.value;
             className = 'post';
           }
         }
