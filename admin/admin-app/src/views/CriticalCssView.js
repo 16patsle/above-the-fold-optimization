@@ -20,6 +20,7 @@ import Info from '../components/Info';
 import PageSelect from '../components/PageSelect';
 import CriticalCssSettings from '../components/CriticalCss/CriticalCssSettings';
 import ConditionalCssSettings from '../components/CriticalCss/ConditionalCssSettings';
+import './CriticalCssView.css';
 
 SyntaxHighlighter.registerLanguage('php', php);
 

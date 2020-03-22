@@ -1,0 +1,8 @@
+.edit-conditional-critical-css .add-form td {
+  padding: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.edit-conditional-critical-css .add-form td:first {
+  padding-top: 0;
+}

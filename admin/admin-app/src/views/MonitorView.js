@@ -14,6 +14,7 @@ import {
 import LoadingWrapper from '../components/LoadingWrapper';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
+import './MonitorView.css';
 
 const sllInstalled = new URL(homeUrl).protocol === 'https:';
 

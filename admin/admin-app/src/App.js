@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 import './App-global.css';
+import './App-mobile.css';
 import TabsView from './views/TabsView';
 import IntroView from './views/IntroView';
 import HtmlView from './views/HtmlView';

@@ -1,0 +1,29 @@
+nav div.ref {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+}
+
+nav div.ref a.logo {
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: black;
+  font-size: 18px;
+  line-height: 20px;
+  margin-top: 4px;
+}
+
+nav div.ref .links {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+@media screen and (max-width: 1030px) {
+  nav div.ref {
+    margin-top: -40px;
+  }
+}

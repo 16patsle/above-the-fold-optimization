@@ -1,0 +1,38 @@
+.warning_red {
+  background: #fff8f8;
+  border: solid 2px red;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.ok_green {
+  background: #f6fff9;
+  border: solid 2px #079c2d;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.info_yellow {
+  background: #fefbf0;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: solid 1px #ffdf82;
+}
+
+.info_seagreen {
+  background: #f1fffe;
+  border: solid 1px #019e97;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.info_seagreen a {
+  color: #019e97;
+}

@@ -1,0 +1,7 @@
+.uptime table.inside th {
+  text-align: left;
+}
+
+.uptime table.inside thead th {
+  border-bottom: solid 1px #efefef;
+}

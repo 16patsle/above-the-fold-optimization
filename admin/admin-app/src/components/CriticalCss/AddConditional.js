@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import ConditionalSelect from './ConditionalSelect';
+import './AddConditional.css';
 
 const AddConditional = props => {
   const [name, setName] = useState('');

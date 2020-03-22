@@ -7,7 +7,6 @@ import LoadingWrapper from '../LoadingWrapper';
 import Info from '../Info';
 import SettingCheckbox from '../SettingCheckbox';
 import SubmitButton from '../SubmitButton';
-import './CriticalCssSettings.css';
 import CriticalCssEditor from './CriticalCssEditor';
 
 const CriticalCssSettings = () => {

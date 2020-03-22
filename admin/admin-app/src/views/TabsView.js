@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
 import Tabs from '../components/Tabs';
+import './TabsView.css';
 
 class TabsView extends Component {
   render() {
