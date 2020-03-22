@@ -4,6 +4,7 @@ import { lgCode, utmString } from '../../utils/globalVars';
 import CssEditor from '../CssEditor';
 import sizeFormat from '../../utils/sizeFormat';
 import byteCount from '../../utils/byteCount';
+import './CriticalCssEditor.css';
 
 const CriticalCssEditor = props => {
   const [editorLoaded, setEditorLoaded] = useState(false);

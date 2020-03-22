@@ -74,12 +74,12 @@
   line-height: 1.4 !important;
 }
 
-.wp-core-ui .button-del {
+.wp-core-ui .button.button-del {
   color: #ff0000;
 }
 
-.wp-core-ui .button-del:focus,
-.wp-core-ui .button-del:hover {
+.wp-core-ui .button.button-del:focus,
+.wp-core-ui .button.button-del:hover {
   background: #ff0000;
   border-color: #ab0000;
   color: #ffffff;

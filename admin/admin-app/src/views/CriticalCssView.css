@@ -1,57 +1,5 @@
-.CodeMirror {
-  border: 1px solid #eeeeee;
-  font-size: 10px !important;
-  width: 100%;
-  height: 150px !important;
-  margin-bottom: 5px;
-}
-
-.CodeMirror.large {
-  border: 1px solid #eeeeee;
-  font-size: 14px !important;
-  width: 100%;
-  height: 500px !important;
-}
-
-.ccss_editor .abtfrcss {
-  width: 100%;
-  height: 150px;
-  font-size: 11px;
-  margin-bottom: 5px;
-}
-
-/**
- * Critical CSS editor
- */
-
 .form-table td.criticalcsstable {
   padding: 0;
-}
-
-.criticalcsstable .item-edit {
-  position: absolute;
-  right: -20px;
-  top: 0;
-  display: block;
-  width: 30px;
-  height: 40px;
-  margin-right: 0 !important;
-  text-indent: 100%;
-  outline: 0;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.ui-widget-overlay {
-  opacity: 0.5 !important; /* Make sure to change both of these, as IE only sees the second one */
-  filter: alpha(opacity=50) !important;
-  background-color: rgb(50, 50, 50) !important; /* This will make it darker */
-}
-
-.abtfr-criticalcss .add-new-menu-action {
-  display: inline-block;
-  margin-right: 3px;
-  vertical-align: middle;
 }
 
 .abtfr-criticalcss .meta-sep,
@@ -68,96 +16,8 @@
   margin-top: 6px;
 }
 
-.abtfr-criticalcss .list-wrap {
-  display: none;
-  clear: both;
-  margin-bottom: 10px;
-}
-
 .abtfr-criticalcss .postbox p.submit {
   margin-bottom: 0;
-}
-
-/* Listings */
-.abtfr-criticalcss .list li {
-  display: none;
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-.abtfr-criticalcss .list li .menu-item-title {
-  cursor: pointer;
-  display: block;
-}
-
-.abtfr-criticalcss .list li .menu-item-title input {
-  margin-right: 3px;
-  margin-top: -3px;
-}
-
-.abtfr-criticalcss .item-delete {
-  position: absolute;
-  right: 12px;
-  top: 7px;
-  display: block;
-  margin-right: 0 !important;
-  text-indent: 100%;
-  outline: none;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.abtfr-criticalcss .item-edit {
-  position: absolute;
-  right: -20px;
-  top: 0;
-  display: block;
-  width: 30px;
-  height: 40px;
-  margin-right: 0 !important;
-  text-indent: 100%;
-  outline: none;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.abtfr-criticalcss .item-edit::before {
-  margin-top: 10px;
-  margin-left: 4px;
-  width: 20px;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  text-indent: -1px; /* account for the dashicon alignment */
-}
-
-.abtfr-criticalcss .item-edit:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.abtfr-criticalcss .item-edit:focus::before {
-  -webkit-box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
-  box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
-}
-
-/* Major/minor publishing actions (classes) */
-.abtfr-criticalcss .major-publishing-actions {
-  clear: both;
-  padding: 7px 0 6px;
-}
-
-.abtfr-criticalcss .major-publishing-actions .publishing-action {
-  text-align: right;
-  float: right;
-}
-
-.abtfr-criticalcss .blank-slate .menu-settings {
-  display: none;
-}
-
-.abtfr-criticalcss .delete-action {
-  float: left;
-  margin-top: 2px;
 }
 
 .abtfr-criticalcss .submitbox .submitcancel {
@@ -172,78 +32,7 @@
   color: #ffffff;
 }
 
-.abtfr-criticalcss .major-publishing-actions .form-invalid {
-  padding-left: 4px;
-  margin-left: -4px;
-}
-
-/* Back-compat for nav-menus screen */
-.abtfr-criticalcss .metabox-holder h3 {
-  padding: 10px 10px 11px 14px;
-  line-height: 21px;
-}
-
-.abtfr-criticalcss .item-edit {
-  background: none;
-  border: none;
-  padding: 0;
-}
-
-.abtfr-criticalcss .item-edit:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.abtfr-criticalcss .item-edit:focus::before {
-  -webkit-box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
-  box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
-}
-.abtfr-criticalcss .item-edit::before {
-  right: 0;
-  content: '\f140';
-  border: none;
-  background: none;
-  font: normal 20px/1 dashicons;
-  speak: none;
-  display: block;
-  padding: 0;
-  text-indent: 0;
-  text-align: center;
-  position: relative;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-decoration: none !important;
-}
-.abtfr-criticalcss .item-edit::before {
-  right: 0;
-  content: '\f140';
-  border: none;
-  background: 0 0;
-  font: normal 20px/1 'dashicons', sans-serif;
-  speak: none;
-  display: block;
-  padding: 0;
-  text-indent: 0;
-  text-align: center;
-  position: relative;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-decoration: none !important;
-  margin-top: 10px;
-  margin-bottom: 8px;
-  margin-left: 4px;
-  width: 20px;
-  border-radius: 50%;
-}
-.abtfr-criticalcss .menu-item-edit-active .item-edit::before {
-  content: '\f142';
-}
-
 @media screen and (max-width: 782px) {
-  .abtfr-criticalcss .item-controls .item-type {
-    margin-top: 2px;
-  }
-
   .abtfr-criticalcss .customlinkdiv .howto input {
     width: 65%;
   }
@@ -255,25 +44,6 @@
   .abtfr-criticalcss .menu-name-label.howto span {
     margin-top: 13px;
   }
-
-  .abtfr-criticalcss .major-publishing-actions .publishing-action {
-    margin-top: 6px;
-  }
-
-  .abtfr-criticalcss .delete-action {
-    font-size: 14px;
-    line-height: 50px;
-    margin-top: 12px;
-  }
-}
-
-.abtfr-criticalcss .item-edit:focus::before {
-  box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
-}
-
-.abtfr-criticalcss .react-monaco-editor-container {
-  border: 1px solid #7e8993;
-  box-sizing: border-box;
 }
 
 .criticalcss-buttons {
