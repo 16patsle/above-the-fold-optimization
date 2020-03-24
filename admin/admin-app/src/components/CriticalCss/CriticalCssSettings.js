@@ -77,8 +77,8 @@ const CriticalCssSettings = () => {
             />
           </tbody>
         </table>
-        <div style={{ marginTop: '1em' }}>
-          {getOption('http2PushCriticalcss') && (
+        {getOption('http2PushCriticalcss') && (
+          <div style={{ marginTop: '1em' }}>
             <Info
               color="yellow"
               style={{
@@ -90,8 +90,8 @@ const CriticalCssSettings = () => {
               <a href={`${adminUrl}admin.php?page=abtfr#/http2`}>HTTP/2-tab</a>{' '}
               for more information.
             </Info>
-          )}
-        </div>
+          </div>
+        )}
         <hr />
         <SubmitButton type={['primary', 'large']} name="is_submit">
           {__('Save', 'abtfr')}
