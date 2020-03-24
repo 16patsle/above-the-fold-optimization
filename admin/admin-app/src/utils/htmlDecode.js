@@ -10,7 +10,7 @@ export default function htmlDecode(text) {
   if (typeof text !== 'string') {
     return text;
   }
-  var map = {
+  const map = {
     '&amp;': '&',
     '&lt;': '<',
     '&gt;': '>',
