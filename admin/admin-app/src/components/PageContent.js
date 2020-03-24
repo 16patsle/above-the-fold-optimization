@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class PageContent extends Component {
   render() {
@@ -21,5 +22,10 @@ class PageContent extends Component {
     );
   }
 }
+
+PageContent.propTypes = {
+  header: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+  children: PropTypes.node.isRequired
+};
 
 export default PageContent;

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import checkPropLinkState from '../utils/checkPropLinkState';
 
 class SettingRadio extends Component {
   render() {
@@ -29,5 +31,21 @@ class SettingRadio extends Component {
     );
   }
 }
+
+SettingRadio.propTypes = {
+  header: PropTypes.string,
+  radios: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
+        .isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired
+    })
+  ).isRequired,
+  name: PropTypes.string,
+  link: checkPropLinkState,
+  description: PropTypes.node,
+  children: PropTypes.node
+};
 
 export default SettingRadio;

@@ -228,7 +228,8 @@ const ConditionalCssSettings = () => {
             </table>
             <ConditionalSelect
               name={`abtfr[conditional_css][${file}][conditions]`}
-              conditionalOptions={conditionalCss.conditionalOptions}
+              conditionalOptionValues={conditionalCss.conditionalOptions[0]}
+              conditionalOptionGroups={conditionalCss.conditionalOptions[1]}
               link={{
                 value: data.conditions,
                 set: value =>

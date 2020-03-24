@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 
 class SearchReplaceExample extends Component {
+  static defaultProps = {
+    showString: __('show string', 'abtfr'),
+    showRegex: __('show regular expression', 'abtfr')
+  };
+
   constructor(props) {
     super(props);
 
-    this.showString = this.props.showString || __('show string', 'abtfr');
-    this.showRegex =
-      this.props.showRegex || __('show regular expression', 'abtfr');
+    this.showString = this.props.showString;
+    this.showRegex = this.props.showRegex;
 
     this.state = {
       showLinkContent: this.showRegex,
@@ -59,5 +64,15 @@ class SearchReplaceExample extends Component {
     );
   }
 }
+
+SearchReplaceExample.propTypes = {
+  showString: PropTypes.string,
+  showRegex: PropTypes.string,
+  title: PropTypes.string,
+  children: PropTypes.shape({
+    string: PropTypes.string,
+    regex: PropTypes.string
+  }).isRequired
+};
 
 export default SearchReplaceExample;

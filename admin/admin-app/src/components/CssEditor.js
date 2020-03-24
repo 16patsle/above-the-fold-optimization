@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MonacoEditor from 'react-monaco-editor';
+import checkPropLinkState from '../utils/checkPropLinkState';
 
 class CssEditor extends Component {
   constructor(props) {
@@ -28,5 +30,10 @@ class CssEditor extends Component {
     );
   }
 }
+
+CssEditor.propTypes = {
+  link: checkPropLinkState,
+  editorDidMount: PropTypes.func
+};
 
 export default CssEditor;

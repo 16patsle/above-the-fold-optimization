@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { adminUrl, adminTabs } from '../utils/globalVars';
 
 class Tabs extends Component {
@@ -26,5 +27,9 @@ class Tabs extends Component {
     return tabElements;
   }
 }
+
+Tabs.propTypes = {
+  selected: PropTypes.string.isRequired
+};
 
 export default Tabs;

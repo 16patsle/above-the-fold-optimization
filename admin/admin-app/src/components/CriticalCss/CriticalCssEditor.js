@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import checkPropLinkState from '../../utils/checkPropLinkState';
 import { lgCode, utmString } from '../../utils/globalVars';
 import CssEditor from '../CssEditor';
 import sizeFormat from '../../utils/sizeFormat';
@@ -150,6 +152,19 @@ const CriticalCssEditor = props => {
       </div>
     </li>
   );
+};
+
+CriticalCssEditor.propTypes = {
+  itemTitle: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  link: checkPropLinkState,
+  config: PropTypes.shape({
+    weight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  }),
+  onDeleteClick: PropTypes.func,
+  className: PropTypes.string,
+  advancedEditor: PropTypes.bool,
+  children: PropTypes.node
 };
 
 export default CriticalCssEditor;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 
 class ApiExample extends Component {
@@ -38,5 +39,10 @@ class ApiExample extends Component {
     );
   }
 }
+
+ApiExample.propTypes = {
+  description: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
+};
 
 export default ApiExample;

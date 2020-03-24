@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 import JSONEditor from 'jsoneditor';
 import 'jsoneditor/dist/jsoneditor.css';
 import './JsonEditor.css';
 import JsonEditorIconFix from './JsonEditorIconFix';
+import checkPropLinkState from '../utils/checkPropLinkState';
 
 class JsonEditor extends Component {
+  static defaultProps = {
+    mode: 'code',
+    objectType: 'array'
+  };
+
   constructor(props) {
     super(props);
 
@@ -23,7 +30,7 @@ class JsonEditor extends Component {
 
       const options = {
         name: this.props.name,
-        mode: this.props.mode || 'code',
+        mode: this.props.mode,
         modes: ['code', 'tree'], // allowed modes
         onError: this.onError.bind(this),
         onChange: this.onChange.bind(this),
@@ -196,5 +203,15 @@ class JsonEditor extends Component {
     );
   }
 }
+
+JsonEditor.propTypes = {
+  name: PropTypes.string,
+  mode: PropTypes.oneOf(['tree', 'view', 'form', 'code', 'text', 'preview']),
+  compact: PropTypes.oneOf(['tree', 'view', 'form', 'code', 'text', 'preview']),
+  schema: PropTypes.object,
+  objectType: PropTypes.oneOf(['object', 'array']),
+  maxLines: PropTypes.number,
+  link: checkPropLinkState
+};
 
 export default JsonEditor;

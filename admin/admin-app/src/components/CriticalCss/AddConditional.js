@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 import ConditionalSelect from './ConditionalSelect';
 import './AddConditional.css';
@@ -98,6 +99,26 @@ const AddConditional = props => {
       </div>
     </div>
   );
+};
+
+AddConditional.propTypes = {
+  onAddClick: PropTypes.func,
+  conditionalOptions: PropTypes.exact({
+    0: PropTypes.arrayOf(
+      PropTypes.shape({
+        class: PropTypes.string,
+        label: PropTypes.string,
+        optgroup: PropTypes.string,
+        value: PropTypes.string
+      })
+    ),
+    1: PropTypes.objectOf(
+      PropTypes.shape({
+        class: PropTypes.string,
+        label: PropTypes.string
+      })
+    )
+  })
 };
 
 export default AddConditional;

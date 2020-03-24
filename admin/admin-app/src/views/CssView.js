@@ -120,13 +120,13 @@ const CssView = () => {
                   {getOption('loadcssEnhanced') ? (
                     <SettingNumberInput
                       header={__('CSS render delay', 'abtfr')}
-                      min="0"
-                      max="3000"
-                      step="1"
+                      min={0}
+                      max={3000}
+                      step={1}
                       name="abtfr[cssdelivery_renderdelay]"
                       className="enchanceloadcssoptions"
                       link={linkOptionState('cssdeliveryRenderdelay')}
-                      placeholder="0 ms"
+                      placeholder={0}
                     >
                       <p>
                         <span

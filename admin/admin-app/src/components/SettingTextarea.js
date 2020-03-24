@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import checkPropLinkState from '../utils/checkPropLinkState';
 
 class SettingTextarea extends Component {
+  static defaultProps = {
+    header: ' '
+  };
+
   render() {
     return (
       <tr valign="top">
-        <th scope="row">{this.props.header || ' '}</th>
+        <th scope="row">{this.props.header}</th>
         <td style={{ paddingTop: '0px' }}>
           <h5 className="h">{this.props.title}</h5>
           <textarea
@@ -23,5 +29,18 @@ class SettingTextarea extends Component {
     );
   }
 }
+
+SettingTextarea.propTypes = {
+  header: PropTypes.string,
+  title: PropTypes.string,
+  style: PropTypes.object,
+  textareaClass: PropTypes.string,
+  name: PropTypes.string,
+  link: checkPropLinkState,
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool,
+  description: PropTypes.node,
+  children: PropTypes.node
+};
 
 export default SettingTextarea;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SettingInnerTable extends Component {
   render() {
@@ -24,5 +25,12 @@ class SettingInnerTable extends Component {
     );
   }
 }
+
+SettingInnerTable.propTypes = {
+  className: PropTypes.string,
+  style: PropTypes.object,
+  header: PropTypes.string,
+  children: PropTypes.node.isRequired
+};
 
 export default SettingInnerTable;

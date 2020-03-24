@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import AsyncSelect from 'react-select/async';
 import { __ } from '@wordpress/i18n';
+import checkPropLinkState from '../utils/checkPropLinkState';
 
 const promiseOptions = async query => {
   const formData = new FormData();
@@ -75,7 +77,7 @@ const PageSelect = props => {
 
   return (
     <tr valign="top">
-      <th scope="row">{props.header || ' '}</th>
+      <th scope="row">{props.header}</th>
       <td>
         {select}
         <p className="description">{props.description}</p>
@@ -83,6 +85,28 @@ const PageSelect = props => {
       </td>
     </tr>
   );
+};
+
+PageSelect.defaultOptions = {
+  header: ' '
+};
+
+PageSelect.propTypes = {
+  style: PropTypes.object,
+  textareaClass: PropTypes.string,
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  link: checkPropLinkState,
+  defaultOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    })
+  ),
+  wrapper: PropTypes.bool,
+  header: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  description: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default PageSelect;

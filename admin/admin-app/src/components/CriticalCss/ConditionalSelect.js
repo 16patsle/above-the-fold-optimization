@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 import AsyncCreatableSelect from 'react-select/async-creatable';
+import checkPropLinkState from '../../utils/checkPropLinkState';
 import './ConditionalSelect.css';
 
 const promiseOptions = async query => {
@@ -33,9 +35,9 @@ const formatGroupLabel = data => {
 };
 
 const ConditionalSelect = props => {
-  const groupOptions = Object.entries(props.conditionalOptions[1]).map(
+  const groupOptions = Object.entries(props.conditionalOptionGroups).map(
     ([key, value]) => {
-      const options = props.conditionalOptions[0].filter(value => {
+      const options = props.conditionalOptionValues.filter(value => {
         return value.optgroup === key;
       });
       return { ...value, ...{ options } };
@@ -62,14 +64,14 @@ const ConditionalSelect = props => {
       if (!data.class) {
         const [type, id] = data.value.split(':');
 
-        let typeObject = props.conditionalOptions[0].find(
+        let typeObject = props.conditionalOptionValues.find(
           ({ value }) => value === data.value
         );
         if (typeObject) {
           label = typeObject.label;
           className = typeObject.class;
         } else {
-          typeObject = props.conditionalOptions[0].find(
+          typeObject = props.conditionalOptionValues.find(
             ({ value }) =>
               value.split(':').length > 1 && value.split(':')[0] === type
           );
@@ -146,6 +148,25 @@ const ConditionalSelect = props => {
       formatOptionLabel={formatOptionLabel}
     />
   );
+};
+
+ConditionalSelect.propTypes = {
+  conditionalOptionValues: PropTypes.arrayOf(
+    PropTypes.shape({
+      class: PropTypes.string,
+      label: PropTypes.string,
+      optgroup: PropTypes.string,
+      value: PropTypes.string
+    })
+  ).isRequired,
+  conditionalOptionGroups: PropTypes.objectOf(
+    PropTypes.shape({
+      class: PropTypes.string,
+      label: PropTypes.string
+    })
+  ).isRequired,
+  name: PropTypes.string,
+  link: checkPropLinkState
 };
 
 export default ConditionalSelect;

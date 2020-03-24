@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import checkPropLinkState from '../utils/checkPropLinkState';
 
 class SettingTextInput extends Component {
+  static defaultProps = {
+    header: ' ',
+    type: 'text'
+  };
+
   render() {
     return (
       <tr valign="top">
-        <th scope="row">{this.props.header || ' '}</th>
+        <th scope="row">{this.props.header}</th>
         <td>
           <input
-            type={this.props.type || 'text'}
+            type={this.props.type}
             style={this.props.style}
             className={this.props.textareaClass}
             name={this.props.name}
@@ -26,5 +33,21 @@ class SettingTextInput extends Component {
     );
   }
 }
+
+SettingTextInput.propTypes = {
+  header: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'url', 'email', 'password', 'search', 'tel']),
+  style: PropTypes.object,
+  className: PropTypes.string,
+  name: PropTypes.string,
+  link: checkPropLinkState,
+  size: PropTypes.number,
+  title: PropTypes.string,
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool,
+  pattern: PropTypes.string,
+  description: PropTypes.node,
+  children: PropTypes.node
+};
 
 export default SettingTextInput;

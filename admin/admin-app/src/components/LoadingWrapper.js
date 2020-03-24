@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { __, sprintf } from '@wordpress/i18n';
 import ErrorBoundary from './ErrorBoundary';
 
@@ -20,6 +21,11 @@ const LoadingWrapper = props => {
       {props.children}
     </ErrorBoundary>
   );
+};
+
+LoadingWrapper.propTypes = {
+  shouldRender: PropTypes.bool,
+  children: PropTypes.node.isRequired
 };
 
 export default LoadingWrapper;

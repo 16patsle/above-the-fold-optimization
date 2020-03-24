@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { __ } from '@wordpress/i18n';
+import checkPropLinkState from '../utils/checkPropLinkState';
 
 class SettingCheckbox extends Component {
+  static defaultProps = {
+    label: __('Enabled', 'abtfr')
+  };
+
   render() {
     return (
       <tr valign="top">
@@ -23,5 +30,14 @@ class SettingCheckbox extends Component {
     );
   }
 }
+
+SettingCheckbox.propTypes = {
+  header: PropTypes.string,
+  name: PropTypes.string,
+  link: checkPropLinkState,
+  label: PropTypes.string,
+  description: PropTypes.node,
+  children: PropTypes.node
+};
 
 export default SettingCheckbox;
