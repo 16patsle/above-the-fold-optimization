@@ -18,6 +18,7 @@ import SettingTextarea from '../components/SettingTextarea';
 import SettingTextInput from '../components/SettingTextInput';
 import SubmitButton from '../components/SubmitButton';
 import SettingInnerTable from '../components/SettingInnerTable';
+import scrollToElement from '../utils/scrollToElement';
 
 const emptyCacheUrl = new URL(adminUrl + 'admin.php');
 emptyCacheUrl.searchParams.append('page', 'abtfr-proxy');
@@ -137,10 +138,7 @@ const ProxyView = () => {
                         Enter the exact url or JSON config object [
                         <a
                           href="#jsoncnf"
-                          onClick={function(e) {
-                            e.preventDefault();
-                            document.querySelector('#jsoncnf').scrollIntoView();
-                          }}
+                          onClick={scrollToElement}
                           title="More information"
                         >
                           ?

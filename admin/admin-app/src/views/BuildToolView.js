@@ -24,6 +24,7 @@ import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
 import PageSelect from '../components/PageSelect';
 import './BuildToolView.css';
+import scrollToElement from '../utils/scrollToElement';
 
 const BuildToolView = () => {
   const { options: conditionalValues, shouldRender, error } = useJSON(
@@ -255,7 +256,9 @@ const BuildToolView = () => {
           <strong>Getting started</strong>
           <p>
             <strong>Step 1:</strong> Follow the{' '}
-            <a href="#installation">installation instructions</a>{' '}
+            <a href="#installation" onClick={scrollToElement}>
+              installation instructions
+            </a>{' '}
           </p>
           <p>
             <strong>Step 2:</strong> create a Critical CSS Task Package
@@ -385,7 +388,11 @@ const BuildToolView = () => {
             <p style={{ margin: '0px' }}>
               <strong>Tip:</strong> optimize images of your /themes/ and
               /uploads/ directory using Gulp.js or Grunt.js{' '}
-              <a href="https://github.com/imagemin/imagemin" rel="noopener noreferrer" target="_blank">
+              <a
+                href="https://github.com/imagemin/imagemin"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 imagemin
               </a>{' '}
               using professional image compression software, including Google
