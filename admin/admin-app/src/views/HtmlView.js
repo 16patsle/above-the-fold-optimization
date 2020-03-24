@@ -74,7 +74,7 @@ const HtmlView = () => {
                     full page cache to maintain an optimal server speed.
                   </span>
                 }
-              ></SettingCheckbox>
+              />
               <SettingCheckbox
                 header={__('Strip HTML comments', 'abtfr')}
                 name="abtfr[html_comments]"
@@ -86,7 +86,7 @@ const HtmlView = () => {
                     <code>&lt;!-- comment --&gt;</code>.
                   </span>
                 }
-              ></SettingCheckbox>
+              />
               <SettingTextarea
                 title="&nbsp;Preserve List"
                 textareaClass="json-array-lines"
@@ -97,7 +97,7 @@ const HtmlView = () => {
                   'abtfr'
                 )}
                 disabled={!getOption('htmlComments')}
-              ></SettingTextarea>
+              />
               <tr valign="top">
                 <td colSpan="2" style={{ padding: '0px' }}>
                   <SubmitButton type={['primary', 'large']} name="is_submit">
@@ -128,7 +128,7 @@ const HtmlView = () => {
             name="html.replace"
             schema={htmlSchema}
             link={linkOptionState('htmlSearchReplace')}
-          ></JsonEditor>
+          />
           <input
             type="hidden"
             name="abtfr[html_search_replace]"

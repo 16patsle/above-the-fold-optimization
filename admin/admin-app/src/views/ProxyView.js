@@ -86,7 +86,7 @@ const ProxyView = () => {
                   'Capture external scripts and load the scripts through a caching proxy.',
                   'abtfr'
                 )}
-              ></SettingCheckbox>
+              />
               {getOption('jsProxy') ? (
                 <SettingInnerTable
                   className="proxyjsoptions"
@@ -110,7 +110,7 @@ const ProxyView = () => {
                         line.
                       </span>
                     }
-                  ></SettingTextarea>
+                  />
                   <SettingTextarea
                     header="Proxy Exclude List"
                     style={{
@@ -123,7 +123,7 @@ const ProxyView = () => {
                     description={__(
                       'Enter (parts of) external javascript files to exclude from the proxy. One script per line.'
                     )}
-                  ></SettingTextarea>
+                  />
                   <SettingTextarea
                     header="Proxy Preload List"
                     style={{
@@ -153,7 +153,7 @@ const ProxyView = () => {
                         JSON object per line.
                       </span>
                     }
-                  ></SettingTextarea>
+                  />
                 </SettingInnerTable>
               ) : null}
               <SettingCheckbox
@@ -165,7 +165,7 @@ const ProxyView = () => {
                   'Capture external stylesheets and load the files through a caching proxy.',
                   'abtfr'
                 )}
-              ></SettingCheckbox>
+              />
               {getOption('cssProxy') ? (
                 <SettingInnerTable
                   className="proxycssoptions"
@@ -188,7 +188,7 @@ const ProxyView = () => {
                         stylesheet per line.
                       </span>
                     }
-                  ></SettingTextarea>
+                  />
                   <SettingTextarea
                     header="Proxy Exclude List"
                     style={{
@@ -204,7 +204,7 @@ const ProxyView = () => {
                         the proxy. One stylesheet per line.
                       </span>
                     }
-                  ></SettingTextarea>
+                  />
                   <SettingTextarea
                     header="Proxy Preload List"
                     style={{
@@ -227,7 +227,7 @@ const ProxyView = () => {
                         JSON object per line.
                       </span>
                     }
-                  ></SettingTextarea>
+                  />
                 </SettingInnerTable>
               ) : null}
               <tr valign="top">
@@ -296,7 +296,7 @@ const ProxyView = () => {
                     JSON config object.
                   </span>
                 }
-              ></SettingTextInput>
+              />
               <SettingTextInput
                 header="Proxy URL"
                 type="url"

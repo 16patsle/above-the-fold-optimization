@@ -39,7 +39,7 @@ const SettingsView = () => {
                     PageSpeed Insights.
                   </span>
                 }
-              ></SettingCheckbox>
+              />
               <SettingCheckbox
                 header={__('Clear Page Caches', 'abtfr')}
                 name="abtfr[clear_pagecache]"
@@ -58,7 +58,7 @@ const SettingsView = () => {
                     is cleared when updating the above the fold settings.
                   </span>
                 }
-              ></SettingCheckbox>
+              />
               <SettingCheckbox
                 header={__('Debug Mode', 'abtfr')}
                 name="abtfr[debug]"
@@ -68,7 +68,7 @@ const SettingsView = () => {
                   'Show debug info in the browser console for logged in admin-users.',
                   'abtfr'
                 )}
-              ></SettingCheckbox>
+              />
               {getOption('abtfOptionsExists') && (
                 <tr valign="top">
                   <th scope="row">Import Settings</th>

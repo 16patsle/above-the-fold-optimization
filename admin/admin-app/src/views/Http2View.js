@@ -143,7 +143,7 @@ const Http2View = () => {
                   name="http2.push"
                   schema={http2Schema}
                   link={linkOptionState('http2PushConfig')}
-                ></JsonEditor>
+                />
                 <input
                   type="hidden"
                   name="abtfr[http2_push_config]"

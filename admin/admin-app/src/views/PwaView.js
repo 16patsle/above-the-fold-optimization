@@ -349,7 +349,7 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                           link={linkOptionState('pwaCacheAssetsPolicy')}
                           compact="tree"
                           maxLines={50}
-                        ></JsonEditor>
+                        />
                         <input
                           type="hidden"
                           name="abtfr[pwa_cache_assets_policy]"
@@ -603,7 +603,7 @@ jQuery(window).on('sw-update',function(e){
                             compact="none"
                             maxLines={50}
                             mode="tree"
-                          ></JsonEditor>
+                          />
                           <input
                             type="hidden"
                             name="abtfr[manifest_json]"

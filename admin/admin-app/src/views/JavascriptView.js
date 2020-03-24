@@ -121,7 +121,7 @@ const JavascriptView = () => {
                     ).
                   </span>
                 }
-              ></SettingCheckbox>
+              />
               <tr
                 valign="top"
                 className="jsdeliveryoptions"
@@ -316,7 +316,7 @@ const JavascriptView = () => {
                               'Select the position where the async loading of Javascript will start.',
                               'abtfr'
                             )}
-                          ></SettingSelect>
+                          />
                           <SettingTextarea
                             header={__('Ignore List', 'abtfr')}
                             style={{
@@ -330,7 +330,7 @@ const JavascriptView = () => {
                               'Scripts to ignore in Javascript delivery optimization. One script per line. The files will be left untouched in the HTML.',
                               'abtfr'
                             )}
-                          ></SettingTextarea>
+                          />
                           <SettingTextarea
                             header={__('Remove List', 'abtfr')}
                             style={{
@@ -344,7 +344,7 @@ const JavascriptView = () => {
                               'Scripts to remove from HTML. One script per line. This feature enables to include small plugin related scripts inline.',
                               'abtfr'
                             )}
-                          ></SettingTextarea>
+                          />
                           <SettingCheckbox
                             header={__('Force Async', 'abtfr')}
                             name="abovethefold[jsdelivery_async_all]"
@@ -354,7 +354,7 @@ const JavascriptView = () => {
                               'When enabled, all scripts are loaded asynchronously.',
                               'abtfr'
                             )}
-                          ></SettingCheckbox>
+                          />
                           {!getOption('jsdeliveryAsyncAll') ? (
                             <SettingTextarea
                               header={__('Async Force List', 'abtfr')}
@@ -410,7 +410,7 @@ const JavascriptView = () => {
                               'Enter (parts of) scripts to force to load blocking (non-async).',
                               'abtfr'
                             )}
-                          ></SettingTextarea>
+                          />
                           <SettingTextarea
                             header={__('requestIdleCallback', 'abtfr')}
                             style={{
@@ -491,7 +491,7 @@ const JavascriptView = () => {
                                 .
                               </span>
                             }
-                          ></SettingCheckbox>
+                          />
                           <SettingCheckbox
                             header={__('jQuery Stub', 'abtfr')}
                             name="abovethefold[jsdelivery_jquery]"
@@ -507,7 +507,7 @@ const JavascriptView = () => {
                                 async.
                               </span>
                             }
-                          ></SettingCheckbox>
+                          />
                         </tbody>
                       </table>
                     </div>

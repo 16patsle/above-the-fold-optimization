@@ -90,7 +90,7 @@ const CssView = () => {
                     for the recommendations by Google.
                   </span>
                 }
-              ></SettingCheckbox>
+              />
               {getOption('cssdelivery') ? (
                 <SettingInnerTable
                   className="cssdeliveryoptions"
@@ -116,7 +116,7 @@ const CssView = () => {
                         .
                       </span>
                     }
-                  ></SettingCheckbox>
+                  />
                   {getOption('loadcssEnhanced') ? (
                     <SettingNumberInput
                       header={__('CSS render delay', 'abtfr')}
@@ -177,7 +177,7 @@ const CssView = () => {
                       'Select the position where the async loading of CSS will start.',
                       'abtfr'
                     )}
-                  ></SettingSelect>
+                  />
                   <SettingTextarea
                     header={__('Ignore List', 'abtfr')}
                     style={{
@@ -191,7 +191,7 @@ const CssView = () => {
                       'Stylesheets to ignore in CSS delivery optimization. One stylesheet per line. The files will be left untouched in the HTML.',
                       'abtfr'
                     )}
-                  ></SettingTextarea>
+                  />
                   <SettingTextarea
                     header={__('Remove List', 'abtfr')}
                     style={{
@@ -205,7 +205,7 @@ const CssView = () => {
                       'Stylesheets to remove from HTML. One stylesheet per line. This feature enables to include small plugin related CSS files inline.',
                       'abtfr'
                     )}
-                  ></SettingTextarea>
+                  />
                 </SettingInnerTable>
               ) : null}
               <SettingCheckbox
@@ -226,7 +226,7 @@ const CssView = () => {
                     .
                   </span>
                 }
-              ></SettingCheckbox>
+              />
               {getOption('gwfo') ? (
                 <SettingInnerTable
                   className="gwfooptions"
@@ -278,7 +278,7 @@ const CssView = () => {
                         ).
                       </span>
                     }
-                  ></SettingSelect>
+                  />
                   {getOption('gwfoLoadmethod') !== 'disabled' ? (
                     <SettingSelect
                       header={__('Load Position', 'abtfr')}
@@ -298,7 +298,7 @@ const CssView = () => {
                         'Select the position where the loading of web fonts will start.',
                         'abtfr'
                       )}
-                    ></SettingSelect>
+                    />
                   ) : null}
                   {!getOption('gwfoConfigValid') ? (
                     <tr>
@@ -353,7 +353,7 @@ const CssView = () => {
                             return false;
                           } /*onchange="if (jQuery(this).val() ==='') { jQuery('#sha256_warning').hide(); } else {jQuery('#sha256_warning').show();} "*/
                         }
-                      ></SettingTextarea>
+                      />
                       <SettingTextarea
                         header={__('Google Web Fonts', 'abtfr')}
                         style={{
@@ -394,7 +394,7 @@ const CssView = () => {
                             )
                           </span>
                         }
-                      ></SettingTextarea>
+                      />
                       <SettingCheckbox
                         name="abtfr[gwfo_googlefonts_auto]"
                         label={__('Auto-detect enabled', 'abtfr')}
@@ -403,7 +403,7 @@ const CssView = () => {
                           'When enabled, fonts are automatically extracted from the HTML, CSS and existing WebFontConfig.',
                           'abtfr'
                         )}
-                      ></SettingCheckbox>
+                      />
                       <SettingTextarea
                         title="&nbsp;Ignore List"
                         style={{
@@ -421,7 +421,7 @@ const CssView = () => {
                             this list will not be optimized or auto-detected.
                           </span>
                         }
-                      ></SettingTextarea>
+                      />
                       <SettingTextarea
                         title="&nbsp;Remove List"
                         style={{
@@ -440,7 +440,7 @@ const CssView = () => {
                             line.
                           </span>
                         }
-                      ></SettingTextarea>
+                      />
                     </React.Fragment>
                   ) : null}
                   <tr valign="top" className="local-font-loading">
