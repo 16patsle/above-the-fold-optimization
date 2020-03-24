@@ -4,7 +4,8 @@ class PageContent extends Component {
   render() {
     return (
       <div className="wrap abtfr-wrapper">
-        <div id="poststuff">
+        <div>
+          {/* poststuff id removed */}
           <div id="post-body" className="metabox-holder">
             <div id="post-body-content">
               <div className="postbox">

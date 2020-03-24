@@ -8,9 +8,8 @@ import {
   siteTitle,
   abtfrAdminNonce,
   lgCode,
-  utmString,
-  wpAbtfrUri,
-  buildToolPrefillValues
+  buildToolPrefillValues,
+  buildToolInstalled
 } from '../utils/globalVars';
 import { getJSON } from '../utils/getSettings';
 import newlineArrayString from '../utils/newLineArrayString';
@@ -24,6 +23,7 @@ import SettingSelect from '../components/SettingSelect';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
 import PageSelect from '../components/PageSelect';
+import './BuildToolView.css';
 
 const BuildToolView = () => {
   const { options: conditionalValues, shouldRender, error } = useJSON(
@@ -235,12 +235,171 @@ const BuildToolView = () => {
             builder simply relies on 'the latest version' and does not consider
             bugs or conflicts in the latest software.
           </Info>
-          <SubmitButton type={['primary', 'large']} name="create">
-            {__('Install package', 'abtfr')}
-          </SubmitButton>
-          <SubmitButton type={['large']} name="download">
-            {__('Download package (zip)', 'abtfr')}
-          </SubmitButton>
+          <p className="submit-buttons">
+            <SubmitButton type={['primary', 'large']} name="create">
+              {__('Install package', 'abtfr')}
+            </SubmitButton>
+            <SubmitButton type={['large']} name="download">
+              {__('Download package (zip)', 'abtfr')}
+            </SubmitButton>
+          </p>
+          <h2 id="howtouse" style={{ marginTop: '1rem' }}>
+            {__('How to use', 'abtfr')}
+          </h2>
+          <p>
+            This WordPress tool creates{' '}
+            <em>Gulp.js Critical Path CSS Cenerator Task Packages</em> that make
+            it easy to create professional quality critical path CSS for
+            individual pages.
+          </p>
+          <strong>Getting started</strong>
+          <p>
+            <strong>Step 1:</strong> Follow the{' '}
+            <a href="#installation">installation instructions</a>{' '}
+          </p>
+          <p>
+            <strong>Step 2:</strong> create a Critical CSS Task Package
+          </p>
+          <p>
+            <strong>Step 3:</strong> start a command line prompt or SSH shell,
+            navigate to <code>/wp-content/themes/THEME_NAME/abtfr/</code> and
+            run the task, e.g.{' '}
+            <code>
+              gulp <strong className="gulp-task-name">task-name</strong>
+            </code>
+            .
+          </p>
+          <p>
+            Test the quality of the created critical path CSS using the{' '}
+            <a href={adminUrl + 'admin.php?page=abtfr-criticalcss-test'}>
+              Critical CSS Quality Test
+            </a>{' '}
+            and optionally use the file <code>extra.css</code> to fix problems
+            in the generated Critical Path CSS.
+          </p>
+          <h2 id="installation">{__('Installation', 'abtfr')}</h2>
+          <h4
+            style={{ marginBottom: '5px', marginTop: '0px' }}
+            id="requirements"
+          >
+            Requirements:
+          </h4>
+          <ul>
+            <li>A regular PC (Windows, Mac or Linux) with command line.</li>
+            <li>
+              The installation of{' '}
+              <a href="https://nodejs.org/" target="_blank">
+                Node.js
+              </a>{' '}
+              (
+              <a
+                href={`https://encrypted.google.com/search?q=how+to+install+node.js&hl=${lgCode}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                click here
+              </a>{' '}
+              for a how-to).
+            </li>
+            <li>
+              The installation of{' '}
+              <a
+                href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Gulp.js
+              </a>{' '}
+              (<code>npm install --global gulp-cli</code>).
+            </li>
+          </ul>
+          <p>
+            The installation of the{' '}
+            <em>WordPress Gulp.js Critical Path CSS Generator</em> is required
+            just once for your theme. NPM (Node.js Package Manager) will read
+            the dependencies from package.json and will install them in the
+            /abtfr/ directory.
+          </p>
+          <p>
+            <strong>Step 1:</strong> download <strong>package.json</strong> and{' '}
+            <strong>gulpfile.js</strong> and upload the files to{' '}
+            <code>
+              /wp-content/themes/THEME_NAME/<strong>abtfr</strong>/
+            </code>
+            . Alternatively click "<em>Auto install</em>" (this will copy the
+            files to your theme directory).
+          </p>
+          <p className="submit-buttons">
+            <SubmitButton type={['primary', 'small']} name="install_package">
+              {buildToolInstalled
+                ? '✓ ' + __('Installed', 'abtfr')
+                : __('Auto install', 'abtfr')}
+            </SubmitButton>
+            <SubmitButton type={['small']} name="download_package">
+              {__('Download package.json & gulpfile.js', 'abtfr')}
+            </SubmitButton>
+          </p>
+          <p>
+            <strong>Step 2:</strong> start a command line prompt or SSH shell
+            and navigate to <code>/wp-content/themes/THEME_NAME/abtfr/</code>.
+          </p>
+          <p>
+            <strong>Step 3:</strong> run the command{' '}
+            <code>
+              <strong>npm install</strong>
+            </code>
+            .
+          </p>
+          <p>
+            <strong>
+              If there are errors during installation you will not be able to
+              get support via the WordPress support forums.
+            </strong>
+            <br />
+            Please seek help in platform or software related support forums, for
+            example Github.
+          </p>
+          <h1 style={{ paddingBottom: '0px' }}>More Optimizations</h1>
+          <p>
+            There are many other WordPress optimizations that can be performed
+            via Grunt.js or Gulp.js, for example{' '}
+            <a
+              href={`https://developers.google.com/speed/webp/?hl=${lgCode}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Google WebP
+            </a>{' '}
+            image optimization, uncss (unused CSS stripping), CSS data-uri (CSS
+            images) and more.{' '}
+            <a
+              href={`https://encrypted.google.com/search?q=grunt+or+gulp+wordpress+optimization&hl=${lgCode}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Search Google
+            </a>{' '}
+            for more information.
+          </p>
+          <Info>
+            <p style={{ margin: '0px' }}>
+              <strong>Tip:</strong> optimize images of your /themes/ and
+              /uploads/ directory using Gulp.js or Grunt.js{' '}
+              <a href="https://github.com/imagemin/imagemin" rel="noopener noreferrer" target="_blank">
+                imagemin
+              </a>{' '}
+              using professional image compression software, including Google
+              WebP, and instead of overwriting the original images like many
+              other solutions, place the images in a subdirectory
+              /wp-content/optimized/ and have Nginx serve the optimized image
+              only when the optimized version is newer. It will result in the
+              best performance, with the best image optimization and instant
+              refresh of images when updated in WordPress. And when you want to
+              apply a new image optimization technique, you will have the
+              original files available. A server cron makes it possible to
+              optimize updated images daily.
+            </p>
+          </Info>
         </PageContent>
       </form>
     </LoadingWrapper>

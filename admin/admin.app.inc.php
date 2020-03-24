@@ -12,7 +12,8 @@ $admin_values = array(
     'wpAbtfrUri' => WPABTFR_URI,
     'criticalCssEditorUrl' => $this->CTRL->view_url('critical-css-editor'),
     'extractCssKey' => md5(SECURE_AUTH_KEY . AUTH_KEY),
-    'buildToolPrefillValues' => array()
+    'buildToolPrefillValues' => array(),
+    'buildToolInstalled' => $this->buildtool->is_installed()
 );
 
 $default = get_option('abtfr-build-tool-default');

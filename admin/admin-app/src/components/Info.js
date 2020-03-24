@@ -3,7 +3,7 @@ import './Info.css';
 
 class Info extends Component {
   render() {
-    let color = 'info_' + this.props.color;
+    let color = 'info_' + (this.props.color || 'yellow');
     if (this.props.color === 'red') {
       color = 'warning_red';
     } else if (this.props.color === 'green') {
