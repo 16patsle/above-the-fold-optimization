@@ -586,10 +586,8 @@ class ABTFR_Admin_BuildTool {
         );
 
         wp_redirect(
-            add_query_arg(
-                array('page' => 'abtfr-build-tool'),
-                admin_url('admin.php')
-            )
+            add_query_arg(array('page' => 'abtfr'), admin_url('admin.php')) .
+                '#/build-tool'
         );
         exit();
     }

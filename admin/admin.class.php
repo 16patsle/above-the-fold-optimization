@@ -278,6 +278,7 @@ class ABTFR_Admin {
                 case 'abtfr-css':
                 case 'abtfr-javascript':
                 case 'abtfr-criticalcss':
+                case 'abtfr-build-tool':
                 case 'abtfr-pwa':
                 case 'abtfr-http2':
                 case 'abtfr-proxy':
@@ -1442,7 +1443,6 @@ class ABTFR_Admin {
         switch ($tab) {
             case 'extract':
             case 'criticalcss-test':
-            case 'build-tool':
                 require_once 'admin.' . $tab . '.inc.php';
                 break;
             default:
