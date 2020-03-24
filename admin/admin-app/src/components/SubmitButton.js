@@ -1,30 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import Button from './Button';
 
 class SubmitButton extends Component {
   static defaultProps = {
-    type: ['primary'],
-    name: 'submit',
-    children: __('Save Changes', 'abtfr')
+    type: ['primary', 'large'],
+    name: 'is_submit',
+    children: __('Save', 'abtfr')
   };
 
   render() {
-    let className = `button`;
-    const types = this.props.type;
-    types.forEach(type => {
-      className += ` button-${type}`;
-    });
-
     return (
-      <input
-        type="submit"
+      <Button
+        type={this.props.type}
+        buttonType="submit"
+        element="input"
         name={this.props.name}
         id={this.props.id || this.props.name}
-        className={className}
-        value={this.props.children}
+        className={this.props.className}
         {...this.props.attributes}
-      />
+      >
+        {this.props.children}
+      </Button>
     );
   }
 }
