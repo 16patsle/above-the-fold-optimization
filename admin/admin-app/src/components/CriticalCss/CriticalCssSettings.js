@@ -42,7 +42,6 @@ const CriticalCssSettings = () => {
               name="abtfr[csseditor]"
               header={__('Use advanced CSS editor', 'abtfr')}
               link={linkOptionState('csseditor')}
-              label={__('Enabled', 'abtfr')}
               description={
                 <>
                   Use the{' '}
@@ -61,7 +60,6 @@ const CriticalCssSettings = () => {
               name="abtfr[http2_push_criticalcss]"
               header={__('Push Critical CSS using HTTP/2 Server Push', 'abtfr')}
               link={linkOptionState('http2PushCriticalcss')}
-              label={__('Enabled', 'abtfr')}
               description={
                 <>
                   When enabled, the critical CSS is not inlined but instead

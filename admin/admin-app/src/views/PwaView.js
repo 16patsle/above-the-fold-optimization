@@ -119,7 +119,6 @@ const PwaView = () => {
                   header={__('Enable PWA', 'abtfr')}
                   name="abtfr[pwa]"
                   link={linkOptionState('pwa')}
-                  label={__('Enabled', 'abtfr')}
                   description={
                     <>
                       Enable PWA functionality in browsers that support{' '}
@@ -143,7 +142,6 @@ const PwaView = () => {
                       name="abtfr[pwa_unregister]"
                       header={__('Unregister Service Worker', 'abtfr')}
                       link={linkOptionState('pwaUnregister')}
-                      label={__('Enabled', 'abtfr')}
                       description={__(
                         'Unregister the PWA Service Worker for visitors.',
                         'abtfr'
@@ -156,7 +154,6 @@ const PwaView = () => {
                         name="abtfr[pwa_register]"
                         header={__('Register Service Worker', 'abtfr')}
                         link={linkOptionState('pwaRegister')}
-                        label={__('Enabled', 'abtfr')}
                         description={
                           <>
                             Unchecking this option enables to combine the PWA
@@ -265,7 +262,6 @@ Notification.requestPermission(function(result){
                   name="abtfr[pwa_cache_pages]"
                   header={__('Offline Cache', 'abtfr')}
                   link={linkOptionState('pwaCachePages')}
-                  label={__('Enabled', 'abtfr')}
                   description={__(
                     'Cache HTML pages in the service worker. This option enables to make a website available offline.',
                     'abtfr'
@@ -331,7 +327,6 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                     name="abtfr[pwa_cache_assets]"
                     header={__('Cache Assets', 'abtfr')}
                     link={linkOptionState('pwaCacheAssets')}
-                    label={__('Enabled', 'abtfr')}
                     description={__(
                       'Cache assets such as scripts and styles. Use a request and/or response filter to apply a cache strategy and enable or disable caching for specific assets.',
                       'abtfr'
@@ -376,7 +371,6 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                     name="abtfr[pwa_offline_class]"
                     header={__('CSS online/offline class', 'abtfr')}
                     link={linkOptionState('pwaOfflineClass')}
-                    label={__('Enabled', 'abtfr')}
                     description={
                       <>
                         Add the class <code>offline</code> to{' '}
@@ -420,7 +414,6 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                         name="abtfr[pwa_cache_pages_head_update]"
                         header={__('HEAD based network update', 'abtfr')}
                         link={linkOptionState('pwaCachePagesHeadUpdate')}
-                        label={__('Enabled', 'abtfr')}
                         description={
                           <>
                             Use a HTTP HEAD request and <code>etag</code> and/or{' '}
@@ -436,7 +429,6 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                         name="abtfr[pwa_cache_pages_update_notify]"
                         header={__('Client event on update', 'abtfr')}
                         link={linkOptionState('pwaCachePagesUpdateNotify')}
-                        label={__('Enabled', 'abtfr')}
                         description={__(
                           'Send an event to the client when the cache is updated.',
                           'abtfr'
@@ -500,7 +492,6 @@ jQuery(window).on('sw-update',function(e){
                     name="abtfr[pwa_cache_preload_require]"
                     header={__('Require preloading', 'abtfr')}
                     link={linkOptionState('pwaCachePreloadRequired')}
-                    label={__('Enabled', 'abtfr')}
                     description={__(
                       'Require preloading to complete in Service Worker installation. This option will activate the service worker after all assets have been preloaded.',
                       'abtfr'
@@ -511,7 +502,6 @@ jQuery(window).on('sw-update',function(e){
                   name="abtfr[pwa_preload_mousedown]"
                   header={__('Preload on Mouse Down', 'abtfr')}
                   link={linkOptionState('pwaPreloadMousedown')}
-                  label={__('Enabled', 'abtfr')}
                   description={
                     <>
                       Start preloading navigation requests in the Service Worker
@@ -644,7 +634,6 @@ jQuery(window).on('sw-update',function(e){
                     name="abtfr[manifest_json_update]"
                     header={__('Update manifest.json', 'abtfr')}
                     link={linkOptionState('manifestJsonUpdate')}
-                    label={__('Enabled', 'abtfr')}
                     description={__(
                       'Update manifest.json when saving settings.',
                       'abtfr'
@@ -654,7 +643,6 @@ jQuery(window).on('sw-update',function(e){
                     name="abtfr[pwa_manifest_meta]"
                     header={__('Link manifest.json in head', 'abtfr')}
                     link={linkOptionState('pwaManifestMeta')}
-                    label={__('Enabled', 'abtfr')}
                     description={
                       <>
                         Add a link to manifest.json in the{' '}

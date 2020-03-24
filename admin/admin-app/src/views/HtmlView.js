@@ -59,7 +59,6 @@ const HtmlView = () => {
                 header={__('Minify HTML', 'abtfr')}
                 name="abtfr[html_minify]"
                 link={linkOptionState('htmlMinify')}
-                label={__('Enabled', 'abtfr')}
                 description={
                   <span>
                     Compress HTML using an enhanced version of{' '}
@@ -79,7 +78,6 @@ const HtmlView = () => {
                 header={__('Strip HTML comments', 'abtfr')}
                 name="abtfr[html_comments]"
                 link={linkOptionState('htmlComments')}
-                label={__('Enabled', 'abtfr')}
                 description={
                   <span>
                     Remove HTML comments from HTML, e.g.{' '}

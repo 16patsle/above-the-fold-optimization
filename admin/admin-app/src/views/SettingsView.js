@@ -30,7 +30,6 @@ const SettingsView = () => {
               <SettingCheckbox
                 header={__('Admin Bar', 'abtfr')}
                 name="abtfr[adminbar]"
-                label={__('Enabled', 'abtfr')}
                 link={linkOptionState('adminbar')}
                 description={
                   <span>
@@ -43,7 +42,6 @@ const SettingsView = () => {
               <SettingCheckbox
                 header={__('Clear Page Caches', 'abtfr')}
                 name="abtfr[clear_pagecache]"
-                label={__('Enabled', 'abtfr')}
                 link={linkOptionState('clearPagecache')}
                 description={
                   <span>
@@ -62,7 +60,6 @@ const SettingsView = () => {
               <SettingCheckbox
                 header={__('Debug Mode', 'abtfr')}
                 name="abtfr[debug]"
-                label={__('Enabled', 'abtfr')}
                 link={linkOptionState('debug')}
                 description={__(
                   'Show debug info in the browser console for logged in admin-users.',

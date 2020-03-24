@@ -203,7 +203,6 @@ const BuildToolView = () => {
                   name="extra"
                   header={__('Append extra.css', 'abtfr')}
                   link={{ value: extra, set: setExtra }}
-                  label={__('Enabled', 'abtfr')}
                   description={
                     <>
                       Add a file <code>extra.css</code> to the package to be
@@ -217,7 +216,6 @@ const BuildToolView = () => {
                   header={__('Update Critical CSS', 'abtfr')}
                   link={{ value: update, set: setUpdate }}
                   options={options}
-                  label={__('Enabled', 'abtfr')}
                   description={__(
                     'Use this option to automatically update WordPress Critical CSS.',
                     'abtfr'

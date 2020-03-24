@@ -123,7 +123,6 @@ const Http2View = () => {
                 header={__('HTTP/2 Server Push', 'abtfr')}
                 name="abtfr[http2_push]"
                 link={linkOptionState('http2Push')}
-                label={__('Enabled', 'abtfr')}
                 description={
                   <span>
                     When enabled, resources such as scripts, stylesheets and

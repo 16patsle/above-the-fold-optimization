@@ -81,7 +81,6 @@ const ProxyView = () => {
                 header="Proxy Scripts"
                 name="abtfr[js_proxy]"
                 link={linkOptionState('jsProxy')}
-                label={__('Enabled', 'abtfr')}
                 description={__(
                   'Capture external scripts and load the scripts through a caching proxy.',
                   'abtfr'
@@ -160,7 +159,6 @@ const ProxyView = () => {
                 header="Proxy Stylesheets"
                 name="abtfr[css_proxy]"
                 link={linkOptionState('cssProxy')}
-                label={__('Enabled', 'abtfr')}
                 description={__(
                   'Capture external stylesheets and load the files through a caching proxy.',
                   'abtfr'

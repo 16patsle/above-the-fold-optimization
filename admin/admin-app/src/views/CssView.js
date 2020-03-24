@@ -64,7 +64,6 @@ const CssView = () => {
                 header={__('Optimize CSS Delivery', 'abtfr')}
                 name="abtfr[cssdelivery]"
                 link={linkOptionState('cssdelivery')}
-                label={__('Enabled', 'abtfr')}
                 description={
                   <span>
                     When enabled, CSS files are loaded asynchronously via{' '}
@@ -100,7 +99,6 @@ const CssView = () => {
                     header={__('Enhanced loadCSS', 'abtfr')}
                     name="abtfr[loadcss_enhanced]"
                     link={linkOptionState('loadcssEnhanced')}
-                    label={__('Enabled', 'abtfr')}
                     description={
                       <span>
                         When enabled, a customized version of loadCSS is used to
@@ -212,7 +210,6 @@ const CssView = () => {
                 header={__('Optimize Web Fonts', 'abtfr')}
                 name="abtfr[gwfo]"
                 link={linkOptionState('gwfo')}
-                label={__('Enabled', 'abtfr')}
                 description={
                   <span>
                     When enabled, web fonts are optimized using{' '}

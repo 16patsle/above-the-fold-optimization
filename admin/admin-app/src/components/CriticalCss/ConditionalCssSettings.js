@@ -196,7 +196,6 @@ const ConditionalCssSettings = () => {
                         }
                       })
                   }}
-                  label={__('Enabled', 'abtfr')}
                 />
                 <SettingCheckbox
                   name={`abtfr[conditional_css][${file}][prependToAny]`}
@@ -222,7 +221,6 @@ const ConditionalCssSettings = () => {
                         }
                       })
                   }}
-                  label={__('Enabled', 'abtfr')}
                 />
               </tbody>
             </table>

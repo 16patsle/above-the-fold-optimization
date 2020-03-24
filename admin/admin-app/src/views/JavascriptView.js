@@ -94,7 +94,6 @@ const JavascriptView = () => {
               <SettingCheckbox
                 header={__('Optimize Javascript Loading', 'abtfr')}
                 name="abovethefold[jsdelivery]"
-                label={__('Enabled', 'abtfr')}
                 link={linkOptionState('jsdelivery')}
                 description={
                   <span>
@@ -348,7 +347,6 @@ const JavascriptView = () => {
                           <SettingCheckbox
                             header={__('Force Async', 'abtfr')}
                             name="abovethefold[jsdelivery_async_all]"
-                            label={__('Enabled', 'abtfr')}
                             link={linkOptionState('jsdeliveryAsyncAll')}
                             description={__(
                               'When enabled, all scripts are loaded asynchronously.',
@@ -474,7 +472,6 @@ const JavascriptView = () => {
                           <SettingCheckbox
                             header={__('Abide Dependencies', 'abtfr')}
                             name="abovethefold[jsdelivery_deps]"
-                            label={__('Enabled', 'abtfr')}
                             link={linkOptionState('jsdeliveryDeps')}
                             description={
                               <span>
@@ -495,7 +492,6 @@ const JavascriptView = () => {
                           <SettingCheckbox
                             header={__('jQuery Stub', 'abtfr')}
                             name="abovethefold[jsdelivery_jquery]"
-                            label={__('Enabled', 'abtfr')}
                             link={linkOptionState('jsdeliveryJquery')}
                             description={
                               <span>
@@ -517,7 +513,6 @@ const JavascriptView = () => {
               <SettingCheckbox
                 header={__('Lazy Load Scripts', 'abtfr')}
                 name="abovethefold[lazyscripts_enabled]"
-                label={__('Enabled', 'abtfr')}
                 link={linkOptionState('lazyscriptsEnabled')}
                 description={
                   <span>
