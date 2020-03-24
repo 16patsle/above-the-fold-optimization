@@ -29,9 +29,7 @@ class TabsView extends Component {
               {/*‐ <a href="https://wordpress.org/support/plugin/abtfr/reviews/#new-post" target="_blank" rel="noopener noreferrer">Review plugin</a>*/}
             </div>
           </div>
-          <Tabs
-            selected={this.props.location.pathname.slice(1) || 'intro'}
-          ></Tabs>
+          <Tabs selected={this.props.location.pathname.slice(1)} />
         </nav>
       </div>
     );

@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { adminUrl, adminTabs } from '../utils/globalVars';
 
 class Tabs extends Component {
+  static defaultProps = {
+    selected: 'intro'
+  };
+
   render() {
     const tabElements = [];
     for (const tabKey in adminTabs) {
