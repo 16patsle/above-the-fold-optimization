@@ -319,7 +319,7 @@ const CssView = () => {
                     </tr>
                   ) : null}
                   {getOption('gwfoLoadmethod') !== 'disabled' ? (
-                    <React.Fragment>
+                    <>
                       <SettingTextarea
                         header={__('WebFontConfig', 'abtfr')}
                         style={{
@@ -441,7 +441,7 @@ const CssView = () => {
                           </span>
                         }
                       />
-                    </React.Fragment>
+                    </>
                   ) : null}
                   <tr valign="top" className="local-font-loading">
                     <th scope="row">Local Font Loading</th>
