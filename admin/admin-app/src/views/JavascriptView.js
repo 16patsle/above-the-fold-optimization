@@ -561,9 +561,7 @@ const JavascriptView = () => {
             </tbody>
           </table>
           <hr />
-          <SubmitButton type={['primary', 'large']} name="is_submit">
-            {__('Save', 'abtfr')}
-          </SubmitButton>
+          <SubmitButton />
         </PageContent>
       </form>
     </LoadingWrapper>

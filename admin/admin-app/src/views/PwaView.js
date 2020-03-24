@@ -695,9 +695,7 @@ jQuery(window).on('sw-update',function(e){
             </table>
           </div>
           <hr />
-          <SubmitButton type={['primary', 'large']} name="is_submit">
-            {__('Save', 'abtfr')}
-          </SubmitButton>
+          <SubmitButton />
         </PageContent>
       </form>
     </LoadingWrapper>

@@ -93,9 +93,7 @@ const CriticalCssSettings = () => {
           </div>
         )}
         <hr />
-        <SubmitButton type={['primary', 'large']} name="is_submit">
-          {__('Save', 'abtfr')}
-        </SubmitButton>
+        <SubmitButton />
         <div id="conditional">&nbsp;</div>
       </CriticalCssEditor>
     </LoadingWrapper>

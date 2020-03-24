@@ -261,9 +261,7 @@ function my_critical_css_condition( $params = array() ) {
             return true or false.
           </p>
           <hr />
-          <SubmitButton type={['primary', 'large']} name="is_submit">
-            {__('Save', 'abtfr')}
-          </SubmitButton>
+          <SubmitButton />
         </PageContent>
       </form>
     </>

@@ -235,7 +235,7 @@ const BuildToolView = () => {
             bugs or conflicts in the latest software.
           </Info>
           <p className="submit-buttons">
-            <SubmitButton type={['primary', 'large']} name="create">
+            <SubmitButton name="create">
               {__('Install package', 'abtfr')}
             </SubmitButton>
             <SubmitButton type={['large']} name="download">

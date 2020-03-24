@@ -330,9 +330,7 @@ const ProxyView = () => {
             </tbody>
           </table>
           <hr />
-          <SubmitButton type={['primary', 'large']} name="is_submit">
-            {__('Save', 'abtfr')}
-          </SubmitButton>
+          <SubmitButton />
           <br />
           <br />
           <h3 style={{ margin: 0, padding: 0 }} id="stats">

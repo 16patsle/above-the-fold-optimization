@@ -98,9 +98,7 @@ const HtmlView = () => {
               />
               <tr valign="top">
                 <td colSpan="2" style={{ padding: '0px' }}>
-                  <SubmitButton type={['primary', 'large']} name="is_submit">
-                    {__('Save', 'abtfr')}
-                  </SubmitButton>
+                  <SubmitButton />
                 </td>
               </tr>
             </tbody>
@@ -162,9 +160,7 @@ const HtmlView = () => {
             </SyntaxHighlighter>
           </div>
           <hr />
-          <SubmitButton type={['primary', 'large']} name="is_submit">
-            {__('Save', 'abtfr')}
-          </SubmitButton>
+          <SubmitButton />
         </PageContent>
       </form>
     </LoadingWrapper>

@@ -264,9 +264,7 @@ const ConditionalCssSettings = () => {
             >
               &nbsp;
             </div>
-            <SubmitButton type={['primary', 'large']} name="is_submit">
-              {__('Save', 'abtfr')}
-            </SubmitButton>
+            <SubmitButton />
           </CriticalCssEditor>
         ))}
     </LoadingWrapper>

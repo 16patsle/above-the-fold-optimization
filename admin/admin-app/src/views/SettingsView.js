@@ -85,9 +85,7 @@ const SettingsView = () => {
             </tbody>
           </table>
           <hr />
-          <SubmitButton type={['primary', 'large']} name="is_submit">
-            {__('Save', 'abtfr')}
-          </SubmitButton>
+          <SubmitButton />
           &nbsp;
           <SubmitButton type={['large']} name="clear_pagecache">
             {__('Clear Page Caches', 'abtfr')}
