@@ -238,7 +238,7 @@ const BuildToolView = () => {
             <SubmitButton name="create">
               {__('Install package', 'abtfr')}
             </SubmitButton>
-            <SubmitButton type={['large']} name="download">
+            <SubmitButton name="download">
               {__('Download package (zip)', 'abtfr')}
             </SubmitButton>
           </p>
@@ -331,12 +331,12 @@ const BuildToolView = () => {
             files to your theme directory).
           </p>
           <p className="submit-buttons">
-            <SubmitButton type={['primary', 'small']} name="install_package">
+            <SubmitButton isSmall name="install_package">
               {buildToolInstalled
                 ? '✓ ' + __('Installed', 'abtfr')
                 : __('Auto install', 'abtfr')}
             </SubmitButton>
-            <SubmitButton type={['small']} name="download_package">
+            <SubmitButton isSecondary isSmall name="download_package">
               {__('Download package.json & gulpfile.js', 'abtfr')}
             </SubmitButton>
           </p>

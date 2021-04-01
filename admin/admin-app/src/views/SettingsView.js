@@ -70,7 +70,7 @@ const SettingsView = () => {
                 <tr valign="top">
                   <th scope="row">Import Settings</th>
                   <td>
-                    <SubmitButton type={['large']} name="import_settings_abtf">
+                    <SubmitButton name="import_settings_abtf">
                       {__('Import settings from ABTF', 'abtfr')}
                     </SubmitButton>
                     <p className="description">
@@ -87,7 +87,7 @@ const SettingsView = () => {
           <hr />
           <SubmitButton />
           &nbsp;
-          <SubmitButton type={['large']} name="clear_pagecache">
+          <SubmitButton name="clear_pagecache">
             {__('Clear Page Caches', 'abtfr')}
           </SubmitButton>
           <br />
