@@ -11,7 +11,7 @@ import {
   wpAbtfrUri
 } from '../utils/globalVars';
 import LoadingWrapper from '../components/LoadingWrapper';
-import JsonEditor from '../components/JsonEditor';
+import LazyJsonEditor from '../components/LazyJsonEditor';
 import { http2Schema } from '../components/editorSchema';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
@@ -138,7 +138,7 @@ const Http2View = () => {
                   </span>
                 }
               >
-                <JsonEditor
+                <LazyJsonEditor
                   name="http2.push"
                   schema={http2Schema}
                   link={linkOptionState('http2PushConfig')}

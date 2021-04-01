@@ -7,7 +7,7 @@ import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import php from 'react-syntax-highlighter/dist/esm/languages/hljs/php';
 import vs from 'react-syntax-highlighter/dist/esm/styles/hljs/vs';
 import LoadingWrapper from '../components/LoadingWrapper';
-import JsonEditor from '../components/JsonEditor';
+import LazyJsonEditor from '../components/LazyJsonEditor';
 import { htmlSchema } from '../components/editorSchema';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
@@ -120,7 +120,7 @@ const HtmlView = () => {
               'abtfr'
             )}
           </p>
-          <JsonEditor
+          <LazyJsonEditor
             name="html.replace"
             schema={htmlSchema}
             link={linkOptionState('htmlSearchReplace')}

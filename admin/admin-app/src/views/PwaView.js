@@ -9,7 +9,7 @@ import {
   abtfrAdminNonce,
   wpAbtfrUri
 } from '../utils/globalVars';
-import JsonEditor from '../components/JsonEditor';
+import LazyJsonEditor from '../components/LazyJsonEditor';
 import {
   pwaAssetCacheSchema,
   pwaManifestSchema
@@ -338,7 +338,7 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                         {__('Asset Cache Include Policy', 'abtfr')}
                       </th>
                       <td>
-                        <JsonEditor
+                        <LazyJsonEditor
                           name="pwa.cache.assets"
                           schema={pwaAssetCacheSchema}
                           link={linkOptionState('pwaCacheAssetsPolicy')}
@@ -585,7 +585,7 @@ jQuery(window).on('sw-update',function(e){
                     ) : (
                       getOption('manifestStatus') === 'good' && (
                         <>
-                          <JsonEditor
+                          <LazyJsonEditor
                             name="pwa.manifest"
                             schema={pwaManifestSchema}
                             link={linkOptionState('manifestJson')}
