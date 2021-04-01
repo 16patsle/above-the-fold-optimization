@@ -40,14 +40,6 @@ class ABTFR_Admin_PWA {
                 $this,
                 'update_settings'
             );
-
-            // add scripts/styles
-            $this->CTRL->loader->add_action(
-                'admin_enqueue_scripts',
-                $this,
-                'enqueue_scripts',
-                30
-            );
         }
     }
 
@@ -415,41 +407,5 @@ class ABTFR_Admin_PWA {
                 'ERROR'
             );
         }
-    }
-    /**
-     * Enqueue scripts and styles
-     */
-    public function enqueue_scripts($hook) {
-        if (!isset($_REQUEST['page']) || $_GET['page'] !== 'abtfr-pwa') {
-            return;
-        }
-
-        // add global admin CSS
-        wp_enqueue_style(
-            'abtfr_admincp_jsoneditor_editor',
-            plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.css',
-            false,
-            WPABTFR_VERSION
-        );
-        wp_enqueue_style(
-            'abtfr_admincp_jsoneditor',
-            plugin_dir_url(__FILE__) . 'css/admincp-jsoneditor.min.css',
-            false,
-            WPABTFR_VERSION
-        );
-
-        // add general admin javascript
-        wp_enqueue_script(
-            'abtfr_admincp_jsoneditor',
-            plugin_dir_url(__FILE__) . 'js/jsoneditor/jsoneditor.min.js',
-            array('jquery'),
-            WPABTFR_VERSION
-        );
-        wp_enqueue_script(
-            'abtfr_admincp_pwa',
-            plugin_dir_url(__FILE__) . 'js/admincp-pwa.min.js',
-            array('jquery', 'abtfr_admincp_jsoneditor'),
-            WPABTFR_VERSION
-        );
     }
 }

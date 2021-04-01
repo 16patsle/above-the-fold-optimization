@@ -3,7 +3,7 @@ import { homeUrl } from '../utils/globalVars';
 
 const iconsUrl =
   homeUrl +
-  '/wp-content/plugins/abtfr/admin/js/jsoneditor/img/jsoneditor-icons.svg';
+  '/wp-content/plugins/abtfr/admin/images/jsoneditor-icons.svg';
 
 class JsonEditorIconFix extends Component {
   render() {

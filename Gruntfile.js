@@ -272,15 +272,6 @@ module.exports = function(grunt) {
                         'node_modules/selectize/dist/js/standalone/selectize.min.js'
                     ],
 
-                    // Codemirror
-                    'admin/js/codemirror.min.js': [
-                        'node_modules/codemirror/lib/codemirror.js',
-                        'node_modules/codemirror/mode/css/css.js',
-                        'admin/js/csslint.js',
-                        'node_modules/codemirror/addon/lint/lint.js',
-                        'node_modules/codemirror/addon/lint/css-lint.js'
-                    ],
-
                     // Critical CSS Extract widget
                     'public/js/min/css-extract-widget.js': [
                         'admin/js/css-extract-widget.js'

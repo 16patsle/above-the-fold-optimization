@@ -32,14 +32,6 @@ class ABTFR_Admin_CriticalCSS {
          * Admin panel specific
          */
         if (is_admin()) {
-            // Hook in the admin styles and scripts
-            $this->CTRL->loader->add_action(
-                'admin_enqueue_scripts',
-                $this,
-                'enqueue_scripts',
-                30
-            );
-
             /**
              * Handle form submissions
              */
@@ -170,45 +162,6 @@ class ABTFR_Admin_CriticalCSS {
                     }
                 }
             }
-        }
-    }
-
-    /**
-     * Enqueue scripts and styles
-     */
-    public function enqueue_scripts($hook) {
-        if (
-            !isset($_REQUEST['page']) ||
-            ($_GET['page'] !== 'abtfr-criticalcss' &&
-                $_GET['page'] !== 'abtfr-above-the-fold')
-        ) {
-            return;
-        }
-
-        // get active tab
-        $tab = $this->CTRL->admin->active_tab();
-
-        switch ($tab) {
-            case 'criticalcss':
-                $options = get_option('abtfr');
-                if (
-                    !isset($options['csseditor']) ||
-                    intval($options['csseditor']) === 1
-                ) {
-                    /**
-                     * Codemirror CSS highlighting
-                     */
-                    wp_enqueue_style(
-                        'abtfr_codemirror',
-                        plugin_dir_url(__FILE__) . 'css/codemirror.min.css'
-                    );
-                    wp_enqueue_script(
-                        'abtfr_codemirror',
-                        plugin_dir_url(__FILE__) . 'js/codemirror.min.js',
-                        array('jquery', 'jquery-ui-resizable', 'abtfr_admincp')
-                    );
-                }
-                break;
         }
     }
 
