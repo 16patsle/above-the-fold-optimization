@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TextControl } from '@wordpress/components';
 import checkPropLinkState from '../utils/checkPropLinkState';
 
 class SettingNumberInput extends Component {
@@ -12,7 +13,7 @@ class SettingNumberInput extends Component {
       <tr valign="top">
         <th scope="row">{this.props.header}</th>
         <td>
-          <input
+          <TextControl
             type="number"
             min={this.props.min}
             max={this.props.max}
@@ -21,7 +22,7 @@ class SettingNumberInput extends Component {
             className={this.props.className}
             name={this.props.name}
             value={this.props.link.value}
-            onChange={e => this.props.link.set(Number(e.target.value))}
+            onChange={this.props.link.set}
             placeholder={this.props.placeholder}
             disabled={this.props.disabled}
           />

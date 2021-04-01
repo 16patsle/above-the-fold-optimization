@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { RadioControl } from '@wordpress/components';
 import checkPropLinkState from '../utils/checkPropLinkState';
 
 class SettingRadio extends Component {
@@ -8,23 +9,12 @@ class SettingRadio extends Component {
       <tr valign="top">
         <th scope="row">{this.props.header}</th>
         <td>
-          {this.props.radios.map(radio => {
-            return (
-              <span key={radio.value}>
-                <label>
-                  <input
-                    type="radio"
-                    name={this.props.name}
-                    value={radio.value}
-                    checked={this.props.link.value === radio.value}
-                    onChange={e => this.props.link.set(e.target.value)}
-                  />
-                  {radio.label}
-                </label>
-                <p className="description">{radio.description}</p>
-              </span>
-            );
-          })}
+          <RadioControl
+            options={this.props.radios}
+            name={this.props.name}
+            selected={this.props.link.value}
+            onChange={this.props.link.set}
+          />
           {this.props.children}
         </td>
       </tr>

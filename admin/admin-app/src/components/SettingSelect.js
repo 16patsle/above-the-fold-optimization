@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { SelectControl } from '@wordpress/components';
 import checkPropLinkState from '../utils/checkPropLinkState';
-
-const optionRenderer = option => (
-  <option value={option.value} key={option.value} disabled={option.disabled}>
-    {option.name}
-  </option>
-);
 
 class SettingSelect extends Component {
   static defaultProps = {
@@ -18,26 +13,14 @@ class SettingSelect extends Component {
       <tr valign="top">
         <th scope="row">{this.props.header}</th>
         <td>
-          <select
+          <SelectControl
             style={this.props.style}
             className={this.props.className}
             name={this.props.name}
             value={this.props.link.value}
-            onChange={e => this.props.link.set(e.target.value)}
-          >
-            {this.props.options.map(option => {
-              if (option.options) {
-                // Option is an optgroup
-                return (
-                  <optgroup key={option.name} label={option.name}>
-                    {option.options.map(optionRenderer)}
-                  </optgroup>
-                );
-              }
-
-              return optionRenderer(option);
-            })}
-          </select>
+            onChange={this.props.link.set}
+            options={this.props.options}
+          />
           <p className="description">{this.props.description}</p>
           {this.props.children}
         </td>

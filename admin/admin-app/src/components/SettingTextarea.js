@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TextareaControl } from '@wordpress/components';
 import checkPropLinkState from '../utils/checkPropLinkState';
 
 class SettingTextarea extends Component {
@@ -13,15 +14,15 @@ class SettingTextarea extends Component {
         <th scope="row">{this.props.header}</th>
         <td style={{ paddingTop: '0px' }}>
           <h5 className="h">{this.props.title}</h5>
-          <textarea
+          <TextareaControl
             style={this.props.style}
             className={this.props.textareaClass}
             name={this.props.name}
             value={this.props.link.value}
-            onChange={e => this.props.link.set(e.target.value)}
+            onChange={this.props.link.set}
             placeholder={this.props.placeholder}
             disabled={this.props.disabled}
-          ></textarea>
+          />
           <p className="description">{this.props.description}</p>
           {this.props.children}
         </td>

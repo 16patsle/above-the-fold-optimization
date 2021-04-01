@@ -164,11 +164,11 @@ const CssView = () => {
                     options={[
                       {
                         value: 'header',
-                        name: __('Header', 'abtfr')
+                        label: __('Header', 'abtfr')
                       },
                       {
                         value: 'footer',
-                        name: __('Footer', 'abtfr')
+                        label: __('Footer', 'abtfr')
                       }
                     ]}
                     description={__(
@@ -236,26 +236,26 @@ const CssView = () => {
                     options={[
                       {
                         value: 'inline',
-                        name: __('Inline', 'abtfr')
+                        label: __('Inline', 'abtfr')
                       },
                       {
                         value: 'async',
-                        name: __('Async', 'abtfr')
+                        label: __('Async', 'abtfr')
                       },
                       {
                         value: 'async_cdn',
-                        name: sprintf(
+                        label: sprintf(
                           __('Async from Google CDN (v$%s)', 'abtfr'),
                           getOption('gwfoCdnVersion')
                         )
                       },
                       {
                         value: 'wordpress',
-                        name: __('WordPress include', 'abtfr')
+                        label: __('WordPress include', 'abtfr')
                       },
                       {
                         value: 'disabled',
-                        name: __('Disabled (remove all fonts)', 'abtfr')
+                        label: __('Disabled (remove all fonts)', 'abtfr')
                       }
                     ]}
                     description={
@@ -284,11 +284,11 @@ const CssView = () => {
                       options={[
                         {
                           value: 'header',
-                          name: __('Header', 'abtfr')
+                          label: __('Header', 'abtfr')
                         },
                         {
                           value: 'footer',
-                          name: __('Footer', 'abtfr')
+                          label: __('Footer', 'abtfr')
                         }
                       ]}
                       description={__(

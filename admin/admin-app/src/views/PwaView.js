@@ -278,15 +278,15 @@ Notification.requestPermission(function(result){
                     options={[
                       {
                         value: 'network',
-                        name: __('Network → Cache', 'abtfr')
+                        label: __('Network → Cache', 'abtfr')
                       },
                       {
                         value: 'cache',
-                        name: __('Cache → Network', 'abtfr')
+                        label: __('Cache → Network', 'abtfr')
                       },
                       {
                         value: 'event',
-                        name: __('On demand (event based)', 'abtfr')
+                        label: __('On demand (event based)', 'abtfr')
                       }
                     ]}
                     description={__(

@@ -45,24 +45,34 @@ const BuildToolView = () => {
     buildToolPrefillValues.update.replace(/^global$/, 'global.css')
   );
 
+  const showConditionalOptions =
+    conditionalValues && Object.entries(conditionalValues).length > 0;
+
   const options = [
     {
-      name: __('Do not update (store result in /package/output/)', 'abtfr'),
+      label: __('Do not update (store result in /package/output/)', 'abtfr'),
       value: ''
     },
-    { name: __('Overwrite global Critical CSS', 'abtfr'), value: 'global.css' },
-    conditionalValues && Object.entries(conditionalValues).length > 0
-      ? {
-          name: __('Conditional Critical CSS', 'abtfr'),
-          options: Object.entries(conditionalValues).map(([file, data]) => ({
-            name: sprintf(
-              __('Overwrite %s', 'abtfr'),
-              file + ' – ' + data.config.name
-            ),
-            value: file
-          }))
-        }
-      : { name: __('', 'abtfr'), value: '-', disabled: true }
+    {
+      label: __('Overwrite global Critical CSS', 'abtfr'),
+      value: 'global.css'
+    },
+    {
+      label: showConditionalOptions
+        ? __('Conditional Critical CSS', 'abtfr')
+        : '',
+      value: '-',
+      disabled: true
+    },
+    ...(showConditionalOptions
+      ? Object.entries(conditionalValues).map(([file, data]) => ({
+          label: sprintf(
+            __('Overwrite %s', 'abtfr'),
+            file + ' – ' + data.config.name
+          ),
+          value: file
+        }))
+      : [])
   ];
 
   return (

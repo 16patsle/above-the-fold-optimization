@@ -157,7 +157,7 @@ const JavascriptView = () => {
                               {
                                 value: 'little-loader',
                                 label: (
-                                  <span>
+                                  <>
                                     <a
                                       href="https://github.com/walmartlabs/little-loader"
                                       target="_blank"
@@ -177,27 +177,24 @@ const JavascriptView = () => {
                                       reference
                                     </a>
                                     )
-                                  </span>
-                                ),
-                                description: (
-                                  <span style={{ marginBottom: '5px' }}>
+                                    <br />
                                     {__(
                                       'A stable async script loader that works in old browsers.',
                                       'abtfr'
                                     )}
-                                  </span>
+                                  </>
                                 )
                               },
                               {
                                 value: 'html5',
-                                label: __(
-                                  'little-loader + HTML5 Web Worker and Fetch API based script loader with localStorage cache',
-                                  'abtfr'
-                                ),
-                                description: (
-                                  <span>
+                                label: (
+                                  <>
+                                    {__(
+                                      'little-loader + HTML5 Web Worker and Fetch API based script loader with localStorage cache',
+                                      'abtfr'
+                                    )}
                                     {!getOption('jsProxy') ? (
-                                      <span
+                                      <div
                                         className="description"
                                         style={{ color: 'red' }}
                                       >
@@ -212,9 +209,9 @@ const JavascriptView = () => {
                                           CORS
                                         </a>
                                         .
-                                      </span>
+                                      </div>
                                     ) : null}
-                                    <span className="description">
+                                    <div className="description">
                                       A state of the art script loader for
                                       optimal mobile speed, inspired by{' '}
                                       <a
@@ -230,8 +227,8 @@ const JavascriptView = () => {
                                       (by a Google engineer), a script loading
                                       concept in use by Google. With fallback to
                                       little-loader for old browsers.
-                                    </span>
-                                  </span>
+                                    </div>
+                                  </>
                                 )
                               }
                             ]}
@@ -304,11 +301,11 @@ const JavascriptView = () => {
                             options={[
                               {
                                 value: 'header',
-                                name: __('Header', 'abtfr')
+                                label: __('Header', 'abtfr')
                               },
                               {
                                 value: 'footer',
-                                name: __('Footer', 'abtfr')
+                                label: __('Footer', 'abtfr')
                               }
                             ]}
                             description={__(

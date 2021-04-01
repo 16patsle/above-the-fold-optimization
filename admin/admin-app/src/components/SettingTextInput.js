@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TextControl } from '@wordpress/components';
 import checkPropLinkState from '../utils/checkPropLinkState';
 
 class SettingTextInput extends Component {
@@ -13,13 +14,13 @@ class SettingTextInput extends Component {
       <tr valign="top">
         <th scope="row">{this.props.header}</th>
         <td>
-          <input
+          <TextControl
             type={this.props.type}
             style={this.props.style}
             className={this.props.textareaClass}
             name={this.props.name}
             value={this.props.link.value}
-            onChange={e => this.props.link.set(e.target.value)}
+            onChange={this.props.link.set}
             size={this.props.size}
             title={this.props.title}
             placeholder={this.props.placeholder}
