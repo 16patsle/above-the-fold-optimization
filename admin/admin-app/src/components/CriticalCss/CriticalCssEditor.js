@@ -17,7 +17,9 @@ const CriticalCssEditor = props => {
     <li
       className={
         'menu-item menu-item-depth-0 menu-item-page pending ' +
-        (editorLoaded || !props.advancedEditor ? 'menu-item-edit-active' : 'menu-item-edit-inactive')
+        (editorLoaded || !props.advancedEditor
+          ? 'menu-item-edit-active'
+          : 'menu-item-edit-inactive')
       }
       style={{ display: 'list-item', position: 'relative', top: '0px' }}
     >
