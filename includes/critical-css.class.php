@@ -128,7 +128,7 @@ class ABTFR_Critical_CSS {
                                     }
                                     $condition = trim($matches[2][$n]);
                                     if ($condition === '') {
-                                        continue; // ignore
+                                        break; // ignore
                                     }
                                     if (strpos($condition, ':') !== false) {
                                         $split = explode(':', $condition, 2);
@@ -177,7 +177,7 @@ class ABTFR_Critical_CSS {
                                                                 ) .
                                                                 '). The parameters should be JSON encoded, e.g. <code>"param1","param2"</code>.'
                                                         );
-                                                        continue;
+                                                        break;
                                                     }
                                                     foreach (
                                                         $data
@@ -247,7 +247,7 @@ class ABTFR_Critical_CSS {
                                                             ) .
                                                             '). The parameters should be JSON encoded, e.g. <code>"param1","param2"</code>.'
                                                     );
-                                                    continue;
+                                                    break;
                                                 }
 
                                                 foreach (
@@ -515,7 +515,7 @@ class ABTFR_Critical_CSS {
                                             ) .
                                             '). The parameters should be JSON encoded, e.g. <code>"param1","param2"</code>.'
                                     );
-                                    continue;
+                                    break;
                                 }
                             }
                             //$data = explode(',',$datasplit[1]);
@@ -717,7 +717,7 @@ class ABTFR_Critical_CSS {
                                 $condition_fn = rtrim($condition_key, '()');
                                 if (!function_exists($condition_fn)) {
                                     // condition not recognized
-                                    continue;
+                                    break;
                                 }
 
                                 $skip = false;
@@ -730,7 +730,7 @@ class ABTFR_Critical_CSS {
                                 }
 
                                 if ($skip) {
-                                    continue;
+                                    break;
                                 }
 
                                 if (

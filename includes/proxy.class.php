@@ -173,7 +173,9 @@ class ABTFR_Proxy {
                             ]
                             : array()
                     ),
-                    create_function('$value', 'return trim($value) !== "";')
+                    function ($value) {
+                        return trim($value) !== '';
+                    }
                 )
             );
         }
