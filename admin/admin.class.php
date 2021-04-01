@@ -397,7 +397,7 @@ class ABTFR_Admin {
         $react_script_asset = file_exists(__DIR__ . $react_script_asset_path)
             ? require __DIR__ . $react_script_asset_path
             : array(
-                'dependencies' => array(),
+                'dependencies' => array('wp-components'),
                 'version' => filemtime(__DIR__ . $react_script_path)
             );
 
@@ -409,6 +409,9 @@ class ABTFR_Admin {
             $react_script_asset['version'],
             true
         );
+
+        // Enqueue wp-components
+        wp_enqueue_style('wp-components');
 
         // Load JS and CSS chunks from asset manifest
         $asset_manifest_json = array();
