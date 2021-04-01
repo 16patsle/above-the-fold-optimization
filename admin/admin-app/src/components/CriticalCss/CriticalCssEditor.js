@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 import checkPropLinkState from '../../utils/checkPropLinkState';
 import { lgCode, utmString } from '../../utils/globalVars';
-import CssEditor from '../CssEditor';
+import LazyCssEditor from '../LazyCssEditor';
 import sizeFormat from '../../utils/sizeFormat';
 import byteCount from '../../utils/byteCount';
 import './CriticalCssEditor.css';
@@ -78,7 +78,7 @@ const CriticalCssEditor = props => {
       >
         {props.advancedEditor ? (
           <>
-            <CssEditor
+            <LazyCssEditor
               link={props.link}
               editorDidMount={() => {
                 setEditorLoaded(true);
