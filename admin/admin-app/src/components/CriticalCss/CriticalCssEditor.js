@@ -17,7 +17,7 @@ const CriticalCssEditor = props => {
     <li
       className={
         'menu-item menu-item-depth-0 menu-item-page pending ' +
-        (editorLoaded ? 'menu-item-edit-active' : 'menu-item-edit-inactive')
+        (editorLoaded || !props.advancedEditor ? 'menu-item-edit-active' : 'menu-item-edit-inactive')
       }
       style={{ display: 'list-item', position: 'relative', top: '0px' }}
     >
@@ -48,7 +48,7 @@ const CriticalCssEditor = props => {
               )}
             </span>
           </span>
-          {!editorLoaded && (
+          {!editorLoaded && props.advancedEditor && (
             <span className="is-submenu loading-editor">
               <span style={{ color: '#ea4335' }}>Loading editor...</span>
             </span>
