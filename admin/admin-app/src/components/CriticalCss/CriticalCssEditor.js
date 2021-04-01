@@ -30,7 +30,7 @@ const CriticalCssEditor = props => {
       >
         <div
           className="menu-item-handle"
-          style={{ width: 'auto', cursor: 'pointer' }}
+          style={{ maxWidth: 'unset', cursor: 'pointer' }}
         >
           <span className="item-title" title={props.itemTitle}>
             <span className="menu-item-title">{props.title}</span>
