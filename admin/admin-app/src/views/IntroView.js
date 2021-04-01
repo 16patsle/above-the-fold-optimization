@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { createInterpolateElement } from '@wordpress/element';
 import {
   homeUrl,
   adminUrl,
@@ -23,8 +24,7 @@ class IntroView extends Component {
       homeUrl
     )}`;
 
-    const monitorUrl = new URL(adminUrl + 'admin.php');
-    monitorUrl.searchParams.append('page', 'abtfr-monitor');
+    const monitorUrl = new URL(adminUrl + 'admin.php?page=abtfr#/monitor');
 
     return (
       <PageContent header={__('Introduction', 'abtfr')}>
@@ -32,52 +32,74 @@ class IntroView extends Component {
           <title>Google PageSpeed Optimization {siteTitle}</title>
         </Helmet>
         <p>
-          Take a moment to explore the abilities of this plugin. This plugin is
-          not a simple <code>on/off</code> plugin so do not expect a result by
-          simply activating the plugin.
+          {createInterpolateElement(
+            __(
+              'Take a moment to explore the abilities of this plugin. This plugin is not a simple <code>on/off</code> plugin so do not expect a result by simply activating the plugin.',
+              'abtfr'
+            ),
+            {
+              code: <code />
+            }
+          )}
         </p>
         <p>
-          This plugin is intended as a toolkit to achieve <u>the best</u>{' '}
-          website performance and it is focussed on Google, including the
-          ability to achieve a Google PageSpeed 100 score.
+          {createInterpolateElement(
+            __(
+              'This plugin is intended as a toolkit to achieve <u>the best</u> website performance and it is focussed on Google, including the ability to achieve a Google PageSpeed 100 score.',
+              'abtfr'
+            ),
+            {
+              u: <u />
+            }
+          )}
         </p>
         <p>
-          Every website is different and has different requirements to achieve
-          the best performance. This plugin offers many configuration options
-          {/* and goes a step further than many premium optimization plugins*/}.
+          {__(
+            'Every website is different and has different requirements to achieve the best performance. This plugin offers many configuration options.',
+            'abtfr'
+          )}
         </p>
         <p>
-          <strong>This plugin is not intended for easy usage.</strong> Please
-          seek expert help if you do not understand how to use this plugin.{' '}
-          <a
-            href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-              'wordpress pagespeed optimization service'
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Search Google
-          </a>{' '}
-          for optimization experts or contact the author of this plugin:{' '}
-          <u>info@optimization.team</u>.
+          {createInterpolateElement(
+            __(
+              '<strong>This plugin is not intended for easy usage.</strong> Please seek expert help if you do not understand how to use this plugin. <a>Search Google</a> for optimization experts or contact the author of this plugin: <u>info@optimization.team</u>.',
+              'abtfr'
+            ),
+            {
+              strong: <strong />,
+              a: (
+                <a
+                  href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                    'wordpress pagespeed optimization service'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+              u: <u />
+            }
+          )}
         </p>
         <p>
-          This plugin is offered for free. Do not expect support. If you
-          experience a problem or have an idea for better performance, we are
-          thankful if you{' '}
-          <a
-            href="https://wordpress.org/support/plugin/abtfr"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            report it
-          </a>{' '}
-          on the WordPress forums. Please do not expect free help to achieve a
-          Google PageSpeed 100 score.
+          {createInterpolateElement(
+            __(
+              'This plugin is offered for free. Do not expect support. If you experience a problem or have an idea for better performance, we are thankful if you <a>report it</a> on the WordPress forums. Please do not expect free help to achieve a Google PageSpeed 100 score.',
+              'abtfr'
+            ),
+            {
+              a: (
+                <a
+                  href="https://wordpress.org/support/plugin/abtfr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              )
+            }
+          )}
         </p>
 
         <h1 style={{ marginBottom: '10px', paddingBottom: '0px' }}>
-          Roadmap to achieve a Google PageSpeed 100 score
+          {__('Roadmap to achieve a Google PageSpeed 100 score', 'abtfr')}
         </h1>
         <h3
           style={{
@@ -87,13 +109,13 @@ class IntroView extends Component {
             borderBottom: 'solid 1px #efefef'
           }}
         >
-          Step 1 - check the state of your website
+          {__('Step 1 - check the state of your website', 'abtfr')}
         </h3>
         <p>
-          Before you start using this plugin: test your website for problems and
-          create a priority list with the issues that need to be resolved. This
-          plugin offers access to several tests from the PageSpeed menu in the
-          top admin bar.
+          {__(
+            'Before you start using this plugin: test your website for problems and create a priority list with the issues that need to be resolved. This plugin offers access to several tests from the PageSpeed menu in the top admin bar.',
+            'abtfr'
+          )}
         </p>
         <p>
           <a
@@ -102,7 +124,7 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Google Full Spectrum Test
+            {__('Google Full Spectrum Test', 'abtfr')}
           </a>
           <a
             className="button button-small"
@@ -112,7 +134,7 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Google PageSpeed Test
+            {__('Google PageSpeed Test', 'abtfr')}
           </a>
           <a
             className="button button-small"
@@ -122,7 +144,7 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Google Mobile Test
+            {__('Google Mobile Test', 'abtfr')}
           </a>
           <a
             className="button button-small"
@@ -132,7 +154,7 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Securi Server Response Time
+            {__('Sucuri Server Response Time', 'abtfr')}
           </a>
           <a
             className="button button-small"
@@ -142,7 +164,7 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            WebPageTest.org
+            {__('WebPageTest.org', 'abtfr')}
           </a>
           <a
             className="button button-small"
@@ -150,7 +172,7 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            GTmetrix
+            {__('GTmetrix', 'abtfr')}
           </a>
           <a
             className="button button-small"
@@ -160,7 +182,7 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            SecurityHeaders.io
+            {__('SecurityHeaders.io', 'abtfr')}
           </a>
           <a
             className="button button-small"
@@ -170,7 +192,7 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            SSL test
+            {__('SSL test', 'abtfr')}
           </a>
           <a
             className="button button-small"
@@ -178,14 +200,21 @@ class IntroView extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            DNS test
+            {__('DNS test', 'abtfr')}
           </a>
         </p>
 
         <Info color="yellow" style={{ marginBottom: '10px' }}>
           <p style={{ margin: '0px' }}>
-            <strong>Tip:</strong> If you can resolve small issues fast, start
-            with the smaller issues, it may help to resolve the larger issues.
+            {createInterpolateElement(
+              __(
+                '<strong>Tip:</strong> If you can resolve small issues fast, start with the smaller issues, it may help to resolve the larger issues.',
+                'abtfr'
+              ),
+              {
+                strong: <strong />
+              }
+            )}
           </p>
         </Info>
 
@@ -197,81 +226,88 @@ class IntroView extends Component {
             borderBottom: 'solid 1px #efefef'
           }}
         >
-          Step 2 - server optimization
+          {__('Step 2 - server optimization', 'abtfr')}
         </h3>
         <p>
-          Start with the fundament of your website: the server. Make sure that
-          the best{' '}
-          <a
-            href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-              'gzip configuration'
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            gzip settings
-          </a>{' '}
-          and{' '}
-          <a
-            href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-              'http cache headers configuration'
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            HTTP cache headers
-          </a>{' '}
-          are installed and if the server is slow, find ways to improve the
-          speed of the server by optimizing WordPress plugins or by using a{' '}
-          <a
-            href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-              'best wordpress full page cache' + new Date().getFullYear()
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            full page cache
-          </a>{' '}
-          solution. It may be required to choose a better hosting plan or to
-          move to a different hosting provider. Hosting reliability and
-          performance is a major aspect for achieving a good performance and
-          stability reputation in Google. Once you lose a stable hosting
-          reputation, it may cause a hidden penalty and you may not get your
-          reputation back for years.
+          {createInterpolateElement(
+            __(
+              'Start with the fundament of your website: the server. Make sure that the best <a1>gzip settings</a1> and <a2>HTTP cache headers</a2> are installed and if the server is slow, find ways to improve the speed of the server by optimizing WordPress plugins or by using a <a3>full page cache</a3> solution. It may be required to choose a better hosting plan or to move to a different hosting provider. Hosting reliability and performance is a major aspect for achieving a good performance and stability reputation in Google. Once you lose a stable hosting reputation, it may cause a hidden penalty and you may not get your reputation back for years.',
+              'abtfr'
+            ),
+            {
+              a1: (
+                <a
+                  href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                    'gzip configuration'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+              a2: (
+                <a
+                  href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                    'http cache headers configuration'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+              a3: (
+                <a
+                  href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                    'best wordpress full page cache' + new Date().getFullYear()
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              )
+            }
+          )}
         </p>
         <p>
-          Choose professional server configuration over WordPress plugins to
-          achieve the best performance.
+          {__(
+            'Choose professional server configuration over WordPress plugins to achieve the best performance.',
+            'abtfr'
+          )}
         </p>
         <p>
-          Google{' '}
-          <a
-            href={`https://developers.google.com/speed/docs/insights/Server?hl=${lgCode}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            officially advises
-          </a>{' '}
-          a maximum server response time of 0,2 seconds (200ms). Test your
-          global server response times{' '}
-          <a
-            href={`https://performance.sucuri.net/domain/${encodeURIComponent(
-              new URL(homeUrl).host.replace('www', '')
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            here
-          </a>
-          .
+          {createInterpolateElement(
+            __(
+              'Google <a1>officially advises</a1> a maximum server response time of 0,2 seconds (200ms). Test your global server response times <a2>here</a2>.',
+              'abtfr'
+            ),
+            {
+              a1: (
+                <a
+                  href={`https://developers.google.com/speed/docs/insights/Server?hl=${lgCode}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+              a2: (
+                <a
+                  href={`https://performance.sucuri.net/domain/${encodeURIComponent(
+                    new URL(homeUrl).host.replace('www', '')
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              )
+            }
+          )}
         </p>
         <Info color="yellow" style={{ marginBottom: '10px' }}>
           <p style={{ margin: '0px' }}>
-            <strong>Tip:</strong> Find out what exactly you need and write a
-            single detailed request to your hosting provider for professional
-            installation. If the server has a speed issue, simply ask your host
-            to achieve a maximum server speed of 0,2 seconds (200ms) as advised
-            by Google.
+            {createInterpolateElement(
+              __(
+                '<strong>Tip:</strong> Find out what exactly you need and write a single detailed request to your hosting provider for professional installation. If the server has a speed issue, simply ask your host to achieve a maximum server speed of 0,2 seconds (200ms) as advised by Google.',
+                'abtfr'
+              ),
+              {
+                strong: <strong />
+              }
+            )}
           </p>
         </Info>
 
@@ -283,22 +319,26 @@ class IntroView extends Component {
             borderBottom: 'solid 1px #efefef'
           }}
         >
-          Step 3 - Google PageSpeed optimization
+          {__('Step 3 - Google PageSpeed optimization', 'abtfr')}
         </h3>
         <p>
-          Test your website at{' '}
-          <a
-            href={`https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
-              homeUrl
-            )}&hl=${lgCode}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Google PageSpeed Insights
-          </a>{' '}
-          and start resolving the issues. Google offers detailed documentation
-          for each issue and this plugin offers the tools to resolve most
-          issues.
+          {createInterpolateElement(
+            __(
+              'Test your website at <a>Google PageSpeed Insights</a> and start resolving the issues. Google offers detailed documentation for each issue and this plugin offers the tools to resolve most issues.',
+              'abtfr'
+            ),
+            {
+              a: (
+                <a
+                  href={`https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
+                    homeUrl
+                  )}&hl=${lgCode}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              )
+            }
+          )}
         </p>
 
         <h3
@@ -309,14 +349,18 @@ class IntroView extends Component {
             borderBottom: 'solid 1px #efefef'
           }}
         >
-          Step 4 - setup a website monitor
+          {__('Step 4 - setup a website monitor', 'abtfr')}
         </h3>
         <p>
-          Once the performance and quality of your website has achieved a
-          perfect state, it is required to maintain it to achieve an optimal
-          reliability, quality and performance reputation in Google. Go to the{' '}
-          <a href={monitorUrl}>Monitor tab</a> for information about website
-          monitoring tools.
+          {createInterpolateElement(
+            __(
+              'Once the performance and quality of your website has achieved a perfect state, it is required to maintain it to achieve an optimal reliability, quality and performance reputation in Google. Go to the <a>Monitor tab</a> for information about website monitoring tools.',
+              'abtfr'
+            ),
+            {
+              a: <a href={monitorUrl} />
+            }
+          )}
         </p>
       </PageContent>
     );
