@@ -145,17 +145,17 @@ const ProxyView = () => {
                     link={linkOptionState('jsProxyPreload')}
                     description={createInterpolateElement(
                       __(
-                        'Enter the exact url or JSON config object [<a>?</a>] of external scripts to preload for "script injected" async script capture, e.g. <code>https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js</code>. This setting will enable the proxy to load the cache url instead of the WordPress PHP proxy url. One url or JSON object per line.',
+                        'Enter the exact url or JSON config object<help/> of external scripts to preload for "script injected" async script capture, e.g. <code>https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js</code>. This setting will enable the proxy to load the cache url instead of the WordPress PHP proxy url. One url or JSON object per line.',
                         'abtfr'
                       ),
                       {
                         code: <code />,
-                        a: (
-                          <a
-                            href="#jsoncnf"
-                            onClick={scrollToElement}
-                            title={__('More information', 'abtfr')}
-                          />
+                        help: (<sup>
+                          [<a
+                          href="#jsoncnf"
+                          onClick={scrollToElement}
+                          title={__('More information', 'abtfr')}>?</a>]
+                        </sup>
                         )
                       }
                     )}
@@ -224,11 +224,18 @@ const ProxyView = () => {
                     link={linkOptionState('cssProxyPreload')}
                     description={createInterpolateElement(
                       __(
-                        'Enter the exact url or JSON config object of external stylesheets to preload for "script injected" async stylesheet capture, e.g. <code>http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css</code>. This setting will enable the proxy to load the cache url instead of the WordPress PHP proxy url. One url or JSON object per line.',
+                        'Enter the exact url or JSON config object<help/> of external stylesheets to preload for "script injected" async stylesheet capture, e.g. <code>http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css</code>. This setting will enable the proxy to load the cache url instead of the WordPress PHP proxy url. One url or JSON object per line.',
                         'abtfr'
                       ),
                       {
-                        code: <code />
+                        code: <code />,
+                        help: (<sup>
+                          [<a
+                          href="#jsoncnf"
+                          onClick={scrollToElement}
+                          title={__('More information', 'abtfr')}>?</a>]
+                        </sup>
+                        )
                       }
                     )}
                   />
