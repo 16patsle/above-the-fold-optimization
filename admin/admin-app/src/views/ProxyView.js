@@ -20,6 +20,7 @@ import SettingTextInput from '../components/SettingTextInput';
 import SubmitButton from '../components/SubmitButton';
 import SettingInnerTable from '../components/SettingInnerTable';
 import scrollToElement from '../utils/scrollToElement';
+import Loading from '../components/Loading';
 
 const emptyCacheUrl = new URL(adminUrl + 'admin.php');
 emptyCacheUrl.searchParams.append('page', 'abtfr-proxy');
@@ -337,7 +338,7 @@ const ProxyView = () => {
           </h3>
           {cacheStatsError && <div>Error: {cacheStatsError}</div>}
           {!cacheStats && !cacheStatsError ? (
-            <div>Loading...</div>
+            <div><Loading/></div>
           ) : (
             <table>
               <tbody>

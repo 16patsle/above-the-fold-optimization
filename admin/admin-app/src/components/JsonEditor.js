@@ -6,6 +6,7 @@ import 'jsoneditor/dist/jsoneditor.css';
 import './JsonEditor.css';
 import JsonEditorIconFix from './JsonEditorIconFix';
 import checkPropLinkState from '../utils/checkPropLinkState';
+import Loading from './Loading';
 
 class JsonEditor extends Component {
   static defaultProps = {
@@ -191,7 +192,7 @@ class JsonEditor extends Component {
         <JsonEditorIconFix />
         <div ref={this.editorRef}>
           <div className="loading-json-editor">
-            {__('Loading JSON editor...', 'abtfr')}
+            <Loading text={__('Loading JSON editor...', 'abtfr')} />
           </div>
         </div>
         <div style={{ float: 'right', marginTop: '5px' }}>

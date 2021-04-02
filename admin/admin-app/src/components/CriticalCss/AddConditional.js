@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import ConditionalSelect from './ConditionalSelect';
+import Loading from '../Loading';
 import './AddConditional.css';
 
 const AddConditional = props => {
@@ -92,7 +93,7 @@ const AddConditional = props => {
           }}
         >
           &nbsp;
-          {loading && 'Loading...'}
+          {loading && <Loading/>}
         </div>
       </div>
     </div>

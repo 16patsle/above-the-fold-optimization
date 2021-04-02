@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { __, sprintf } from '@wordpress/i18n';
 import ErrorBoundary from './ErrorBoundary';
+import Loading from './Loading';
 
 const LoadingWrapper = props => {
   if (props.error) {
@@ -9,7 +10,11 @@ const LoadingWrapper = props => {
   }
 
   if (!props.shouldRender) {
-    return <div>{__('Loading...', 'abtfr')}</div>;
+    return (
+      <div>
+        <Loading/>
+      </div>
+    );
   }
 
   return (
