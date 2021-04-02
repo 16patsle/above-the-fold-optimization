@@ -1,15 +1,19 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
 import './index.css';
-import App from './App';
+import Loading from './components/Loading';
 //import registerServiceWorker from './registerServiceWorker';
 
+const HashRouter = React.lazy(() => import('react-router-dom/HashRouter'));
+const App = React.lazy(() => import('./App'));
+
 ReactDOM.render(
-  <HashRouter>
-    <App />
-  </HashRouter>,
+  <Suspense fallback={<Loading />}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Suspense>,
   document.getElementById('root')
 );
