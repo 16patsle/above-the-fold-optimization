@@ -87,7 +87,9 @@ class IntroView extends Component {
     return (
       <PageContent header={__('Introduction', 'abtfr')}>
         <Helmet>
-          <title>{__('Google PageSpeed Optimization', 'abtfr')} {siteTitle}</title>
+          <title>
+            {__('Google PageSpeed Optimization', 'abtfr')} {siteTitle}
+          </title>
         </Helmet>
         <p>
           {createInterpolateElement(
