@@ -10,14 +10,12 @@ class SettingRadio extends Component {
         <th scope="row">{this.props.header}</th>
         <td>
           <RadioControl
+            help={this.props.description}
             options={this.props.radios}
             name={this.props.name}
             selected={this.props.link.value}
             onChange={this.props.link.set}
           />
-          {this.props.description && (
-            <p className="description">{this.props.description}</p>
-          )}
           {this.props.children}
         </td>
       </tr>

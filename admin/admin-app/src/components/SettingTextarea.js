@@ -13,8 +13,9 @@ class SettingTextarea extends Component {
       <tr valign="top">
         <th scope="row">{this.props.header}</th>
         <td style={{ paddingTop: '0px' }}>
-          <h5 className="h">{this.props.title}</h5>
           <TextareaControl
+            label={this.props.title}
+            help={this.props.description}
             style={this.props.style}
             className={this.props.textareaClass}
             name={this.props.name}
@@ -23,7 +24,6 @@ class SettingTextarea extends Component {
             placeholder={this.props.placeholder}
             disabled={this.props.disabled}
           />
-          <p className="description">{this.props.description}</p>
           {this.props.children}
         </td>
       </tr>

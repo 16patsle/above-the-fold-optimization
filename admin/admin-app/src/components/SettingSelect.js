@@ -14,6 +14,7 @@ class SettingSelect extends Component {
         <th scope="row">{this.props.header}</th>
         <td>
           <SelectControl
+            help={this.props.description}
             style={this.props.style}
             className={this.props.className}
             name={this.props.name}
@@ -21,7 +22,6 @@ class SettingSelect extends Component {
             onChange={this.props.link.set}
             options={this.props.options}
           />
-          <p className="description">{this.props.description}</p>
           {this.props.children}
         </td>
       </tr>

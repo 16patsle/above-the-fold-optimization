@@ -14,6 +14,7 @@ class SettingNumberInput extends Component {
         <th scope="row">{this.props.header}</th>
         <td>
           <TextControl
+            help={this.props.description}
             type="number"
             min={this.props.min}
             max={this.props.max}
@@ -26,7 +27,6 @@ class SettingNumberInput extends Component {
             placeholder={this.props.placeholder}
             disabled={this.props.disabled}
           />
-          <p className="description">{this.props.description}</p>
           {this.props.children}
         </td>
       </tr>

@@ -16,11 +16,11 @@ class SettingCheckbox extends Component {
         <td>
           <CheckboxControl
             label={this.props.label}
+            help={this.props.description}
             name={this.props.name}
             checked={this.props.link.value}
             onChange={this.props.link.set}
           />
-          <p className="description">{this.props.description}</p>
           {this.props.children}
         </td>
       </tr>

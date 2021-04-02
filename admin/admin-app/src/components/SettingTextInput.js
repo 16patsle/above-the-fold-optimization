@@ -15,6 +15,7 @@ class SettingTextInput extends Component {
         <th scope="row">{this.props.header}</th>
         <td>
           <TextControl
+            help={this.props.description}
             type={this.props.type}
             style={this.props.style}
             className={this.props.textareaClass}
@@ -27,7 +28,6 @@ class SettingTextInput extends Component {
             disabled={this.props.disabled}
             pattern={this.props.pattern}
           />
-          <p className="description">{this.props.description}</p>
           {this.props.children}
         </td>
       </tr>
