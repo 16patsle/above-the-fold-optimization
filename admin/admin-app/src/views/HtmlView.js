@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { createInterpolateElement } from '@wordpress/element';
 import { ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import { adminUrl, siteTitle, abtfrAdminNonce } from '../utils/globalVars';
@@ -22,15 +23,24 @@ SyntaxHighlighter.registerLanguage('php', php);
 const wpHtmlSearchReplaceExample = `
 function your_html_search_and_replace( &$search, &$replace, &$search_regex, &$replace_regex ) {
 
-	# regular string replace
+	# ${
+    /* translators: comment in example code */
+    __('regular string replace', 'abtfr')
+  }
 	$search[] = 'string';
 	$replace[] = '';
 
-	# regex replace
+	# ${
+    /* translators: comment in example code */
+    __('regex replace', 'abtfr')
+  }
 	$search_regex[] = '|regex (string)|i';
 	$replace_regex[] = '$1';
 
-	return $search; // required
+	return $search; // ${
+    /* translators: comment in example code */
+    __('required', 'abtfr')
+  }
 }
 
 add_filter( 'abtfr_html_replace', 'your_html_search_and_replace', 10, 4 );
@@ -60,27 +70,31 @@ const HtmlView = () => {
                 header={__('Minify HTML', 'abtfr')}
                 name="abtfr[html_minify]"
                 link={linkOptionState('htmlMinify')}
-                description={
-                  <span>
-                    Compress HTML using an enhanced version of{' '}
-                    <ExternalLink href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php">
-                      HTML.php
-                    </ExternalLink>
-                    . This option will reduce the size of HTML but may require a
-                    full page cache to maintain an optimal server speed.
-                  </span>
-                }
+                description={createInterpolateElement(
+                  __(
+                    'Compress HTML using an enhanced version of <a>HTML.php</a>. This option will reduce the size of HTML but may require a full page cache to maintain an optimal server speed.',
+                    'abtfr'
+                  ),
+                  {
+                    a: (
+                      <ExternalLink href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php" />
+                    )
+                  }
+                )}
               />
               <SettingCheckbox
                 header={__('Strip HTML comments', 'abtfr')}
                 name="abtfr[html_comments]"
                 link={linkOptionState('htmlComments')}
-                description={
-                  <span>
-                    Remove HTML comments from HTML, e.g.{' '}
-                    <code>&lt;!-- comment --&gt;</code>.
-                  </span>
-                }
+                description={createInterpolateElement(
+                  __(
+                    'Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>',
+                    'abtfr'
+                  ),
+                  {
+                    code: <code />
+                  }
+                )}
               />
               <SettingTextarea
                 title="&nbsp;Preserve List"
@@ -132,20 +146,27 @@ const HtmlView = () => {
           <Info color="yellow" style={{ marginTop: '30px' }}>
             <SearchReplaceExample title={__('Click to select', 'abtfr')}>
               {{
-                string: __(
-                  '"search":"string to match","replace":"newstring"',
+                string: `{"search":"${__(
+                  'string to match',
                   'abtfr'
-                ),
-                regex: __(
-                  '{"search":"|string to (match)|i","replace":"newstring $1","regex":true}',
+                )}","replace":"${__('newstring', 'abtfr')}"}`,
+                regex: `{"search":"|${__(
+                  'string to (match)',
                   'abtfr'
-                )
+                )}|i","replace":"${__('newstring', 'abtfr')} $1","regex":true}`
               }}
             </SearchReplaceExample>
           </Info>
           <p>
-            You can also add a search and replace configuration using the
-            WordPress filter hook <code>abtfr_html_replace</code>.
+            {createInterpolateElement(
+              __(
+                'You can also add a search and replace configuration using the WordPress filter hook <code>abtfr_html_replace</code>.',
+                'abtfr'
+              ),
+              {
+                code: <code />
+              }
+            )}
           </p>
           <div id="wp_html_search_replace_example">
             <SyntaxHighlighter
