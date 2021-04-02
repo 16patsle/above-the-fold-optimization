@@ -64,7 +64,8 @@ const AddConditional = props => {
             <tr valign="top">
               <td>
                 <ConditionalSelect
-                  conditionalOptions={props.conditionalOptions}
+                  conditionalOptionValues={props.conditionalOptions[0]}
+                  conditionalOptionGroups={props.conditionalOptions[1]}
                   link={{ value: conditions, set: setConditions }}
                 />
                 <p className="description">
