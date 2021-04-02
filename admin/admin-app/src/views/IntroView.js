@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { createInterpolateElement } from '@wordpress/element';
+import { Button } from '@wordpress/components';
 import {
   homeUrl,
   adminUrl,
@@ -11,25 +12,82 @@ import {
 } from '../utils/globalVars';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
+import ExternalLink from '../components/ExternalLink';
 
 const baseHomeUrl = new URL(homeUrl).host.replace('www', '');
 
+// Google uses a different host for the US
+const thinkHost = `https://testmysite.${
+  googleIntlCode === 'en-us' ? 'think' : ''
+}withgoogle.com/`;
+const thinkUrl = `${thinkHost}intl/${googleIntlCode}?url=${encodeURIComponent(
+  homeUrl
+)}`;
+
+const monitorUrl = new URL(adminUrl + 'admin.php?page=abtfr#/monitor');
+
+const makeGoogleUrl = query =>
+  `https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+    query
+  )}`;
+
+const testButtons = [
+  {
+    text: __('Google Full Spectrum Test', 'abtfr'),
+    href: `${thinkUrl}&hl=${lgCode}`
+  },
+  {
+    text: __('Google PageSpeed Test', 'abtfr'),
+    href: `https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
+      homeUrl
+    )}&hl=${lgCode}`
+  },
+  {
+    text: __('Google Mobile Test', 'abtfr'),
+    href: `https://search.google.com/search-console/mobile-friendly?url=${encodeURIComponent(
+      homeUrl
+    )}&hl=${lgCode}`
+  },
+  {
+    text: __('Sucuri Server Response Time', 'abtfr'),
+    href: `https://performance.sucuri.net/domain/${encodeURIComponent(
+      baseHomeUrl
+    )}`
+  },
+  {
+    text: __('WebPageTest.org', 'abtfr'),
+    href: `http://www.webpagetest.org/?url=${encodeURIComponent(homeUrl)}`
+  },
+  {
+    text: __('GTmetrix', 'abtfr'),
+    href: `https://gtmetrix.com/?url=${encodeURIComponent(homeUrl)}`
+  },
+  {
+    text: __('SecurityHeaders.io', 'abtfr'),
+    href: `https://securityheaders.io/?q=${encodeURIComponent(
+      homeUrl
+    )}&hide=on&followRedirects=on`
+  },
+  {
+    text: __('SSL test', 'abtfr'),
+    href: `https://www.ssllabs.com/ssltest/analyze.html?d=${encodeURIComponent(
+      homeUrl
+    )}`
+  },
+  {
+    text: __('DNS test', 'abtfr'),
+    href: `http://www.intodns.com/${encodeURIComponent(baseHomeUrl)}`
+  }
+];
+
+const currYear = new Date().getFullYear();
+
 class IntroView extends Component {
   render() {
-    // Google uses a different host for the US
-    const thinkHost = `https://testmysite.${
-      googleIntlCode === 'en-us' ? 'think' : ''
-    }withgoogle.com/`;
-    const thinkUrl = `${thinkHost}intl/${googleIntlCode}?url=${encodeURIComponent(
-      homeUrl
-    )}`;
-
-    const monitorUrl = new URL(adminUrl + 'admin.php?page=abtfr#/monitor');
-
     return (
       <PageContent header={__('Introduction', 'abtfr')}>
         <Helmet>
-          <title>Google PageSpeed Optimization {siteTitle}</title>
+          <title>{__('Google PageSpeed Optimization', 'abtfr')} {siteTitle}</title>
         </Helmet>
         <p>
           {createInterpolateElement(
@@ -68,12 +126,10 @@ class IntroView extends Component {
             {
               strong: <strong />,
               a: (
-                <a
-                  href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                <ExternalLink
+                  href={makeGoogleUrl(
                     'wordpress pagespeed optimization service'
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  )}
                 />
               ),
               u: <u />
@@ -88,11 +144,7 @@ class IntroView extends Component {
             ),
             {
               a: (
-                <a
-                  href="https://wordpress.org/support/plugin/abtfr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
+                <ExternalLink href="https://wordpress.org/support/plugin/abtfr" />
               )
             }
           )}
@@ -118,90 +170,17 @@ class IntroView extends Component {
           )}
         </p>
         <p>
-          <a
-            className="button button-small"
-            href={`${thinkUrl}&hl=${lgCode}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('Google Full Spectrum Test', 'abtfr')}
-          </a>
-          <a
-            className="button button-small"
-            href={`https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
-              homeUrl
-            )}&hl=${lgCode}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('Google PageSpeed Test', 'abtfr')}
-          </a>
-          <a
-            className="button button-small"
-            href={`https://search.google.com/search-console/mobile-friendly?url=${encodeURIComponent(
-              homeUrl
-            )}&hl=${lgCode}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('Google Mobile Test', 'abtfr')}
-          </a>
-          <a
-            className="button button-small"
-            href={`https://performance.sucuri.net/domain/${encodeURIComponent(
-              baseHomeUrl
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('Sucuri Server Response Time', 'abtfr')}
-          </a>
-          <a
-            className="button button-small"
-            href={`http://www.webpagetest.org/?url=${encodeURIComponent(
-              homeUrl
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('WebPageTest.org', 'abtfr')}
-          </a>
-          <a
-            className="button button-small"
-            href={`https://gtmetrix.com/?url=${encodeURIComponent(homeUrl)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('GTmetrix', 'abtfr')}
-          </a>
-          <a
-            className="button button-small"
-            href={`https://securityheaders.io/?q=${encodeURIComponent(
-              homeUrl
-            )}&hide=on&followRedirects=on`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('SecurityHeaders.io', 'abtfr')}
-          </a>
-          <a
-            className="button button-small"
-            href={`https://www.ssllabs.com/ssltest/analyze.html?d=${encodeURIComponent(
-              homeUrl
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('SSL test', 'abtfr')}
-          </a>
-          <a
-            className="button button-small"
-            href={`http://www.intodns.com/${encodeURIComponent(baseHomeUrl)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {__('DNS test', 'abtfr')}
-          </a>
+          {testButtons.map(({ text, href }) => (
+            <Button
+              isSecondary
+              isSmall
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {text}
+            </Button>
+          ))}
         </p>
 
         <Info color="yellow" style={{ marginBottom: '10px' }}>
@@ -235,31 +214,17 @@ class IntroView extends Component {
               'abtfr'
             ),
             {
-              a1: (
-                <a
-                  href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-                    'gzip configuration'
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              ),
+              a1: <ExternalLink href={makeGoogleUrl('gzip configuration')} />,
               a2: (
-                <a
-                  href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-                    'http cache headers configuration'
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <ExternalLink
+                  href={makeGoogleUrl('http cache headers configuration')}
                 />
               ),
               a3: (
-                <a
-                  href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-                    'best wordpress full page cache' + new Date().getFullYear()
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <ExternalLink
+                  href={makeGoogleUrl(
+                    `best wordpress full page cache ${currYear}`
+                  )}
                 />
               )
             }
@@ -279,19 +244,15 @@ class IntroView extends Component {
             ),
             {
               a1: (
-                <a
+                <ExternalLink
                   href={`https://developers.google.com/speed/docs/insights/Server?hl=${lgCode}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 />
               ),
               a2: (
-                <a
+                <ExternalLink
                   href={`https://performance.sucuri.net/domain/${encodeURIComponent(
-                    new URL(homeUrl).host.replace('www', '')
+                    baseHomeUrl
                   )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 />
               )
             }
@@ -329,12 +290,10 @@ class IntroView extends Component {
             ),
             {
               a: (
-                <a
+                <ExternalLink
                   href={`https://developers.google.com/speed/pagespeed/insights/?url=${encodeURIComponent(
                     homeUrl
                   )}&hl=${lgCode}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 />
               )
             }
