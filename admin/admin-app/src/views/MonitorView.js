@@ -15,6 +15,7 @@ import LoadingWrapper from '../components/LoadingWrapper';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
 import './MonitorView.css';
+import { Button } from '@wordpress/components';
 
 const sllInstalled = new URL(homeUrl).protocol === 'https:';
 
@@ -131,12 +132,9 @@ const MonitorView = () => {
                 display an UptimeRobot.com overview.
               </p>
               <p>
-                <a
-                  href={getOption('uptimerobotInstallLink')}
-                  className="button"
-                >
+                <Button isSecondary href={getOption('uptimerobotInstallLink')}>
                   Install plugin
-                </a>
+                </Button>
               </p>
             </div>
           ) : null}

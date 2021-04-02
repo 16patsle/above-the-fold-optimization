@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 
 class SearchReplaceExample extends Component {
   static defaultProps = {
@@ -52,13 +53,9 @@ class SearchReplaceExample extends Component {
           {this.state.exampleHtml}
         </code>
         (
-        <button
-          type="button"
-          className="button-link"
-          onClick={this.handleClick}
-        >
+        <Button isLink onClick={this.handleClick}>
           {this.state.showLinkContent}
-        </button>
+        </Button>
         )
       </span>
     );

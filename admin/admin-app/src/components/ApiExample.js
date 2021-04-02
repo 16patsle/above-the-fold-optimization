@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 
 class ApiExample extends Component {
   constructor(props) {
@@ -15,15 +16,14 @@ class ApiExample extends Component {
       <>
         <p className="description">
           {this.props.description} (
-          <button
-            className="button-link"
-            type="button"
+          <Button
+            isLink
             onClick={() =>
               this.setState({ exampleShown: !this.state.exampleShown })
             }
           >
             {__('show example', 'abtfr')}
-          </button>
+          </Button>
           ).
         </p>
         <pre

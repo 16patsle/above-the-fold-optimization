@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __, sprintf } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
   adminUrl,
@@ -504,13 +505,13 @@ const CssView = () => {
                         <input type="file" name="googlefontzip" />
                       </p>
                       <p>
-                        <button
+                        <Button
+                          isPrimary
                           type="submit"
                           name="uploadgooglefontzip"
-                          className="button button-primary button-green"
                         >
                           {__('Upload & Extract', 'abtfr')}
-                        </button>
+                        </Button>
                       </p>
 
                       <h4 className="h">
@@ -529,14 +530,15 @@ const CssView = () => {
                         Change the paths of the fonts to the location of the
                         fonts in your theme directory, e.g.{' '}
                         <code>{getOption('fontThemePath')}</code> and{' '}
-                        <a
+                        <Button
+                          isSecondary
+                          isSmall
                           href={`https://www.google.com/search?q=minify+css+online&amp;hl=${lgCode}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="button button-secondary button-small"
                         >
                           minify
-                        </a>{' '}
+                        </Button>{' '}
                         the CSS.
                       </p>
                     </td>

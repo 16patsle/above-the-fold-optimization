@@ -18,6 +18,7 @@ import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
 import './Http2View.css';
+import { Button } from '@wordpress/components';
 
 const http2Insert = {
   scripts: [
@@ -107,16 +108,16 @@ const Http2View = () => {
             Google (SPDY). This plugin enables to make use of some it's
             optimization potential.
           </p>
-          <a
+          <Button
+            isSecondary
             href={`https://tools.keycdn.com/http2-test?url=${encodeURIComponent(
               homeUrl
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="button"
           >
             {__('Test your website for HTTP/2 support', 'abtfr')}
-          </a>
+          </Button>
           <table className="form-table">
             <tbody>
               <SettingCheckbox
@@ -152,38 +153,34 @@ const Http2View = () => {
                 <div style={{ clear: 'both', height: 10 }}></div>
                 <fieldset>
                   <legend>{__('Insert', 'abtfr')}</legend>
-                  <button
-                    type="button"
+                  <Button
+                    isSecondary
                     onClick={handleInsertClick}
-                    className="button"
                     data-http2-insert="scripts"
                   >
                     {__('WordPress scripts', 'abtfr')}
-                  </button>
-                  <button
-                    type="button"
+                  </Button>
+                  <Button
+                    isSecondary
                     onClick={handleInsertClick}
-                    className="button"
                     data-http2-insert="stylesheets"
                   >
                     {__('WordPress stylesheets', 'abtfr')}
-                  </button>
-                  <button
-                    type="button"
+                  </Button>
+                  <Button
+                    isSecondary
                     onClick={handleInsertClick}
-                    className="button"
                     data-http2-insert="images"
                   >
                     {__('HTML images', 'abtfr')}
-                  </button>
-                  <button
-                    type="button"
+                  </Button>
+                  <Button
+                    isSecondary
                     onClick={handleInsertClick}
-                    className="button"
                     data-http2-insert="custom"
                   >
                     {__('Custom resource list', 'abtfr')}
-                  </button>
+                  </Button>
                 </fieldset>
                 <Info color="yellow">
                   <strong>Note:</strong> When using the Progressive Web App

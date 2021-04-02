@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 import ConditionalSelect from './ConditionalSelect';
 import './AddConditional.css';
 
@@ -79,13 +80,9 @@ const AddConditional = props => {
             </tr>
           </tbody>
         </table>
-        <button
-          type="button"
-          className="button button-small"
-          onClick={handleClick}
-        >
+        <Button isSecondary isSmall onClick={handleClick}>
           {__('Save', 'abtfr')}
-        </button>
+        </Button>
         <div
           style={{
             height: '10px',

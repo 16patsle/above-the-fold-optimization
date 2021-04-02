@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
   adminUrl,
@@ -554,13 +555,13 @@ jQuery(window).on('sw-update',function(e){
                         the file to the root of your WordPress installation and
                         make it writeable.
                         <div style={{ marginTop: 10 }}>
-                          <button
+                          <Button
+                            isSecondary
                             type="submit"
                             name="create_manifest"
-                            className="button"
                           >
                             Create manifest.json
-                          </button>
+                          </Button>
                         </div>
                       </Info>
                     )}

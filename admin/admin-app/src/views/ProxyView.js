@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 import useSWR from 'swr';
 import useSettings from '../utils/useSettings';
 import {
@@ -374,14 +375,12 @@ const ProxyView = () => {
                       {new Date(cacheStats.date).toLocaleString()}
                     </p>
                     <hr />
-                    <button
-                      type="button"
-                      onClick={updateCacheStats}
-                      className="button button-small"
-                    >
+                    <Button isSecondary isSmall onClick={updateCacheStats}>
                       Refresh Stats
-                    </button>
-                    <a
+                    </Button>
+                    <Button
+                      isSecondary
+                      isSmall
                       href={emptyCacheUrl}
                       onClick={function(e) {
                         if (
@@ -392,10 +391,9 @@ const ProxyView = () => {
                           return e.preventDefault();
                         }
                       }}
-                      className="button button-small"
                     >
                       Empty Cache
-                    </a>
+                    </Button>
                   </td>
                 </tr>
               </tfoot>
