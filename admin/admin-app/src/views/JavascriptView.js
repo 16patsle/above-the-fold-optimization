@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { createInterpolateElement } from '@wordpress/element';
 import { ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
@@ -58,26 +59,27 @@ const JavascriptView = () => {
             color="seagreen"
             style={{ marginBottom: '0px', fontSize: '14px' }}
           >
-            <strong>Tip:</strong> More information about javascript optimization
-            can be found in{' '}
-            <ExternalLink href={'https://www.igvita.com/?' + utmString}>
-              this blog
-            </ExternalLink>{' '}
-            by Ilya Grigorik, web performance engineer at Google and author of
-            the O'Reilly book{' '}
-            <ExternalLink
-              href={
-                'https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/?' +
-                utmString
+            {createInterpolateElement(
+              __(
+                "<strong>Tip:</strong> More information about javascript optimization can be found in <a1>this blog</a1> by Ilya Grigorik, web performance engineer at Google and author of the O'Reilly book <a2>High Performance Browser Networking</a2> (<a3>free online</a3>).",
+                'abtfr'
+              ),
+              {
+                strong: <strong />,
+                a1: (
+                  <ExternalLink href={'https://www.igvita.com/?' + utmString} />
+                ),
+                a2: (
+                  <ExternalLink
+                    href={
+                      'https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/?' +
+                      utmString
+                    }
+                  />
+                ),
+                a3: <ExternalLink href={'https://hpbn.co/?' + utmString} />
               }
-            >
-              High Performance Browser Networking
-            </ExternalLink>{' '}
-            (
-            <ExternalLink href={'https://hpbn.co/?' + utmString}>
-              free online
-            </ExternalLink>
-            ).
+            )}
           </Info>
           <table className="form-table">
             <tbody>
@@ -85,25 +87,25 @@ const JavascriptView = () => {
                 header={__('Optimize Javascript Loading', 'abtfr')}
                 name="abovethefold[jsdelivery]"
                 link={linkOptionState('jsdelivery')}
-                description={
-                  <span>
-                    When enabled, Javascript files are loaded asynchronously
-                    using an enhanced version of{' '}
-                    <ExternalLink href="https://github.com/walmartlabs/little-loader">
-                      little-loader
-                    </ExternalLink>{' '}
-                    from Walmart Labs (
-                    <ExternalLink
-                      href={
-                        'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' +
-                        utmString
-                      }
-                    >
-                      reference
-                    </ExternalLink>
-                    ).
-                  </span>
-                }
+                description={createInterpolateElement(
+                  __(
+                    'When enabled, Javascript files are loaded asynchronously using an enhanced version of <a1>little-loader</a1> from Walmart Labs (<a2>reference</a2>).',
+                    'abtfr'
+                  ),
+                  {
+                    a1: (
+                      <ExternalLink href="https://github.com/walmartlabs/little-loader" />
+                    ),
+                    a2: (
+                      <ExternalLink
+                        href={
+                          'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' +
+                          utmString
+                        }
+                      />
+                    )
+                  }
+                )}
               />
               <tr
                 valign="top"
@@ -123,12 +125,14 @@ const JavascriptView = () => {
                           margin: '0px'
                         }}
                       >
-                        <span style={{ color: 'red', fontWeight: 'bold' }}>
-                          {__('Warning:', 'abtfr')}
-                        </span>{' '}
-                        {__(
-                          'It may require some tweaking of the settings to prevent javascript problems.',
-                          'abtfr'
+                        {createInterpolateElement(
+                          __(
+                            '<strong>Warning:</strong> It may require some tweaking of the settings to prevent javascript problems.',
+                            'abtfr'
+                          ),
+                          {
+                            strong: <strong style={{ color: 'red' }} />
+                          }
                         )}
                       </p>
                       <table className="form-table">
@@ -142,19 +146,25 @@ const JavascriptView = () => {
                                 value: 'little-loader',
                                 label: (
                                   <>
-                                    <ExternalLink href="https://github.com/walmartlabs/little-loader">
-                                      little-loader
-                                    </ExternalLink>{' '}
-                                    from Walmart Labs (
-                                    <ExternalLink
-                                      href={
-                                        'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' +
-                                        utmString
+                                    {createInterpolateElement(
+                                      __(
+                                        '<a1>little-loader</a1> from Walmart Labs (<a2>reference</a2>)',
+                                        'abtfr'
+                                      ),
+                                      {
+                                        a1: (
+                                          <ExternalLink href="https://github.com/walmartlabs/little-loader" />
+                                        ),
+                                        a2: (
+                                          <ExternalLink
+                                            href={
+                                              'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' +
+                                              utmString
+                                            }
+                                          />
+                                        )
                                       }
-                                    >
-                                      reference
-                                    </ExternalLink>
-                                    )
+                                    )}
                                     <br />
                                     {__(
                                       'A stable async script loader that works in old browsers.',
@@ -176,29 +186,37 @@ const JavascriptView = () => {
                                         className="description"
                                         style={{ color: 'red' }}
                                       >
-                                        This script loader requires the{' '}
-                                        <a href={proxyUrl}>Javascript proxy</a>{' '}
-                                        to be enabled to bypass{' '}
-                                        <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">
-                                          CORS
-                                        </ExternalLink>
-                                        .
+                                        {createInterpolateElement(
+                                          __(
+                                            'This script loader requires the <a1>Javascript proxy</a1> to be enabled to bypass <a2>CORS</a2>.',
+                                            'abtfr'
+                                          ),
+                                          {
+                                            a1: <a href={proxyUrl} />,
+                                            a2: (
+                                              <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" />
+                                            )
+                                          }
+                                        )}
                                       </div>
                                     ) : null}
                                     <div className="description">
-                                      A state of the art script loader for
-                                      optimal mobile speed, inspired by{' '}
-                                      <ExternalLink
-                                        href={
-                                          'https://addyosmani.com/basket.js/#' +
-                                          utmString
+                                      {createInterpolateElement(
+                                        __(
+                                          'A state of the art script loader for optimal mobile speed, inspired by <a>basket.js </a> (by a Google engineer), a script loading concept in use by Google. With fallback to little-loader for old browsers.',
+                                          'abtfr'
+                                        ),
+                                        {
+                                          a: (
+                                            <ExternalLink
+                                              href={
+                                                'https://addyosmani.com/basket.js/#' +
+                                                utmString
+                                              }
+                                            />
+                                          )
                                         }
-                                      >
-                                        basket.js
-                                      </ExternalLink>{' '}
-                                      (by a Google engineer), a script loading
-                                      concept in use by Google. With fallback to
-                                      little-loader for old browsers.
+                                      )}
                                     </div>
                                   </>
                                 )
@@ -391,20 +409,17 @@ const JavascriptView = () => {
                               getOption('jsdeliveryScriptloader') !== 'html5'
                             }
                             link={linkOptionState('jsdeliveryIdle')}
-                            description={
-                              <span>
-                                Enter a list with{' '}
-                                <code>script_string[:timeout_ms]</code> entries
-                                (one per line) to execute scripts in CPU idle
-                                time within an optional timeout in milliseconds.
-                                This feature enables to prioritize script
-                                execution. (
-                                <ExternalLink href="https://developers.google.com/web/updates/2015/08/using-requestidlecallback">
-                                  more information
-                                </ExternalLink>
+                            description={createInterpolateElement(
+                              __(
+                                'Enter a list with <code>script_string[:timeout_ms]</code> entries (one per line) to execute scripts in CPU idle time within an optional timeout in milliseconds. This feature enables to prioritize script execution. (<a>more information</a>)',
+                                'abtfr'
+                              ),
+                              {
+                                a: (
+                                  <ExternalLink href="https://developers.google.com/web/updates/2015/08/using-requestidlecallback" />
                                 )
-                              </span>
-                            }
+                              }
+                            )}
                           >
                             {!getOption('jsProxy') &&
                             getOption('jsdeliveryScriptloader') !== 'html5' ? (
@@ -429,41 +444,46 @@ const JavascriptView = () => {
                               </p>
                             )}
                             <Info color="yellow" style={{ marginTop: '7px' }}>
-                              Example: <code>script.js:2000</code> (script.js
-                              should execute when CPU is available or within 2
-                              seconds). Timeout is optional.
+                              {createInterpolateElement(
+                                __(
+                                  'Example: <code>script.js:2000</code> (script.js should execute when CPU is available or within 2 seconds). Timeout is optional.',
+                                  'abtfr'
+                                ),
+                                {
+                                  code: <code />
+                                }
+                              )}
                             </Info>
                           </SettingTextarea>
                           <SettingCheckbox
                             header={__('Abide Dependencies', 'abtfr')}
                             name="abovethefold[jsdelivery_deps]"
                             link={linkOptionState('jsdeliveryDeps')}
-                            description={
-                              <span>
-                                When enabled, scripts will be loaded in
-                                sequential order abiding the WordPress
-                                dependency configuration from{' '}
-                                <ExternalLink href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/">
-                                  wp_enqueue_script()
-                                </ExternalLink>
-                                .
-                              </span>
-                            }
+                            description={createInterpolateElement(
+                              __(
+                                'When enabled, scripts will be loaded in sequential order abiding the WordPress dependency configuration from <a>wp_enqueue_script()</a>.',
+                                'abtfr'
+                              ),
+                              {
+                                a: (
+                                  <ExternalLink href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/" />
+                                )
+                              }
+                            )}
                           />
                           <SettingCheckbox
                             header={__('jQuery Stub', 'abtfr')}
                             name="abovethefold[jsdelivery_jquery]"
                             link={linkOptionState('jsdeliveryJquery')}
-                            description={
-                              <span>
-                                When enabled, a queue captures basic jQuery
-                                functionality such as{' '}
-                                <code>jQuery(function($){' ... '});</code> and{' '}
-                                <code>$(document).bind('ready')</code> in inline
-                                scripts. This feature enables to load jQuery
-                                async.
-                              </span>
-                            }
+                            description={createInterpolateElement(
+                              __(
+                                "When enabled, a queue captures basic jQuery functionality such as <code>jQuery(function($){ ... });</code> and <code>$(document).bind('ready')</code> in inline scripts. This feature enables to load jQuery async.",
+                                'abtfr'
+                              ),
+                              {
+                                code: <code />
+                              }
+                            )}
                           />
                         </tbody>
                       </table>
@@ -475,31 +495,38 @@ const JavascriptView = () => {
                 header={__('Lazy Load Scripts', 'abtfr')}
                 name="abovethefold[lazyscripts_enabled]"
                 link={linkOptionState('lazyscriptsEnabled')}
-                description={
-                  <span>
-                    When enabled, the widget module from{' '}
-                    <ExternalLink href="https://github.com/ressio/lazy-load-xt#widgets">
-                      jQuery Lazy Load XT
-                    </ExternalLink>{' '}
-                    is loaded to enable lazy loading of inline scripts such as
-                    Facebook like and Twitter follow buttons.
-                  </span>
-                }
+                description={createInterpolateElement(
+                  __(
+                    'When enabled, the widget module from <a>jQuery Lazy Load XT</a> is loaded to enable lazy loading of inline scripts such as Facebook like and Twitter follow buttons.',
+                    'abtfr'
+                  ),
+                  {
+                    a: (
+                      <ExternalLink href="https://github.com/ressio/lazy-load-xt#widgets" />
+                    )
+                  }
+                )}
               >
                 {getOption('lazyscriptsEnabled') ? (
-                  <span>
+                  <>
                     <p className="description lazyscriptsoptions">
-                      This option is compatible with{' '}
-                      <a
-                        href={
-                          adminUrl +
-                          'plugin-install.php?s=Lazy+Load+XT&tab=search&type=term'
+                      {createInterpolateElement(
+                        __(
+                          'This option is compatible with <a>WordPress lazy load plugins</a>that use Lazy Load XT. Those plugins are<u>not required</u> for this feature.',
+                          'abtfr'
+                        ),
+                        {
+                          a: (
+                            <a
+                              href={
+                                adminUrl +
+                                'plugin-install.php?s=Lazy+Load+XT&tab=search&type=term'
+                              }
+                            />
+                          ),
+                          u: <u />
                         }
-                      >
-                        WordPress lazy load plugins
-                      </a>{' '}
-                      that use Lazy Load XT. Those plugins are{' '}
-                      <u>not required</u> for this feature.
+                      )}
                     </p>
                     <div
                       style={{ float: 'left', width: '100%', overflow: 'auto' }}
@@ -512,7 +539,7 @@ const JavascriptView = () => {
                         {lazyloadExample}
                       </SyntaxHighlighter>
                     </div>
-                  </span>
+                  </>
                 ) : null}
               </SettingCheckbox>
             </tbody>
