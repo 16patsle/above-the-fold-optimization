@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import { adminUrl, siteTitle, abtfrAdminNonce } from '../utils/globalVars';
 import LoadingWrapper from '../components/LoadingWrapper';
@@ -46,13 +47,9 @@ const SettingsView = () => {
                 description={
                   <span>
                     If enabled, the page related caches of{' '}
-                    <a
-                      href="https://github.com/16patsle/abtf-reborn/tree/master/modules/plugins/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <ExternalLink href="https://github.com/16patsle/abtf-reborn/tree/master/modules/plugins/">
                       supported plugins
-                    </a>{' '}
+                    </ExternalLink>{' '}
                     is cleared when updating the above the fold settings.
                   </span>
                 }
@@ -96,13 +93,9 @@ const SettingsView = () => {
           <p>
             Based on your current configuration, the ABTF Reborn inline client
             javascript can be white listed using the following hashes. (
-            <a
-              href="https://content-security-policy.com/faq/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ExternalLink href="https://content-security-policy.com/faq/">
               documentation
-            </a>
+            </ExternalLink>
             )
           </p>
           <p className="warning_red">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { Button, ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
   adminUrl,
@@ -18,7 +19,6 @@ import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
 import SubmitButton from '../components/SubmitButton';
 import './Http2View.css';
-import { Button } from '@wordpress/components';
 
 const http2Insert = {
   scripts: [
@@ -97,13 +97,11 @@ const Http2View = () => {
             </title>
           </Helmet>
           <p>
-            <a
+            <ExternalLink
               href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${lgCode}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               HTTP/2
-            </a>{' '}
+            </ExternalLink>{' '}
             is a new version of the internet protocol originally developed by
             Google (SPDY). This plugin enables to make use of some it's
             optimization potential.
@@ -128,13 +126,11 @@ const Http2View = () => {
                   <span>
                     When enabled, resources such as scripts, stylesheets and
                     images can be pushed to visitors together with the HTML (
-                    <a
+                    <ExternalLink
                       href={`https://developers.google.com/web/fundamentals/performance/http2/?hl=${lgCode}#server_push`}
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       documentation
-                    </a>
+                    </ExternalLink>
                     ).
                   </span>
                 }
@@ -188,22 +184,14 @@ const Http2View = () => {
                   calculates a <strong>Cache Digest</strong> based on previously
                   pushed resources. This feature is based on the hash
                   calculation implementation of{' '}
-                  <a
-                    href="https://gitlab.com/sebdeckers/cache-digest-immutable/#-cache-digest-immutable"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <ExternalLink href="https://gitlab.com/sebdeckers/cache-digest-immutable/#-cache-digest-immutable">
                     Cache-Digest-Immutable
-                  </a>{' '}
+                  </ExternalLink>{' '}
                   and enables the server to only push resources that aren't
                   already available in the client. For more information, see{' '}
-                  <a
-                    href="https://calendar.perfplanet.com/2016/cache-digests-http2-server-push/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <ExternalLink href="https://calendar.perfplanet.com/2016/cache-digests-http2-server-push/">
                     this article
-                  </a>{' '}
+                  </ExternalLink>{' '}
                   on PerfPlanet.com.
                   <br />
                   <br />

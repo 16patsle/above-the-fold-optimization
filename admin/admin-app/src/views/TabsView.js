@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { __ } from '@wordpress/i18n';
+import { ExternalLink } from '@wordpress/components';
 import Tabs from '../components/Tabs';
 import './TabsView.css';
 
@@ -11,22 +12,14 @@ class TabsView extends Component {
         <nav className="nav-tab-wrapper" style={{ position: 'relative' }}>
           <div className="ref">
             <div className="links">
-              <a
-                href="https://github.com/16patsle/abtf-reborn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink href="https://github.com/16patsle/abtf-reborn">
                 Github
-              </a>{' '}
+              </ExternalLink>{' '}
               ‐{' '}
-              <a
-                href="https://github.com/16patsle/abtf-reborn/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink href="https://github.com/16patsle/abtf-reborn/issues">
                 Report a bug
-              </a>{' '}
-              {/*‐ <a href="https://wordpress.org/support/plugin/abtfr/reviews/#new-post" target="_blank" rel="noopener noreferrer">Review plugin</a>*/}
+              </ExternalLink>{' '}
+              {/*‐ <ExternalLink href="https://wordpress.org/support/plugin/abtfr/reviews/#new-post">Review plugin</ExternalLink>*/}
             </div>
           </div>
           <Tabs selected={this.props.location.pathname.slice(1)} />

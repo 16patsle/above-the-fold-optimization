@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { Button, ExternalLink } from '@wordpress/components';
 import {
   adminUrl,
   homeUrl,
@@ -53,13 +53,9 @@ const CriticalCssView = () => {
         >
           {__('Quality Test (Split View)', 'abtfr')}
         </a>
-        <a
-          href={criticalCssEditorUrl + '#editor'}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <ExternalLink href={criticalCssEditorUrl + '#editor'}>
           {__('Live Editor', 'abtfr')}
-        </a>
+        </ExternalLink>
         <a href={adminUrl + 'admin.php?page=abtfr#/build-tool'}>
           {__('Gulp.js Critical CSS Generator', 'abtfr')}
         </a>
@@ -79,45 +75,33 @@ const CriticalCssView = () => {
           <p>
             Critical Path CSS is the minimum CSS required to render above the
             fold content. Please read the{' '}
-            <a
+            <ExternalLink
               href={`https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent?hl=${lgCode}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               documentation by Google
-            </a>{' '}
+            </ExternalLink>{' '}
             before you continue.
           </p>
           <p>
-            <a
-              href="https://github.com/addyosmani/critical-path-css-tools"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ExternalLink href="https://github.com/addyosmani/critical-path-css-tools">
               This article
-            </a>{' '}
+            </ExternalLink>{' '}
             by a Google engineer provides information about the available
             methods for creating critical path CSS.{' '}
-            <a
+            <ExternalLink
               href={`https://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/?${utmString}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               This blog
-            </a>{' '}
+            </ExternalLink>{' '}
             (with video) by two Google engineers provides information about the
             essence of Critical Path CSS creation.
           </p>
           <Info color="yellow">
             <p style={{ margin: '0px' }}>
               <strong>Tip:</strong> If you notice a{' '}
-              <a
-                href="https://en.wikipedia.org/wiki/Flash_of_unstyled_content"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink href="https://en.wikipedia.org/wiki/Flash_of_unstyled_content">
                 Flash of Unstyled Content
-              </a>{' '}
+              </ExternalLink>{' '}
               (FOUC), use the{' '}
               <a href={adminUrl + 'admin.php?page=abtfr-criticalcss-test'}>
                 Quality Test-tab

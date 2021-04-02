@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { Button, ExternalLink } from '@wordpress/components';
 import useSWR from 'swr';
 import useSettings from '../utils/useSettings';
 import {
@@ -67,13 +67,11 @@ const ProxyView = () => {
           </p>
           <p>
             This feature enables to pass the{' '}
-            <a
+            <ExternalLink
               href={`https://developers.google.com/speed/docs/insights/LeverageBrowserCaching?hl=${lgCode}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Leverage browser caching
-            </a>{' '}
+            </ExternalLink>{' '}
             rule from Google PageSpeed Insights.
           </p>
           <table className="form-table">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
   adminUrl,
@@ -59,33 +60,23 @@ const JavascriptView = () => {
           >
             <strong>Tip:</strong> More information about javascript optimization
             can be found in{' '}
-            <a
-              href={'https://www.igvita.com/?' + utmString}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ExternalLink href={'https://www.igvita.com/?' + utmString}>
               this blog
-            </a>{' '}
+            </ExternalLink>{' '}
             by Ilya Grigorik, web performance engineer at Google and author of
             the O'Reilly book{' '}
-            <a
+            <ExternalLink
               href={
                 'https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/?' +
                 utmString
               }
-              target="_blank"
-              rel="noopener noreferrer"
             >
               High Performance Browser Networking
-            </a>{' '}
+            </ExternalLink>{' '}
             (
-            <a
-              href={'https://hpbn.co/?' + utmString}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ExternalLink href={'https://hpbn.co/?' + utmString}>
               free online
-            </a>
+            </ExternalLink>
             ).
           </Info>
           <table className="form-table">
@@ -98,24 +89,18 @@ const JavascriptView = () => {
                   <span>
                     When enabled, Javascript files are loaded asynchronously
                     using an enhanced version of{' '}
-                    <a
-                      href="https://github.com/walmartlabs/little-loader"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <ExternalLink href="https://github.com/walmartlabs/little-loader">
                       little-loader
-                    </a>{' '}
+                    </ExternalLink>{' '}
                     from Walmart Labs (
-                    <a
+                    <ExternalLink
                       href={
                         'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' +
                         utmString
                       }
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       reference
-                    </a>
+                    </ExternalLink>
                     ).
                   </span>
                 }
@@ -157,24 +142,18 @@ const JavascriptView = () => {
                                 value: 'little-loader',
                                 label: (
                                   <>
-                                    <a
-                                      href="https://github.com/walmartlabs/little-loader"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
+                                    <ExternalLink href="https://github.com/walmartlabs/little-loader">
                                       little-loader
-                                    </a>{' '}
+                                    </ExternalLink>{' '}
                                     from Walmart Labs (
-                                    <a
+                                    <ExternalLink
                                       href={
                                         'https://formidable.com/blog/2016/01/07/the-only-correct-script-loader-ever-made/#' +
                                         utmString
                                       }
-                                      target="_blank"
-                                      rel="noopener noreferrer"
                                     >
                                       reference
-                                    </a>
+                                    </ExternalLink>
                                     )
                                     <br />
                                     {__(
@@ -200,29 +179,23 @@ const JavascriptView = () => {
                                         This script loader requires the{' '}
                                         <a href={proxyUrl}>Javascript proxy</a>{' '}
                                         to be enabled to bypass{' '}
-                                        <a
-                                          href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS"
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                        >
+                                        <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">
                                           CORS
-                                        </a>
+                                        </ExternalLink>
                                         .
                                       </div>
                                     ) : null}
                                     <div className="description">
                                       A state of the art script loader for
                                       optimal mobile speed, inspired by{' '}
-                                      <a
+                                      <ExternalLink
                                         href={
                                           'https://addyosmani.com/basket.js/#' +
                                           utmString
                                         }
-                                        target="_blank"
-                                        rel="noopener noreferrer"
                                       >
                                         basket.js
-                                      </a>{' '}
+                                      </ExternalLink>{' '}
                                       (by a Google engineer), a script loading
                                       concept in use by Google. With fallback to
                                       little-loader for old browsers.
@@ -426,13 +399,9 @@ const JavascriptView = () => {
                                 time within an optional timeout in milliseconds.
                                 This feature enables to prioritize script
                                 execution. (
-                                <a
-                                  href="https://developers.google.com/web/updates/2015/08/using-requestidlecallback"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
+                                <ExternalLink href="https://developers.google.com/web/updates/2015/08/using-requestidlecallback">
                                   more information
-                                </a>
+                                </ExternalLink>
                                 )
                               </span>
                             }
@@ -474,13 +443,9 @@ const JavascriptView = () => {
                                 When enabled, scripts will be loaded in
                                 sequential order abiding the WordPress
                                 dependency configuration from{' '}
-                                <a
-                                  href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
+                                <ExternalLink href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/">
                                   wp_enqueue_script()
-                                </a>
+                                </ExternalLink>
                                 .
                               </span>
                             }
@@ -513,13 +478,9 @@ const JavascriptView = () => {
                 description={
                   <span>
                     When enabled, the widget module from{' '}
-                    <a
-                      href="https://github.com/ressio/lazy-load-xt#widgets"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <ExternalLink href="https://github.com/ressio/lazy-load-xt#widgets">
                       jQuery Lazy Load XT
-                    </a>{' '}
+                    </ExternalLink>{' '}
                     is loaded to enable lazy loading of inline scripts such as
                     Facebook like and Twitter follow buttons.
                   </span>

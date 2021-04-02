@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __, sprintf } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { Button, ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
   adminUrl,
@@ -69,25 +69,19 @@ const CssView = () => {
                 description={
                   <span>
                     When enabled, CSS files are loaded asynchronously via{' '}
-                    <a
-                      href="https://github.com/filamentgroup/loadCSS"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <ExternalLink href="https://github.com/filamentgroup/loadCSS">
                       loadCSS
-                    </a>{' '}
+                    </ExternalLink>{' '}
                     (
                     {getOption('cssLoadcssVersion')
                       ? 'v' + getOption('cssLoadcssVersion')
                       : 'unknown version'}
                     ).{' '}
-                    <a
+                    <ExternalLink
                       href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${lgCode}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       Click here
-                    </a>{' '}
+                    </ExternalLink>{' '}
                     for the recommendations by Google.
                   </span>
                 }
@@ -106,13 +100,11 @@ const CssView = () => {
                         When enabled, a customized version of loadCSS is used to
                         make use of the <code>requestAnimationFrame</code> API
                         following the{' '}
-                        <a
+                        <ExternalLink
                           href={`https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery?hl=${lgCode}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
                         >
                           recommendations by Google
-                        </a>
+                        </ExternalLink>
                         .
                       </span>
                     }
@@ -215,13 +207,9 @@ const CssView = () => {
                 description={
                   <span>
                     When enabled, web fonts are optimized using{' '}
-                    <a
-                      href="https://github.com/typekit/webfontloader"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <ExternalLink href="https://github.com/typekit/webfontloader">
                       Google Web Font Loader
-                    </a>
+                    </ExternalLink>
                     .
                   </span>
                 }
@@ -263,13 +251,11 @@ const CssView = () => {
                     description={
                       <span>
                         Select the method to load{' '}
-                        <a
+                        <ExternalLink
                           href={`https://developers.google.com/speed/libraries/?hl=${lgCode}#web-font-loader`}
-                          target="_blank"
-                          rel="noopener noreferrer"
                         >
                           webfont.js
-                        </a>{' '}
+                        </ExternalLink>{' '}
                         (
                         {getOption('cssWebfontVersion')
                           ? 'v' + getOption('cssWebfontVersion')
@@ -337,13 +323,9 @@ const CssView = () => {
                             Enter the <code>WebFontConfig</code> variable for
                             Google Web Font Loader. Leave blank for the default
                             configuration. (
-                            <a
-                              href="https://github.com/typekit/webfontloader#configuration"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                            <ExternalLink href="https://github.com/typekit/webfontloader#configuration">
                               more information
-                            </a>
+                            </ExternalLink>
                             )
                           </span>
                         }
@@ -367,29 +349,21 @@ const CssView = () => {
                         description={
                           <span>
                             Enter the{' '}
-                            <a
+                            <ExternalLink
                               href={`https://developers.google.com/fonts/docs/getting_started?hl=${lgCode}&csw=1`}
-                              target="_blank"
-                              rel="noopener noreferrer"
                             >
                               Google Font API
-                            </a>{' '}
+                            </ExternalLink>{' '}
                             definitions of{' '}
-                            <a
+                            <ExternalLink
                               href={`https://fonts.google.com/?hl=${lgCode}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
                             >
                               Google Web Fonts
-                            </a>{' '}
+                            </ExternalLink>{' '}
                             to load. One font per line. (
-                            <a
-                              href="https://github.com/typekit/webfontloader#google"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                            <ExternalLink href="https://github.com/typekit/webfontloader#google">
                               documentation
-                            </a>
+                            </ExternalLink>
                             )
                           </span>
                         }
@@ -477,13 +451,9 @@ const CssView = () => {
 
                       <p>
                         Visit{' '}
-                        <a
-                          href="https://google-webfonts-helper.herokuapp.com/fonts?utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <ExternalLink href="https://google-webfonts-helper.herokuapp.com/fonts?utm_source=wordpress&amp;utm_medium=plugin&amp;utm_term=optimization&amp;utm_campaign=o10n-x%3A%20Above%20The%20Fold%20Optimization">
                           Google Webfonts Helper
-                        </a>{' '}
+                        </ExternalLink>{' '}
                         and search for the fonts that you want to download.
                         Select the font configuration (weight, charset and
                         style) and download the zip-file.

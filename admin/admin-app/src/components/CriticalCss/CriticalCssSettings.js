@@ -1,5 +1,6 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
+import { ExternalLink } from '@wordpress/components';
 import useSettings, { useJSON } from '../../utils/useSettings';
 import { adminUrl } from '../../utils/globalVars';
 import { getJSON } from '../../utils/getSettings';
@@ -45,13 +46,9 @@ const CriticalCssSettings = () => {
               description={
                 <>
                   Use the{' '}
-                  <a
-                    href="https://microsoft.github.io/monaco-editor/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <ExternalLink href="https://microsoft.github.io/monaco-editor/">
                     Monaco editor
-                  </a>{' '}
+                  </ExternalLink>{' '}
                   with CSS error reporting.
                 </>
               }
@@ -64,13 +61,9 @@ const CriticalCssSettings = () => {
                 <>
                   When enabled, the critical CSS is not inlined but instead
                   pushed together with the HTML (
-                  <a
-                    href="https://developers.google.com/web/fundamentals/performance/http2/#server_push"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <ExternalLink href="https://developers.google.com/web/fundamentals/performance/http2/#server_push">
                     documentation
-                  </a>
+                  </ExternalLink>
                   ).
                 </>
               }

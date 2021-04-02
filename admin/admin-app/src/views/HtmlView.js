@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import { adminUrl, siteTitle, abtfrAdminNonce } from '../utils/globalVars';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -62,13 +63,9 @@ const HtmlView = () => {
                 description={
                   <span>
                     Compress HTML using an enhanced version of{' '}
-                    <a
-                      href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <ExternalLink href="https://github.com/mrclay/minify/blob/master/lib/Minify/HTML.php">
                       HTML.php
-                    </a>
+                    </ExternalLink>
                     . This option will reduce the size of HTML but may require a
                     full page cache to maintain an optimal server speed.
                   </span>

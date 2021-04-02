@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { Button, ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
   homeUrl,
@@ -15,7 +16,6 @@ import LoadingWrapper from '../components/LoadingWrapper';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
 import './MonitorView.css';
-import { Button } from '@wordpress/components';
 
 const sllInstalled = new URL(homeUrl).protocol === 'https:';
 
@@ -37,17 +37,15 @@ const MonitorView = () => {
             </title>
           </Helmet>
           <div style={{ float: 'right', zIndex: 9000, position: 'relative' }}>
-            <a
+            <ExternalLink
               href={`https://www.google.nl/webmasters/?hl=${lgCode}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <img
                 src={wpAbtfrUri + 'admin/images/googlebot.png'}
                 alt="Google Bot"
                 title="Google Webmasters Monitor"
               />
-            </a>
+            </ExternalLink>
           </div>
           <p>
             {__(
@@ -61,49 +59,41 @@ const MonitorView = () => {
             performance so that you will be able to respond instantly when a
             problem occurs, preventing damage to your reputation in Google. The
             most important aspects to monitor besides basic uptime are the{' '}
-            <a
+            <ExternalLink
               href={`https://testmysite.thinkwithgoogle.com/?url=${homeUrl}&hl=${lgCode}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Google PageSpeed scores
-            </a>
+            </ExternalLink>
             ,{' '}
-            <a
+            <ExternalLink
               href={`https://www.google.com/transparencyreport/safebrowsing/diagnostic/index.html?hl=${lgCode}#url=${encodeURIComponent(
                 new URL(homeUrl).host.replace('www', '')
               )}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Google Malware registration
-            </a>
+            </ExternalLink>
             , SSL certificate expiration and mobile usability (user experience)
             on all mobile devices.
           </p>
           <p>
             There are many free and paid monitoring services.{' '}
-            <a
+            <ExternalLink
               href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
                 'best website monitor ' + new Date().getFullYear()
               )}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Search Google
-            </a>{' '}
+            </ExternalLink>{' '}
             for the available website monitoring services.
           </p>
           <Info color="yellow">
             <strong>
               You should always register your website for{' '}
-              <a
+              <ExternalLink
                 href={`https://www.google.com/webmasters/?hl=${lgCode}`}
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Google Webmasters
-              </a>{' '}
+              </ExternalLink>{' '}
               to get a free monitor for SEO related problems and tips to improve
               the quality of your website.
             </strong>{' '}
@@ -111,17 +101,13 @@ const MonitorView = () => {
             about the quality and findability of your website.
           </Info>
           <div style={{ float: 'right' }}>
-            <a
-              href={`https://uptimerobot.com/?${utmString}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ExternalLink href={`https://uptimerobot.com/?${utmString}`}>
               <img
                 src={wpAbtfrUri + 'admin/images/uptimerobot.png'}
                 alt="UptimeRobot.com"
                 title="UptimeRobot.com - Free website monitor"
               />
-            </a>
+            </ExternalLink>
           </div>
           <h4>UptimeRobot.com - uptime monitor</h4>
           {getOption('uptimerobotStatus') === 'not installed' ? (
@@ -153,17 +139,15 @@ const MonitorView = () => {
             ></div>
           ) : null}
           <div style={{ float: 'right' }}>
-            <a
+            <ExternalLink
               href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${utmString}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <img
                 src={wpAbtfrUri + 'admin/images/google-security.png'}
                 alt="Google Security Blog"
                 title="Google Security Blog"
               />
-            </a>
+            </ExternalLink>
           </div>
           <h4>CertificateMonitor.org - SSL certificate expiry monitor</h4>
           <div className={sllInstalled ? 'ok_green' : 'warning_red'}>
@@ -177,35 +161,27 @@ const MonitorView = () => {
             results, discouraging a visit. In the beginning of 2017 the Google
             Chrome browser will start showing an insecure warning for non SSL
             websites (
-            <a
+            <ExternalLink
               href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${utmString}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Google blog
-            </a>
+            </ExternalLink>
             ).
           </div>
           <p>
             Register your website for free at{' '}
-            <a
-              href={`https://certificatemonitor.org/?${utmString}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ExternalLink href={`https://certificatemonitor.org/?${utmString}`}>
               CertificateMonitor.org
-            </a>{' '}
+            </ExternalLink>{' '}
             to receive a notification when a SSL certificate is about the
             expire.{' '}
-            <a
+            <ExternalLink
               href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
                 'ssl certificate monitor ' + new Date().getFullYear()
               )}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Search Google
-            </a>{' '}
+            </ExternalLink>{' '}
             for other premium SSL monitoring services.
           </p>
           <h4>Professional &amp; advanced website monitoring</h4>
@@ -217,23 +193,19 @@ const MonitorView = () => {
           </p>
           <p>
             One of the many solutions is{' '}
-            <a
+            <ExternalLink
               href={`https://www.browserstack.com/automate?${utmString}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               BrowserStack.com Automate Pro
-            </a>
+            </ExternalLink>
             .{' '}
-            <a
+            <ExternalLink
               href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
                 'selenium website monitor'
               )}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Search Google
-            </a>{' '}
+            </ExternalLink>{' '}
             for more automated UI test tools.
           </p>
         </PageContent>

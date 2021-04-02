@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { Button, ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
   adminUrl,
@@ -47,11 +47,7 @@ const PwaView = () => {
           </Helmet>
           <div>
             <div style={{ textAlign: 'center' }}>
-              <a
-                href="https://developers.google.com/web/tools/lighthouse/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink href="https://developers.google.com/web/tools/lighthouse/">
                 <img
                   src={`${wpAbtfrUri}admin/images/google-lighthouse-pwa-validation.jpg`}
                   alt="Google Bot"
@@ -59,17 +55,13 @@ const PwaView = () => {
                   style={{ maxWidth: 1141, maxHeight: 359 }}
                   title="Google Lighthouse PWA Validation"
                 />
-              </a>
+              </ExternalLink>
             </div>
             <p>
               Google has been promoting{' '}
-              <a
-                href="https://developers.google.com/web/progressive-web-apps/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink href="https://developers.google.com/web/progressive-web-apps/">
                 Progressive Web Apps
-              </a>{' '}
+              </ExternalLink>{' '}
               (PWA) as the future of the internet: a combination of the
               flexibility and openness of the existing web with the user
               experience advantages of native mobile apps. In essence: a mobile
@@ -78,13 +70,9 @@ const PwaView = () => {
             </p>
             <p>
               Google provides an extensive test called{' '}
-              <a
-                href="https://developers.google.com/web/tools/lighthouse/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink href="https://developers.google.com/web/tools/lighthouse/">
                 Lighthouse
-              </a>{' '}
+              </ExternalLink>{' '}
               that tests for validity against the key qualities of a Progressive
               Web App: performance, accessibility, and more.
             </p>
@@ -95,21 +83,13 @@ const PwaView = () => {
             </p>
             <p>
               At the core of the features of a Progressive Web App is a{' '}
-              <a
-                href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">
                 HTML5 Service Worker
-              </a>
+              </ExternalLink>
               . It's supported by every major modern browser (
-              <a
-                href="https://jakearchibald.github.io/isserviceworkerready/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink href="https://jakearchibald.github.io/isserviceworkerready/">
                 browser compatibility
-              </a>
+              </ExternalLink>
               ).
             </p>
           </div>
@@ -123,13 +103,9 @@ const PwaView = () => {
                   description={
                     <>
                       Enable PWA functionality in browsers that support{' '}
-                      <a
-                        href="https://jakearchibald.github.io/isserviceworkerready/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <ExternalLink href="https://jakearchibald.github.io/isserviceworkerready/">
                         Service Worker
-                      </a>
+                      </ExternalLink>
                       .
                     </>
                   }
@@ -165,14 +141,12 @@ const PwaView = () => {
                             </a>
                             . If you want to load the PWA Service Worker using{' '}
                             <code>importScripts</code> use the file{' '}
-                            <a
+                            <ExternalLink
                               href={`${homeUrl}/${getOption('pwaSwFilename')}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
                               download={getOption('pwaSwFilename')}
                             >
                               /{getOption('pwaSwFilename')}
-                            </a>
+                            </ExternalLink>
                             .
                           </>
                         }
@@ -187,13 +161,9 @@ const PwaView = () => {
                         description={
                           <>
                             Enter an optional{' '}
-                            <a
-                              href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers#register_a_service_worker"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                            <ExternalLink href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers#register_a_service_worker">
                               scope
-                            </a>{' '}
+                            </ExternalLink>{' '}
                             for the service worker, e.g. <code>/blog/</code>.
                             The scope restricts the PWA functionality to a path.
                           </>
@@ -205,13 +175,9 @@ const PwaView = () => {
                           <p className="description">
                             The PWA Service Worker supports sending Push
                             Notifications (
-                            <a
-                              href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                            <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification">
                               documentation
-                            </a>
+                            </ExternalLink>
                             ).
                           </p>
                           <ApiExample
@@ -376,13 +342,9 @@ Abtfr.offline(['/shop/','/shop/product1.html','/wp-content/uploads/.../product-i
                       <>
                         Add the class <code>offline</code> to{' '}
                         <code>&lt;body&gt;</code> based on{' '}
-                        <a
-                          href="https://developer.mozilla.org/en-US/docs/Online_and_offline_events"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <ExternalLink href="https://developer.mozilla.org/en-US/docs/Online_and_offline_events">
                           HTML5 online/offline events
-                        </a>
+                        </ExternalLink>
                         . This feature enables to add a user friendly notice via
                         CSS when the connection is offline.
                       </>
@@ -507,13 +469,9 @@ jQuery(window).on('sw-update',function(e){
                     <>
                       Start preloading navigation requests in the Service Worker
                       on mouse down. Older mobile devices including iOS8 have a{' '}
-                      <a
-                        href="https://encrypted.google.com/search?q=300ms+tap+delay+mobile"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <ExternalLink href="https://encrypted.google.com/search?q=300ms+tap+delay+mobile">
                         300ms click delay
-                      </a>{' '}
+                      </ExternalLink>{' '}
                       which is a lot of time wasted for navigation clicks. An
                       average mouse click also has a 200-500ms delay before
                       navigation starts. This feature enables to start
@@ -530,23 +488,15 @@ jQuery(window).on('sw-update',function(e){
                   <td>
                     <p style={{ marginBottom: '1em' }}>
                       The{' '}
-                      <a
-                        href="https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <ExternalLink href="https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/">
                         Web App Manifest
-                      </a>{' '}
+                      </ExternalLink>{' '}
                       is a JSON document that enables to control how a website
                       app appears to the user in areas where they would expect
                       to see apps. It is required to validate as Google PWA. (
-                      <a
-                        href="https://w3c.github.io/manifest/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <ExternalLink href="https://w3c.github.io/manifest/">
                         W3C documentation
-                      </a>
+                      </ExternalLink>
                       )
                     </p>
                     {getOption('pwaManifestStatus') === 'not existing' && (
@@ -607,23 +557,17 @@ jQuery(window).on('sw-update',function(e){
                     <p>
                       There are several online tools that can help with Web App
                       Manifest creation.{' '}
-                      <a
-                        href="https://app-manifest.firebaseapp.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <ExternalLink href="https://app-manifest.firebaseapp.com/">
                         https://app-manifest.firebaseapp.com/
-                      </a>{' '}
+                      </ExternalLink>{' '}
                       is a simple one.{' '}
-                      <a
+                      <ExternalLink
                         href={`https://encrypted.google.com/search?q=${encodeURIComponent(
                           'webapp manifest creator'
                         )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
                       >
                         Search Google
-                      </a>{' '}
+                      </ExternalLink>{' '}
                       for more creators.
                     </p>
                   </td>
@@ -663,23 +607,17 @@ jQuery(window).on('sw-update',function(e){
                       <>
                         Enter Web App related meta tags to include in the{' '}
                         <code>&lt;head&gt;</code> of the page. (
-                        <a
-                          href="https://developers.google.com/web/ilt/pwa/lab-auditing-with-lighthouse#43_add_tags_for_other_browsers"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <ExternalLink href="https://developers.google.com/web/ilt/pwa/lab-auditing-with-lighthouse#43_add_tags_for_other_browsers">
                           documentation
-                        </a>
+                        </ExternalLink>
                         ). There are many{' '}
-                        <a
+                        <ExternalLink
                           href={`https://encrypted.google.com/search?q=${encodeURIComponent(
                             'web app icon generators'
                           )}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
                         >
                           Web App Meta Generators
-                        </a>{' '}
+                        </ExternalLink>{' '}
                         that enable to fine tune the settings for an optimal
                         mobile representation.
                       </>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { __, sprintf } from '@wordpress/i18n';
+import { ExternalLink } from '@wordpress/components';
 import { useJSON } from '../utils/useSettings';
 import {
   homeUrl,
@@ -106,22 +107,9 @@ const BuildToolView = () => {
           <p>
             Most advanced optimization software such as critical path CSS
             creation are easiest to use using a build tool such as{' '}
-            <a
-              href="http://gruntjs.com/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Grunt.js
-            </a>{' '}
-            and{' '}
-            <a
-              href="http://gulpjs.com/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Gulp.js
-            </a>
-            . While those build tools make it easy to use professional software
+            <ExternalLink href="http://gruntjs.com/">Grunt.js</ExternalLink> and{' '}
+            <ExternalLink href="http://gulpjs.com/">Gulp.js</ExternalLink>.
+            While those build tools make it easy to use professional software
             for experienced developers, most average WordPress users will not be
             able to use them and thus have no access to professional
             optimization software.
@@ -129,22 +117,11 @@ const BuildToolView = () => {
           <p>
             This WordPress based <em>build tool builder</em> enables
             professional critical path CSS creation via{' '}
-            <a
-              href="https://github.com/addyosmani/critical"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
+            <ExternalLink href="https://github.com/addyosmani/critical">
               critical
-            </a>{' '}
+            </ExternalLink>{' '}
             (by a Google engineer) using the build tool{' '}
-            <a
-              href="http://gulpjs.com/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Gulp.js
-            </a>
-            .
+            <ExternalLink href="http://gulpjs.com/">Gulp.js</ExternalLink>.
           </p>
           <table className="form-table">
             <tbody>
@@ -198,13 +175,9 @@ const BuildToolView = () => {
                       generate critical path CSS. Format: <code>800x600</code>.
                       One dimension per line. The result is combined and
                       compressed. (
-                      <a
-                        href="https://github.com/addyosmani/critical#generate-critical-path-css-with-multiple-resolutions"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
+                      <ExternalLink href="https://github.com/addyosmani/critical#generate-critical-path-css-with-multiple-resolutions">
                         more info
-                      </a>
+                      </ExternalLink>
                       ).
                     </>
                   }
@@ -299,28 +272,19 @@ const BuildToolView = () => {
             <li>A regular PC (Windows, Mac or Linux) with command line.</li>
             <li>
               The installation of{' '}
-              <a href="https://nodejs.org/" target="_blank">
-                Node.js
-              </a>{' '}
-              (
-              <a
+              <ExternalLink href="https://nodejs.org/">Node.js</ExternalLink> (
+              <ExternalLink
                 href={`https://encrypted.google.com/search?q=how+to+install+node.js&hl=${lgCode}`}
-                rel="noopener noreferrer"
-                target="_blank"
               >
                 click here
-              </a>{' '}
+              </ExternalLink>{' '}
               for a how-to).
             </li>
             <li>
               The installation of{' '}
-              <a
-                href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
+              <ExternalLink href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md">
                 Gulp.js
-              </a>{' '}
+              </ExternalLink>{' '}
               (<code>npm install --global gulp-cli</code>).
             </li>
           </ul>
@@ -374,35 +338,27 @@ const BuildToolView = () => {
           <p>
             There are many other WordPress optimizations that can be performed
             via Grunt.js or Gulp.js, for example{' '}
-            <a
+            <ExternalLink
               href={`https://developers.google.com/speed/webp/?hl=${lgCode}`}
-              rel="noopener noreferrer"
-              target="_blank"
             >
               Google WebP
-            </a>{' '}
+            </ExternalLink>{' '}
             image optimization, uncss (unused CSS stripping), CSS data-uri (CSS
             images) and more.{' '}
-            <a
+            <ExternalLink
               href={`https://encrypted.google.com/search?q=grunt+or+gulp+wordpress+optimization&hl=${lgCode}`}
-              rel="noopener noreferrer"
-              target="_blank"
             >
               Search Google
-            </a>{' '}
+            </ExternalLink>{' '}
             for more information.
           </p>
           <Info>
             <p style={{ margin: '0px' }}>
               <strong>Tip:</strong> optimize images of your /themes/ and
               /uploads/ directory using Gulp.js or Grunt.js{' '}
-              <a
-                href="https://github.com/imagemin/imagemin"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
+              <ExternalLink href="https://github.com/imagemin/imagemin">
                 imagemin
-              </a>{' '}
+              </ExternalLink>{' '}
               using professional image compression software, including Google
               WebP, and instead of overwriting the original images like many
               other solutions, place the images in a subdirectory

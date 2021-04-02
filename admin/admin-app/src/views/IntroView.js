@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
 import { createInterpolateElement } from '@wordpress/element';
-import { Button } from '@wordpress/components';
+import { Button, ExternalLink } from '@wordpress/components';
 import {
   homeUrl,
   adminUrl,
@@ -12,7 +12,6 @@ import {
 } from '../utils/globalVars';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
-import ExternalLink from '../components/ExternalLink';
 
 const baseHomeUrl = new URL(homeUrl).host.replace('www', '');
 
