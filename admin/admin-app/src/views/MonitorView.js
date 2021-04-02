@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { createInterpolateElement } from '@wordpress/element';
 import { Button, ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
 import {
@@ -42,8 +43,8 @@ const MonitorView = () => {
             >
               <img
                 src={wpAbtfrUri + 'admin/images/googlebot.png'}
-                alt="Google Bot"
-                title="Google Webmasters Monitor"
+                alt={__('Google Bot', 'abtfr')}
+                title={__('Google Webmasters Monitor', 'abtfr')}
               />
             </ExternalLink>
           </div>
@@ -54,80 +55,101 @@ const MonitorView = () => {
             )}
           </p>
           <p>
-            To ensure uptime and website quality it is required to monitor all
-            aspects of a website that influence the availability, stability and
-            performance so that you will be able to respond instantly when a
-            problem occurs, preventing damage to your reputation in Google. The
-            most important aspects to monitor besides basic uptime are the{' '}
-            <ExternalLink
-              href={`https://testmysite.thinkwithgoogle.com/?url=${homeUrl}&hl=${lgCode}`}
-            >
-              Google PageSpeed scores
-            </ExternalLink>
-            ,{' '}
-            <ExternalLink
-              href={`https://www.google.com/transparencyreport/safebrowsing/diagnostic/index.html?hl=${lgCode}#url=${encodeURIComponent(
-                new URL(homeUrl).host.replace('www', '')
-              )}`}
-            >
-              Google Malware registration
-            </ExternalLink>
-            , SSL certificate expiration and mobile usability (user experience)
-            on all mobile devices.
+            {createInterpolateElement(
+              __(
+                'To ensure uptime and website quality it is required to monitor all aspects of a website that influence the availability, stability and performance so that you will be able to respond instantly when a problem occurs, preventing damage to your reputation in Google. The most important aspects to monitor besides basic uptime are the <a2>Google PageSpeed scores</a2>, <a2>Google Malware registration</a2>, SSL certificate expiration and mobile usability (user experience) on all mobile devices.',
+                'abtfr'
+              ),
+              {
+                a1: (
+                  <ExternalLink
+                    href={`https://testmysite.thinkwithgoogle.com/?url=${homeUrl}&hl=${lgCode}`}
+                  />
+                ),
+                a2: (
+                  <ExternalLink
+                    href={`https://www.google.com/transparencyreport/safebrowsing/diagnostic/index.html?hl=${lgCode}#url=${encodeURIComponent(
+                      new URL(homeUrl).host.replace('www', '')
+                    )}`}
+                  />
+                )
+              }
+            )}
           </p>
           <p>
-            There are many free and paid monitoring services.{' '}
-            <ExternalLink
-              href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-                'best website monitor ' + new Date().getFullYear()
-              )}`}
-            >
-              Search Google
-            </ExternalLink>{' '}
-            for the available website monitoring services.
+            {createInterpolateElement(
+              __(
+                'There are many free and paid monitoring services. <a>Search Google</a> for the available website monitoring services.',
+                'abtfr'
+              ),
+              {
+                a: (
+                  <ExternalLink
+                    href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                      'best website monitor ' + new Date().getFullYear()
+                    )}`}
+                  />
+                )
+              }
+            )}
           </p>
           <Info color="yellow">
-            <strong>
-              You should always register your website for{' '}
-              <ExternalLink
-                href={`https://www.google.com/webmasters/?hl=${lgCode}`}
-              >
-                Google Webmasters
-              </ExternalLink>{' '}
-              to get a free monitor for SEO related problems and tips to improve
-              the quality of your website.
-            </strong>{' '}
-            Checking in regularly shows Google that you are genuinely concerned
-            about the quality and findability of your website.
+            {createInterpolateElement(
+              __(
+                '<strong>You should always register your website for <a>Google Webmasters</a> to get a free monitor for SEO related problems and tips to improve the quality of your website.</strong> Checking in regularly shows Google that you are genuinely concerned about the quality and findability of your website.',
+                'abtfr'
+              ),
+              {
+                strong: <strong />,
+                a: (
+                  <ExternalLink
+                    href={`https://www.google.com/webmasters/?hl=${lgCode}`}
+                  />
+                )
+              }
+            )}
           </Info>
           <div style={{ float: 'right' }}>
             <ExternalLink href={`https://uptimerobot.com/?${utmString}`}>
               <img
                 src={wpAbtfrUri + 'admin/images/uptimerobot.png'}
-                alt="UptimeRobot.com"
-                title="UptimeRobot.com - Free website monitor"
+                alt={__('UptimeRobot.com', 'abtfr')}
+                title={__('UptimeRobot.com - Free website monitor', 'abtfr')}
               />
             </ExternalLink>
           </div>
-          <h4>UptimeRobot.com - uptime monitor</h4>
+          <h4>{__('UptimeRobot.com - uptime monitor', 'abtfr')}</h4>
           {getOption('uptimerobotStatus') === 'not installed' ? (
             <div>
               <p>
-                The plugin <strong>Uptime Robot for WordPress</strong> is not
-                installed or deactivated. Activate or install the plugin to
-                display an UptimeRobot.com overview.
+                {createInterpolateElement(
+                  __(
+                    'The plugin <strong>Uptime Robot for WordPress</strong> is not installed or deactivated. Activate or install the plugin to display an UptimeRobot.com overview.',
+                    'abtfr'
+                  ),
+                  {
+                    strong: <strong />
+                  }
+                )}
               </p>
               <p>
                 <Button isSecondary href={getOption('uptimerobotInstallLink')}>
-                  Install plugin
+                  {__('Install plugin', 'abtfr')}
                 </Button>
               </p>
             </div>
           ) : null}
           {getOption('uptimerobotStatus') === 'not configured' ? (
             <p>
-              Configure the UptimeRobot.com API key in{' '}
-              <strong>Uptime Robot for WordPress</strong>.
+              {createInterpolateElement(
+                __(
+                  'Configure the UptimeRobot.com API key in <strong>Uptime Robot for WordPress</strong>.',
+                  'abtfr'
+                ),
+                {
+                  strong: <strong />
+                }
+              )}
             </p>
           ) : null}
           {getOption('uptimerobotStatus') === 'active' ? (
@@ -144,47 +166,59 @@ const MonitorView = () => {
             >
               <img
                 src={wpAbtfrUri + 'admin/images/google-security.png'}
-                alt="Google Security Blog"
-                title="Google Security Blog"
+                alt={__('Google Security Blog', 'abtfr')}
+                title={__('Google Security Blog', 'abtfr')}
               />
             </ExternalLink>
           </div>
-          <h4>CertificateMonitor.org - SSL certificate expiry monitor</h4>
-          <div className={sllInstalled ? 'ok_green' : 'warning_red'}>
-            <span style={{ fontWeight: 'bold' }}>
-              To secure findability in Google it is required to install a SSL
-              certificate.
-            </span>{' '}
-            Google officially announced in 2014 that SSL secured websites are
-            ranked higher in the search results and in some countries Google is
-            labeling non-https websites as <code>insecure</code> in the search
-            results, discouraging a visit. In the beginning of 2017 the Google
-            Chrome browser will start showing an insecure warning for non SSL
-            websites (
-            <ExternalLink
-              href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${utmString}`}
-            >
-              Google blog
-            </ExternalLink>
-            ).
-          </div>
+          <h4>
+            {__(
+              'CertificateMonitor.org - SSL certificate expiry monitor',
+              'abtfr'
+            )}
+          </h4>
+          <Info color={sllInstalled ? 'green' : 'red'}>
+            {createInterpolateElement(
+              __(
+                '<strong>To secure findability in Google it is required to install a SSL certificate.</strong> Google officially announced in 2014 that SSL secured websites are ranked higher in the search results and in some countries Google is labeling non-https websites as <code>insecure</code> in the search results, discouraging a visit. In the beginning of 2017 the Google Chrome browser will start showing an insecure warning for non SSL websites (<a>Google blog</a>).',
+                'abtfr'
+              ),
+              {
+                strong: <strong/>,
+                code: <code/>,
+                a: (
+                  <ExternalLink
+                    href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${utmString}`}
+                  />
+                )
+              }
+            )}
+          </Info>
           <p>
-            Register your website for free at{' '}
-            <ExternalLink href={`https://certificatemonitor.org/?${utmString}`}>
-              CertificateMonitor.org
-            </ExternalLink>{' '}
-            to receive a notification when a SSL certificate is about the
-            expire.{' '}
-            <ExternalLink
-              href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-                'ssl certificate monitor ' + new Date().getFullYear()
-              )}`}
-            >
-              Search Google
-            </ExternalLink>{' '}
-            for other premium SSL monitoring services.
+            {createInterpolateElement(
+              __(
+                'Register your website for free at <a1>CertificateMonitor.org</a1> to receive a notification when a SSL certificate is about the expire. <a2>Search Google</a2> for other premium SSL monitoring services.',
+                'abtfr'
+              ),
+              {
+                a1: (
+                  <ExternalLink
+                    href={`https://certificatemonitor.org/?${utmString}`}
+                  />
+                ),
+                a2: (
+                  <ExternalLink
+                    href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                      'ssl certificate monitor ' + new Date().getFullYear()
+                    )}`}
+                  />
+                )
+              }
+            )}
           </p>
-          <h4>Professional &amp; advanced website monitoring</h4>
+          <h4>
+            {__('Professional advanced website monitoring', 'abtfr')}
+          </h4>
           <p>
             {__(
               'Consider using robot solutions that simulate real-user behaviour on your website, from multiple (mobile) devices, to monitor the physical performance and user experience of your website including details such as the functionality of a mobile menu.',
@@ -192,21 +226,26 @@ const MonitorView = () => {
             )}
           </p>
           <p>
-            One of the many solutions is{' '}
-            <ExternalLink
-              href={`https://www.browserstack.com/automate?${utmString}`}
-            >
-              BrowserStack.com Automate Pro
-            </ExternalLink>
-            .{' '}
-            <ExternalLink
-              href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
-                'selenium website monitor'
-              )}`}
-            >
-              Search Google
-            </ExternalLink>{' '}
-            for more automated UI test tools.
+            {createInterpolateElement(
+              __(
+                'One of the many solutions is <a1>BrowserStack.com Automate Pro</a1>. <a2>Search Google</a2> for more automated UI test tools.',
+                'abtfr'
+              ),
+              {
+                a1: (
+                  <ExternalLink
+                    href={`https://www.browserstack.com/automate?${utmString}`}
+                  />
+                ),
+                a2: (
+                  <ExternalLink
+                    href={`https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
+                      'selenium website monitor'
+                    )}`}
+                  />
+                )
+              }
+            )}
           </p>
         </PageContent>
       </form>
