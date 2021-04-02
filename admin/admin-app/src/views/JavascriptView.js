@@ -233,7 +233,7 @@ const JavascriptView = () => {
                               }
                             ]}
                           >
-                            <div className="info_yellow">
+                            <Info style={{ marginBottom: 0 }}>
                               <p
                                 className="description"
                                 style={{ marginTop: '0px' }}
@@ -292,7 +292,7 @@ const JavascriptView = () => {
                                   </li>
                                 </ul>
                               </span>
-                            </div>
+                            </Info>
                           </SettingRadio>
                           <SettingSelect
                             header={__('Position', 'abtfr')}
