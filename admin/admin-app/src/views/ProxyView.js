@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
+import { createInterpolateElement } from '@wordpress/element';
 import { Button, ExternalLink } from '@wordpress/components';
 import useSWR from 'swr';
 import useSettings from '../utils/useSettings';
@@ -67,18 +68,24 @@ const ProxyView = () => {
             )}
           </p>
           <p>
-            This feature enables to pass the{' '}
-            <ExternalLink
-              href={`https://developers.google.com/speed/docs/insights/LeverageBrowserCaching?hl=${lgCode}`}
-            >
-              Leverage browser caching
-            </ExternalLink>{' '}
-            rule from Google PageSpeed Insights.
+            {createInterpolateElement(
+              __(
+                'This feature enables to pass the <a>Leverage browser caching</a> rule from Google PageSpeed Insights.',
+                'abtfr'
+              ),
+              {
+                a: (
+                  <ExternalLink
+                    href={`https://developers.google.com/speed/docs/insights/LeverageBrowserCaching?hl=${lgCode}`}
+                  />
+                )
+              }
+            )}
           </p>
           <table className="form-table">
             <tbody>
               <SettingCheckbox
-                header="Proxy Scripts"
+                header={__('Proxy Scripts', 'abtfr')}
                 name="abtfr[js_proxy]"
                 link={linkOptionState('jsProxy')}
                 description={__(
@@ -92,7 +99,7 @@ const ProxyView = () => {
                   header={__('Script Proxy Settings', 'abtfr')}
                 >
                   <SettingTextarea
-                    header="Proxy Include List"
+                    header={__('Proxy Include List', 'abtfr')}
                     style={{
                       width: '100%',
                       height: 50,
@@ -100,18 +107,22 @@ const ProxyView = () => {
                     }}
                     name="abtfr[js_proxy_include]"
                     link={linkOptionState('jsProxyInclude')}
-                    placeholder="Leave blank to proxy all external scripts..."
-                    description={
-                      <span>
-                        Enter (parts of) external javascript files to proxy,
-                        e.g. <code>google-analytics.com/analytics.js</code> or{' '}
-                        <code>facebook.net/en_US/sdk.js</code>. One script per
-                        line.
-                      </span>
-                    }
+                    placeholder={__(
+                      'Leave blank to proxy all external scripts...',
+                      'abtfr'
+                    )}
+                    description={createInterpolateElement(
+                      __(
+                        'Enter (parts of) external javascript files to proxy, e.g. <code>google-analytics.com/analytics.js</code> or <code>facebook.net/en_US/sdk.js</code>. One script per line.',
+                        'abtfr'
+                      ),
+                      {
+                        code: <code />
+                      }
+                    )}
                   />
                   <SettingTextarea
-                    header="Proxy Exclude List"
+                    header={__('Proxy Exclude List', 'abtfr')}
                     style={{
                       width: '100%',
                       height: 50,
@@ -124,7 +135,7 @@ const ProxyView = () => {
                     )}
                   />
                   <SettingTextarea
-                    header="Proxy Preload List"
+                    header={__('Proxy Preload List', 'abtfr')}
                     style={{
                       width: '100%',
                       height: 50,
@@ -132,31 +143,27 @@ const ProxyView = () => {
                     }}
                     name="abtfr[js_proxy_preload]"
                     link={linkOptionState('jsProxyPreload')}
-                    description={
-                      <span>
-                        Enter the exact url or JSON config object [
-                        <a
-                          href="#jsoncnf"
-                          onClick={scrollToElement}
-                          title="More information"
-                        >
-                          ?
-                        </a>
-                        ] of external scripts to preload for "script injected"
-                        async script capture, e.g.{' '}
-                        <code>
-                          https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js
-                        </code>
-                        . This setting will enable the proxy to load the cache
-                        url instead of the WordPress PHP proxy url. One url or
-                        JSON object per line.
-                      </span>
-                    }
+                    description={createInterpolateElement(
+                      __(
+                        'Enter the exact url or JSON config object [<a>?</a>] of external scripts to preload for "script injected" async script capture, e.g. <code>https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js</code>. This setting will enable the proxy to load the cache url instead of the WordPress PHP proxy url. One url or JSON object per line.',
+                        'abtfr'
+                      ),
+                      {
+                        code: <code />,
+                        a: (
+                          <a
+                            href="#jsoncnf"
+                            onClick={scrollToElement}
+                            title={__('More information', 'abtfr')}
+                          />
+                        )
+                      }
+                    )}
                   />
                 </SettingInnerTable>
               ) : null}
               <SettingCheckbox
-                header="Proxy Stylesheets"
+                header={__('Proxy Stylesheets', 'abtfr')}
                 name="abtfr[css_proxy]"
                 link={linkOptionState('cssProxy')}
                 description={__(
@@ -170,7 +177,7 @@ const ProxyView = () => {
                   header={__('Stylesheet Proxy Settings', 'abtfr')}
                 >
                   <SettingTextarea
-                    header="Proxy Include List"
+                    header={__('Proxy Include List', 'abtfr')}
                     style={{
                       width: '100%',
                       height: 50,
@@ -178,17 +185,22 @@ const ProxyView = () => {
                     }}
                     name="abtfr[css_proxy_include]"
                     link={linkOptionState('cssProxyInclude')}
-                    placeholder="Leave blank to proxy all external stylesheets..."
-                    description={
-                      <span>
-                        Enter (parts of) external stylesheets to proxy, e.g.{' '}
-                        <code>googleapis.com/jquery-ui.css</code>. One
-                        stylesheet per line.
-                      </span>
-                    }
+                    placeholder={__(
+                      'Leave blank to proxy all external stylesheets...',
+                      'abtfr'
+                    )}
+                    description={createInterpolateElement(
+                      __(
+                        'Enter (parts of) external stylesheets to proxy, e.g. <code>googleapis.com/jquery-ui.css</code>. One stylesheet per line.',
+                        'abtfr'
+                      ),
+                      {
+                        code: <code />
+                      }
+                    )}
                   />
                   <SettingTextarea
-                    header="Proxy Exclude List"
+                    header={__('Proxy Exclude List', 'abtfr')}
                     style={{
                       width: '100%',
                       height: 50,
@@ -196,15 +208,13 @@ const ProxyView = () => {
                     }}
                     name="abtfr[css_proxy_exclude]"
                     link={linkOptionState('cssProxyExclude')}
-                    description={
-                      <span>
-                        Enter (parts of) external stylesheets to exclude from
-                        the proxy. One stylesheet per line.
-                      </span>
-                    }
+                    description={__(
+                      'Enter (parts of) external stylesheets to exclude from the proxy. One stylesheet per line.',
+                      'abtfr'
+                    )}
                   />
                   <SettingTextarea
-                    header="Proxy Preload List"
+                    header={__('Proxy Preload List', 'abtfr')}
                     style={{
                       width: '100%',
                       height: 50,
@@ -212,19 +222,15 @@ const ProxyView = () => {
                     }}
                     name="abtfr[css_proxy_preload]"
                     link={linkOptionState('cssProxyPreload')}
-                    description={
-                      <span>
-                        Enter the exact url or JSON config object of external
-                        stylesheets to preload for "script injected" async
-                        stylesheet capture, e.g.{' '}
-                        <code>
-                          http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css
-                        </code>
-                        . This setting will enable the proxy to load the cache
-                        url instead of the WordPress PHP proxy url. One url or
-                        JSON object per line.
-                      </span>
-                    }
+                    description={createInterpolateElement(
+                      __(
+                        'Enter the exact url or JSON config object of external stylesheets to preload for "script injected" async stylesheet capture, e.g. <code>http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css</code>. This setting will enable the proxy to load the cache url instead of the WordPress PHP proxy url. One url or JSON object per line.',
+                        'abtfr'
+                      ),
+                      {
+                        code: <code />
+                      }
+                    )}
                   />
                 </SettingInnerTable>
               ) : null}
@@ -241,29 +247,30 @@ const ProxyView = () => {
                     }}
                   >
                     <h4 style={{ margin: 0, padding: 0, marginBottom: 5 }}>
-                      JSON Proxy Config Object
+                      {__('JSON Proxy Config Object', 'abtfr')}
                     </h4>
                     <p className="description" style={{ marginTop: 0 }}>
-                      JSON config objects enable advanced file based proxy
-                      configuration. JSON objects can be used together with
-                      simple file entry and must be placed on one line (no
-                      spaces are allowed).
+                      {__(
+                        'JSON config objects enable advanced file based proxy configuration. JSON objects can be used together with simple file entry and must be placed on one line (no spaces are allowed).',
+                        'abtfr'
+                      )}
                     </p>
                     <p className="description">
-                      JSON config objects must contain a target url (the url
-                      that will be downloaded by the proxy). Regular expression
-                      enables to match a source URL in the HTML, e.g. an URL
-                      with a cache busting date string (?time) or an url on a
-                      different host. Valid parameters are <code>url</code>,{' '}
-                      <code>regex</code>, <code>regex-flags</code>,{' '}
-                      <code>cdn</code> and <code>expire</code> (expire time in
-                      seconds).
+                      {createInterpolateElement(
+                        __(
+                          'JSON config objects must contain a target url (the url that will be downloaded by the proxy). Regular expression enables to match a source URL in the HTML, e.g. an URL with a cache busting date string (?time) or an url on a different host. Valid parameters are <code>url</code>, <code>regex</code>, <code>regex-flags</code>, <code>cdn</code> and <code>expire</code> (expire time in seconds).',
+                          'abtfr'
+                        ),
+                        {
+                          code: <code />
+                        }
+                      )}
                     </p>
                     <p
                       className="description"
                       style={{ marginBottom: 0, marginTop: 5 }}
                     >
-                      Example:
+                      {__('Example:', 'abtfr')}
                       <br />
                       <code>
                         {'{'}"regex":
@@ -277,54 +284,57 @@ const ProxyView = () => {
                 </td>
               </tr>
               <SettingTextInput
-                header="Proxy CDN"
+                header={__('Proxy CDN', 'abtfr')}
                 type="url"
                 style={{ width: '100%' }}
                 name="abtfr[proxy_cdn]"
                 link={linkOptionState('proxyCdn')}
-                placeholder="Leave blank for the default WordPress (plugin modified) upload directory url..."
-                description={
-                  <span>
-                    Enter the default CDN url for cached resources, e.g.{' '}
-                    <code>
-                      <strong>https://cdn.domain.com</strong>
-                      /wp-content/uploads/abtfr/proxy/.../resource.js
-                    </code>
-                    . You can set a custom CDN per individual resource using a
-                    JSON config object.
-                  </span>
-                }
+                placeholder={__(
+                  'Leave blank for the default WordPress (plugin modified) upload directory url...',
+                  'abtfr'
+                )}
+                description={createInterpolateElement(
+                  __(
+                    'Enter the default CDN url for cached resources, e.g. <code><strong>https://cdn.domain.com</strong>/wp-content/uploads/abtfr/proxy/.../resource.js</code>. You can set a custom CDN per individual resource using a JSON config object.',
+                    'abtfr'
+                  ),
+                  {
+                    code: <code />,
+                    strong: <strong />
+                  }
+                )}
               />
               <SettingTextInput
-                header="Proxy URL"
+                header={__('Proxy URL', 'abtfr')}
                 type="url"
                 style={{ width: '100%' }}
                 name="abtfr[proxy_url]"
                 link={linkOptionState('proxyUrl')}
-                placeholder="Leave blank for the default WordPress PHP based proxy url..."
-                description={
-                  <span>
-                    Enter a custom proxy url to serve captured external
-                    resources. There are 2 parameters that can be used in the
-                    url:{' '}
-                    <code>
-                      {'{'}PROXY:URL{'}'}
-                    </code>{' '}
-                    and{' '}
-                    <code>
-                      {'{'}PROXY:TYPE{'}'}
-                    </code>
-                    .
-                  </span>
-                }
+                placeholder={__(
+                  'Leave blank for the default WordPress PHP based proxy url...',
+                  'abtfr'
+                )}
+                description={createInterpolateElement(
+                  __(
+                    'Enter a custom proxy url to serve captured external resources. There are 2 parameters that can be used in the url: <code>{PROXY:URL}</code> and <code>{PROXY:TYPE}</code>.',
+                    'abtfr'
+                  ),
+                  {
+                    code: <code />
+                  }
+                )}
               >
                 <p className="description">
-                  E.g.:{' '}
-                  <code>
-                    https://nginx-proxy.mydomain.com/{'{'}PROXY:TYPE{'}'}/{'{'}
-                    PROXY:URL{'}'}
-                  </code>
-                  . Type is the string <u>js</u> or <u>css</u>.
+                  {createInterpolateElement(
+                    __(
+                      'E.g.: <code>https://nginx-proxy.mydomain.com/{PROXY:TYPE}/{PROXY:URL}</code>. Type is the string <u>js</u> or <u>css</u>.',
+                      'abtfr'
+                    ),
+                    {
+                      code: <code />,
+                      u: <u />
+                    }
+                  )}
                 </p>
               </SettingTextInput>
             </tbody>
@@ -334,11 +344,15 @@ const ProxyView = () => {
           <br />
           <br />
           <h3 style={{ margin: 0, padding: 0 }} id="stats">
-            Cache Stats
+            {__('Cache Stats', 'abtfr')}
           </h3>
-          {cacheStatsError && <div>Error: {cacheStatsError}</div>}
+          {cacheStatsError && (
+            <div>{sprintf(__('Error: %s', 'abtfr'), cacheStatsError)}</div>
+          )}
           {!cacheStats && !cacheStatsError ? (
-            <div><Loading/></div>
+            <div>
+              <Loading />
+            </div>
           ) : (
             <table>
               <tbody>
@@ -348,7 +362,7 @@ const ProxyView = () => {
                     width={70}
                     style={{ textAlign: 'right', fontSize: 14 }}
                   >
-                    Files:
+                    {__('Files:', 'abtfr')}
                   </td>
                   <td style={{ fontSize: 14 }}>{cacheStats.files}</td>
                 </tr>
@@ -358,7 +372,7 @@ const ProxyView = () => {
                     width={70}
                     style={{ textAlign: 'right', fontSize: 14 }}
                   >
-                    Size:
+                    {__('Size:', 'abtfr')}
                   </td>
                   <td style={{ fontSize: 14 }}>{cacheStats.size}</td>
                 </tr>
@@ -370,12 +384,14 @@ const ProxyView = () => {
                     style={{ padding: 0, margin: 0, fontSize: 11 }}
                   >
                     <p style={{ padding: 0, margin: 0, fontSize: 11 }}>
-                      Stats last updated:{' '}
-                      {new Date(cacheStats.date).toLocaleString()}
+                      {sprintf(
+                        __('Stats last updated: %s', 'abtfr'),
+                        new Date(cacheStats.date).toLocaleString()
+                      )}
                     </p>
                     <hr />
                     <Button isSecondary isSmall onClick={updateCacheStats}>
-                      Refresh Stats
+                      {__('Refresh Stats', 'abtfr')}
                     </Button>
                     <Button
                       isSecondary
@@ -384,14 +400,17 @@ const ProxyView = () => {
                       onClick={function(e) {
                         if (
                           !window.confirm(
-                            'Are you sure you want to empty the cache directory?'
+                            __(
+                              'Are you sure you want to empty the cache directory?',
+                              'abtfr'
+                            )
                           )
                         ) {
                           return e.preventDefault();
                         }
                       }}
                     >
-                      Empty Cache
+                      {__('Empty Cache', 'abtfr')}
                     </Button>
                   </td>
                 </tr>
