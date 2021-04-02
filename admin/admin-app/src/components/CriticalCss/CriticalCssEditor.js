@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 import checkPropLinkState from '../../utils/checkPropLinkState';
 import { lgCode, utmString } from '../../utils/globalVars';
 import LazyCssEditor from '../LazyCssEditor';
@@ -97,35 +98,39 @@ const CriticalCssEditor = props => {
           />
         )}
         <div className="criticalcss-buttons">
-          <a
+          <Button
+            isSecondary
+            isSmall
             href={`https://www.google.com/search?q=beautify+css+online&hl=${lgCode}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="button button-secondary button-small"
           >
             Beautify
-          </a>
-          <a
+          </Button>
+          <Button
+            isSecondary
+            isSmall
             href={`https://www.google.com/search?q=minify+css+online&hl=${lgCode}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="button button-secondary button-small"
           >
             Minify
-          </a>
-          <a
+          </Button>
+          <Button
+            isSecondary
+            isSmall
             href="https://jigsaw.w3.org/css-validator/#validate_by_input+with_options"
             target="_blank"
             rel="noopener noreferrer"
-            className="button button-secondary button-small"
           >
             Validate
-          </a>
-          <a
+          </Button>
+          <Button
+            isSecondary
+            isSmall
             href={`http://csslint.net/#${utmString}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="button button-secondary button-small"
           >
             CSS
             <span
@@ -137,7 +142,7 @@ const CriticalCssEditor = props => {
             >
               LINT
             </span>
-          </a>
+          </Button>
         </div>
         <div
           style={{
