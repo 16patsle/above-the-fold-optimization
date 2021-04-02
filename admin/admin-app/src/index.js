@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Loading from './components/Loading';
 
-const HashRouter = React.lazy(() => import('react-router-dom/HashRouter'));
+const HashRouter = React.lazy(() => import('./HashRouter'));
 const App = React.lazy(() => import('./App'));
 
 ReactDOM.render(
