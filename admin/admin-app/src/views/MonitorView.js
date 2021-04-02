@@ -154,7 +154,7 @@ const MonitorView = () => {
             <span style={{ fontWeight: 'bold' }}>
               To secure findability in Google it is required to install a SSL
               certificate.
-            </span>
+            </span>{' '}
             Google officially announced in 2014 that SSL secured websites are
             ranked higher in the search results and in some countries Google is
             labeling non-https websites as <code>insecure</code> in the search
