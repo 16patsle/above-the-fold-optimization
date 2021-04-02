@@ -15,7 +15,6 @@ import LoadingWrapper from '../components/LoadingWrapper';
 import Info from '../components/Info';
 import PageContent from '../components/PageContent';
 import SettingCheckbox from '../components/SettingCheckbox';
-import SettingSelect from '../components/SettingSelect';
 import SettingTextarea from '../components/SettingTextarea';
 import SettingRadio from '../components/SettingRadio';
 import SubmitButton from '../components/SubmitButton';
@@ -294,11 +293,11 @@ const JavascriptView = () => {
                               </span>
                             </Info>
                           </SettingRadio>
-                          <SettingSelect
+                          <SettingRadio
                             header={__('Position', 'abtfr')}
                             name="abovethefold[jsdelivery_position]"
                             link={linkOptionState('jsdeliveryPosition')}
-                            options={[
+                            radios={[
                               {
                                 value: 'header',
                                 label: __('Header', 'abtfr')

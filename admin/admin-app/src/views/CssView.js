@@ -16,6 +16,7 @@ import SubmitButton from '../components/SubmitButton';
 import SettingSelect from '../components/SettingSelect';
 import SettingNumberInput from '../components/SettingNumberInput';
 import SettingInnerTable from '../components/SettingInnerTable';
+import SettingRadio from '../components/SettingRadio';
 import './CssView.css';
 
 const proxyUrl = new URL(adminUrl + 'admin.php');
@@ -157,11 +158,11 @@ const CssView = () => {
                       </p>
                     </SettingNumberInput>
                   ) : null}
-                  <SettingSelect
+                  <SettingRadio
                     header={__('Position', 'abtfr')}
                     name="abtfr[cssdelivery_position]"
                     link={linkOptionState('cssdeliveryPosition')}
-                    options={[
+                    radios={[
                       {
                         value: 'header',
                         label: __('Header', 'abtfr')
