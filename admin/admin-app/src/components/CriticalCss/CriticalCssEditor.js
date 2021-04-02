@@ -58,14 +58,15 @@ const CriticalCssEditor = props => {
           )}
           <span className="item-controls">
             {props.config && (
-              <button
-                type="button"
-                className="item-delete button button-small button-del"
+              <Button
+                isSmall
+                isDestructive
+                className="item-delete"
                 title="Delete conditional Critical CSS"
                 onClick={props.onDeleteClick}
               >
                 ✗
-              </button>
+              </Button>
             )}
             <button type="button" className="item-edit">
               ^

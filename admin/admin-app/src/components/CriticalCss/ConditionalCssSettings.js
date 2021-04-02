@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 import useSettings, { useJSON } from '../../utils/useSettings';
 import { homeUrl, abtfrRestNonce } from '../../utils/globalVars';
 import { getJSON } from '../../utils/getSettings';
@@ -131,14 +132,13 @@ const ConditionalCssSettings = () => {
           )}
         </p>
         <p style={{ marginTop: '1em', marginBottom: '1em' }}>
-          <button
-            type="button"
-            className="button"
+          <Button
+            isSecondary
             style={{ marginRight: '0.5em' }}
             onClick={() => setShowAddConditional(!showAddConditional)}
           >
             {__('Add Conditional Critical CSS', 'abtfr')}
-          </button>
+          </Button>
         </p>
         {showAddConditional && (
           <AddConditional

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 import {
   adminUrl,
   homeUrl,
@@ -203,24 +204,22 @@ const CriticalCssView = () => {
                     link={{ value: extractCss, set: setExtractCss }}
                   />
                   <div style={{ marginTop: '10px' }}>
-                    <button
-                      type="button"
-                      className="button button-large"
+                    <Button
+                      isSecondary
                       onClick={e => {
                         extractCssButtonClicked(extractCss.value);
                       }}
                     >
                       {__('Download', 'abtfr')}
-                    </button>
-                    <button
-                      type="button"
-                      className="button button-large"
+                    </Button>
+                    <Button
+                      isSecondary
                       onClick={e => {
                         extractCssButtonClicked(extractCss.value, 'print');
                       }}
                     >
                       {__('Print', 'abtfr')}
-                    </button>
+                    </Button>
                   </div>
                 </td>
               </tr>
