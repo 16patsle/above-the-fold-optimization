@@ -16,7 +16,8 @@ class Tabs extends Component {
 
       const className =
         tabKey === this.props.selected ||
-        (tabKey === 'criticalcss' && this.props.selected === 'criticalcss-test')
+        (tabKey === 'criticalcss' && this.props.selected === 'criticalcss-test') ||
+        (tabKey === 'intro' && this.props.selected === '')
           ? ' nav-tab-active'
           : '';
       const url = new URL(adminUrl + 'admin.php');
