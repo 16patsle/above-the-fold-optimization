@@ -223,3 +223,9 @@ pre.example-code {
 pre.example-code code {
   background: white;
 }
+
+.abtfr-wrapper .components-external-link svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: text-bottom;
+}
