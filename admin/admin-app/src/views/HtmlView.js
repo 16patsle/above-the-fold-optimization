@@ -88,7 +88,7 @@ const HtmlView = () => {
                 link={linkOptionState('htmlComments')}
                 description={createInterpolateElement(
                   __(
-                    'Remove HTML comments from HTML, e.g. <code>&lt;!-- comment --&gt;</code>',
+                    'Remove HTML comments from HTML, e.g. <code><!-- comment --></code>',
                     'abtfr'
                   ),
                   {
