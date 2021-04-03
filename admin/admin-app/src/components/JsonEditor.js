@@ -7,6 +7,7 @@ import './JsonEditor.css';
 import JsonEditorIconFix from './JsonEditorIconFix';
 import checkPropLinkState from '../utils/checkPropLinkState';
 import Loading from './Loading';
+import { ExternalLink } from '@wordpress/components';
 
 class JsonEditor extends Component {
   static defaultProps = {
@@ -196,9 +197,9 @@ class JsonEditor extends Component {
           </div>
         </div>
         <div style={{ float: 'right', marginTop: '5px' }}>
-          <a href="https://github.com/josdejong/jsoneditor">
+          <ExternalLink href="https://github.com/josdejong/jsoneditor">
             {__('JSON editor', 'abtfr')}
-          </a>
+          </ExternalLink>
         </div>
       </>
     );

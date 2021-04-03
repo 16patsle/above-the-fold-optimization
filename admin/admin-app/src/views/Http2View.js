@@ -205,13 +205,9 @@ const Http2View = () => {
                   <br />
                   It is not possible to push resources that are not used on a
                   page. For more information, see{' '}
-                  <a
-                    href="https://jakearchibald.com/2017/h2-push-tougher-than-i-thought/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <ExternalLink href="https://jakearchibald.com/2017/h2-push-tougher-than-i-thought/">
                     this article
-                  </a>
+                  </ExternalLink>
                 </Info>
               </SettingCheckbox>
             </tbody>
