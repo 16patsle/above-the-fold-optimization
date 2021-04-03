@@ -10,6 +10,7 @@ import SubmitButton from '../SubmitButton';
 import CriticalCssEditor from './CriticalCssEditor';
 import AddConditional from './AddConditional';
 import ConditionalSelect from './ConditionalSelect';
+import Loading from '../Loading';
 
 const ConditionalCssSettings = () => {
   const { getOption, shouldRender, error } = useSettings();
@@ -147,7 +148,7 @@ const ConditionalCssSettings = () => {
           />
         )}
       </li>
-      {conditionalCss.conditionalValues &&
+      {conditionalCss.conditionalValues ?
         Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
           <CriticalCssEditor
             key={file}
@@ -266,7 +267,7 @@ const ConditionalCssSettings = () => {
             </div>
             <SubmitButton />
           </CriticalCssEditor>
-        ))}
+        )) : <Loading/>}
     </LoadingWrapper>
   );
 };
