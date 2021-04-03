@@ -391,13 +391,12 @@ class ABTFR_Admin {
         //wp_enqueue_style('abtfr_admincp', plugin_dir_url(__FILE__) . 'css/admincp.min.css', false, WPABTFR_VERSION);
 
         // add admin-app JS
-        $react_dir = plugin_dir_url(__FILE__) . 'admin-app/build/';
-        $react_script_path = '/admin-app/build/index.js';
-        $react_script_asset_path = '/admin-app/build/index.asset.php';
+        $react_script_path = '/admin-app/build/js/index.chunk.js';
+        $react_script_asset_path = '/admin-app/build/runtime-index.asset.php';
         $react_script_asset = file_exists(__DIR__ . $react_script_asset_path)
             ? require __DIR__ . $react_script_asset_path
             : array(
-                'dependencies' => array('wp-components'),
+                'dependencies' => array(),
                 'version' => filemtime(__DIR__ . $react_script_path)
             );
 
@@ -425,7 +424,7 @@ class ABTFR_Admin {
                 as $key => $entrypoint
             ) {
                 // Don't load index.js and index.asset.php
-                if ($key > 1) {
+                if ($entrypoint !== 'js/index.chunk.js' && !preg_match('/\.php$/', $entrypoint)) {
                     // Is it a css file?
                     if (preg_match('/\.css$/', $entrypoint)) {
                         wp_enqueue_style(
@@ -453,6 +452,7 @@ class ABTFR_Admin {
             }
         }
 
+        $react_dir = plugin_dir_url(__FILE__) . 'admin-app/build/';
         echo '<input id="reactDir" type="hidden" value="' . $react_dir . '" />';
     }
 
