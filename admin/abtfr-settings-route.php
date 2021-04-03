@@ -534,8 +534,8 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     $options['pwa_sw_filename'] = $sw['filename'];
 
     // HTTP/2
-		// asset cache policy
-    if (!is_array($options['http2_push_config']) || empty($options['http2_push_config'])) {
+	// asset cache policy
+    if (empty($options['http2_push_config']) || !is_array($options['http2_push_config'])) {
       $options['http2_push_config'] = json_decode('[]');
     }
 
