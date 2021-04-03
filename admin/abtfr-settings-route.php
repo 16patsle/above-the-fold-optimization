@@ -65,6 +65,12 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
         'args'                => array(),
       ),
     ) );
+    register_rest_route( $namespace, '/cachestats', array(
+      'methods'             => WP_REST_Server::READABLE,
+      'callback'            => array( $this, 'get_proxy_cache_stats' ),
+      'permission_callback' => array( $this, 'get_proxy_cache_stats_permissions_check' ),
+      'args'                => array(),
+    ) );
   }
  
   /**
@@ -415,6 +421,26 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
 
     return new WP_REST_Response( true, 200 );
   }
+
+  /**
+   * Get proxy cache stats
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function get_proxy_cache_stats() {
+    // update cache stats
+    $this->admin->CTRL->proxy->prune(true);
+
+    $cache_stats = $this->admin->CTRL->proxy->cache_stats();
+    $cache_stats['files'] = number_format_i18n($cache_stats['files'], 0);
+    $cache_stats['size'] = $this->admin->CTRL->admin->human_filesize(
+      $cache_stats['size']
+    );
+    $cache_stats['date'] = date('r', $cache_stats['date']);
+
+    return new WP_REST_Response( $this->convert_to_camel_case_array($cache_stats), 200 );
+  }
  
   /**
    * Check if a given request has access to get settings
@@ -434,6 +460,16 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
    * @return WP_Error|bool
    */
   public function get_criticalcss_permissions_check( $request ) {
+    return current_user_can( 'manage_options' );
+  }
+
+  /**
+   * Check if a given request has access to get proxy cache stats
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|bool
+   */
+  public function get_proxy_cache_stats_permissions_check( $request ) {
     return current_user_can( 'manage_options' );
   }
 

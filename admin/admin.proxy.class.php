@@ -45,15 +45,6 @@ class ABTFR_Admin_Proxy {
              * Handle form submissions
              */
             $this->CTRL->loader->add_action('admin_init', $this, 'init');
-
-            /**
-             * Handle Ajax proxy cache stats
-             */
-            $this->CTRL->loader->add_action(
-                'wp_ajax_abtfr_cache_stats',
-                $this,
-                'ajax_cache_stats'
-            );
         }
     }
 
@@ -93,29 +84,6 @@ class ABTFR_Admin_Proxy {
                 ) . '#/proxy'
             );
         }
-    }
-
-    /**
-     * Ajax cache stats update
-     */
-    public function ajax_cache_stats() {
-        // update cache stats
-        $this->CTRL->proxy->prune(true);
-        //$this->CTRL->admin->set_notice('<p style="font-size:18px;">The proxy cache directory has been emptied.</p>', 'NOTICE');
-
-        $cache_stats = $this->CTRL->proxy->cache_stats();
-        $cache_stats['files'] = number_format_i18n($cache_stats['files'], 0);
-        $cache_stats['size'] = $this->CTRL->admin->human_filesize(
-            $cache_stats['size']
-        );
-        $cache_stats['date'] = date('r', $cache_stats['date']);
-
-        $json = json_encode($cache_stats);
-        header('Content-Type: application/json');
-        header('Content-Length: ' . strlen($json));
-        echo $json;
-
-        wp_die(); // this is required to terminate immediately and return a proper response
     }
 
     /**

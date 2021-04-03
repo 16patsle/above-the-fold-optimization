@@ -5,11 +5,11 @@ import { createInterpolateElement } from '@wordpress/element';
 import { Button, ExternalLink } from '@wordpress/components';
 import useSWR from 'swr';
 import useSettings from '../utils/useSettings';
+import { getJSON } from '../utils/getSettings';
 import {
   adminUrl,
   siteTitle,
   abtfrAdminNonce,
-  ajaxUrl,
   lgCode,
   wpAbtfrUri
 } from '../utils/globalVars';
@@ -34,10 +34,7 @@ const ProxyView = () => {
     data: cacheStats,
     error: cacheStatsError,
     revalidate: updateCacheStats
-  } = useSWR(
-    ajaxUrl + '?action=abtfr_cache_stats',
-    async url => await (await fetch(url)).json()
-  );
+  } = useSWR('cachestats', async query => await getJSON(query));
 
   return (
     <LoadingWrapper shouldRender={shouldRender} error={error}>
