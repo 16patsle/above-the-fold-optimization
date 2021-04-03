@@ -148,7 +148,7 @@ const ConditionalCssSettings = () => {
           />
         )}
       </li>
-      {conditionalCss.conditionalValues ?
+      {conditionalCss.conditionalValues ? (
         Object.entries(conditionalCss.conditionalValues).map(([file, data]) => (
           <CriticalCssEditor
             key={file}
@@ -267,7 +267,10 @@ const ConditionalCssSettings = () => {
             </div>
             <SubmitButton />
           </CriticalCssEditor>
-        )) : <Loading/>}
+        ))
+      ) : (
+        <Loading />
+      )}
     </LoadingWrapper>
   );
 };

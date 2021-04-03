@@ -184,8 +184,8 @@ const MonitorView = () => {
                 'abtfr'
               ),
               {
-                strong: <strong/>,
-                code: <code/>,
+                strong: <strong />,
+                code: <code />,
                 a: (
                   <ExternalLink
                     href={`https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html?${utmString}`}
@@ -216,9 +216,7 @@ const MonitorView = () => {
               }
             )}
           </p>
-          <h4>
-            {__('Professional advanced website monitoring', 'abtfr')}
-          </h4>
+          <h4>{__('Professional advanced website monitoring', 'abtfr')}</h4>
           <p>
             {__(
               'Consider using robot solutions that simulate real-user behaviour on your website, from multiple (mobile) devices, to monitor the physical performance and user experience of your website including details such as the functionality of a mobile menu.',

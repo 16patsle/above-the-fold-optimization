@@ -150,12 +150,18 @@ const ProxyView = () => {
                       ),
                       {
                         code: <code />,
-                        help: (<sup>
-                          [<a
-                          href="#jsoncnf"
-                          onClick={scrollToElement}
-                          title={__('More information', 'abtfr')}>?</a>]
-                        </sup>
+                        help: (
+                          <sup>
+                            [
+                            <a
+                              href="#jsoncnf"
+                              onClick={scrollToElement}
+                              title={__('More information', 'abtfr')}
+                            >
+                              ?
+                            </a>
+                            ]
+                          </sup>
                         )
                       }
                     )}
@@ -229,12 +235,18 @@ const ProxyView = () => {
                       ),
                       {
                         code: <code />,
-                        help: (<sup>
-                          [<a
-                          href="#jsoncnf"
-                          onClick={scrollToElement}
-                          title={__('More information', 'abtfr')}>?</a>]
-                        </sup>
+                        help: (
+                          <sup>
+                            [
+                            <a
+                              href="#jsoncnf"
+                              onClick={scrollToElement}
+                              title={__('More information', 'abtfr')}
+                            >
+                              ?
+                            </a>
+                            ]
+                          </sup>
                         )
                       }
                     )}

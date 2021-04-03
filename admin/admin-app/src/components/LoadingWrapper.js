@@ -12,7 +12,7 @@ const LoadingWrapper = props => {
   if (!props.shouldRender) {
     return (
       <div>
-        <Loading/>
+        <Loading />
       </div>
     );
   }

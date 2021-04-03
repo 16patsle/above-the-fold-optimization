@@ -5,7 +5,7 @@ const CssEditor = React.lazy(() => import('../components/CssEditor'));
 
 export default function LazyCssEditor(props) {
   return (
-    <Suspense fallback={<Loading/>}>
+    <Suspense fallback={<Loading />}>
       <CssEditor {...props} />
     </Suspense>
   );

@@ -93,7 +93,7 @@ const AddConditional = props => {
           }}
         >
           &nbsp;
-          {loading && <Loading/>}
+          {loading && <Loading />}
         </div>
       </div>
     </div>

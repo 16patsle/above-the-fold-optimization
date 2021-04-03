@@ -110,25 +110,24 @@ const SettingsView = () => {
             )}
           </p>
           <Info color="red">
-          {createInterpolateElement(
+            {createInterpolateElement(
               __(
                 '<strong>Important:</strong> when you change the configuration of the plugin the hashes may change.',
                 'abtfr'
               ),
               {
-                strong: <strong/>
+                strong: <strong />
               }
             )}
-            
           </Info>
           {getOption('clientHashes') === 'false' ? (
             <Info color="red">
               <h3>
-              {__(
-                'Failed to retrieve hashes. You can find the hashes in the Dev Tools console in the Chrome browser.',
-                'abtfr'
-              )}
-            </h3>
+                {__(
+                  'Failed to retrieve hashes. You can find the hashes in the Dev Tools console in the Chrome browser.',
+                  'abtfr'
+                )}
+              </h3>
             </Info>
           ) : (
             <span>

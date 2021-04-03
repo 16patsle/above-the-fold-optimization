@@ -5,7 +5,7 @@ const JsonEditor = React.lazy(() => import('../components/JsonEditor'));
 
 export default function LazyJsonEditor(props) {
   return (
-    <Suspense fallback={<Loading/>}>
+    <Suspense fallback={<Loading />}>
       <JsonEditor {...props} />
     </Suspense>
   );
