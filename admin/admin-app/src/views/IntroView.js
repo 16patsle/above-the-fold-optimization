@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import { __ } from '@wordpress/i18n';
 import { createInterpolateElement } from '@wordpress/element';
 import { Button, ExternalLink } from '@wordpress/components';
@@ -22,8 +23,6 @@ const thinkHost = `https://testmysite.${
 const thinkUrl = `${thinkHost}intl/${googleIntlCode}?url=${encodeURIComponent(
   homeUrl
 )}`;
-
-const monitorUrl = new URL(adminUrl + 'admin.php?page=abtfr#/monitor');
 
 const makeGoogleUrl = query =>
   `https://encrypted.google.com/search?hl=${lgCode}&q=${encodeURIComponent(
@@ -318,7 +317,7 @@ class IntroView extends Component {
               'abtfr'
             ),
             {
-              a: <a href={monitorUrl} />
+              a: <Link to="/monitor" />
             }
           )}
         </p>
