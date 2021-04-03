@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { __, sprintf } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
 import { useJSON } from '../utils/useSettings';
@@ -27,6 +26,7 @@ import SubmitButton from '../components/SubmitButton';
 import PageSelect from '../components/PageSelect';
 import './BuildToolView.css';
 import scrollToElement from '../utils/scrollToElement';
+import SubNav from '../components/SubNav';
 
 const BuildToolView = () => {
   const { options: conditionalValues, shouldRender, error } = useJSON(
@@ -79,18 +79,7 @@ const BuildToolView = () => {
 
   return (
     <LoadingWrapper shouldRender={shouldRender} error={error}>
-      <nav className="subnav">
-        <span className="t">{__('Submenu:', 'abtfr')}</span>
-        <a
-          href={adminUrl + 'admin.php?page=abtfr-criticalcss-test'}
-          className="f"
-        >
-          {__('Quality Test (Split View)', 'abtfr')}
-        </a>
-        <Link to="/build-tool" className="s">
-          {__('Gulp.js Critical CSS Generator', 'abtfr')}
-        </Link>
-      </nav>
+      <SubNav isBuildTool />
       <form
         method="post"
         action={

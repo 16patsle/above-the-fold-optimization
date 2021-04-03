@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { __ } from '@wordpress/i18n';
 import { Button, ExternalLink } from '@wordpress/components';
 import {
@@ -9,7 +8,6 @@ import {
   siteTitle,
   abtfrAdminNonce,
   lgCode,
-  criticalCssEditorUrl,
   extractCssKey,
   utmString
 } from '../utils/globalVars';
@@ -23,6 +21,7 @@ import PageSelect from '../components/PageSelect';
 import CriticalCssSettings from '../components/CriticalCss/CriticalCssSettings';
 import ConditionalCssSettings from '../components/CriticalCss/ConditionalCssSettings';
 import './CriticalCssView.css';
+import SubNav from '../components/SubNav';
 
 SyntaxHighlighter.registerLanguage('php', php);
 
@@ -46,21 +45,7 @@ const CriticalCssView = () => {
 
   return (
     <>
-      <nav className="subnav">
-        <span className="t">{__('Submenu:', 'abtfr')}</span>
-        <a
-          href={adminUrl + 'admin.php?page=abtfr-criticalcss-test'}
-          className="f"
-        >
-          {__('Quality Test (Split View)', 'abtfr')}
-        </a>
-        <ExternalLink href={criticalCssEditorUrl + '#editor'}>
-          {__('Live Editor', 'abtfr')}
-        </ExternalLink>
-        <Link to="/build-tool">
-          {__('Gulp.js Critical CSS Generator', 'abtfr')}
-        </Link>
-      </nav>
+      <SubNav />
       <form
         method="post"
         action={adminUrl + 'admin-post.php?action=abtfr_criticalcss_update'}
