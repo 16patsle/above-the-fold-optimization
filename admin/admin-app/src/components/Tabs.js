@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { adminUrl, adminTabs } from '../utils/globalVars';
 
 class Tabs extends Component {
@@ -21,13 +22,11 @@ class Tabs extends Component {
         (tabKey === 'intro' && this.props.selected === '')
           ? ' nav-tab-active'
           : '';
-      const url = new URL(adminUrl + 'admin.php');
-      url.searchParams.append('page', 'abtfr');
-      url.hash += tabKey !== 'intro' ? '#/' + tabKey : '#/';
+      const url = tabKey !== 'intro' ? '/' + tabKey : '/';
       tabElements.push(
-        <a className={'nav-tab' + className} href={encodeURI(url)} key={tabKey}>
+        <Link className={'nav-tab' + className} to={url} key={tabKey}>
           {adminTabs[tabKey]}
-        </a>
+        </Link>
       );
     }
     return tabElements;

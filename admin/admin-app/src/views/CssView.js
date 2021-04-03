@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import { __, sprintf } from '@wordpress/i18n';
 import { Button, ExternalLink } from '@wordpress/components';
 import useSettings from '../utils/useSettings';
@@ -19,9 +20,6 @@ import SettingNumberInput from '../components/SettingNumberInput';
 import SettingInnerTable from '../components/SettingInnerTable';
 import SettingRadio from '../components/SettingRadio';
 import './CssView.css';
-
-const proxyUrl = new URL(adminUrl + 'admin.php');
-proxyUrl.searchParams.append('page', 'abtfr-proxy');
 
 const CssView = () => {
   const { linkOptionState, getOption, shouldRender, error } = useSettings();
@@ -424,7 +422,7 @@ const CssView = () => {
                         <code>fonts.googleapis.com</code> that is causing a
                         render-blocking warning in the Google PageSpeed test.
                         The Google fonts stylesheet cannot be cached by the{' '}
-                        <a href={proxyUrl}>external resource proxy</a> because
+                        <Link to="/proxy">external resource proxy</Link> because
                         it serves different content based on the client.
                       </p>
                       <p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import { __ } from '@wordpress/i18n';
 import { createInterpolateElement } from '@wordpress/element';
 import { ExternalLink } from '@wordpress/components';
@@ -22,9 +23,6 @@ import SettingRadio from '../components/SettingRadio';
 import SubmitButton from '../components/SubmitButton';
 
 SyntaxHighlighter.registerLanguage('xml', xml);
-
-const proxyUrl = new URL(adminUrl + 'admin.php');
-proxyUrl.searchParams.append('page', 'pagespeed-proxy');
 
 const lazyloadExample = `
 <div data-lazy-widget>
@@ -192,7 +190,7 @@ const JavascriptView = () => {
                                             'abtfr'
                                           ),
                                           {
-                                            a1: <a href={proxyUrl} />,
+                                            a1: <Link to="/proxy" />,
                                             a2: (
                                               <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" />
                                             )

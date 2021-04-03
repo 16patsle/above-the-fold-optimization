@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import { __, sprintf } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
 import { useJSON } from '../utils/useSettings';
@@ -86,9 +87,9 @@ const BuildToolView = () => {
         >
           {__('Quality Test (Split View)', 'abtfr')}
         </a>
-        <a href={adminUrl + 'admin.php?page=abtfr#/build-tool'} className="s">
+        <Link to="/build-tool" className="s">
           {__('Gulp.js Critical CSS Generator', 'abtfr')}
-        </a>
+        </Link>
       </nav>
       <form
         method="post"

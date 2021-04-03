@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { __ } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
 import useSettings, { useJSON } from '../../utils/useSettings';
-import { adminUrl } from '../../utils/globalVars';
 import { getJSON } from '../../utils/getSettings';
 import LoadingWrapper from '../LoadingWrapper';
 import Info from '../Info';
@@ -85,10 +85,7 @@ const CriticalCssSettings = () => {
               >
                 <strong>Note:</strong> When using this feature, make sure that
                 your server supports HTTP/2 Server Push. See the{' '}
-                <a href={`${adminUrl}admin.php?page=abtfr#/http2`}>
-                  HTTP/2-tab
-                </a>{' '}
-                for more information.
+                <Link to="/http2">HTTP/2-tab</Link> for more information.
               </Info>
             </div>
           )}

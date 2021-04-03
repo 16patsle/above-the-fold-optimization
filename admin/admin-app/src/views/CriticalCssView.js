@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import { __ } from '@wordpress/i18n';
 import { Button, ExternalLink } from '@wordpress/components';
 import {
@@ -56,9 +57,9 @@ const CriticalCssView = () => {
         <ExternalLink href={criticalCssEditorUrl + '#editor'}>
           {__('Live Editor', 'abtfr')}
         </ExternalLink>
-        <a href={adminUrl + 'admin.php?page=abtfr#/build-tool'}>
+        <Link to="/build-tool">
           {__('Gulp.js Critical CSS Generator', 'abtfr')}
-        </a>
+        </Link>
       </nav>
       <form
         method="post"
