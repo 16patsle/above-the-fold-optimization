@@ -17,31 +17,31 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     register_rest_route( $namespace, '/' . $base, array(
       'methods'             => WP_REST_Server::READABLE,
       'callback'            => array( $this, 'get_settings' ),
-      'permission_callback' => array( $this, 'get_settings_permissions_check' ),
+      'permission_callback' => '__return_true',
       'args'                => array(),
     ) );
     register_rest_route( $namespace, '/' . $base . '/(?P<setting>[\w]+)', array(
       'methods'             => WP_REST_Server::READABLE,
       'callback'            => array( $this, 'get_setting' ),
-      'permission_callback' => array( $this, 'get_settings_permissions_check' ),
+      'permission_callback' => '__return_true',
     ) );
     register_rest_route( $namespace, '/criticalcss', array(
       'methods'             => WP_REST_Server::READABLE,
       'callback'            => array( $this, 'get_criticalcss' ),
-      'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+      'permission_callback' => array( $this, 'permissions_check' ),
       'args'                => array(),
     ) );
     register_rest_route( $namespace, '/conditionalcss', array(
       array(
         'methods'             => WP_REST_Server::READABLE,
         'callback'            => array( $this, 'get_conditionalcss' ),
-        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'permission_callback' => array( $this, 'permissions_check' ),
         'args'                => array(),
       ),
       array(
         'methods'             => WP_REST_Server::CREATABLE,
         'callback'            => array( $this, 'create_conditionalcss_item' ),
-        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'permission_callback' => array( $this, 'permissions_check' ),
         'args'                => $this->get_endpoint_args_for_item_schema( true ),
       ),
     ) );
@@ -49,26 +49,26 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
       array(
         'methods'             => WP_REST_Server::READABLE,
         'callback'            => array( $this, 'get_conditionalcss_item' ),
-        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'permission_callback' => array( $this, 'permissions_check' ),
         'args'                => array(),
       ),
       array(
         'methods'             => WP_REST_Server::EDITABLE,
         'callback'            => array( $this, 'update_conditionalcss_item' ),
-        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'permission_callback' => array( $this, 'permissions_check' ),
         'args'                => $this->get_endpoint_args_for_item_schema( false ),
       ),
       array(
         'methods'             => WP_REST_Server::DELETABLE,
         'callback'            => array( $this, 'delete_conditionalcss_item' ),
-        'permission_callback' => array( $this, 'get_criticalcss_permissions_check' ),
+        'permission_callback' => array( $this, 'permissions_check' ),
         'args'                => array(),
       ),
     ) );
     register_rest_route( $namespace, '/cachestats', array(
       'methods'             => WP_REST_Server::READABLE,
       'callback'            => array( $this, 'get_proxy_cache_stats' ),
-      'permission_callback' => array( $this, 'get_proxy_cache_stats_permissions_check' ),
+      'permission_callback' => array( $this, 'permissions_check' ),
       'args'                => array(),
     ) );
   }
@@ -441,35 +441,14 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
 
     return new WP_REST_Response( $this->convert_to_camel_case_array($cache_stats), 200 );
   }
- 
-  /**
-   * Check if a given request has access to get settings
-   *
-   * @param WP_REST_Request $request Full data about the request.
-   * @return WP_Error|bool
-   */
-  public function get_settings_permissions_check( $request ) {
-    //return current_user_can( 'manage_options' );
-    return true;
-  }
 
   /**
-   * Check if a given request has access to get critical css
+   * Check if a given request has access to the resource
    *
    * @param WP_REST_Request $request Full data about the request.
    * @return WP_Error|bool
    */
-  public function get_criticalcss_permissions_check( $request ) {
-    return current_user_can( 'manage_options' );
-  }
-
-  /**
-   * Check if a given request has access to get proxy cache stats
-   *
-   * @param WP_REST_Request $request Full data about the request.
-   * @return WP_Error|bool
-   */
-  public function get_proxy_cache_stats_permissions_check( $request ) {
+  public function permissions_check( $request ) {
     return current_user_can( 'manage_options' );
   }
 
