@@ -65,11 +65,19 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
         'args'                => array(),
       ),
     ) );
-    register_rest_route( $namespace, '/cachestats', array(
-      'methods'             => WP_REST_Server::READABLE,
-      'callback'            => array( $this, 'get_proxy_cache_stats' ),
-      'permission_callback' => array( $this, 'permissions_check' ),
-      'args'                => array(),
+    register_rest_route( $namespace, '/proxycache', array(
+      array(
+        'methods'             => WP_REST_Server::READABLE,
+        'callback'            => array( $this, 'get_proxy_cache' ),
+        'permission_callback' => array( $this, 'permissions_check' ),
+        'args'                => array(),
+      ),
+      array(
+        'methods'             => WP_REST_Server::DELETABLE,
+        'callback'            => array( $this, 'delete_proxy_cache' ),
+        'permission_callback' => array( $this, 'permissions_check' ),
+        'args'                => array(),
+      ),
     ) );
     register_rest_route( $namespace, '/terms', array(
       'methods'             => WP_REST_Server::READABLE,
@@ -434,7 +442,7 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
    * @param WP_REST_Request $request Full data about the request.
    * @return WP_Error|WP_REST_Response
    */
-  public function get_proxy_cache_stats( $request ) {
+  public function get_proxy_cache( $request ) {
     // update cache stats
     $this->admin->CTRL->proxy->prune(true);
 
@@ -446,6 +454,18 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     $cache_stats['date'] = date('r', $cache_stats['date']);
 
     return new WP_REST_Response( $this->convert_to_camel_case_array($cache_stats), 200 );
+  }
+
+  /**
+   * Empty the proxy cache
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function delete_proxy_cache( $request ) {
+    $this->admin->CTRL->proxy->empty_cache();
+
+    return new WP_REST_Response( true, 200 );
   }
 
   /**

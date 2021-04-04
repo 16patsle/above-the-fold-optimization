@@ -8,8 +8,10 @@ import useSettings from '../utils/useSettings';
 import { getJSON } from '../utils/getSettings';
 import {
   adminUrl,
+  homeUrl,
   siteTitle,
   abtfrAdminNonce,
+  abtfrRestNonce,
   lgCode,
   wpAbtfrUri
 } from '../utils/globalVars';
@@ -23,10 +25,6 @@ import SettingInnerTable from '../components/SettingInnerTable';
 import scrollToElement from '../utils/scrollToElement';
 import Loading from '../components/Loading';
 
-const emptyCacheUrl = new URL(adminUrl + 'admin.php');
-emptyCacheUrl.searchParams.append('page', 'abtfr-proxy');
-emptyCacheUrl.searchParams.append('empty_cache', 1);
-
 const ProxyView = () => {
   const { linkOptionState, getOption, shouldRender, error } = useSettings();
 
@@ -34,7 +32,36 @@ const ProxyView = () => {
     data: cacheStats,
     error: cacheStatsError,
     revalidate: updateCacheStats
-  } = useSWR('cachestats', async query => await getJSON(query));
+  } = useSWR('proxycache', async query => await getJSON(query));
+
+  const handleEmptyCache = async () => {
+    if (
+      window.confirm(
+        __(
+          'Are you sure you want to empty the cache directory?',
+          'abtfr'
+        )
+      )
+    ) {
+      const result = await fetch(
+        `${homeUrl}/wp-json/abtfr/v1/proxycache`,
+        {
+          method: 'DELETE',
+          headers: {
+            'X-WP-Nonce': abtfrRestNonce
+          }
+        }
+      );
+
+      if ((await result.json()) === true) {
+        updateCacheStats();
+        alert(__('The proxy cache directory has been emptied.', 'abtfr'));
+        return;
+      } else {
+        alert(__('Could not empty cache.', 'abtfr'));
+      }
+    }
+  };
 
   return (
     <LoadingWrapper shouldRender={shouldRender} error={error}>
@@ -412,19 +439,7 @@ const ProxyView = () => {
                     <Button
                       isSecondary
                       isSmall
-                      href={emptyCacheUrl}
-                      onClick={function(e) {
-                        if (
-                          !window.confirm(
-                            __(
-                              'Are you sure you want to empty the cache directory?',
-                              'abtfr'
-                            )
-                          )
-                        ) {
-                          return e.preventDefault();
-                        }
-                      }}
+                      onClick={handleEmptyCache}
                     >
                       {__('Empty Cache', 'abtfr')}
                     </Button>
