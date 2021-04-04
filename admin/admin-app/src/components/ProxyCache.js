@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
-import { Button, Modal, Flex, FlexItem } from '@wordpress/components';
+import { Button, Modal, Flex, FlexItem, Notice } from '@wordpress/components';
 import useSWR from 'swr';
 import { getJSON } from '../utils/getSettings';
 import { homeUrl, abtfrRestNonce } from '../utils/globalVars';
@@ -18,9 +18,13 @@ const ProxyCache = () => {
   const closeModal = () => setOpen(false);
 
   const [isEmptying, setEmptying] = useState(false);
+  const [isEmptyDone, setEmptyDone] = useState(false);
+  const [isEmptyError, setEmptyError] = useState(false);
 
   const emptyCache = async () => {
     setEmptying(true);
+    setEmptyDone(false);
+    setEmptyError(false);
 
     const result = await fetch(`${homeUrl}/wp-json/abtfr/v1/proxycache`, {
       method: 'DELETE',
@@ -31,9 +35,9 @@ const ProxyCache = () => {
 
     if ((await result.json()) === true) {
       updateCacheStats();
-      alert(__('The proxy cache directory has been emptied.', 'abtfr'));
+      setEmptyDone(true);
     } else {
-      alert(__('Could not empty cache.', 'abtfr'));
+      setEmptyError(true);
     }
 
     closeModal();
@@ -46,7 +50,19 @@ const ProxyCache = () => {
         {__('Cache Stats', 'abtfr')}
       </h3>
       {cacheStatsError && (
-        <div>{sprintf(__('Error: %s', 'abtfr'), cacheStatsError)}</div>
+        <Notice status="error" isDismissible={false}>
+          {sprintf(__('Error: %s', 'abtfr'), cacheStatsError)}
+        </Notice>
+      )}
+      {isEmptyDone && (
+        <Notice status="success" onRemove={() => setEmptyDone(false)}>
+          {__('The proxy cache directory has been emptied.', 'abtfr')}
+        </Notice>
+      )}
+      {isEmptyError && (
+        <Notice status="error" onRemove={() => setEmptyError(false)}>
+          {__('Could not empty cache.', 'abtfr')}
+        </Notice>
       )}
       {!cacheStats && !cacheStatsError ? (
         <div>
