@@ -2,25 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 import AsyncCreatableSelect from 'react-select/async-creatable';
+import debounce from 'debounce-promise';
 import checkPropLinkState from '../../utils/checkPropLinkState';
+import searchPagesConditional from '../../utils/searchPagesConditional';
 import './ConditionalSelect.css';
 
-const promiseOptions = async query => {
-  const formData = new FormData();
-  formData.append('action', 'abtfr_condition_search');
-  formData.append('query', query);
-  formData.append('maxresults', 10);
-
-  const res = await (await fetch(window.ajaxurl, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json'
-    },
-    body: formData
-  })).json();
-
-  return res;
-};
+const promiseOptions = debounce(query => searchPagesConditional(query, 10), 400);
 
 const noOptionsMessage = ({ inputValue }) => {
   if (inputValue) {
