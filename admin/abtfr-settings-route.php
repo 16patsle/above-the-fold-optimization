@@ -71,6 +71,12 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
       'permission_callback' => array( $this, 'permissions_check' ),
       'args'                => array(),
     ) );
+    register_rest_route( $namespace, '/terms', array(
+      'methods'             => WP_REST_Server::READABLE,
+      'callback'            => array( $this, 'get_terms' ),
+      'permission_callback' => '__return_true',//array( $this, 'permissions_check' ),
+      'args'                => array(),
+    ) );
   }
  
   /**
@@ -428,7 +434,7 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
    * @param WP_REST_Request $request Full data about the request.
    * @return WP_Error|WP_REST_Response
    */
-  public function get_proxy_cache_stats() {
+  public function get_proxy_cache_stats( $request ) {
     // update cache stats
     $this->admin->CTRL->proxy->prune(true);
 
@@ -440,6 +446,45 @@ class ABTFR_Settings_Route extends WP_REST_Controller {
     $cache_stats['date'] = date('r', $cache_stats['date']);
 
     return new WP_REST_Response( $this->convert_to_camel_case_array($cache_stats), 200 );
+  }
+
+  /**
+   * Return terms
+   *
+   * @param WP_REST_Request $request Full data about the request.
+   * @return WP_Error|WP_REST_Response
+   */
+  public function get_terms( $request ) {
+    $params = $request->get_params();
+    $query = isset($params['query']) ? trim($params['query']) : '';
+    $limit =
+      isset($params['limit']) && intval($params['limit']) > 10 && intval($params['limit']) < 30 ?
+      intval($params['limit']) : 10;
+
+    if(!isset($params['taxonomy'])) {
+      return new WP_Error( 'bad-request',  __( 'Bad request.', 'abtfr' ), array( 'status' => 400 ) );
+    }
+
+    $terms = get_terms(array(
+      'taxonomy' => $params['taxonomy'],
+      'orderby' => 'title',
+      'number' => $limit,
+      'hide_empty' => false,
+      'name__like' => $query
+    ));
+
+    $result = [];
+
+    foreach ($terms as $term) {
+      $result[] = [
+          'id' => $term->term_id,
+          'link' => get_term_link($term->term_id),
+          'name' => $term->name,
+          'slug' => $term->slug,
+      ];
+    }
+
+    return new WP_REST_Response($result);
   }
 
   /**
