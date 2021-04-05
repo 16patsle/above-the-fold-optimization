@@ -58,7 +58,7 @@ const CriticalCssEditor = props => {
           </span>
           {!editorLoaded && props.advancedEditor && (
             <span className="is-submenu loading-editor">
-              <span style={{ color: '#ea4335' }}>Loading editor...</span>
+              <span style={{ color: '#ea4335' }}>{__('Loading editor...', 'abtfr')}</span>
             </span>
           )}
           <span className="item-controls">
@@ -67,7 +67,7 @@ const CriticalCssEditor = props => {
                 isSmall
                 isDestructive
                 className="item-delete"
-                title="Delete conditional Critical CSS"
+                title={__('Delete conditional Critical CSS', 'abtfr')}
                 onClick={props.onDeleteClick}
               >
                 ✗
@@ -109,7 +109,7 @@ const CriticalCssEditor = props => {
             isSmall
             onClick={formatCode}
           >
-            Format
+            {__('Format', 'abtfr')}
           </Button>
           <Button
             isSecondary
@@ -118,7 +118,7 @@ const CriticalCssEditor = props => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Minify
+            {__('Minify', 'abtfr')}
           </Button>
           <Button
             isSecondary
@@ -127,7 +127,7 @@ const CriticalCssEditor = props => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Validate
+            {__('Validate', 'abtfr')}
           </Button>
           <Button
             isSecondary
