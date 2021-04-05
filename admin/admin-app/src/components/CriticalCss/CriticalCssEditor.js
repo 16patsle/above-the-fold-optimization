@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import checkPropLinkState from '../../utils/checkPropLinkState';
-import { lgCode, utmString } from '../../utils/globalVars';
+import { utmString } from '../../utils/globalVars';
 import LazyCssEditor from '../LazyCssEditor';
 import sizeFormat from '../../utils/sizeFormat';
 import byteCount from '../../utils/byteCount';
-import formatCss from '../../utils/tools/formatCss';
-import minifyCss from '../../utils/tools/minifyCss';
+import cssWorker from '../../utils/tools/cssWorker';
 import './CriticalCssEditor.css';
 
 const CriticalCssEditor = props => {
@@ -17,11 +16,11 @@ const CriticalCssEditor = props => {
   const [showEditor, setShowEditor] = useState(true);
 
   const formatCode = async () => {
-    props.link.set(await formatCss(props.link.value));
+    props.link.set(await cssWorker(props.link.value, 'format'));
   };
 
   const minifyCode = async () => {
-    props.link.set(await minifyCss(props.link.value));
+    props.link.set(await cssWorker(props.link.value, 'minify'));
   };
 
   return (
