@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { __ } from '@wordpress/i18n';
-import { Button, ExternalLink } from '@wordpress/components';
+import { Button, ExternalLink, Notice } from '@wordpress/components';
 import {
   adminUrl,
   homeUrl,
@@ -25,23 +25,26 @@ import SubNav from '../components/SubNav';
 
 SyntaxHighlighter.registerLanguage('php', php);
 
-const extractCssButtonClicked = (href = '', output = 'download') => {
-  if (href === '') {
-    alert('Select a page...');
-    return;
-  }
-
-  if (/\?/.test(href)) {
-    href += '&';
-  } else {
-    href += '?';
-  }
-
-  document.location.href = `${href}extract-css=${extractCssKey}&output=${output}`;
-};
-
 const CriticalCssView = () => {
   const [extractCss, setExtractCss] = useState({});
+  const [noticeText, setNoticeText] = useState(false);
+
+  const extractCssButtonClicked = (href = '', output = 'download') => {
+    href = href.trim();
+    
+    if (href === '') {
+      setNoticeText(__('Select a page...', 'abtfr'));
+      return;
+    }
+  
+    if (/\?/.test(href)) {
+      href += '&';
+    } else {
+      href += '?';
+    }
+  
+    document.location.href = `${href}extract-css=${extractCssKey}&output=${output}`;
+  };
 
   return (
     <>
@@ -140,6 +143,14 @@ const CriticalCssView = () => {
                   >
                     {__('Extract Full CSS', 'abtfr')}
                   </h3>
+                  {noticeText && (
+                    <Notice
+                      status="error"
+                      onRemove={() => setNoticeText(false)}
+                    >
+                      {noticeText}
+                    </Notice>
+                  )}
                   <p className="description">
                     {__(
                       'For the creation of Critical Path CSS you need the full CSS of a page. This tool allows you to extract the full CSS from any url and optionally to select the specific CSS files you want to extract.',
