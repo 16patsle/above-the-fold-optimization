@@ -40,49 +40,6 @@ class ABTFR_Admin_Proxy {
                 $this,
                 'update_settings'
             );
-
-            /**
-             * Handle form submissions
-             */
-            $this->CTRL->loader->add_action('admin_init', $this, 'init');
-        }
-    }
-
-    /**
-     * Admin init
-     */
-    public function init() {
-        // empty cache
-        if (isset($_GET['empty_cache']) && intval($_GET['empty_cache']) === 1) {
-            $this->CTRL->proxy->empty_cache();
-            $this->CTRL->admin->set_notice(
-                '<p style="font-size:18px;">The proxy cache directory has been emptied.</p>',
-                'NOTICE'
-            );
-            wp_redirect(
-                add_query_arg(
-                    array('page' => 'abtfr'),
-                    admin_url('admin.php')
-                ) . '#/proxy'
-            );
-        }
-
-        // update cache stats, deprecated
-        if (
-            isset($_GET['update_cache_stats']) &&
-            intval($_GET['update_cache_stats']) === 1
-        ) {
-            $this->CTRL->proxy->prune(true);
-            $this->CTRL->admin->set_notice(
-                '<p style="font-size:18px;">The proxy cache directory has been emptied.</p>',
-                'NOTICE'
-            );
-            wp_redirect(
-                add_query_arg(
-                    array('page' => 'abtfr'),
-                    admin_url('admin.php')
-                ) . '#/proxy'
-            );
         }
     }
 
