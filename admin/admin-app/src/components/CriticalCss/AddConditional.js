@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import ConditionalSelect from './ConditionalSelect';
-import Loading from '../Loading';
 import './AddConditional.css';
 
 const AddConditional = props => {
@@ -81,20 +80,9 @@ const AddConditional = props => {
             </tr>
           </tbody>
         </table>
-        <Button isSecondary isSmall onClick={handleClick}>
+        <Button isSecondary isSmall onClick={handleClick} isBusy={loading}>
           {__('Save', 'abtfr')}
         </Button>
-        <div
-          style={{
-            height: '10px',
-            clear: 'both',
-            overflow: 'hidden',
-            fontSize: '1px'
-          }}
-        >
-          &nbsp;
-          {loading && <Loading />}
-        </div>
       </div>
     </div>
   );
