@@ -7,12 +7,17 @@ import { lgCode, utmString } from '../../utils/globalVars';
 import LazyCssEditor from '../LazyCssEditor';
 import sizeFormat from '../../utils/sizeFormat';
 import byteCount from '../../utils/byteCount';
+import formatCss from '../../utils/tools/formatCss';
 import './CriticalCssEditor.css';
 
 const CriticalCssEditor = props => {
   const [editorLoaded, setEditorLoaded] = useState(false);
 
   const [showEditor, setShowEditor] = useState(true);
+
+  const formatCode = async () => {
+    props.link.set(await formatCss(props.link.value));
+  }
 
   return (
     <li
@@ -102,11 +107,9 @@ const CriticalCssEditor = props => {
           <Button
             isSecondary
             isSmall
-            href={`https://www.google.com/search?q=beautify+css+online&hl=${lgCode}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={formatCode}
           >
-            Beautify
+            Format
           </Button>
           <Button
             isSecondary
