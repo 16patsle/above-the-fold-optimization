@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@wordpress/components": "^13.0.0",
+    "cssnano": "^4.1.10",
     "debounce-promise": "^3.1.2",
     "jsoneditor": "^8.6.3",
     "monaco-editor": "^0.20.0",
+    "postcss": "^7.0.35",
     "prettier": "^2.2.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

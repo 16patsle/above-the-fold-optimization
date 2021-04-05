@@ -8,6 +8,7 @@ import LazyCssEditor from '../LazyCssEditor';
 import sizeFormat from '../../utils/sizeFormat';
 import byteCount from '../../utils/byteCount';
 import formatCss from '../../utils/tools/formatCss';
+import minifyCss from '../../utils/tools/minifyCss';
 import './CriticalCssEditor.css';
 
 const CriticalCssEditor = props => {
@@ -17,6 +18,10 @@ const CriticalCssEditor = props => {
 
   const formatCode = async () => {
     props.link.set(await formatCss(props.link.value));
+  };
+
+  const minifyCode = async () => {
+    props.link.set(await minifyCss(props.link.value));
   };
 
   return (
@@ -109,13 +114,7 @@ const CriticalCssEditor = props => {
           <Button isSecondary isSmall onClick={formatCode}>
             {__('Format', 'abtfr')}
           </Button>
-          <Button
-            isSecondary
-            isSmall
-            href={`https://www.google.com/search?q=minify+css+online&hl=${lgCode}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Button isSecondary isSmall onClick={minifyCode}>
             {__('Minify', 'abtfr')}
           </Button>
           <Button
