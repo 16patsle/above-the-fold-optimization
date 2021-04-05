@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { Button, Modal, Flex, FlexItem, Notice } from '@wordpress/components';
 import useSettings, { useJSON } from '../../utils/useSettings';
 import { homeUrl, abtfrRestNonce } from '../../utils/globalVars';
 import { getJSON } from '../../utils/getSettings';
@@ -25,42 +25,48 @@ const ConditionalCssSettings = () => {
 
   const [showAddConditional, setShowAddConditional] = useState(false);
 
+  const [isOpen, setOpen] = useState(false);
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
+
+  const [deleteFilename, setDeleteFilename] = useState(false);
+  const [isDeleting, setDeleting] = useState(false);
+
   const handleDelete = async filename => {
-    if (
-      confirm(
-        __(
-          'Are you sure you want to delete this conditional Critical CSS?',
-          'abtfr'
-        )
+    openModal();
+    setDeleteFilename(filename);
+  };
+
+  const doDelete = async () => {
+    const conditionalCssOld = conditionalCss;
+
+    setConditionalCss({
+      ...conditionalCss,
+      conditionalValues: Object.fromEntries(
+        Object.entries(conditionalCss.conditionalValues).filter(([key]) => {
+          return key !== deleteFilename;
+        })
       )
-    ) {
-      const conditionalCssOld = conditionalCss;
+    });
 
-      setConditionalCss({
-        ...conditionalCss,
-        conditionalValues: Object.fromEntries(
-          Object.entries(conditionalCss.conditionalValues).filter(([key]) => {
-            return key !== filename;
-          })
-        )
-      });
+    setDeleting(true);
 
-      const result = await fetch(
-        `${homeUrl}/wp-json/abtfr/v1/conditionalcss/${filename}`,
-        {
-          method: 'DELETE',
-          headers: {
-            'X-WP-Nonce': abtfrRestNonce
-          }
+    const result = await fetch(
+      `${homeUrl}/wp-json/abtfr/v1/conditionalcss/${deleteFilename}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'X-WP-Nonce': abtfrRestNonce
         }
-      );
-
-      if ((await result.json()) === true) {
-        return;
-      } else {
-        setConditionalCss(conditionalCssOld);
       }
+    );
+
+    if ((await result.json()) !== true) {
+      setConditionalCss(conditionalCssOld);
     }
+
+    closeModal();
+    setDeleting(false);
   };
 
   const handleAdd = async (name, conditions) => {
@@ -270,6 +276,32 @@ const ConditionalCssSettings = () => {
         ))
       ) : (
         <Loading />
+      )}
+      {isOpen && (
+        <Modal
+          title={__('Delete conditional CSS?', 'abtfr')}
+          closeLabel={__('Close')}
+          onRequestClose={closeModal}
+        >
+          <p>
+            {__(
+              'Are you sure you want to delete this conditional Critical CSS?',
+              'abtfr'
+            )}
+          </p>
+          <Flex justify="flex-end">
+            <FlexItem>
+              <Button isSecondary onClick={closeModal}>
+                {__('Cancel')}
+              </Button>
+            </FlexItem>
+            <FlexItem>
+              <Button isPrimary onClick={doDelete} isBusy={isDeleting}>
+                {__('Delete', 'abtfr')}
+              </Button>
+            </FlexItem>
+          </Flex>
+        </Modal>
       )}
     </LoadingWrapper>
   );
