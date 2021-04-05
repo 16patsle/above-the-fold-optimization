@@ -38,12 +38,6 @@ class ABTFR_Admin_Monitor {
                 $this,
                 'update_settings'
             );
-            // Legacy version
-            $this->CTRL->loader->add_action(
-                'admin_post_abtfr-monitor-update',
-                $this,
-                'update_settings'
-            );
         }
     }
 
