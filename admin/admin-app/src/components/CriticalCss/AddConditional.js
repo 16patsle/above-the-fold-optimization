@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { Button, Notice } from '@wordpress/components';
 import ConditionalSelect from './ConditionalSelect';
 import './AddConditional.css';
 
@@ -9,23 +9,25 @@ const AddConditional = props => {
   const [name, setName] = useState('');
   const [conditions, setConditions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [noticeText, setNoticeText] = useState(false);
 
   const nameRef = React.createRef();
 
   const handleClick = () => {
-    if (name === '') {
-      alert(__('Enter a name (admin reference)...', 'abtfr'));
-      nameRef.focus();
+    if (name.trim() === '') {
+      setNoticeText(__('Enter a name (admin reference)...', 'abtfr'));
+      nameRef.current.focus();
       return;
     }
 
     if (!/^[a-zA-Z0-9\-_ ]+$/.test(name)) {
-      alert(__('The name contains invalid characters.', 'abtfr'));
-      nameRef.focus();
+      setNoticeText(__('The name contains invalid characters.', 'abtfr'));
+      nameRef.current.focus();
       return;
     }
 
     setLoading(true);
+    setNoticeText(false);
 
     if (props.onAddClick) {
       props.onAddClick(
@@ -47,6 +49,11 @@ const AddConditional = props => {
       <h3 className="hndle" style={{ borderBottom: 'solid 1px #e5e5e5' }}>
         <span>{__('Add Conditional Critical CSS', 'abtfr')}</span>
       </h3>
+      {noticeText && (
+        <Notice status="error" onRemove={() => setNoticeText(false)}>
+          {noticeText}
+        </Notice>
+      )}
       <div className="inside" style={{ paddingBottom: '0px' }}>
         <table className="form-table add-form" style={{ marginBottom: '5px' }}>
           <tbody>
