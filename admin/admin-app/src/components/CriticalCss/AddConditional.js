@@ -13,7 +13,7 @@ const AddConditional = props => {
 
   const nameRef = React.createRef();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (name.trim() === '') {
       setNoticeText(__('Enter a name (admin reference)...', 'abtfr'));
       nameRef.current.focus();
@@ -30,10 +30,15 @@ const AddConditional = props => {
     setNoticeText(false);
 
     if (props.onAddClick) {
-      props.onAddClick(
-        name,
+      const error = await props.onAddClick(
+        name.trim(),
         conditions.map(val => val.value).join('|==abtfr==|')
       );
+      setLoading(false);
+
+      if (error.message) {
+        setNoticeText(error.message);
+      }
     }
   };
 

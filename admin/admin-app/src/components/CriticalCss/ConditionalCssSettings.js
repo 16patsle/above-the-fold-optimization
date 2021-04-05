@@ -107,12 +107,14 @@ const ConditionalCssSettings = () => {
       }
     });
 
-    if ((await result.json()) === true) {
+    const json = await result.json();
+    if (json === true) {
       setShowAddConditional(false);
       // stop changing state in add conditional (isLoading to false)
       return;
     } else {
       setConditionalCss(conditionalCssOld);
+      return json;
     }
   };
 
