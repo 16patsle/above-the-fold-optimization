@@ -15,12 +15,19 @@ const CriticalCssEditor = props => {
 
   const [showEditor, setShowEditor] = useState(true);
 
+  const [isFormatting, setFormatting] = useState(false);
+  const [isMinifying, setMinifying] = useState(false);
+
   const formatCode = async () => {
+    setFormatting(true);
     props.link.set(await cssWorker(props.link.value, 'format'));
+    setFormatting(false);
   };
 
   const minifyCode = async () => {
+    setMinifying(true);
     props.link.set(await cssWorker(props.link.value, 'minify'));
+    setMinifying(false);
   };
 
   return (
@@ -110,10 +117,15 @@ const CriticalCssEditor = props => {
           />
         )}
         <div className="criticalcss-buttons">
-          <Button isSecondary isSmall onClick={formatCode}>
+          <Button
+            isSecondary
+            isSmall
+            onClick={formatCode}
+            isBusy={isFormatting}
+          >
             {__('Format', 'abtfr')}
           </Button>
-          <Button isSecondary isSmall onClick={minifyCode}>
+          <Button isSecondary isSmall onClick={minifyCode} isBusy={isMinifying}>
             {__('Minify', 'abtfr')}
           </Button>
           <Button
