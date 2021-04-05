@@ -18,7 +18,7 @@ export default function htmlDecode(text) {
     '&#039;': "'"
   };
 
-  return text.replace(/(&amp;|&lt;|&gt;|&quot;|&#039;)/g, function(m) {
+  return text.replace(/(&amp;|&lt;|&gt;|&quot;|&#039;)/g, function (m) {
     return map[m];
   });
 }

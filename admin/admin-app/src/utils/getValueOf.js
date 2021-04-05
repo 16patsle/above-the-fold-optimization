@@ -4,7 +4,7 @@
  * @param {String} [returnType] Type of object to expect, used for fallback value
  * @returns {String} The value of the element, or the fallback
  */
-export default function(selector, returnType) {
+export default function (selector, returnType) {
   const returns = {
     object: '{}'
   };

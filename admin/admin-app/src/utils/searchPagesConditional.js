@@ -90,9 +90,9 @@ export default async function searchPagesConditional(query = '', limit = 10) {
 
       if (['post_tag', 'product_cat', 'product_brand'].includes(taxonomy)) {
         const terms = await getJSON(
-          `terms?taxonomy=${encodeURIComponent(
-            taxonomy
-          )}&limit=${limit}${query && `&query=${encodeURIComponent(query)}`}`,
+          `terms?taxonomy=${encodeURIComponent(taxonomy)}&limit=${limit}${
+            query && `&query=${encodeURIComponent(query)}`
+          }`,
           'abtfr/v1'
         );
 

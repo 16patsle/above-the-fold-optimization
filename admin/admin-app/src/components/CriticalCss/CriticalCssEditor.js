@@ -17,7 +17,7 @@ const CriticalCssEditor = props => {
 
   const formatCode = async () => {
     props.link.set(await formatCss(props.link.value));
-  }
+  };
 
   return (
     <li
@@ -58,7 +58,9 @@ const CriticalCssEditor = props => {
           </span>
           {!editorLoaded && props.advancedEditor && (
             <span className="is-submenu loading-editor">
-              <span style={{ color: '#ea4335' }}>{__('Loading editor...', 'abtfr')}</span>
+              <span style={{ color: '#ea4335' }}>
+                {__('Loading editor...', 'abtfr')}
+              </span>
             </span>
           )}
           <span className="item-controls">
@@ -104,11 +106,7 @@ const CriticalCssEditor = props => {
           />
         )}
         <div className="criticalcss-buttons">
-          <Button
-            isSecondary
-            isSmall
-            onClick={formatCode}
-          >
+          <Button isSecondary isSmall onClick={formatCode}>
             {__('Format', 'abtfr')}
           </Button>
           <Button

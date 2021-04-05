@@ -10,13 +10,15 @@ const promiseOptions = async query => {
   formData.append('query', query);
   formData.append('maxresults', 10);
 
-  const res = await (await fetch(window.ajaxurl, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json'
-    },
-    body: formData
-  })).json();
+  const res = await (
+    await fetch(window.ajaxurl, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      },
+      body: formData
+    })
+  ).json();
 
   if (res && document.location.host) {
     var l = res.length;

@@ -7,7 +7,10 @@ import checkPropLinkState from '../../utils/checkPropLinkState';
 import searchPagesConditional from '../../utils/searchPagesConditional';
 import './ConditionalSelect.css';
 
-const promiseOptions = debounce(query => searchPagesConditional(query, 10), 400);
+const promiseOptions = debounce(
+  query => searchPagesConditional(query, 10),
+  400
+);
 
 const noOptionsMessage = ({ inputValue }) => {
   if (inputValue) {

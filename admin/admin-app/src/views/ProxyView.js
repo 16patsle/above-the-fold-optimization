@@ -347,7 +347,7 @@ const ProxyView = () => {
           <SubmitButton />
           <br />
           <br />
-          <ProxyCache/>
+          <ProxyCache />
         </PageContent>
       </form>
     </LoadingWrapper>
